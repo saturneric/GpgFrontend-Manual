@@ -7,7 +7,7 @@ sidebar:
 
 GpgFrontend is available for download through multiple channels. For more
 detailed instructions on installation and getting started, please refer to the
-[Getting Started Guide](/getting-started/).
+[Getting Started Guide](overview/getting-started/).
 
 ---
 
