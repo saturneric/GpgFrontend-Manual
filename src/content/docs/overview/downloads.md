@@ -52,7 +52,6 @@ detailed instructions on installation and getting started, please refer to the
 - **Microsoft Store Download**: Windows users can visit the application store
   page through the Microsoft Store badge below.
 
-  <a href="https://apps.microsoft.com/detail/GpgFrontend%20-%20OpenPGP/GnuPG%20crypto,%20sign%20and%20key%20management%20Tool/9nh716mqk2b5?launch=true
-	&mode=mini">
+<a href="https://apps.microsoft.com/detail/9nh716mqk2b5">
 	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
 </a>
