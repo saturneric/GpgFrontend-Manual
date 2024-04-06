@@ -16,7 +16,7 @@ GpgFrontend supports digital signatures to verify the integrity and origin of
 messages. Users can manage and generate key pairs, encrypt files and emails, and
 sign their communications for added security.
 
-**How can I obtain and start using GpgFrontend?** You can download the latest version of GpgFrontend from [GpgFrontend's Downloads Page](https://www.gpgfrontend.bktus.com/overview/downloads/) and choose the installtion method for your platform.
+**How can I obtain and start using GpgFrontend?** You can download the latest version of GpgFrontend from [GpgFrontend's Downloads Page](../downloads/) and choose the installtion method for your platform.
 
 ## OpenPGP and GnuPG Explained
 
