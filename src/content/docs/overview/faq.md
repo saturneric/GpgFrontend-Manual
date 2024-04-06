@@ -60,13 +60,13 @@ this based on your operating system:
 
 ### Additional Assistance
 
-- For more detailed guidance, refer to the quick start manual available at [Getting Started Guide](/getting-started/).
+- For more detailed guidance, refer to the quick start manual available at [Getting Started Guide](../getting-started/).
 
 ## Reporting Bugs and Contributing
 
 **Found a bug?** If you encounter any issues with GpgFrontend, please report
 them via the GitHub repository. You can also contact me directly if you're not
-on GitHub; see the [Contact](/contact/) section for details.
+on GitHub; see the [Contact](../contact/) section for details.
 
 **Interested in contributing?** Feel free to modify GpgFrontend's code and
 submit a Pull Request with your enhancements. You can also send patches via
