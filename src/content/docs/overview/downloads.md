@@ -7,7 +7,7 @@ sidebar:
 
 GpgFrontend is available for download through multiple channels. For more
 detailed instructions on installation and getting started, please refer to the
-[Quick Start Manual](quick-start.md).
+[Getting Started Guide](../getting-started/).
 
 ---
 
@@ -52,4 +52,6 @@ detailed instructions on installation and getting started, please refer to the
 - **Microsoft Store Download**: Windows users can visit the application store
   page through the Microsoft Store badge below.
 
-  <ms-store-badge productid="9NH716MQK2B5"></ms-store-badge>
+<a href="https://apps.microsoft.com/detail/9nh716mqk2b5">
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
