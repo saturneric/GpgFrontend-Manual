@@ -41,7 +41,8 @@ contributions, suggestions, and feedback from users worldwide.
 Dive into the development journey on GitHub, where every line of code, each
 update, and user feedback converge to refine and enhance GpgFrontend.
 
-- [GitHub Repository](https://github.com/saturneric/GpgFrontend)
+- [Source Code of Application](https://github.com/saturneric/GpgFrontend)
+- [Source Code of THIS Website](https://github.com/saturneric/GpgFrontend-Manual)
 
 ### License and Contributions
 
