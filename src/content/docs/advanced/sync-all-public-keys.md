@@ -4,7 +4,6 @@ sidebar:
   label: Sync Public Keys
 ---
 
-
 Keeping your public keys in sync with those stored on a key server is crucial
 for secure communications. This synchronization ensures that any changes to
 public keys, such as revocations or the addition of subkeys, are reflected in
@@ -30,10 +29,15 @@ GpgFrontend automates the public key synchronization process through a
 user-friendly interface. Here’s how to use it:
 
 1. Open the **Key Management** interface.
-2. Locate and click the **Sync Public Key** button. This initiates the automatic
-   synchronization.
+2. In the list of public keys, you can now select specific keys to sync by
+   checking the boxes next to them.
+3. Locate and click the **Sync Public Key** button. This initiates the automatic
+   synchronization for the selected keys. If no keys are selected, all public
+   keys will be synchronized. In this case, a confirmation prompt will appear to
+   confirm full synchronization.
 
-![Sync Public Key Button](https://image.cdn.bktus.com/i/2023/11/16/e2129464-6bd7-3fd4-e359-3a1f7a25bfd6.webp)
+![Sync Public Key
+Button](https://image.cdn.bktus.com/i/2023/11/16/e2129464-6bd7-3fd4-e359-3a1f7a25bfd6.webp)
 
 _Note: Replace the placeholder text with the actual link to the image showing
 the Sync Public Key button._

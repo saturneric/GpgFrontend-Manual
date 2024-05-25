@@ -29,17 +29,18 @@ GpgFrontend uses the tools provided by this library.
 
 ### Before starting your work
 
-In order to facilitate coordination, please contact me via email before you
-start this work. This is very important, please contact me first so that the
-work you do can be better used by GpgFrontend.
+Before starting your work, it is no longer necessary to contact me. Please
+ensure you have a thorough understanding of Qt Linguist and its usage. You can
+directly edit the files, or use the Qt Linguist GUI Tool for editing.
 
 ### Updates to Translation Work Process
 
 - **For correcting existing translations**: You can directly modify the ts files
   and then send them to me via email.
-- **For adding a new language translation**: If you're unfamiliar with the
-  process, you can request a new ts file by emailing me. I will provide you with
-  the necessary file to start the translation for the new language.
+- **For adding a new language translation**: You can generate new ts files using
+  the Qt Linguist command line tools. If you are not technically inclined and
+  are unsure how to use these tools, you can email me, and I will provide you
+  with the appropriate ts file.
 
 ### Hand in your work
 

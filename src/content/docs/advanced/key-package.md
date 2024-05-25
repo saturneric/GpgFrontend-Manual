@@ -14,16 +14,43 @@ exporting, and safely transferring a KeyPackage.
 
 ## Creating a KeyPackage
 
+To create a KeyPackage, follow these steps:
 
+1. **Open the Key Management Interface**: Navigate to the main interface where
+   you manage your keys.
 
-## Exporting the KeyPackage
+2. **Export Keys**: Click on the "Export Key" button to initiate the export
+   process.
 
-After configuring the export settings:
+3. **Choose KeyPackage Export**: Select the option to export keys as a
+   KeyPackage. This will open a new dialog box for configuring the KeyPackage.
 
-1. Click on the 'OK' button to create the KeyPackage.
-2. The interface will generate two files:
-   - A `.gpgpack` file containing the packaged keys.
-   - A `.key` file which should be kept confidential and deleted after the transfer is complete.
+4. **Configure KeyPackage**:
+
+   - **KeyPackage Name**: In the first field, you will see a generated name for
+     the KeyPackage, such as `KeyPackage_41132`. You can click the button
+     labeled "Generate Key Package Name" to generate a new name if desired.
+   - **Output Path**: In the second field, click the button labeled "Select
+     Output Path" to choose where to save the KeyPackage file.
+   - **Passphrase**: In the third field, click the button labeled "Generate and
+     Save Passphrase" to generate and save a passphrase for the KeyPackage.
+     Ensure the security of this passphrase.
+
+5. **Optional Settings**:
+
+   - **Include Secret Keys**: Check the box labeled "Include secret key (Think
+     twice before acting)" if you want to include private keys in the
+     KeyPackage. This is generally not recommended unless necessary.
+   - **Exclude Keys without Private Parts**: Check the box labeled "Exclude keys
+     that do not have a private key" to exclude keys that do not have associated
+     private keys.
+
+6. **Export**: Once all settings are configured and reviewed, click the "OK"
+   button to create and export the KeyPackage.
+
+By following these steps, you can create a secure KeyPackage to transfer your
+cryptographic keys between devices. Ensure that the generated passphrase and the
+KeyPackage file are stored securely to prevent unauthorized access.
 
 ## Security Notice
 
@@ -44,8 +71,6 @@ To transfer the KeyPackage:
    target device using the passphrase set during the creation process.
 
 ## After Transfer: Importing and Verifying
-
-
 
 ## Best Practices
 
