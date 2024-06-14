@@ -6,63 +6,113 @@ GpgFrontend offers a fast and convenient method for working with files. The
 encryption and decryption process for files is nearly identical to that of text,
 with the exception that file operations involve binary input and output.
 
-## File Extension Introduction
+## Using File Browser for Encryption and Decryption
 
-For ciphertext in ASCII format, the file extension is typically "asc" and these
-files can be opened with a text editor. On the other hand, if the ciphertext is
-in binary format, the file extension will be "gpg". Binary ciphertext files are
-generally smaller than ASCII format.
+After clicking the **File Browser** button, a system directory selection dialog
+will appear. Follow these steps to perform encryption, decryption, and signing
+operations:
+
+1. **Open File Browser**:
+
+   - Click the **File Browser** button in the toolbar at the top of the
+     interface. This will open a system dialog allowing you to choose a
+     directory.
+
+2. **Select Directory**:
+
+   - In the system dialog, navigate to the desired directory and select it. Once
+     selected, a new tab named "File Browser" will open in GpgFrontend,
+     displaying the contents of the chosen directory.
+
+3. **Select a File**:
+
+   - In the File Browser tab, you will see a list of files and folders within
+     the selected directory. Click on the file you want to encrypt, decrypt, or
+     sign.
+
+4. **Encrypt the File**:
+
+   - To encrypt a file, first select the file in the File Browser. Then, in the
+     **Key Toolbox** on the right, select the public key of the recipient by
+     checking the box next to the desired key. Finally, click the **Encrypt**
+     button in the toolbar at the top.
+
+5. **Decrypt the File**:
+
+   - To decrypt a file, select the encrypted file in the File Browser. Ensure
+     you have the corresponding private key in your keyring. Click the
+     **Decrypt** button in the toolbar. If the correct key is available, the
+     file will be decrypted.
+
+![File Operations](https://image.cdn.bktus.com/i/2024/06/15/a8d7bf2f-54f6-ccc6-7bdd-8bb0d2ba44af.webp)
+
+By following these steps, you can easily manage file encryption, decryption, and
+signing using the GpgFrontend's File Browser feature. This streamlined process
+allows you to handle your cryptographic needs directly from the file system
+interface.
+
+## File Extension Requirements
+
+GpgFrontend supports different file extensions for various cryptographic
+operations. Understanding these extensions helps in properly managing encrypted
+and signed files. Here’s a breakdown of the file extensions used:
+
+#### ASCII Format
+
+- **.asc**: Files with the ".asc" extension are in ASCII format. These files
+  contain ASCII-armored ciphertext, which is a text representation of the
+  encrypted data. ASCII format is typically used for easy sharing via email or
+  text editors, as it ensures compatibility with text-based applications.
+
+#### Binary Format
+
+- **.gpg**: Files with the ".gpg" extension are in binary format. Binary
+  ciphertext files are more compact than their ASCII counterparts and are
+  generally used for more efficient storage and transmission. They cannot be
+  viewed directly in text editors, as the content is in a binary format.
+
+#### Combined Content
+
+- **.gpg**: When you use the encryption and signing functions together,
+  GpgFrontend generates a file with the ".gpg" extension. This file contains
+  both the encrypted content and the signature, ensuring that the recipient can
+  verify that the ciphertext originates from you.
+
+To perform decryption and verification operations, you need to use files with
+either the ".gpg" or ".asc" extension. These files contain the necessary
+ciphertext and signature content required for these operations.
+
+By adhering to these file extension requirements, you can ensure that your
+encrypted and signed files are correctly recognized and processed by
+GpgFrontend.
+
+### Default Output Mode
 
 Before version 2.0.4, GpgFrontend generated ciphertext files exclusively in
 ASCII format. However, beginning with version 2.0.4, GpgFrontend now generates
 ciphertext files in binary format by default. This setting can be adjusted in
 the program's settings.
 
-![image-20220112073548736](https://image.cdn.bktus.com/i/2023/11/16/980bff72-7271-b639-e63b-ff1d274edc95.webp)
+### Changing Output Mode
 
-## File Browser
+To change the output mode between ASCII and binary formats, follow these steps:
 
-From the top menu's "File" option, you can access the file browser by pressing
-Ctrl/Command + B. After choosing target directory at system navigator, you
-can then use the file browser tab to do some operations on files. By using the
-file browser, you can navigate to your working directory and right-click on the
-file you wish to work with. This will open a pop-up menu, where you can select
-the operation you want to perform on the file.
+1. **Open Settings**:
 
-![image-20220112072034647](https://image.cdn.bktus.com/i/2023/11/16/6a137a63-ae76-d45c-b425-5c3e5961aa2d.webp)
+   - Navigate to the GnuPG Controller settings within GpgFrontend. This can be
+     done by accessing the settings menu from the main interface.
 
-Located at the top of the file tab are two control buttons. The button on the
-left allows you to navigate up one level in the directory hierarchy, while the
-button on the right refreshes the input box on the left with the corresponding
-path.
+2. **Locate Binary Mode Option**:
 
-On the far right of the file tab, there is a button with useful options that you
-can select to show system files or hidden files.
+   - In the settings interface, under the "General" section, locate the option
+     labeled "Use Binary Mode for File Operations".
 
-![image-20220112072335503](https://image.cdn.bktus.com/i/2023/11/16/1cc208dc-75f7-6e1f-f802-149ed18095af.webp)
+3. **Toggle Binary Mode**:
+   - Check or uncheck this option to switch between binary (gpg) and ASCII (asc)
+     output formats. Checking the box will enable binary mode, while unchecking
+     it will revert to ASCII format.
 
-### Encrypt & Sign
+By following these steps, you can customize how GpgFrontend handles the format
+of ciphertext files according to your preference or needs.
 
-GpgFrontend recommends using the encryption and signature functions in this
-method, so that the recipient can verify that the ciphertext originates from
-you. You can select one or more recipients' public keys as well as your own
-private key to complete this operation.
-
-When the operation is complete, a file with the ".gpg" extension is generated.
-This file contains both encrypted content and signed content.
-
-![Peek 2022-01-12 07-26](https://image.cdn.bktus.com/i/2023/11/16/e7b1cf22-483d-91a4-e1d1-475ba10c51ad.gif)
-
-### Decrypt & Verify
-
-When decrypting this ciphertext, it undergoes verification, which enhances
-security. Additionally, you can perform a "Only Verify" operation which verifies
-the content without decrypting it. To use this operation, you must select a file
-with a ".gpg" or ".asc" extension, which contains the ciphertext and signature
-content.
-
-To encourage users to verify whether the ciphertext is signed or not when
-decrypting, Gpg Frontend does not provide a separate decryption operation for
-this.
-
-![Peek 2022-01-12 07-24](https://image.cdn.bktus.com/i/2023/11/16/bf3cca62-d28a-83bd-8676-7cb1bcf94f4c.gif)
+![Locate Binary Mode Option](https://image.cdn.bktus.com/i/2024/06/15/1a82922d-4a68-d315-f388-5571a4d93e8f.webp)

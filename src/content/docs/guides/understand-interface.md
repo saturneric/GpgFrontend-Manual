@@ -9,39 +9,46 @@ of the page. The exploration that follows will gradually unveil additional
 functionalities. Bear in mind that interfaces may vary across different
 versions.
 
-![Interface](https://image.cdn.bktus.com/i/2023/11/16/27c0bd12-8a1d-b9ae-2ecd-dbde5f96e36f.webp)
+![Interface](https://image.cdn.bktus.com/i/2024/06/15/baf33505-c34f-12c7-d897-a60fc9b5b600.webp)
 
 ## Text Editor
 
 The text editing zone allows you the liberty to input any desired text or
-establish a new tab through the "New" choice in the file menu at the top. Moving
+establish a new tab through the "New" option in the file menu at the top. Moving
 or closing tabs can be done with ease as per your needs.
 
 Numerous operations can be performed on your text using options available in the
-Operations Bar. Alternatively, you may utilize standard shortcuts like
-Ctrl+C/V/S for copy, paste, and save operations, or even searching within the
-text.
+Operations Bar at the top of the interface. You can encrypt, decrypt, sign, and
+verify text directly from this menu. Additionally, standard shortcuts like
+Ctrl+C, Ctrl+V, and Ctrl+S for copy, paste, and save operations, or searching
+within the text using Ctrl+F, are supported.
 
-The edited text within the text box is encoded in UTF8 without any formatting.
+The edited text within the text box is encoded in UTF-8 without any formatting.
 This plain text format ensures that no message alteration leads to confusion.
-While we have plans to introduce rich text editing in the future, the specifics
-are still being deliberated.
+While there are plans to introduce rich text editing in the future, the
+specifics are still being deliberated.
 
 ### Large Text File Support
 
-GpgFrontend accommodates opening larger files without hindrance. However, when
-dealing with relatively large files, editing of the tab won't be feasible until
-the entire file is loaded. During this time, despite not being able to edit the
-file, you still have the capability to view it.
+GpgFrontend accommodates opening larger files without hindrance, with the
+current limit set to 1MB per file. When dealing with relatively large files,
+editing of the tab won't be feasible until the entire file is loaded. During
+this time, despite not being able to edit the file, you still have the
+capability to view it.
+
+It is important to note that opening files larger than 1MB is not supported, as
+excessively long text files can cause significant performance issues with the
+graphical user interface (GUI). This limitation helps maintain the application's
+responsiveness and ensures a smooth user experience.
 
 ## Information Board
 
 GpgFrontend presents the outcome of the current tab page operation on the
-Information Board, signifying the success or failure of the operation.
-Additionally, the Information Board's text includes supplementary details to
-assist in understanding the particulars of your encryption, decryption,
-signature, and other operations. Depending on your language settings, the output
-displayed on the dashboard may differ.
+Information Board, signifying the success or failure of the operation. The
+Information Board's text includes supplementary details to assist in
+understanding the particulars of your encryption, decryption, signature, and
+other operations. Depending on your language settings, the output displayed on
+the dashboard may differ.
 
 The Information Board was conceived to provide a comprehensive view of more
 information within the same space. However, GpgFrontend plans to incorporate a
@@ -68,56 +75,48 @@ font size is 10, and it can be modified to any value ranging from 9 to 18.
 
 ### Dashboard Actions Menu
 
-The dashboard actions menu facilitates quick and easy access to common
-functionalities related to the content of the information board. It empowers
-users to efficiently manage and process large chunks of content on the
-Information Board for various purposes.
+The dashboard actions menu, located below the Information Board, provides quick
+and easy access to essential functions related to the content displayed. It
+empowers users to efficiently manage and process large chunks of information for
+various purposes.
 
 #### Copy
 
 This function allows users to swiftly capture significant portions of content
-from the Information Board for other applications.
+from the Information Board for use in other applications. Simply select the
+content you need and use this button to copy it to the clipboard.
 
 #### Save File
 
-This operation archives the contents of the information board into the file
-system, utilizing the UTF-8 format. Although the resultant output file lacks a
-suffix, it is essentially in a plain text format.
+This operation archives the contents of the Information Board into the file
+system in UTF-8 format. Although the resultant output file does not have a
+suffix, it is essentially plain text and can be opened with any text editor.
 
 #### Clear
 
-This command promptly purges all content from the information board. The
-clearance includes both the contents and statuses of the information board. A
-new operation (such as encryption) will automatically trigger this clearing
-process.
+This command promptly purges all content from the Information Board, including
+both the displayed contents and statuses. Any new operation, such as encryption
+or decryption, will automatically trigger this clearing process, ensuring that
+the Information Board always displays the most current and relevant information.
 
-### Optional Actions Menu
+## Key Toolbox
 
-In addition to the Information Board, an Optional Actions Menu will be presented
-below it. If any auxiliary operations can be performed post your main operation
-(such as displaying more detailed information, sending encrypted text via email,
-etc.), the access points for these supplementary tasks will be made available
-here.
-
-## Key ToolBox
-
-This feature presents a comprehensive list of key pairs stored on your device,
-intended for use with Gpg operations. The keys within the ToolBox are classified
-into multiple categories, each corresponding to a unique usage context.
-Additionally, the ToolBox provides access to a variety of common operations, all
-of which can be found in the Key List Menu.
+The Key Toolbox on the right side of the interface lists all available keys,
+including public and private keys. The columns provide details such as key type,
+name, and email address. You can select keys from this list to perform various
+operations such as encryption, decryption, signing, and verification.
 
 ### Usage
 
 Most Gpg-related operations require specifying a key pair (for tasks like
 encryption, decryption, signature, etc.). You can select the checkbox in the
-first column of the Key ToolBox's table to designate one or more keys for your
+first column of the Key Toolbox's table to designate one or more keys for your
 operation. Categories that contain only public keys are frequently utilized in
 cryptographic scenarios.
 
 ### Classification
 
-The ToolBox showcases categories via tabbed display. None of these categories
+The Toolbox showcases categories via tabbed display. None of these categories
 include any expired or revoked keys. To view such keys, you should refer to the
 Key Manager. The default category comprises all private and public keys. During
 any operation, only the keys from the currently selected category will be
@@ -128,7 +127,7 @@ considered for input.
 Understanding this list is crucial. Let's walk through its components step by
 step.
 
-- **Select**: Check the box in this column to notify Gpg Frontend that you wish
+- **Select**: Check the box in this column to notify GpgFrontend that you wish
   to use the key from this row for your subsequent operation.
 
 - **Type**: This column informs you about the key type and whether the primary
@@ -165,13 +164,23 @@ step.
 
 ## Operations Bar
 
-Here, you can execute corresponding operations by clicking on the buttons
-provided. For instance, after inputting text into a text editor and specifying
-the desired key in the key toolbox, you can click the encryption button to
-perform the operation.
+The Operations Bar at the top includes the following functions:
 
-Some operations require key specification, while others do not, as will be
-detailed in the respective sections of this document.
+1. New: Create a new text file tab.
+2. Open: Open an existing text file.
+3. File Browser: Browse and select files from your system.
+4. Encrypt: Encrypt the text or file.
+5. Encrypt Sign: Encrypt and sign the text or file.
+6. Decrypt: Decrypt the text or file.
+7. Decrypt Verify: Decrypt and verify the text or file.
+8. Sign: Sign the text or file.
+9. Verify: Verify the signature of the text or file.
+10. Manage Keys: Open the key management interface.
+11. Import Key: Import a new key through some approaches.
+
+This interface provides a comprehensive suite of tools for managing and
+utilizing your cryptographic keys and performing various encryption-related
+operations with ease.
 
 ### Customization
 

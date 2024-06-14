@@ -28,23 +28,37 @@ authenticate signatures made with the new subkey.
 GpgFrontend automates the public key synchronization process through a
 user-friendly interface. Here’s how to use it:
 
-1. Open the **Key Management** interface.
-2. In the list of public keys, you can now select specific keys to sync by
-   checking the boxes next to them.
-3. Locate and click the **Sync Public Key** button. This initiates the automatic
-   synchronization for the selected keys. If no keys are selected, all public
-   keys will be synchronized. In this case, a confirmation prompt will appear to
-   confirm full synchronization.
+1. **Open the Key Management Interface**:
 
-![Sync Public Key
-Button](https://image.cdn.bktus.com/i/2023/11/16/e2129464-6bd7-3fd4-e359-3a1f7a25bfd6.webp)
+   - Navigate to the Key Management interface by clicking on the "Manage Keys"
+     button in the main interface.
 
-_Note: Replace the placeholder text with the actual link to the image showing
-the Sync Public Key button._
+2. **Select Keys to Sync**:
 
-The feature works by checking all the public keys in your possession against the
-key server. If there's an updated version of a key you own, GpgFrontend will
-import the new details to your local keyring.
+   - In the list of public keys, you can select specific keys to sync by
+     checking the boxes next to them. If you want to sync all public keys, you
+     do not need to select any specific keys.
+
+3. **Click the Sync Public Key Button**:
+
+   - Locate and click the **Sync Public Key** button. This button is represented
+     by a cloud icon with a refresh symbol, located in the toolbar at the top of
+     the Key Management interface.
+   - If you have selected specific keys, the synchronization process will
+     initiate for those keys. If no keys are selected, a confirmation prompt
+     will appear, asking you to confirm if you want to synchronize all public
+     keys.
+
+4. **Synchronization Process**:
+   - The feature works by checking all the public keys in your possession
+     against the key server. If there is an updated version of a key you own,
+     GpgFrontend will import the new details to your local keyring.
+
+![Sync Public Key](https://image.cdn.bktus.com/i/2024/06/15/8771cd76-1a46-321e-8bf9-93d8db2a9f78.webp)
+
+By following these steps, you can ensure that your public keys are always
+up-to-date, enhancing the security and reliability of your cryptographic
+communications.
 
 ### Choosing the Right Key Server
 
@@ -53,7 +67,7 @@ To know which key server GpgFrontend interacts with, follow these steps:
 1. Go to the settings section of GpgFrontend.
 2. The default key server configured will be listed here.
 
-![Default Key Server Setting](https://image.cdn.bktus.com/i/2023/11/16/9bcac7e1-e058-84a0-520b-039c64eb3443.webp)
+![Default Key Server Setting](https://image.cdn.bktus.com/i/2024/06/15/03471d32-54f2-2be7-53a3-eeee03f74372.webp)
 
 _Note: Replace the placeholder text with the actual link to the image showing
 the key server settings._

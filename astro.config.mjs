@@ -45,9 +45,9 @@ export default defineConfig({
           },
         },
         {
-          label: "Reference",
+          label: "Extra",
           autogenerate: {
-            directory: "reference",
+            directory: "extra",
           },
         },
       ],

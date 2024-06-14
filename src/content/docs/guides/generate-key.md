@@ -4,125 +4,110 @@ sidebar:
   order: 3
 ---
 
-Sure, let's go through the process of generating a key pair and subkeys.
+GpgFrontend makes it easy to generate a key pair or a subkey for encryption,
+signing, and authentication. Follow the steps below to create your own keys.
 
-To generate a key pair using GpgFrontend, follow these steps:
+## Steps to Generate a Key Pair
 
-1. Open GpgFrontend and click on the "Generate Key" button.
-2. Fill in the required information, such as your name and email address.
-3. Choose the type of key you want to generate (RSA, DSA or ECC).
-4. Set the key size and expiration date, if desired.
-5. Create a passphrase to protect your private key.
-6. Click "Generate" to create your key pair.
+![Generate A Key Pair](https://image.cdn.bktus.com/i/2024/06/15/5df15149-1890-2645-8452-e7c4798ccd16.webp)
 
-Once your key pair is generated, you can add subkeys to it by following these
-steps:
+1. **Open Key Management**:
 
-1. Select the key pair you want to add a subkey to.
-2. Click on the "Add Subkey" button.
-3. Choose the type of subkey you want to add (encryption, signing,
-   authentication, or all).
-4. Set the subkey size and expiration date, if desired.
-5. Create a passphrase to protect your subkey.
-6. Click "Add" to create your subkey.
+   - Click on the "New Keypair" button in the Key Management interface. This
+     will open the Generate Key dialog box.
 
-You can add multiple subkeys to a key pair, each with their own specific
-purposes. This allows you to have more control over your key pair's security and
-usage.
+2. **Fill in Basic Information**:
 
-## Generate Key Pair
+   - **Name**: Enter your name. The name should be at least 5 characters long.
+   - **Email Address**: Enter your email address. It should follow the correct
+     email format.
+   - **Comment**: Optionally, add a comment to help differentiate this key pair
+     from others.
 
-You can quickly understand the process of generating a key pair by watching the
-following animation.
+3. **Set Expiration Date**:
 
-![GIF](https://image.cdn.bktus.com/i/2023/11/16/711f0379-eea6-ee25-2072-8e77d07d2ad5.gif)
+   - Choose an expiration date for the key pair. By default, GpgFrontend
+     suggests setting the expiration date to two years after generation.
+   - Alternatively, you can check the "Never expire" checkbox to make the key
+     pair permanent. This option can be changed later, even after the key has
+     expired.
 
-### Name & Email & Comment
+4. **Select Key Size and Type**:
 
-The three fields, including name, email, and comment, are used to help users
-differentiate this key pair from other key pairs they may have. Among these
-three options, name and email are mandatory, while comment is optional.
+   - **Key Size**: Choose the key size. The default size is 2048 bits. Note that
+     the size option is only applicable when the key type is RSA or DSA.
+   - **Key Type**: Select the type of key you want to generate. Available
+     options include RSA, DSA, ECDSA, ECDSA + ECDH, ECDSA + ECDH NIST P-256, and
+     ECDSA + ECDH BrainPool P-256. For key types with a plus sign (e.g., ECDSA +
+     ECDH), a primary key and a corresponding subkey will be generated.
 
-It is important to note that the name should be at least 5 characters long, and
-the email should follow the correct format (no actual email account is
-required).
+5. **Set a Passphrase**:
 
-![uid](https://image.cdn.bktus.com/i/2023/11/16/3ad515e0-6d9e-6507-552c-55101da16836.webp)
+   - It is crucial to set a passphrase to protect your private key. Uncheck the
+     "Non Pass Phrase" checkbox and enter a strong, unique passphrase.
+   - If you prefer not to set a passphrase (not recommended for security
+     reasons), you can leave the "Non Pass Phrase" checkbox checked.
 
-### Expiration Date
+6. **Select Key Usage**:
 
-Setting an expiration date for the key pair is a way to limit the validity of
-the key over time. Once the expiration date is reached, the key can still be
-used, but its operations, especially signature operations, will be considered
-invalid. By default, GpgFrontend suggests setting the expiration date to two
-years after generation, but you can also choose to check the "Never expire"
-checkbox to make the key pair permanent.
+   - Specify the usage for the key pair. Options include:
+     - **Encryption**: For encrypting data.
+     - **Signing**: For creating digital signatures.
+     - **Certification**: For certifying other keys (only for primary keys).
+     - **Authentication**: For authentication purposes, such as SSH keys.
+   - Note that some usages may not be available depending on the selected key
+     type. For example, the DSA algorithm does not support encryption.
 
-It's important to note that this option can be changed at any time after
-generation, even after the expiration date has passed, as long as the primary
-key still exists.
+7. **Generate the Key Pair**:
+   - After filling in all the necessary information and selecting the desired
+     options, click the "OK" button to generate your key pair.
 
-![expiration-date](https://image.cdn.bktus.com/i/2023/11/16/ce9b446d-a7a0-2944-b8e4-3517c0d3a861.webp)
+By following these steps, you can generate a secure key pair using GpgFrontend,
+tailored to your specific needs for encryption, signing, and authentication.
 
-### Key Size & Algo
+## Steps to Generate a Subkey
 
-Setting an expiration date for the key pair is a way to limit the validity of
-the key over time. Once the expiration date is reached, the key can still be
-used, but its operations, especially signature operations, will be considered
-invalid. By default, GpgFrontend suggests setting the expiration date to two
-years after generation, but you can also choose to check the "Never expire"
-checkbox to make the key pair permanent.
+![Generate A Subkey](https://image.cdn.bktus.com/i/2024/06/15/a56c83bc-72ad-6232-1764-6fef5aeceddd.webp)
 
-It's important to note that this option can be changed at any time after
-generation, even after the expiration date has passed, as long as the primary
-key still exists.
+1. **Open Key Management**:
 
-![keysize-algo](https://image.cdn.bktus.com/i/2023/11/16/4ce5ecfa-7ad0-7a81-cbe1-2ea93f7872ea.webp)
+   - In the Key Management interface, right-click on the key pair you wish to
+     add a subkey to. Select the "New Subkey" option from the context menu.
 
-### Passphrase
+2. **Fill in Basic Information**:
 
-Setting a password to protect the primary key is crucial in case of a security
-breach. If the "Do not set password" checkbox is unchecked, you will be prompted
-to enter a password during the key pair generation process. Follow the prompts
-to set the password. Once the password is set, whenever you need to use the
-primary key for an operation, you will need to enter the password to unlock it
-(some systems have a password manager to automate this process).
+   - **Key Type**: Select the type of subkey you want to generate. Available
+     options include RSA, DSA, ECDSA, ECDH, ECDH NIST P-256, ECDH NIST P-384,
+     ECDH NIST P-521, ECDH BrainPool P-256, ECDH BrainPool P-384, and ECDH
+     BrainPool P-512.
+   - **Key Size**: Choose the key size. This option is only applicable when the
+     key type is RSA or DSA.
+   - **Expiration Date**: Set an expiration date for the subkey. You can also
+     choose to check the "Never expire" checkbox to make the subkey permanent.
 
-However, you can also check the "Do not set password" checkbox to skip setting a
-protection password for the primary key. But this is not recommended due to
-security concerns.
+3. **Set a Passphrase**:
 
-### Usage
+   - If the primary key has a passphrase, the subkey's passphrase must be equal
+     to it. Ensure that the "Non Pass Phrase" checkbox is unchecked if you want
+     to set a passphrase.
 
-When generating a key pair, you can specify the usage for the first subkey,
-which is the primary key. There are four options:
+4. **Select Key Usage**:
 
-![usages](https://image.cdn.bktus.com/i/2023/11/16/f9bae59d-9181-2cb8-53a6-b51c0698c613.webp)
+   - Specify the usage for the subkey. Options include:
+     - **Encryption**: For encrypting data.
+     - **Signing**: For creating digital signatures.
+     - **Authentication**: For authentication purposes, such as SSH keys.
+   - Note that the certification usage is not available for subkeys.
 
-- Encryption: Once generated, this key can be used for encryption purposes.
+5. **Generate the Subkey**:
+   - After filling in all the necessary information and selecting the desired
+     options, click the "OK" button to generate your subkey.
 
-- Signing: Once generated, this key can be used for signature purposes.
+By following these steps, you can generate a subkey using GpgFrontend, which
+enhances the functionality of your primary key pair for various cryptographic
+operations.
 
-- Certification: This key can be used to certify or verify other keys. Only the
-  primary key can have this usage.
-
-- Authentication: This key can be used for authentication purposes, such as with
-  SSH keys.
-
-The third of these four uses (authentication purposes) can only be owned by the
-primary key. In addition, some usages are not available when using certain
-algorithms for encryption. For example, when the DSA algorithm is selected, the
-encryption uses are disabled.
-
-## Generate Subkey
-
-It is possible to append subkeys to an existing key pair. The subkey does not
-require the input of a name, email, or comment, as the remaining steps are
-essentially identical to those for generating a key pair.
-
-![Generate Subkey](https://image.cdn.bktus.com/i/2023/11/16/4871ee77-5da5-5473-a2be-2d9c29d6b842.gif)
-
-### Extra note
+## Extra Note
 
 Below are some guidelines that may prove useful in comprehending the
 aforementioned concepts and utilizing this tool accurately.
@@ -168,8 +153,8 @@ but also provides flexibility in key usage and management.
 
 - **Secure Storage**: The primary key should be stored in a highly secure
   location, preferably offline or in a hardware security module (HSM), to
-  prevent unauthorized access. This is because the loss or compromise of the
-  primary key jeopardizes the entire cryptographic framework.
+  prevent unauthorized access. The loss or compromise of the primary key
+  jeopardizes the entire cryptographic framework.
 
 - **Key Generation and Maintenance**: While tools like GpgFrontend provide
   user-friendly interfaces for managing keys, they may lack support for advanced
@@ -205,3 +190,52 @@ maintaining the integrity and security of cryptographic operations. By adhering
 to best practices for key usage, storage, and renewal, users can safeguard their
 digital identities and ensure the confidentiality and authenticity of their
 communications.
+
+#### Additional Note on Subkey Algorithm Types
+
+Subkeys in GpgFrontend offer more algorithm types than primary keys due to their
+specialized roles. While primary keys focus on establishing identity and trust,
+subkeys are often dedicated to specific tasks like encryption or authentication.
+This task-specific design allows subkeys to utilize a broader range of
+algorithms, enhancing their flexibility and functionality. For instance, while
+primary keys may be restricted to certain secure algorithms for signing, subkeys
+can employ diverse algorithms optimized for encryption, like ECDH, ensuring
+efficient and secure operations tailored to the user's needs.
+
+**Primary Key Supported Algorithms:**
+
+- RSA
+- DSA
+- ECDSA
+
+**Subkey Supported Algorithms:**
+
+- RSA
+- DSA
+- ECDSA
+- ECDH
+- ECDH NIST P-256
+- ECDH NIST P-384
+- ECDH NIST P-521
+- ECDH BrainPool P-256
+- ECDH BrainPool P-384
+- ECDH BrainPool P-512
+
+**Explanation:**
+
+The broader range of algorithms available for subkeys arises because subkeys are
+designed for specific functions and can therefore leverage specialized
+algorithms optimized for those functions. For example, ECDH (Elliptic Curve
+Diffie-Hellman) is highly efficient for encryption tasks and is commonly used
+for subkeys dedicated to encryption. This flexibility in algorithm choice
+ensures that cryptographic operations can be optimized for both performance and
+security based on the specific use case.
+
+Primary keys, however, are central to the user's cryptographic identity and are
+primarily used for signing and certifying subkeys. This critical role
+necessitates the use of well-established and highly secure algorithms to ensure
+the integrity and trustworthiness of the entire cryptographic system.
+
+By differentiating the algorithms and roles of primary keys and subkeys,
+GpgFrontend enhances both security and operational efficiency, allowing users to
+maintain a robust and flexible cryptographic setup​.
