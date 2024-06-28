@@ -288,12 +288,14 @@ explanation of each button's function:
      Keyservers facilitate the distribution and retrieval of public keys.
 
 6. **Revoke Certificate Operation**:
-   - **Function**: This dropdown menu provides options for revoking a key
+
+   - **Function**: This dropdown menu provides options for generating a
+     revocation certificate for the key or importing an existing revocation
      certificate. Revoking a certificate is necessary if the key has been
-     compromised or if it is no longer needed. This action invalidates the key,
-     ensuring it cannot be used maliciously. The revocation information is
-     typically uploaded to a keyserver so that others are aware of the key's
-     revoked status.
+     compromised or is no longer needed. This action invalidates the key,
+     ensuring it cannot be maliciously used. Revocation information is typically
+     uploaded to a keyserver to inform others about the revoked status of the
+     key.
 
 These operations help manage the lifecycle of key pairs, ensuring their secure
 use and proper distribution.
