@@ -61,7 +61,7 @@ the repository and clone it locally. For email contributions, ensure Git is
 installed on your machine.
 
 For setting up local development Environment, you can refer to [this
-section](../setup-dev-env/).
+section](/appendix/setup-dev-env).
 
 ### Step 2: Making Changes
 

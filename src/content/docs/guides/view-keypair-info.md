@@ -40,8 +40,8 @@ This part is the information of the primary key of the key pair. The primary key
 is very crucial because without it, you cannot perform related management
 operations like adding and revoking sub-keys (similar to not being able to open
 the key ring). Let's introduce the information of the primary key separately
-below. If you want to learn more, see the [Basic Concepts](../basic-concepts.md)
-section.
+below. If you want to learn more, see the [Fundamental
+Concepts](/guides/fundamental-concepts) section.
 
 The absence of the master key means that the private key of the master key does
 not exist, but this doesn't mean that neither the public key nor the private key

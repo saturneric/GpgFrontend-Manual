@@ -202,6 +202,8 @@ primary keys may be restricted to certain secure algorithms for signing, subkeys
 can employ diverse algorithms optimized for encryption, like ECDH, ensuring
 efficient and secure operations tailored to the user's needs.
 
+For more Details: [Comparison of Cryptographic Algorithms](/extra/algorithms-comparison)
+
 **Primary Key Supported Algorithms:**
 
 - RSA

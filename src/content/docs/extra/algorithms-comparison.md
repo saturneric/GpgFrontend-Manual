@@ -37,33 +37,84 @@ and ECDH. Here’s a detailed comparison to help you make an informed decision:
 - **Security**: Suitable for digital signatures, but less versatile and not as
   widely supported as RSA and ECDSA.
 
-## ECDSA (Elliptic Curve Digital Signature Algorithm)
+## ElGamal Encryption (ELG-E)
 
-- **Key Characteristics**: ECDSA is based on elliptic curve cryptography (ECC)
-  and provides equivalent security to RSA with much shorter key lengths.
-- **Key Sizes**: Commonly uses 224-bit keys for the same security level as
-  2048-bit RSA keys. Higher security levels can be achieved with 256, 384, or
-  521-bit keys.
-- **Use Cases**: Used for digital signatures, particularly in constrained
-  environments like mobile devices and IoT due to its efficiency.
-- **Performance**: More efficient and faster than RSA for the same security
-  level. Requires less computational power and bandwidth.
-- **Security**: Offers strong security with smaller key sizes, making it
-  suitable for environments with limited
-  resources.
+- **Key Characteristics**: ElGamal encryption (ELG-E) is an asymmetric key
+  encryption algorithm used for public-key cryptography. It is based on the
+  Diffie-Hellman key exchange and provides both encryption and digital
+  signatures.
+- **Key Sizes**: Like DSA, ElGamal typically uses large key sizes, often 2048
+  bits or more, to ensure a high level of security.
 
-## ECDH (Elliptic Curve Diffie-Hellman)
+- **Use Cases**: ElGamal is used in encryption and key exchange protocols. It is
+  particularly valued for its ability to generate different ciphertexts for the
+  same plaintext each time it is encrypted, providing semantic security.
+  However, it is less commonly used than RSA or ECC-based methods.
 
-- **Key Characteristics**: ECDH is used for key exchange based on elliptic curve
-  cryptography. It is commonly paired with ECDSA for secure communications.
-- **Key Sizes**: Similar to ECDSA, ECDH uses shorter keys for equivalent
-  security levels (e.g., 256-bit ECDH for 128-bit security).
-- **Use Cases**: Ideal for establishing shared secrets over an insecure channel,
-  often used in conjunction with ECDSA for encryption and authentication.
-- **Performance**: Efficient in terms of computational power and key size.
-  Suitable for applications requiring secure key exchange.
-- **Security**: Provides robust security with smaller keys, making it efficient
-  for both performance and security.
+- **Performance**: ElGamal encryption is computationally intensive, especially
+  when compared to RSA or ECC algorithms. The encryption process is relatively
+  slow, and the resulting ciphertexts are significantly larger than the
+  plaintext.
+
+- **Security**: ElGamal offers strong security, especially when large key sizes
+  are used. However, its performance drawbacks and the complexity of managing
+  larger ciphertexts have limited its widespread adoption.
+
+## Understanding ECDH and ECDSA
+
+### Overview of Elliptic Curve Cryptography (ECC)
+
+Elliptic Curve Cryptography (ECC) is a powerful cryptographic method that
+provides robust security with relatively small key sizes, making it ideal for
+environments where computational power and storage are limited. ECC is commonly
+used in two main algorithms: ECDH and ECDSA.
+
+### ECDH and ECDSA: Core Differences
+
+- **ECDH (Elliptic Curve Diffie-Hellman)** is a key exchange algorithm that
+  enables two parties to securely establish a shared secret over an insecure
+  channel. This shared secret can then be used for encryption. ECDH is not
+  directly used for encryption or signing; instead, it is crucial for securely
+  setting up encryption keys.
+
+- **ECDSA (Elliptic Curve Digital Signature Algorithm)** is used for creating
+  digital signatures, allowing one party to sign a message and another to verify
+  its authenticity. ECDSA ensures that the message has not been tampered with
+  and that it originates from the claimed sender.
+
+### Common ECC Algorithms and Their Use Cases
+
+- **NIST Curves (P-256, P-384, P-521)**: These curves, standardized by the
+  National Institute of Standards and Technology (NIST), are widely used in
+  secure communication protocols. For example, **ECDH NIST P-256** provides
+  approximately 128-bit security, making it suitable for most encryption needs,
+  while **ECDSA NIST P-256** is often used for digital signatures. As the key
+  size increases (e.g., P-384, P-521), so does the security level, with P-521
+  offering approximately 256-bit security, ideal for applications requiring the
+  highest level of protection.
+
+- **ED25519 and ED448**: **ED25519** is favored for its speed and security,
+  providing 128-bit security and commonly used in modern applications like
+  secure messaging (e.g., Signal) and blockchain technologies. **ECDSA ED25519**
+  is excellent for generating fast and secure digital signatures. **ED448**, on
+  the other hand, offers higher security (224-bit) and is suitable for
+  environments that require even stronger protection, although at a slight
+  performance cost.
+
+- **BrainPool Curves (P-256, P-384, P-512)**: These curves are alternatives to
+  the NIST standards, offering similar security levels but with different
+  parameters. **ECDH BrainPool P-256** and **ECDSA BrainPool P-256** are used
+  when there is a preference for non-NIST curves, especially in regions or
+  industries where alternative cryptographic standards are required. The
+  BrainPool curves maintain the balance between security and performance across
+  different key sizes.
+
+- **CV25519 and X448**: **ECDH CV25519** is a counterpart to ED25519 but is used
+  specifically for key exchange. It provides approximately 128-bit security and
+  is widely used for its efficiency in secure communications. **ECDH X448** is
+  the higher-security variant (224-bit security) and is appropriate for
+  scenarios demanding more robust encryption, albeit with higher computational
+  costs.
 
 ## Algorithm Flexibility in Primary Keys and Subkeys
 

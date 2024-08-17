@@ -132,7 +132,7 @@ this document to learn how to set the default key server.
 
 This is an advanced function provided by GpgFrontend, it can synchronize all
 your local public key information at one time, if you want to know, please read
-[this document](../features/sync-all-public-keys.md).
+[this document](/advanced/sync-all-public-keys).
 
 ## Key Server Related Settings
 

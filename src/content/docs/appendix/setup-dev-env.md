@@ -59,15 +59,6 @@ cd GpgFrontend
 This step ensures that line endings are consistent across different operating
 systems.
 
-- **For Windows:**
-
-```bash
-git config --global core.autocrlf false
-git config --global core.eol lf
-```
-
-- **For macOS:**
-
 ```bash
 git config --global core.autocrlf false
 git config --global core.eol lf
@@ -82,7 +73,7 @@ sudo apt-get update
 sudo apt-get install -y build-essential cmake ninja-build libarchive-dev libssl-dev libgpgme-dev
 ```
 
-- **On macOS (11 and 12):**
+- **On macOS 12 or later:**
 
 ```bash
 brew install cmake openssl@3 ninja libarchive gpgme

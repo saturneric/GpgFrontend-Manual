@@ -17,7 +17,7 @@ messages. Users can manage and generate key pairs, encrypt files and emails, and
 sign their communications for added security.
 
 **How can I obtain and start using GpgFrontend?** You can download the latest
-version of GpgFrontend from [GpgFrontend's Downloads Page](../downloads/) and
+version of GpgFrontend from [GpgFrontend's Downloads Page](/overview/downloads) and
 choose the installation method for your platform.
 
 ## OpenPGP and GnuPG Explained
@@ -63,13 +63,13 @@ this based on your operating system:
 ### Additional Assistance
 
 - For more detailed guidance, refer to the quick start manual available at
-  [Getting Started Guide](../getting-started/).
+  [Getting Started Guide](/overview/getting-started).
 
 ## Reporting Bugs and Contributing
 
 **Found a bug?** If you encounter any issues with GpgFrontend, please report
 them via the GitHub repository. You can also contact me directly if you're not
-on GitHub; see the [Contact](../contact/) section for details.
+on GitHub; see the [Contact](/overview/contact) section for details.
 
 **Interested in contributing?** Feel free to modify GpgFrontend's code and
 submit a Pull Request with your enhancements. You can also send patches via
