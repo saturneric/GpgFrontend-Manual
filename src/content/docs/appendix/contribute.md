@@ -88,10 +88,3 @@ description of your changes and the reasons for them in your email.
 If you have any technical questions or need assistance, refer to the Contact
 document for the maintainer's email address. We are here to help and encourage a
 collaborative development process.
-
-## Conclusion
-
-Your contributions are vital to the success and improvement of GpgFrontend. We
-appreciate your efforts to adhere to these guidelines and look forward to your
-innovative and high-quality contributions. Thank you for being a part of our
-community.

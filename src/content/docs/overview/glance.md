@@ -12,7 +12,7 @@ encryption, decryption, and digital signing, offering a seamless interface for
 managing OpenPGP tasks. Embrace the latest features of GnuPG 2.x, enhancing your
 security in the digital age.
 
-**Document Version Reference: [v2.1.3](https://github.com/saturneric/GpgFrontend/releases/tag/v2.1.2)**
+**Document Version Reference: [v2.1.4](https://github.com/saturneric/GpgFrontend/releases/tag/v2.1.4)**
 
 ## User Interface Glimpse
 

@@ -206,20 +206,29 @@ efficient and secure operations tailored to the user's needs.
 
 - RSA
 - DSA
-- ECDSA
+- ECDSA ED25519
+- ECDSA NIST P-256
+- ECDSA NIST P-384
+- ECDSA NIST P-521
+- ECDSA BrainPool P-256 (GnuPG >2.3.0)
+- ECDSA BrainPool P-384 (GnuPG >2.3.0)
+- ECDSA BrainPool P-512 (GnuPG >2.3.0)
 
 **Subkey Supported Algorithms:**
 
 - RSA
 - DSA
-- ECDSA
-- ECDH
+- ELG-E
+- ECDSA ED25519
+- ECDSA ED448 (GnuPG >2.3.0)
+- ECDH CV25519
+- ECDH X448 (GnuPG >2.3.0)
 - ECDH NIST P-256
 - ECDH NIST P-384
 - ECDH NIST P-521
-- ECDH BrainPool P-256
-- ECDH BrainPool P-384
-- ECDH BrainPool P-512
+- ECDH BrainPool P-256 (GnuPG >2.3.0)
+- ECDH BrainPool P-384 (GnuPG >2.3.0)
+- ECDH BrainPool P-512 (GnuPG >2.3.0)
 
 **Explanation:**
 

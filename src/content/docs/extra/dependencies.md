@@ -16,8 +16,6 @@ visit their respective homepages:
 - **AppImage**: [https://appimage.org](https://appimage.org)
 - **macOS Application Bundles**: [Link](https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/BundleTypes/BundleTypes.html)
 - **libarchive**: [https://www.libarchive.org](https://www.libarchive.org)
-- **spdlog**: [https://github.com/gabime/spdlog](https://github.com/gabime/spdlog)
-- **mimalloc**: [https://github.com/microsoft/mimalloc](https://github.com/microsoft/mimalloc)
 - **Qt-AES**: [https://github.com/bricke/Qt-AES](https://github.com/bricke/Qt-AES)
 
 The icons utilized in this software are sourced from [Alibaba

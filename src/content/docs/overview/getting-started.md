@@ -67,8 +67,7 @@ For an effortless install or removal process, use Homebrew Cask:
 1. **Install GnuPG** via Homebrew or download it from [GPG for OS
    X](https://sourceforge.net/projects/gpgosx/files).
 2. **Download** the `GpgFrontend-*******-macos-**.dmg` file from [GpgFrontend's
-   releases](https://github.com/saturneric/GpgFrontend/releases). Select
-   `x86_64` for compatibility with Intel and Apple Silicon chips.
+   releases](https://github.com/saturneric/GpgFrontend/releases).
 3. **Mount** the DMG file and **run** GpgFrontend.
 4. **Optional:** Drag GpgFrontend into your Applications folder for easy access.
 
