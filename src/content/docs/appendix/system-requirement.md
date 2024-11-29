@@ -51,13 +51,14 @@ dependencies:
     This variant ensures compatibility with earlier Windows environments,
     extending the tool's accessibility and usability.
 
-- **GnuPG 2.2.0 or Higher:** GpgFrontend integrates with GnuPG for its
+- **GnuPG 2.1.0 or Higher:** GpgFrontend integrates with GnuPG for its
   cryptographic operations, including encryption, decryption, and digital
-  signing. GnuPG (version 2.2.0 or newer) is a necessary component to leverage
-  the full capabilities of GpgFrontend. Please note, GnuPG 1.x versions are not
-  supported by GpgFrontend due to differences in functionality and support.
-  Users are encouraged to use GnuPG 2.x to ensure compatibility and secure
-  operations.
+  signing. While GpgFrontend supports GnuPG version 2.1.0 or newer, some
+  features may not be fully functional with versions below 2.4.0. For the best
+  compatibility and to ensure access to all features, it is strongly recommended
+  to use GnuPG 2.4.0 or higher. Please note that GnuPG 1.x versions are not
+  supported due to significant differences in functionality and lack of modern
+  security updates.
 
 By catering to a wide range of operating systems and ensuring backward
 compatibility with older Windows versions through Qt5 support, GpgFrontend

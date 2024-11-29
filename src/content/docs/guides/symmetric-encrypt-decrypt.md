@@ -45,16 +45,6 @@ challenge of securely exchanging the password between the sender and receiver
 cannot be understated. If this password is intercepted or guessed by an
 unauthorized party, the encrypted data's security is compromised.
 
-In summary, GpgFrontend's support for symmetric encryption provides a powerful
-tool for users needing to secure their data with a password. This method is
-distinguished by its reliance on a single password for both encryption and
-decryption, offering a balance between simplicity and security. Users must
-exercise caution in creating a strong password and ensure its secure exchange to
-maintain the confidentiality and integrity of their encrypted data. Symmetric
-encryption with GpgFrontend is a testament to the versatility of cryptographic
-practices, catering to a wide range of security needs with user-friendly
-solutions.
-
 ## How to Perform Symmetric Encryption
 
 Performing symmetric encryption with GpgFrontend is a straightforward process.
