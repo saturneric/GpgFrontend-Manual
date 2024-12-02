@@ -8,16 +8,22 @@ GpgFrontend is available for download through multiple channels. For more
 detailed instructions on installation and getting started, please refer to the
 [Getting Started Guide](/overview/getting-started/).
 
----
-
 ## Download Options Across Platforms
 
 ### GitHub Releases
 
-- **Latest Release Download**: Click the badge below to directly navigate to the
+- **Stable Release**: Click the badge below to directly navigate to the
   GitHub page for the latest release download.
 
-  [![GitHub Release (latest by date)](https://img.shields.io/github/downloads/saturneric/GpgFrontend/latest/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/latest)
+  [![GitHub Release](https://img.shields.io/github/downloads/saturneric/GpgFrontend/latest/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/latest)
+
+- **Nightly Release**: Stable releases are published every two months or longer,
+  which may not meet the needs of users seeking urgent fixes or new features.
+  Nightly builds provide faster updates, automatically releasing changes as new
+  code is committed. Active users can quickly access the latest features and
+  fixes, with feedback highly encouraged.
+
+  [![GitHub Release Nightly](https://img.shields.io/github/downloads/saturneric/GpgFrontend/nightly/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/nightly)
 
 ### SourceForge
 
