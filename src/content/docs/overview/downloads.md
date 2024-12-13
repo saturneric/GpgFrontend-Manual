@@ -25,13 +25,6 @@ detailed instructions on installation and getting started, please refer to the
 
   [![GitHub Release Nightly](https://img.shields.io/github/downloads/saturneric/GpgFrontend/nightly/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/nightly)
 
-### SourceForge
-
-- **SourceForge Download**: Access the download page on SourceForge through the
-  download button below.
-
-  [![Download GpgFrontend](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/gpgfrontend/files/latest/download)
-
 ### Homebrew Cask
 
 - **Homebrew Cask**: Mac users can check the version information through the
