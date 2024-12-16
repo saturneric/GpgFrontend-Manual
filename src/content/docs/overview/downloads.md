@@ -49,7 +49,9 @@ detailed instructions on installation and getting started, please refer to the
 
 ### Windows
 
-- **WinGet Package**: Windows users can also install GpgFrontend through the Windows Package Manager (WinGet). Check the version information through the badge below or install using the command line.
+- **WinGet Package**: Windows users can also install GpgFrontend through the
+  Windows Package Manager (WinGet). Check the version information through the
+  badge below or install using the command line.
 
   [![WinGet Package Version](https://img.shields.io/winget/v/Saturneric.GpgFrontend?style=for-the-badge)](https://repology.org/project/gpgfrontend/versions)
 
