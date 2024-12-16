@@ -49,9 +49,9 @@ detailed instructions on installation and getting started, please refer to the
 
 ### Windows
 
-- **WinGet Package**: Windows users can also install GpgFrontend through the
-  Windows Package Manager (WinGet). Check the version information through the
-  badge below or install using the command line.
+- **WinGet Package**: Windows users can install GpgFrontend through the Windows
+  Package Manager (WinGet). Check the version information through the badge
+  below or install using the command line.
 
   [![WinGet Package Version](https://img.shields.io/winget/v/Saturneric.GpgFrontend?style=for-the-badge)](https://repology.org/project/gpgfrontend/versions)
 
@@ -61,8 +61,8 @@ detailed instructions on installation and getting started, please refer to the
   winget install Saturneric.GpgFrontend
   ```
 
-- **Microsoft Store Download**: Windows users can visit the application store
-  page through the Microsoft Store badge below.
+- **Microsoft Store Download**: Windows users can also visit the application
+  store page through the Microsoft Store badge below.
 
   <a href="https://apps.microsoft.com/detail/9nh716mqk2b5">
     <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
