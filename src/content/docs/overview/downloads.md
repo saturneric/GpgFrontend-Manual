@@ -17,10 +17,10 @@ detailed instructions on installation and getting started, please refer to the
 - **GitHub Releases**: Click the badges below to access the latest stable and nightly builds.
 
   [![GitHub Release](https://img.shields.io/github/downloads/saturneric/GpgFrontend/latest/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/latest)
+
   [![GitHub Release Nightly](https://img.shields.io/github/downloads/saturneric/GpgFrontend/nightly/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/nightly)
 
-- **Static Mirror**: A fast, direct-download mirror is also available at  
-  [ftp.bktus.com](https://ftp.bktus.com/GpgFrontend/), served securely over HTTPS via Nginx. No authentication, rate limits, or redirections.
+- **Static Mirror**: A fast, direct-download mirror is also available at [ftp.bktus.com](https://ftp.bktus.com/GpgFrontend/), served securely over HTTPS via Nginx. No authentication, rate limits, or redirections.
 
 ### Homebrew Cask
 
