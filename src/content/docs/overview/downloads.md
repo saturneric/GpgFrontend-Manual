@@ -12,20 +12,15 @@ detailed instructions on installation and getting started, please refer to the
 
 [![Packaging status](https://repology.org/badge/vertical-allrepos/gpgfrontend.svg)](https://repology.org/project/gpgfrontend/versions)
 
-### GitHub Releases
+### Releases & Downloads
 
-- **Stable Release**: Click the badge below to directly navigate to the
-  GitHub page for the latest release download.
+- **GitHub Releases**: Click the badges below to access the latest stable and nightly builds.
 
   [![GitHub Release](https://img.shields.io/github/downloads/saturneric/GpgFrontend/latest/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/latest)
-
-- **Nightly Release**: Stable releases are published every two months or longer,
-  which may not meet the needs of users seeking urgent fixes or new features.
-  Nightly builds provide faster updates, automatically releasing changes as new
-  code is committed. Active users can quickly access the latest features and
-  fixes, with feedback highly encouraged.
-
   [![GitHub Release Nightly](https://img.shields.io/github/downloads/saturneric/GpgFrontend/nightly/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/nightly)
+
+- **Static Mirror**: A fast, direct-download mirror is also available at  
+  [ftp.bktus.com](https://ftp.bktus.com/GpgFrontend/), served securely over HTTPS via Nginx. No authentication, rate limits, or redirections.
 
 ### Homebrew Cask
 
