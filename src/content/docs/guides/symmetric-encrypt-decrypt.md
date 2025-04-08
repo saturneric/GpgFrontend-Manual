@@ -4,128 +4,105 @@ sidebar:
   label: Symmetric Crypto
 ---
 
-## About Symmetric Encryption & Decryption
+## 🔐 What Is Symmetric Encryption?
 
-Symmetric encryption, in contrast to asymmetric encryption, uses a single key
-for both the encryption of plaintext and the decryption of ciphertext. This
-method is characterized by its simplicity and speed, making it a popular choice
-for encrypting large volumes of data or for scenarios where the sharing of keys
-between the sender and receiver can be securely managed. GpgFrontend provides a
-user-friendly interface for implementing symmetric encryption, streamlining the
-process for users who may not be familiar with the intricacies of cryptographic
-operations.
+**Symmetric encryption** is a method of securing data where the **same
+password** is used to both encrypt and decrypt information.
 
-The process of symmetric encryption with GpgFrontend begins when a user opts to
-encrypt data without selecting a recipient's public key from the Key Toolbox.
-This action signals the software to use symmetric encryption for the task at
-hand. At this point, the user is prompted to create a password. This password
-acts as the encryption key, transforming the plaintext into ciphertext through a
-cryptographic algorithm. It's crucial that this password is strong and unique,
-as the security of the encrypted data directly depends on the password's
-complexity and unpredictability.
+Unlike **asymmetric encryption**, which uses a public/private key pair,
+symmetric encryption relies on a single shared secret (the password). This
+approach is:
 
-Once the password is established, GpgFrontend proceeds to encrypt the data. The
-resulting ciphertext can only be decrypted with the exact password used for its
-encryption. This means that anyone who wishes to access the encrypted data must
-know the password, highlighting the importance of securely sharing this password
-between the sender and receiver.
+- ✅ Fast and efficient
+- ✅ Ideal for large files or quick one-time sharing
+- ❗ Best used when both parties can safely share the password
 
-Decrypting symmetrically encrypted data with GpgFrontend requires the same
-password used during the encryption phase. When the 'Decrypt' function is
-initiated, the software prompts the user to enter the password. Upon successful
-authentication with the correct password, the software decrypts the ciphertext
-back into readable plaintext. This decryption process, like encryption, is
-straightforward and efficient, but the security of the data relies entirely on
-the password's confidentiality.
+> 📌 If someone intercepts the password, the encrypted data is no longer secure
+> — so always handle password exchange carefully.
 
-Symmetric encryption is particularly useful in scenarios where encrypted data
-needs to be stored securely or transmitted over a secure channel, and where the
-overhead of managing public and private keys is not desirable. However, the
-challenge of securely exchanging the password between the sender and receiver
-cannot be understated. If this password is intercepted or guessed by an
-unauthorized party, the encrypted data's security is compromised.
+## 🔄 How It Works
 
-## How to Perform Symmetric Encryption
+1. You choose a **strong password**.
+2. That password is used to **encrypt** the data.
+3. Anyone with the **same password** can **decrypt** it.
+4. No key pair is required — only the shared password.
 
-Performing symmetric encryption with GpgFrontend is a straightforward process.
-Follow these steps to encrypt your data using a password:
+> 📎 Encryption security depends entirely on the strength and secrecy of the
+> password used.
 
-1. **Prepare Your Data**:
+## ✍️ Encrypting Data Symmetrically
 
-   - Start by opening GpgFrontend and entering the text you want to encrypt in
-     the text editor area. You can create a new tab through the "New" option if
-     needed.
+To encrypt text using symmetric encryption:
 
-2. **Initiate Encryption**:
+1. **Enter the Text**
+   - Input the plaintext (the content you want to protect).
 
-   - Click the 'Encrypt' button in the Operations Bar at the top of the
-     interface. This button is represented by a padlock icon with the label
-     "Encrypt".
+2. **Start Encryption**
+   - Choose to encrypt **without selecting any public key**.
 
-3. **No Key Selected**:
+3. **Set a Password**
+   - When prompted, enter a **strong, unique password**.
+   - This becomes your **encryption key**.
 
-   - If no key is selected in the Key Toolbox, a prompt will appear asking if
-     you want to encrypt with a symmetric cipher using a passphrase. Click "OK"
-     to proceed.
+4. **Encryption Completes**
+   - The text is transformed into ciphertext.
+   - You can now save it or share it with someone.
 
-4. **Set a Password**:
+> 🔐 The recipient will need the **exact same password** to decrypt the message.
 
-   - Enter a strong, unique password in the prompt that appears. This password
-     will be used to encrypt your data. Ensure that the password is complex and
-     secure, as it will be required to decrypt the data later.
+![Symmetric
+Encryption](https://image.cdn.bktus.com/i/2024/06/15/e81042ca-40e4-0ce4-5a44-111a89acb5d1.webp)
 
-5. **Encryption Process**:
+## 🔓 Decrypting Symmetric Encrypted Data
 
-   - GpgFrontend will use the provided password to encrypt your data,
-     transforming the plaintext into ciphertext. The resulting encrypted message
-     will be displayed in the text editor area.
+To decrypt content that was encrypted symmetrically:
 
-6. **Save or Share Encrypted Data**:
-   - You can now save the encrypted message to a file or share it with others.
-     Remember, the recipient will need the exact password used during encryption
-     to decrypt the data.
+1. **Paste the Ciphertext**
+   - The message should begin with `-----BEGIN PGP MESSAGE-----` and end with
+     `-----END PGP MESSAGE-----`.
 
-By following these steps, you can easily encrypt your data using symmetric
-encryption in GpgFrontend. This method is ideal for scenarios where you need to
-secure data with a password without managing public and private keys.
+2. **Initiate Decryption**
+   - Choose to decrypt the message.
 
-![Symmetric Encryption](https://image.cdn.bktus.com/i/2024/06/15/e81042ca-40e4-0ce4-5a44-111a89acb5d1.webp)
+3. **Enter the Password**
+   - Input the **same password** that was used for encryption.
 
-## How to Decrypt Symmetric Encryption?
+4. **View the Plaintext**
+   - If the password is correct, the original message will be revealed.
 
-Decrypting symmetrically encrypted data with GpgFrontend is straightforward and
-similar to decrypting data encrypted with asymmetric encryption. Follow these
-steps:
+> 🧠 If the password is incorrect or mistyped, decryption will fail.
 
-1. **Copy the Ciphertext**:
+## 💡 When to Use Symmetric Encryption?
 
-   - First, ensure that you have the ciphertext (the encrypted message) copied
-     to your clipboard. The ciphertext should be in the format typically
-     generated by GnuPG, enclosed in `-----BEGIN PGP MESSAGE-----` and `-----END
-PGP MESSAGE-----` tags.
+Symmetric encryption is a great choice when:
 
-2. **Paste the Ciphertext into the Text Editor**:
+- You’re encrypting something **for yourself** (e.g. storing private notes or
+  backup files).
+- You’re sharing data over a **secure channel**, and can **safely provide the
+  password**.
+- You don’t want to manage public/private key infrastructure.
 
-   - Open GpgFrontend and paste the ciphertext into the text editor area. You
-     can do this by creating a new tab through the "New" option if needed.
+However, it is **not ideal** for public communication where secure password
+exchange is difficult.
 
-3. **Click the Decrypt Button**:
+## 🛡️ Tips for Better Security
 
-   - Click the 'Decrypt' button in the Operations Bar at the top of the
-     interface. This button is represented by a key icon with the label
-     "Decrypt".
+- Always use a **strong, complex password** (longer is better).
+- Never send passwords through insecure channels (e.g., unencrypted email).
+- Consider using symmetric encryption as a supplement to public-key encryption —
+  e.g., encrypt a file symmetrically, then encrypt the password with the
+  recipient’s public key.
 
-4. **Enter the Password**:
+## 🧭 Summary
 
-   - A prompt will appear asking for the password that was used to encrypt the
-     data. Enter the correct password and confirm.
+| Feature                | Symmetric Encryption                        |
+|------------------------|---------------------------------------------|
+| Key type               | Single shared password                      |
+| Use case               | Fast, simple encryption                     |
+| Ideal for              | Self-encryption or trusted 1-to-1 sharing   |
+| Sensitive to           | Password leaks                              |
+| Key management needed  | ❌ No                                        |
 
-5. **Decryption Process**:
-   - GpgFrontend will use GnuPG to recognize the type of encryption used and the
-     corresponding key. If the password is correct, the software will decrypt
-     the ciphertext and display the readable plaintext in the text editor area.
-
-By following these steps, you can efficiently decrypt any symmetrically
-encrypted data using GpgFrontend. The software's ability to automatically
-recognize the encryption type and key ensures a seamless decryption process,
-making it easy to access your encrypted information securely.
+Symmetric encryption is a lightweight and powerful tool — when used correctly.
+Always combine it with safe password management to ensure your data stays truly
+secure.

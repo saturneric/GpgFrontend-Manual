@@ -4,66 +4,72 @@ sidebar:
   order: 3
 ---
 
-GpgFrontend makes it easy to generate a key pair or a subkey for encryption,
-signing, and authentication. Follow the steps below to create your own keys.
+GpgFrontend provides a flexible and user-friendly interface for generating
+GnuPG-compatible key pairs. The updated **Generate Key** dialog introduces
+multiple configuration levels—from simplified templates to advanced
+cryptographic control—catering to both casual and expert users.
 
-## Steps to Generate a Key Pair
+## Launch the Generate Key Dialog
 
-![Generate A Key Pair](https://image.cdn.bktus.com/i/2024/06/15/5df15149-1890-2645-8452-e7c4798ccd16.webp)
+In the **Key Management** interface, click on the **“New Keypair”** button. This
+opens the **Generate Key** window, where you can define your identity and
+configure key parameters.
 
-1. **Open Key Management**:
+## Enter User Information
 
-   - Click on the "New Keypair" button in the Key Management interface. This
-     will open the Generate Key dialog box.
+- **Name**: Required. Enter your full name (minimum 5 characters).  
+- **Email**: Required. Must be in a valid email format.  
+- **Comment**: Optional. Helps distinguish this key from others.
 
-2. **Fill in Basic Information**:
+## Choose Key Database
 
-   - **Name**: Enter your name. The name should be at least 5 characters long.
-   - **Email Address**: Enter your email address. It should follow the correct
-     email format.
-   - **Comment**: Optionally, add a comment to help differentiate this key pair
-     from others.
+Select the **Key Database** where the generated key pair will be stored (e.g.,
+`0: TEST`).
 
-3. **Set Expiration Date**:
+## Configure Key Settings
 
-   - Choose an expiration date for the key pair. By default, GpgFrontend
-     suggests setting the expiration date to two years after generation.
-   - Alternatively, you can check the "Never expire" checkbox to make the key
-     pair permanent. This option can be changed later, even after the key has
-     expired.
+The **Generate Key** dialog offers two configuration modes:
 
-4. **Select Key Size and Type**:
+### Easy Mode
 
-   - **Key Size**: Choose the key size. The default size is 2048 bits. Note that
-     the size option is only applicable when the key type is RSA or DSA.
-   - **Key Type**: Select the type of key you want to generate. Available
-     options include RSA, DSA, ECDSA, ECDSA + ECDH, ECDSA + ECDH NIST P-256, and
-     ECDSA + ECDH BrainPool P-256. For key types with a plus sign (e.g., ECDSA +
-     ECDH), a primary key and a corresponding subkey will be generated.
+Easy Mode simplifies key generation using common templates. You can configure:
 
-5. **Set a Passphrase**:
+- **Algorithm**: RSA, DSA, ECC (Curve25519), or other supported types.
+- **Validity Period**: Choose from preset options (e.g., 3 months, 2 years, 10
+  years, or *Non Expired*).
+- **Combination**:
+  - **Primary Key Only**
+  - **Primary Key with Subkey** — useful when separating signing and encryption
+    functions.
 
-   - It is crucial to set a passphrase to protect your private key. Uncheck the
-     "Non Pass Phrase" checkbox and enter a strong, unique passphrase.
-   - If you prefer not to set a passphrase (not recommended for security
-     reasons), you can leave the "Non Pass Phrase" checkbox checked.
+> Recommended for users who prefer a faster and more guided setup process.
 
-6. **Select Key Usage**:
+### Advanced Mode (Primary Key & Subkey Tabs)
 
-   - Specify the usage for the key pair. Options include:
-     - **Encryption**: For encrypting data.
-     - **Signing**: For creating digital signatures.
-     - **Certification**: For certifying other keys (only for primary keys).
-     - **Authentication**: For authentication purposes, such as SSH keys.
-   - Note that some usages may not be available depending on the selected key
-     type. For example, the DSA algorithm does not support encryption.
+Switch to the **Primary Key** and **Subkey** tabs for detailed cryptographic
+control. Available options include:
 
-7. **Generate the Key Pair**:
-   - After filling in all the necessary information and selecting the desired
-     options, click the "OK" button to generate your key pair.
+- **Algorithm**: RSA, DSA, ED25519, ED448, Brainpool, NIST, CV25519, and others.
+- **Key Length**: Adjustable for applicable algorithms (e.g., RSA: 2048, 3072,
+  4096 bits).
+- **Expiration**: Set a specific expiry date or mark the key as non-expiring.
+- **Usage Flags**:
+  - Encrypt
+  - Sign
+  - Authenticate
+  - Certify (for primary keys)
+- **Passphrase Protection**: Enable or disable passphrase requirement.
 
-By following these steps, you can generate a secure key pair using GpgFrontend,
-tailored to your specific needs for encryption, signing, and authentication.
+> Ideal for experienced users who require full control over key structure and
+> behavior.
+
+## Generate the Key Pair
+
+Once configuration is complete:
+
+- Review the summary in the lower panel.
+- Click the **“Generate”** button.
+- GpgFrontend will begin the generation process and confirm when complete.
 
 ## Primary Key Supported Algorithms
 

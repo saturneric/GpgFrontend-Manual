@@ -12,9 +12,13 @@ export default defineConfig({
         src: "./src/assets/logo.svg",
       },
       favicon: "/images/favicon.ico",
-      social: {
-        github: "https://github.com/saturneric/GpgFrontend",
-      },
+      social: [
+        {
+          icon: "github",
+          label: "GitHub",
+          href: "https://github.com/saturneric/GpgFrontend",
+        },
+      ],
       editLink: {
         baseUrl: "https://github.com/saturneric/GpgFrontend-Manual/edit/main/",
       },
@@ -50,6 +54,9 @@ export default defineConfig({
             directory: "extra",
           },
         },
+      ],
+      customCss: [
+        "./src/styles/custom.css",
       ],
     }),
   ],

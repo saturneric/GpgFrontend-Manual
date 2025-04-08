@@ -87,7 +87,7 @@ all core functionalities:
 
 1. **New E-Mail**: Create a new email or text file.
 2. **Open**: Open an existing text file.
-3. **File Browser**: Browse and select files from your system.
+3. **File Panel**: Browse and select files from your system.
 4. **Encrypt**: Encrypt text or files using selected keys.
 5. **Encrypt Sign**: Encrypt and sign text or files simultaneously.
 6. **Decrypt**: Decrypt text or files.

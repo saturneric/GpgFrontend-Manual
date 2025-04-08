@@ -1,53 +1,73 @@
 ---
-title: Generate and Use Subkey
+title: Generate and Use Subkey(s)
 sidebar:
-  order: 3
+  order: 4
 ---
 
-GpgFrontend provides comprehensive support for subkeys, allowing users to
-enhance security and flexibility through proper key management.
+GpgFrontend allows users to extend their primary key pairs by generating one or
+more subkeys. Subkeys can be used for specific cryptographic purposes, such as
+encryption, signing, or authentication, while keeping the primary key more
+secure and reserved for certification.
 
-## Steps to Generate a Subkey
+## Generating a Subkey
 
-![Generate A Subkey](https://image.cdn.bktus.com/i/2024/06/15/a56c83bc-72ad-6232-1764-6fef5aeceddd.webp)
+There are **two entry points** to generate a subkey:
 
-1. **Open Key Management**:
+### Method 1: From Key Management
 
-   - In the Key Management interface, right-click on the key pair you wish to
-     add a subkey to. Select the "New Subkey" option from the context menu.
+1. **Open Key Management**  
+   - Navigate to the main **KeyPair Management** interface.
+   - Right-click on the key pair to which you want to add a subkey.
+   - Select **“New Subkey”** from the context menu.
 
-2. **Fill in Basic Information**:
+   ![](https://image.cdn.bktus.com/i/2025/04/09/194529c8-4745-a2f1-5b9a-70cb66344243.webp)
+   
 
-   - **Key Type**: Select the type of subkey you want to generate. Available
-     options include RSA, DSA, ECDSA, ECDH, ECDH NIST P-256, ECDH NIST P-384,
-     ECDH NIST P-521, ECDH BrainPool P-256, ECDH BrainPool P-384, and ECDH
-     BrainPool P-512.
-   - **Key Size**: Choose the key size. This option is only applicable when the
-     key type is RSA or DSA.
-   - **Expiration Date**: Set an expiration date for the subkey. You can also
-     choose to check the "Never expire" checkbox to make the subkey permanent.
+### Method 2: From Key Details View
 
-3. **Set a Passphrase**:
+1. **Open Key Details**  
+   - Double-click on the desired key pair in the **Key Management** list.
+   - Switch to the **Keychain** tab.
+   - Click the **“Generate A New Subkey”** button.
 
-   - If the primary key has a passphrase, the subkey's passphrase must be equal
-     to it. Ensure that the "Non Pass Phrase" checkbox is unchecked if you want
-     to set a passphrase.
+   ![](https://image.cdn.bktus.com/i/2025/04/09/fb9eddab-3842-061c-f81c-48fe660bb651.webp)
 
-4. **Select Key Usage**:
+### Configuring the Subkey
 
-   - Specify the usage for the subkey. Options include:
-     - **Encryption**: For encrypting data.
-     - **Signing**: For creating digital signatures.
-     - **Authentication**: For authentication purposes, such as SSH keys.
-   - Note that the certification usage is not available for subkeys.
+Once the subkey generation dialog appears, configure the following settings:
 
-5. **Generate the Subkey**:
-   - After filling in all the necessary information and selecting the desired
-     options, click the "OK" button to generate your subkey.
+- **Algorithm**: Choose the algorithm for the subkey. Options include:
+  - RSA, DSA  
+  - ECC (e.g., ED25519, ED448, CV25519, SECP256K1, Brainpool, NIST curves, etc.)  
+  - ECDH for encryption, EdDSA for signing, etc.
 
-By following these steps, you can generate a subkey using GpgFrontend, which
-enhances the functionality of your primary key pair for various cryptographic
-operations.
+- **Key Size**: Select the desired key size. This setting is available for most
+  algorithms, including RSA, DSA, and ECC variants (such as Curve25519,
+  Brainpool, or NIST curves). For curve-based algorithms, the key size typically
+  corresponds to the selected curve (e.g., ED25519 = 256 bits), while RSA/DSA
+  allows configurable sizes like 2048, 3072, or 4096 bits.
+
+- **Expiration Date**: Set how long the subkey remains valid:
+  - Predefined periods (e.g., 1 year, 2 years)
+  - Exact date/time
+  - Or enable **“Non Expired”** for permanent validity.
+
+- **Key Usage**: Choose what the subkey can be used for:
+  - `Encrypt`
+  - `Sign`
+  - `Authenticate`  
+  *(Certification usage is reserved for primary keys.)*
+
+### Final Step: Generate
+
+Once all configurations are completed:
+
+- Review your choices in the summary area (if available).
+- Click **“Generate”** to create the subkey.
+- The new subkey will be listed under the **Keychain** tab of the selected key
+  pair.
+
+![](https://image.cdn.bktus.com/i/2025/04/09/39cd8ec1-303e-9fa8-7104-8cf0606565ff.webp)
 
 ## Understanding Primary Keys and Subkeys
 
@@ -133,7 +153,8 @@ and successfully export a subkey:
    a location to save the exported subkey. Choose a secure directory and save
    the subkey as a separate file.
 
-![Export Subkey](https://image.cdn.bktus.com/i/2024/11/29/15c9ab0c-a05e-0117-3244-2ac01aaed9a9.webp)
+![Export
+Subkey](https://image.cdn.bktus.com/i/2024/11/29/15c9ab0c-a05e-0117-3244-2ac01aaed9a9.webp)
 
 ### Step-by-Step Guide to Importing Subkeys
 
@@ -141,16 +162,19 @@ To demonstrate how to import an individual subkey that has been previously
 exported, let's refer to the screenshots provided. Below is a step-by-step guide
 to navigate the GpgFrontend interface and successfully import a subkey:
 
-1.  **Select the Key Database**: Choose the appropriate key database from the **Key Toolbox**.
+1.  **Select the Key Database**: Choose the appropriate key database from the
+    **Key Toolbox**.
 
-![Switch Key Database](https://image.cdn.bktus.com/i/2024/11/29/0e8ff19e-4189-65db-5732-1a2e79d9b8a6.webp)
+![Switch Key
+Database](https://image.cdn.bktus.com/i/2024/11/29/0e8ff19e-4189-65db-5732-1a2e79d9b8a6.webp)
 
 1. **Import the Subkey**: Click on the **Import Key** button in the top toolbar,
    and select **File** from the dropdown menu. This action will open a dialog
    where you can browse your system to locate the previously exported subkey
    file.
 
-   ![Import the Subkey](https://image.cdn.bktus.com/i/2024/11/29/8f3456ba-6275-4ef9-8e41-49b9b6bc0dfa.webp)
+   ![Import the
+   Subkey](https://image.cdn.bktus.com/i/2024/11/29/8f3456ba-6275-4ef9-8e41-49b9b6bc0dfa.webp)
 
 2. **Select Subkey File**: Browse to the location where the subkey file is
    saved, select it, and click **Open**. This will import the subkey into the
@@ -161,10 +185,11 @@ to navigate the GpgFrontend interface and successfully import a subkey:
    You should see all relevant information about the subkey, including **Key
    ID**, **Algorithm**, **Key Size**, and **Usage**.
 
-4. **Handling Primary Key**:You can now move your master key to a safe place. Then delete it at
-   GpgFrontend.
+4. **Handling Primary Key**:You can now move your master key to a safe place.
+   Then delete it at GpgFrontend.
 
-   ![Verify Imported Subkey](https://image.cdn.bktus.com/i/2024/11/29/ac01142d-1ffa-ba32-daac-36ddf0729ff1.webp)
+   ![Verify Imported
+   Subkey](https://image.cdn.bktus.com/i/2024/11/29/ac01142d-1ffa-ba32-daac-36ddf0729ff1.webp)
 
 ### Confirming Primary Key Absence
 
@@ -174,7 +199,8 @@ for this subkey does not exist in the current key database. This is expected if
 you have securely removed the primary key to minimize exposure, while retaining
 the subkeys for ongoing operations.
 
-![Meaning of'#' Symbol](https://image.cdn.bktus.com/i/2024/11/29/78d9bc07-8b96-302b-25d1-cbb88815f16a.webp)
+![Meaning of'#'
+Symbol](https://image.cdn.bktus.com/i/2024/11/29/78d9bc07-8b96-302b-25d1-cbb88815f16a.webp)
 
 You can confirm the absence of the primary key by opening the **Key Details**
 view of the imported subkey. In the **Primary Key Existence** section, it should
@@ -189,7 +215,8 @@ Existence** section in the Key Details view, which will display **Not Exists**.
 This setup is intentional in many cases to improve security by isolating the
 primary key.
 
-![Primary Key Not Exists](https://image.cdn.bktus.com/i/2024/11/29/05594a4b-cdad-7ad4-070b-58e24701cce3.webp)
+![Primary Key Not
+Exists](https://image.cdn.bktus.com/i/2024/11/29/05594a4b-cdad-7ad4-070b-58e24701cce3.webp)
 
 ### Actions Limited by the Absence of a Primary Key:
 
@@ -217,7 +244,8 @@ primary key poses a security risk. By isolating the primary key and relying
 solely on subkeys, you can maintain a balance between functionality and
 security.
 
-![Use Subkey to Encrypt](https://image.cdn.bktus.com/i/2024/11/29/20047766-48ab-f4a3-175c-241c7d5c0dbf.webp)
+![Use Subkey to
+Encrypt](https://image.cdn.bktus.com/i/2024/11/29/20047766-48ab-f4a3-175c-241c7d5c0dbf.webp)
 
 ### Tips for Secure Usage:
 
@@ -240,7 +268,8 @@ primary keys may be restricted to certain secure algorithms for signing, subkeys
 can employ diverse algorithms optimized for encryption, like ECDH, ensuring
 efficient and secure operations tailored to the user's needs.
 
-For more Details: [Comparison of Cryptographic Algorithms](/extra/algorithms-comparison)
+For more Details: [Comparison of Cryptographic
+Algorithms](/extra/algorithms-comparison)
 
 **Subkey Supported Algorithms:**
 

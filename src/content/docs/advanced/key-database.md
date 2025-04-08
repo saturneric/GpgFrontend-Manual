@@ -63,7 +63,7 @@ The **Key Database** tab allows you to perform the following operations:
 
 - Right-click on a database entry to view options like:
   - **Move Up/Move Down**: Reorder the database list.
-  - **Move to Top**: Prioritize a database by moving it to the top.
+  - **Move to Top**: Prioritize a database by moving it to the top. If a database is at the top, it is considered as the Default Key Database.
   - **Edit**: Rename or modify the path of an existing database.
   - **Remove**: Delete a database from the configuration.
 

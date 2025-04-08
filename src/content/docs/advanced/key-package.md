@@ -114,10 +114,3 @@ the KeyPackage into the key management tool on the target device.
 - Delete the KeyPackage files from all devices and any intermediaries (like
   email servers or cloud storage) after the transfer is complete to prevent
   unauthorized access.
-
-## Conclusion
-
-The KeyPackage feature streamlines the process of transferring key data between
-devices while maintaining high security standards. By following the steps
-outlined in this document, users can effectively manage their cryptographic keys
-across multiple platforms.

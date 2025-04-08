@@ -11,13 +11,13 @@ To access the import options, navigate to the toolbar and select the desired
 method based on your specific requirements. Additionally, you can access
 additional options by selecting the action menu in the key management section.
 
-![Import Key Pair](https://image.cdn.bktus.com/i/2023/11/16/7c24bd6d-6e50-0eb8-943e-3447b96894b3.webp)
+![](https://image.cdn.bktus.com/i/2023/11/16/7c24bd6d-6e50-0eb8-943e-3447b96894b3.webp)
 
 In fact, you can find the action menu in the key management section, which
 provides access to additional key management options beyond those available in
 the toolbar.
 
-![Import Key Pair 2](https://image.cdn.bktus.com/i/2023/11/16/15595b17-3a88-d790-c475-cf8c5c7ee4a5.webp)
+![](https://image.cdn.bktus.com/i/2023/11/16/15595b17-3a88-d790-c475-cf8c5c7ee4a5.webp)
 
 ### File
 
@@ -82,7 +82,7 @@ shown in the screenshot below. This will save the data to a file. Before
 proceeding, please make sure to choose a suitable directory to store the file
 containing the public key data.
 
-![Export on the Key Pair at Operations Tab](https://image.cdn.bktus.com/i/2023/11/16/5f7a4dbc-d261-c395-31eb-a1bc55cb4d55.webp)
+![](https://image.cdn.bktus.com/i/2023/11/16/5f7a4dbc-d261-c395-31eb-a1bc55cb4d55.webp)
 
 ### Export multiple public keys at once
 
@@ -91,7 +91,7 @@ pairs on the key management interface and click on the "Export to Clipboard"
 option. This will copy the data to your system clipboard, which you can then
 paste into any application or file.
 
-![Export multiple public keys at once](https://image.cdn.bktus.com/i/2023/11/16/fae0706d-8836-5ffe-804e-c21b06f1b445.webp)
+![](https://image.cdn.bktus.com/i/2023/11/16/fae0706d-8836-5ffe-804e-c21b06f1b445.webp)
 
 ### Export Private Key
 
@@ -100,7 +100,7 @@ contains the private key (either the primary key or subkey). From there, you can
 select a destination and GpgFrontend will export the corresponding private key
 content to that location.
 
-![Export Private Key](https://image.cdn.bktus.com/i/2023/11/16/a453e2cd-3489-6403-8a89-13faa4dd6b32.webp)
+![](https://image.cdn.bktus.com/i/2023/11/16/a453e2cd-3489-6403-8a89-13faa4dd6b32.webp)
 
 Exporting the private key also exports both the public key and private key data,
 as the private key data alone is meaningless without the corresponding public
