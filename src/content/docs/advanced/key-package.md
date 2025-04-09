@@ -75,34 +75,25 @@ To transfer the KeyPackage:
 To import the KeyPackage after transferring it to the target device, follow
 these steps:
 
-![Importing KeyPackage](https://image.cdn.bktus.com/i/2024/06/15/a086df66-bdac-74fb-9a2c-35cddd224564.webp)
+![](https://image.cdn.bktus.com/i/2024/06/15/a086df66-bdac-74fb-9a2c-35cddd224564.webp)
 
-1. **Initiate Import**:
+- **Initiate Import**: Open the key management tool on the target device and
+click on the "Import Key" button.
+- **Select KeyPackage Option**: As shown in the image, from the dropdown menu,
+select the "Key Package" option. This indicates that you will be importing a
+KeyPackage.
 
-   - Open the key management tool on the target device and click on the "Import
-     Key" button.
+- **Select KeyPackage File**: A file selection dialog will appear. First, choose
+the `.gpgpack` file that you transferred. This file contains the packaged keys.
 
-2. **Select KeyPackage Option:**
+- **Select Key File**: After selecting the `.gpgpack` file, another file
+selection dialog will prompt you to choose the corresponding key file. This key
+file is used to decrypt the KeyPackage.
 
-   - As shown in the image, from the dropdown menu, select the "Key Package"
-     option. This indicates that you will be importing a KeyPackage.
-
-3. **Select KeyPackage File**:
-
-   - A file selection dialog will appear. First, choose the `.gpgpack` file that
-     you transferred. This file contains the packaged keys.
-
-4. **Select Key File**:
-
-   - After selecting the `.gpgpack` file, another file selection dialog will
-     prompt you to choose the corresponding key file. This key file is used to
-     decrypt the KeyPackage.
-
-5. **Import Keys**:
-   - Once both files are selected, the key management tool will automatically
-     import the keys contained within the KeyPackage. You will be prompted to
-     enter the passphrase that was set during the creation of the KeyPackage to
-     complete the import process.
+- **Import Keys**: Once both files are selected, the key management tool will
+automatically import the keys contained within the KeyPackage. You will be
+prompted to enter the passphrase that was set during the creation of the
+KeyPackage to complete the import process.
 
 By following these steps, you can securely import your cryptographic keys from
 the KeyPackage into the key management tool on the target device.

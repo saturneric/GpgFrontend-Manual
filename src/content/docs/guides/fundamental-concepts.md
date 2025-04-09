@@ -24,10 +24,12 @@ At the heart of GPG is the **key pair**: two mathematically linked keys.
   - Decrypt messages sent to you.
   - Sign data so others know it’s really from you.
 
-> 🧠 Think of it like a mailbox:
-> - Your public key is the address — people can send you letters.
-> - Your private key is the key to open the mailbox — only you can read what’s
->   inside.
+
+:::tip[Think of it like a mailbox]
+- Your public key is the address — people can send you letters.
+- Your private key is the key to open the mailbox — only you can read what’s
+  inside.
+:::
 
 ## 🔧 Generating a Key Pair
 
@@ -37,8 +39,10 @@ To use GPG, you first create a key pair. During creation, you’ll choose:
 - A **key size** (larger sizes are more secure but slower).
 - A **passphrase** to protect the private key.
 
-> 🔒 Your passphrase adds a layer of protection — even if someone gets your key
-> file, they can’t use it without this password.
+:::caution
+🔒 Your passphrase adds a layer of protection — even if someone gets your key
+file, they can’t use it without this password.
+:::
 
 ## 🧩 What Are Subkeys?
 
@@ -61,7 +65,7 @@ Your **primary key** is your core identity. It:
 - Signs your subkeys.
 - Can certify other people's public keys (used to build trust networks).
 
-### Why Is It So Important?
+:::caution
 
 If someone gains access to your **primary private key**, they can impersonate
 you. That’s why:
@@ -69,6 +73,8 @@ you. That’s why:
 - It should be **backed up** securely.
 - It’s best to use **subkeys** for daily operations.
 - Some people even keep their primary key **offline** for maximum safety.
+
+:::
 
 ## ✉️ How Encryption Works
 
@@ -164,5 +170,9 @@ Whether you're just starting to explore encrypted communication or already
 managing multiple keys, GpgFrontend acts as a bridge — combining the strength of
 GPG with simplicity and clarity.
 
-> 🧩 You focus on **secure communication** — let GpgFrontend handle the
-> complexity behind it.
+:::tip[]
+
+You focus on **secure communication** — let GpgFrontend handle the complexity
+behind it.
+
+:::
