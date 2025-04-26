@@ -1,5 +1,7 @@
 ---
 title: Best Practices for OpenPGP Trust Chain Management
+sidebar:
+  label: Trust Chain Management
 ---
 
 ## Background: Understanding Trust Management
