@@ -10,6 +10,21 @@ changes via GitHub pull requests or sending git patches via email. Below, you'll
 find the steps to set up your environment, make changes, and how to submit those
 changes. Additionally, you'll find contact information for further assistance.
 
+## Wiki
+
+An AI-assisted Wiki has been generated through automated analysis of the
+GpgFrontend source code. This Wiki provides a comprehensive overview of the
+project's major technical architecture, design principles, and key components.
+The accuracy of the information is high, making it a valuable resource for both
+new and experienced contributors.
+
+Link: https://deepwiki.com/saturneric/GpgFrontend
+
+It is highly recommended to read the Wiki carefully before diving into the
+project details and source code. Understanding the architectural design
+beforehand will significantly accelerate your learning curve and improve the
+quality of your contributions.
+
 ## Technical Requirements
 
 To maintain the integrity and compatibility of GpgFrontend, please adhere to the
