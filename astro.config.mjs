@@ -1,11 +1,13 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import netlify from "@astrojs/netlify";
+import starlightThemeNova from "starlight-theme-nova";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     starlight({
+      plugins: [starlightThemeNova()],
       title: "GpgFrontend",
       description: "A Free, Easy-to-Use, Cross-Platform OpenPGP Crypto Tool.",
       logo: {
@@ -25,7 +27,6 @@ export default defineConfig({
       sidebar: [
         {
           label: "Overview",
-          // Autogenerate a group of links for the 'guides' directory.
           autogenerate: {
             directory: "overview",
           },
@@ -55,9 +56,7 @@ export default defineConfig({
           },
         },
       ],
-      customCss: [
-        "./src/styles/custom.css",
-      ],
+      customCss: ["./src/styles/custom.css"],
     }),
   ],
   output: "server",
