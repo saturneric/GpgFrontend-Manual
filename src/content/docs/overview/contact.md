@@ -15,9 +15,14 @@ messages.
 
 ## Personal Details
 
-- **Name:** Eric
+- **Preferred Name:** Eric
+- **Full Legal Name:** Yu Hu
 - **Email:** [eric@bktus.com](mailto:eric@bktus.com) (Server location: Germany)
 - **Preferred Email Format:** Plain text, without HTML enhancements.
+- **Headquarters:** Baden-Württemberg, Germany
+
+**Note for CA Verification:** For informal correspondence you can call me
+**Eric**; for formal or legal matters, please use **Mr. Hu**.
 
 ### About My Domain
 
