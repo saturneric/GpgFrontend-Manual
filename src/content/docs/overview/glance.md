@@ -5,19 +5,31 @@ sidebar:
   order: 1
 ---
 
-**GpgFrontend** stands as a premier, cross-platform, user-friendly, and compact
-tool for all your [OpenPGP](https://www.openpgp.org/) encryption needs. Designed
-for both beginners and experts in data security, GpgFrontend simplifies
-encryption, decryption, and digital signing, offering a seamless interface for
-managing OpenPGP tasks. Embrace the latest features of GnuPG 2.x, enhancing your
-security in the digital age.
+**GpgFrontend** is a modern, cross-platform, open-source GUI for OpenPGP
+encryption—easy for beginners, powerful for experts, and truly portable for
+everyone who values security and flexibility.
 
-If you’d like to support GpgFrontend, consider giving the project a ⭐ on
-[GitHub](https://github.com/saturneric/GpgFrontend). Your support not only helps
-it grow but also spreads the word, allowing more people to discover and benefit
-from GpgFrontend. Every contribution is highly appreciated!
+**Key Features:**
 
-**Document Version Reference: [v2.1.7](https://github.com/saturneric/GpgFrontend/releases/tag/v2.1.7)**
+- **One-click Encryption & Signing** — Quickly encrypt, decrypt, and digitally
+  sign texts, files, and emails effortlessly.
+- **Multiple Independent Key Databases** — Seamlessly manage different keys and
+  identities for various roles, projects, or teams.
+- **Fully Portable Across OS** — Run from a USB drive and move keys and settings
+  easily between Windows and Linux.
+- **Comprehensive Algorithm Support** — Supports RSA, DSA, EdDSA, ECDSA (NIST,
+  Brainpool), ECDH, and many more via modern GnuPG.
+- **Easy Installation** — Available via Homebrew, Flatpak, GitHub Releases,
+  winget, AUR, Microsoft Store, and more.
+- **True Cross-platform Experience** — Native support for Windows, macOS, Linux,
+  and buildable on FreeBSD.
+
+Give GpgFrontend a ⭐ on [GitHub](https://github.com/saturneric/GpgFrontend).
+Your support helps our community grow, allowing more people to secure their
+privacy easily and effectively.
+
+**Current Documentation Version:**
+[v2.1.7](https://github.com/saturneric/GpgFrontend/releases/tag/v2.1.7)
 
 ## User Interface Glimpse
 
@@ -27,19 +39,20 @@ accurate documentation._
 
 ![GpgFrontend Interface](https://image.cdn.bktus.com/i/2024/06/15/0408b896-6472-4677-b0d1-96f5b9e54a3b.webp)
 
-## Project Origins and Mission
+## Mission and Origins
 
-GpgFrontend inherits its core from the stable and user-friendly
-[gpg4usb](https://www.gpg4usb.org/) project, aiming to introduce OpenPGP's new
-features while maintaining simplicity and accessibility. My goal is to
-ensure data security, making GnuPG's powerful tools available to all,
-regardless of technical expertise.
+GpgFrontend draws its inspiration and core philosophy from the stable, portable,
+and cross-platform [gpg4usb](https://www.gpg4usb.org/) project. Inheriting the
+spirit of true portability and platform independence, GpgFrontend builds on this
+foundation to deliver even more advanced features, modern algorithm support, and
+an intuitive user experience. Our mission is to make powerful OpenPGP encryption
+truly accessible—simple, robust, and convenient for everyone, on any major
+operating system.
 
-### A Commitment to Freedom and Security
+### Open Source, Always
 
-As a solo-maintained open-source project, GpgFrontend is a testament to the
-power of community and the pursuit of privacy. It remains forever free, inviting
-contributions, suggestions, and feedback from users worldwide.
+As a community-driven, open-source project, GpgFrontend is entirely free and
+transparent, welcoming contributions, feedback, and ideas from users worldwide.
 
 ## Explore the Source
 
@@ -51,16 +64,12 @@ update, and user feedback converge to refine and enhance GpgFrontend.
 
 ### License and Contributions
 
-Licensed under GPL-3.0, GpgFrontend champions open-source values. Contributions
-are not just welcomed but essential—whether through issue reports, pull
-requests, or code patches via email.
+GpgFrontend is licensed under GPL-3.0. Contributions—from issue reports to code
+patches—are warmly welcomed.
 
-## Ensuring Your Privacy
+## Your Privacy First
 
-With a serverless design, GpgFrontend guarantees your data stays yours alone.
-For those requiring extra security layers, future versions will offer offline
-functionality, further solidifying its stance as a privacy-first tool.
-
-GpgFrontend is more than software; it's a commitment to secure, accessible, and
-open communication for everyone. Join us in this journey, where your security
-and privacy are paramount.
+Designed with privacy at its core, GpgFrontend guarantees that your data remains
+yours alone, free from telemetry and external dependencies. Join us on our
+mission to make encryption secure, simple, and available to everyone—because
+your privacy matters.
