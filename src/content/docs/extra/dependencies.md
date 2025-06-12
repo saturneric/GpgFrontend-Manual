@@ -4,19 +4,38 @@ sidebar:
   label: Dependencies
 ---
 
-GpgFrontend incorporates various libraries and binaries that come with their
-unique licenses. For additional details or to obtain the source code, please
-visit their respective homepages:
+# Libraries
 
-- **GnuPG**: [https://gnupg.org](https://gnupg.org)
-- **GPGME**: [https://gnupg.org/software/gpgme/index.html](https://gnupg.org/software/gpgme/index.html)
+GpgFrontend incorporates various libraries and binaries, each with their own
+license terms. For more information or to obtain the source code, please visit
+the respective project homepages.
+
+Note: As of v2.1.9, GpgFrontend no longer uses the QtAES library. All
+cryptographic operations—including AES encryption/decryption—are now performed
+using OpenSSL, with AES-GCM as the default and only mode.
+
+## Common
+
 - **Qt (Open Source)**: [https://www.qt.io](https://www.qt.io)
-- **MSYS2**: [https://www.msys2.org](https://www.msys2.org)
-- **Mingw-w64**: [http://mingw-w64.org/doku.php](http://mingw-w64.org/doku.php)
-- **AppImage**: [https://appimage.org](https://appimage.org)
-- **macOS Application Bundles**: [Link](https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/BundleTypes/BundleTypes.html)
+- **GnuPG**: [https://gnupg.org](https://gnupg.org)
+- **GpgME**: [https://gnupg.org/software/gpgme/index.html](https://gnupg.org/software/gpgme/index.html)
+- **OpenSSL**: [https://openssl-library.org](https://openssl-library.org)
 - **libarchive**: [https://www.libarchive.org](https://www.libarchive.org)
-- **Qt-AES**: [https://github.com/bricke/Qt-AES](https://github.com/bricke/Qt-AES)
+
+## Windows
+
+- **MSYS2**: [https://www.msys2.org](https://www.msys2.org)
+- **mingw-w64**: [https://www.mingw-w64.org](https://www.mingw-w64.org)
+
+## Linux
+
+- **AppImage**: [https://appimage.org](https://appimage.org)
+
+## macOS
+
+- **macOS Application Bundles**: [Link](https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/AboutBundles/AboutBundles.html)
+
+# Icons
 
 The icons utilized in this software are sourced from [Alibaba
 Iconfont](https://www.iconfont.cn/). This vector icon library is free of use,
