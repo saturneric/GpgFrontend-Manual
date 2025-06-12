@@ -2,15 +2,46 @@
 title: KeyPackage Functionality
 sidebar:
   label: KeyPackage
+  order: 3
 ---
 
-## Overview
+The KeyPackage feature is designed to securely package and transfer key
+data—including both public and private keys—between devices. This enables users
+to maintain their cryptographic identities across platforms. Starting from
+version 2.1.9, KeyPackage functionality has been significantly enhanced to
+improve security, encryption strength, and user control.
 
-The KeyPackage is a feature designed to securely package and transfer key data
-between different devices. It encapsulates both the public and private keys of
-multiple key pairs, ensuring that users can maintain cryptographic functionality
-across various platforms. This document outlines the process of creating,
-exporting, and safely transferring a KeyPackage.
+> Important: KeyPackages created with v2.1.9 and later are not compatible with
+> those created in previous versions.
+
+## Security Enhancements Since v2.1.9
+
+- Encryption Algorithm: KeyPackage data is now encrypted with AES-256-GCM
+  (authenticated encryption), providing both confidentiality and integrity
+  protection. Earlier versions used AES-256-ECB, which lacks integrity checking.
+
+Key Generation:
+
+- The encryption key for the KeyPackage is generated using GnuPG’s built-in
+  random number generator through the GPG interface.
+- If GPG entropy is unavailable, the system falls back to OpenSSL’s secure
+  random generator.
+- Prior to v2.1.9, QRandom was used for key generation, providing weaker
+  security guarantees.
+
+Naming Convention: KeyPackage names are now generated in the format
+KeyPackage\_<zbase>, where <zbase> is a strong random identifier encoded in
+zbase32. Previous versions used a numeric format such as KeyPackage_41132.
+
+PIN Protection:
+
+- After generating the KeyPackage, users are required to set a PIN. The actual
+  KeyPackage encryption key is then encrypted with this PIN using modern
+  authenticated encryption.
+- This means that, in addition to the KeyPackage file itself, a separate “key
+  file” is generated and must be kept together with the KeyPackage. Both are
+  required, along with the PIN, for a successful import.
+- Without the correct PIN, the KeyPackage cannot be decrypted or used.
 
 ## Creating a KeyPackage
 
@@ -28,13 +59,14 @@ To create a KeyPackage, follow these steps:
 4. **Configure KeyPackage**:
 
    - **KeyPackage Name**: In the first field, you will see a generated name for
-     the KeyPackage, such as `KeyPackage_41132`. You can click the button
+     the KeyPackage, such as `KeyPackage_<zbase>`. You can click the button
      labeled "Generate Key Package Name" to generate a new name if desired.
    - **Output Path**: In the second field, click the button labeled "Select
      Output Path" to choose where to save the KeyPackage file.
    - **Passphrase**: In the third field, click the button labeled "Generate and
-     Save Passphrase" to generate and save a passphrase for the KeyPackage.
-     Ensure the security of this passphrase.
+     Save Passphrase" to generate and save a key for the KeyPackage. You will
+     later be prompted to provide a PIN; make sure it is strong and
+     confidential.
 
 5. **Optional Settings**:
 
@@ -49,24 +81,25 @@ To create a KeyPackage, follow these steps:
    button to create and export the KeyPackage.
 
 By following these steps, you can create a secure KeyPackage to transfer your
-cryptographic keys between devices. Ensure that the generated passphrase and the
-KeyPackage file are stored securely to prevent unauthorized access.
+cryptographic keys between devices.
 
 ## Security Notice
 
 When the KeyPackage is successfully created, a message will inform you that the
-package is protected with encryption algorithms (e.g., AES-256-ECB) and is safe
-to transfer. However, it emphasizes that the key file must not be disclosed
-under any circumstances. Users are advised to delete the KeyPackage file and the
-key file as soon as possible after the transfer is complete.
+package is protected with encryption algorithms (e.g., AES-256-GCM) and is safe
+to transfer.
+
+Never disclose the KeyPackage or key file to untrusted parties. After transfer,
+delete all copies from intermediate storage locations.
 
 ## Transferring the KeyPackage
 
 To transfer the KeyPackage:
 
 1. Use a secure transfer method to move the `.gpgpack` file to the target
-   device. This could be through a secured network connection, encrypted email,
-   or a physical device like a USB drive, which should be encrypted as well.
+   device. Use a secure transfer method (e.g., encrypted USB drive, encrypted
+   email, or a secure network channel) to move both the `.gpgpack` file and its
+   associated `.key` file to the target device.
 2. Once transferred, import the KeyPackage into the key management tool on the
    target device using the passphrase set during the creation process.
 
@@ -78,30 +111,42 @@ these steps:
 ![](https://image.cdn.bktus.com/i/2024/06/15/a086df66-bdac-74fb-9a2c-35cddd224564.webp)
 
 - **Initiate Import**: Open the key management tool on the target device and
-click on the "Import Key" button.
+  click on the "Import Key" button.
 - **Select KeyPackage Option**: As shown in the image, from the dropdown menu,
-select the "Key Package" option. This indicates that you will be importing a
-KeyPackage.
-
+  select the "Key Package" option. This indicates that you will be importing a
+  KeyPackage.
 - **Select KeyPackage File**: A file selection dialog will appear. First, choose
-the `.gpgpack` file that you transferred. This file contains the packaged keys.
-
+  the `.gpgpack` file that you transferred. This file contains the packaged keys.
 - **Select Key File**: After selecting the `.gpgpack` file, another file
-selection dialog will prompt you to choose the corresponding key file. This key
-file is used to decrypt the KeyPackage.
-
-- **Import Keys**: Once both files are selected, the key management tool will
-automatically import the keys contained within the KeyPackage. You will be
-prompted to enter the passphrase that was set during the creation of the
-KeyPackage to complete the import process.
+  selection dialog will prompt you to choose the corresponding key file. This key
+  file is used to decrypt the KeyPackage.
+- **Enter PIN**: You will be prompted for the PIN that was set during KeyPackage
+  creation.
+- **Import**: Once the correct PIN is entered, your keys will be imported.
 
 By following these steps, you can securely import your cryptographic keys from
 the KeyPackage into the key management tool on the target device.
 
+## Compatibility Notice
+
+- KeyPackages created with v2.1.9 or later are not compatible with previous
+  versions. Attempting to import a v2.1.9 KeyPackage into an older GpgFrontend
+  release will fail.
+- Legacy KeyPackages: If you need to migrate old KeyPackages, do so before
+  upgrading, or export and repackage your keys after upgrading to v2.1.9.
+
+## Security Notice
+
+- KeyPackage encryption is now much stronger, using modern, authenticated
+  cryptography and a PIN-protected key hierarchy.
+- Both the `.gpgpack` file and its `.key` file are required for import, in
+  addition to your PIN.
+- Always delete KeyPackage files and key files from all devices and
+  intermediaries after transfer is complete.
+
 ## Best Practices
 
-- Always ensure that you are transferring key data over a secure channel.
-- Keep the passphrase strong and confidential.
-- Delete the KeyPackage files from all devices and any intermediaries (like
-  email servers or cloud storage) after the transfer is complete to prevent
-  unauthorized access.
+- Always transfer key data via secure, encrypted channels.
+- Choose a strong, unique PIN and do not share it.
+- Delete all KeyPackage and key files after successful import, including any
+  backup or email attachments.
