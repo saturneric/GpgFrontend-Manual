@@ -2,6 +2,7 @@
 title: Synchronizing Public Keys with Key Server
 sidebar:
   label: Sync Public Keys
+  order: 4
 ---
 
 Keeping your public keys in sync with those stored on a key server is crucial
@@ -26,19 +27,19 @@ GpgFrontend automates the public key synchronization process through a
 user-friendly interface. Here’s how to use it:
 
 1. Open the Key Management Interface: Navigate to the Key Management interface
-by clicking on the "Manage Keys" button in the main interface.
+   by clicking on the "Manage Keys" button in the main interface.
 2. Select Keys to Sync: In the list of public keys, you can select specific keys
-to sync by checking the boxes next to them. If you want to sync all public keys,
-you do not need to select any specific keys.
+   to sync by checking the boxes next to them. If you want to sync all public keys,
+   you do not need to select any specific keys.
 3. Click the Sync Public Key Button: Locate and click the **Sync Public Key**
-button. This button is represented by a cloud icon with a refresh symbol,
-located in the toolbar at the top of the Key Management interface.If you have
-selected specific keys, the synchronization process will initiate for those
-keys. If no keys are selected, a confirmation prompt will appear, asking you to
-confirm if you want to synchronize all public keys.
+   button. This button is represented by a cloud icon with a refresh symbol,
+   located in the toolbar at the top of the Key Management interface.If you have
+   selected specific keys, the synchronization process will initiate for those
+   keys. If no keys are selected, a confirmation prompt will appear, asking you to
+   confirm if you want to synchronize all public keys.
 4. Synchronization Process: The feature works by checking all the public keys in
-your possession against the key server. If there is an updated version of a key
-you own, GpgFrontend will import the new details to your local keyring.
+   your possession against the key server. If there is an updated version of a key
+   you own, GpgFrontend will import the new details to your local keyring.
 
 ![](https://image.cdn.bktus.com/i/2024/06/15/8771cd76-1a46-321e-8bf9-93d8db2a9f78.webp)
 
