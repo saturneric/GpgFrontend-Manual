@@ -2,6 +2,7 @@
 title: Multi-Key Database Support
 sidebar:
   label: Multi-Key Database
+  order: 2
 ---
 
 GpgFrontend introduces **Multi-Key Database Support**, providing users with a
@@ -49,17 +50,24 @@ To manage multiple key databases, follow these steps:
 
 ## Managing Key Databases
 
-The **Key Database** tab allows you to perform the following operations:
+The Key Database tab allows you to perform the following operations:
 
 ### Adding a New Key Database
 
-- Click the **Add New Key Database** button.
+- Click the Add New Key Database button.
 - Specify a name and path for the new database. This will create an isolated
-  environment for new keys.
+  environment for newly generated or imported keys.
+
+**Relative Path Support:** If you enable the Relative Path option, the specified
+absolute path will be automatically converted to a path relative to the
+GpgFrontend application directory. This is particularly useful for Portable Mode
+or when moving the application between different systems, as it ensures that key
+database paths remain valid and consistent regardless of the host environment.
 
 ### Editing and Reordering Key Databases
 
 Right-click on a database entry to view options like:
+
 - **Move Up/Move Down**: Reorder the database list.
 - **Move to Top**: Prioritize a database by moving it to the top. If a database
   is at the top, it is considered as the Default Key Database.
@@ -86,9 +94,9 @@ restart to take effect.
 ## Use Cases for Multi-Key Databases
 
 - Project Isolation: Maintain separate databases for different projects to
-avoid accidental cross-use of keys.
+  avoid accidental cross-use of keys.
 - Organizational Separation: Keep departmental or team-specific keys isolated
-to ensure they are only accessible to authorized personnel.
+  to ensure they are only accessible to authorized personnel.
 - Enhanced Security for Sensitive Keys: Store high-security keys in a dedicated
   database, minimizing the risk of exposure during routine operations.
 
@@ -97,11 +105,11 @@ to ensure they are only accessible to authorized personnel.
 - Name Databases Clearly: Use descriptive names for each database to make it
   easier to identify their purpose.
 - Regular Backups: Backup each database regularly to prevent loss of critical
-keys. Store backups in secure, encrypted locations.
+  keys. Store backups in secure, encrypted locations.
 - Audit Database Usage: Periodically review the contents and usage of each
-database to ensure proper organization and security.
+  database to ensure proper organization and security.
 - Isolate Sensitive Operations: For highly sensitive keys, consider using a
-dedicated device or environment to manage their database.
+  dedicated device or environment to manage their database.
 - Avoid Overloading Databases: Distribute keys evenly across multiple databases
   instead of overloading a single one. This enhances performance and
   organization.
