@@ -2,6 +2,7 @@
 title: A Comprehensive Guide of GpgController
 sidebar:
   label: Gpg Controller
+  order: 5
 ---
 
 The **GpgController** in **GpgFrontend** is a powerful tool for configuring and
@@ -33,11 +34,12 @@ The **General** tab provides essential configuration options for GpgFrontend's i
 #### Use Binary Mode for File Operations
 
 This option determines the format used for encrypted or signed files:
+
 - **Binary Mode**: Produces compact and efficient files, ideal for storage and
- processing.
+  processing.
 - **ASCII Mode**: Generates human-readable files encoded in ASCII format. This
- is useful for sharing files over email or systems that might corrupt binary
- files.
+  is useful for sharing files over email or systems that might corrupt binary
+  files.
 
 Recommendation: Use binary mode for local file operations and ASCII
 mode for file sharing or email attachments.
@@ -90,9 +92,10 @@ detailed documentation is available elsewhere, note the following key points:
 ![](https://image.cdn.bktus.com/i/2024/11/29/7a66848e-bc23-fd13-08a4-1923de39369e.webp)
 
 :::tip[Tipps]
+
 > For more information on key database management, refer to the dedicated
 > documentation.
-:::
+> :::
 
 ## Advanced Tab: Custom GnuPG Configuration
 

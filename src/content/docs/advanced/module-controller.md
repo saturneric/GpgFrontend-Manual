@@ -2,6 +2,7 @@
 title: "Module Controller: Extending GpgFrontend Functionality"
 sidebar:
   label: Module Controller
+  order: 6
 ---
 
 The **Module Controller** in **GpgFrontend** allows users to manage modular
@@ -37,12 +38,14 @@ for managing their activation, metadata, and storage.
 ### Key Features
 
 **Module List**
+
 - The left panel lists all currently available modules.
 - Modules prefixed with `*` are **Integrated Modules**, meaning they are bundled
   with the GpgFrontend application.
 
 **Module Information**: When a module is selected, detailed metadata is
-displayed in the right  panel, including:
+displayed in the right panel, including:
+
 - **ID**: The unique identifier of the module.
 - **Version**: The current module version.
 - **SDK Version**: The version of the SDK required by the module.
@@ -76,8 +79,8 @@ displayed in the right  panel, including:
   by deleting the corresponding `.dll` (Windows) or `.dylib` (Mac) file from the
   `modules` directory.
 - **Linux Users**: Due to the nature of **AppImage** and **Flatpak** packages,
-removing Integrated Modules may require recompiling and repackaging the
-application.
+  removing Integrated Modules may require recompiling and repackaging the
+  application.
 
 :::
 
@@ -91,6 +94,7 @@ interactions with the core application.
 ### Key Features
 
 **Key-Value Data**
+
 - Displays the hierarchical structure of global variables, including:
 - Module-specific settings (e.g., version checking, state tracking).
 - GnuPG paths and environment configurations.
@@ -117,31 +121,32 @@ the `libgpgfrontend_sdk` library.
 ### Key Points for Developers
 
 **C ABI Compliance**: Modules must be implemented using the C ABI to ensure
-  compatibility across all supported platforms (Windows, macOS, Linux).
+compatibility across all supported platforms (Windows, macOS, Linux).
 
 **Dynamic SDK Linking**: Modules interact with GpgFrontend by linking
- dynamically to the **libgpgfrontend_sdk** library. This library provides the
- necessary interfaces for module initialization, data exchange, and runtime
- interaction.
- 
+dynamically to the **libgpgfrontend_sdk** library. This library provides the
+necessary interfaces for module initialization, data exchange, and runtime
+interaction.
+
 **SDK Limitations**: The current SDK API is still under development and may not
- cover all potential use cases. Developers are encouraged to contact the project
- maintainer for guidance or feature requests.
+cover all potential use cases. Developers are encouraged to contact the project
+maintainer for guidance or feature requests.
 
 **Getting Started**: Place the compiled module file (`.dll`, `.dylib`, or `.so`)
- in the `modules` directory. Use the **Show Mods Directory** button to locate
- this directory.
+in the `modules` directory. Use the **Show Mods Directory** button to locate
+this directory.
 
 :::tip[Tips for Managing Modules]
+
 1. **Backup Before Changes**: Always create a backup of the `modules` directory
-  before making changes, especially when adding or removing modules.
+   before making changes, especially when adding or removing modules.
 2. **Regular Updates**: Check for updates to both GpgFrontend and its modules to
- ensure compatibility and access to the latest features.
+   ensure compatibility and access to the latest features.
 3. **Safe Removal**: Follow the guidelines for deleting Integrated Modules based
- on your platform to avoid accidental issues.
+   on your platform to avoid accidental issues.
 4. **Use Global Register Table for Debugging**: Advanced users can verify module
- configurations and GPG environment paths through the **Global Register Table**.
-:::
+   configurations and GPG environment paths through the **Global Register Table**.
+   :::
 
 ## Example Module: Version Checking
 
