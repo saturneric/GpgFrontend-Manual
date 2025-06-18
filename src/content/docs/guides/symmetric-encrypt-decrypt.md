@@ -32,43 +32,41 @@ approach is:
 
 ## ✍️ Encrypting Data Symmetrically
 
-To encrypt text using symmetric encryption:
+To encrypt text using symmetric encryption in GpgFrontend (v2.1.9 and later):
 
-1. **Enter the Text**
-   - Input the plaintext (the content you want to protect).
+Enable Symmetric Encryption Feature
 
-2. **Start Encryption**
-   - Choose to encrypt **without selecting any public key**.
+1. Go to the Settings.
+2. Under the Appearance tab, check the `Sym. Encrypt` checkbox to enable symmetric encryption functionality.
 
-3. **Set a Password**
-   - When prompted, enter a **strong, unique password**.
-   - This becomes your **encryption key**.
+Access the Symmetric Encryption Button
 
-4. **Encryption Completes**
-   - The text is transformed into ciphertext.
-   - You can now save it or share it with someone.
+1. After enabling, you’ll see a dedicated `Sym. Encrypt` button on the main interface.
+
+Enter the Text or Select a File
+
+- Input the plaintext you wish to protect in the text editor.
+- Select a file to encrypt using the file panel.
+
+Symmetric Encryption
+
+1. Without selecting any public key, click the `Sym. Encrypt` button.
+2. When prompted, enter a strong, unique password.
+3. This password becomes your encryption key.
+4. The text or file will be encrypted into ciphertext.
+5. You can save or share the encrypted result.
 
 > 🔐 The recipient will need the **exact same password** to decrypt the message.
-
-![Symmetric
-Encryption](https://image.cdn.bktus.com/i/2024/06/15/e81042ca-40e4-0ce4-5a44-111a89acb5d1.webp)
 
 ## 🔓 Decrypting Symmetric Encrypted Data
 
 To decrypt content that was encrypted symmetrically:
 
-1. **Paste the Ciphertext**
-   - The message should begin with `-----BEGIN PGP MESSAGE-----` and end with
-     `-----END PGP MESSAGE-----`.
-
-2. **Initiate Decryption**
-   - Choose to decrypt the message.
-
-3. **Enter the Password**
-   - Input the **same password** that was used for encryption.
-
-4. **View the Plaintext**
-   - If the password is correct, the original message will be revealed.
+1. Paste the Ciphertext: The message should begin with `-----BEGIN PGP MESSAGE-----` and end with `-----END PGP MESSAGE-----`.
+2. Initiate Decryption: Choose to decrypt the message.
+3. Enter the Password: Input the **same password** that was used for
+   encryption.
+4. View the Plaintext: If the password is correct, the original message will be revealed.
 
 > 🧠 If the password is incorrect or mistyped, decryption will fail.
 
@@ -92,17 +90,3 @@ exchange is difficult.
 - Consider using symmetric encryption as a supplement to public-key encryption —
   e.g., encrypt a file symmetrically, then encrypt the password with the
   recipient’s public key.
-
-## 🧭 Summary
-
-| Feature                | Symmetric Encryption                        |
-|------------------------|---------------------------------------------|
-| Key type               | Single shared password                      |
-| Use case               | Fast, simple encryption                     |
-| Ideal for              | Self-encryption or trusted 1-to-1 sharing   |
-| Sensitive to           | Password leaks                              |
-| Key management needed  | ❌ No                                        |
-
-Symmetric encryption is a lightweight and powerful tool — when used correctly.
-Always combine it with safe password management to ensure your data stays truly
-secure.

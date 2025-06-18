@@ -5,9 +5,9 @@ sidebar:
   order: 1
 ---
 
-**GpgFrontend** is a modern, cross-platform, open-source GUI for OpenPGP
-encryption—easy for beginners, powerful for experts, and truly portable for
-everyone who values security and flexibility.
+**GpgFrontend** is a modern, cross-platform, open-source GUI for
+[OpenPGP](https://www.openpgp.org/) encryption—easy for beginners, powerful for
+experts, and truly portable for everyone who values security and flexibility.
 
 **Key Features:**
 
@@ -29,7 +29,7 @@ Your support helps our community grow, allowing more people to secure their
 privacy easily and effectively.
 
 **Current Documentation Version:**
-[v2.1.7](https://github.com/saturneric/GpgFrontend/releases/tag/v2.1.7)
+[v2.1.9](https://github.com/saturneric/GpgFrontend/releases/tag/v2.1.9)
 
 ## User Interface Glimpse
 
