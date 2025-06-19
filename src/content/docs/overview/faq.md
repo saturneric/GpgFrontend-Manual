@@ -20,6 +20,12 @@ sign their communications for added security.
 version of GpgFrontend from [GpgFrontend's Downloads Page](/overview/downloads) and
 choose the installation method for your platform.
 
+**How do I update GpgFrontend to the latest version?** You can always get the
+latest stable or nightly release from the Downloads Page. On Windows, simply run
+the new installer. On macOS and Linux, replace the old app or AppImage with the
+new version. Your settings and keys will be preserved unless noted otherwise in
+the release notes.
+
 ## OpenPGP and GnuPG Explained
 
 **How do OpenPGP and GnuPG relate?** OpenPGP serves as a standardized protocol
@@ -82,13 +88,16 @@ encryption or decryption; it requires GnuPG for these operations. This design
 choice ensures higher security, allowing users to rely on their own verified
 version of GnuPG.
 
-## Understanding BETA Versions
+## Understanding Nightly Versions
 
-**What does "BETA" signify in a release?** A "BETA" label indicates that the
-version may not have undergone comprehensive testing, particularly for new
-modules. While beta versions are carefully evaluated post-release, and stable
-versions are published when ready, the aim is to avoid beta releases from
-version 2.0.0 onwards, barring exceptional circumstances.
+A Nightly version is an automatically generated, experimental build of
+GpgFrontend that may include the latest features, urgent fixes, and changes that
+are still being tested. Nightly builds are less stable than official releases,
+may introduce breaking changes without notice, and are not GPG-signed. They are
+ideal for users who want early access and are willing to help test, but not
+recommended for production use. For integrity, please verify the provided SHA256
+checksums. Your feedback is invaluable—please report any issues or suggestions
+on GitHub to help improve future stable releases.
 
 ## Security and Privacy
 
@@ -97,3 +106,67 @@ GnuPG to implement the OpenPGP standard, securing your data with robust
 encryption algorithms to prevent unauthorized access. It supports public and
 private key encryption methods, ensuring only intended recipients can decrypt
 and read your messages.
+
+## Importing and Exporting Keys
+
+**How do I import or export keys in GpgFrontend?** Use the Key Management
+section to import or export public/private keys. You can also drag-and-drop key
+files directly into the application's Key ToolBox.
+
+## File Encryption and Decryption
+
+**Can I encrypt and decrypt files as well as text?** Yes, GpgFrontend supports both
+text and file encryption/decryption. Use the dedicated file options in the main
+interface to protect or unlock files.
+
+## Compatibility With Other OpenPGP Software
+
+**Can I use keys and encrypted data created in other OpenPGP software?** Yes—as
+long as your keys and encrypted data are in a format accepted by GnuPG (GPG),
+they can be used with GpgFrontend. GpgFrontend relies on GnuPG for all OpenPGP
+operations, so compatibility is determined by what GnuPG supports. Most keys and
+data produced by standard-compliant GPG or PGP programs will work seamlessly.
+
+## Supported Languages
+
+**Is GpgFrontend available in my language?** GpgFrontend supports multiple
+languages. You can change the display language from the `Settings > General`
+tab. Want to help translate? See the [contribution
+guide](/appendix/translate-interface) on GitHub!
+
+## Password & PIN Handling
+
+**How does GpgFrontend handle passphrases or PINs?** 
+
+GpgFrontend does not process or store your GPG key passphrases or smart card
+PINs. All password and PIN entry for GPG keys is securely handled by the GnuPG
+pinentry component, which operates independently of GpgFrontend. GpgFrontend
+never sees, intercepts, or retains your passphrases or PINs. 
+
+For application-specific encryption features (such as KeyPackage protection),
+passphrases or PINs are used only in memory for cryptographic operations and
+immediately cleared afterward. Advanced users can enable PIN caching for these
+features, and adjust security levels for maximum protection.
+
+**Can lost passwords or keys be recovered?** No, for your security, neither
+GpgFrontend nor the developer can recover lost passwords or private keys. Make
+sure to back up your private key and remember your passphrase!
+
+## Using GpgFrontend With Smart Cards
+
+**Does GpgFrontend support OpenPGP smart cards or tokens?** Yes, GpgFrontend
+supports smart card operations (such as viewing, key generation, and signing) if
+your GnuPG installation is configured for smart card support. Users can manage
+their OpenPGP smart cards directly using the SmartCard Controller within
+GpgFrontend.
+
+## Privacy Policy
+
+**What data does GpgFrontend collect?** GpgFrontend does not collect or transmit
+any personal or usage data. All cryptographic operations are performed locally.
+Update checks can be disabled, and no tracking or analytics are built in.
+
+## Feature Requests
+
+**How can I request a new feature?** You can suggest new features by opening an
+issue on GitHub or contacting the maintainer directly.
