@@ -84,6 +84,30 @@ installation, but runtime self-validation is not possible.
 Flatpak packages use their own signature and sandboxing mechanisms, which offer
 a certain degree of integrity protection within the Flatpak ecosystem.
 
+## Modules and Self-Check
+
+When Application Self-Check is enabled, integrated modules (official modules
+bundled with GpgFrontend) will also be subject to digital signature
+verification. Any integrated module (DLL) that is not properly code-signed will
+be refused and not loaded at runtime. This ensures that all official components
+maintain the same high standard of integrity and authenticity as the core
+application.
+
+However, user-defined or third-party custom modules are not subject to this
+strict signature requirement. GpgFrontend will allow unsigned user modules to
+load, recognizing that developers may not have access to code signing
+certificates during development. This is intended to lower the barrier for open
+development and community contributions.
+
+:::tip[Note]
+
+For maximum security, users deploying GpgFrontend in sensitive environments
+should periodically check the custom module directory for any unexpected or
+untrusted DLL files. If you do not use third-party modules, you can delete or
+lock down the custom module directory to eliminate this potential risk surface.
+
+:::
+
 ## Security Note
 
 Application Self-Check adds an important layer of security by helping ensure
