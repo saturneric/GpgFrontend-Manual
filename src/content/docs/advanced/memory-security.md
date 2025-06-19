@@ -13,7 +13,7 @@ alongside any other configuration options. This flexible approach lets you
 adjust memory protection according to your security requirements and system
 capabilities.
 
-### SecureLevel 0 (Default/Low)
+### SecureLevel 0 (Default)
 
 Standard memory allocation is used at this level. It is recommended for
 environments prioritizing compatibility and performance, where handling of
@@ -26,7 +26,7 @@ the original source is actively cleared and zeroed out. This process helps
 ensure that plaintext information does not remain accessible in memory after it
 is no longer needed.
 
-### SecureLevel 1 (Medium)
+### SecureLevel 1 (Standard)
 
 Enhanced memory management techniques are activated at this level, including
 zero-initialization of sensitive buffers and stricter tracking of memory usage.
@@ -39,7 +39,7 @@ engine (GpgME) and protected by GnuPG mechanisms. Each secure buffer is fully
 initialized to zero upon allocation and is explicitly erased upon release,
 minimizing the risk of residual sensitive data in memory.
 
-### SecureLevel 2 (High):
+### SecureLevel 2 (Enhanced):
 
 At this highest security level, GpgFrontend utilizes OpenSSL’s secure memory
 feature, allocating sensitive data into locked regions protected from being
