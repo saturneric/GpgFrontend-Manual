@@ -65,14 +65,25 @@ reliable digital signature verification for EXE/DLL files.
 
 ### macOS
 
-On macOS, all application binaries are signed using Apple-recognized developer
-certificates and go through Apple Notarization. The Gatekeeper security feature
-verifies both the signature and the notarization status of your application
-bundle upon installation and launch, ensuring integrity and authenticity.
+On macOS, all application binaries are signed with Apple‐recognized Developer ID
+certificates and must pass Apple Notarization. In addition, the app is built
+with the Hardened Runtime enabled, which enforces:
 
-Thus, the application’s authenticity and integrity are protected at the system
-level, although the internal self-check feature does not perform additional
-runtime verification.
+- Library Validation: only loading code-signed system or same-team libraries.
+- Code Signing Enforcement: rejecting any binary or plug-in that has been
+  tampered with.
+- Debugging and Injection Prevention: blocking unauthorized debug attachments
+  and DYLD_INSERT_LIBRARIES-style code injections.
+- Entitlements Enforcement: honoring only the explicitly granted entitlements
+  (e.g. JIT, network, file access).
+- Memory Protection: preventing writable pages from being executable (and vice
+  versa) unless a JIT entitlement is granted.
+
+Together with Gatekeeper’s signature & notarization checks at install and
+launch, Hardened Runtime ensures that your macOS application’s authenticity,
+integrity, and runtime security are enforced at the system level, even though
+the internal self-check feature does not perform additional runtime signature
+validation.
 
 ### Linux
 
