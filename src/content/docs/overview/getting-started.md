@@ -114,7 +114,8 @@ provides an essential overview of encryption principles, key management basics,
 and the main concepts used throughout GpgFrontend.
 
 Then, you can quickly get started by referring to the following topic-specific
-guides:
+guides. For more details about operations and the user interface, please refer to:
+[Interface Understanding](/guides/understand-interface/)
 
 - [Generating a Key Pair](/guides/generate-key/)
 - [Importing and Exporting Key Pairs](/guides/import-export-key-pair/)
@@ -123,9 +124,6 @@ guides:
 - [Using Key Groups](/guides/key-group/)
 - [Key Server Operations](/guides/key-server-operations/)
 - [Smart Card Operations](/guides/smart-card/)
-
-For more details about operations and the user interface, please refer to:
-[GpgFrontend Interface Overview](/guides/understand-interface/)
 
 :::tip
 

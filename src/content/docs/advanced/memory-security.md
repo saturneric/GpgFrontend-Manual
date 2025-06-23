@@ -39,7 +39,7 @@ engine (GpgME) and protected by GnuPG mechanisms. Each secure buffer is fully
 initialized to zero upon allocation and is explicitly erased upon release,
 minimizing the risk of residual sensitive data in memory.
 
-### SecureLevel 2 (Enhanced):
+### SecureLevel 2 (Enhanced)
 
 At this highest security level, GpgFrontend utilizes OpenSSL’s secure memory
 feature, allocating sensitive data into locked regions protected from being
