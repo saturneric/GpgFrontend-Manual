@@ -51,9 +51,6 @@ files.
   and **Ctrl+S** for copying, pasting, and saving text.
 - **Plain Text Format**: Text is encoded in UTF-8 without formatting to ensure
   clarity and compatibility. Future plans may include rich text editing.
-
-#### Large Text File Support
-
 - Files up to **1MB** are supported. Larger files may cause performance issues
   and are not recommended.
 - While loading large files, editing will be temporarily disabled until the
@@ -99,24 +96,38 @@ and algorithms used.
 
 ## Key Toolbox
 
-The **Key Toolbox**, located on the right side of the interface, lists all
-available keys. It provides details such as key type, name, email address, and
-usage. Users can select keys for specific operations by ticking the boxes in the
-first column.
+Located on the right side, the Key Toolbox lists all your available keys,
+including public, private, and key groups.
 
-### Key Details
+Key features:
+
+- Selection: Tick boxes to choose keys for current operations.
+- Type/Usage/Email: Quickly review each key’s function.
+- Tab Filtering: Tabs let you quickly filter keys by type or status.
+
+Keys that are expired, revoked, or unavailable are hidden by default, but can be
+managed in the Manage Keys interface.
+
+### Understanding the Key Toolbox Table
+
+The Key Toolbox contains detailed information about each key. Some of the
+columns and codes—especially in the Type and Usage columns—may not be
+immediately obvious. The section below explains the meaning of these less
+obvious—but essential—fields and codes, so you can confidently interpret key
+types, usage, and status in your daily cryptographic operations.
 
 - **Type**:
   - `pub`: Public key (for encryption or verification).
   - `pub/sec`: Key pair with both public and private keys.
   - `pub/sec#`: Key pair with missing primary key.
   - `pub/sec^`: Key pair with components stored on a smart card.
-- **Email Address**: Shows the email associated with each key.
+  - `group`: Key Group (a collection of public keys used as one recipient for
+    encryption).
 - **Usage**: Indicates key functionality with codes:
-  - `C`: Certification.
-  - `E`: Encryption.
-  - `S`: Signing.
-  - `A`: Authentication.
+  - `C`: Certification – can certify (sign) other keys (typically primary keys only)
+  - `E`: Encryption – can encrypt data to this key
+  - `S`: Signing – can create digital signatures
+  - `A`: Authentication – can be used for authentication (e.g. SSH)
 
 ### Categories
 
