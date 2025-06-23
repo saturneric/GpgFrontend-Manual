@@ -15,23 +15,21 @@ There are **two entry points** to generate a subkey:
 
 ### Method 1: From Key Management
 
-1. **Open Key Management**
+1. Open Key Management
+2. Navigate to the main **KeyPair Management** interface.
+3. Right-click on the key pair to which you want to add a subkey.
+4. Select **“New Subkey”** from the context menu.
 
-   - Navigate to the main **KeyPair Management** interface.
-   - Right-click on the key pair to which you want to add a subkey.
-   - Select **“New Subkey”** from the context menu.
-
-   ![](https://image.cdn.bktus.com/i/2025/04/09/194529c8-4745-a2f1-5b9a-70cb66344243.webp)
+![](https://image.cdn.bktus.com/i/2025/04/09/194529c8-4745-a2f1-5b9a-70cb66344243.webp)
 
 ### Method 2: From Key Details View
 
-1. **Open Key Details**
+1. Open Key Details
+2. Double-click on the desired key pair in the **Key Management** list.
+3. Switch to the **Keychain** tab.
+4. Click the **“Generate A New Subkey”** button.
 
-   - Double-click on the desired key pair in the **Key Management** list.
-   - Switch to the **Keychain** tab.
-   - Click the **“Generate A New Subkey”** button.
-
-   ![](https://image.cdn.bktus.com/i/2025/04/09/fb9eddab-3842-061c-f81c-48fe660bb651.webp)
+![](https://image.cdn.bktus.com/i/2025/04/09/fb9eddab-3842-061c-f81c-48fe660bb651.webp)
 
 ### Configuring the Subkey
 
