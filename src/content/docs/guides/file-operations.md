@@ -8,7 +8,29 @@ GpgFrontend offers a fast and convenient method for working with files. The
 processes of encryption, decryption, signing, and verifying files are similar to
 text-based operations but involve binary input and output.
 
-## Using File Panel for Encryption, Decryption, Signing, and Verifying
+## Quick File Operations via Direct Selection
+
+GpgFrontend enables you to quickly process any file or directory directly from
+the main interface, streamlining your workflow for secure file handling.
+
+1. Direct File Selection: In the main window, click the Open button and choose
+   either Open File or Open Directory from the drop-down menu.
+2. In the system dialog, select the file (e.g., CCC.eml) or directory you want
+   to process.
+3. Automatic File Panel Activation: If you select a file, the File Panel will
+   automatically open, with the chosen file highlighted and ready for operation.
+   If you select a directory, the File Panel opens showing the entire directory
+   contents, allowing you to browse and select one or more files for further
+   action.
+4. Proceed with Cryptographic Operations: With the File Panel open, you can now
+   select one or more keys from the Key ToolBox (individual public keys or key
+   groups). Then, you can click the appropriate toolbar button—Encrypt, Decrypt,
+   Sign, or Verify—to perform the desired cryptographic operation on the
+   selected file(s).
+
+![](https://image.cdn.bktus.com/i/2025/06/24/51136aa32550eeeaecdb8dff32d62526280919ab.webp)
+
+## Using File Panel Directly
 
 After clicking the **File Panel** button, a system directory selection dialog
 will appear. Follow these steps to perform various cryptographic operations:
@@ -21,6 +43,8 @@ will appear. Follow these steps to perform various cryptographic operations:
    GpgFrontend, displaying the contents of the chosen directory.
 3. Select a File: In the File Panel tab, click on the file you want to encrypt,
    decrypt, sign, or verify.
+
+![](https://image.cdn.bktus.com/i/2025/06/24/acb0e681d8f383589727d0012c3842c487033fa1.webp)
 
 ### 4. File Operations (Encrypt, Decrypt, Sign, Verify)
 
