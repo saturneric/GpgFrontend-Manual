@@ -4,19 +4,46 @@ sidebar:
   order: 2
 ---
 
-This documentation explains the interface and functionality of GpgFrontend,
-based on the latest UI design. It is intended to guide users through its
-features effectively.
+This documentation explains the layout and features of the latest GpgFrontend
+interface, helping users to efficiently utilize all cryptographic operations in
+different workspaces.
 
-![Interface](https://image.cdn.bktus.com/i/2024/11/29/0b427894-0706-70fd-cd68-634d57655df4.webp)
+![Interface](https://image.cdn.bktus.com/i/2025/06/24/f0121645a9c0d8f0e67b2b9f4d1788bd42c7674a.webp)
 
-## Text Editing Zone
+## Workspace Overview
 
-The **Text Editing Zone** allows users to input any desired text or work on
-existing files. You can open a new tab using the **"New"** or **"New E-Mail"**
-button or load an existing file with **"Open"** from the menu bar.
+GpgFrontend organizes your cryptographic workflow into multiple workspaces
+(tabs), making it easy to work with files, plain text, and email data
+simultaneously.
 
-### Key Features:
+There are three main workspace types, each represented by a tab:
+
+- File Panel: For batch file and folder operations.
+- Text Editor: For editing and encrypting/decrypting plain text.
+- Mail Editor: For handling email messages in a dedicated editor.
+
+You can open multiple tabs of each type and switch between them as needed.
+
+### File Panel
+
+The File Panel is dedicated to cryptographic operations on files and folders. It
+allows you to:
+
+- Browse and select files or folders from your system.
+- Encrypt, decrypt, sign, or verify one or multiple files.
+- Switch between ASCII and binary output modes.
+- Activate Batch Mode for multi-file operations.
+- Automatically handle folder archiving/encryption (see the File Operations
+  section for details).
+
+Files and folders selected via Open are always opened in a File Panel tab.
+
+### Text Editor
+
+The Text Editor allows users to input any desired text or work on existing
+files.
+
+#### Key Features
 
 - **Operations Bar**: Located at the top, it provides options to encrypt,
   decrypt, sign, and verify text directly.
@@ -31,6 +58,23 @@ button or load an existing file with **"Open"** from the menu bar.
   and are not recommended.
 - While loading large files, editing will be temporarily disabled until the
   entire file is processed.
+
+### Mail Editor
+
+The Mail Editor is specifically designed for working with EML-format email
+messages.
+
+- Open and Edit EML Files: Load .eml files (standard email format) directly for
+  viewing and editing their content.
+- Compose, Encrypt, Sign, and Verify Emails: Easily write or modify email
+  content and apply encryption, digital signatures, or verify received
+  signatures—all in one place.
+
+:::caution[Note]
+
+The Mail Editor is optimized for .eml files, ensuring compatibility with standard email clients and maintaining proper formatting and metadata during cryptographic operations.
+
+:::
 
 ## Information Panel
 
@@ -82,20 +126,24 @@ Expired or revoked keys are not displayed by default and can be viewed in
 
 ## Operations Bar
 
-The **Operations Bar**, at the top of the interface, provides quick access to
-all core functionalities:
+The Operations Bar at the top provides one-click access to all core
+cryptographic and workspace features. Here are the main buttons, from left to
+right:
 
-1. **New E-Mail**: Create a new email or text file.
-2. **Open**: Open an existing text file.
-3. **File Panel**: Browse and select files from your system.
-4. **Encrypt**: Encrypt text or files using selected keys.
-5. **Encrypt Sign**: Encrypt and sign text or files simultaneously.
-6. **Decrypt**: Decrypt text or files.
-7. **Decrypt Verify**: Decrypt and verify signed files.
-8. **Sign**: Digitally sign text or files.
-9. **Verify**: Verify the signature of text or files.
-10. **Manage Keys**: Access the key management interface.
-11. **Import Key**: Import keys into your keyring.
+1. **Open**: Open a file or directory, launching the File Panel for file-based
+   operations.
+2. **Workspace**: Manage and switch between different workspaces or tabs, such
+   as File Panel, Text Editor, and Mail Editor.
+3. **Encrypt**: Encrypt the currently selected file(s) or text using the
+   selected recipient keys.
+4. **Decrypt**: Decrypt the currently selected encrypted file(s) or text. No key
+   selection is required—gpg automatically detects and uses the
+   appropriate private key(s) from your keyring.
+5. **Sign**: Digitally sign the selected file(s) or text with your private key.
+6. **Verify**: Verify the signature of the selected file(s) or text.
+7. **New Keypair**: Generate a new key pair.
+8. **Import Key...**: Import existing public or private keys into your keyring.
+9. **Manage Keys**: Access the key management interface.
 
 ### Customization
 
