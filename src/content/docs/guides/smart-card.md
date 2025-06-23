@@ -33,7 +33,7 @@ authentication, and other security-critical applications.
 
 OpenPGP smart cards support at least two types of PIN codes:
 
-### User PIN (CHV1):
+#### User PIN (CHV1)
 
 This is the regular PIN you enter to unlock the card for daily operations, such
 as signing or decrypting.
@@ -42,7 +42,7 @@ as signing or decrypting.
 - Entering it incorrectly too many times will lock the card, requiring admin
   intervention.
 
-### Admin PIN (CHV2):
+#### Admin PIN (CHV2)
 
 This is the administrator PIN, used to perform high-privilege management
 operations.
