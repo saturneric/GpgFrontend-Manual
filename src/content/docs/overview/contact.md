@@ -27,7 +27,7 @@ For email correspondence, I strongly prefer plain text over HTML format.
 
 ### About My Domain
 
-The domain `BKTUS.com` (“Bakantu union us”) is just a personal domain I
+The domain [`bktus.com`](https://bktus.com/) (“Bakantu union us”) is just a personal domain I
 registered as a teenager. “Bakantu” is simply a made-up word—no hidden meaning!
 I just wanted a name that blended technology and community, reflecting values
 like innovation, connectivity, and collaboration. :)
