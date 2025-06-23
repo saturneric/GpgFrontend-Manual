@@ -8,57 +8,87 @@ GpgFrontend is available for download through multiple channels. For more
 detailed instructions on installation and getting started, please refer to the
 [Getting Started Guide](/overview/getting-started/).
 
-## Download Options Across Platforms
-
 [![Packaging status](https://repology.org/badge/vertical-allrepos/gpgfrontend.svg)](https://repology.org/project/gpgfrontend/versions)
 
-### Releases & Downloads
+## Direct Downloads
 
-- **GitHub Releases**: Click the badges below to access the latest stable and nightly builds.
+Choose from the options below to download GpgFrontend directly for your platform.
 
-  [![GitHub Release](https://img.shields.io/github/downloads/saturneric/GpgFrontend/latest/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/latest)
+### GitHub Releases
 
-  [![GitHub Release Nightly](https://img.shields.io/github/downloads/saturneric/GpgFrontend/nightly/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/nightly)
+Click the badges below to access the latest stable and nightly builds.
 
-- **Static Mirror**: A fast, direct-download mirror is also available at [ftp.bktus.com](https://ftp.bktus.com/GpgFrontend/), served securely over HTTPS via Nginx. No authentication, rate limits, or redirections.
+[![GitHub Release](https://img.shields.io/github/downloads/saturneric/GpgFrontend/latest/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/latest)
 
-### Homebrew Cask
+[![GitHub Release Nightly](https://img.shields.io/github/downloads/saturneric/GpgFrontend/nightly/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/nightly)
 
-- **Homebrew Cask**: Mac users can check the version information through the
-  badge below or install using the command line.
+### Static Mirror
 
-  [![Homebrew Cask](https://img.shields.io/homebrew/cask/v/gpgfrontend?style=for-the-badge)](https://formulae.brew.sh/cask/gpgfrontend)
+For privacy-conscious users, a fast and secure direct-download mirror is
+available at [ftp.bktus.com](https://ftp.bktus.com/GpgFrontend/). This mirror is
+served over HTTPS with no authentication, tracking, rate limits, or
+redirections.
 
-  Install command:
+### Asset Naming Patterns and Descriptions
 
-  ```
-  brew install --cask gpgfrontend
-  ```
+Below is a summary table explaining the naming patterns and purposes of each
+downloadable asset. You can use the filename patterns to quickly identify and
+select the appropriate package for your platform or use case.
 
-### Flatpak
+| Filename Pattern                  | Description                                                                                 |
+| --------------------------------- | ------------------------------------------------------------------------------------------- |
+| `***-universal.zip`               | The universal package: contains both Windows Portable and Linux AppImage in one archive.    |
+| `***-windows-x86_64-portable.zip` | Fully portable Windows version. No installation needed; just extract and run.               |
+| `***-windows-x86_64.msix`         | MSIX installer for Windows (recommended for most Windows users).                            |
+| `***-windows-x86_64.msi`          | Classic MSI installer for Windows; suitable for legacy/enterprise environments.             |
+| `***-macos-**.dmg`                | macOS disk image; number = minimum required macOS version. Drag to install.                 |
+| `***-linux-******.AppImage`       | AppImage for Linux; make it executable and run directly.                                    |
+| `*.sig`                           | GPG signature file for verifying the integrity and authenticity of the corresponding asset. |
 
-- **Flatpak Installation**: Linux users can click the image below to navigate to
-  the Flathub page for installation.
+## Homebrew Cask
 
-  [![Download on Flathub](https://flathub.org/api/badge?locale=en)](https://flathub.org/apps/com.bktus.gpgfrontend)
+Mac users can check the version information through the
+badge below or install using the command line.
 
-### Windows
+[![Homebrew Cask](https://img.shields.io/homebrew/cask/v/gpgfrontend?style=for-the-badge)](https://formulae.brew.sh/cask/gpgfrontend)
 
-- **WinGet Package**: Windows users can install GpgFrontend through the Windows
-  Package Manager (WinGet). Check the version information through the badge
-  below or install using the command line.
+Install command:
 
-  [![WinGet Package Version](https://img.shields.io/winget/v/Saturneric.GpgFrontend?style=for-the-badge)](https://repology.org/project/gpgfrontend/versions)
+```
+brew install --cask gpgfrontend
+```
 
-  Install command:
+## Flatpak
 
-  ```
-  winget install Saturneric.GpgFrontend
-  ```
+Linux users can click the image below to navigate to the Flathub page for
+installation.
 
-- **Microsoft Store Download**: Windows users can also visit the application
-  store page through the Microsoft Store badge below.
+[![Download on Flathub](https://flathub.org/api/badge?locale=en)](https://flathub.org/apps/com.bktus.gpgfrontend)
 
-  <a href="https://apps.microsoft.com/detail/9nh716mqk2b5">
-    <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
-  </a>
+## Windows
+
+There are several convenient ways to install GpgFrontend on Windows. Choose the
+method that best fits your workflow.
+
+### WinGet
+
+Windows users can install GpgFrontend through the Windows Package Manager
+(WinGet). Check the version information through the badge below or install
+using the command line.
+
+[![WinGet Package Version](https://img.shields.io/winget/v/Saturneric.GpgFrontend?style=for-the-badge)](https://repology.org/project/gpgfrontend/versions)
+
+Install command:
+
+```
+winget install Saturneric.GpgFrontend
+```
+
+### Microsoft Store
+
+Windows users can also visit the application store page through the Microsoft
+Store badge below.
+
+<a href="https://apps.microsoft.com/detail/9nh716mqk2b5">
+  <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
