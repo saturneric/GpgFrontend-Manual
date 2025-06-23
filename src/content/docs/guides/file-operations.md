@@ -13,12 +13,14 @@ text-based operations but involve binary input and output.
 After clicking the **File Panel** button, a system directory selection dialog
 will appear. Follow these steps to perform various cryptographic operations:
 
-1. Open File Panel: Click the **File Panel** button in the toolbar at the top of the interface. This will open a system dialog allowing you to choose a directory.
-2. Select Directory: In the system dialog, navigate to the desired directory and select it. Once
-  selected, a new tab named "File Panel" will open in GpgFrontend, displaying
-  the contents of the chosen directory.
-3. Select a File: In the File Panel tab, click on the file you want to encrypt, decrypt, sign,
-  or verify.
+1. Open File Panel: Click the **File Panel** button in the toolbar at the top of
+   the interface. This will open a system dialog allowing you to choose a
+   directory.
+2. Select Directory: In the system dialog, navigate to the desired directory and
+   select it. Once selected, a new tab named "File Panel" will open in
+   GpgFrontend, displaying the contents of the chosen directory.
+3. Select a File: In the File Panel tab, click on the file you want to encrypt,
+   decrypt, sign, or verify.
 
 ### 4. File Operations (Encrypt, Decrypt, Sign, Verify)
 
@@ -41,10 +43,12 @@ Understanding the appropriate file extensions helps in managing encrypted and
 signed files properly. Here’s a breakdown of the file extensions used:
 
 ### ASCII Format
+
 - **.asc**: ASCII-armored files. Can contain encrypted data or signatures in a
   text-compatible format.
 
 ### Binary Format
+
 - **.gpg**: Binary encrypted files or combined encrypted and signed files. More
   efficient for storage and transmission.
 - **.sig**: Binary signature files used exclusively for signature operations.
@@ -61,11 +65,11 @@ settings.
 To change the output mode between ASCII and binary formats:
 
 1. Open Settings: Navigate to the GnuPG Controller settings within GpgFrontend by accessing
-     the settings menu.
-2. Locate Binary Mode Option: In the settings interface, under the "General" section, find the option
-     labeled "Use Binary Mode for File Operations".
-3. Toggle Binary Mode: Check or uncheck this option to switch between binary (gpg/sig) and ASCII
-     (asc) output formats.
+   the settings menu.
+2. Locate Binary Mode Option: In the settings interface, under the "General"
+   section, find the option labeled "Use Binary Mode for File Operations".
+3. Toggle Binary Mode: Check or uncheck this option to switch between binary
+   (gpg/sig) and ASCII (asc) output formats.
 
 This streamlined process allows you to manage file encryption, decryption,
 signing, and verification efficiently with GpgFrontend.
@@ -123,6 +127,7 @@ directory contents while preserving their original structure.
 
 When a folder is selected for encryption, GpgFrontend automatically performs the
 following operations:
+
 1. Archiving: The folder is first archived using the tar utility, combining all
    files and subdirectories into a single .tar archive.
 2. Encryption: The `.tar` archive is then encrypted using GnuPG, resulting in a
@@ -139,6 +144,7 @@ transferable format.
 
 GpgFrontend also offers automatic extraction when decrypting `.tar.gpg` or
 `.tar.asc` files:
+
 1. Decryption: The selected encrypted archive is decrypted using GnuPG,
    producing the original `.tar` archive.
 2. Extraction: If the decrypted content is a `.tar` archive, GpgFrontend
