@@ -19,16 +19,16 @@ At the heart of GPG is the **key pair**: two mathematically linked keys.
 - **Public Key**: Share this with anyone. Others use it to:
   - Send you encrypted messages.
   - Verify your digital signature.
-  
 - **Private Key**: Keep this secret. You use it to:
   - Decrypt messages sent to you.
   - Sign data so others know it’s really from you.
 
-
 :::tip[Think of it like a mailbox]
+
 - Your public key is the address — people can send you letters.
 - Your private key is the key to open the mailbox — only you can read what’s
   inside.
+
 :::
 
 ## 🔧 Generating a Key Pair
@@ -61,6 +61,7 @@ independently.
 ## 🧱 Understanding the Primary Key
 
 Your **primary key** is your core identity. It:
+
 - Links to your user ID (usually name + email).
 - Signs your subkeys.
 - Can certify other people's public keys (used to build trust networks).
@@ -76,6 +77,38 @@ you. That’s why:
 
 :::
 
+## 🏷️ Public Key Certificates: Proving Identity and Key Relationships
+
+A public key in GPG/PGP is not just a raw cryptographic key.
+It is always packaged as a certificate, which contains more than just the key itself.
+
+A public key certificate includes:
+
+- The public key data (for encryption and verifying signatures)
+- The User ID (your name and email address)
+- Signatures made by your own primary key and, optionally, by other people
+
+### Why Are Certificates Important?
+
+- Binding Identity: The certificate links your key to your identity, such as
+  your name and email. This way, people can verify that the key truly belongs to
+  you.
+- Establishing Trust: Others can “sign” your public key, vouching for your
+  identity. This signature acts as a recommendation, forming a “Web of Trust.”
+- Subkey Relationship: If you use subkeys (for encryption or signing), their
+  certificates include signatures from your primary key. This proves that each
+  subkey really belongs to your primary identity, and not to someone else.
+
+### Example
+
+When you share your public key, you are actually sharing a certificate that:
+
+- Includes your identity and any subkeys
+- Shows cryptographic proof that the subkeys are authorized by your primary key
+- May be signed by other people who trust your identity
+
+This is why you should always distribute your full public key certificate—not just the bare key!
+
 ## ✉️ How Encryption Works
 
 Imagine you want to send a private message to someone:
@@ -86,6 +119,7 @@ Imagine you want to send a private message to someone:
 4. They can **verify your signature** with your public key.
 
 This ensures:
+
 - **Privacy**: No one but the intended recipient can read the message.
 - **Authenticity**: The recipient knows the message is from you.
 
@@ -98,6 +132,7 @@ others to:
 - Confirm that **you** are the sender.
 
 Digital signatures are used to:
+
 - Sign emails.
 - Sign files or software packages.
 - Sign other people's public keys (to build trust).
@@ -107,6 +142,7 @@ Digital signatures are used to:
 ### Secure Email
 
 You want to email a sensitive document:
+
 - Encrypt it using the recipient’s public key.
 - Sign it with your private key.
 - The recipient decrypts and verifies it.
@@ -114,12 +150,14 @@ You want to email a sensitive document:
 ### Software Publishing
 
 You release a file or program online:
+
 - You sign it.
 - Users can verify the signature before using it.
 
 ### Building Trust
 
 You meet someone at a conference:
+
 - You exchange and sign each other’s keys.
 - Anyone who trusts your key may now also trust theirs.
 
@@ -141,6 +179,7 @@ You meet someone at a conference:
 ## 🧭 Summary
 
 GPG is a powerful tool for privacy and digital identity. By learning:
+
 - How keys work,
 - When to encrypt vs. sign,
 - And how to protect your credentials,
