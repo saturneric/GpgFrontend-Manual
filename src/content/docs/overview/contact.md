@@ -5,43 +5,40 @@ sidebar:
   order: 5
 ---
 
-Please avoid discussing business or political matters here. This space is
-dedicated to fostering the well-being and advancement of humanity. If you have
-any technical questions or suggestions on how to enhance this software, your
-insights are very much welcome.
+Contact on this page is intended for technical collaboration and feedback. This
+space is dedicated to fostering the well-being and advancement of humanity. If
+you have any technical questions or suggestions on how to enhance this software,
+your insights are very much welcome.
 
-For correspondence, I strongly prefer plain text emails over HTML formatted
-messages.
+For email correspondence, I strongly prefer plain text over HTML format.
 
 ## Personal Details
 
 - **Preferred Name:** Eric
-- **Full Legal Name:** Yu Hu
-- **Email:** [eric@bktus.com](mailto:eric@bktus.com) (Server location: Germany)
-- **Preferred Email Format:** Plain text, without HTML enhancements.
-- **Headquarters:** Baden-Württemberg, Germany
+- **Legal Name:** Yu Hu
+- **Email:** [eric@bktus.com](mailto:eric@bktus.com) (server in Germany)
+- **Headquarters:** Germany
 
-**Note for CA Verification:** For informal correspondence you can call me
-**Eric**; for formal or legal matters, please use **Mr. Hu**.
+> **Note on Names**: I’ve used the name Eric since childhood, and prefer it in
+> nearly all non-Chinese contexts, especially online. My legal name, Yu Hu, is
+> only truly accurate in Chinese characters and is rarely needed outside of
+> legal or formal situations. It’s provided here mainly for code signing
+> certificate verification. In formal settings, please use Mr. Hu.
 
 ### About My Domain
 
-The domain BKTUS (Bakantu union us) is not a commercial entity but rather a
-personal domain name of mine. The name "Bakantu" merges elements of technology
-and community, reflecting a domain that values both innovation and connectivity.
-It represents a seamless integration of advanced scientific pursuits with the
-foundational principles of mutual support and collaboration, characteristic of a
-forward-thinking, interconnected society. This name embodies the synergy between
-technological progress and communal interdependence, aimed at fostering a better
-future.
+The domain `BKTUS.com` (“Bakantu union us”) is just a personal domain I
+registered as a teenager. “Bakantu” is simply a made-up word—no hidden meaning!
+I just wanted a name that blended technology and community, reflecting values
+like innovation, connectivity, and collaboration. :)
 
 ### Language Proficiency
 
 I can use the following languages and welcome communication in any of them:
 
-1. English
-2. Chinese
-3. German
+- English
+- Chinese
+- German
 
 ### Secure Communication (GPG Public Key)
 
