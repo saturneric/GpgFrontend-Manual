@@ -77,38 +77,6 @@ you. That’s why:
 
 :::
 
-## 🏷️ Public Key Certificates: Proving Identity and Key Relationships
-
-A public key in GPG/PGP is not just a raw cryptographic key.
-It is always packaged as a certificate, which contains more than just the key itself.
-
-A public key certificate includes:
-
-- The public key data (for encryption and verifying signatures)
-- The User ID (your name and email address)
-- Signatures made by your own primary key and, optionally, by other people
-
-### Why Are Certificates Important?
-
-- Binding Identity: The certificate links your key to your identity, such as
-  your name and email. This way, people can verify that the key truly belongs to
-  you.
-- Establishing Trust: Others can “sign” your public key, vouching for your
-  identity. This signature acts as a recommendation, forming a “Web of Trust.”
-- Subkey Relationship: If you use subkeys (for encryption or signing), their
-  certificates include signatures from your primary key. This proves that each
-  subkey really belongs to your primary identity, and not to someone else.
-
-### Example
-
-When you share your public key, you are actually sharing a certificate that:
-
-- Includes your identity and any subkeys
-- Shows cryptographic proof that the subkeys are authorized by your primary key
-- May be signed by other people who trust your identity
-
-This is why you should always distribute your full public key certificate—not just the bare key!
-
 ## ✉️ How Encryption Works
 
 Imagine you want to send a private message to someone:
@@ -161,6 +129,39 @@ You meet someone at a conference:
 - You exchange and sign each other’s keys.
 - Anyone who trusts your key may now also trust theirs.
 
+## 🏷️ Public Key Certificates
+
+A public key in GPG/PGP is not just a raw cryptographic key. It is always
+packaged as a certificate, which contains more than just the key itself.
+
+A public key certificate includes:
+
+- The public key data (for encryption and verifying signatures)
+- The User ID (your name and email address)
+- Signatures made by your own primary key and, optionally, by other people
+
+### Why Are Certificates Important?
+
+- Binding Identity: The certificate links your key to your identity, such as
+  your name and email. This way, people can verify that the key truly belongs to
+  you.
+- Establishing Trust: Others can “sign” your public key, vouching for your
+  identity. This signature acts as a recommendation, forming a “Web of Trust.”
+- Subkey Relationship: If you use subkeys (for encryption or signing), their
+  certificates include signatures from your primary key. This proves that each
+  subkey really belongs to your primary identity, and not to someone else.
+
+### Example
+
+When you share your public key, you are actually sharing a certificate that:
+
+- Includes your identity and any subkeys
+- Shows cryptographic proof that the subkeys are authorized by your primary key
+- May be signed by other people who trust your identity
+
+This is why you should always distribute your full public key certificate—not
+just the bare key!
+
 ## ✅ Best Practices for New Users
 
 1. **Back Up Your Keys**: Store your private key and revocation certificate in a
@@ -175,16 +176,6 @@ You meet someone at a conference:
    immediately and inform your contacts.
 6. **Understand the Web of Trust**: GPG builds trust by people signing each
    other's keys — this forms a decentralized trust model.
-
-## 🧭 Summary
-
-GPG is a powerful tool for privacy and digital identity. By learning:
-
-- How keys work,
-- When to encrypt vs. sign,
-- And how to protect your credentials,
-
-You’re taking a big step toward securing your digital life.
 
 ## 🧰 Where Does GpgFrontend Fit In?
 
