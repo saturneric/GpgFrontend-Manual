@@ -25,14 +25,15 @@ For email correspondence, I strongly prefer plain text over HTML format.
 > legal or formal situations. It’s provided here mainly for code signing
 > certificate verification. In formal settings, please use Mr. Hu.
 
-### About My Domain
+## About My Domain
 
-The domain [`bktus.com`](https://bktus.com/) (“Bakantu union us”) is just a personal domain I
-registered as a teenager. “Bakantu” is simply a made-up word—no hidden meaning!
-I just wanted a name that blended technology and community, reflecting values
-like innovation, connectivity, and collaboration. :)
+The domain [`bktus.com`](https://bktus.com/) (“Bakantu union us”) is just a
+personal domain I registered as a teenager. “Bakantu” is simply a made-up
+word—no hidden meaning! I just wanted a name that blended technology and
+community, reflecting values like innovation, connectivity, and collaboration.
+:)
 
-### Language Proficiency
+## Language Proficiency
 
 I can use the following languages and welcome communication in any of them:
 
@@ -40,7 +41,7 @@ I can use the following languages and welcome communication in any of them:
 - Chinese
 - German
 
-### Secure Communication (GPG Public Key)
+## Secure Communication (GPG Public Key)
 
 For secure and encrypted communication, below is my long-term PGP public key.
 Please ensure any encrypted messages are sent in plain text format and avoid
