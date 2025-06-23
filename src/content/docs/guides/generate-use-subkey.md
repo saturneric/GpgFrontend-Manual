@@ -15,17 +15,18 @@ There are **two entry points** to generate a subkey:
 
 ### Method 1: From Key Management
 
-1. **Open Key Management**  
+1. **Open Key Management**
+
    - Navigate to the main **KeyPair Management** interface.
    - Right-click on the key pair to which you want to add a subkey.
    - Select **“New Subkey”** from the context menu.
 
    ![](https://image.cdn.bktus.com/i/2025/04/09/194529c8-4745-a2f1-5b9a-70cb66344243.webp)
-   
 
 ### Method 2: From Key Details View
 
-1. **Open Key Details**  
+1. **Open Key Details**
+
    - Double-click on the desired key pair in the **Key Management** list.
    - Switch to the **Keychain** tab.
    - Click the **“Generate A New Subkey”** button.
@@ -37,8 +38,9 @@ There are **two entry points** to generate a subkey:
 Once the subkey generation dialog appears, configure the following settings:
 
 - **Algorithm**: Choose the algorithm for the subkey. Options include:
-  - RSA, DSA  
-  - ECC (e.g., ED25519, ED448, CV25519, SECP256K1, Brainpool, NIST curves, etc.)  
+
+  - RSA, DSA
+  - ECC (e.g., ED25519, ED448, CV25519, SECP256K1, Brainpool, NIST curves, etc.)
   - ECDH for encryption, EdDSA for signing, etc.
 
 - **Key Size**: Select the desired key size. This setting is available for most
@@ -48,6 +50,7 @@ Once the subkey generation dialog appears, configure the following settings:
   allows configurable sizes like 2048, 3072, or 4096 bits.
 
 - **Expiration Date**: Set how long the subkey remains valid:
+
   - Predefined periods (e.g., 1 year, 2 years)
   - Exact date/time
   - Or enable **“Non Expired”** for permanent validity.
@@ -56,7 +59,7 @@ Once the subkey generation dialog appears, configure the following settings:
   - `Encrypt`
   - `Sign`
   - `Authenticate`  
-  *(Certification usage is reserved for primary keys.)*
+    _(Certification usage is reserved for primary keys.)_
 
 ### Final Step: Generate
 
@@ -153,8 +156,7 @@ and successfully export a subkey:
    a location to save the exported subkey. Choose a secure directory and save
    the subkey as a separate file.
 
-![Export
-Subkey](https://image.cdn.bktus.com/i/2024/11/29/15c9ab0c-a05e-0117-3244-2ac01aaed9a9.webp)
+![Export Subkey](https://image.cdn.bktus.com/i/2024/11/29/15c9ab0c-a05e-0117-3244-2ac01aaed9a9.webp)
 
 ### Step-by-Step Guide to Importing Subkeys
 
@@ -165,16 +167,14 @@ to navigate the GpgFrontend interface and successfully import a subkey:
 1.  **Select the Key Database**: Choose the appropriate key database from the
     **Key Toolbox**.
 
-![Switch Key
-Database](https://image.cdn.bktus.com/i/2024/11/29/0e8ff19e-4189-65db-5732-1a2e79d9b8a6.webp)
+![Switch Key Database](https://image.cdn.bktus.com/i/2024/11/29/0e8ff19e-4189-65db-5732-1a2e79d9b8a6.webp)
 
 1. **Import the Subkey**: Click on the **Import Key** button in the top toolbar,
    and select **File** from the dropdown menu. This action will open a dialog
    where you can browse your system to locate the previously exported subkey
    file.
 
-   ![Import the
-   Subkey](https://image.cdn.bktus.com/i/2024/11/29/8f3456ba-6275-4ef9-8e41-49b9b6bc0dfa.webp)
+   ![Import the Subkey](https://image.cdn.bktus.com/i/2024/11/29/8f3456ba-6275-4ef9-8e41-49b9b6bc0dfa.webp)
 
 2. **Select Subkey File**: Browse to the location where the subkey file is
    saved, select it, and click **Open**. This will import the subkey into the
@@ -188,8 +188,7 @@ Database](https://image.cdn.bktus.com/i/2024/11/29/0e8ff19e-4189-65db-5732-1a2e7
 4. **Handling Primary Key**:You can now move your master key to a safe place.
    Then delete it at GpgFrontend.
 
-   ![Verify Imported
-   Subkey](https://image.cdn.bktus.com/i/2024/11/29/ac01142d-1ffa-ba32-daac-36ddf0729ff1.webp)
+   ![Verify Imported Subkey](https://image.cdn.bktus.com/i/2024/11/29/ac01142d-1ffa-ba32-daac-36ddf0729ff1.webp)
 
 ### Confirming Primary Key Absence
 
@@ -199,8 +198,7 @@ for this subkey does not exist in the current key database. This is expected if
 you have securely removed the primary key to minimize exposure, while retaining
 the subkeys for ongoing operations.
 
-![Meaning of'#'
-Symbol](https://image.cdn.bktus.com/i/2024/11/29/78d9bc07-8b96-302b-25d1-cbb88815f16a.webp)
+![Meaning of'#' Symbol](https://image.cdn.bktus.com/i/2024/11/29/78d9bc07-8b96-302b-25d1-cbb88815f16a.webp)
 
 You can confirm the absence of the primary key by opening the **Key Details**
 view of the imported subkey. In the **Primary Key Existence** section, it should
@@ -215,8 +213,7 @@ Existence** section in the Key Details view, which will display **Not Exists**.
 This setup is intentional in many cases to improve security by isolating the
 primary key.
 
-![Primary Key Not
-Exists](https://image.cdn.bktus.com/i/2024/11/29/05594a4b-cdad-7ad4-070b-58e24701cce3.webp)
+![Primary Key Not Exists](https://image.cdn.bktus.com/i/2024/11/29/05594a4b-cdad-7ad4-070b-58e24701cce3.webp)
 
 ### Actions Limited by the Absence of a Primary Key:
 
@@ -244,20 +241,82 @@ primary key poses a security risk. By isolating the primary key and relying
 solely on subkeys, you can maintain a balance between functionality and
 security.
 
-![Use Subkey to
-Encrypt](https://image.cdn.bktus.com/i/2024/11/29/20047766-48ab-f4a3-175c-241c7d5c0dbf.webp)
+![Use Subkey to Encrypt](https://image.cdn.bktus.com/i/2024/11/29/20047766-48ab-f4a3-175c-241c7d5c0dbf.webp)
 
-### Tips for Secure Usage:
+## Common Misconceptions about Subkey
 
-1. **Inspect Subkey Capabilities**: Always verify what operations a subkey can
-   perform by reviewing its **Usage** field.
-2. **Plan Subkey Generation**: At the time of key creation, consider creating
-   multiple subkeys with distinct purposes (e.g., signing, encryption,
-   authentication).
-3. **Backup Primary Key Securely**: Store the primary key in an offline, highly
-   secure location to allow recovery or advanced operations if needed.
+When you export only a subkey and then import it into a different key database
+(or application), you may notice that:
 
-### Additional Note on Subkey Algorithm Types
+- The key listing still shows the primary key’s ID as the main identifier.
+- The keyring still displays the original key structure—including the primary
+  key and potentially other subkeys—though only the exported subkey is available
+  for actual use (decryption, signing, etc.).
+- The usage flags (such as CESA: Certify, Encrypt, Sign, Authenticate) may
+  change—only capabilities for which the private part is present remain active.
+
+### Why is this the case?
+
+This is not a bug, but a fundamental part of how OpenPGP and GnuPG represent keys.
+
+### Key Structure: Public Context is Required
+
+Even if you export and import only a subkey’s secret part, you are actually
+exporting and importing a full public key structure (a certificate) with only a
+partial set of private components.
+
+- The public key block still contains the primary key’s information, all user
+  IDs, and all subkey definitions.
+- The secret part of the primary key is absent, so you cannot certify, revoke,
+  or generate further subkeys.
+- The exported file needs to include the primary key’s public information,
+  because the subkey’s trust depends on its certification by the primary key.
+
+:::tip[Analogy]
+
+Exporting a subkey is like sending only the content of a letter but still
+including the envelope, address, and signature. You need all of these for the
+recipient (the application) to know who sent it and to verify its authenticity.
+
+:::
+
+The primary key is the identity anchor for the whole key structure. Subkeys
+derive their trust from the fact that the primary key certified them. If the
+primary key’s public info and signatures are missing, the subkey would not be
+recognized as legitimate or trustworthy by other OpenPGP tools.
+
+### Multiple Subkeys Included
+
+If the key structure contains other subkeys, their definitions will also be
+present in the exported key material—even if their secret parts are missing.
+This design ensures the integrity and context of the key structure for any
+OpenPGP-compliant tool.
+
+### Why is the Key ID Still the Primary Key’s?
+
+OpenPGP keyrings and applications (including GpgFrontend, Thunderbird, etc.)
+identify the whole key structure by the primary key ID. This ensures consistency
+and interoperability across tools and platforms. It’s not possible to create a
+"standalone" subkey that appears as its own identity—the subkey’s value is only
+recognized as part of the primary key’s web-of-trust.
+
+### Can I use only a subkey for all operations?
+
+Yes, as long as you have generated the necessary subkeys for signing,
+encryption, and authentication. But certain actions, like certifying other keys
+or adding User IDs, require the primary key.
+
+## Tips for Secure Usage
+
+- **Inspect Subkey Capabilities**: Always verify what operations a subkey can
+  perform by reviewing its **Usage** field.
+- **Plan Subkey Generation**: At the time of key creation, consider creating
+  multiple subkeys with distinct purposes (e.g., signing, encryption,
+  authentication).
+- **Backup Primary Key Securely**: Store the primary key in an offline, highly
+  secure location to allow recovery or advanced operations if needed.
+
+## Additional Note on Subkey Algorithm Types
 
 Subkeys in GpgFrontend offer more algorithm types than primary keys due to their
 specialized roles. While primary keys focus on establishing identity and trust,
