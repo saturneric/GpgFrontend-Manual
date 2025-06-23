@@ -11,7 +11,7 @@ protocols while maintaining robust OpenPGP compliance. Whether you're signing,
 encrypting, verifying, or decrypting emails, GpgFrontend ensures a secure and
 streamlined experience.
 
-## **Purpose and Key Advantages**
+## Purpose and Key Advantages
 
 GpgFrontend's email processing functionality is designed to empower users to
 handle PGP-signed and encrypted emails in situations where their email clients
@@ -28,9 +28,9 @@ include:
   offline, local-first solution that minimizes exposure to online threats and
   untrusted environments.
 
-## **Features Overview**
+## Features Overview
 
-### **1. OpenPGP Standards Compliance**
+### OpenPGP Standards Compliance
 
 GpgFrontend adheres to OpenPGP standards (RFC 4880 and 3156) for email
 encryption and signing, ensuring compatibility with tools like Thunderbird and
@@ -46,9 +46,9 @@ other OpenPGP-enabled clients.
   - **Decrypt and Verify Together or Separately**: Flexibly handle incoming
     messages.
 
-### **2. Creating and Processing Emails**
+### Creating and Processing Emails
 
-#### **Creating and Signing Emails**
+#### Creating and Signing Emails
 
 1. Open GpgFrontend and click **"New E-Mail"** to create a blank email.
 
@@ -61,7 +61,7 @@ other OpenPGP-enabled clients.
 
 ![Sign Email](https://image.cdn.bktus.com/i/2024/11/29/fc733201-8a5e-b2c9-8043-c17e09b5367b.webp)
 
-#### **Encrypting Emails**
+#### Encrypting Emails
 
 1. Select the recipient's public key in the **Key Toolbox**.
 2. Click **"Encrypt"** to secure the email content.
@@ -69,15 +69,15 @@ other OpenPGP-enabled clients.
 
 ![Encrypt Email](https://image.cdn.bktus.com/i/2024/11/29/92427d5d-937b-2285-97a5-48d7c6edf9a2.webp)
 
-#### **Saving Emails for Sending**
+#### Saving Emails for Sending
 
 1. Processed emails can be saved as `.eml` files using **File > Save As**.
 2. Upload the `.eml` file to your email client's drafts folder or webmail
    interface, then send the email.
 
-### **3. Receiving and Processing Emails**
+### Receiving and Processing Emails
 
-#### **Decrypting and Verifying Emails**
+#### Decrypting and Verifying Emails
 
 1. Export the email source as an `.eml` file from your email client or copy the
    raw email source.
@@ -86,48 +86,48 @@ other OpenPGP-enabled clients.
    - **"Decrypt Verify"**: Decrypt and verify the email simultaneously.
    - **"Verify"**: Validate the signature without decrypting.
    - **"Decrypt"**: Decrypt without verifying.
-  
+
 ![Verify Email](https://image.cdn.bktus.com/i/2024/11/29/1147e7e4-5fc0-26e7-04a3-e1c71e17f550.webp)
 
-#### **Offline Validation**
+#### Offline Validation
 
 - GpgFrontend processes all email verification and decryption offline, ensuring
   that no sensitive data is exposed to external servers.
 - Users retain full control of their private keys, which remain stored locally.
 
-### **4. Why Use EML Format?**
+### Why Use EML Format?
 
-#### **Benefits of EML**
+#### Benefits of EML
 
 - `.eml` is a widely supported format across email clients like Thunderbird,
   Outlook, and webmail platforms.
 - Unlike proprietary email handling protocols, `.eml` allows for seamless
   export, import, and offline processing.
 
-#### **Why Not Use IMAP/SMTP?**
+#### Why Not Use IMAP/SMTP?
 
 - Avoids the complexity and potential vulnerabilities introduced by integrating
   full-fledged email protocols.
 - Keeps the application lightweight and focused on local cryptographic
   operations.
 
-#### **Addressing PGP Limitations in Clients**
+#### Addressing PGP Limitations in Clients
 
 - Many email clients lack robust PGP support or offer inconsistent
   implementations.
 - GpgFrontend provides a reliable and flexible solution for users needing
   advanced PGP functionality.
 
-## **Key Use Cases**
+## Key Use Cases
 
-### **1. Sending Emails**
+### Sending Emails
 
 1. Process the email in GpgFrontend (e.g., sign, encrypt, or both).
 2. Save the processed email as an `.eml` file.
 3. Import the `.eml` file into your email client or webmail interface, then send
    it.
 
-### **2. Receiving Emails**
+### Receiving Emails
 
 1. Export the email source as `.eml` from your email client.
 2. Open it in GpgFrontend to decrypt or verify.
@@ -135,27 +135,27 @@ other OpenPGP-enabled clients.
    - A signed email will display a **"Good Digital Signature"** message.
    - An encrypted email will be decrypted and displayed in plaintext.
 
-## **Advanced Features**
+## Advanced Features
 
-### **1. Combined Operations**
+### Combined Operations
 
 - GpgFrontend supports simultaneous encryption and signing of outgoing emails.
 - Incoming emails can also be decrypted and verified in a single operation for
   convenience.
 
-### **2. Flexible Processing**
+### Flexible Processing
 
 - Choose separate or combined workflows for signing, encrypting, verifying, or
   decrypting based on your needs.
 - This flexibility makes GpgFrontend a versatile tool for various email
   scenarios.
 
-### **3. Offline-First Design**
+### Offline-First Design
 
 - All cryptographic operations are performed locally, ensuring that private keys
   and sensitive data are never exposed to external servers.
 
-## **Best Practices for Secure Email Handling**
+## Best Practices for Secure Email Handling
 
 1. **Use Trusted Keys**:
 
