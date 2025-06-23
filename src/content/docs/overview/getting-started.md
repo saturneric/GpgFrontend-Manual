@@ -28,13 +28,17 @@ pre-installed. Check your GnuPG version with `gpg --version` in your terminal.
 It is advisable to upgrade to GnuPG version 2.2 or later for optimal performance
 and compatibility.
 
-## Installation & Execution Guide
+## Brief Installation Guide
 
 GpgFrontend is distributed through multiple official channels, making
 installation easy on all major platforms. **For the latest download options and
 installation commands for your system, please visit the
-[Downloads](/overview/downloads) page.** Below is a general overview of the main
-installation methods for each platform.
+[Downloads](/overview/downloads) page.**
+
+> Note: The installation methods below provide general guidance. If you prefer
+> installing via package managers such as WinGet, Microsoft Store, or Flatpak,
+> please refer to the Downloads page for the most up-to-date and recommended
+> options.
 
 ### For Windows Users
 
@@ -77,7 +81,7 @@ For an effortless install or removal process, use Homebrew Cask:
 1. **Install GnuPG** via Homebrew or download it from [GPG for OS
    X](https://sourceforge.net/projects/gpgosx/files).
 2. **Download** the `GpgFrontend-*******-macos-**.dmg` file from [GpgFrontend's
-   releases](https://github.com/saturneric/GpgFrontend/releases).
+   latest releases](https://github.com/saturneric/GpgFrontend/releases/latest).
 3. **Mount** the DMG file and **run** GpgFrontend.
 4. **Optional:** Drag GpgFrontend into your Applications folder for easy access.
 
@@ -90,8 +94,8 @@ conflicts.
 1. **Install GnuPG** if it's not already installed.
    - Debian/Ubuntu: `sudo apt update && sudo apt install gpg`
    - Fedora: `sudo yum install gnupg`
-2. **Download** the AppImage from [GpgFrontend's
-   releases](https://github.com/saturneric/GpgFrontend/releases), labeled
+2. **Download** the AppImage from [GpgFrontend's latest
+   releases](https://github.com/saturneric/GpgFrontend/releases/latest), labeled
    `GpgFrontend-*******-linux-******.AppImage`.
 3. **Make it executable:** `chmod u+x ./GpgFrontend-***-linux-******.AppImage`.
 4. **Launch** the AppImage with a double-click or through the terminal.
