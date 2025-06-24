@@ -49,8 +49,6 @@ decision.
 
 ## Understanding ECDH and ECDSA
 
-### Overview of Elliptic Curve Cryptography (ECC)
-
 Elliptic Curve Cryptography (ECC) is a powerful cryptographic method that
 provides robust security with relatively small key sizes, making it ideal for
 environments where computational power and storage are limited. ECC is commonly
@@ -117,14 +115,12 @@ ECC algorithms and their specific applications.
 
 ## EdDSA (Edwards-Curve Digital Signature Algorithm)
 
-### **Overview**
-
 EdDSA is a modern digital signature algorithm based on elliptic curve
 cryptography. It is specifically designed to be more efficient, secure, and
 resistant to common implementation errors compared to older algorithms like DSA
 or ECDSA.
 
-### **Key Characteristics**
+### Key Characteristics
 
 - **Deterministic Signature Generation**: Unlike ECDSA and DSA, which require
   secure random numbers for each signature, EdDSA uses deterministic methods,
@@ -135,19 +131,19 @@ or ECDSA.
   - **Ed448**: Provides higher 224-bit security for environments requiring
     greater protection but at the cost of performance.
 
-### **Use Cases**
+### Use Cases
 
 - **Ed25519**: Ideal for secure messaging (e.g., Signal), blockchain, and other
   modern cryptographic protocols where performance and efficiency are critical.
 - **Ed448**: Used in environments requiring stronger security, such as highly
   sensitive communications or systems with long-term security needs.
 
-### **Performance**
+### Performance
 
 EdDSA is faster than RSA and ECDSA for both signing and verification. Its
 compact key sizes make it ideal for resource-constrained devices or systems.
 
-### **Compatibility**
+### Compatibility
 
 While Ed25519 has gained significant adoption in modern cryptographic libraries,
 it is not yet universally supported in older systems or clients. Ed448 has even
@@ -155,16 +151,13 @@ more limited support.
 
 ## Why ECDH Cannot Be Used as a Primary Key Algorithm
 
-### Key Difference Between ECDH and ECDSA/EdDSA
+**ECDH (Elliptic Curve Diffie-Hellman)** is a key exchange algorithm used to
+establish shared secrets between two parties. It is not designed for signing
+or verification, which are essential for primary key functionalities.
 
-- **ECDH (Elliptic Curve Diffie-Hellman)** is a key exchange algorithm used to
-  establish shared secrets between two parties. It is not designed for signing
-  or verification, which are essential for primary key functionalities.
-- **ECDSA (Elliptic Curve Digital Signature Algorithm)** and **EdDSA** are
-  signature algorithms, specifically designed for identity verification and
-  creating/verifying digital signatures, making them suitable for primary keys.
-
-### Primary Key Requirements
+**ECDSA (Elliptic Curve Digital Signature Algorithm)** and **EdDSA** are
+signature algorithms, specifically designed for identity verification and
+creating/verifying digital signatures, making them suitable for primary keys.
 
 Primary keys are used to:
 
@@ -178,14 +171,14 @@ key exchange tasks.
 
 ## Recommended Algorithms for Compatibility and Security
 
-### **1. RSA (2048-bit or 3072-bit)**
+### RSA (2048-bit or 3072-bit)
 
 - **Why**: RSA offers the broadest compatibility across legacy systems,
   libraries, and cryptographic protocols.
 - **When to Use**: Choose RSA when you need to ensure interoperability with
   older clients or systems that may not support newer elliptic curve algorithms.
 
-### **2. Curve25519**
+### Curve25519
 
 - **Why**: Curve25519 is highly efficient, secure, and compact, making it a great
   choice for modern cryptographic applications.
