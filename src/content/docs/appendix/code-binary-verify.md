@@ -10,7 +10,7 @@ secure, automated build processes.
 
 ## Automated Build Process
 
-Our software leverages **GitHub Actions** for automated compilations, ensuring
+GpgFrontend leverages **GitHub Actions** for automated compilations, ensuring
 that every binary file version released is directly compiled from the source
 code stored in the GitHub repository's main branch. This approach guarantees
 that the compilation process is transparent, replicable, and free from manual
@@ -32,10 +32,12 @@ verification mechanisms, as outlined below:
 
 ### Windows
 
-All executable files (.exe, .dll) and installer packages are signed using a
-[Certum](https://www.certum.eu/en/certum-by-asseco/) code signing certificate.
-The signature is trusted by Windows and can be verified through standard Windows
-mechanisms (e.g., file properties or signtool).
+All executable files (.exe, .dll) and installer packages (.msi, .msix) are
+signed using a [Certum](https://www.certum.eu/en/certum-by-asseco/) code signing
+certificate. The signature is trusted by Windows and can be verified through
+standard Windows mechanisms (e.g., file properties or signtool).
+
+![](https://image.cdn.bktus.com/i/2025/06/25/2eb0e5a1ff970b6d97ed38f18b45476c9aad6ee7.webp)
 
 ### macOS
 
