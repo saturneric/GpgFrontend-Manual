@@ -70,7 +70,8 @@ opening without additional permissions.
 
 #### Using Homebrew Cask
 
-For an effortless install or removal process, use Homebrew Cask:
+For an effortless install or removal process, use [Homebrew
+Cask](https://formulae.brew.sh/cask/gpgfrontend):
 
 1. Ensure **Homebrew** is installed.
 2. **Install** GpgFrontend with the command `brew install --cask gpgfrontend`.
@@ -84,6 +85,8 @@ For an effortless install or removal process, use Homebrew Cask:
    latest releases](https://github.com/saturneric/GpgFrontend/releases/latest).
 3. **Mount** the DMG file and **run** GpgFrontend.
 4. **Optional:** Drag GpgFrontend into your Applications folder for easy access.
+
+![](https://image.cdn.bktus.com/i/2025/06/24/03df3c64a965b9da96c82ddb38c35b74b1796ee0.webp)
 
 ### For Linux Users (AppImage)
 
