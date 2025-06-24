@@ -27,7 +27,7 @@ features.
 
 The **General** tab provides essential configuration options for GpgFrontend's interaction with GPG.
 
-![General Tab](https://image.cdn.bktus.com/i/2024/11/29/0ee752ca-ecd1-2a86-91b5-f6129184c7a4.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/efc08c723b0b28bffdf11771f0e2e9e5e271f175.webp)
 
 ### Available Options
 
@@ -89,19 +89,20 @@ detailed documentation is available elsewhere, note the following key points:
 - **Switch Between Databases**: Use the **Key Toolbox** dropdown in the main
   interface to select the active database.
 
-![](https://image.cdn.bktus.com/i/2024/11/29/7a66848e-bc23-fd13-08a4-1923de39369e.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/c5bee8d83eb9c0087f9d76f0ed9a6c283acdaf2c.webp)
 
 :::tip[Tipps]
 
 > For more information on key database management, refer to the dedicated
 > documentation.
-> :::
+
+:::
 
 ## Advanced Tab: Custom GnuPG Configuration
 
 The **Advanced** tab is designed for users who need to configure custom GPG installations.
 
-![](https://image.cdn.bktus.com/i/2024/11/29/ba283263-c9f5-9a6b-44a7-b0adf79684e8.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/bcff3997dcddebc237e560e99ad97564333e4fe2.webp)
 
 ### Configuring Custom GnuPG
 

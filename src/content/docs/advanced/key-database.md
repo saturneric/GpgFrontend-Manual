@@ -46,7 +46,7 @@ To manage multiple key databases, follow these steps:
 - In the **GnuPG Controller** window, switch to the **Key Database** tab.
 - Here, you will find a list of all configured key databases.
 
-![](https://image.cdn.bktus.com/i/2024/11/29/7a66848e-bc23-fd13-08a4-1923de39369e.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/2a5cefe92a56b851de8ecd1661961592a7d3bc6c.webp)
 
 ## Managing Key Databases
 
@@ -74,7 +74,7 @@ Right-click on a database entry to view options like:
 - **Edit**: Rename or modify the path of an existing database.
 - **Remove**: Delete a database from the configuration.
 
-![](https://image.cdn.bktus.com/i/2024/11/29/0fd0d56b-532c-f0a8-c263-40d288cd74ba.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/a012d736e4b116feb45d3c6af3e1b39ce8124c4f.webp)
 
 :::caution
 
