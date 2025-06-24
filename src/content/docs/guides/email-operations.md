@@ -46,38 +46,37 @@ other OpenPGP-enabled clients.
   - **Decrypt and Verify Together or Separately**: Flexibly handle incoming
     messages.
 
-### Creating and Processing Emails
-
-#### Creating and Signing Emails
+### Creating and Signing Emails
 
 1. Open GpgFrontend and click **"New E-Mail"** to create a blank email.
-
-![Open Email Tab](https://image.cdn.bktus.com/i/2024/11/29/19674701-548b-db30-3d19-473422618fc3.webp)
-
 2. Type your email content in the editor.
 3. Select your private key from the **Key Toolbox**.
 4. Click **"Sign"** to digitally sign the email.
-   - Signed emails include a PGP signature block, visible in the content.
+5. Fill Sender, Receiver and the Subject of the email.
 
-![Sign Email](https://image.cdn.bktus.com/i/2024/11/29/fc733201-8a5e-b2c9-8043-c17e09b5367b.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/84f732220b3a967aa5d3986f79475bdfcf53454e.webp)
 
-#### Encrypting Emails
+![](https://image.cdn.bktus.com/i/2025/06/24/610ba60f2cd8eeddbcfbbc57aa602cff61197065.webp)
+
+![](https://image.cdn.bktus.com/i/2025/06/24/fea933e12bf46516d6a1385698b6afa94e7543a0.webp)
+
+![](https://image.cdn.bktus.com/i/2025/06/24/ee90e5bb25c7accdccf70f17c1986e53e0b4e81f.webp)
+
+### Encrypting Emails
 
 1. Select the recipient's public key in the **Key Toolbox**.
-2. Click **"Encrypt"** to secure the email content.
-   - The content will be transformed into a PGP-encrypted format.
+2. Click **"Encrypt"** to secure the email content. The content will be
+   transformed into a PGP-encrypted format.
 
-![Encrypt Email](https://image.cdn.bktus.com/i/2024/11/29/92427d5d-937b-2285-97a5-48d7c6edf9a2.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/f8fe32d6e3502a1ba3503189fa40e4348bd4cc81.webp)
 
-#### Saving Emails for Sending
+### Saving Emails for Sending
 
 1. Processed emails can be saved as `.eml` files using **File > Save As**.
 2. Upload the `.eml` file to your email client's drafts folder or webmail
    interface, then send the email.
 
-### Receiving and Processing Emails
-
-#### Decrypting and Verifying Emails
+### Decrypting and Verifying Emails
 
 1. Export the email source as an `.eml` file from your email client or copy the
    raw email source.
@@ -87,9 +86,9 @@ other OpenPGP-enabled clients.
    - **"Verify"**: Validate the signature without decrypting.
    - **"Decrypt"**: Decrypt without verifying.
 
-![Verify Email](https://image.cdn.bktus.com/i/2024/11/29/1147e7e4-5fc0-26e7-04a3-e1c71e17f550.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/64b84451fd044cfd0c081161dad3057c5fde25a4.webp)
 
-#### Offline Validation
+### Offline Validation
 
 - GpgFrontend processes all email verification and decryption offline, ensuring
   that no sensitive data is exposed to external servers.
@@ -97,21 +96,19 @@ other OpenPGP-enabled clients.
 
 ### Why Use EML Format?
 
-#### Benefits of EML
-
 - `.eml` is a widely supported format across email clients like Thunderbird,
   Outlook, and webmail platforms.
 - Unlike proprietary email handling protocols, `.eml` allows for seamless
   export, import, and offline processing.
 
-#### Why Not Use IMAP/SMTP?
+### Why Not Use IMAP/SMTP?
 
 - Avoids the complexity and potential vulnerabilities introduced by integrating
   full-fledged email protocols.
 - Keeps the application lightweight and focused on local cryptographic
   operations.
 
-#### Addressing PGP Limitations in Clients
+### Addressing PGP Limitations in Clients
 
 - Many email clients lack robust PGP support or offer inconsistent
   implementations.
@@ -157,26 +154,13 @@ other OpenPGP-enabled clients.
 
 ## Best Practices for Secure Email Handling
 
-1. **Use Trusted Keys**:
-
-   - Regularly validate public keys to prevent misuse.
-   - Import keys only from trusted sources.
-
-2. **Keep Private Keys Offline**:
-
-   - Avoid uploading private keys to email providers.
-   - Store private keys securely, preferably on encrypted storage.
-
-3. **Leverage GpgFrontend's Local Processing**:
-
-   - Ensure all encryption, signing, and verification tasks are performed
-     offline for maximum security.
-
-4. **Save Emails in EML Format**:
-
-   - Use `.eml` files for cross-platform compatibility and simple integration
-     with various email clients.
-
-5. **Check Email Compatibility**:
-   - Ensure recipients can handle PGP-encrypted emails or provide instructions
-     for using tools like GpgFrontend or Thunderbird.
+- Use Trusted Keys: Regularly validate public keys to prevent misuse and import
+  keys only from trusted sources.
+- Keep Private Keys Offline: Avoid uploading private keys to email providers and
+  store private keys securely, preferably on encrypted storage.
+- Leverage GpgFrontend's Local Processing: Ensure all encryption, signing, and
+  verification tasks are performed offline for maximum security.
+- Save Emails in EML Format: Use `.eml` files for cross-platform compatibility
+  and simple integration with various email clients.
+- Check Email Compatibility: Ensure recipients can handle PGP-encrypted emails
+  or provide instructions for using tools like GpgFrontend or Thunderbird.
