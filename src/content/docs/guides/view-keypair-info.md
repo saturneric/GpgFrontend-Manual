@@ -16,7 +16,7 @@ is used for encryption only, but if you possess the private key, you can perform
 more actions (it also depends on your algorithm; DSA can only be used for
 signatures).
 
-![View Key Pair Details 1](https://image.cdn.bktus.com/i/2024/06/15/9f5b0089-923f-33e1-d2cd-f7690ec2d050.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/707eab9708c7cf9af472a5e05295d132d831f223.webp)
 
 ## General Info
 
@@ -32,7 +32,7 @@ set it as the primary UID to change it.
 According to the OpenPGP protocol, this part is divided into Name, Email, and
 Comment.
 
-![View Key Pair Details Owner](https://image.cdn.bktus.com/i/2024/06/15/30066ecc-ec79-ee27-a3ed-5faad0e6934f.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/a648820ee997bce65d3b65ebb7c3056b37e1597d.webp)
 
 ### Primary Key
 
@@ -48,7 +48,7 @@ not exist, but this doesn't mean that neither the public key nor the private key
 exists. Please remember: Each subkey and primary key consist of a pair of public
 and private keys.
 
-![View Key Pair Details Primary Key](https://image.cdn.bktus.com/i/2024/06/15/8cd3691e-70dc-1239-5f80-9a89f1d342ba.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/8b3235e625749d20effc4a7f334e7dacd2688923.webp)
 
 #### Key ID
 
@@ -75,7 +75,7 @@ the key algorithm shown here is more precise. For example, it can specify
 particular algorithms such as ED25519 or NISTP256, providing detailed
 information about the specific cryptographic methods employed.
 
-![Algorithm Detail](https://image.cdn.bktus.com/i/2024/06/15/1e2fba1d-5d5a-738c-a51f-6a3732f6e296.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/1a4c3220e4952de2ba8bbdfc01a42d48dce6337c.webp)
 
 #### Key Size
 
@@ -125,7 +125,7 @@ other key pairs.
 
 ### Fingerprint
 
-![View Key Pair Details Fingerprint](https://image.cdn.bktus.com/i/2024/06/15/e3250448-a947-a583-eea9-464847e9da32.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/bc688aa06bc3db294001b429018e5a79e888be44.webp)
 
 The fingerprint of the key pair is used for humans to quickly compare whether
 the key pair is the expected key pair. This field is unique for all keys in the
@@ -142,7 +142,7 @@ pair is what they expected. However, for accurate identification, fingerprints
 or key IDs should be compared. A key can have multiple UIDs, but a key pair can
 only have one primary UID, which is always listed first in the interface.
 
-![View Key Pair Details UID](https://image.cdn.bktus.com/i/2024/06/15/b502d2b6-db02-7d52-f82f-8e4c2e056276.webp)
+![View Key Pair Details UID](https://image.cdn.bktus.com/i/2025/06/24/6ba422bf970ce94533b798e9ebb24e2465f3d45e.webp)
 
 UID has three elements: Name, Email, Comment. The name should be at least five
 characters long, and the email should conform to the format. The rules for
@@ -158,7 +158,7 @@ keyring with their signature to the keyserver. If many people do the same, the
 public key on the keyserver will have numerous signatures, making it
 trustworthy.
 
-![Signatures of UID](https://image.cdn.bktus.com/i/2024/06/15/81d4f9bd-5c4e-ad22-25dc-f5a4a0c3d9af.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/c79c00d20a087f7a123fbbbf65bd1fd5e7c22bee.webp)
 
 You can also use the primary key of another key pair to sign a UID. Generally, a
 primary UID of a key pair with many valid signatures is considered more
@@ -172,35 +172,47 @@ the signer's UID.
 
 ## Subkey Info
 
-The sub-key mechanism is a crucial feature of GPG that improves both flexibility
-and security. However, it also introduces some complexity, which can be
-challenging for beginners. For a basic understanding, consider the following
-points:
+The subkey mechanism is a core feature of GnuPG, designed to enhance both security and operational flexibility. While powerful, subkeys can introduce some complexity for new users. Here are the fundamentals to help you understand and manage subkeys effectively:
 
-- A key pair can be likened to a key ring, comprising a primary key (a pair of
-  public and private keys) and multiple subkeys (or none).
-- Each subkey and primary key consists of a pair of public and private keys.
+- Key Pair as a Keyring: Think of your GPG key pair as a keyring, with a primary
+  key (the “master” key) and zero or more subkeys.
+- Primary Key vs Subkeys: The primary key is the root of trust. It certifies
+  subkeys and is typically reserved for critical actions, such as signing other
+  keys (certification) or adding user IDs.
 - The subkey can perform related operations (such as signing, encryption) in the
   absence or unavailability of the primary key.
 - The functions of subkeys can overlap, and when both subkeys can be used for
   signing, the earlier one is selected.
 - Subkeys can use more algorithms than the primary key, but usually have the
   same effect on daily operations.
-- The disclosure of a subkey only affects that subkey, while the disclosure of
-  the primary key endangers the entire key pair.
+- Security Isolation: If a subkey is ever compromised, only that subkey needs to
+  be revoked and replaced—the trust chain anchored by the primary key remains
+  intact. However, if the primary key is compromised, the entire key structure is
+  at risk, as it controls all subkeys and certifications.
 
-![Subkeys Details](https://image.cdn.bktus.com/i/2024/06/15/49283a38-47ec-4ff3-5c84-8167a97ab68e.webp)
+As shown in the Key Details window (see below), all subkeys and the primary key
+are listed along with their properties (algorithm, size, usage, etc.), allowing
+for clear management and monitoring.
 
-The primary key and all subkeys in the key pair are displayed on the interface.
-Some information about the key is also listed below.
+![](https://image.cdn.bktus.com/i/2025/06/24/3b87a8d639d8be4cf99d6fc4fc1b5d8c4168be3d.webp)
 
-### Key In smart card
+### Key in Smart Card
 
-Whether a key is in the smart card refers to whether the key is moved to the
-smart card. Moving the key to the smart card changes the structure of the key
-and is irreversible.
+Key in Smart Card indicates whether a particular (sub)key’s private component
+has been moved to a hardware smart card.
 
-### Operations
+- When a key is moved to a smart card, its private part is physically
+  transferred and removed from your local key database.
+- This change is irreversible—the private key now exists only on the smart card
+  and cannot be extracted back.
+- This provides strong protection against malware or key theft: cryptographic
+  operations using that key (such as signing or decrypting) will now require the
+  smart card to be present and unlocked.
+
+> Tip: Moving your encryption or signing subkey to a smart card is highly
+> recommended for > users seeking maximum security.
+
+## Operations
 
 In this column, what you can do differs for a key pair that only has a public
 key and a key pair that includes a private key.
@@ -208,35 +220,29 @@ key and a key pair that includes a private key.
 ### Operations on a Public Key
 
 This interface provides various general operations that can be performed on the
-selected public key. Below is an explanation of each button's function:
+selected public key. Below is an explanation of each button's function.
 
-![View Key Pair Details Operations](https://image.cdn.bktus.com/i/2024/06/15/5748a38d-7804-2cca-ecff-bdbfc186290f.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/56b96c1420da618873ca707c6e7da4ab6e1d7a25.webp)
 
-1. **Export Public Key**:
+#### Export Public Key
 
-   - **Function**: This button allows you to export the public key to a file.
-     Exporting a public key is useful when you need to share it with others or
-     upload it to a keyserver. The exported file can then be distributed or
-     backed up as needed.
+This button allows you to export the public key to a file. Exporting a public
+key is useful when you need to share it with others or upload it to a keyserver.
+The exported file can then be distributed or backed up as needed.
 
-2. **Key Server Operation (Pubkey)**:
+#### Key Server Operation (Pubkey)
 
-   - **Function**: This dropdown menu provides options for interacting with
-     keyservers. A keyserver is a repository where public keys are stored and
-     can be retrieved by others. The operations might include uploading your
-     public key to a keyserver, refreshing your public key with updates from the
-     keyserver, or searching for other public keys on the keyserver.
+This dropdown menu provides options for interacting with keyservers. A keyserver
+is a repository where public keys are stored and can be retrieved by others. The
+operations include refreshing your public key with updates from the keyserver.
 
-3. **Set Owner Trust Level**:
-   - **Function**: This button allows you to set the trust level for the owner
-     of the public key. Trust levels are part of the web of trust model used in
-     public key infrastructures. By setting the trust level, you indicate how
-     much you trust the key owner to correctly verify and sign other keys. This
-     affects how your system evaluates the validity of signatures made by the
-     key owner.
+#### Set Owner Trust Level
 
-These operations facilitate the management and sharing of public keys, helping
-to establish and maintain trust within a cryptographic system.
+This button allows you to set the trust level for the owner of the public key.
+Trust levels are part of the web of trust model used in public key
+infrastructures. By setting the trust level, you indicate how much you trust the
+key owner to correctly verify and sign other keys. This affects how your system
+evaluates the validity of signatures made by the key owner.
 
 ### Operations on a Private Key
 
@@ -244,58 +250,52 @@ This interface provides various general operations that can be performed on the
 selected key pair, including both public and private key operations. Below is an
 explanation of each button's function:
 
-![View Key Pair Details Operations 1](https://image.cdn.bktus.com/i/2024/06/15/68cb4069-5db5-6057-c122-9b9dc2a862f1.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/55ac60792266c3e13254b53a47fe468cdba93048.webp)
 
-1. **Export Public Key**:
+#### Export Public Key
 
-   - **Function**: This button allows you to export the public key to a file.
-     This is useful for sharing your public key with others or for uploading it
-     to a keyserver. The exported file can be distributed or backed up as
-     needed.
+This button allows you to export the public key to a file. This is useful for
+sharing your public key with others or for uploading it to a keyserver. The
+exported file can be distributed or backed up as needed.
 
-2. **Export Private Key**:
+#### Export Private Key
 
-   - **Function**: This button provides options for exporting the private key.
-     There are typically two modes for exporting:
-     - **Export Complete Private Key**: This exports the entire private key,
-       including all associated information. It is used when you need a full
-       backup or when transferring the key to another system.
-     - **Export Minimal Private Key**: This exports only the essential
-       components of the private key, minimizing the amount of data. This can be
-       useful for more secure key transfers or for environments with specific
-       security requirements.
+This button provides options for exporting the private key. There are typically
+two modes for exporting:
 
-3. **Modify Expiration Datetime (Primary Key)**:
+- **Export Complete Private Key**: This exports the entire private key,
+  including all associated information. It is used when you need a full backup
+  or when transferring the key to another system.
+- **Export Minimal Private Key**: This exports only the essential components of
+  the private key, minimizing the amount of data. This can be useful for more
+  secure key transfers or for environments with specific security requirements.
 
-   - **Function**: This button allows you to modify the expiration date and time
-     of the primary key. This is important for managing the key's lifecycle and
-     ensuring that it remains valid for the desired period. Adjusting the
-     expiration date can help maintain security by ensuring keys are
-     periodically reviewed and updated.
+#### Modify Expiration Datetime (Primary Key)
 
-4. **Modify Password**:
+This button allows you to modify the expiration date and time of the primary
+key. This is important for managing the key's lifecycle and ensuring that it
+remains valid for the desired period. Adjusting the expiration date can help
+maintain security by ensuring keys are periodically reviewed and updated.
 
-   - **Function**: This button enables you to change the password that protects
-     the private key. Changing the password can enhance security, especially if
-     you suspect that the current password may have been compromised or if you
-     want to follow best practices for regular password updates.
+#### Modify Password
 
-5. **Key Server Operation (Pubkey)**:
+This button enables you to change the password that protects the private key.
+Changing the password can enhance security, especially if you suspect that the
+current password may have been compromised or if you want to follow best
+practices for regular password updates.
 
-   - **Function**: This dropdown menu provides options for interacting with
-     keyservers using the public key. Operations might include uploading the
-     public key to a keyserver, or refreshing the key from the keyserver.
-     Keyservers facilitate the distribution and retrieval of public keys.
+#### Key Server Operation (Pubkey)
 
-6. **Revoke Certificate Operation**:
+This dropdown menu provides options for interacting with keyservers using the
+public key. Operations might include uploading the public key to a keyserver, or
+refreshing the key from the keyserver. Keyservers facilitate the distribution
+and retrieval of public keys.
 
-   - **Function**: This dropdown menu provides options for generating a
-     revocation certificate for the key or importing an existing revocation
-     certificate. Revoking a certificate is necessary if the key has been
-     compromised or is no longer needed. This action invalidates the key,
-     ensuring it cannot be maliciously used. Revocation information is typically
-     uploaded to a keyserver to inform others about the revoked status of the
-     key.
+#### Revoke Certificate Operation
 
-These operations help manage the lifecycle of key pairs, ensuring their secure
-use and proper distribution.
+This dropdown menu provides options for generating a revocation certificate for
+the key or importing an existing revocation certificate. Revoking a certificate
+is necessary if the key has been compromised or is no longer needed. This action
+invalidates the key, ensuring it cannot be maliciously used. Revocation
+information is typically uploaded to a keyserver to inform others about the
+revoked status of the key.

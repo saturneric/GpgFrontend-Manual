@@ -29,7 +29,7 @@ There are **two entry points** to generate a subkey:
 3. Switch to the **Keychain** tab.
 4. Click the **“Generate A New Subkey”** button.
 
-![](https://image.cdn.bktus.com/i/2025/04/09/fb9eddab-3842-061c-f81c-48fe660bb651.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/629f4685256b3facbb8c3d6e4e14d9e31bd6f83a.webp)
 
 ### Configuring the Subkey
 
@@ -68,7 +68,7 @@ Once all configurations are completed:
 - The new subkey will be listed under the **Keychain** tab of the selected key
   pair.
 
-![](https://image.cdn.bktus.com/i/2025/04/09/39cd8ec1-303e-9fa8-7104-8cf0606565ff.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/a52b9445c4aef48b880ae1fb7d031b6d445b700e.webp)
 
 ## Understanding Primary Keys and Subkeys
 
@@ -154,7 +154,7 @@ and successfully export a subkey:
    a location to save the exported subkey. Choose a secure directory and save
    the subkey as a separate file.
 
-![Export Subkey](https://image.cdn.bktus.com/i/2024/11/29/15c9ab0c-a05e-0117-3244-2ac01aaed9a9.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/b4f1dc5e6eb6f683300564a4ba998e48d22b75b4.webp)
 
 ### Step-by-Step Guide to Importing Subkeys
 

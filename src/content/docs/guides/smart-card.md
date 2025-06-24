@@ -9,7 +9,7 @@ managing your OpenPGP smart cards (such as YubiKey, Nitrokey, or other
 compatible devices). It allows you to view detailed card information, perform
 essential operations, and manage keys directly on your smart card.
 
-![](https://image.cdn.bktus.com/i/2025/06/19/1a9393f9-2f6a-8df5-d931-239b11dd88fb.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/c5d2b202ae1003d31fe708df2989935ce30bf78d.webp)
 
 ## Core Concepts and Frequently Asked Questions
 

@@ -8,7 +8,7 @@ This documentation explains the layout and features of the latest GpgFrontend
 interface, helping users to efficiently utilize all cryptographic operations in
 different workspaces.
 
-![Interface](https://image.cdn.bktus.com/i/2025/06/24/f0121645a9c0d8f0e67b2b9f4d1788bd42c7674a.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/1661f0ae38ec3a91c26c3bc495bbd68baf5cdd18.webp)
 
 ## Workspace Overview
 

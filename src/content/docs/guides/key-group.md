@@ -40,7 +40,7 @@ will be able to decrypt messages or files encrypted to that group.
    the key list with Type shown as group. You can now use this group for
    encryption and other operations—just like a single public key.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/0c8840486daaa95b7824b6a9ac34b957c94b175e.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/c70891d9ad74b21074be03c7a1d0aabf77d9ea3a.webp)
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/bf35548136bc176635dc0fd1175795597701e1dc.webp)
 
