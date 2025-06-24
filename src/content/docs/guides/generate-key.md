@@ -15,10 +15,12 @@ In the **Key Management** interface, click on the **“New Keypair”** button. 
 opens the **Generate Key** window, where you can define your identity and
 configure key parameters.
 
+![](https://image.cdn.bktus.com/i/2025/06/24/79fe9ef30cbc5e10e7eda6aca7ee22616e874267.webp)
+
 ## Enter User Information
 
-- **Name**: Required. Enter your full name (minimum 5 characters).  
-- **Email**: Required. Must be in a valid email format.  
+- **Name**: Required. Enter your full name (minimum 5 characters).
+- **Email**: Required. Must be in a valid email format.
 - **Comment**: Optional. Helps distinguish this key from others.
 
 ## Choose Key Database
@@ -36,7 +38,7 @@ Easy Mode simplifies key generation using common templates. You can configure:
 
 - **Algorithm**: RSA, DSA, ECC (Curve25519), or other supported types.
 - **Validity Period**: Choose from preset options (e.g., 3 months, 2 years, 10
-  years, or *Non Expired*).
+  years, or _Non Expired_).
 - **Combination**:
   - **Primary Key Only**
   - **Primary Key with Subkey** — useful when separating signing and encryption

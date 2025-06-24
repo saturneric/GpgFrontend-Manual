@@ -28,7 +28,7 @@ the main interface, streamlining your workflow for secure file handling.
    Sign, or Verify—to perform the desired cryptographic operation on the
    selected file(s).
 
-![](https://image.cdn.bktus.com/i/2025/06/24/51136aa32550eeeaecdb8dff32d62526280919ab.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/2365c709356b1339898043390a1ff7ac232e05f4.webp)
 
 ## Using File Panel Directly
 
@@ -61,6 +61,10 @@ and using the appropriate key from the Key Toolbox:
   public key is available in your keyring and click the Verify button in the
   toolbar.
 
+![](https://image.cdn.bktus.com/i/2025/06/24/5ed085a7ac16c34a1e6ba46707597e91a93b6ecc.gif)
+
+![](https://image.cdn.bktus.com/i/2025/06/24/3dceea13ad31f488a347f3b0d4b1fb998487f223.gif)
+
 ## File Extension Requirements
 
 Understanding the appropriate file extensions helps in managing encrypted and
@@ -88,8 +92,9 @@ settings.
 
 To change the output mode between ASCII and binary formats:
 
-1. Open Settings: Navigate to the GnuPG Controller settings within GpgFrontend by accessing
-   the settings menu.
+1. Open Settings: Navigate to the [GnuPG
+   Controller](/advanced/gnupg-controller/) settings within GpgFrontend by
+   accessing the settings menu.
 2. Locate Binary Mode Option: In the settings interface, under the "General"
    section, find the option labeled "Use Binary Mode for File Operations".
 3. Toggle Binary Mode: Check or uncheck this option to switch between binary
@@ -97,6 +102,8 @@ To change the output mode between ASCII and binary formats:
 
 This streamlined process allows you to manage file encryption, decryption,
 signing, and verification efficiently with GpgFrontend.
+
+![](https://image.cdn.bktus.com/i/2025/06/24/40365f1a7b1ac8d24ac8c11c45e77476a465eab7.webp)
 
 ### Quick Toggle via File Panel Menu
 
@@ -140,6 +147,8 @@ significantly improving operational efficiency in workflows involving large
 volumes of data.
 
 ![](https://image.cdn.bktus.com/i/2025/04/09/24a8b950-ff08-2133-0ee2-5003095f1ff7.webp)
+
+![](https://image.cdn.bktus.com/i/2025/06/24/41efb25fd3a691a57c04a0a2ec4b0e651ceb556c.gif)
 
 ## Folder Encryption and Decryption
 
