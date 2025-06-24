@@ -33,9 +33,9 @@ verification mechanisms, as outlined below:
 ### Windows
 
 All executable files (.exe, .dll) and installer packages are signed using a
-Certum code signing certificate. The signature is trusted by Windows and can be
-verified through standard Windows mechanisms (e.g., file properties or
-signtool).
+[Certum](https://www.certum.eu/en/certum-by-asseco/) code signing certificate.
+The signature is trusted by Windows and can be verified through standard Windows
+mechanisms (e.g., file properties or signtool).
 
 ### macOS
 
@@ -43,6 +43,8 @@ All application bundles and binaries are signed with an Apple-approved developer
 certificate (codesign). Each official release also passes Apple Notarization,
 ensuring the package’s integrity and compliance with Apple’s security standards.
 Gatekeeper will automatically verify these protections on first launch.
+
+![](https://image.cdn.bktus.com/i/2025/06/24/cbc3a2ec86515bf5882d1249179e5e06053ada5f.webp)
 
 ### Linux
 
@@ -52,12 +54,16 @@ integrity of the package using the provided GPG public key before installation
 or execution. For Flatpak and other formats, the platform’s own signature and
 sandboxing mechanisms offer additional security.
 
+![](https://image.cdn.bktus.com/i/2025/06/24/690c6b534ab54130dfa100f85a8cc299a0223ff5.webp)
+
 ## Build Info Verification
 
 Our software includes an "About" interface accessible from the help menu,
 providing users with information about the software version, platform, and the
 specific GitHub repository branch and commit hash used for compiling the binary.
 This feature adds an extra layer of transparency and verification for users.
+
+![](https://image.cdn.bktus.com/i/2025/06/24/fe75a2c041c9e5a7823d0c4d8820bf35501117cd.webp)
 
 ## Public Key for Verification
 
