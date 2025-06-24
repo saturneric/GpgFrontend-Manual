@@ -40,6 +40,10 @@ throughout the manual.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/8725f93f511017055e6df799dac5262a5e9c3254.webp)
 
+![](https://image.cdn.bktus.com/i/2025/06/25/82aae58a6e35a26aec366cea65178057a8817f12.webp)
+
+![](https://image.cdn.bktus.com/i/2025/06/25/126a292375472a3c559a0a0de775283e4ea05875.webp)
+
 :::tip[Note]
 
 The core features and workflow of GpgFrontend are consistent across all
