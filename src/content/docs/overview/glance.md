@@ -33,18 +33,19 @@ privacy easily and effectively.
 
 ## User Interface Glimpse
 
-The example screenshot below shows GpgFrontend running on macOS, illustrating
-its clean and modern interface design. Interface layout, fonts, and colors may
-look different on Windows or Linux, but the core features and workflow remain
-consistent across all platforms.
+Most of the screenshots in this manual are from the macOS version of
+GpgFrontend, as primary development and testing are conducted on macOS. This
+approach ensures consistent screenshot quality and a unified visual style
+throughout the manual.
 
-![macOS](https://image.cdn.bktus.com/i/2025/06/19/14c7666f-fc81-8f32-e881-29272958c13b.webp)
+![](https://image.cdn.bktus.com/i/2025/06/24/8725f93f511017055e6df799dac5262a5e9c3254.webp)
 
 :::tip[Note]
 
-GpgFrontend's appearance may vary across different operating systems and
-themes. Always refer to the corresponding version of the software for the most
-accurate documentation.
+The core features and workflow of GpgFrontend are consistent across all
+supported platforms (Windows, Linux, etc.). While visual details such as fonts
+and window styles may differ slightly depending on your operating system, the
+documentation remains applicable and relevant for all users.
 
 :::
 
