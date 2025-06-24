@@ -78,7 +78,6 @@ sudo apt-get install -y build-essential cmake ninja-build libarchive-dev libssl-
 ```bash
 brew install cmake openssl@3 ninja libarchive gpgme
 brew link --force openssl@3
-
 ```
 
 - **For Windows (via MSYS2):** Set up MSYS2 according to its documentation and
