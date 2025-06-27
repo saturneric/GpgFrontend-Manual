@@ -12,26 +12,49 @@ communication, file protection, and digital signing.
 
 Let’s walk through the core concepts in a beginner-friendly way.
 
-## 🔐 What Is a Key Pair?
+## PGP and GPG: What’s the Difference Today?
 
-At the heart of GPG is the **key pair**: two mathematically linked keys.
+When people talk about “PGP,” they usually mean the OpenPGP standard for
+encrypted communication—not the original commercial PGP software. GPG (GNU
+Privacy Guard) is the free, open-source tool most people use today. It fully
+supports the OpenPGP standard and is available for all major platforms.
 
-- **Public Key**: Share this with anyone. Others use it to:
-  - Send you encrypted messages.
-  - Verify your digital signature.
-- **Private Key**: Keep this secret. You use it to:
-  - Decrypt messages sent to you.
-  - Sign data so others know it’s really from you.
+In short:
 
-:::tip[Think of it like a mailbox]
+- PGP was the original software, now rarely used.
+- GPG is the open-source standard tool for modern encrypted email, files, and
+  signatures.
 
-- Your public key is the address — people can send you letters.
-- Your private key is the key to open the mailbox — only you can read what’s
-  inside.
+If you’re just starting out, you almost always want to use GPG or a tool built
+on top of GPG.able, but if you prefer open-source freedom and regular updates,
+GPG is the usual choice.
+
+## What Is a Key Pair?
+
+In GPG, a **key pair** consists of a public key and a private key that are
+mathematically linked.
+
+**Public Key**: Think of it as a locked mailbox. Anyone can drop a letter (your
+encrypted message) into the mailbox and lock it.
+
+- Others use it to encrypt messages they send to you.
+- Others use it to verify your digital signature.
+
+**Private Key**: This is the only key that opens the locked mailbox. You—and
+only you—can retrieve and read the letters inside.
+
+- Decrypt messages sent to you.
+- Sign your own messages or files so others know they truly came from you.
+
+:::tip[Everyday Analogy]
+
+Imagine you’ve installed a mailbox on the street. Anyone can deposit letters
+into it (encrypt information), but only you—holding the mailbox key—can open it
+and read what’s inside.
 
 :::
 
-## 🔧 Generating a Key Pair
+## Generating a Key Pair
 
 To use GPG, you first create a key pair. During creation, you’ll choose:
 
@@ -44,7 +67,7 @@ To use GPG, you first create a key pair. During creation, you’ll choose:
 file, they can’t use it without this password.
 :::
 
-## 🧩 What Are Subkeys?
+## What Are Subkeys?
 
 A GPG identity doesn’t stop at one key pair. You can create **subkeys** under
 your primary key. These are used for specific tasks:
@@ -55,10 +78,10 @@ your primary key. These are used for specific tasks:
 Subkeys are tied to your identity, but they can be revoked or replaced
 independently.
 
-> ✅ Tip: Use subkeys for everyday tasks and keep your **primary key offline** or
+> Tip: Use subkeys for everyday tasks and keep your **primary key offline** or
 > backed up securely.
 
-## 🧱 Understanding the Primary Key
+## Understanding the Primary Key
 
 Your **primary key** is your core identity. It:
 
@@ -77,7 +100,7 @@ you. That’s why:
 
 :::
 
-## ✉️ How Encryption Works
+## How Encryption Works
 
 Imagine you want to send a private message to someone:
 
@@ -91,7 +114,7 @@ This ensures:
 - **Privacy**: No one but the intended recipient can read the message.
 - **Authenticity**: The recipient knows the message is from you.
 
-## 🖋️ What Is Digital Signing?
+## What Is Digital Signing?
 
 Signing is like sealing a document with your unique fingerprint. It allows
 others to:
@@ -105,31 +128,49 @@ Digital signatures are used to:
 - Sign files or software packages.
 - Sign other people's public keys (to build trust).
 
-## 📦 Real-Life Use Cases
+## Real-Life Use Cases
 
-### Secure Email
+GPG is useful in many situations beyond email or software. Here are some
+practical examples where encryption and digital signatures can protect your
+privacy, secure your data, or build trust with others.
 
-You want to email a sensitive document:
+### Protecting Cloud Backups
 
-- Encrypt it using the recipient’s public key.
-- Sign it with your private key.
-- The recipient decrypts and verifies it.
+You store sensitive files (like financial records or personal photos) in the
+cloud. Before uploading, you encrypt them with your GPG public key. Even if the
+cloud provider is hacked, only you can decrypt and access your data.
 
-### Software Publishing
+### Sharing Passwords Securely
 
-You release a file or program online:
+You need to share a server password with a remote teammate. Instead of sending
+it as plain text, you encrypt the password file with their public key. Only they
+can decrypt and read it.
 
-- You sign it.
-- Users can verify the signature before using it.
+### Verifying Software Downloads
 
-### Building Trust
+You want to install open-source software from the internet. Before running the
+installer, you check the author’s digital signature with GPG. If the signature
+is valid, you know the file wasn’t tampered with.
 
-You meet someone at a conference:
+### Securing Personal Notes
 
-- You exchange and sign each other’s keys.
-- Anyone who trusts your key may now also trust theirs.
+You keep a journal or confidential notes on your laptop. You encrypt these notes
+with your own public key. Even if your device is stolen, no one else can read
+your information.
 
-## 🏷️ Public Key Certificates
+### Proving Document Authenticity
+
+You sign a PDF contract before sending it to a business partner. They can verify
+your digital signature to confirm the document really came from you and hasn’t
+been altered.
+
+### Open Source Contributions
+
+You contribute code to an open-source project on GitHub. You sign your commits
+and tags with your GPG key, so everyone knows the code changes are really from
+you.
+
+## Public Key Certificates
 
 A public key in GPG/PGP is not just a raw cryptographic key. It is always
 packaged as a certificate, which contains more than just the key itself.
@@ -162,7 +203,7 @@ When you share your public key, you are actually sharing a certificate that:
 This is why you should always distribute your full public key certificate—not
 just the bare key!
 
-## ✅ Best Practices for New Users
+## Best Practices for New Users
 
 1. **Back Up Your Keys**: Store your private key and revocation certificate in a
    secure, offline location.
@@ -177,7 +218,7 @@ just the bare key!
 6. **Understand the Web of Trust**: GPG builds trust by people signing each
    other's keys — this forms a decentralized trust model.
 
-## 🧰 Where Does GpgFrontend Fit In?
+## Where Does GpgFrontend Fit In?
 
 While GPG/PGP itself is powerful, it is mostly command-line based — which can be
 intimidating for beginners.
@@ -200,7 +241,7 @@ Whether you're just starting to explore encrypted communication or already
 managing multiple keys, GpgFrontend acts as a bridge — combining the strength of
 GPG with simplicity and clarity.
 
-:::tip[]
+:::tip
 
 You focus on **secure communication** — let GpgFrontend handle the complexity
 behind it.
