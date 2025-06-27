@@ -41,7 +41,7 @@ user-friendly interface. Here’s how to use it:
    your possession against the key server. If there is an updated version of a key
    you own, GpgFrontend will import the new details to your local keyring.
 
-![](https://image.cdn.bktus.com/i/2024/06/15/8771cd76-1a46-321e-8bf9-93d8db2a9f78.webp)
+![](https://image.cdn.bktus.com/i/2025/06/28/38eefac3220f864b5e4a1fe98681f8cef817ef21.webp)
 
 By following these steps, you can ensure that your public keys are always
 up-to-date, enhancing the security and reliability of your cryptographic
@@ -54,20 +54,28 @@ To know which key server GpgFrontend interacts with, follow these steps:
 1. Go to the settings section of GpgFrontend.
 2. The default key server configured will be listed here.
 
-![](https://image.cdn.bktus.com/i/2024/06/15/03471d32-54f2-2be7-53a3-eeee03f74372.webp)
-
-:::tip
-
-Replace the placeholder text with the actual link to the image showing
-the key server settings.
-
-:::
+![](https://image.cdn.bktus.com/i/2025/06/28/86bc996c90eb449dee681a86be15797015128f5c.webp)
 
 If you need to use a different key server:
 
 1. Navigate to the key server settings within GpgFrontend.
 2. Add your preferred key server's details.
 3. Set it as the default for future synchronizations.
+
+:::caution[Changes (v2.1.6 and later)]
+
+Setting a default key server **only affects key searches/imports**.
+
+- **Export** and **Sync** operations are no longer affected by this setting.
+- These operations **always use `https://keys.openpgp.org`**, which implements
+  the Verifying Keyserver (VKS) API.
+
+This behavior ensures improved security and global consistency in public key
+management.
+
+Or: [Want to restore previous behavior?](/guides/key-server-operations/#want-to-restore-previous-behavior)
+
+:::
 
 ## Best Practices for Key Synchronization
 

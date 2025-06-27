@@ -5,22 +5,26 @@ sidebar:
   order: 3
 ---
 
+import { Steps, Aside } from "@astrojs/starlight/components";
+
 The KeyPackage feature is designed to securely package and transfer key
 data—including both public and private keys—between devices. This enables users
 to maintain their cryptographic identities across platforms. Starting from
 version 2.1.9, KeyPackage functionality has been significantly enhanced to
 improve security, encryption strength, and user control.
 
-> Important: KeyPackages created with v2.1.9 and later are not compatible with
-> those created in previous versions.
+<Aside type="caution">
+  KeyPackages created with v2.1.9 and later are not compatible with those
+  created in previous versions.
+</Aside>
 
 ## Security Enhancements Since v2.1.9
 
-- Encryption Algorithm: KeyPackage data is now encrypted with AES-256-GCM
-  (authenticated encryption), providing both confidentiality and integrity
-  protection. Earlier versions used AES-256-ECB, which lacks integrity checking.
+KeyPackage data is now encrypted with AES-256-GCM (authenticated encryption),
+providing both confidentiality and integrity protection. Earlier versions used
+AES-256-ECB, which lacks integrity checking.
 
-Key Generation:
+### Key Generation
 
 - The encryption key for the KeyPackage is generated using GnuPG’s built-in
   random number generator through the GPG interface.
@@ -28,12 +32,11 @@ Key Generation:
   random generator.
 - Prior to v2.1.9, QRandom was used for key generation, providing weaker
   security guarantees.
+- KeyPackage names are now generated in the format `KeyPackage_<zbase>`, where
+  `<zbase>` is a strong random identifier encoded in zbase32. Previous versions
+  used a numeric format such as `KeyPackage_41132`.
 
-Naming Convention: KeyPackage names are now generated in the format
-KeyPackage\_<zbase>, where <zbase> is a strong random identifier encoded in
-zbase32. Previous versions used a numeric format such as KeyPackage_41132.
-
-PIN Protection:
+### PIN Protection
 
 - After generating the KeyPackage, users are required to set a PIN. The actual
   KeyPackage encryption key is then encrypted with this PIN using modern
@@ -47,14 +50,16 @@ PIN Protection:
 
 To create a KeyPackage, follow these steps:
 
+<Steps>
+
 1. **Open the Key Management Interface**: Navigate to the main interface where
    you manage your keys.
-
 2. **Export Keys**: Click on the "Export Key" button to initiate the export
    process.
-
 3. **Choose KeyPackage Export**: Select the option to export keys as a
    KeyPackage. This will open a new dialog box for configuring the KeyPackage.
+
+   ![](https://image.cdn.bktus.com/i/2025/06/28/b0e9d21290681e6f61415b80ee51b90b47b1c04b.webp)
 
 4. **Configure KeyPackage**:
 
@@ -68,6 +73,8 @@ To create a KeyPackage, follow these steps:
      later be prompted to provide a PIN; make sure it is strong and
      confidential.
 
+     ![](https://image.cdn.bktus.com/i/2025/06/28/0c304b476b436063970398593a82116029bc0e95.webp)
+
 5. **Optional Settings**:
 
    - **Include Secret Keys**: Check the box labeled "Include secret key (Think
@@ -79,6 +86,8 @@ To create a KeyPackage, follow these steps:
 
 6. **Export**: Once all settings are configured and reviewed, click the "OK"
    button to create and export the KeyPackage.
+
+</Steps>
 
 By following these steps, you can create a secure KeyPackage to transfer your
 cryptographic keys between devices.
@@ -108,21 +117,29 @@ To transfer the KeyPackage:
 To import the KeyPackage after transferring it to the target device, follow
 these steps:
 
-![](https://image.cdn.bktus.com/i/2024/06/15/a086df66-bdac-74fb-9a2c-35cddd224564.webp)
+<Steps>
 
-- **Initiate Import**: Open the key management tool on the target device and
-  click on the "Import Key" button.
-- **Select KeyPackage Option**: As shown in the image, from the dropdown menu,
-  select the "Key Package" option. This indicates that you will be importing a
-  KeyPackage.
-- **Select KeyPackage File**: A file selection dialog will appear. First, choose
-  the `.gpgpack` file that you transferred. This file contains the packaged keys.
-- **Select Key File**: After selecting the `.gpgpack` file, another file
-  selection dialog will prompt you to choose the corresponding key file. This key
-  file is used to decrypt the KeyPackage.
-- **Enter PIN**: You will be prompted for the PIN that was set during KeyPackage
-  creation.
-- **Import**: Once the correct PIN is entered, your keys will be imported.
+1. **Initiate Import**: Open the key management tool on the target device and
+   click on the "Import Key" button.
+
+2. **Select KeyPackage Option**: As shown in the image, from the dropdown menu,
+   select the "Key Package" option. This indicates that you will be importing a
+   KeyPackage.
+   ![](https://image.cdn.bktus.com/i/2025/06/28/aec995410df49d0b532329a611ef68f10cd1885f.webp)
+
+3. **Select KeyPackage File**: A file selection dialog will appear. First, choose
+   the `.gpgpack` file that you transferred. This file contains the packaged keys.
+
+4. **Select Key File**: After selecting the `.gpgpack` file, another file
+   selection dialog will prompt you to choose the corresponding key file. This key
+   file is used to decrypt the KeyPackage.
+
+5. **Enter PIN**: You will be prompted for the PIN that was set during KeyPackage
+   creation.
+
+6. **Import**: Once the correct PIN is entered, your keys will be imported.
+
+</Steps>
 
 By following these steps, you can securely import your cryptographic keys from
 the KeyPackage into the key management tool on the target device.

@@ -33,7 +33,7 @@ The **Module Controller** interface consists of the following tabs:
 The **Registered Modules** tab displays all available modules and provides tools
 for managing their activation, metadata, and storage.
 
-![](https://image.cdn.bktus.com/i/2024/11/29/b35d35f9-4ae2-0d3b-917d-a6fb815711f9.webp)
+![](https://image.cdn.bktus.com/i/2025/06/28/543b81d81b4adf03f039aeca2176247b2a1be705.webp)
 
 ### Key Features
 
@@ -109,7 +109,7 @@ gpgme:
 
 **Navigation**: Expand nodes to explore detailed properties for modules or core components.
 
-![](https://image.cdn.bktus.com/i/2024/11/29/e4a74c1d-c81a-166f-abd8-4f3f4f92f4d0.webp)
+![](https://image.cdn.bktus.com/i/2025/06/28/5a7e617a2d9f1a0efd3e939075c5074e1bd40043.webp)
 
 ## Developing Custom Modules
 
