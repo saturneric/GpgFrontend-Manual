@@ -1,0 +1,280 @@
+---
+title: Frequently Asked Questions (FAQ)
+sidebar:
+  label: FAQ
+  order: 4
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+## Why use GpgFrontend instead of other OpenPGP frontends?
+
+GpgFrontend is a user-friendly, cross-platform tool for OpenPGP encryption and
+signing. It stands out among frontends for several reasons:
+
+- Minimalist and intuitive interface: Focuses on simplicity and ease of use,
+  without unnecessary menus or confusing workflows.
+- Full-featured, without extra complexity: Covers all essential OpenPGP
+  features—key management, encryption, decryption, digital signatures—while
+  avoiding the added confusion of X.509 certificates or unrelated protocols.
+- Consistent experience on all platforms: Delivers the same look, feel, and
+  functionality on Windows, macOS, and Linux, including fully portable
+  (no-install) use.
+- Advanced key management: Lets you work with multiple key databases, making it
+  easy to separate, backup, and organize keys for different purposes.
+- Modern and secure: Supports the latest GnuPG releases and their new algorithms
+  and security improvements.
+- Security-focused features: Offers enhanced in-app security such as secure PIN
+  entry, main key encryption, application-level key rotation, and configurable
+  security levels.
+- For everyone: Simple enough for beginners, yet powerful for experts—no matter
+  your experience level.
+
+Whether you need to encrypt files and emails, manage multiple keyrings, or want
+a clear and distraction-free OpenPGP experience, GpgFrontend is designed to
+empower you—without getting in your way.
+
+## How can I obtain and start using GpgFrontend?
+
+You can download the latest version of GpgFrontend from [GpgFrontend's Downloads
+Page](/overview/downloads) and choose the installation method for your platform.
+
+## Which operating systems does GpgFrontend support?
+
+GpgFrontend is a cross-platform application that supports Windows, macOS, and
+Linux, making it accessible to nearly all users for their privacy and data
+protection needs.
+
+## How do I update GpgFrontend to the latest version?
+
+You can always get the latest stable or nightly release from the Downloads Page.
+On Windows, simply run the new installer. On macOS and Linux, replace the old
+app or AppImage with the new version. Your settings and keys will be preserved
+unless noted otherwise in the release notes.
+
+## How do OpenPGP, PGP, and GnuPG (GPG) relate?
+
+- **OpenPGP** is the open standard ([RFC
+  4880](https://www.rfc-editor.org/rfc/rfc4880)) for encrypted email, files, and
+  digital signatures.
+- **PGP** was the original proprietary software created in the 1990s; it is now
+  rarely used, but its name is sometimes used informally to mean the OpenPGP
+  standard.
+- **GnuPG (GPG)** is the most widely used free, open-source implementation of
+  the OpenPGP standard.
+
+Today, when people talk about "PGP encryption," they almost always mean the
+OpenPGP standard, and the tool they actually use is GnuPG (GPG) or another
+compatible app. GpgFrontend is a user-friendly front-end for GnuPG, making
+OpenPGP encryption easy for everyone.
+
+## Why the Need for GnuPG?
+
+GpgFrontend does not perform encryption, decryption, or signing on its own.
+Instead, it relies on GnuPG (GPG) to handle all cryptographic operations.
+
+This approach has several advantages:
+
+- **Security:** GnuPG is a well-established, widely audited tool for encryption
+  and signing. By using GnuPG directly, GpgFrontend avoids the risks of trying
+  to implement complex cryptographic algorithms itself.
+- **Trust:** Users can install and verify their own trusted version of GnuPG,
+  ensuring the core security functions are independent and reliable.
+- **Compatibility:** By delegating encryption and signing to GnuPG, GpgFrontend
+  remains compatible with the OpenPGP ecosystem and all files, keys, and
+  signatures it supports.
+
+In short: GpgFrontend provides a user-friendly interface, while GnuPG serves as
+the secure cryptographic engine underneath.
+
+## Why use GPG instead of other encryption software?
+
+GPG is the most widely adopted implementation of the OpenPGP standard.
+
+- It’s free, open-source, and cross-platform.
+- It’s trusted by security professionals, developers, journalists, and everyday
+  users worldwide.
+- GPG has been reviewed and improved for over 20 years, with strong community
+  support and regular updates.
+- GPG integrates with many tools, email clients, and scripts, making it
+  versatile for all kinds of encryption and signing needs.
+
+Other proprietary encryption tools may lock you into a single platform, lack
+transparency, or have limited interoperability. With GPG, you benefit from open
+standards, strong security, and long-term compatibility.
+
+## How secure is GPG?
+
+When used correctly, GPG offers strong protection for your data and
+communications:
+
+- It uses well-established cryptographic algorithms and supports key sizes
+  considered secure by modern standards.
+- GPG is open source, so its code is publicly reviewed by security experts
+  worldwide.
+- Your private keys are never shared or transmitted unless you choose to do so.
+- As with any security tool, your keys and passphrases are only as secure as you
+  keep them. Always protect your private key and use a strong passphrase.
+
+## Has GPG ever been compromised or leaked?
+
+No major vulnerability has ever led to a full compromise or mass leakage of
+private keys in GPG itself.
+
+- There have been occasional security bugs—quickly fixed by the community—but no
+  known incident where GPG’s core cryptography was broken.
+- Real-world leaks typically result from weak passphrases, poor key management,
+  malware on user devices, or social engineering—not flaws in GPG itself.
+
+## Can I use keys/data from other OpenPGP software?
+
+Yes—as long as your keys and encrypted data are in a format accepted by GnuPG
+(GPG), they can be used with GpgFrontend. GpgFrontend relies on GnuPG for all
+OpenPGP operations, so compatibility is determined by what GnuPG supports. Most
+keys and data produced by standard-compliant GPG or PGP programs will work
+seamlessly.
+
+## Why not just use simple password-based encryption or built-in file encryption?
+
+GPG uses public key cryptography, which is much more flexible and secure for
+sharing information:
+
+- You don’t need to agree on a password with each person in advance.
+- Anyone can encrypt data for you, even if they don’t know you personally, as
+  long as they have your public key.
+- Keys can be rotated or revoked without breaking past communications.
+- Digital signatures let you prove authorship or integrity—something
+  password-based encryption can’t offer.
+
+## Why use GPG/OpenPGP instead of instant messaging tools like Signal or Matrix?
+
+Modern messengers (Signal, Matrix, WhatsApp, etc.) are excellent for real-time,
+secure conversations—but GPG serves a different purpose:
+
+- No accounts, no servers: You don’t need to register, log in, or share a phone
+  number/email address. This means maximum privacy—even for strangers or
+  short-term contacts.
+- No reliance on any specific service: With GPG, there’s no central authority.
+  You control your keys, and no company or server can block you.
+- Long-term trust: GPG keys can be used for years, and can sign files, emails,
+  software, or other keys, not just chat messages.
+- Works offline: You can encrypt and sign files for transfer over USB drives,
+  CDs, or even paper printouts—no network required.
+- Manual and transparent: GPG is like a “manual transmission” for privacy—you
+  see and control every step, and nothing is hidden behind an app’s automation
+  or cloud syncing.
+
+## What is unique about GPG and OpenPGP?
+
+- Open standard: Anyone can create their own tools to read/write OpenPGP
+  messages—no vendor lock-in.
+- Anonymity: You can create and use keys without ever revealing your real name,
+  phone number, or email address.
+- Web of Trust: You can independently verify other people’s keys by meeting them
+  in person, not just by trusting a central server or company.
+- Minimal attack surface: With fewer background services and automatic
+  connections, there are fewer opportunities for attackers.
+
+## Are there other situations where GPG/OpenPGP is still the best tool?
+
+- Secure file exchange with strangers: For example, journalists receiving
+  sensitive documents from anonymous sources.
+- Publishing signed statements: Like public disclosures, scientific results, or
+  software releases, where long-term verifiability is important.
+- Air-gapped workflows: Encrypting data to move between computers that are never
+  connected to the internet.
+- Strong auditability: Security experts can inspect and verify every part of
+  GPG, and you can keep full control over your keys and data.
+
+<Aside>
+
+Many people prefer GPG/OpenPGP because it lets them choose exactly how much complexity, automation, or trust they want. Some users need maximum simplicity and privacy—even if it means more manual work—while others prefer convenience. GPG gives you that “manual gear shift”: everything is under your control, nothing is forced, and no extra features are introduced unless you want them.
+
+</Aside>
+
+## What if I see "GnuPG not installed correctly"?
+
+This issue typically arises when GpgFrontend cannot locate GnuPG on your system.
+Here are steps to address this based on your operating system:
+
+- For macOS Users: Install GnuPG using Homebrew with `brew install gnupg`.
+- For Linux Users: Install GnuPG via your package manager (apt, yum, etc.).
+- For Windows Users: New versions include GnuPG; or get it
+  [here](https://www.gnupg.org/ftp/gcrypt/binary/).
+
+## Where can I find more help?
+
+For more detailed guidance, refer to the quick start manual available at
+[Getting Started Guide](/overview/getting-started).
+
+## How do I import or export keys in GpgFrontend?
+
+Use the Key Management section to import or export public/private keys. You can
+also drag-and-drop key files directly into the application's Key ToolBox.
+
+## Can I encrypt and decrypt files as well as text?
+
+Yes, GpgFrontend supports both text and file encryption/decryption. Use the
+dedicated file options in the main interface to protect or unlock files.
+
+## What are Nightly versions?
+
+Automatically generated experimental builds with new features/fixes under
+testing. Less stable than official releases, may have breaking changes, and are
+not GPG-signed. Not recommended for production. Always verify the SHA256
+checksum. Please report feedback/issues on GitHub.
+
+## How does GpgFrontend handle passphrases or PINs?
+
+GpgFrontend never processes or stores your GPG key passphrases or smart card
+PINs. All PIN entry is securely handled by GnuPG’s pinentry, independent from
+GpgFrontend.
+
+For app-specific encryption (e.g., KeyPackage), passphrases/PINs are used only
+in memory and immediately cleared. Advanced users can enable PIN caching and
+adjust security levels.
+
+## Can lost passwords or keys be recovered?
+
+No, for your security, neither GpgFrontend nor the developer can recover lost
+passwords or private keys. Make sure to back up your private key and remember
+your passphrase!
+
+## How does GpgFrontend ensure secure communications?
+
+It uses GnuPG to implement OpenPGP with robust encryption algorithms. Only
+intended recipients can decrypt your messages.
+
+## Does GpgFrontend support OpenPGP smart cards or tokens?
+
+Yes, if your GnuPG supports smart cards. Manage your smart cards directly via
+the SmartCard Controller.
+
+## Is GpgFrontend available in my language?
+
+GpgFrontend supports multiple languages. You can change the display language
+from the `Settings > General` tab. Want to help translate? See the [contribution
+guide](/appendix/translate-interface) on GitHub!
+
+## What data does GpgFrontend collect?
+
+GpgFrontend does not collect or transmit any personal or usage data. All
+cryptographic operations are performed locally. Update checks can be disabled,
+and no tracking or analytics are built in.
+
+## How can I request a new feature?
+
+You can suggest new features by opening an issue on GitHub or contacting the
+maintainer directly.
+
+## Found a bug?
+
+If you encounter any issues with GpgFrontend, please report them via the GitHub
+repository. You can also contact me directly if you're not on GitHub; see the
+[Contact](/overview/contact) section for details.
+
+## Interested in contributing?
+
+Feel free to modify GpgFrontend's code and submit a Pull Request with your
+enhancements. You can also send patches via email if you prefer to contribute
+anonymously.
