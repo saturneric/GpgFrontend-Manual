@@ -17,7 +17,7 @@ GpgFrontend offers a convenient graphical interface for interacting with key
 servers, making key search, import, export, and synchronization operations
 straightforward for all users.
 
-## 📥 Import Public Key From Key Server
+## Import Public Key From Key Server
 
 1. Open the Import Key Menu: In the Operations Bar at the top of the main
    window, click the Import Key button (with a downward arrow).
@@ -60,7 +60,7 @@ You can then verify:
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/4efe7862bc47b95387a8ee247d4b767dbbfa36b6.webp)
 
-## 📤 Export My Public Key to Key Server
+## Export My Public Key to Key Server
 
 GpgFrontend allows you to upload your public key to a key server, making it
 discoverable for others who wish to send you encrypted messages.
@@ -87,7 +87,7 @@ To export:
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/34505c6435d485dc2f8ce680a8c8f630fbb18b2a.webp)
 
-## 🔄 Synchronize Public Key Information
+## Synchronize Public Key Information
 
 If you want to ensure that your local key matches what is available on the key
 server, use the **“Synchronize key pair with key server”** feature.
@@ -104,7 +104,7 @@ GpgFrontend will:
 > ⚠️ Synchronization is **not available** if you have the private key locally.
 > In this case, you are expected to **publish** updates, not pull them.
 
-## ⚙️ Key Server Related Settings
+## Key Server Related Settings
 
 You can configure your key server preferences in:
 
@@ -119,9 +119,9 @@ You can configure your key server preferences in:
 - **Delete a Server**: Right-click a row and select **Delete**.
 - **Test Connection**: Click **Test** to check if the server is reachable.
 
-> ✅ **Recommended**: Always use HTTPS to prevent man-in-the-middle attacks.
+> **Recommended**: Always use HTTPS to prevent man-in-the-middle attacks.
 
-### 🌐 Set Default Key Server
+### Set Default Key Server
 
 To set a key server as your **default** for public key **search/import**
 operations:
@@ -130,16 +130,24 @@ operations:
 2. Select **“Set as Default”**.
 3. The default server will be marked in the first column of the table.
 
-> ⚠️ **Important (v2.1.6 and later)**:
->
-> Setting a default key server **only affects key searches/imports**.
->
-> - **Export** and **Sync** operations are no longer affected by this setting.
-> - These operations **always use `https://keys.openpgp.org`**, which implements
->   the Verifying Keyserver (VKS) API.
->
-> This behavior ensures improved security and global consistency in public key
-> management.
+:::caution[Changes (v2.1.6 and later)]
+
+Setting a default key server **only affects key searches/imports**.
+
+- **Export** and **Sync** operations are no longer affected by this setting.
+- These operations **always use `https://keys.openpgp.org`**, which implements
+  the Verifying Keyserver (VKS) API.
+
+This behavior ensures improved security and global consistency in public key
+management.
+
+:::
+
+### Want to restore previous behavior?
+
+You can disable the `KeyServerSync` module in the module controller. This will
+prevent GpgFrontend from forcing export/sync operations to use
+`keys.openpgp.org`, allowing custom server logic to take effect again.
 
 ## Tips about Key Servers
 
@@ -156,12 +164,7 @@ operations:
 > **Export** and **Sync** operations will still use `keys.openpgp.org` by
 > default in **GpgFrontend v2.1.6 and later**.
 
-> 🛠️ **Want to restore previous behavior?**  
-> You can disable the `KeyServerSync` module in the advanced settings.  
-> This will prevent GpgFrontend from forcing export/sync operations to use
-> `keys.openpgp.org`, allowing custom server logic to take effect again.
-
-## 🔍 Automatically Check Key Publish Status
+## Automatically Check Key Publish Status
 
 GpgFrontend v2.1.6 introduces a feature that automatically checks whether your
 public key has been published on [keys.openpgp.org](https://keys.openpgp.org),
@@ -187,7 +190,7 @@ status from key server`
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/b2daf0876b29278e703f4721f7f68c22ffa1752b.webp)
 
-### ⚠️ Important Notes
+### Important Notes
 
 - This feature **only works with `keys.openpgp.org`**, which supports the
   **Verifying Keyserver (VKS) API**.
@@ -196,7 +199,7 @@ status from key server`
 - It is purely a **read-only status check**, and does not modify or upload
   anything to the server.
 
-## 🔒 Final Notes
+## Final Notes
 
 - Public keys uploaded to key servers are **distributed globally** and **cannot
   be deleted**.
