@@ -15,9 +15,10 @@ import { Tabs, TabItem, Badge } from "@astrojs/starlight/components";
 
 ## Direct Downloads
 
-![GitHub Release](https://img.shields.io/github/v/release/saturneric/GpgFrontend?style=for-the-badge)
+![GitHub Release](https://img.shields.io/github/v/release/saturneric/GpgFrontend?style=for-the-badge&label=Stable)
+![GitHub Nightly](https://img.shields.io/github/v/release/saturneric/GpgFrontend?include_prereleases&filter=nightly*&display_name=release&style=for-the-badge&label=Nightly)
 
-Choose from the options below to download GpgFrontend for your platform:
+Choose the version that fits your needs:
 
 <CardGrid>
   <LinkCard
@@ -26,68 +27,56 @@ Choose from the options below to download GpgFrontend for your platform:
     description="Fastest and most up-to-date source for stable builds. Recommended for most users."
   />
   <LinkCard
+    title="GitHub Nightly Releases"
+    href="https://github.com/saturneric/GpgFrontend/releases/nightly"
+    description="Get the latest experimental/nightly builds. For advanced users and testers."
+  />
+  <LinkCard
     title="Privacy-Friendly HTTPS Mirror"
     href="https://ftp.bktus.com/GpgFrontend/"
-    description="Direct, secure download. No tracking, no authentication, no rate limits, no redirections."
+    description="Direct, secure download. No tracking, no authentication, no rate limits."
   />
 </CardGrid>
 
-### Asset Naming Patterns and Descriptions
+### Asset Naming
 
 Below is a summary table explaining the naming patterns and purposes of each
 downloadable asset. You can use the filename patterns to quickly identify and
 select the appropriate package for your platform or use case.
 
-| Filename Pattern                  | Description                                                                                 |
-| --------------------------------- | ------------------------------------------------------------------------------------------- |
-| `***-universal.zip`               | The universal package: contains both Windows Portable and Linux AppImage in one archive.    |
-| `***-windows-x86_64-portable.zip` | Fully portable Windows version. No installation needed; just extract and run.               |
-| `***-windows-x86_64.msix`         | MSIX installer for Windows (recommended for most Windows users).                            |
-| `***-windows-x86_64.msi`          | Classic MSI installer for Windows; suitable for legacy/enterprise environments.             |
-| `***-macos-**.dmg`                | macOS disk image; number = minimum required macOS version. Drag to install.                 |
-| `***-linux-******.AppImage`       | AppImage for Linux; make it executable and run directly.                                    |
-| `*.sig`                           | GPG signature file for verifying the integrity and authenticity of the corresponding asset. |
+| Filename Pattern               | Description                                                       |
+| ------------------------------ | ----------------------------------------------------------------- |
+| `-universal.zip`               | Contains both Windows Portable and Linux AppImage in one archive. |
+| `-windows-x86_64-portable.zip` | Fully portable Windows version. No installation needed;           |
+| `-windows-x86_64.msix`         | MSIX installer for Windows (Recommended).                         |
+| `-windows-x86_64.msi`          | MSI installer for Windows; For Legacy/Enterprise environments.    |
+| `-macos-<ver>.dmg`             | macOS disk image; \<ver\> = minimum required macOS version.       |
+| `-linux-<arch>.AppImage`       | AppImage for Linux; make it executable and run directly.          |
+| `*.sig`                        | GPG signature file for verifying the integrity and authenticity.  |
 
-## Homebrew Cask
+## Platform-Specific Installation
 
-Mac users can check the version information through the badge below or install
-using the command line.
+Install GpgFrontend via your preferred package manager or store:
 
-[![Homebrew Cask](https://img.shields.io/homebrew/cask/v/gpgfrontend?style=for-the-badge)](https://formulae.brew.sh/cask/gpgfrontend)
-
-Install command:
-
-```
-brew install --cask gpgfrontend
-```
-
-## Flatpak
-
-Linux users can click the image below to navigate to the Flathub page for
-installation.
-
-[![Download on Flathub](https://flathub.org/api/badge?locale=en)](https://flathub.org/apps/com.bktus.gpgfrontend)
-
-## Windows
-
-There are several convenient ways to install GpgFrontend on Windows. Choose the
-method that best fits your workflow.
-
-<Tabs>
-  <TabItem label="WinGet">
-    Install directly using the command line.
-
-    ```shell
-    winget install Saturneric.GpgFrontend
-    ```
-
-  </TabItem>
-  <TabItem label="Microsoft Store">
-    Visit the application store page via the badge below:
-
-    <a href="https://apps.microsoft.com/detail/9nh716mqk2b5?referrer=appbadge&mode=direct">
-      <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
-    </a>
-
-  </TabItem>
-</Tabs>
+<CardGrid>
+  <LinkCard
+    title="Homebrew Cask (macOS)"
+    href="https://formulae.brew.sh/cask/gpgfrontend"
+    description="Install or check version with Homebrew."
+  />
+  <LinkCard
+    title="Flatpak (Linux)"
+    href="https://flathub.org/apps/com.bktus.gpgfrontend"
+    description="Install via Flathub on most Linux distros."
+  />
+  <LinkCard
+    title="WinGet (Windows)"
+    href="https://winget.run/pkg/Saturneric/GpgFrontend"
+    description="Install via Windows Package Manager."
+  />
+  <LinkCard
+    title="Microsoft Store (Windows)"
+    href="https://apps.microsoft.com/detail/9nh716mqk2b5?referrer=appbadge&mode=direct"
+    description="One-click install from the Microsoft Store."
+  />
+</CardGrid>
