@@ -2,9 +2,11 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import netlify from "@astrojs/netlify";
 import starlightThemeNova from "starlight-theme-nova";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://gpgfrontend.bktus.com",
   integrations: [
     starlight({
       plugins: [starlightThemeNova()],
@@ -58,6 +60,7 @@ export default defineConfig({
       ],
       customCss: ["./src/styles/custom.css"],
     }),
+    sitemap(),
   ],
   output: "server",
   adapter: netlify(),
