@@ -10,24 +10,27 @@ detailed instructions on installation and getting started, please refer to the
 
 [![Packaging status](https://repology.org/badge/vertical-allrepos/gpgfrontend.svg)](https://repology.org/project/gpgfrontend/versions)
 
+import { LinkCard, CardGrid } from "@astrojs/starlight/components";
+import { Tabs, TabItem, Badge } from "@astrojs/starlight/components";
+
 ## Direct Downloads
 
-Choose from the options below to download GpgFrontend directly for your platform.
+![GitHub Release](https://img.shields.io/github/v/release/saturneric/GpgFrontend?style=for-the-badge)
 
-### GitHub Releases
+Choose from the options below to download GpgFrontend for your platform:
 
-Click the badges below to access the latest stable and nightly builds.
-
-[![GitHub Release](https://img.shields.io/github/downloads/saturneric/GpgFrontend/latest/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/latest)
-
-[![GitHub Release Nightly](https://img.shields.io/github/downloads/saturneric/GpgFrontend/nightly/total?style=for-the-badge)](https://github.com/saturneric/GpgFrontend/releases/nightly)
-
-### Static Mirror
-
-For privacy-conscious users, a fast and secure direct-download mirror is
-available at [ftp.bktus.com](https://ftp.bktus.com/GpgFrontend/). This mirror is
-served over HTTPS with no authentication, tracking, rate limits, or
-redirections.
+<CardGrid>
+  <LinkCard
+    title="GitHub Releases"
+    href="https://github.com/saturneric/GpgFrontend/releases/latest"
+    description="Fastest and most up-to-date source for stable builds. Recommended for most users."
+  />
+  <LinkCard
+    title="Privacy-Friendly HTTPS Mirror"
+    href="https://ftp.bktus.com/GpgFrontend/"
+    description="Direct, secure download. No tracking, no authentication, no rate limits, no redirections."
+  />
+</CardGrid>
 
 ### Asset Naming Patterns and Descriptions
 
@@ -47,8 +50,8 @@ select the appropriate package for your platform or use case.
 
 ## Homebrew Cask
 
-Mac users can check the version information through the
-badge below or install using the command line.
+Mac users can check the version information through the badge below or install
+using the command line.
 
 [![Homebrew Cask](https://img.shields.io/homebrew/cask/v/gpgfrontend?style=for-the-badge)](https://formulae.brew.sh/cask/gpgfrontend)
 
@@ -70,25 +73,21 @@ installation.
 There are several convenient ways to install GpgFrontend on Windows. Choose the
 method that best fits your workflow.
 
-### WinGet
+<Tabs>
+  <TabItem label="WinGet">
+    Install directly using the command line.
 
-Windows users can install GpgFrontend through the Windows Package Manager
-(WinGet). Check the version information through the badge below or install
-using the command line.
+    ```shell
+    winget install Saturneric.GpgFrontend
+    ```
 
-[![WinGet Package Version](https://img.shields.io/winget/v/Saturneric.GpgFrontend?style=for-the-badge)](https://repology.org/project/gpgfrontend/versions)
+  </TabItem>
+  <TabItem label="Microsoft Store">
+    Visit the application store page via the badge below:
 
-Install command:
+    <a href="https://apps.microsoft.com/detail/9nh716mqk2b5?referrer=appbadge&mode=direct">
+      <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+    </a>
 
-```
-winget install Saturneric.GpgFrontend
-```
-
-### Microsoft Store
-
-Windows users can also visit the application store page through the Microsoft
-Store badge below.
-
-<a href="https://apps.microsoft.com/detail/9nh716mqk2b5">
-  <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
-</a>
+  </TabItem>
+</Tabs>
