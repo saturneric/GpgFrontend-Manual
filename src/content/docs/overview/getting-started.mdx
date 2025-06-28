@@ -1,0 +1,165 @@
+---
+title: Getting Started with GpgFrontend
+sidebar:
+  label: Getting Started
+  order: 2
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Steps } from "@astrojs/starlight/components";
+import { Aside } from "@astrojs/starlight/components";
+
+Welcome to GpgFrontend, the cross-platform, OpenPGP encryption tool designed for
+simplicity and security. This guide will walk you through the installation
+process tailored to your operating system, ensuring you can start securing your
+communications as quickly and efficiently as possible.
+
+## Before You Begin: Prerequisites
+
+GpgFrontend leverages the robust functionalities of GnuPG for encryption,
+decryption, and key management. It is crucial to have GnuPG installed on your
+device to make full use of GpgFrontend.
+
+**Windows users:**  
+GnuPG is bundled with GpgFrontend for Windows. You do not need to install it separately.
+
+**macOS users:**  
+Install GnuPG before running GpgFrontend.
+
+- Recommended: `brew install gnupg` (using [Homebrew](https://formulae.brew.sh/formula/gnupg))
+- Alternatively: Download GPG for OSX from [GPG for OSX](https://sourceforge.net/projects/gpgosx/files).
+
+**Linux users:**  
+Most modern distributions include GnuPG by default. To check your version, run `gpg --version`
+
+If you need to install or upgrade:
+
+- Debian/Ubuntu: `sudo apt install gpg`
+- Fedora: `sudo yum install gnupg`
+
+**BSD users:**  
+GnuPG must be installed manually. Refer to your system's package manager or build from source.
+
+<Aside type="caution">
+  Starting from GpgFrontend version 2.1.8, GnuPG **2.4 or later** is required
+  for all features to function correctly. GnuPG 2.2 is the minimum supported
+  version for basic functionality, but some advanced features may be
+  unavailable.
+</Aside>
+
+## Brief Installation Guide
+
+GpgFrontend is distributed through multiple official channels, making
+installation easy on all major platforms. **For the latest download options and
+installation commands for your system, please visit the
+[Downloads](/overview/downloads) page.**
+
+The installation methods below provide general guidance. If you prefer
+installing via package managers such as WinGet, Microsoft Store, or Flatpak,
+please refer to the Downloads page for the most up-to-date and recommended
+options.
+
+<Tabs>
+  <TabItem label="Windows(Portable)">
+
+   <Steps>
+
+      1.  **Download** the portable version from [GpgFrontend's latest
+         releases](https://github.com/saturneric/GpgFrontend/releases/latest), labeled
+         `GpgFrontend-*******-windows-x86_64-portable.zip`.
+
+      2.  **Extract** the contents
+         of the downloaded ZIP file.
+
+      3.  **Run** `GpgFrontend.exe` from the extracted `bin` directory.
+
+   </Steps>
+
+  </TabItem>
+
+  <TabItem label="Windows(Installer)">
+
+   <Steps>
+
+      1. **Download** the MSIX installer from [GpgFrontend's latest
+      releases](https://github.com/saturneric/GpgFrontend/releases/latest), named
+      `GpgFrontend-*******-windows-x86_64.msix`.
+
+      2. **Install** GpgFrontend by following the on-screen instructions. After
+      installation, you can access GpgFrontend directly from your desktop.
+
+   </Steps>
+
+  </TabItem>
+  <TabItem label="macOS">
+
+   <Steps>
+
+      1. **Ensure GnuPG is installed** (see prerequisites above).
+
+      2. **Download** the `GpgFrontend-*******-macos-**.dmg` file from [GpgFrontend's
+         latest releases](https://github.com/saturneric/GpgFrontend/releases/latest).
+
+      3. **Mount** the DMG file and **run** GpgFrontend.
+
+      5. **Optional:** Drag GpgFrontend into your Applications folder for easy access.
+
+            ![](https://image.cdn.bktus.com/i/2025/06/24/03df3c64a965b9da96c82ddb38c35b74b1796ee0.webp)
+
+   </Steps>
+
+  </TabItem>
+
+   <TabItem label="Linux">
+
+   <Steps>
+
+      1.  **Ensure GnuPG is installed** (see prerequisites above).
+
+      2.  **Download** the AppImage from [GpgFrontend's latest releases](https://github.com/saturneric/GpgFrontend/releases/latest), labeled `GpgFrontend-*******-linux-******.AppImage`.
+
+      3.  **Make it executable:** `chmod u+x ./GpgFrontend-***-linux-******.AppImage`.
+
+      4.  **Launch** the AppImage with a double-click or through the terminal.
+
+   </Steps>
+
+   </TabItem>
+
+   <TabItem label="BSD">
+   
+Currently, there are no binary releases for BSD systems. However, GpgFrontend
+can be compiled and run on BSD. Refer to the GitHub repository for build
+instructions.
+
+   </TabItem>
+</Tabs>
+
+---
+
+## Basic Operations Index
+
+Before diving into the specific operations, **we highly recommend that beginners
+start with the [Fundamental Concepts](/guides/fundamental-concepts/) guide**. It
+provides an essential overview of encryption principles, key management basics,
+and the main concepts used throughout GpgFrontend.
+
+Then, you can quickly get started by referring to the following topic-specific
+guides. For more details about operations and the user interface, please refer to:
+[Interface Understanding](/guides/understand-interface/)
+
+- [Generating a Key Pair](/guides/generate-key/)
+- [Importing and Exporting Key Pairs](/guides/import-export-key-pair/)
+- [File Encryption and Decryption](/guides/file-operations/)
+- [Text Encryption and Decryption](/guides/text-opetations/)
+- [Using Key Groups](/guides/key-group/)
+- [Key Server Operations](/guides/key-server-operations/)
+- [Smart Card Operations](/guides/smart-card/)
+
+:::tip
+
+You can also explore more topic-specific guides in the "Brief Guides" section.
+If you encounter any questions, it is recommended to consult the dedicated
+documentation for each feature first.
+
+:::
