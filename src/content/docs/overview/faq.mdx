@@ -7,33 +7,6 @@ sidebar:
 
 import { Aside } from "@astrojs/starlight/components";
 
-## Why use GpgFrontend instead of other OpenPGP frontends?
-
-GpgFrontend is a user-friendly, cross-platform tool for OpenPGP encryption and
-signing. It stands out among frontends for several reasons:
-
-- Minimalist and intuitive interface: Focuses on simplicity and ease of use,
-  without unnecessary menus or confusing workflows.
-- Full-featured, without extra complexity: Covers all essential OpenPGP
-  features—key management, encryption, decryption, digital signatures—while
-  avoiding the added confusion of X.509 certificates or unrelated protocols.
-- Consistent experience on all platforms: Delivers the same look, feel, and
-  functionality on Windows, macOS, and Linux, including fully portable
-  (no-install) use.
-- Advanced key management: Lets you work with multiple key databases, making it
-  easy to separate, backup, and organize keys for different purposes.
-- Modern and secure: Supports the latest GnuPG releases and their new algorithms
-  and security improvements.
-- Security-focused features: Offers enhanced in-app security such as secure PIN
-  entry, main key encryption, application-level key rotation, and configurable
-  security levels.
-- For everyone: Simple enough for beginners, yet powerful for experts—no matter
-  your experience level.
-
-Whether you need to encrypt files and emails, manage multiple keyrings, or want
-a clear and distraction-free OpenPGP experience, GpgFrontend is designed to
-empower you—without getting in your way.
-
 ## How can I obtain and start using GpgFrontend?
 
 You can download the latest version of GpgFrontend from [GpgFrontend's Downloads
@@ -51,6 +24,14 @@ You can always get the latest stable or nightly release from the Downloads Page.
 On Windows, simply run the new installer. On macOS and Linux, replace the old
 app or AppImage with the new version. Your settings and keys will be preserved
 unless noted otherwise in the release notes.
+
+## Why isn't GpgFrontend available on the Apple Store?
+
+GpgFrontend is not available on the Apple Store because GnuPG (which GpgFrontend
+depends on) cannot function properly inside the App Sandbox required by macOS
+App Store policies. The App Sandbox restricts system-level access needed for
+secure key management and encryption operations. For full functionality and
+security, GpgFrontend must be installed outside of the App Store environment.
 
 ## How do OpenPGP, PGP, and GnuPG (GPG) relate?
 
