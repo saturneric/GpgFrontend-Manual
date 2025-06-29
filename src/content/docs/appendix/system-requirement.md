@@ -2,67 +2,35 @@
 title: System Requirement
 ---
 
-Before proceeding with the installation and usage of GpgFrontend, it's crucial
-to understand the system requirements that ensure optimal performance. This
-section provides comprehensive details about the necessary software
-dependencies, hardware specifications, and the compatible operating systems.
-Meeting these requirements will ensure a smooth, efficient experience while
-using GpgFrontend.
-
-Please read the following subsections carefully to confirm that your system
-aligns with the recommended configurations.
+Before installing GpgFrontend, please verify that your system meets the
+following specifications to ensure optimal performance and feature support.
 
 ## Hardware
 
-While the specific hardware requirements largely depend on the size and
-complexity of the data you're working with, we generally recommend:
+For smooth operation, we recommend:
 
-A computer with at least 1 GB of RAM. However, 2 GB or more is preferable for
-smoother performance. The majority of these resources are allocated to your
-operating system, but around 100 MB of memory is needed to ensure the smooth
-running of GpgFrontend. At least 200 MB of free disk space for software
-installation. Additional space will be needed for ongoing work.
+- RAM: 2 GB or more (minimum 1 GB)
+- Disk: 200 MB free for installation (plus extra for files)
+- CPU: Dual-core or better
 
-Please note, these requirements are intended to be guidelines rather than strict
-rules. It's possible that GpgFrontend will work on lower-spec hardware, but for
-optimal performance, the above specifications are recommended.
+These are guidelines. GpgFrontend may run on lower-spec machines, but
+performance can suffer with large files or keyrings.
 
-## Operating System
+## OS
 
-GpgFrontend is compatible with major operating systems including Linux, macOS,
-and Windows. Specifically, it recommends Windows 7 and later, macOS 11 and
-later, and Ubuntu 20.04 LTS or other equivalent Linux distributions.
+- Windows 10 / 11
+- macOS 13 or later
+- Ubuntu 22.04 or later
 
-## Software
+> Note: Only 64-bit systems are supported. 32-bit systems are not supported.
 
-To ensure GpgFrontend functions seamlessly, it relies on the following software
-dependencies:
+## GnuPG
 
-- **Qt Framework:** GpgFrontend is developed using the Qt framework to offer a
-  rich user experience and cross-platform compatibility. The application
-  includes:
+- Minimum 2.2.0
+- Recommended 2.4.0+ for full feature support
 
-  - **Qt6:** The primary build utilizes Qt6, ensuring a modern interface and
-    robust performance. Qt6 is included in the release packages for Linux,
-    macOS, and Windows, offering straightforward setup without additional
-    installations.
-  - **Qt5 Support for Windows:** Recognizing the need to accommodate users on
-    older versions of Windows, GpgFrontend also provides a Qt5-based version.
-    This variant ensures compatibility with earlier Windows environments,
-    extending the tool's accessibility and usability.
-
-- **GnuPG 2.2.0 or Higher:** GpgFrontend integrates with GnuPG for its
-  cryptographic operations, including encryption, decryption, and digital
-  signing. While GpgFrontend supports GnuPG version 2.2.0 or newer, some
-  features may not be fully functional with versions below 2.4.0. For the best
-  compatibility and to ensure access to all features, it is strongly recommended
-  to use GnuPG 2.4.0 or higher. Please note that GnuPG 1.x versions are not
-  supported due to significant differences in functionality and lack of modern
-  security updates.
-
-By catering to a wide range of operating systems and ensuring backward
-compatibility with older Windows versions through Qt5 support, GpgFrontend
-strives to be as inclusive and accessible as possible.
+> On Windows: GnuPG is bundled with the Application, so no separate installation
+> needed.
 
 ## Network
 
