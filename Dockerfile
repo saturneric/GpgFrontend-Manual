@@ -22,10 +22,6 @@ FROM nginx:alpine AS runtime
 # Install dumb-init for proper signal handling
 RUN apk add --no-cache dumb-init
 
-# Create nginx user and group
-RUN addgroup -g 1001 -S nginx && \
-  adduser -S -D -H -u 1001 -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx
-
 # Copy nginx configuration
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
