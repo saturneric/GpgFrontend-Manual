@@ -1,0 +1,48 @@
+name: CI
+
+# For all pushes to the main branch run the tests and push the image to the
+# GitHub registry under an edge tag so we can use it for the nightly
+# integration tests
+on: [push]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      # GitHub Actions do not automatically checkout your projects. If you need the code
+      # you need to check it out.
+      - name: Checkout
+        uses: https://git.stdv.de/Mirrors/checkout@v3.6.0
+      - name: Prepare
+        id: prep
+        run: |
+          DOCKER_IMAGE=git.stdv.de/saturneric/gpgfrontend-manual
+          VERSION=$(git rev-parse --short HEAD)
+          # Add timestamp for better versioning
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          TAGS="${DOCKER_IMAGE}:${VERSION}"
+          TAGS="$TAGS,${DOCKER_IMAGE}:${VERSION}-${TIMESTAMP}"
+          TAGS="$TAGS,${DOCKER_IMAGE}:latest"
+          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: https://git.stdv.de/Mirrors/setup-buildx-action@v2
+
+      - name: Login to Gitea
+        if: github.event_name != 'pull_request'
+        uses: https://git.stdv.de/Mirrors/login-action@v2
+        with:
+          registry: git.stdv.de
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build & Push
+        id: docker_build
+        uses: https://git.stdv.de/Mirrors/build-push-action@v4
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          context: .
+          file: ./Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.prep.outputs.tags }}
