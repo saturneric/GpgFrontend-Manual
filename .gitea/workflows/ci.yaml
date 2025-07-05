@@ -16,7 +16,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=git.stdv.de/saturneric/gpgfrontend-manual
+          DOCKER_IMAGE=git.stdv.de/gpgfrontend/manual
           VERSION=$(git rev-parse --short HEAD)
           # Add timestamp for better versioning
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
