@@ -26,7 +26,7 @@ straightforward for all users.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/3660f65893c4e79954486f1b3cfb5cb6b09a13d0.webp)
 
-### How to Import:
+### How to Import
 
 1. Choose a key server from the drop-down list.
 2. Enter a **Key ID**, **Fingerprint**, or **Email Address** into the search
@@ -70,13 +70,13 @@ After v2.1.6, **GpgFrontend uses
 by default. This server uses the **Verifying Keyserver (VKS) Interface**, which
 provides extra protection against spam and key poisoning.
 
-### Key Points:
+### Key Points
 
-- 🔐 **Only public keys are uploaded**, never private keys.
-- ✅ **Master key is required** to export.
-- ✉️ `keys.openpgp.org` requires email verification before your key becomes
+- **Only public keys are uploaded**, never private keys.
+- **Master key is required** to export.
+- `keys.openpgp.org` requires email verification before your key becomes
   publicly searchable.
-- 🧱 Uploaded keys are **propagated through the VKS protocol** and cannot be
+  Uploaded keys are **propagated through the VKS protocol** and cannot be
   deleted.
 
 To export:
@@ -101,14 +101,16 @@ GpgFrontend will:
 - Compare the server copy with your local one.
 - Indicate if any update is applied.
 
-> ⚠️ Synchronization is **not available** if you have the private key locally.
-> In this case, you are expected to **publish** updates, not pull them.
+:::caution[Sync/Publish]
+
+Synchronization is **not available** if you have the private key locally. In
+this case, you are expected to **publish** updates, not pull them.
+
+:::
 
 ## Key Server Related Settings
 
-You can configure your key server preferences in:
-
-> **Settings → Key Servers**
+You can configure your key server preferences in: Settings → Key Servers
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/9092488afe3b899f89dc51b1789ec6dbe0249e79.webp)
 
@@ -141,13 +143,11 @@ Setting a default key server **only affects key searches/imports**.
 This behavior ensures improved security and global consistency in public key
 management.
 
-:::
-
-### Want to restore previous behavior?
-
-You can disable the `KeyServerSync` module in the module controller. This will
-prevent GpgFrontend from forcing export/sync operations to use
+Restore: You can disable the `KeyServerSync` module in the module controller.
+This will prevent GpgFrontend from forcing export/sync operations to use
 `keys.openpgp.org`, allowing custom server logic to take effect again.
+
+:::
 
 ## Tips about Key Servers
 
@@ -159,10 +159,14 @@ prevent GpgFrontend from forcing export/sync operations to use
 > 🔎 `keys.openpgp.org` does **not** support fuzzy search — you must use the
 > **exact email**, **full fingerprint**, or **full key ID**.
 
-> ⚠️ **Don't confuse search servers with export/sync servers** — even if you
-> perform key searches using a custom server like `keyserver.ubuntu.com`,  
-> **Export** and **Sync** operations will still use `keys.openpgp.org` by
-> default in **GpgFrontend v2.1.6 and later**.
+:::caution[Confusing Concepts]
+
+**Don't confuse `search servers` with `export/sync servers`** — even if you perform
+key searches using a custom server like `keyserver.ubuntu.com`, **Export** and
+**Sync** operations will still use `keys.openpgp.org` by default in
+**GpgFrontend v2.1.6 and later**.
+
+:::
 
 ## Automatically Check Key Publish Status
 
@@ -180,8 +184,6 @@ helping users keep track of their key visibility on the VKS-based keyserver.
 ![](https://image.cdn.bktus.com/i/2025/06/24/e52d18a85267987f8202ba6ede39068b3c6e140b.webp)
 
 ### How to Enable
-
-To activate this:
 
 1. Go to `Settings → Network` tab.
 2. Under **Network Ability**, check the box: `Automatically fetch key publish
