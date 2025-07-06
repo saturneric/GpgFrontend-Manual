@@ -2,7 +2,7 @@
 title: "Module Controller: Extending GpgFrontend Functionality"
 sidebar:
   label: Module Controller
-  order: 6
+  order: 7
 ---
 
 The **Module Controller** in **GpgFrontend** allows users to manage modular

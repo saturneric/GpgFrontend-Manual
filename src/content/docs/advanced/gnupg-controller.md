@@ -2,7 +2,7 @@
 title: A Comprehensive Guide of GpgController
 sidebar:
   label: Gpg Controller
-  order: 5
+  order: 6
 ---
 
 The **GpgController** in **GpgFrontend** is a powerful tool for configuring and

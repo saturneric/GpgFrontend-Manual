@@ -1,0 +1,107 @@
+---
+title: Key Revocation
+sidebar:
+  label: Key Revocation
+  order: 5
+---
+
+import { Steps } from "@astrojs/starlight/components";
+import { Aside } from '@astrojs/starlight/components';
+
+Public key cryptography relies on the long-term security and trustworthiness of
+private keys. However, situations may arise where a key can no longer be
+trusted, such as when it is lost, compromised, or no longer needed. In these
+cases, it is essential to inform others that the key should no longer be used.
+
+A key revocation certificate serves this purpose. It allows the owner (or anyone
+with the certificate) to mark a public key as revoked—meaning the key is no
+longer valid for signing or encryption. Publishing a revocation certificate
+ensures that anyone retrieving the key from a public server or receiving it
+directly will know that the key is no longer trustworthy.
+
+## When to Use Key Revocation
+
+1. Key compromise: If you suspect your private key has been stolen or copied by
+   an unauthorized party.
+2. Key loss: If you permanently lose access to your private key and can no
+   longer control its use.
+3. Change of ownership or retirement: If you no longer wish to use the key for
+   any reason (e.g., moving to a new key).
+4. Administrative/security policy: To comply with organization or security
+   policies requiring regular key turnover.
+
+By preparing a revocation certificate in advance, you can quickly react to these
+situations and help prevent unauthorized or accidental use of outdated or
+compromised keys.
+
+<Aside type="caution" title="Revocation Has No Effect If Not Published">
+
+Merely generating or importing a revocation certificate is not enough. If you do
+not publish the revoked key to a public key server or actively notify your
+contacts, others will still see your key as valid and may continue to use it.
+
+Always publish your revoked key and inform peers as soon as possible to ensure
+the revocation is recognized by others.
+
+</Aside>
+
+
+## Generating a Key Revocation Certificate
+
+<Steps>
+
+1. Open the Key Details Window: open Key Details Dialog, then switch to the
+   Operations tab.
+
+   ![](https://image.cdn.bktus.com/i/2025/07/06/8698a865162985cacd7d38b218226888fac27b9a.webp)
+
+2. Select `Generate Revocation Certificate`: At the bottom dropdown labeled
+   `Revoke Certificate Operation`, choose Generate Revocation Certificate.
+
+3. Specify the Revocation Reason: Choose one reason code from the dropdown.
+    Optionally provide free-form text for a more detailed explanation (e.g., lost,
+    compromised).
+
+    ![](https://image.cdn.bktus.com/i/2025/07/06/84bbe89bf023c2855e19e96d63a85f2f08c94006.webp)
+
+4. Confirm and Save: Click OK, then in the file-save dialog, you can choose a
+   secure local or private location to store the .rev file.
+
+5. Backup and Store: Backup: Keep the .rev file in a secure offline or encrypted
+   location.
+
+</Steps>
+
+
+## Importing a Key Revocation Certificate
+
+<Steps>
+
+1. Open the Key Details Dialog: Navigate again to `Key Details → Operations`.
+
+2. Select "Import Revocation Certificate": From the Revoke Certificate Operation
+   dropdown, choose Import Revocation Certificate.
+
+3. Import the `.rev` File: In the file-selection dialog, locate and open the
+   previously saved `.rev` file.
+
+4. Verify Revocation: After import, the local key interface will mark the key as
+   revoked. It can no longer be used for signing or decryption.
+
+   ![](https://image.cdn.bktus.com/i/2025/07/06/a287f7d66fe6850fca4031502d448b7524886099.webp)
+
+5. Publish to a Public Key Server
+    ```shell
+    gpg --keyserver hkps://keyserver.ubuntu.com --send-keys <YOUR_KEY_ID>
+    ```
+
+</Steps>
+
+## Best Practices
+
+- Prepare in Advance: Generate and back up the revocation certificate before any
+  key may be lost or compromised.
+- Secure Storage: Keep the revocation `.rev` file offline or in encrypted media
+  to prevent unauthorized revocation.
+- Notify & Synchronize: After publishing revocation, inform peers or document
+  the change so everyone refreshes the key status promptly.
