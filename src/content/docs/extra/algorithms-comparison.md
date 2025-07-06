@@ -123,14 +123,14 @@ ECC algorithms and their specific applications.
   - **Performance**: Optimized for computational efficiency, making it an
     excellent choice for environments requiring rapid cryptographic operations.
 
-## EdDSA (Edwards-Curve Digital Signature Algorithm)
+### EdDSA (Edwards-Curve Digital Signature Algorithm)
 
 EdDSA is a modern digital signature algorithm based on elliptic curve
 cryptography. It is specifically designed to be more efficient, secure, and
 resistant to common implementation errors compared to older algorithms like DSA
 or ECDSA.
 
-### Key Characteristics
+#### Key Characteristics
 
 - **Deterministic Signature Generation**: Unlike ECDSA and DSA, which require
   secure random numbers for each signature, EdDSA uses deterministic methods,
@@ -142,25 +142,25 @@ or ECDSA.
     security for environments requiring greater protection but at the cost of
     performance.
 
-### Use Cases
+#### Use Cases
 
 - **Ed25519**: Ideal for secure messaging (e.g., Signal), blockchain, and other
   modern cryptographic protocols where performance and efficiency are critical.
 - **Ed448**: Used in environments requiring stronger security, such as highly
   sensitive communications or systems with long-term security needs.
 
-### Performance
+#### Performance
 
 EdDSA is faster than RSA and ECDSA for both signing and verification. Its
 compact key sizes make it ideal for resource-constrained devices or systems.
 
-### Compatibility
+#### Compatibility
 
 While Ed25519 has gained significant adoption in modern cryptographic libraries,
 it is not yet universally supported in older systems or clients. Ed448 has even
 more limited support.
 
-## Why ECDH Cannot Be Used as a Primary Key Algorithm
+### Why ECDH Cannot Be Used as a Primary Key Algorithm
 
 **ECDH (Elliptic Curve Diffie-Hellman)** is a key exchange algorithm used to
 establish shared secrets between two parties. It is not designed for signing
