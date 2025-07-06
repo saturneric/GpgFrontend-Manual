@@ -71,13 +71,13 @@ not fully considered.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/d974152f4b2b850d228408b99d37ea487a3cf914.webp)
 
-Currently:
+### Current Behavior
 
 - GpgFrontend does not automatically upload signed UIDs to OpenPGP key servers.
 - Whether a signature update is accepted depends entirely on the specific key
   server’s policy.
 
-Reasons for not enforcing automatic synchronization:
+### Reasons for not enforcing automatic synchronization
 
 Uncontrollable Behavior of Key Servers
 
