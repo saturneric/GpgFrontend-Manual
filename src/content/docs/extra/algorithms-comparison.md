@@ -11,9 +11,9 @@ decision.
 
 ## RSA (Rivest-Shamir-Adleman)
 
-- **Key Characteristics**: RSA is one of the most widely used public key
-  algorithms. It was introduced in 1977 and is based on the difficulty of
-  factoring large prime numbers.
+- **Key Characteristics**: [RSA](https://en.wikipedia.org/wiki/RSA_cryptosystem)
+  is one of the most widely used public key algorithms. It was introduced in
+  1977 and is based on the difficulty of factoring large prime numbers.
 - **Key Sizes**: Typically, RSA keys are 2048 bits or larger. For higher
   security, keys up to 4096 bits are used.
 - **Use Cases**: RSA is versatile and can be used for both encryption and
@@ -26,8 +26,9 @@ decision.
 
 ## ElGamal Encryption (ELG-E)
 
-- **Key Characteristics**: ElGamal encryption (ELG-E) is an asymmetric key
-  encryption algorithm used for public-key cryptography. It is based on the
+- **Key Characteristics**: [ElGamal encryption
+  (ELG-E)](https://en.wikipedia.org/wiki/ElGamal_encryption) is an asymmetric
+  key encryption algorithm used for public-key cryptography. It is based on the
   Diffie-Hellman key exchange and provides both encryption and digital
   signatures.
 - **Key Sizes**: Like DSA, ElGamal typically uses large key sizes, often 2048
@@ -49,23 +50,26 @@ decision.
 
 ## Understanding ECDH and ECDSA
 
-Elliptic Curve Cryptography (ECC) is a powerful cryptographic method that
-provides robust security with relatively small key sizes, making it ideal for
-environments where computational power and storage are limited. ECC is commonly
-used in two main algorithms: ECDH and ECDSA.
+[Elliptic Curve Cryptography
+(ECC)](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography) is a powerful
+cryptographic method that provides robust security with relatively small key
+sizes, making it ideal for environments where computational power and storage
+are limited. ECC is commonly used in two main algorithms: ECDH and ECDSA.
 
 ### ECDH and ECDSA: Core Differences
 
-- **ECDH (Elliptic Curve Diffie-Hellman)** is a key exchange algorithm that
-  enables two parties to securely establish a shared secret over an insecure
-  channel. This shared secret can then be used for encryption. ECDH is not
-  directly used for encryption or signing; instead, it is crucial for securely
-  setting up encryption keys.
+- [ECDH (Elliptic Curve
+  Diffie-Hellman)](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman)
+  is a key exchange algorithm that enables two parties to securely establish a
+  shared secret over an insecure channel. This shared secret can then be used
+  for encryption. ECDH is not directly used for encryption or signing; instead,
+  it is crucial for securely setting up encryption keys.
 
-- **ECDSA (Elliptic Curve Digital Signature Algorithm)** is used for creating
-  digital signatures, allowing one party to sign a message and another to verify
-  its authenticity. ECDSA ensures that the message has not been tampered with
-  and that it originates from the claimed sender.
+- [ECDSA (Elliptic Curve Digital Signature
+  Algorithm)](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm)
+  is used for creating digital signatures, allowing one party to sign a message
+  and another to verify its authenticity. ECDSA ensures that the message has not
+  been tampered with and that it originates from the claimed sender.
 
 ### Common ECC Algorithms and Their Use Cases
 
@@ -73,9 +77,11 @@ Elliptic Curve Cryptography (ECC) offers a range of algorithms and curves
 tailored to different cryptographic needs. Below is an overview of commonly used
 ECC algorithms and their specific applications.
 
-- **NIST Curves (P-256, P-384, P-521)**: Standardized by the National Institute
-  of Standards and Technology (NIST), these curves are widely utilized in secure
-  communication protocols. For example:
+- [NIST Curves (P-256, P-384,
+  P-521)](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf):
+  Standardized by the National Institute of Standards and Technology (NIST),
+  these curves are widely utilized in secure communication protocols. For
+  example:
 
   - **ECDH NIST P-256**: Provides approximately 128-bit security, making it
     suitable for most encryption scenarios.
@@ -85,8 +91,9 @@ ECC algorithms and their specific applications.
     proportionally, with P-521 offering around 256-bit security, making it ideal
     for high-security environments.
 
-- **BrainPool Curves (P-256, P-384, P-512)**: BrainPool curves serve as
-  alternatives to NIST standards, providing similar security levels but with
+- [BrainPool Curves (P-256, P-384,
+  P-512)](https://www.rfc-editor.org/rfc/rfc5639): BrainPool curves serve
+  as alternatives to NIST standards, providing similar security levels but with
   independently developed parameters.
 
   - **Use Cases**: Often used in regions or industries that prefer non-NIST
@@ -98,16 +105,19 @@ ECC algorithms and their specific applications.
 - **CV25519 and X448**: These curves are optimized for performance and are
   widely used in modern cryptographic applications.
 
-  - **ECDH CV25519**: A counterpart to ED25519, this curve is designed for key
-    exchange and offers approximately 128-bit security. It is highly efficient
-    in secure communications.
-  - **ECDH X448**: A higher-security variant providing 224-bit security,
-    suitable for applications requiring more robust encryption. However, it
-    comes with a slight trade-off in computational efficiency.
+  - [ECDH CV25519](https://en.wikipedia.org/wiki/Curve25519): A counterpart to
+    [Ed25519](https://en.wikipedia.org/wiki/EdDSA#Ed25519), this curve is
+    designed for key exchange and offers approximately 128-bit security. It is
+    highly efficient in secure communications.
+  - [ECDH X448](https://en.wikipedia.org/wiki/Curve448): A higher-security
+    variant providing 224-bit security, suitable for applications requiring more
+    robust encryption. However, it comes with a slight trade-off in
+    computational efficiency.
 
-- **SECP256K1**: Defined by the Standards for Efficient Cryptography Group
-  (SECG), SECP256K1 is distinct from NIST curves and has gained significant
-  traction due to its adoption in blockchain technologies.
+- [SECP256K1](https://www.secg.org/sec2-v2.pdf): Defined by the Standards for
+  Efficient Cryptography Group (SECG), SECP256K1 is distinct from NIST curves
+  and has gained significant traction due to its adoption in blockchain
+  technologies.
   - **Key Use Case**: Widely used for cryptographic operations in Bitcoin and
     other blockchain systems, where efficient signature verification is crucial.
   - **Performance**: Optimized for computational efficiency, making it an
@@ -126,10 +136,11 @@ or ECDSA.
   secure random numbers for each signature, EdDSA uses deterministic methods,
   reducing the risk of vulnerabilities caused by poor randomness.
 - **Elliptic Curves Used**: EdDSA supports two primary curves:
-  - **Ed25519**: Provides 128-bit security and is optimized for speed and
-    compact key sizes.
-  - **Ed448**: Provides higher 224-bit security for environments requiring
-    greater protection but at the cost of performance.
+  - [Ed25519](https://en.wikipedia.org/wiki/EdDSA#Ed25519): Provides 128-bit
+    security and is optimized for speed and compact key sizes.
+  - [Ed448](https://en.wikipedia.org/wiki/Curve448): Provides higher 224-bit
+    security for environments requiring greater protection but at the cost of
+    performance.
 
 ### Use Cases
 
@@ -170,6 +181,13 @@ purposes. Instead, it is commonly used for subkeys dedicated to encryption or
 key exchange tasks.
 
 ## Recommended Algorithms for Compatibility and Security
+
+Cryptographic key selection is critical to ensuring both robust security and
+practical interoperability across diverse systems. With a wide array of
+algorithms available, it is important to balance compatibility, performance, and
+future-proof security when designing a cryptographic infrastructure. The
+following recommendations highlight widely accepted algorithms suitable for most
+scenarios, from legacy environments to modern applications.
 
 ### RSA (2048-bit or 3072-bit)
 
