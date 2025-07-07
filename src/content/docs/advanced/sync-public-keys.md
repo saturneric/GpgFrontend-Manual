@@ -73,8 +73,6 @@ Setting a default key server **only affects key searches/imports**.
 This behavior ensures improved security and global consistency in public key
 management.
 
-Or: [Want to restore previous behavior?](/guides/key-server-operations/#want-to-restore-previous-behavior)
-
 :::
 
 ## Best Practices for Key Synchronization

@@ -3,13 +3,14 @@ import starlight from "@astrojs/starlight";
 import netlify from "@astrojs/netlify";
 import starlightThemeNova from "starlight-theme-nova";
 import sitemap from "@astrojs/sitemap";
+import starlightLinksValidator from "starlight-links-validator";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://gpgfrontend.bktus.com",
   integrations: [
     starlight({
-      plugins: [starlightThemeNova()],
+      plugins: [starlightThemeNova(), starlightLinksValidator()],
       title: "GpgFrontend",
       description: "A Free, Easy-to-Use, Cross-Platform OpenPGP Crypto Tool.",
       logo: {
