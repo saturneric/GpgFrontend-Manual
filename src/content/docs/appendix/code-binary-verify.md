@@ -92,10 +92,3 @@ dbaEG0FOTKu+n4rVhBpTes93Bn2GcRSbQwA=
 =fWZe
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-
-This comprehensive approach to security—including automated builds,
-cross-platform code signing (Windows Authenticode, Apple codesign &
-notarization, OpenPGP for Linux), careful selection of third-party libraries,
-and transparent verification methods—ensures that users can trust the software
-they are using while also providing the tools needed to independently verify
-that trust.
