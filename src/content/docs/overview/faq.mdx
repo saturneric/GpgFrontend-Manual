@@ -51,12 +51,17 @@ OpenPGP encryption easy for everyone.
 
 ## Why does GpgFrontend require GnuPG?
 
-GpgFrontend is a user-friendly interface that relies on GnuPG (GPG) to handle all cryptographic operations.
-This approach provides:
+GpgFrontend is a user-friendly interface that relies on GnuPG (GPG) to handle
+all cryptographic operations. This approach provides:
 
-- Security: GnuPG is a widely audited and trusted open-source encryption tool. By using it directly, GpgFrontend avoids the risks of re-implementing cryptographic algorithms.
-- Trust & Control: Users can install and verify their own trusted GnuPG, ensuring transparency and independence.
-- Compatibility: Delegating crypto operations to GnuPG ensures GpgFrontend works seamlessly with the entire OpenPGP ecosystem (including standard keys, files, and signatures).
+- Security: GnuPG is a widely audited and trusted open-source encryption tool.
+  By using it directly, GpgFrontend avoids the risks of re-implementing
+  cryptographic algorithms.
+- Trust & Control: Users can install and verify their own trusted GnuPG,
+  ensuring transparency and independence.
+- Compatibility: Delegating crypto operations to GnuPG ensures GpgFrontend works
+  seamlessly with the entire OpenPGP ecosystem (including standard keys, files,
+  and signatures).
 
 In short: GpgFrontend is your control panel; GnuPG is the secure engine.
 
@@ -70,8 +75,8 @@ In short: GpgFrontend is your control panel; GnuPG is the secure engine.
 - Comprehensive Features: Supports symmetric/asymmetric encryption, digital
   signatures, key management, key revocation, and a robust web-of-trust model.
 - Transparency and Control: All encryption processes are visible and
-  configurable. You decide how your data is secured—no hidden algorithms or
-  automation.
+  configurable. You decide how your data is secured. There will be no hidden
+  algorithms or automation.
 - Interoperability: Compatible with any OpenPGP-compliant software, ensuring
   your data is accessible and exchangeable.
 
@@ -79,8 +84,8 @@ Proprietary or closed-source tools may restrict platform compatibility, hide how
 data is encrypted, or lock you into their ecosystem.
 
 <Aside>
-  GPG/OpenPGP lets you choose your own balance of privacy and convenience. It’s
-  like a “manual transmission” for digital security—maximum control, no forced
+  GPG/OpenPGP lets you choose your own balance of privacy and convenience. It"s
+  like a "manual transmission" for digital security for maximum control, no forced
   automation, and nothing is hidden unless you want it to be.
 </Aside>
 
@@ -92,34 +97,35 @@ When used correctly, GPG provides strong cryptographic protection:
 - Open source: Its code is continually reviewed by global experts.
 - No central data leaks: No major vulnerability has ever led to a mass
   compromise of GPG private keys.
-- Common risks arise from user error—weak passphrases, mishandled keys, device
-  malware—not GPG itself.
+- Common risks arise from user error, such as weak passphrases, mishandled keys,
+  device malware. They're not from GPG itself.
 
 Bottom line: Your keys and passphrase security are just as important as the
 software you use.
 
 ## Has GnuPG ever been successfully attacked?
 
-According to the official [GnuPG FAQ 11.8](https://gnupg.org/faq/gnupg-faq.html#successful_attacks):
+According to the official [GnuPG FAQ
+11.8](https://gnupg.org/faq/gnupg-faq.html#successful_attacks):
 
-> “If you mean, ‘has GnuPG traffic ever been successfully cryptanalyzed?’, the
-> answer is a flat ‘no’. We are unaware of any credible reports of any of the
-> ciphers used in GnuPG having ever been successfully cryptanalyzed.”
+> "If you mean, "has GnuPG traffic ever been successfully cryptanalyzed?", the
+> answer is a flat "no". We are unaware of any credible reports of any of the
+> ciphers used in GnuPG having ever been successfully cryptanalyzed."
 
 ## What makes GPG/OpenPGP unique compared to instant messengers or built-in encryption?
 
-- No accounts or servers: You don’t need to register or rely on any
-  service—maximum privacy, even with strangers.
+- No accounts or servers: You don't need to register or rely on any
+  service.
 - Long-term trust: Keys can be used for years, supporting file/email/software
-  signing and “web of trust.”
+  signing and "web of trust" models.
 - Works offline: Encrypt/sign files for transfer over any medium, no internet
   required.
 - Manual & transparent: Everything is under your control, with no forced
   automation or cloud syncing.
 
 Instant messengers (Signal, Matrix, etc.) are great for real-time communication
-but require accounts, central servers, and frequent key changes—less suitable
-for offline or anonymous use.
+but require accounts, central servers, and frequent key changes. It's less
+suitable for offline or anonymous use.
 
 ## When is GPG/OpenPGP the best tool?
 
@@ -142,8 +148,8 @@ compliant GPG or legacy PGP programs.
 
 Public-key encryption (like GPG) is more flexible and secure:
 
-- No need to share passwords in advance—just publish your public key.
-- Anyone can encrypt for you, even if you’ve never met.
+- No need to share passwords in advance, only by publish your public key.
+- Anyone can encrypt for you, even if you"ve never met.
 - Digital signatures prove authorship and integrity.
 - Keys can be revoked or rotated at any time without breaking old data.
 
@@ -182,7 +188,7 @@ checksum. Please report feedback/issues on GitHub.
 ## How does GpgFrontend handle passphrases or PINs?
 
 GpgFrontend never processes or stores your GPG key passphrases or smart card
-PINs. All PIN entry is securely handled by GnuPG’s pinentry, independent from
+PINs. All PIN entry is securely handled by GnuPG's pinentry, independent from
 GpgFrontend.
 
 For app-specific encryption (e.g., KeyPackage), passphrases/PINs are used only
