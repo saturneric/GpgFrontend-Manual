@@ -11,8 +11,8 @@ license terms. For more information or to obtain the source code, please visit
 the respective project homepages.
 
 Note: As of v2.1.9, GpgFrontend no longer uses the QtAES library. All
-cryptographic operations—including AES encryption/decryption—are now performed
-using OpenSSL, with AES-GCM as the default and only mode.
+cryptographic operations (mainly used for the Application itself) are now
+performed using OpenSSL, with AES-GCM as the default and only mode.
 
 ## Common
 

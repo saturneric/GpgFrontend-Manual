@@ -17,15 +17,15 @@ approach is:
 - Ideal for large files or quick one-time sharing
 - Best used when both parties can safely share the password
 
-> If someone intercepts the password, the encrypted data is no longer secure —
-> so always handle password exchange carefully.
+> If someone intercepts the password, the encrypted data is no longer secure.
+> Therefore, please always use strong, unique passwords and share them securely. 
 
 ## How It Works
 
 1. You choose a **strong password**.
 2. That password is used to **encrypt** the data.
 3. Anyone with the **same password** can **decrypt** it.
-4. No key pair is required — only the shared password.
+4. No key pair is required, but only the shared password.
 
 > Encryption security depends entirely on the strength and secrecy of the
 > password used.
@@ -44,7 +44,7 @@ To encrypt text using symmetric encryption in GpgFrontend (v2.1.9 and later):
 
 ### Access the Symmetric Encryption Button
 
-After enabling, you’ll see a dedicated `Sym. Encrypt` button on the main
+After enabling, you'll see a dedicated `Sym. Encrypt` button on the main
 interface.
 
 ![](https://image.cdn.bktus.com/i/2025/07/06/9b9dfde1a024c9637133035a581e0431e1147597.webp)
@@ -83,11 +83,11 @@ To decrypt content that was encrypted symmetrically:
 
 Symmetric encryption is a great choice when:
 
-- You’re encrypting something **for yourself** (e.g. storing private notes or
+- You're encrypting something **for yourself** (e.g. storing private notes or
   backup files).
-- You’re sharing data over a **secure channel**, and can **safely provide the
+- You're sharing data over a **secure channel**, and can **safely provide the
   password**.
-- You don’t want to manage public/private key infrastructure.
+- You don't want to manage public/private key infrastructure.
 
 However, it is **not ideal** for public communication where secure password
 exchange is difficult.
@@ -96,6 +96,6 @@ exchange is difficult.
 
 - Always use a **strong, complex password** (longer is better).
 - Never send passwords through insecure channels (e.g., unencrypted email).
-- Consider using symmetric encryption as a supplement to public-key encryption —
+- Consider using symmetric encryption as a supplement to public-key encryption
   e.g., encrypt a file symmetrically, then encrypt the password with the
-  recipient’s public key.
+  recipient's public key.

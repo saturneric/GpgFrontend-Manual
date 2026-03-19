@@ -156,15 +156,15 @@ This will prevent GpgFrontend from forcing export/sync operations to use
 | `keys.openpgp.org`     | ❌ No        | ✅ Yes        | Requires exact match (email, fingerprint) |
 | `keyserver.ubuntu.com` | ✅ Yes       | ❌ No         | Traditional HKP server, less strict       |
 
-> 🔎 `keys.openpgp.org` does **not** support fuzzy search — you must use the
+> 🔎 `keys.openpgp.org` does **not** support fuzzy search, so you must use the
 > **exact email**, **full fingerprint**, or **full key ID**.
 
 :::caution[Confusing Concepts]
 
-**Don't confuse `search servers` with `export/sync servers`** — even if you perform
-key searches using a custom server like `keyserver.ubuntu.com`, **Export** and
-**Sync** operations will still use `keys.openpgp.org` by default in
-**GpgFrontend v2.1.6 and later**.
+**Don't confuse `search servers` with `export/sync servers`** even if you always
+perform key searches using a custom server like `keyserver.ubuntu.com` at the
+Key Import Dialog, **Export** and **Sync** operations will still use
+`keys.openpgp.org` by default in **GpgFrontend v2.1.6 and later**.
 
 :::
 

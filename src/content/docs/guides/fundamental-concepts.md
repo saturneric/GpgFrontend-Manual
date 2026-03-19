@@ -120,9 +120,11 @@ When sharing your public key, you're actually distributing a **certificate**
 that includes:
 
 - Your public key itself.
-- Your user ID (name and email).
+- Your user ID (name and email). Just remember, the user ID is not a secure
+  identifier and can be easily forged.
 - Digital signatures from your primary key or trusted contacts confirming your
   identity.
+- Metadata about the key, such as creation date and expiration.
 
 Certificates build trust, allowing others to confirm the authenticity of your
 public key.
@@ -152,9 +154,6 @@ operations:
 - Easily encrypt and decrypt messages and files.
 - Sign and verify digital signatures intuitively.
 - Seamlessly interact with public key servers.
-
-GpgFrontend makes secure communication accessible, even if you're new to
-encryption.
 
 By managing the complexity behind the scenes, GpgFrontend allows you to focus
 solely on keeping your information secure and private.

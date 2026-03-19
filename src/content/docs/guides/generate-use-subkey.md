@@ -247,11 +247,11 @@ When you export only a subkey and then import it into a different key database
 (or application), you may notice that:
 
 - The key listing still shows the primary key’s ID as the main identifier.
-- The keyring still displays the original key structure—including the primary
-  key and potentially other subkeys—though only the exported subkey is available
+- The keyring still displays the original key structure(including the primary
+  key and potentially other subkeys) though only the exported subkey is available
   for actual use (decryption, signing, etc.).
-- The usage flags (such as CESA: Certify, Encrypt, Sign, Authenticate) may
-  change—only capabilities for which the private part is present remain active.
+- The usage flags (such as CESA: Certify, Encrypt, Sign, Authenticate) can be
+  changed under certain conditions.
 
 ### Why is this the case?
 
@@ -286,7 +286,7 @@ recognized as legitimate or trustworthy by other OpenPGP tools.
 ### Multiple Subkeys Included
 
 If the key structure contains other subkeys, their definitions will also be
-present in the exported key material—even if their secret parts are missing.
+present in the exported key material even if their secret parts are missing.
 This design ensures the integrity and context of the key structure for any
 OpenPGP-compliant tool.
 
@@ -295,8 +295,8 @@ OpenPGP-compliant tool.
 OpenPGP keyrings and applications (including GpgFrontend, Thunderbird, etc.)
 identify the whole key structure by the primary key ID. This ensures consistency
 and interoperability across tools and platforms. It’s not possible to create a
-"standalone" subkey that appears as its own identity—the subkey’s value is only
-recognized as part of the primary key’s web-of-trust.
+"standalone" subkey that appears as its own identity. Always remember that the
+subkey’s value is only recognized with the provenance of the primary key.
 
 ### Can I use only a subkey for all operations?
 

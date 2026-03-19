@@ -20,8 +20,8 @@ environments prioritizing compatibility and performance, where handling of
 highly sensitive data is limited.
 
 Even at SecureLevel 0, GpgFrontend implements safeguards to reduce the risk of
-residual data in memory. When content is read from Qt—such as user input fields
-or temporary buffers—the data is promptly transferred into internal buffers, and
+residual data in memory. When content is read from Qt(such as user input fields
+or temporary buffers) the data is promptly transferred into internal buffers, and
 the original source is actively cleared and zeroed out. This process helps
 ensure that plaintext information does not remain accessible in memory after it
 is no longer needed.
@@ -32,8 +32,8 @@ Enhanced memory management techniques are activated at this level, including
 zero-initialization of sensitive buffers and stricter tracking of memory usage.
 Sensitive data is less likely to persist in memory after it is no longer needed.
 
-All sensitive data—including file contents, (de)compressed plaintext, and
-plaintext from text fields—is placed into dedicated secure buffers prior to any
+All sensitive data, including file contents, (de)compressed plaintext, and
+plaintext from text fields, is placed into dedicated secure buffers prior to any
 processing or transfer. These buffers are passed directly to the cryptographic
 engine (GpgME) and protected by GnuPG mechanisms. Each secure buffer is fully
 initialized to zero upon allocation and is explicitly erased upon release,
@@ -48,7 +48,7 @@ data is securely erased from memory after use.
 
 For SecureLevel 2, GpgFrontend pre-allocates a 32 MB secure heap for all
 sensitive operations. Regular UI data is not stored in secure memory by default;
-however, data from certain UI elements—such as text field contents—is
+however, data from certain UI elements, such as text field contents, is
 transferred to secure memory immediately after being read from Qt components.
 The original Qt objects are then overwritten and actively cleansed, reducing the
 risk of residual plaintext in standard memory and avoiding inadvertent multiple
@@ -66,8 +66,8 @@ operations, maximizing protection of sensitive content.
 
 At SecureLevel 2, GpgFrontend leverages OpenSSL’s secure heap functionality for
 advanced memory protection. The secure heap is a dedicated area of memory
-managed by OpenSSL to reduce the risk of sensitive information—such as private
-keys, passphrases, and decrypted messages—being exposed via memory overruns,
+managed by OpenSSL to reduce the risk of sensitive information(such as private
+keys, passphrases, and decrypted messages) being exposed via memory overruns,
 underruns, or unauthorized access.
 
 Key aspects of OpenSSL’s secure memory in GpgFrontend include:
@@ -125,9 +125,9 @@ sensitive data. Regardless of the SecureLevel, the application strives to:
 These memory security measures are available from version 2.1.9 onward and
 continue to evolve. While GpgFrontend aims to cover as many scenarios as
 possible, some edge cases may not be fully addressed in the initial versions.
-Community feedback is highly encouraged—users are invited to review the code,
-report issues, and contribute suggestions to accelerate improvements in memory
-security.
+Community feedback is highly encouraged. For example, users are invited to
+review the code, report issues, and contribute suggestions to accelerate
+improvements in memory security.
 
 :::
 

@@ -24,8 +24,8 @@ the main interface, streamlining your workflow for secure file handling.
    action.
 4. Proceed with Cryptographic Operations: With the File Panel open, you can now
    select one or more keys from the Key ToolBox (individual public keys or key
-   groups). Then, you can click the appropriate toolbar button—Encrypt, Decrypt,
-   Sign, or Verify—to perform the desired cryptographic operation on the
+   groups). Then, you can click the appropriate toolbar button(Encrypt, Decrypt,
+   Sign, or Verify) to perform the desired cryptographic operation on the
    selected file(s).
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/2365c709356b1339898043390a1ff7ac232e05f4.webp)

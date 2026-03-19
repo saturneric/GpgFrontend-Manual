@@ -6,8 +6,8 @@ sidebar:
 
 GpgFrontend provides a flexible and user-friendly interface for generating
 GnuPG-compatible key pairs. The updated **Generate Key** dialog introduces
-multiple configuration levels—from simplified templates to advanced
-cryptographic control—catering to both casual and expert users.
+multiple configuration levels from simplified templates to advanced
+cryptographic control, catering to both normal and expert users.
 
 ## Launch the Generate Key Dialog
 
@@ -41,7 +41,7 @@ Easy Mode simplifies key generation using common templates. You can configure:
   years, or _Non Expired_).
 - **Combination**:
   - **Primary Key Only**
-  - **Primary Key with Subkey** — useful when separating signing and encryption
+  - **Primary Key with Subkey**: Useful when separating signing and encryption
     functions.
 
 > Recommended for users who prefer a faster and more guided setup process.

@@ -7,8 +7,7 @@ sidebar:
 When Self-Check is enabled, GpgFrontend will verify the digital signatures
 (Authenticode signatures) of its core dynamic libraries and components at
 startup. This helps ensure that the application’s essential code has not been
-altered, replaced, or corrupted—whether accidentally or through malicious
-interference.
+altered, replaced, or corrupted.
 
 This mechanism is particularly useful when running a copy of GpgFrontend from a
 USB drive or any other removable media that may be more susceptible to

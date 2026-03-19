@@ -186,7 +186,7 @@ The subkey mechanism is a core feature of GnuPG, designed to enhance both securi
 - Subkeys can use more algorithms than the primary key, but usually have the
   same effect on daily operations.
 - Security Isolation: If a subkey is ever compromised, only that subkey needs to
-  be revoked and replaced—the trust chain anchored by the primary key remains
+  be revoked and replaced. The trust chain anchored by the primary key remains
   intact. However, if the primary key is compromised, the entire key structure is
   at risk, as it controls all subkeys and certifications.
 
@@ -203,8 +203,8 @@ has been moved to a hardware smart card.
 
 - When a key is moved to a smart card, its private part is physically
   transferred and removed from your local key database.
-- This change is irreversible—the private key now exists only on the smart card
-  and cannot be extracted back.
+- This change is irreversible. The private key now exists only on the smart card
+  and cannot be extracted back theoretically.
 - This provides strong protection against malware or key theft: cryptographic
   operations using that key (such as signing or decrypting) will now require the
   smart card to be present and unlocked.

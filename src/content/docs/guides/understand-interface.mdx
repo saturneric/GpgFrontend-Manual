@@ -77,7 +77,7 @@ messages.
   viewing and editing their content.
 - Compose, Encrypt, Sign, and Verify Emails: Easily write or modify email
   content and apply encryption, digital signatures, or verify received
-  signatures—all in one place.
+  signatures.
 
 :::caution[Note]
 
@@ -123,10 +123,10 @@ managed in the Manage Keys interface.
 ### Understanding the Key Toolbox Table
 
 The Key Toolbox contains detailed information about each key. Some of the
-columns and codes—especially in the Type and Usage columns—may not be
-immediately obvious. The section below explains the meaning of these less
-obvious—but essential—fields and codes, so you can confidently interpret key
-types, usage, and status in your daily cryptographic operations.
+columns and codes(in the Type and Usage columns) may not be immediately obvious
+for new users. This section explains the meaning of these fields and codes, so
+you can confidently interpret key types, usage, and status in your daily
+cryptographic operations.
 
 - **Type**:
   - `pub`: Public key (for encryption or verification).
@@ -160,7 +160,7 @@ right:
 3. **Encrypt**: Encrypt the currently selected file(s) or text using the
    selected recipient keys.
 4. **Decrypt**: Decrypt the currently selected encrypted file(s) or text. No key
-   selection is required—gpg automatically detects and uses the
+   selection is required, because gpg will automatically detect and use the
    appropriate private key(s) from your keyring.
 5. **Sign**: Digitally sign the selected file(s) or text with your private key.
 6. **Verify**: Verify the signature of the selected file(s) or text.

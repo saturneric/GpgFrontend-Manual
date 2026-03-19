@@ -6,8 +6,8 @@ sidebar:
 
 To enhance the protection of application data, GpgFrontend automatically
 generates and manages a dedicated Application Secure Key. This key is used to
-encrypt sensitive internal data—such as certain configuration files, key server
-settings, and key generation profiles—distinct from user PGP keys. Key
+encrypt sensitive internal data, such as certain configuration files, key server
+settings, and key generation profiles. They're distinct from user PGP keys. Key
 management adapts according to the configured security level and user
 preferences.
 
@@ -110,8 +110,8 @@ and advanced encryption), you can later change the SecureLevel to a lower value
   under this SecureLevel will be accessible as before, while the data protected
   under SecureLevel 3 remains securely stored and inaccessible in this mode.
 - You can switch the SecureLevel back to 3 (or higher) at any time. After you
-  enter the correct PIN, all your previous application data—including
-  configuration, key server settings, and other protected content—will be fully
+  enter the correct PIN, all your previous application data including
+  configuration, key server settings, and other protected content will be fully
   restored and available.
 - You can freely alternate between SecureLevel 3 and any lower level. Each time
   you return to SecureLevel 3 and successfully authenticate with your PIN, your

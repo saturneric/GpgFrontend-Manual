@@ -24,22 +24,13 @@ GpgFrontend uses the tools provided by this library.
 2. You will find some ts files(.ts) at path
    [`resource/lfs/locale/ts`](https://github.com/saturneric/GpgFrontend/tree/main/resource/lfs/locale/ts)
 3. Add a new language: Create a new file; see [locale codes](https://saimana.com/list-of-country-locale-code/).
-4. To edit or update an existing language, navigate to the path `resource/lfs/locale/ts`.
+4. To edit or update an existing language: Just by modifying the corresponding ts file.
 
 ## Before starting your work
 
 Before starting your work, it is no longer necessary to contact me. Please
 ensure you have a thorough understanding of Qt Linguist and its usage. You can
 directly edit the files, or use the Qt Linguist GUI Tool for editing.
-
-## Updates to Translation Work Process
-
-- **For correcting existing translations**: You can directly modify the ts files
-  and then send them to me via email.
-- **For adding a new language translation**: You can generate new ts files using
-  the Qt Linguist command line tools. If you are not technically inclined and
-  are unsure how to use these tools, you can email me, and I will provide you
-  with the appropriate ts file.
 
 ## Hand in your work
 

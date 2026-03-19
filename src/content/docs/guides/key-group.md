@@ -38,7 +38,7 @@ will be able to decrypt messages or files encrypted to that group.
    Create to make the group.
 4. Key Group Appears in List: After creation, your new key group will appear in
    the key list with Type shown as group. You can now use this group for
-   encryption and other operations—just like a single public key.
+   encryption and other operations. It works just like a single public key.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/c70891d9ad74b21074be03c7a1d0aabf77d9ea3a.webp)
 
@@ -97,9 +97,8 @@ Group will be automatically disabled.
 ### Key Group Usage and Limitations
 
 Key Groups as Encryption Targets Only: In GpgFrontend, a Key Group is treated as
-a single encryptable entity—you can use it as a recipient for encryption just
-like a public key. Key Groups cannot be used for signing, decryption, or
-certification. They are only valid for encryption operations.
+a single entity for encryption purposes. Therefore, Key Groups cannot be used
+for signing, decryption, or certification.
 
 ### Independence from GnuPG keygroups
 

@@ -173,7 +173,7 @@ missing keys.
 
 ### Can My Smart Card (e.g., YubiKey) Store Multiple Types of Credentials?
 
-Yes, many modern security tokens and smart cards—such as YubiKey—support
+Yes, many modern security tokens and smart cards(such as YubiKey) support
 multiple independent modules or “applications” on the same device. Typical
 examples include:
 
@@ -195,8 +195,7 @@ examples include:
   grant access to, another module’s secrets.
 
 You can use your YubiKey for OpenPGP-based email encryption, as a passkey for
-passwordless login, and as a smart card for Windows logon—all at the same time,
-without conflicts.
+passwordless login, and as a smart card for Windows logon at the same time.
 
 > While modules are independent, the overall storage of the device is shared.
 > Each module has its own storage limit (e.g., number of FIDO2 credentials,
