@@ -44,26 +44,30 @@ Below is a summary table explaining the naming patterns and purposes of each
 downloadable asset. You can use the filename patterns to quickly identify and
 select the appropriate package for your platform or use case.
 
-| Filename Pattern               | Description                                                       |
-| ------------------------------ | ----------------------------------------------------------------- |
-| `-universal.zip`               | Contains both Windows Portable and Linux AppImage in one archive. |
-| `-windows-x86_64-portable.zip` | Fully portable Windows version. No installation needed;           |
-| `-windows-x86_64.msix`         | MSIX installer for Windows (Recommended).                         |
-| `-windows-x86_64.msi`          | MSI installer for Windows; For Legacy/Enterprise environments.    |
-| `-macos-<ver>.dmg`             | macOS disk image; \<ver\> = minimum required macOS version.       |
-| `-linux-<arch>.AppImage`       | AppImage for Linux; make it executable and run directly.          |
-| `*.sig`                        | GPG signature file for verifying the integrity and authenticity.  |
-| `-qt5-`                        | Qt5 build, for older systems (e.g., Windows 7, Ubuntu 20.04).     |
+| Filename Pattern               | Description                                                      |
+| ------------------------------ | ---------------------------------------------------------------- |
+| `-windows-x86_64-portable.zip` | Fully portable Windows version. No installation needed;          |
+| `-windows-x86_64.msix`         | MSIX installer for Windows (Recommended).                        |
+| `-windows-x86_64.msi`          | MSI installer for Windows; For Legacy/Enterprise environments.   |
+| `-macos-<ver>.dmg`             | macOS disk image; \<ver\> = minimum required macOS version.      |
+| `-linux-<arch>.AppImage`       | AppImage for Linux; make it executable and run directly.         |
+| `*.sig`                        | GPG signature file for verifying the integrity and authenticity. |
+| `-qt5-`                        | Qt5 build, for older systems (e.g., Windows 7, Ubuntu 20.04).    |
 
 ## Platform-Specific Installation
 
-Install GpgFrontend via your preferred package manager or store: 
+Install GpgFrontend via your preferred package manager or store:
 
 <CardGrid>
   <LinkCard
+    title="Mac App Store: GpgFrontend Lite"
+    href="https://apps.apple.com/app/gpgfrontend-lite/id6763597446"
+    description="Sandbox-friendly Mac App Store edition for macOS, using the rPGP engine."
+  />
+  <LinkCard
     title="Homebrew Cask (macOS)"
     href="https://formulae.brew.sh/cask/gpgfrontend"
-    description="Install or check version with Homebrew."
+    description="Install the regular GpgFrontend desktop edition with Homebrew."
   />
   <LinkCard
     title="Flatpak (Linux)"
@@ -81,3 +85,18 @@ Install GpgFrontend via your preferred package manager or store:
     description="One-click install from the Microsoft Store."
   />
 </CardGrid>
+
+:::note[GpgFrontend Lite]
+GpgFrontend Lite is the Mac App Store edition of GpgFrontend. It is designed for
+the macOS sandbox environment, uses the rPGP engine, and does not include GnuPG.
+
+For the full desktop experience with GnuPG integration and advanced
+configuration options, use the regular GpgFrontend desktop edition from GitHub,
+Homebrew, or other package channels.
+:::
+
+:::caution[GpgFrontend Lite Key Backup]
+Please back up your OpenPGP keys created or imported in GpgFrontend Lite. The
+Lite edition stores key data inside the app-managed macOS sandbox storage. If
+your keys are lost, encrypted data may not be recoverable.
+:::

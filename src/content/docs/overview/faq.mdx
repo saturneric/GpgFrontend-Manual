@@ -25,14 +25,6 @@ On Windows, simply run the new installer. On macOS and Linux, replace the old
 app or AppImage with the new version. Your settings and keys will be preserved
 unless noted otherwise in the release notes.
 
-## Why isn't GpgFrontend available on the Apple Store?
-
-GpgFrontend is not available on the Apple Store because GnuPG (which GpgFrontend
-depends on) cannot function properly inside the App Sandbox required by macOS
-App Store policies. The App Sandbox restricts system-level access needed for
-secure key management and encryption operations. For full functionality and
-security, GpgFrontend must be installed outside of the App Store environment.
-
 ## How do OpenPGP, PGP, and GnuPG (GPG) relate?
 
 - **OpenPGP** is the open standard ([RFC
@@ -49,21 +41,117 @@ OpenPGP standard, and the tool they actually use is GnuPG (GPG) or another
 compatible app. GpgFrontend is a user-friendly front-end for GnuPG, making
 OpenPGP encryption easy for everyone.
 
-## Why does GpgFrontend require GnuPG?
+## Which cryptographic engines does GpgFrontend use?
 
-GpgFrontend is a user-friendly interface that relies on GnuPG (GPG) to handle
-all cryptographic operations. This approach provides:
+GpgFrontend supports multiple cryptographic engines.
 
-- Security: GnuPG is a widely audited and trusted open-source encryption tool.
-  By using it directly, GpgFrontend avoids the risks of re-implementing
-  cryptographic algorithms.
-- Trust & Control: Users can install and verify their own trusted GnuPG,
-  ensuring transparency and independence.
-- Compatibility: Delegating crypto operations to GnuPG ensures GpgFrontend works
-  seamlessly with the entire OpenPGP ecosystem (including standard keys, files,
-  and signatures).
+In the regular GpgFrontend desktop edition, **GnuPG** remains the default and
+primary backend. It provides mature, widely deployed OpenPGP functionality and
+is recommended for users who need maximum compatibility with existing
+GnuPG-based workflows.
 
-In short: GpgFrontend is your control panel; GnuPG is the secure engine.
+GpgFrontend also provides an **rPGP** backend for selected use cases. The rPGP
+engine is implemented in Rust and enables newer OpenPGP features, including
+OpenPGP v6 / RFC 9580 related functionality.
+
+## What is the rPGP engine?
+
+The rPGP engine is an alternative OpenPGP backend used by GpgFrontend for
+selected OpenPGP operations. It is implemented in Rust and allows GpgFrontend to
+provide a self-contained OpenPGP experience without relying on an external GnuPG
+installation.
+
+## Does rPGP replace GnuPG in GpgFrontend?
+
+No. In the regular GpgFrontend desktop edition, GnuPG remains the default and
+primary backend.
+
+The rPGP engine is provided as an additional backend for selected use cases,
+including sandbox-friendly operation and newer OpenPGP features. Some advanced
+features available through GnuPG may not be available through rPGP yet.
+
+## Can I use the same keys with GnuPG and rPGP?
+
+Not always. GnuPG and rPGP use separate key storage in GpgFrontend, and some key
+types, packet formats, or newer OpenPGP features may not be fully compatible
+between engines.
+
+If you need maximum compatibility with existing GnuPG-based workflows, use the
+regular GpgFrontend desktop edition with the GnuPG backend.
+
+## Is GpgFrontend available on the Mac App Store?
+
+Yes. **GpgFrontend Lite** is available on the Mac App Store as a lightweight,
+sandbox-friendly edition for macOS.
+
+However, the regular GpgFrontend desktop edition is not distributed through the
+Mac App Store. The regular edition integrates with GnuPG and provides advanced
+configuration options that do not fit well with the macOS App Sandbox model
+required by the Mac App Store.
+
+GpgFrontend Lite is fully self-contained, uses the rPGP engine, and does not
+include GnuPG. For users who need the full GnuPG-based desktop experience,
+please install the regular GpgFrontend edition from GitHub, Homebrew, or other
+package channels.
+
+## Why is there a separate GpgFrontend Lite edition?
+
+GpgFrontend Lite is not a replacement for the regular GpgFrontend desktop
+edition. It is a separate Mac App Store edition designed specifically for the
+macOS App Sandbox.
+
+The regular GpgFrontend desktop edition is built around the full GnuPG-based
+desktop experience, including advanced configuration options, integration with
+existing GnuPG workflows, and access to the user's regular desktop environment.
+These capabilities do not fit well with the sandboxed distribution model
+required by the Mac App Store.
+
+GpgFrontend Lite therefore uses the rPGP engine and keeps its key data inside
+the app-managed macOS sandbox storage. This makes it suitable for a
+self-contained Mac App Store release while still supporting everyday OpenPGP
+operations such as encryption, decryption, signing, verification, and local key
+management.
+
+| Feature               | Regular Desktop Edition      | Lite Edition (App Store)          |
+| :-------------------- | :--------------------------- | :-------------------------------- |
+| **Engine**            | **GnuPG** (Primary) + rPGP   | **rPGP Only** (Pure Rust)         |
+| **Environment**       | Full System Access           | macOS Sandbox (Enhanced Security) |
+| **GnuPG Integration** | Yes (System GPG)             | No (Self-contained)               |
+| **Best For**          | Professional & Critical Work | Modern v6 Workflows & Quick Tasks |
+
+:::note[Technical background]
+
+The sandbox-related challenges around bundling and integrating GnuPG in a
+movable macOS App Bundle have been discussed in the GnuPG development community.
+
+See also: [GnuPG and macOS App Sandbox](https://lists.gnupg.org/pipermail/gnupg-devel/2022-May/035065.html)
+:::
+
+## Where are keys stored in GpgFrontend Lite?
+
+GpgFrontend Lite stores its key data locally inside the app-managed macOS
+sandbox storage. It does not upload your keys or messages to any server.
+
+Please back up your OpenPGP keys created or imported in GpgFrontend Lite. If
+your keys are lost, encrypted data may not be recoverable.
+
+## Can GpgFrontend Lite use my existing GnuPG keyring?
+
+No. GpgFrontend Lite does not include or integrate with GnuPG, and it cannot
+directly use your existing GnuPG keyring.
+
+If you want to use a key from another OpenPGP application, export the key from
+that application and import it into GpgFrontend Lite. Please be careful when
+exporting secret keys and keep your backups secure.
+
+## Which version should I use: GpgFrontend or GpgFrontend Lite?
+
+Use the regular GpgFrontend desktop edition if you need the full GnuPG-based
+experience, advanced configuration options, or maximum compatibility with
+existing GnuPG workflows.
+
+Use GpgFrontend Lite if you prefer a simple, self-contained Mac App Store
+edition for everyday OpenPGP operations on macOS.
 
 ## Why choose GPG/OpenPGP over other encryption solutions?
 
@@ -85,8 +173,8 @@ data is encrypted, or lock you into their ecosystem.
 
 <Aside>
   GPG/OpenPGP lets you choose your own balance of privacy and convenience. It"s
-  like a "manual transmission" for digital security for maximum control, no forced
-  automation, and nothing is hidden unless you want it to be.
+  like a "manual transmission" for digital security for maximum control, no
+  forced automation, and nothing is hidden unless you want it to be.
 </Aside>
 
 ## How secure is GPG?
@@ -155,18 +243,21 @@ Public-key encryption (like GPG) is more flexible and secure:
 
 ## What if I see "GnuPG not installed correctly"?
 
-This issue typically arises when GpgFrontend cannot locate GnuPG on your system.
-Here are steps to address this based on your operating system:
+This message mainly applies to GpgFrontend versions before **2.2.0**, or to
+GnuPG-specific workflows in the regular desktop edition.
 
-- For macOS Users: Install GnuPG using Homebrew with `brew install gnupg`.
-- For Linux Users: Install GnuPG via your package manager (apt, yum, etc.).
-- For Windows Users: New versions include GnuPG; or get it
-  [here](https://www.gnupg.org/ftp/gcrypt/binary/).
+Starting from GpgFrontend **2.2.0**, if GnuPG is not available, GpgFrontend can
+fall back to the built-in rPGP engine so that the application can still start
+and provide basic OpenPGP functionality.
 
-## Where can I find more help?
+If you want to use the regular GnuPG backend, existing GnuPG keyrings, smart
+cards, or other GnuPG-specific features, please install GnuPG:
 
-For more detailed guidance, refer to the quick start manual available at
-[Getting Started Guide](/overview/getting-started).
+- **macOS:** Install GnuPG using Homebrew with `brew install gnupg`.
+- **Linux:** Install GnuPG via your package manager, for example
+  `sudo apt install gpg` or `sudo dnf install gnupg`.
+- **Windows:** Recent regular desktop builds bundle GnuPG. If needed, you can
+  also download GnuPG from the [official GnuPG website](https://www.gnupg.org/download/).
 
 ## How do I import or export keys in GpgFrontend?
 
