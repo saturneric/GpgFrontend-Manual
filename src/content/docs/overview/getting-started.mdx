@@ -1,5 +1,5 @@
 ---
-title: Getting Started with GpgFrontend
+title: Initializing Your Cipher Machine
 sidebar:
   label: Getting Started
   order: 2
@@ -9,17 +9,23 @@ import { Tabs, TabItem } from "@astrojs/starlight/components";
 import { Steps } from "@astrojs/starlight/components";
 import { Aside } from "@astrojs/starlight/components";
 
-Welcome to **GpgFrontend**, a powerful, cross-platform [OpenPGP](https://www.openpgp.org/) tool designed to make encryption accessible for everyone. This guide will help you set up your environment and perform your first secure operations.
+Welcome to your new cryptographic workspace. **GpgFrontend** is engineered to
+make OpenPGP/LibrePGP encryption predictable, absolute, and accessible across
+any system. This operational manual will guide you through the initial
+calibration of your machine, ensuring your environment is secured and ready for
+its first deployment.
 
-<Aside type="caution" title="Important: GnuPG Version Requirement">
-  Starting from version 2.1.8, GpgFrontend requires **GnuPG 2.4 or later** for
-  full feature support. While GnuPG 2.2 is the minimum to start, some advanced
-  functions may be disabled.
+<Aside type="caution" title="System Directive: Engine Compatibility">
+  To unlock the full operational capacity of GpgFrontend (v2.1.8+), the **GnuPG
+  2.4 engine or later** is strictly required. While the legacy GnuPG 2.2 engine
+  meets the bare minimum to boot the application, several advanced cryptographic
+  modules will remain locked down to ensure absolute stability.
 </Aside>
 
 ## Cryptographic Engines
 
-GpgFrontend relies on a backend engine to handle cryptographic tasks. Refer to the table below to see what your system needs:
+GpgFrontend relies on a backend engine to handle cryptographic tasks. Refer to
+the table below to see what your system needs:
 
 | Platform         | Recommended Engine  | Notes                                                      |
 | :--------------- | :------------------ | :--------------------------------------------------------- |
@@ -29,11 +35,14 @@ GpgFrontend relies on a backend engine to handle cryptographic tasks. Refer to t
 | **Linux**        | **GnuPG**           | Pre-installed in most distros. Check with `gpg --version`. |
 | **BSD**          | **GnuPG**           | Must be installed manually via ports/pkg.                  |
 
-> **Note:** If GnuPG is missing (v2.2.0+), GpgFrontend will automatically fall back to the built-in **rPGP** engine to maintain basic functionality.
+> **Note:** If GnuPG is missing (v2.2.0+), GpgFrontend will automatically fall
+> back to the built-in **rPGP** engine to maintain basic functionality.
 
 ## Installation Guide
 
-Select your operating system to view the recommended installation steps. For more advanced methods (WinGet, Flatpak), visit our [Downloads](/overview/downloads) page.
+Select your operating system to view the recommended installation steps. For
+more advanced methods (WinGet, Flatpak), visit our
+[Downloads](/overview/downloads) page.
 
 <Tabs>
   <TabItem label="Windows">
@@ -55,22 +64,24 @@ Select your operating system to view the recommended installation steps. For mor
 
 <TabItem label="macOS">
   <Steps>
-    1. **Install GnuPG** via Homebrew: `brew install gnupg`. 2. **Download** the
-    `.dmg` file from [GitHub
-    Releases](https://github.com/saturneric/GpgFrontend/releases/latest). 3.
-    **Mount** the DMG and drag **GpgFrontend** to your **Applications** folder.
+    1. **Install GnuPG** via Homebrew: `brew install gnupg`.
+    2. **Download** the `.dmg` file from [GitHub Releases](https://github.com/saturneric/GpgFrontend/releases/latest).
+    3. **Mount** the DMG and drag **GpgFrontend** to your **Applications** folder.
+     ![Drag to Applications](https://image.cdn.bktus.com/i/2025/06/24/03df3c64a965b9da96c82ddb38c35b74b1796ee0.webp)
+
   </Steps>
-  ![Drag to
-  Applications](https://image.cdn.bktus.com/i/2025/06/24/03df3c64a965b9da96c82ddb38c35b74b1796ee0.webp)
+  
 </TabItem>
 
 <TabItem label="Linux">
   <Steps>
     1. **Verify GnuPG**: Ensure `gpg` is installed (`sudo apt install gpg` or
-    `sudo dnf install gnupg`). 2. **Download** the `.AppImage` from [GitHub
-    Releases](https://github.com/saturneric/GpgFrontend/releases/latest). 3.
-    **Set Permissions**: Run `chmod u+x ./GpgFrontend-xxx.AppImage`. 4.
-    **Launch**: Double-click the file or run it via terminal.
+    `sudo dnf install gnupg`).
+    2. **Download** the `.AppImage` from [GitHub
+    Releases](https://github.com/saturneric/GpgFrontend/releases/latest).
+    3. **Set Permissions**: Run `chmod u+x ./GpgFrontend-xxx.AppImage`.
+    4. **Launch**: Double-click the file or run it via terminal.
+
   </Steps>
 </TabItem>
 
@@ -79,11 +90,10 @@ Select your operating system to view the recommended installation steps. For mor
   </TabItem>
 </Tabs>
 
----
-
 ## 3. Next Steps
 
-If you are new to PGP, we strongly recommend reading our [Fundamental Concepts](/guides/fundamental-concepts/) guide first.
+If you are new to PGP, we strongly recommend reading our [Fundamental
+Concepts](/guides/fundamental-concepts/) guide first.
 
 ### Quick Links
 

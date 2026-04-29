@@ -4,99 +4,104 @@ sidebar:
   order: 3
 ---
 
-GpgFrontend is available for download through multiple channels. For more
-detailed instructions on installation and getting started, please refer to the
-[Getting Started Guide](/overview/getting-started/).
+Your personal cipher machine is ready for deployment. Choose your preferred
+channel to acquire GpgFrontend. For detailed operational instructions, please
+consult the [Getting Started Guide](/overview/getting-started/).
 
 [![Packaging status](https://repology.org/badge/vertical-allrepos/gpgfrontend.svg)](https://repology.org/project/gpgfrontend/versions)
 
 import { LinkCard, CardGrid } from "@astrojs/starlight/components";
 import { Tabs, TabItem, Badge } from "@astrojs/starlight/components";
 
-## Direct Downloads
+## Direct Acquisition
 
 ![GitHub Release](https://img.shields.io/github/v/release/saturneric/GpgFrontend?style=for-the-badge&label=Stable)
 ![GitHub Nightly](https://img.shields.io/github/v/release/saturneric/GpgFrontend?include_prereleases&filter=nightly*&display_name=release&style=for-the-badge&label=Nightly)
 
-Choose the version that fits your needs:
+Acquire the raw binaries directly from our primary distribution lines:
 
 <CardGrid>
   <LinkCard
-    title="GitHub Releases"
+    title="GitHub Releases (Stable)"
     href="https://github.com/saturneric/GpgFrontend/releases/latest"
-    description="Fastest and most up-to-date source for stable builds. Recommended for most users."
+    description="The primary assembly line for battle-tested, stable machines. Recommended for daily operations."
   />
   <LinkCard
-    title="GitHub Nightly Releases"
+    title="GitHub Nightly (Experimental)"
     href="https://github.com/saturneric/GpgFrontend/releases/nightly"
-    description="Get the latest experimental/nightly builds. For advanced users and testers."
+    description="Bleeding-edge builds straight from the forge. For advanced operators and testers."
   />
   <LinkCard
-    title="Privacy-Friendly HTTPS Mirror"
+    title="Telemetry-Free HTTPS Mirror"
     href="https://ftp.bktus.com/GpgFrontend/"
-    description="Direct, secure download. No tracking, no authentication, no rate limits."
+    description="Pure, air-gapped acquisition. Direct downloads with zero tracking, authentication, or rate limits."
   />
 </CardGrid>
 
-### Asset Naming
+### Artifact Nomenclature
 
-Below is a summary table explaining the naming patterns and purposes of each
-downloadable asset. You can use the filename patterns to quickly identify and
-select the appropriate package for your platform or use case.
+Below is the decoding table for our release artifacts. Use this to identify the exact package engineered for your operating environment.
 
-| Filename Pattern               | Description                                                      |
-| ------------------------------ | ---------------------------------------------------------------- |
-| `-windows-x86_64-portable.zip` | Fully portable Windows version. No installation needed;          |
-| `-windows-x86_64.msix`         | MSIX installer for Windows (Recommended).                        |
-| `-windows-x86_64.msi`          | MSI installer for Windows; For Legacy/Enterprise environments.   |
-| `-macos-<ver>.dmg`             | macOS disk image; \<ver\> = minimum required macOS version.      |
-| `-linux-<arch>.AppImage`       | AppImage for Linux; make it executable and run directly.         |
-| `*.sig`                        | GPG signature file for verifying the integrity and authenticity. |
-| `-qt5-`                        | Qt5 build, for older systems (e.g., Windows 7, Ubuntu 20.04).    |
+| Filename Pattern               | Operational Purpose                                                   |
+| ------------------------------ | --------------------------------------------------------------------- |
+| `-windows-x86_64-portable.zip` | Zero-footprint Windows execution. Run directly from a USB drive.      |
+| `-windows-x86_64.msix`         | Modern MSIX deployment for Windows (Recommended).                     |
+| `-windows-x86_64.msi`          | Standard MSI installer; engineered for Enterprise environments.       |
+| `-macos-<ver>.dmg`             | macOS disk image; `<ver>` indicates minimum OS requirement.           |
+| `-linux-<arch>.AppImage`       | Standalone Linux executable. Grant execution rights and ignite.       |
+| `*.sig`                        | Cryptographic signature. Always verify the integrity of your machine. |
+| `-qt5-`                        | Legacy architecture build (e.g., Windows 7, Ubuntu 20.04).            |
 
-## Platform-Specific Installation
+## Ecosystem Deployment
 
-Install GpgFrontend via your preferred package manager or store:
+Integrate GpgFrontend seamlessly into your system via trusted package managers
+and official storefronts:
 
 <CardGrid>
   <LinkCard
-    title="Mac App Store: GpgFrontend Lite"
+    title="Mac App Store: Lite Edition"
     href="https://apps.apple.com/app/gpgfrontend-lite/id6763597446"
-    description="Sandbox-friendly Mac App Store edition for macOS, using the rPGP engine."
+    description="A streamlined, sandbox-compliant macOS edition powered purely by the modern rPGP engine."
   />
   <LinkCard
     title="Homebrew Cask (macOS)"
     href="https://formulae.brew.sh/cask/gpgfrontend"
-    description="Install the regular GpgFrontend desktop edition with Homebrew."
+    description="Deploy the uncompromising Dual-Engine desktop edition via Homebrew."
   />
   <LinkCard
     title="Flatpak (Linux)"
     href="https://flathub.org/apps/com.bktus.gpgfrontend"
-    description="Install via Flathub on most Linux distros."
+    description="Secure, sandboxed distribution for most major Linux ecosystems."
   />
   <LinkCard
     title="WinGet (Windows)"
     href="https://winstall.app/apps/Saturneric.GpgFrontend"
-    description="Install via Windows Package Manager."
+    description="Command-line deployment via Windows Package Manager."
   />
   <LinkCard
     title="Microsoft Store (Windows)"
     href="https://apps.microsoft.com/detail/9nh716mqk2b5?referrer=appbadge&mode=direct"
-    description="One-click install from the Microsoft Store."
+    description="One-click official integration for Windows environments."
   />
 </CardGrid>
 
-:::note[GpgFrontend Lite]
-GpgFrontend Lite is the Mac App Store edition of GpgFrontend. It is designed for
-the macOS sandbox environment, uses the rPGP engine, and does not include GnuPG.
+:::note[The Lite Architecture]
 
-For the full desktop experience with GnuPG integration and advanced
-configuration options, use the regular GpgFrontend desktop edition from GitHub,
-Homebrew, or other package channels.
+**GpgFrontend Lite** is specifically engineered for the strict macOS sandbox
+environment. By omitting GnuPG and relying exclusively on the memory-safe **rPGP
+engine**, it delivers a seamless Mac App Store experience.
+
+For the complete cryptographic workstation—including GnuPG legacy support and
+advanced hardware token integration—please deploy the standard Desktop Edition
+via Homebrew or GitHub.
+
 :::
 
-:::caution[GpgFrontend Lite Key Backup]
-Please back up your OpenPGP keys created or imported in GpgFrontend Lite. The
-Lite edition stores key data inside the app-managed macOS sandbox storage. If
-your keys are lost, encrypted data may not be recoverable.
+:::caution[Operational Directive: Secure Your Keys]
+
+If you operate **GpgFrontend Lite**, immediate backup of your OpenPGP keys is
+mandatory. Because the Lite edition stores cryptographic material within an
+ephemeral Apple sandbox, application removal or system resets may obliterate
+your keys. **Lost keys result in permanently inaccessible data.**
+
 :::
