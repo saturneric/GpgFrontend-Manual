@@ -92,8 +92,7 @@ settings.
 
 To change the output mode between ASCII and binary formats:
 
-1. Open Settings: Navigate to the [GnuPG
-   Controller](/advanced/gnupg-controller/) settings within GpgFrontend by
+1. Open Settings: Navigate to the General settings within GpgFrontend by
    accessing the settings menu.
 2. Locate Binary Mode Option: In the settings interface, under the "General"
    section, find the option labeled "Use Binary Mode for File Operations".
