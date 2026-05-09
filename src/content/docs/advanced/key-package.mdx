@@ -7,22 +7,46 @@ sidebar:
 
 import { Steps, Aside } from "@astrojs/starlight/components";
 
-The KeyPackage feature is designed to securely package and transfer key data
-including both public and private keys between devices. This enables users to
-maintain their cryptographic identities across platforms. Starting from version
-2.1.9, KeyPackage functionality has been significantly enhanced to improve
-security, encryption strength, and user control.
+The KeyPackage feature is designed to securely package and transfer key data,
+including public and private keys, between devices. This allows users to keep
+their OpenPGP identities available across platforms.
+
+Starting with version 2.1.9, KeyPackage security was significantly improved by
+moving away from the older AES-ECB based format. Starting with v2.2.0,
+the internal cryptographic helpers used by KeyPackage handling have migrated
+from OpenSSL to **libsodium**, and the internal package format has changed again.
 
 <Aside type="caution">
-  KeyPackages created with v2.1.9 and later are not compatible with those
-  created in previous versions.
+  KeyPackages created with v2.1.9 and later are not compatible with packages
+  created by versions earlier than v2.1.9.
+
+KeyPackages created with v2.2.0 and later may also be incompatible with
+KeyPackages created by v2.1.9 to v2.1.x, because the internal cryptographic
+format changed as part of the migration from OpenSSL-based helpers to
+libsodium-based helpers.
+
 </Aside>
 
-## Security Enhancements Since v2.1.9
+## Security Enhancements
 
-KeyPackage data is now encrypted with AES-256-GCM (authenticated encryption),
-providing both confidentiality and integrity protection. Earlier versions used
-AES-256-ECB, which lacks integrity checking.
+### Since v2.1.9
+
+KeyPackage data was migrated from the older AES-256-ECB based format to an
+authenticated encryption design based on OpenSSL-backed AES-GCM. This improved
+both confidentiality and integrity protection.
+
+Earlier versions used AES-256-ECB, which did not provide integrity checking and
+is no longer recommended for this purpose.
+
+### Starting with v2.2.0
+
+KeyPackage handling now uses GpgFrontend's libsodium-based internal
+cryptographic helpers instead of OpenSSL-based helpers.
+
+This change improves consistency with the rest of GpgFrontend's internal
+application-managed cryptography, but it also changes the internal KeyPackage
+format. As a result, KeyPackages should generally be created and imported with
+the same major GpgFrontend series when possible.
 
 ### Key Generation
 
@@ -62,7 +86,6 @@ To create a KeyPackage, follow these steps:
    ![](https://image.cdn.bktus.com/i/2025/06/28/b0e9d21290681e6f61415b80ee51b90b47b1c04b.webp)
 
 4. **Configure KeyPackage**:
-
    - **KeyPackage Name**: In the first field, you will see a generated name for
      the KeyPackage, such as `KeyPackage_<zbase>`. You can click the button
      labeled "Generate Key Package Name" to generate a new name if desired.
@@ -76,7 +99,6 @@ To create a KeyPackage, follow these steps:
      ![](https://image.cdn.bktus.com/i/2025/06/28/0c304b476b436063970398593a82116029bc0e95.webp)
 
 5. **Optional Settings**:
-
    - **Include Secret Keys**: Check the box labeled "Include secret key (Think
      twice before acting)" if you want to include private keys in the
      KeyPackage. This is generally not recommended unless necessary.

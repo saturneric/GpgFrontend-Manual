@@ -7,28 +7,36 @@ sidebar:
 
 import { Steps } from "@astrojs/starlight/components";
 
-GpgFrontend introduces **Multi-Key Database Support**, providing users with a
-flexible and organized way to manage multiple key databases. This feature is
-ideal for users who require separate cryptographic environments for different
-projects, organizations, or levels of security.
+GpgFrontend provides **Multi-Key Database Support**, allowing users to manage
+multiple isolated OpenPGP key databases in one application. This is useful when
+you want to separate keys for different projects, organizations, identities, or
+security levels.
+
+Starting with GpgFrontend v2.2.0, key database management is integrated into the
+main **Settings** dialog. The old **GnuPG Controller** window has been removed.
 
 ## Features
 
-- **Multiple Key Databases**: Manage distinct key databases for specific
+- **Multiple Key Databases**: Manage separate key databases for different
   purposes or contexts.
-- **Flexible Switching**: Easily switch between databases for different
-  operations without affecting other configurations.
-- **Customizable Management**: Add, edit, reorder, or remove databases as
+- **Per-Database Engine Selection**: Choose the OpenPGP engine used by each key
+  database, such as GnuPG or the experimental rPGP engine when available.
+- **Flexible Switching**: Switch between configured databases from the main
+  interface.
+- **Customizable Management**: Add, edit, reorder, or remove key databases as
   needed.
 
 ## Benefits
 
-- **Improved Security**: Isolate sensitive keys in dedicated databases to
-  minimize exposure.
-- **Enhanced Organization**: Maintain separate databases for better operational
-  clarity.
-- **Streamlined Workflows**: Quickly switch between databases for various
-  projects or encryption tasks.
+- **Improved Separation**: Keep personal, project, organization, or test keys in
+  different databases.
+- **Better Workflow Control**: Use different key databases for different tasks
+  without mixing unrelated keys.
+- **Engine-Aware Testing**: Use GnuPG-backed databases for maximum compatibility
+  and rPGP-backed databases for testing newer OpenPGP features such as OpenPGP
+  v6.
+- **Reduced Operational Risk**: Avoid accidentally using keys from the wrong
+  project or security context.
 
 ## Accessing the Multi-Key Database Feature
 
@@ -36,50 +44,72 @@ To manage multiple key databases, follow these steps:
 
 <Steps>
 
-1. Click on the **Advanced** menu in the top navigation bar.
+1. Open **Settings** from the main application menu.
 
-2. Select **Open GnuPG Controller** from the dropdown options.
-   ![](https://image.cdn.bktus.com/i/2024/11/29/abfaa919-2945-1acc-eb35-5c86828a97ca.webp)
+2. Go to the **Key Database** section.
 
-3. In the **GnuPG Controller** window, switch to the **Key Database** tab.
+3. Here, you can view all configured key databases, including their names,
+   paths, order, and selected OpenPGP engines.
 
-4. Here, you will find a list of all configured key databases.
-   ![](https://image.cdn.bktus.com/i/2025/06/24/2a5cefe92a56b851de8ecd1661961592a7d3bc6c.webp)
+4. Add, edit, reorder, or remove key databases as needed.
 
 </Steps>
 
+:::note
+
+In GpgFrontend v2.2.0 and later, the previous **GnuPG Controller** window has
+been removed. Key database management is now part of the unified **Settings**
+interface.
+
+:::
+
 ## Managing Key Databases
 
-The Key Database tab allows you to perform the following operations:
+The **Key Database** settings page allows you to manage all configured key
+databases.
 
 ### Adding a New Key Database
 
-- Click the Add New Key Database button.
-- Specify a name and path for the new database. This will create an isolated
-  environment for newly generated or imported keys.
+To add a new key database:
+
+- Click **Add New Key Database**.
+- Specify a display name for the database.
+- Select the database path or use the default suggested location.
+- Choose the OpenPGP engine when the option is available.
+
+A new key database creates an isolated environment for generated or imported
+keys.
+
+:::note[Engine Selection]
+
+GnuPG remains the recommended default engine for daily use and maximum
+interoperability. The experimental rPGP engine can be used for supported
+databases when testing newer OpenPGP features such as OpenPGP v6 or selected
+post-quantum algorithms.
+
+:::
 
 **Relative Path Support:** If you enable the Relative Path option, the specified
-absolute path will be automatically converted to a path relative to the
-GpgFrontend application directory. This is particularly useful for Portable Mode
-or when moving the application between different systems, as it ensures that key
-database paths remain valid and consistent regardless of the host environment.
+absolute path will be converted to a path relative to the GpgFrontend
+application directory. This is useful for Portable Mode or when moving the
+application between different systems, because key database paths can remain
+valid across different host environments.
 
 ### Editing and Reordering Key Databases
 
-Right-click on a database entry to view options like:
+Right-click a database entry, or use the available management buttons, to access
+actions such as:
 
-![](https://image.cdn.bktus.com/i/2025/06/24/a012d736e4b116feb45d3c6af3e1b39ce8124c4f.webp)
-
-- **Move Up/Move Down**: Reorder the database list.
-- **Move to Top**: Prioritize a database by moving it to the top. If a database
-  is at the top, it is considered as the Default Key Database.
-- **Edit**: Rename or modify the path of an existing database.
-- **Remove**: Delete a database from the configuration.
+- **Move Up / Move Down**: Reorder the database list.
+- **Move to Top**: Move a database to the top of the list. The first database is
+  treated as the default key database.
+- **Edit**: Rename the database, adjust its path, or change supported settings.
+- **Remove**: Remove the database from the GpgFrontend configuration.
 
 :::caution
 
-Any changes to the key database settings will require an application
-restart to take effect.
+Some changes to key database settings may require restarting GpgFrontend before
+they take full effect.
 
 :::
 
@@ -88,28 +118,57 @@ restart to take effect.
 - Use the **Key Toolbox** dropdown in the main interface to switch between
   configured databases.
 - Select the desired database, and the corresponding keys will be displayed.
+- Operations such as key generation, import, export, encryption, signing, and
+  verification will use the currently selected key database where applicable.
 
-![](https://image.cdn.bktus.com/i/2024/11/29/dd783ee0-df5e-2b6f-428f-784c68246186.webp)
+## About `gf_keydb.sqlite`
+
+Starting with the 2.2 series, GpgFrontend may create a `gf_keydb.sqlite` file in
+configured key database directories.
+
+For **rPGP** key databases, this SQLite database stores rPGP-managed key material
+and metadata.
+
+For **GnuPG** key databases, private and public key material remains managed by
+GnuPG. In this case, `gf_keydb.sqlite` is used only for GpgFrontend-managed
+metadata and may be empty.
+
+:::caution[Backup Notice]
+
+Back up each key database according to its engine type.
+
+For GnuPG databases, back up the corresponding GnuPG home directory and your
+revocation certificates.
+
+For rPGP databases, back up the database directory that contains
+`gf_keydb.sqlite`, because it may contain rPGP-managed key material.
+
+:::
 
 ## Use Cases for Multi-Key Databases
 
-- Project Isolation: Maintain separate databases for different projects to
-  avoid accidental cross-use of keys.
-- Organizational Separation: Keep departmental or team-specific keys isolated
-  to ensure they are only accessible to authorized personnel.
-- Enhanced Security for Sensitive Keys: Store high-security keys in a dedicated
-  database, minimizing the risk of exposure during routine operations.
+- **Project Isolation**: Keep keys for different projects separate to avoid
+  accidental cross-use.
+- **Personal and Work Separation**: Store personal and work-related keys in
+  different databases.
+- **Organization or Team Separation**: Maintain separate databases for different
+  departments, teams, or customer environments.
+- **Testing New Engines**: Use a dedicated rPGP database to test OpenPGP v6 or
+  experimental algorithms without affecting your main GnuPG keyring.
+- **Sensitive Key Handling**: Keep high-value or sensitive keys in a dedicated
+  database with stricter backup and access procedures.
 
 ## Tips for Effective Multi-Key Database Usage
 
-- Name Databases Clearly: Use descriptive names for each database to make it
-  easier to identify their purpose.
-- Regular Backups: Backup each database regularly to prevent loss of critical
-  keys. Store backups in secure, encrypted locations.
-- Audit Database Usage: Periodically review the contents and usage of each
-  database to ensure proper organization and security.
-- Isolate Sensitive Operations: For highly sensitive keys, consider using a
-  dedicated device or environment to manage their database.
-- Avoid Overloading Databases: Distribute keys evenly across multiple databases
-  instead of overloading a single one. This enhances performance and
-  organization.
+- **Use clear names**: Name databases according to their purpose, such as
+  `Personal`, `Work`, `Project Alpha`, or `rPGP Test`.
+- **Check the active database before operating**: Make sure you are using the
+  intended database before importing keys, generating keys, encrypting files, or
+  signing data.
+- **Back up regularly**: Back up each database and store backups in secure,
+  encrypted locations.
+- **Separate stable and experimental workflows**: Use GnuPG-backed databases for
+  daily work and separate rPGP-backed databases for testing experimental
+  features.
+- **Review database contents periodically**: Remove unused keys, check
+  expiration dates, and verify that keys are stored in the intended database.

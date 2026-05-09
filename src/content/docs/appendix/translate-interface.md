@@ -4,39 +4,64 @@ sidebar:
   label: Translate
 ---
 
-GpgFrontend is designed to support multiple languages, but requires volunteer
-contributions to achieve this goal. Fortunately, translation work does not
-require an understanding of difficult technology. Volunteers simply need to use
-their skills to get the job done and make it accessible to everyone.
+GpgFrontend is designed to support multiple languages, and community
+translation is an important part of making the application accessible to more
+users.
 
-## What you need to know about translation work
+Translation work does not require deep technical knowledge of cryptography or
+GpgFrontend internals. If you are familiar with both English and another
+language, you can help improve the interface, documentation, and user
+experience.
 
-From v2.1.2, GpgFrontend uses the Qt translation support library [Qt
-Linguist](https://doc.qt.io/qt-6/qtlinguist-index.html) in the Qt project.
-Before starting everything, you need to know something about this library. After
-you are sure about the content of the document, you can first try to see how
-GpgFrontend uses the tools provided by this library.
+## What You Need to Know
 
-## About translation files
+Since v2.1.2, GpgFrontend has used Qt's translation system through
+[Qt Linguist](https://doc.qt.io/qt-6/qtlinguist-index.html).
 
-1. Download or clone source code
-   [HERE](https://github.com/saturneric/GpgFrontend)
-2. You will find some ts files(.ts) at path
-   [`resource/lfs/locale/ts`](https://github.com/saturneric/GpgFrontend/tree/main/resource/lfs/locale/ts)
-3. Add a new language: Create a new file; see [locale codes](https://saimana.com/list-of-country-locale-code/).
-4. To edit or update an existing language: Just by modifying the corresponding ts file.
+Before starting, it is helpful to understand the basic Qt Linguist workflow:
 
-## Before starting your work
+- `.ts` files store source strings and translations.
+- Qt Linguist can be used to edit translations with a graphical interface.
+- Unfinished or outdated translations can be updated gradually.
+- Placeholders such as `%1`, `%2`, `%n`, and HTML-like tags should be preserved.
 
-Before starting your work, it is no longer necessary to contact me. Please
-ensure you have a thorough understanding of Qt Linguist and its usage. You can
-directly edit the files, or use the Qt Linguist GUI Tool for editing.
+## About Translation Files
 
-## Hand in your work
+1. Download or clone the source code from
+   [GitHub](https://github.com/saturneric/GpgFrontend).
+2. Translation files are located in
+   [`resource/lfs/locale/ts`](https://github.com/saturneric/GpgFrontend/tree/main/resource/lfs/locale/ts).
+3. To add a new language, create a new `.ts` file using the appropriate locale
+   code. See this [locale code list](https://saimana.com/list-of-country-locale-code/)
+   for reference.
+4. To update an existing language, edit the corresponding `.ts` file.
 
-You can submit your great work in two ways:
+## Translation Lifecycle
 
-1. Raise a pull request and merge the changed translation file(s) to the
-   repository.
-2. [Email ME](mailto:eric@bktus.com). Please attach the changed ts file in the
-   email.
+Once a translation file is created and added to GpgFrontend, the language will
+continue to be supported in later releases unless it is intentionally removed.
+
+However, interface strings change over time. New features, renamed options, and
+updated dialogs may introduce untranslated or outdated strings. Before a
+release, I may use AI-assisted translation tools to fill missing translations
+in languages that I cannot confidently review myself, so that supported
+languages remain reasonably complete.
+
+AI-assisted translations are only a fallback. They may be inaccurate, unnatural,
+too literal, or inconsistent with established terminology. Human review is still
+preferred, especially for security-related terms, OpenPGP concepts, and user
+interface wording.
+
+Contributors are welcome to improve existing translations at any time. If you
+notice awkward, incorrect, or incomplete translations, you can edit the
+corresponding `.ts` file and submit the updated version again.
+
+## Submitting Your Work
+
+You can submit translation updates in either of the following ways:
+
+1. Open a pull request with the changed `.ts` file or files.
+2. Send the updated `.ts` file by email to
+   [eric@bktus.com](mailto:eric@bktus.com).
+
+Both new languages and corrections to existing translations are welcome.

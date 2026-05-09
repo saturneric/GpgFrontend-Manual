@@ -14,6 +14,13 @@ Note: As of v2.1.9, GpgFrontend no longer uses the QtAES library. All
 cryptographic operations (mainly used for the Application itself) are now
 performed using OpenSSL, with AES-GCM as the default and only mode.
 
+Note: Starting with v2.2.0, the internal cryptographic helpers have been
+migrated again from OpenSSL to **libsodium**. This includes application-level
+helpers such as hashing, HMAC, random generation, password hashing, and key
+derivation. OpenSSL may also still be used indirectly by Qt or the operating
+system for network communication, such as HTTPS/TLS connections. Therefore, this
+change does not mean OpenSSL is completely absent from all runtime environments.
+
 ## Common
 
 - **Qt (Open Source)**: [https://www.qt.io](https://www.qt.io)
@@ -21,6 +28,7 @@ performed using OpenSSL, with AES-GCM as the default and only mode.
 - **GpgME**: [https://gnupg.org/software/gpgme/index.html](https://gnupg.org/software/gpgme/index.html)
 - **OpenSSL**: [https://openssl-library.org](https://openssl-library.org)
 - **libarchive**: [https://www.libarchive.org](https://www.libarchive.org)
+- **libsodium**: [https://libsodium.gitbook.io/doc](https://libsodium.gitbook.io/doc)
 
 ## Windows
 
@@ -34,6 +42,7 @@ performed using OpenSSL, with AES-GCM as the default and only mode.
 ## macOS
 
 - **macOS Application Bundles**: [Link](https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/AboutBundles/AboutBundles.html)
+- **Xcode Command Line Tools**: [https://developer.apple.com/xcode/](https://developer.apple.com/xcode/)
 
 # Icons
 
