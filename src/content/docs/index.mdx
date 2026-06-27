@@ -1,10 +1,12 @@
 ---
 title: GpgFrontend
-description: Your personal, cross-platform OpenPGP cipher machine. Free, portable, and built for true offline privacy.
+description: A free, user-friendly, portable, and cross-platform OpenPGP encryption tool. Encrypt, sign, and manage GPG keys with a clean modern interface and a dual-engine core powered by GnuPG and Rust rPGP.
 template: splash
 hero:
   tagline: >
-    A digital Enigma for the modern era. Execute OpenPGP and LibrePGP encryption, signing, and key management with absolute sovereignty and precision.
+    Effortless, portable OpenPGP encryption for Windows, macOS, and Linux.
+    One clean interface, two engines: your choice of the trusted GnuPG or a
+    modern, memory-safe Rust rPGP backend.
   image:
     file: ../../assets/icon.png
   actions:
@@ -12,35 +14,38 @@ hero:
       link: /overview/glance/
       icon: right-arrow
       variant: primary
-    - text: Get the Machine
+    - text: Download
       link: /overview/downloads/
       icon: rocket
       variant: secondary
+    - text: ⭐ Star on GitHub
+      link: https://github.com/saturneric/GpgFrontend
+      icon: github
+      variant: minimal
+      attrs:
+        target: _blank
+        rel: noopener
 ---
 
 import { Card, CardGrid } from "@astrojs/starlight/components";
 
-## The Cipher Machine
+## Why GpgFrontend
 
 <CardGrid stagger>
-  <Card title="Air-Gapped Portability" icon="laptop">
-    A fortress in your pocket. Run the entire cryptographic workspace directly
-    from a USB drive across Windows, macOS, and Linux. Plug in, execute your
-    tasks, and leave absolutely zero trace.
+  <Card title="Dual-Engine Core" icon="rocket">
+    Two crypto engines, one interface. Choose the trusted GnuPG or a modern,
+    memory-safe Rust rPGP backend, and switch anytime.
   </Card>
-  <Card title="Predictable Execution" icon="rocket">
-    You press the key, the math executes. Turn raw thoughts into secure ciphers
-    or sign critical files instantly. Intuitive, direct workflows with zero
-    hidden telemetry.
+  <Card title="Truly Portable" icon="laptop">
+    Run from a USB drive across Windows, macOS, and Linux. Plug in, work, and
+    leave no trace behind.
   </Card>
-  <Card title="Multi-Vault Mastery" icon="seti:lock">
-    Total control over your identities. Isolate different facets of your digital
-    life by seamlessly switching between multiple, independent key databases.
-    Your keys, your rules.
+  <Card title="Multi-Key Mastery" icon="seti:lock">
+    Manage multiple, independent key databases for different identities,
+    projects, or teams. Your keys, your rules.
   </Card>
-  <Card title="Transparent & Enduring" icon="open-book" invert>
-    100% free, open-source, and built to last. A steadfast architecture crafted
-    by the community to protect your archives not just for today, but for
-    decades to come.
+  <Card title="Open & Free Forever" icon="open-book" invert>
+    100% free and open source. No tracking, no hidden costs. Built by the
+    community, auditable today and built to last.
   </Card>
 </CardGrid>
