@@ -76,6 +76,22 @@ Once all configurations are completed:
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/a52b9445c4aef48b880ae1fb7d031b6d445b700e.webp)
 
+### Adding an Additional Decryption Subkey (ADSK)
+
+The **Keychain** tab also offers an **Add ADSK(s)** button. An Additional
+Decryption Subkey lets you attach another key's encryption subkey to your key,
+so messages encrypted to you can also be decrypted by the ADSK holder (for
+example, an organization escrow or backup key).
+
+:::note[Requires the GnuPG engine]
+
+ADSK support is provided by the **GnuPG engine** (GnuPG 2.4.1 or later). The
+button appears only for a primary key that has its secret material available,
+and it is hidden when the active key database uses an engine or GnuPG version
+that does not support ADSK.
+
+:::
+
 ## Understanding Primary Keys and Subkeys
 
 In the realm of cryptography, key management plays a crucial role in ensuring
@@ -132,6 +148,16 @@ reduce exposure. For high-security environments, it is recommended that:
 > access. The loss or compromise of the primary key jeopardizes the entire
 > cryptographic framework."
 
+:::note[Subkey export requires the GnuPG engine]
+
+Exporting an individual subkey, and the related workflow of removing the primary
+key to leave only subkeys, is supported by the **GnuPG engine** only. When a key
+database uses the rPGP engine, the **Export Subkey** button is hidden, and the
+button shows the tooltip "Exporting subkeys is not supported by the current
+OpenPGP backend." To isolate subkeys this way, use a GnuPG-backed key database.
+
+:::
+
 ### Step-by-Step Guide to Exporting Subkeys
 
 To demonstrate how to export an individual subkey, let's refer to the screenshot
@@ -154,7 +180,9 @@ and successfully export a subkey:
 
 4. **Export the Subkey**: On the right side of the key details section, there is
    an **Export Subkey** button, highlighted in the screenshot. Click this button
-   to start the export process.
+   to start the export process. When the selected row is the primary key (a
+   certification-capable key), the button is labeled **Export Primary Key**
+   instead.
 
 5. **Save the Subkey File**: A file dialog will appear, prompting you to specify
    a location to save the exported subkey. Choose a secure directory and save
