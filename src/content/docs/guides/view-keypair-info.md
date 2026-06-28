@@ -109,6 +109,16 @@ the expiration time of the primary key at any time, or even set it to never
 expire. The prerequisite for this is that the primary key exists in the key
 pair.
 
+#### Key Format Version
+
+This shows the OpenPGP packet format of the primary key, displayed as `v4` or
+`v6`. `v4` is the widely compatible default, while `v6` is the modern RFC 9580
+format used for post-quantum and other newer keys.
+
+This field is only shown when the active engine can report it. The rPGP engine
+parses the key packet and exposes the format version, whereas GnuPG/GPGME does
+not, so the field is hidden for keys loaded through the GnuPG engine.
+
 #### Last Update
 
 This is the time when the content of the key pair was last updated. Operations

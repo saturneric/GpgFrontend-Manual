@@ -57,6 +57,14 @@ Once the subkey generation dialog appears, configure the following settings:
   - `Authenticate`  
     _(Certification usage is reserved for primary keys.)_
 
+- **Second Algorithm**: Shown only for **hybrid** algorithms (such as the
+  post-quantum ML-KEM/Kyber options). When the selected algorithm is a hybrid
+  construction, a **Second Algorithm** (and **Second Key Length**) field appears
+  so you can pick the classical component that is paired with it.
+
+- **No Passphrase**: Generate the subkey without a separate passphrase when the
+  selected engine permits it.
+
 ### Final Step: Generate
 
 Once all configurations are completed:

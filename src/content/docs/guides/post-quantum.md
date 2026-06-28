@@ -54,16 +54,28 @@ A quick primer on the families:
 
 ## Generate Your First Post-Quantum Key
 
-1. Open **Key Management** and choose **Generate Key**.
-2. In the **Algorithm** selector, look for the entries marked with a
-   🛡 **Post-Quantum** label. These are the quantum-resistant options.
+1. Open **Key Management** and click **New Keypair** to open the **Generate Key**
+   dialog.
+2. Choose how to pick a post-quantum algorithm:
+   - **Easy Mode**: open the **Profile** dropdown and select a profile listed
+     under the **Post-Quantum** section header.
+   - **Advanced Mode** (the **Primary Key** / **Subkey** tabs): open the
+     **Algorithm** dropdown and choose an entry under the **Post-Quantum**
+     section header. The algorithm list is grouped into family tiers
+     (classical, **ECC**, and **Post-Quantum**) so the quantum-resistant options
+     are easy to find.
 3. Pick an algorithm:
-   - For **encryption**, choose an **ML-KEM (Kyber)** option.
+   - For **encryption**, choose an **ML-KEM (Kyber)** option (a subkey
+     algorithm).
    - For **signing**, choose **ML-DSA** or **SLH-DSA**.
 4. Make sure the active engine supports your choice. Most PQC algorithms are
    provided by the **rPGP** engine; you can switch engines if an option is not
    available.
 5. Fill in your name, email, and validity period, then generate the key.
+
+Post-quantum algorithms require the **v6** key format. In Advanced Mode the
+**Key Format** is switched to v6 and locked automatically once a post-quantum
+algorithm is selected, so you don't need to set it manually.
 
 That's it, you now hold a post-quantum OpenPGP key.
 

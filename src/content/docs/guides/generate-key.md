@@ -23,6 +23,10 @@ configure key parameters.
 - **Email**: Required. Must be in a valid email format.
 - **Comment**: Optional. Helps distinguish this key from others.
 
+The refresh button next to the identity fields fills in a **random anonymous
+identity**. This is handy for throwaway or test keys when you don't want to tie
+the key to a real name or address.
+
 ## Choose Key Database
 
 Select the **Key Database** where the generated key pair will be stored (e.g.,
@@ -34,17 +38,42 @@ The **Generate Key** dialog offers two configuration modes:
 
 ### Easy Mode
 
-Easy Mode simplifies key generation using common templates. You can configure:
+Easy Mode simplifies key generation using ready-made **profiles** instead of
+exposing every cryptographic option. It is split into two sections:
 
-- **Algorithm**: RSA, DSA, ECC (Curve25519), or other supported types.
+**Profile**
+
+- **Name**: Pick a profile from the dropdown. Profiles are grouped by algorithm
+  family under section headers:
+  - **(Classical)**: traditional profiles such as RSA.
+  - **ECC**: elliptic-curve profiles. The Ed25519 (Curve25519) profile is the
+    recommended modern default and is pre-selected when available.
+  - **Post-Quantum**: quantum-resistant profiles (rPGP engine only).
+- **Save / Delete / Reset**: Manage the profile list. **Save** stores your
+  current configuration as a new named profile, **Delete** removes the selected
+  profile, and **Reset** restores the profile list to its default set. The
+  built-in `Custom` profile is reserved and cannot be deleted.
+
+Only profiles whose algorithms are supported by the currently selected engine
+and key database are listed.
+
+**Basic**
+
 - **Validity Period**: Choose from preset options (e.g., 3 months, 2 years, 10
   years, or _Non Expired_).
 - **Combination**:
   - **Primary Key Only**
-  - **Primary Key with Subkey**: Useful when separating signing and encryption
+  - **Primary Key With Subkey**: Useful when separating signing and encryption
     functions.
 
 > Recommended for users who prefer a faster and more guided setup process.
+
+:::note
+
+When the rPGP engine is selected, expiration options are hidden because the
+backend currently has limited support for setting key validity periods.
+
+:::
 
 ### Advanced Mode (Primary Key & Subkey Tabs)
 
@@ -54,13 +83,23 @@ control. Available options include:
 - **Algorithm**: RSA, DSA, ED25519, ED448, Brainpool, NIST, CV25519, and others.
 - **Key Length**: Adjustable for applicable algorithms (e.g., RSA: 2048, 3072,
   4096 bits).
+- **Key Format** (Primary Key tab): Choose the OpenPGP packet format:
+  - **v4 (Compatible)**: the interoperable default, supported across the wider
+    OpenPGP ecosystem.
+  - **v6 (Modern)**: the RFC 9580 format. It is opt-in because v6 support is
+    still limited in parts of the ecosystem, and is required for post-quantum
+    algorithms.
 - **Expiration**: Set a specific expiry date or mark the key as non-expiring.
 - **Usage Flags**:
   - Encrypt
   - Sign
   - Authenticate
   - Certify (for primary keys)
-- **Passphrase Protection**: Enable or disable passphrase requirement.
+- **Passphrase Protection**: Enable or disable passphrase requirement via the
+  **No Passphrase** option.
+
+> When a post-quantum algorithm is selected, the **v6** key format is required
+> and is enforced automatically.
 
 > Ideal for experienced users who require full control over key structure and
 > behavior.
