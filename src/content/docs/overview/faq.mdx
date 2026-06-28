@@ -38,8 +38,9 @@ unless noted otherwise in the release notes.
 
 Today, when people talk about "PGP encryption," they almost always mean the
 OpenPGP standard, and the tool they actually use is GnuPG (GPG) or another
-compatible app. GpgFrontend is a user-friendly front-end for GnuPG, making
-OpenPGP encryption easy for everyone.
+compatible app. GpgFrontend is a user-friendly front-end for OpenPGP. It uses
+GnuPG as its primary engine and, since v2.2.0, also offers an optional rPGP
+engine, making OpenPGP encryption easy for everyone.
 
 ## Which cryptographic engines does GpgFrontend use?
 
@@ -172,7 +173,7 @@ Proprietary or closed-source tools may restrict platform compatibility, hide how
 data is encrypted, or lock you into their ecosystem.
 
 <Aside>
-  GPG/OpenPGP lets you choose your own balance of privacy and convenience. It"s
+  GPG/OpenPGP lets you choose your own balance of privacy and convenience. It's
   like a "manual transmission" for digital security for maximum control, no
   forced automation, and nothing is hidden unless you want it to be.
 </Aside>
@@ -237,7 +238,7 @@ compliant GPG or legacy PGP programs.
 Public-key encryption (like GPG) is more flexible and secure:
 
 - No need to share passwords in advance, only by publish your public key.
-- Anyone can encrypt for you, even if you"ve never met.
+- Anyone can encrypt for you, even if you've never met.
 - Digital signatures prove authorship and integrity.
 - Keys can be revoked or rotated at any time without breaking old data.
 
@@ -278,9 +279,16 @@ checksum. Please report feedback/issues on GitHub.
 
 ## How does GpgFrontend handle passphrases or PINs?
 
-GpgFrontend never processes or stores your GPG key passphrases or smart card
-PINs. All PIN entry is securely handled by GnuPG's pinentry, independent from
-GpgFrontend.
+This depends on the engine used by the active key database.
+
+With the **GnuPG engine**, GpgFrontend never processes or stores your GPG key
+passphrases or smart card PINs. All PIN entry is securely handled by GnuPG's
+pinentry and `gpg-agent`, independent from GpgFrontend.
+
+With the **rPGP engine**, there is no `gpg-agent` or pinentry, so GpgFrontend
+prompts for the passphrase itself and passes it to the rPGP engine. Passphrases
+are kept only in memory for the duration of the operation and then cleared; they
+are never written to disk.
 
 For app-specific encryption (e.g., KeyPackage), passphrases/PINs are used only
 in memory and immediately cleared. Advanced users can enable PIN caching and
@@ -294,13 +302,15 @@ your passphrase!
 
 ## How does GpgFrontend ensure secure communications?
 
-It uses GnuPG to implement OpenPGP with robust encryption algorithms. Only
-intended recipients can decrypt your messages.
+It uses a mature OpenPGP engine (GnuPG by default, or the rPGP engine when
+selected) with robust encryption algorithms. Only intended recipients can
+decrypt your messages.
 
 ## Does GpgFrontend support OpenPGP smart cards or tokens?
 
 Yes, if your GnuPG supports smart cards. Manage your smart cards directly via
-the SmartCard Controller.
+the SmartCard Controller. Smart card support requires the **GnuPG engine**; the
+rPGP engine does not provide smart card or token integration.
 
 ## Is GpgFrontend available in my language?
 
