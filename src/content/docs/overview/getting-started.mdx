@@ -16,10 +16,12 @@ calibration of your machine, ensuring your environment is secured and ready for
 its first deployment.
 
 <Aside type="caution" title="System Directive: Engine Compatibility">
-  To unlock the full operational capacity of GpgFrontend (v2.1.8+), the **GnuPG
-  2.4 engine or later** is strictly required. While the legacy GnuPG 2.2 engine
-  meets the bare minimum to boot the application, several advanced cryptographic
-  modules will remain locked down to ensure absolute stability.
+  Since v2.2.0, GpgFrontend can run on either the **GnuPG** engine or the
+  built-in **rPGP** engine. For the full GnuPG-based experience (smart cards,
+  owner trust, existing keyrings), the **GnuPG 2.4 engine or later** is
+  recommended; the bundled Windows build now ships a recent GnuPG 2.5.x. If
+  GnuPG is missing or older, the application still starts on the rPGP engine,
+  but several GnuPG-specific modules will remain unavailable.
 </Aside>
 
 ## Cryptographic Engines
@@ -90,7 +92,7 @@ more advanced methods (WinGet, Flatpak), visit our
   </TabItem>
 </Tabs>
 
-## 3. Next Steps
+## Next Steps
 
 If you are new to PGP, we strongly recommend reading our [Fundamental Concepts](/guides/fundamental-concepts/) guide first.
 
