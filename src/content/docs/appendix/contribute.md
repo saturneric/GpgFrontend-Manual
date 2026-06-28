@@ -37,9 +37,14 @@ following technical standards for all contributions:
   standard is required. This helps ensure our code takes advantage of more
   recent language features while maintaining compatibility with various
   platforms and compilers.
-- **Compiler Compatibility:** Your code should compile successfully with both
-  Clang and GCC compilers. This cross-compatibility is crucial for ensuring that
-  GpgFrontend can be built on a variety of platforms and environments.
+- **Rust Standard:** Since v2.2, GpgFrontend includes a Rust component (the rPGP
+  engine), located under the `rust/` directory and built into the project via
+  [Corrosion](https://github.com/corrosion-rs/corrosion). Rust code must build
+  with the Rust 2024 edition (Rust 1.85 or newer) and should be formatted with
+  `rustfmt` and pass `clippy` using their default configurations.
+- **Compiler Compatibility:** Your C/C++ code should compile successfully with
+  both Clang and GCC compilers. This cross-compatibility is crucial for ensuring
+  that GpgFrontend can be built on a variety of platforms and environments.
 - **Third-Party Libraries:** Introducing third-party libraries should be done
   with caution. Any added library must be compatible with the GPL 3.0 license.
   Prior discussion with project maintainers about the necessity and implications

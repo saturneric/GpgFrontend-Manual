@@ -46,6 +46,11 @@ environment in GitHub Codespaces.
 
 - **Git:** Installed and configured on your system.
 - **Compilers:** GCC and Clang for cross-compatibility.
+- **Rust toolchain:** Required since v2.2. GpgFrontend now ships a Rust-based
+  engine (rPGP), which is compiled into the project at build time via
+  [Corrosion](https://github.com/corrosion-rs/corrosion). Install Rust through
+  [rustup](https://rustup.rs/). The Rust crate uses the 2024 edition, so a
+  recent toolchain (Rust 1.85 or newer) is required.
 
 ### Clone the Repository
 
@@ -110,6 +115,27 @@ brew link --force openssl@3
 pacman -Syu
 pacman -S mingw-w64-x86_64-cmake msys2-runtime-devel mingw-w64-x86_64-ninja mingw-w64-x86_64-gnupg mingw-w64-x86_64-libarchive mingw-w64-x86_64-gpgme
 ```
+
+:::caution[Windows build environment]
+
+On Windows, GpgFrontend can only be built within a Unix-like build environment,
+namely MSYS2, MinGW, or Cygwin. A native MSVC/Visual Studio toolchain is not
+supported. **MSYS2 is the only environment that is regularly tested, and it is
+the recommended choice;** MinGW and Cygwin may work but are not officially
+verified.
+
+:::
+
+### Install the Rust Toolchain
+
+Install Rust through rustup (all platforms):
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+On Windows with MSYS2, install Rust via `rustup` from the official installer
+instead. The build expects `cargo` to be available on your `PATH`.
 
 ### Install Qt6
 
