@@ -1,6 +1,6 @@
 ---
 title: File Operations
-description: Encrypt, decrypt, sign, and verify files and folders in GpgFrontend using the File Panel and quick direct-selection workflows.
+description: "Encrypt, decrypt, sign, and verify files and folders in GpgFrontend using the File Panel and quick direct-selection workflows."
 sidebar:
   order: 6
 ---

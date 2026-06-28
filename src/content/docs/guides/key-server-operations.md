@@ -1,6 +1,6 @@
 ---
 title: Key Server Operations
-description: Search, import, export, and synchronize OpenPGP public keys with key servers using GpgFrontend's graphical interface.
+description: "Search, import, export, and synchronize OpenPGP public keys with key servers using GpgFrontend's graphical interface."
 ---
 
 Key servers are essential components in the ecosystem of encrypted

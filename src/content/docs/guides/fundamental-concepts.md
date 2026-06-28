@@ -1,6 +1,6 @@
 ---
 title: Fundamental Concepts for Beginners
-description: A beginner's guide to OpenPGP, GPG, and PGP: learn public and private keys, encryption, and digital signatures before using GpgFrontend.
+description: "A beginner's guide to OpenPGP, GPG, and PGP: learn public and private keys, encryption, and digital signatures before using GpgFrontend."
 sidebar:
   label: Fundamental Concepts
   order: 1

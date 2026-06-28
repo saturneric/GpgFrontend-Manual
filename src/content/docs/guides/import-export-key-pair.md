@@ -1,6 +1,6 @@
 ---
 title: Import & Export Key Pair
-description: Import and export OpenPGP key pairs in GpgFrontend via file, editor, clipboard, or key server for easy backup and key sharing.
+description: "Import and export OpenPGP key pairs in GpgFrontend via file, editor, clipboard, or key server for easy backup and key sharing."
 ---
 
 GpgFrontend provides various methods for importing or exporting key pairs, some

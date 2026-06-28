@@ -1,6 +1,6 @@
 ---
 title: "Application Data Storage"
-description: How GpgFrontend securely stores application data such as key server settings and key profiles using per-object key derivation and authenticated encryption.
+description: "How GpgFrontend securely stores application data such as key server settings and key profiles using per-object key derivation and authenticated encryption."
 sidebar:
   label: Application Data Storage
 ---

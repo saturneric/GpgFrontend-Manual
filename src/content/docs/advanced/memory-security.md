@@ -1,6 +1,6 @@
 ---
 title: "Memory Security"
-description: Configure GpgFrontend's SecureLevel memory protection settings to balance security, compatibility, and performance when handling sensitive data.
+description: "Configure GpgFrontend's SecureLevel memory protection settings to balance security, compatibility, and performance when handling sensitive data."
 sidebar:
   label: Memory Security
 ---

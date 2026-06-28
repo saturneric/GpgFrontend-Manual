@@ -1,6 +1,6 @@
 ---
 title: View Key Pair Details
-description: Inspect OpenPGP key pair details in GpgFrontend, including owner UIDs, primary key, subkeys, algorithms, and validity information.
+description: "Inspect OpenPGP key pair details in GpgFrontend, including owner UIDs, primary key, subkeys, algorithms, and validity information."
 sidebar:
   label: Key Pair Details
 ---

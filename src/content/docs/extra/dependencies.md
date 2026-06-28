@@ -1,6 +1,6 @@
 ---
 title: Dependencies and Acknowledgements
-description: Libraries and third-party dependencies used by GpgFrontend, with their licenses and acknowledgements, including OpenSSL and libsodium.
+description: "Libraries and third-party dependencies used by GpgFrontend, with their licenses and acknowledgements, including OpenSSL and libsodium."
 sidebar:
   label: Dependencies
 ---

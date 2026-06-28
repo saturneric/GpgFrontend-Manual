@@ -1,6 +1,6 @@
 ---
 title: "Application Secure Key"
-description: How GpgFrontend generates and manages the Application Secure Key that protects its internal data, kept separate from your OpenPGP keys.
+description: "How GpgFrontend generates and manages the Application Secure Key that protects its internal data, kept separate from your OpenPGP keys."
 sidebar:
   label: Application Secure Key
 ---

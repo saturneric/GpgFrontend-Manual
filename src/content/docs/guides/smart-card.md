@@ -1,6 +1,6 @@
 ---
 title: Comprehensive OpenPGP Smart Card Management
-description: Use OpenPGP smart cards like YubiKey and Nitrokey in GpgFrontend: view card details, manage on-card keys, and run secure hardware operations.
+description: "Use OpenPGP smart cards like YubiKey and Nitrokey in GpgFrontend: view card details, manage on-card keys, and run secure hardware operations."
 sidebar:
   label: Smart Card
 ---

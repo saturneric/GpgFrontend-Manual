@@ -1,6 +1,6 @@
 ---
 title: Post-Quantum Cryptography
-description: Generate and use post-quantum OpenPGP keys in GpgFrontend, including ML-KEM (Kyber), ML-DSA, and SLH-DSA quantum-resistant algorithms.
+description: "Generate and use post-quantum OpenPGP keys in GpgFrontend, including ML-KEM (Kyber), ML-DSA, and SLH-DSA quantum-resistant algorithms."
 sidebar:
   label: Post-Quantum Keys
   order: 7

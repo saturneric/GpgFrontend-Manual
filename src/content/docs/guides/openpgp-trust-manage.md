@@ -1,6 +1,6 @@
 ---
 title: Best Practices for OpenPGP Trust Chain Management
-description: Manage the OpenPGP web of trust in GpgFrontend by setting Owner Trust levels and signing other keys' UIDs to build a reliable, decentralized trust model.
+description: "Manage the OpenPGP web of trust in GpgFrontend by setting Owner Trust levels and signing other keys' UIDs to build a reliable, decentralized trust model."
 sidebar:
   label: Trust Chain Management
 ---

@@ -1,6 +1,6 @@
 ---
 title: Synchronizing Public Keys with Key Server
-description: Keep your local OpenPGP keyring current by synchronizing public keys with key servers in GpgFrontend to catch revocations and subkey updates.
+description: "Keep your local OpenPGP keyring current by synchronizing public keys with key servers in GpgFrontend to catch revocations and subkey updates."
 sidebar:
   label: Sync Public Keys
   order: 4

@@ -1,6 +1,6 @@
 ---
 title: Comparison of Cryptographic Algorithms
-description: Compare OpenPGP cryptographic algorithms supported by GpgFrontend, including RSA, ECC, and post-quantum options, across the GnuPG and rPGP engines.
+description: "Compare OpenPGP cryptographic algorithms supported by GpgFrontend, including RSA, ECC, and post-quantum options, across the GnuPG and rPGP engines."
 sidebar:
   label: Comparison of Algorithms
 ---

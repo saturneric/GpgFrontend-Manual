@@ -1,6 +1,6 @@
 ---
 title: Email Functionality
-description: Sign, encrypt, verify, and decrypt emails offline in GpgFrontend using the .eml format and the built-in OpenPGP Email module.
+description: "Sign, encrypt, verify, and decrypt emails offline in GpgFrontend using the .eml format and the built-in OpenPGP Email module."
 sidebar:
   label: Email Operations
 ---
