@@ -66,6 +66,50 @@ and using the appropriate key from the Key Toolbox:
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/3dceea13ad31f488a347f3b0d4b1fb998487f223.gif)
 
+## Drag and Drop in the File Panel
+
+The File Panel supports drag-and-drop, making it easy to bring files into your
+working directory or reorganize them without using the system file dialog.
+
+### Where Items Are Dropped
+
+The destination depends on what is under the cursor when you release the drag:
+
+- Drop onto a folder to place the items inside that folder.
+- Drop onto a file to place the items in that file's parent folder.
+- Drop onto empty space to place the items in the folder currently shown in the
+  panel.
+
+The target folder must be writable. If it is not, the drop is rejected and a
+message explains why.
+
+### Copying Files Into the File Panel
+
+Drag one or more files or folders from your operating system's file manager (such
+as Finder, Windows Explorer, or your Linux file manager) and drop them onto the
+File Panel. The items are **copied** into the target folder, leaving the
+originals in place. This is a quick way to gather the files you want to encrypt,
+decrypt, sign, or verify.
+
+### Moving Files Within the File Panel
+
+Drag files or folders from one location in the File Panel and drop them onto a
+different folder in the same panel. The items are **moved** to the target folder.
+
+### Confirmation and Safeguards
+
+Before performing the operation, GpgFrontend asks you to confirm the move or
+copy, showing the item name (or count) and the destination folder. Several
+safeguards protect against common mistakes:
+
+- Dropping items back into their own folder is treated as a no-op.
+- A folder cannot be moved or copied into itself or one of its own subfolders.
+- If an item with the same name already exists in the target folder, the
+  operation for that item is skipped and you are notified.
+
+After a successful drop, the panel refreshes and selects the newly added or moved
+items, and a status message reports how many items were processed.
+
 ## File Extension Requirements
 
 Understanding the appropriate file extensions helps in managing encrypted and
