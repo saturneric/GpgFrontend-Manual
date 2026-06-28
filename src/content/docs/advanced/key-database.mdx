@@ -121,6 +121,38 @@ they take full effect.
 - Operations such as key generation, import, export, encryption, signing, and
   verification will use the currently selected key database where applicable.
 
+### Changing the Engine of a Key Database
+
+Each key database is bound to one engine at a time, and this includes the
+**default key database** (the first entry in the list, also called the default
+channel). The engine you select determines which key store GpgFrontend reads at
+that database's path. A GnuPG keyring and an rPGP `gf_keydb.sqlite` store can sit
+in the same directory, but they are **separate stores and are never merged**.
+
+This matters most for the default key database, which normally points at your
+GnuPG home directory:
+
+- If you set the default database's engine to **rPGP** and restart GpgFrontend,
+  the application creates and reads a `gf_keydb.sqlite` file inside that GnuPG
+  home directory and shows only the rPGP keys. Your existing **GnuPG keys are
+  not displayed** in the default database while rPGP is active.
+- If you switch the default database's engine back to **GnuPG** and restart, the
+  application reads the GnuPG keyring again, and the **rPGP store is not read**,
+  so its keys are not displayed.
+
+:::caution[Switching engines hides keys, it does not delete them]
+
+Changing a database's engine does not move, convert, or delete any keys. Keys
+that belong to the inactive engine simply are not shown, because GpgFrontend only
+reads the store for the currently selected engine. To see a given set of keys
+again, select the engine that owns them and restart if prompted.
+
+If you need both GnuPG and rPGP keys available at the same time, create
+**separate key databases**, one per engine, instead of switching the engine on a
+single database.
+
+:::
+
 ## About `gf_keydb.sqlite`
 
 Starting with the 2.2 series, GpgFrontend may create a `gf_keydb.sqlite` file in
