@@ -1,5 +1,6 @@
 ---
 title: Generate Key Pair
+description: Create GnuPG-compatible OpenPGP key pairs in GpgFrontend, from simple templates to advanced control over algorithm, key size, and expiry.
 sidebar:
   order: 3
 ---

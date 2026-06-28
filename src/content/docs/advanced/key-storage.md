@@ -1,5 +1,6 @@
 ---
 title: How Keys Are Stored (GnuPG vs rPGP)
+description: Understand how GpgFrontend's GnuPG and rPGP engines store OpenPGP keys differently, and what it means for backups, security, and interoperability.
 sidebar:
   label: Key Storage
   order: 3

@@ -1,5 +1,6 @@
 ---
 title: Text Operations
+description: Encrypt, decrypt, sign, and verify text in GpgFrontend using OpenPGP public key cryptography with simple, intuitive workflows.
 sidebar:
   order: 5
 ---

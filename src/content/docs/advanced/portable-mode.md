@@ -1,5 +1,6 @@
 ---
 title: "Portable Mode"
+description: Run GpgFrontend in Portable Mode from a USB drive, keeping all data and configuration in the app directory and leaving no trace on the host.
 sidebar:
   label: Portable Mode
   order: 1

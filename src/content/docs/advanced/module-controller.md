@@ -1,5 +1,6 @@
 ---
 title: "Module Controller: Extending GpgFrontend Functionality"
+description: Manage modular extensions in GpgFrontend with the Module Controller, enabling features like email, version checks, and key synchronization.
 sidebar:
   label: Module Controller
   order: 7

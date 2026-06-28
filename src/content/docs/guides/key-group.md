@@ -1,5 +1,6 @@
 ---
 title: Key Groups
+description: Create and use key groups in GpgFrontend to encrypt to multiple recipients at once, treating a collection of public keys as a single key.
 ---
 
 A Key Group is a powerful feature in GpgFrontend that allows you to manage and

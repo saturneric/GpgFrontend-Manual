@@ -1,5 +1,6 @@
 ---
 title: Contributing to GpgFrontend
+description: How to contribute to GpgFrontend through GitHub pull requests or email patches, including environment setup, workflow, and contact information.
 ---
 
 Thank you for considering contributing to GpgFrontend! As a community-driven

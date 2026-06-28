@@ -1,5 +1,6 @@
 ---
 title: "Application Self-Check"
+description: How GpgFrontend's Self-Check verifies the digital signatures of its core libraries at startup to detect tampering, especially in portable use.
 sidebar:
   label: Application Self-Check
 ---

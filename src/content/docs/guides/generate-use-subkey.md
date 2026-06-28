@@ -1,5 +1,6 @@
 ---
 title: Generate and Use Subkey(s)
+description: Add and manage OpenPGP subkeys in GpgFrontend for signing, encryption, or authentication while keeping your primary key secure.
 sidebar:
   order: 4
 ---

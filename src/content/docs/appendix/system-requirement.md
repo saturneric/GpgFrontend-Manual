@@ -1,5 +1,6 @@
 ---
 title: System Requirement
+description: Recommended hardware and operating system requirements for running GpgFrontend on Windows, macOS, and Linux.
 ---
 
 The following are mainly the recommended system requirements for running

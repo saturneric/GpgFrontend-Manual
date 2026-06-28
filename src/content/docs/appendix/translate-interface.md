@@ -1,5 +1,6 @@
 ---
 title: Translate Interface
+description: Help translate GpgFrontend into more languages with Qt Linguist; no cryptography expertise needed, just fluency in English and another language.
 sidebar:
   label: Translate
 ---

@@ -1,5 +1,6 @@
 ---
 title: Contact Information
+description: How to reach the GpgFrontend maintainer for technical questions, feedback, and collaboration, including email and encryption preferences.
 sidebar:
   label: Contact
   order: 5
