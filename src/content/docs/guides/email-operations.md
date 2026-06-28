@@ -11,6 +11,25 @@ protocols while maintaining robust OpenPGP compliance. Whether you're signing,
 encrypting, verifying, or decrypting emails, GpgFrontend ensures a secure and
 streamlined experience.
 
+## How to Access Email Operations
+
+Email functionality is delivered by the integrated **Email module**
+(`com.bktus.gpgfrontend.module.email`), which ships with the regular GpgFrontend
+desktop edition and loads automatically when present. You do not configure it in
+the Settings dialog.
+
+You can reach the email workflow in two ways:
+
+- Click **"New E-Mail"** to compose a message, then sign and/or encrypt it and
+  save it as an `.eml` file.
+- Open an existing `.eml` file (for example, one exported from your mail client)
+  to verify or decrypt it. GpgFrontend then shows the parsed email headers (From,
+  To, Subject, Date) alongside the OpenPGP result.
+
+If the email actions do not appear, you are likely running an edition without
+the Email module (for example, GpgFrontend Lite) or a build that excludes
+modules.
+
 ## Purpose and Key Advantages
 
 GpgFrontend's email processing functionality is designed to empower users to
@@ -36,6 +55,12 @@ GpgFrontend adheres to OpenPGP standards (RFC 4880 and 3156) for email
 encryption and signing, ensuring compatibility with tools like Thunderbird and
 other OpenPGP-enabled clients.
 
+GpgFrontend produces **PGP/MIME** messages (RFC 3156) rather than inline PGP. A
+signed message is wrapped as a `multipart/signed` structure with a detached
+signature, and an encrypted message as `multipart/encrypted`. This keeps the
+message body, attachments, and formatting intact, and it is the format modern
+clients such as Thunderbird expect.
+
 - Emails processed in GpgFrontend can be easily verified and decrypted by
   compliant email clients.
 - Supports separate and combined operations, such as:
@@ -52,7 +77,22 @@ other OpenPGP-enabled clients.
 2. Type your email content in the editor.
 3. Select your private key from the **Key Toolbox**.
 4. Click **"Sign"** to digitally sign the email.
-5. Fill Sender, Receiver and the Subject of the email.
+5. In the dialog that appears, fill in the **From**, **To**, and **Subject**
+   fields. Use the **CC** and **BCC** buttons to reveal those fields if you need
+   them.
+
+When you sign, GpgFrontend pre-fills the **From** field from the primary user ID
+of your signing key (in `Name <email>` form). When you encrypt, it can likewise
+suggest recipients from the selected encryption keys.
+
+:::note[Address format]
+
+Address fields must use either a bare address (`alice@example.com`) or the
+`Name <alice@example.com>` form. Separate multiple recipients in **To**, **CC**,
+or **BCC** with a semicolon (`;`). Invalid entries are flagged before the email
+is built.
+
+:::
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/84f732220b3a967aa5d3986f79475bdfcf53454e.webp)
 
@@ -87,6 +127,22 @@ other OpenPGP-enabled clients.
    - **"Decrypt"**: Decrypt without verifying.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/64b84451fd044cfd0c081161dad3057c5fde25a4.webp)
+
+### Understanding the Results
+
+After you verify or decrypt an `.eml` file, GpgFrontend presents the outcome as a
+set of result cards so you can confirm what was processed:
+
+- **E-Mail card**: the parsed message headers, including **From**, **To**,
+  **Subject**, **CC**, **BCC**, and **Date**.
+- **OpenPGP card**: details of the OpenPGP/MIME structure, including the
+  **Signed EML Data Hash (SHA1)** that was covered by the signature and the
+  **Message Integrity Check Algorithm** (the `micalg` declared in the message).
+- **Encryption Recipient cards**: for encrypted mail, the recipient each copy was
+  encrypted to, shown as the key's user ID and **Key ID**.
+
+Reviewing these cards lets you confirm that the signature covers the message you
+actually received and that it was encrypted to the keys you expect.
 
 ### Offline Validation
 
@@ -151,6 +207,27 @@ other OpenPGP-enabled clients.
 
 - All cryptographic operations are performed locally, ensuring that private keys
   and sensitive data are never exposed to external servers.
+
+## Troubleshooting Common Issues
+
+- **Signature shows as invalid:** PGP/MIME signatures cover the exact bytes of
+  the signed part. If a mail server or client rewraps, re-encodes, or alters the
+  message in transit, verification can fail even when the content looks correct.
+  Whenever possible, export the original `.eml` source rather than a re-rendered
+  copy.
+- **"New E-Mail" or email actions are missing:** The email workflow comes from
+  the Email module. If it is absent, you are likely running an edition without
+  the module (for example, GpgFrontend Lite). See
+  [How to Access Email Operations](#how-to-access-email-operations).
+- **Address field rejected:** Make sure each address uses `alice@example.com` or
+  `Name <alice@example.com>`, and that multiple recipients are separated with a
+  semicolon (`;`).
+- **Cannot decrypt a received email:** Confirm that the corresponding secret key
+  is present in the active key database and that you selected the database whose
+  keys match the recipients.
+- **Recipient cannot read your message:** Verify that your client preserved the
+  `.eml` exactly and that the recipient's client supports PGP/MIME. If they only
+  support inline PGP, they may not be able to process the message.
 
 ## Best Practices for Secure Email Handling
 
