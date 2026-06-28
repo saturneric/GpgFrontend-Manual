@@ -5,8 +5,24 @@ sidebar:
   order: 1
 ---
 
+Every day you trust other people with your private information: emails, files,
+backups, identity documents, passwords. OpenPGP lets you protect that
+information yourself, so only the people you choose can read it, and so others
+can prove that a message or file genuinely came from you. It works offline, it
+relies on no company or account, and it has protected journalists, developers,
+and privacy-conscious people for decades.
+
 If you're new to **OpenPGP**, **GPG (GNU Privacy Guard)**, or **PGP (Pretty Good
 Privacy)**, this guide explains the fundamental concepts step by step.
+
+:::tip[You don't need to memorize all of this]
+
+Skim this page once to get the big picture, then come back to it when you need
+it. You can start using GpgFrontend with just two ideas: you have a **private
+key** you keep secret, and a **public key** you share with others. The rest will
+make sense as you go.
+
+:::
 
 ## What Is OpenPGP, GPG, and PGP?
 
@@ -229,3 +245,17 @@ With GpgFrontend, you can:
 For normal daily use, GpgFrontend recommends the GnuPG engine for compatibility
 and stability. The experimental rPGP engine is available for users who want to
 try newer OpenPGP features or use the sandbox-friendly GpgFrontend Lite edition.
+
+## Where to Go Next
+
+You now know enough to start. A good first path is:
+
+1. [Install GpgFrontend](/overview/getting-started/) for your platform.
+2. [Generate your first key pair](/guides/generate-key/), then back it up safely.
+3. [Encrypt your first file](/guides/file-operations/) or
+   [text message](/guides/text-operations/).
+4. [Import and export keys](/guides/import-export-key-pair/) so you can exchange
+   public keys with others.
+
+If you ever feel stuck, the [FAQ](/overview/faq/) answers the most common
+questions from new users.
