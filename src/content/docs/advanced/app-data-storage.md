@@ -13,9 +13,28 @@ generation profiles, and other internal objects.
 > computing the SHA-256 hash of the master application key combined with the
 > object name. All objects were encrypted directly with the master key, without
 > per-object key derivation, HMAC, or authenticated encryption modes. Advanced
-> techniques such as HKDF-based key derivation, per-object HMAC, and
-> authenticated encryption (e.g., AES-GCM) were introduced in v2.1.9 for
-> significantly improved security.
+> techniques such as per-object key derivation, per-object HMAC, and
+> authenticated encryption were introduced in v2.1.9 for significantly improved
+> security.
+
+:::note[Cryptographic backend since v2.2.0]
+
+Starting with v2.2.0, GpgFrontend uses [libsodium](https://doc.libsodium.org/)
+for application data cryptography. The primitives are:
+
+- **Authenticated encryption:** XChaCha20-Poly1305 (IETF), with a random salt
+  and nonce per object.
+- **Per-object key derivation:** keyed BLAKE2b (`crypto_generichash`) with domain
+  separation, derived from the active application secure key and the object
+  reference.
+- **Passphrase-based key derivation:** Argon2id (`crypto_pwhash`), used where a
+  user passphrase protects the key.
+- **Object references:** HMAC-SHA256 (`crypto_auth_hmacsha256`).
+
+Earlier 2.1.x descriptions that mention HKDF-SHA256 or AES-GCM refer to the
+previous implementation.
+
+:::
 
 ## Data Object Structure
 
@@ -25,14 +44,16 @@ generation profiles, and other internal objects.
   uniqueness and integrity of the data mapping.
 - Per-Object Encryption: Every data object is encrypted individually using a key
   derived from the current active application secure key and the object’s
-  reference. Key derivation utilizes HKDF-SHA256 for high security and
-  resistance to key reuse attacks.
+  reference. Key derivation uses libsodium's keyed BLAKE2b hash
+  (`crypto_generichash`) with domain separation, so each object gets a distinct
+  key and is resistant to key reuse.
 - Key Identification: The first part of each stored object file contains an
   identifier for the key used to encrypt it, allowing for seamless key rotation
   and backward compatibility.
-- Encryption Algorithms: Actual data encryption uses lightweight, authenticated
-  cryptography (such as AES-GCM or an equivalent mode), ensuring both
-  confidentiality and integrity of application objects.
+- Encryption Algorithms: Actual data encryption uses the XChaCha20-Poly1305
+  (IETF) authenticated cipher provided by libsodium, with a random salt and
+  nonce per object, ensuring both confidentiality and integrity of application
+  objects.
 
 ## File Layout and Access
 

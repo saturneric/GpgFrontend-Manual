@@ -133,6 +133,14 @@ For **GnuPG** key databases, private and public key material remains managed by
 GnuPG. In this case, `gf_keydb.sqlite` is used only for GpgFrontend-managed
 metadata and may be empty.
 
+:::tip[How each engine stores keys]
+
+The two engines keep your keys in fundamentally different places, which affects
+backups and security expectations. For a full explanation, see
+[How Keys Are Stored (GnuPG vs rPGP)](/advanced/key-storage).
+
+:::
+
 :::caution[Backup Notice]
 
 Back up each key database according to its engine type.
