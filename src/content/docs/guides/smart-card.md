@@ -11,6 +11,15 @@ essential operations, and manage keys directly on your smart card.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/c5d2b202ae1003d31fe708df2989935ce30bf78d.webp)
 
+:::note[Requires the GnuPG engine]
+
+Smart card management is a GnuPG-only feature. It relies on GnuPG components
+(such as `gpg-agent` and `scdaemon`) and the GnuPG keyring's key stubs, so it is
+only available when GnuPG is the active engine. The rPGP engine does not support
+smart cards; switch to the GnuPG backend to manage your card.
+
+:::
+
 ## Core Concepts and Frequently Asked Questions
 
 ### What is an OpenPGP Smart Card?

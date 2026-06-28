@@ -84,21 +84,23 @@ it is to crack the ciphertext. But at the same time, it takes more time for a
 single operation. Generally speaking, a length of 2048 bits is safe enough (this
 refers to the key generated using the RSA algorithm).
 
-#### Normal Usage
+#### Usage
 
-This refers to what the key pair can conceptually be used for, including the
-conceptual usage of the primary key and sub-key. When the primary key or subkey
-generation can be used to sign, but it has already expired or does not exist,
-the signature usage will still be displayed here.
+This shows what the key pair can be used for, as the union of the capabilities
+of the primary key and all subkeys. The possible capabilities are
+**Certificate**, **Encrypt**, **Sign**, and **Auth**. For example, if any
+available (sub)key can sign, the **Sign** capability is listed here.
 
-#### Actual Usage
+#### Owner Trust Level
 
-This is the actual usage of the primary key and all subkeys, which is the union
-of their usage. If there is only one primary key in the key pair that can be
-used for signing, but this primary key does not exist, then the signature usage
-will not appear here, only in Normal Usage. In addition, when there is only one
-subkey that can be used for signing, if it has expired, the signature purpose
-will not be displayed here.
+This shows how much you trust the owner of this key pair to correctly verify and
+sign other keys, as part of the web-of-trust model. This field is only shown
+when the active engine reports owner trust (GnuPG); engines that do not support
+owner trust hide it.
+
+#### Create Date
+
+This is the creation time of the primary key, shown in your local time.
 
 #### Expires on
 
@@ -124,11 +126,12 @@ not, so the field is hidden for keys loaded through the GnuPG engine.
 This is the time when the content of the key pair was last updated. Operations
 such as adding a UID or subkey will modify the content of the key pair.
 
-#### Secret Key Existence
+#### Primary Key Existence
 
-This indicates whether the actual content of the primary key exists. When the
-primary key does not exist, if there are still available subkeys in the key
-pair, the key pair can still be used for normal operations. However, in the
+This indicates whether the actual content of the primary key exists, shown as
+**Exists** or **Not Exists**. When the primary key does not exist, if there are
+still available subkeys in the key pair, the key pair can still be used for
+normal operations. However, in the
 above case, the content of the key pair cannot be modified (that is, operations
 such as adding UID or subkey cannot be performed), and the key pair cannot sign
 other key pairs.
@@ -253,6 +256,11 @@ Trust levels are part of the web of trust model used in public key
 infrastructures. By setting the trust level, you indicate how much you trust the
 key owner to correctly verify and sign other keys. This affects how your system
 evaluates the validity of signatures made by the key owner.
+
+> Note: Owner trust is a GnuPG concept and is only available with the GnuPG
+> engine. The rPGP engine does not support owner trust, so this button (and the
+> Owner Trust Level field in the General Info) is hidden when rPGP is the active
+> engine.
 
 ### Operations on a Private Key
 

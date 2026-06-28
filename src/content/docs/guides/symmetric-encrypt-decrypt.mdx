@@ -79,6 +79,53 @@ To decrypt content that was encrypted symmetrically:
 
 > If the password is incorrect or mistyped, decryption will fail.
 
+## Technical Details: GnuPG vs rPGP
+
+Symmetric encryption produces an OpenPGP message protected by a passphrase
+instead of a public key. The passphrase is run through an OpenPGP
+**String-to-Key (S2K)** function to derive the actual symmetric key, and the
+data is then encrypted with a symmetric cipher. How this is done depends on the
+active engine, and it directly affects which tools can decrypt the result.
+
+| Aspect            | GnuPG engine                                            | rPGP engine                                      |
+| ----------------- | ------------------------------------------------------- | ------------------------------------------------ |
+| Implementation    | `gpgme_op_encrypt_symmetric` (GnuPG decides the details) | rPGP, fixed parameters                           |
+| Symmetric cipher  | GnuPG default, typically AES-256 (configurable)         | AES-256                                          |
+| Data packet       | GnuPG default (SEIPD; may use AEAD on newer GnuPG)      | SEIPD v1 (CFB with an integrity check)           |
+| Key derivation    | Iterated-and-salted S2K by default (configurable)       | Argon2id S2K (memory-hard)                       |
+| Interoperability  | Broad; readable by most OpenPGP tools                   | Requires an RFC 9580 / Argon2-aware tool         |
+
+### GnuPG Engine
+
+With the GnuPG engine, GpgFrontend asks GnuPG to perform the symmetric
+encryption, so the cipher, S2K function, and packet format follow your GnuPG
+version and configuration (for example, `s2k-cipher-algo`, `s2k-digest-algo`,
+and `s2k-count` in `gpg.conf`). Current GnuPG defaults to AES-256 with an
+iterated-and-salted S2K, which is widely understood by other OpenPGP
+implementations. Newer GnuPG versions may use AEAD (OCB) when configured.
+
+### rPGP Engine
+
+With the rPGP engine, the parameters are fixed: the message is an **SEIPD v1**
+packet encrypted with **AES-256**, and the passphrase is stretched into the
+symmetric key using an **Argon2id** S2K. Argon2 is a memory-hard function, which
+makes brute-forcing a weak passphrase considerably more expensive than the
+classic iterated-and-salted S2K.
+
+:::caution[rPGP symmetric output needs a modern tool]
+
+Argon2 S2K is part of the modern OpenPGP standard (RFC 9580). A message that
+rPGP encrypts symmetrically can only be decrypted by an rPGP-aware or otherwise
+RFC 9580 / Argon2-capable tool. Older GnuPG versions that do not support Argon2
+S2K cannot decrypt it. If you need the widest compatibility, encrypt
+symmetrically with the GnuPG engine instead.
+
+:::
+
+When encrypting symmetrically with rPGP, GpgFrontend always prompts for the
+passphrase fresh (the passphrase cache is bypassed) and asks you to confirm it,
+to avoid accidentally encrypting with a mistyped password.
+
 ## When to Use Symmetric Encryption?
 
 Symmetric encryption is a great choice when:

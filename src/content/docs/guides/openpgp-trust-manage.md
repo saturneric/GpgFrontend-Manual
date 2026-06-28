@@ -16,6 +16,16 @@ In decentralized environments, the responsibility for managing trust rests with
 each individual user. This document introduces the key mechanisms behind trust
 management in GpgFrontend and outlines current behaviors and design decisions.
 
+:::note[Requires the GnuPG engine]
+
+The trust features described here, namely setting Owner Trust and signing the
+UIDs of other keys, are GnuPG concepts and are only available when GnuPG is the
+active engine. The rPGP engine does not support Owner Trust or UID signing, so
+the related menu items and dialogs are hidden when rPGP is active. Switch to the
+GnuPG backend to manage your trust chain.
+
+:::
+
 ## Owner Trust Mechanism
 
 The Owner Trust mechanism in OpenPGP is a way for users to manage the
