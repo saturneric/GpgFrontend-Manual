@@ -1,116 +1,104 @@
 ---
 title: Import & Export Key Pair
 description: "Import and export OpenPGP key pairs in GpgFrontend via file, editor, clipboard, or key server for easy backup and key sharing."
+sidebar:
+  order: 7
 ---
 
-GpgFrontend provides various methods for importing or exporting key pairs, some
-of which are outlined below. Please refer to the guide for more information.
+GpgFrontend gives you several ways to **import** keys (bring them in) and
+**export** keys (save or share them). This page covers each one.
 
-## Import Key Pair
+## Import a Key
 
-To access the import options, navigate to the toolbar and select the desired
-method based on your specific requirements. Additionally, you can access
-additional options by selecting the action menu in the key management section.
+You can import a public or private key in a few ways. Find them on the toolbar, or
+open the action menu in the key management section for more options.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/65a0c1fce233c2fc15afd362b432eb53f684c73d.webp)
 
-In fact, you can find the action menu in the key management section, which
-provides access to additional key management options beyond those available in
-the toolbar.
-
 ![](https://image.cdn.bktus.com/i/2025/06/24/0f9c76d074dd6c364603baea3c565e66c9a8d62d.webp)
 
-### File
+### From a File
 
-This option allows you to select a public or private key file in text format
-with any extension to import.
+Choose a public or private key file to import. The file can be text with any
+extension.
 
-### Editor
+### By Pasting Into the Editor
 
-You can paste the contents of a key file onto a blank text label page and
-GpgFrontend will automatically recognize and import the corresponding key.
+Paste the contents of a key into a blank editor page. GpgFrontend recognizes the
+key and imports it for you.
 
-### Clipboard
+### From the Clipboard
 
-You can copy the contents of a key to your system clipboard and then select this
-option to import the corresponding key.
+Copy a key's contents to your system clipboard, then choose this option to import
+it.
 
-### Key server
+### From a Key Server (public keys only)
 
-This feature enables users to search for and import public keys from a key
-server. Users must first enter the email or ID associated with the desired key
-and select the appropriate key server. Upon clicking the search button, a list
-of public keys that can be imported from the server will be displayed. Users can
-choose to import multiple keys together or double-click on a specific table row
-to import a corresponding public key. It is important to note that when using
-this method, only public keys can be imported.
+Search a key server and import public keys from it. Enter the email or ID you are
+looking for, pick a key server, and click search. GpgFrontend shows the matching
+public keys. You can import several at once, or double-click one row to import just
+that key. This method imports **public keys only**.
 
-A detailed description of this part can be found
-[Here](/guides/key-server-operations/).
+For the full steps, see [Key Server Operations](/guides/key-server-operations/).
 
-### Dropdown on Key Toolbox
+### By Drag and Drop
 
-You can drag the key file directly to the key toolbox, and then follow the
-prompts of GpgFrontend to import the key.
+Drag a key file straight onto the Key Toolbox, then follow the prompts to import
+it.
 
-## Export Key Pair
+## Export a Key
 
-When deriving the public key of a key pair using the private key, you can derive
-either the public key or the private key or both of all the keys present in the
-key pair. However, if there are numerous keys in the key pair, the exported data
-can be lengthy. Multiple export methods are available, which are similar to the
-import process.
+Exporting saves a key so you can back it up or share it. GpgFrontend always exports
+in ASCII text, so the file works across different computers.
 
-In Gpg Frontend, the exported data is encoded in ASCII to ensure compatibility
-between computers.
+You can export your **public key** (safe to share) or your **private key** (keep
+this secret). The export options work much like the import ones.
 
-### Export Public Key
+### Export a Public Key
 
-You can find this operation in many places. The following will introduce them
-one by one.
+Your public key is safe to give to anyone. There are a few ways to export it.
 
-#### Append Public Key to Editor
+#### Append to the Editor
 
-To append a public key to the editor in GpgFrontend, right-click on a row in the
-key toolbox and select "Append Select Key(s) to Editor" from the pop-up menu.
-This will add the public key of the selected key to the end of the text label
-page. You can then copy the content to any location as needed.
+Right-click a key in the Key Toolbox and choose **Append Select Key(s) to Editor**.
+This adds the public key to the end of the editor page, where you can copy it
+wherever you need.
 
-#### Export on the Key Pair at Operations Tab
+#### Save to a File
 
-To export a public key using the Key Pair at Operations Tab, follow the steps
-shown in the screenshot below. This will save the data to a file. Before
-proceeding, please make sure to choose a suitable directory to store the file
-containing the public key data.
+Use the key pair's **Operations** tab to save the public key to a file, as shown
+below. Pick a folder for the file first.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/b9ea951b5c94e8f18cc22e6e415778b97818718f.webp)
 
-### Export multiple public keys at once
+#### Export Several at Once
 
-To export public key data for multiple key pairs at once, select the desired key
-pairs on the key management interface and click on the "Export to Clipboard"
-option. This will copy the data to your system clipboard, which you can then
-paste into any application or file.
+To export the public keys of several key pairs together, select them in the key
+management view and click **Export to Clipboard**. This copies the data to your
+clipboard, ready to paste into any app or file.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/0ce7919189489923f38e3871e407dad96b788174.webp)
 
-### Export Private Key
+### Export a Private Key
 
-Private key options are available in various locations on the detail page that
-contains the private key (either the primary key or subkey). From there, you can
-select a destination and GpgFrontend will export the corresponding private key
-content to that location.
+You can find private key options in several places on the detail page of a key that
+holds a private part (the primary key or a subkey). Pick a destination, and
+GpgFrontend exports the private key there.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/9dbc57b795542a5f9c2f78875d5be1f9c692ed0d.webp)
 
-Exporting the private key also exports both the public key and private key data,
-as the private key data alone is meaningless without the corresponding public
-key. Thus, the private key content is typically bundled with the public key
-content during export. However, it's essential to note that the private key file
-should never be disclosed to others. If leaked, it could compromise the security
-of all ciphertexts encrypted by the key.
+:::caution[Never share your private key]
 
-You can export the private key data in your key pair in two ways.
+The private key file must stay secret. If it leaks, anyone can read every message
+encrypted to that key. Share only your public key.
 
-1. Full export: Include all key data and UID and UID signature in the key pair.
-2. Minimal export: Only all key data in the key pair is included.
+:::
+
+Exporting a private key also includes the matching public key, because a private
+key is meaningless on its own. So the two are bundled together in the export.
+
+You can export your private key in two ways:
+
+1. **Full export**: includes all key data, plus the user IDs and their signatures.
+2. **Minimal export**: includes only the key data, without the extra user ID
+   signatures.
