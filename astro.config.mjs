@@ -61,33 +61,23 @@ export default defineConfig({
       sidebar: [
         {
           label: "Overview",
-          autogenerate: {
-            directory: "overview",
-          },
+          items: [{ autogenerate: { directory: "overview" } }],
         },
         {
           label: "Brief Guides",
-          autogenerate: {
-            directory: "guides",
-          },
+          items: [{ autogenerate: { directory: "guides" } }],
         },
         {
           label: "Advanced Features",
-          autogenerate: {
-            directory: "advanced",
-          },
+          items: [{ autogenerate: { directory: "advanced" } }],
         },
         {
           label: "Appendix",
-          autogenerate: {
-            directory: "appendix",
-          },
+          items: [{ autogenerate: { directory: "appendix" } }],
         },
         {
           label: "Extra",
-          autogenerate: {
-            directory: "extra",
-          },
+          items: [{ autogenerate: { directory: "extra" } }],
         },
       ],
       customCss: ["./src/styles/custom.css"],
