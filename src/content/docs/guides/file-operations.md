@@ -2,231 +2,171 @@
 title: File Operations
 description: "Encrypt, decrypt, sign, and verify files and folders in GpgFrontend using the File Panel and quick direct-selection workflows."
 sidebar:
-  order: 6
+  order: 5
 ---
 
-GpgFrontend offers a fast and convenient method for working with files. The
-processes of encryption, decryption, signing, and verifying files are similar to
-text-based operations but involve binary input and output.
+Working on files is much like [working on text](/guides/text-operations/): you can
+**encrypt**, **decrypt**, **sign**, and **verify** them. The difference is that
+files are handled as binary input and output. You do all of this in the **File
+Panel**.
 
-## Quick File Operations via Direct Selection
+## Open Files in the File Panel
 
-GpgFrontend enables you to quickly process any file or directory directly from
-the main interface, streamlining your workflow for secure file handling.
+The File Panel is where you work on files. There are two ways to open it.
 
-1. Direct File Selection: In the main window, click the Open button and choose
-   either Open File or Open Directory from the drop-down menu.
-2. In the system dialog, select the file (e.g., CCC.eml) or directory you want
-   to process.
-3. Automatic File Panel Activation: If you select a file, the File Panel will
-   automatically open, with the chosen file highlighted and ready for operation.
-   If you select a directory, the File Panel opens showing the entire directory
-   contents, allowing you to browse and select one or more files for further
-   action.
-4. Proceed with Cryptographic Operations: With the File Panel open, you can now
-   select one or more keys from the Key ToolBox (individual public keys or key
-   groups). Then, you can click the appropriate toolbar button(Encrypt, Decrypt,
-   Sign, or Verify) to perform the desired cryptographic operation on the
-   selected file(s).
+**Using the Open button:**
+
+1. In the main window, click **Open** and choose **Open File** or **Open
+   Directory**.
+2. Pick the file or folder you want.
+3. The File Panel opens. If you picked a file, it is highlighted and ready. If you
+   picked a folder, you see its contents and can choose files inside.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/2365c709356b1339898043390a1ff7ac232e05f4.webp)
 
-## Using File Panel Directly
+**Using the File Panel button:**
 
-After clicking the **File Panel** button, a system directory selection dialog
-will appear. Follow these steps to perform various cryptographic operations:
-
-1. Open File Panel: Click the **File Panel** button in the toolbar at the top of
-   the interface. This will open a system dialog allowing you to choose a
-   directory.
-2. Select Directory: In the system dialog, navigate to the desired directory and
-   select it. Once selected, a new tab named "File Panel" will open in
-   GpgFrontend, displaying the contents of the chosen directory.
-3. Select a File: In the File Panel tab, click on the file you want to encrypt,
-   decrypt, sign, or verify.
+1. Click the **File Panel** button in the top toolbar.
+2. Choose a folder in the dialog.
+3. A new **File Panel** tab opens showing that folder. Click the file you want.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/acb0e681d8f383589727d0012c3842c487033fa1.webp)
 
-### 4. File Operations (Encrypt, Decrypt, Sign, Verify)
+## Encrypt, Decrypt, Sign, or Verify a File
 
-Perform various file operations by selecting the desired file in the File Panel
-and using the appropriate key from the Key Toolbox:
+Once a file is selected in the File Panel, pick the right key in the **Key
+Toolbox** and click the matching toolbar button:
 
-- Encrypt: Select the desired file in the File Panel. Choose a recipient's
-  public key from the Key Toolbox and click the Encrypt button in the toolbar.
-- Decrypt: Select the encrypted file in the File Panel. Ensure your private key
-  is available in your keyring and click the Decrypt button in the toolbar.
-- Sign: Select the desired file in the File Panel. Choose your private key from
-  the Key Toolbox and click the Sign button in the toolbar.
-- Verify: Select the signed file in the File Panel. Ensure the corresponding
-  public key is available in your keyring and click the Verify button in the
-  toolbar.
+- **Encrypt**: choose the recipient's **public key**, then click **Encrypt**.
+- **Decrypt**: make sure your **private key** is in your keyring, then click
+  **Decrypt**. You don't need to pick a key; GpgFrontend finds the right one.
+- **Sign**: choose your **private key**, then click **Sign**.
+- **Verify**: make sure the sender's **public key** is in your keyring, then click
+  **Verify**.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/5ed085a7ac16c34a1e6ba46707597e91a93b6ecc.gif)
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/3dceea13ad31f488a347f3b0d4b1fb998487f223.gif)
 
-## Drag and Drop in the File Panel
+## Drag and Drop Files
 
-The File Panel supports drag-and-drop, making it easy to bring files into your
-working directory or reorganize them without using the system file dialog.
+The File Panel supports drag-and-drop, an easy way to bring files into your
+working folder or move them around without using the system file dialog.
 
 ### Where Items Are Dropped
 
-The destination depends on what is under the cursor when you release the drag:
+Where an item lands depends on what is under the cursor when you let go:
 
 - Drop onto a folder to place the items inside that folder.
 - Drop onto a file to place the items in that file's parent folder.
-- Drop onto empty space to place the items in the folder currently shown in the
-  panel.
+- Drop onto empty space to place the items in the folder shown in the panel.
 
 The target folder must be writable. If it is not, the drop is rejected and a
 message explains why.
 
-### Copying Files Into the File Panel
+### Copy Files Into the Panel
 
-Drag one or more files or folders from your operating system's file manager (such
-as Finder, Windows Explorer, or your Linux file manager) and drop them onto the
-File Panel. The items are **copied** into the target folder, leaving the
-originals in place. This is a quick way to gather the files you want to encrypt,
-decrypt, sign, or verify.
+Drag one or more files or folders from your system's file manager (Finder, Windows
+Explorer, or your Linux file manager) and drop them onto the File Panel. The items
+are **copied** in, leaving the originals in place. This is a quick way to gather
+the files you want to work on.
 
-### Moving Files Within the File Panel
+### Move Files Within the Panel
 
-Drag files or folders from one location in the File Panel and drop them onto a
-different folder in the same panel. The items are **moved** to the target folder.
+Drag files or folders from one spot in the File Panel and drop them onto a
+different folder in the same panel. The items are **moved** to that folder.
 
 ### Confirmation and Safeguards
 
-Before performing the operation, GpgFrontend asks you to confirm the move or
-copy, showing the item name (or count) and the destination folder. Several
-safeguards protect against common mistakes:
+Before it moves or copies anything, GpgFrontend asks you to confirm, showing the
+item name (or count) and the destination folder. A few safeguards prevent common
+mistakes:
 
-- Dropping items back into their own folder is treated as a no-op.
-- A folder cannot be moved or copied into itself or one of its own subfolders.
-- If an item with the same name already exists in the target folder, the
-  operation for that item is skipped and you are notified.
+- Dropping items back into their own folder does nothing.
+- A folder can't be moved or copied into itself or one of its own subfolders.
+- If an item with the same name already exists in the target folder, that item is
+  skipped and you are told.
 
-After a successful drop, the panel refreshes and selects the newly added or moved
-items, and a status message reports how many items were processed.
+After a successful drop, the panel refreshes, selects the new or moved items, and
+shows how many items were handled.
 
-## File Extension Requirements
+## Work on Many Files at Once (Batch Mode)
 
-Understanding the appropriate file extensions helps in managing encrypted and
-signed files properly. Here’s a breakdown of the file extensions used:
+By default the File Panel works on one file at a time. Turn on **Batch Mode** to
+handle several at once.
 
-### ASCII Format
+1. Click **Switch Batch Mode**, the segmented icon at the top-right of the File
+   Panel toolbar. (Hover over it to see the "Switch Batch Mode" tooltip.)
+2. Select several files with **Ctrl+Click** or **Shift+Click**.
+3. Click **Encrypt**, **Decrypt**, **Sign**, or **Verify**. The action applies to
+   every selected file.
 
-- **.asc**: ASCII-armored files. Can contain encrypted data or signatures in a
-  text-compatible format.
-
-### Binary Format
-
-- **.gpg**: Binary encrypted files or combined encrypted and signed files. More
-  efficient for storage and transmission.
-- **.sig**: Binary signature files used exclusively for signature operations.
-
-## Output Mode
-
-Before version 2.0.4, GpgFrontend generated ciphertext and signature files
-exclusively in ASCII format. From version 2.0.4 onwards, it generates files in
-binary format by default. This setting can be adjusted in the program's
-settings.
-
-### Changing Output Mode
-
-To change the output mode between ASCII and binary formats:
-
-1. Open Settings: Navigate to the General settings within GpgFrontend by
-   accessing the settings menu.
-2. Locate Binary Mode Option: In the settings interface, under the "General"
-   section, find the option labeled "Use Binary Mode for File Operations".
-3. Toggle Binary Mode: Check or uncheck this option to switch between binary
-   (gpg/sig) and ASCII (asc) output formats.
-
-This streamlined process allows you to manage file encryption, decryption,
-signing, and verification efficiently with GpgFrontend.
-
-![](https://image.cdn.bktus.com/i/2025/06/24/40365f1a7b1ac8d24ac8c11c45e77476a465eab7.webp)
-
-### Quick Toggle via File Panel Menu
-
-In addition to the settings menu, GpgFrontend also provides a quick toggle
-option for switching between ASCII and binary output modes directly from the
-File Panel:
-
-1. Access the File Panel Toolbar: In the File Panel, locate the toolbar at the
-   top right.
-2. Open the Drop-down Menu: Click the button with the gear icon or three-line
-   icon (as shown in the screenshot) to open a drop-down menu.
-3. Select ASCII Mode: From the menu, choose “ASCII Mode” to enable ASCII-armored
-   output for operations like encryption or signing. When checked, output files
-   such as .asc will be generated instead of binary formats like .gpg or .sig.
-
-This feature offers a convenient way to switch output modes without navigating
-through the main settings, making file operations faster and more adaptable
-based on user needs.
-
-![](https://image.cdn.bktus.com/i/2025/04/09/ea2c8b52-2a49-ee18-5897-5cf3d72115a5.webp)
-
-## Enabling Batch Mode for Multi-file Operations
-
-By default, the File Panel supports only single-file selection for cryptographic
-operations. However, GpgFrontend includes a Batch Mode feature that allows users
-to select and process multiple files simultaneously:
-
-1. Activate Batch Mode: Click the “Switch Batch Mode” button, represented by a
-   segmented icon located at the top-right corner of the File Panel toolbar. A
-   tooltip labeled “Switch Batch Mode” will appear when hovering over the
-   button.
-2. Select Multiple Files: Once Batch Mode is activated, the file panel will
-   allow multi-selection using standard keyboard shortcuts (e.g., Ctrl or
-   Shift+Click).
-3. Perform Bulk Operations: After selecting the desired files, perform
-   encryption, decryption, signing, or verification actions using the toolbar
-   controls. The operation will be applied to all selected files.
-
-Batch Mode is especially useful for advanced users handling multiple files,
-significantly improving operational efficiency in workflows involving large
-volumes of data.
+Batch Mode is handy when you have many files to process at once.
 
 ![](https://image.cdn.bktus.com/i/2025/04/09/24a8b950-ff08-2133-0ee2-5003095f1ff7.webp)
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/41efb25fd3a691a57c04a0a2ec4b0e651ceb556c.gif)
 
-## Folder Encryption and Decryption
+## Encrypt or Decrypt a Whole Folder
 
-GpgFrontend supports seamless encryption and decryption of entire folders
-through the File Panel interface. This feature enables users to securely package
-directory contents while preserving their original structure.
+GpgFrontend can encrypt and decrypt an entire folder, keeping its structure
+intact.
 
-### Encrypting Folders
+### Encrypt a Folder
 
-When a folder is selected for encryption, GpgFrontend automatically performs the
-following operations:
+When you encrypt a folder, GpgFrontend:
 
-1. Archiving: The folder is first archived using the tar utility, combining all
-   files and subdirectories into a single .tar archive.
-2. Encryption: The `.tar` archive is then encrypted using GnuPG, resulting in a
-   `.tar.gpg` (binary) or `.tar.asc` (ASCII-armored) file, depending on the
-   selected output mode.
+1. Packs it into a single `.tar` archive (using the tar tool), combining all files
+   and subfolders.
+2. Encrypts that archive, giving you a `.tar.gpg` (binary) or `.tar.asc` (ASCII)
+   file, depending on your output mode.
 
-This behavior mirrors the functionality of the gpg-zip tool, which combines
-archiving and encryption into a single streamlined operation.
+This works like the `gpg-zip` tool: packing and encrypting in one step. The result
+is one file that holds the whole folder, ready to store or send.
 
-Note: The resulting encrypted file represents the entire folder in a secure,
-transferable format.
+### Decrypt a Folder Archive
 
-### Decrypting Encrypted Archives
+When you decrypt a `.tar.gpg` or `.tar.asc` file, GpgFrontend:
 
-GpgFrontend also offers automatic extraction when decrypting `.tar.gpg` or
-`.tar.asc` files:
+1. Decrypts it back into the `.tar` archive.
+2. Unpacks that archive into a folder in the current directory, restoring the
+   original structure.
 
-1. Decryption: The selected encrypted archive is decrypted using GnuPG,
-   producing the original `.tar` archive.
-2. Extraction: If the decrypted content is a `.tar` archive, GpgFrontend
-   automatically extracts its contents into a folder within the current
-   directory, restoring the full folder structure.
+You don't need to unpack anything by hand.
 
-This automatic process eliminates the need for manual unpacking and ensures that
-encrypted folders are fully restored to their original state.
+## File Types and Output Format
+
+### File Extensions
+
+Knowing the file extensions helps you keep track of encrypted and signed files:
+
+- **.asc**: ASCII-armored. A text-friendly format that can hold encrypted data or
+  signatures.
+- **.gpg**: Binary. Encrypted files, or combined encrypted and signed files.
+  Smaller than ASCII.
+- **.sig**: Binary signature file, used for signatures only.
+
+### Choose ASCII or Binary Output
+
+GpgFrontend saves files in **binary** by default (since version 2.0.4; older
+versions used ASCII). Binary files are smaller. Choose **ASCII** when you need
+text-friendly output, for example to paste into an email.
+
+**Change it in Settings:**
+
+1. Open **Settings** and go to the **General** section.
+2. Find the option **Use Binary Mode for File Operations**.
+3. Check it for binary (`.gpg` / `.sig`), or uncheck it for ASCII (`.asc`).
+
+![](https://image.cdn.bktus.com/i/2025/06/24/40365f1a7b1ac8d24ac8c11c45e77476a465eab7.webp)
+
+**Or toggle it from the File Panel:**
+
+1. In the File Panel, find the toolbar at the top right.
+2. Click the gear or three-line icon to open the menu.
+3. Choose **ASCII Mode**. When checked, you get `.asc` files instead of `.gpg` or
+   `.sig`.
+
+This is a faster way to switch output modes without opening the main settings.
+
+![](https://image.cdn.bktus.com/i/2025/04/09/ea2c8b52-2a49-ee18-5897-5cf3d72115a5.webp)
