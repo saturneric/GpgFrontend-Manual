@@ -30,10 +30,16 @@
 }
 
 .main-pane img {
-  max-width: 80%;
+  max-width: min(100%, 560px);
   width: auto;
   height: auto;
   display: block;
+  margin-inline: auto;
   image-rendering: auto;
   object-fit: contain;
+}
+
+/* Opt-out for a single wide screenshot: ![](url){.wide} */
+.main-pane img.wide {
+  max-width: 100%;
 }
