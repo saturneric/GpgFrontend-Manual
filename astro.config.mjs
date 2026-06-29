@@ -113,5 +113,5 @@ export default defineConfig({
     sitemap(),
   ],
   output: "static",
-  adapter: netlify(),
+  adapter: netlify({ imageCDN: false }),
 });
