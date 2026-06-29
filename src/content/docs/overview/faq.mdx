@@ -8,30 +8,40 @@ sidebar:
 
 import { Aside } from "@astrojs/starlight/components";
 
-These questions are grouped by topic. Jump to the section that fits what you need.
+Questions are grouped by topic. Click any question to open its answer.
 
 ## Getting Started
 
-### How do I get GpgFrontend?
+<details>
+<summary>How do I get GpgFrontend?</summary>
 
 You can download the latest version of GpgFrontend from [GpgFrontend's Downloads
 Page](/overview/downloads) and pick the install method for your platform.
 
-### Which operating systems does GpgFrontend support?
+</details>
+
+<details>
+<summary>Which operating systems does GpgFrontend support?</summary>
 
 GpgFrontend runs on Windows, macOS, and Linux, so almost anyone can use it to
 protect their privacy and data.
 
-### How do I update GpgFrontend to the latest version?
+</details>
+
+<details>
+<summary>How do I update GpgFrontend to the latest version?</summary>
 
 You can always get the latest stable or nightly release from the Downloads Page.
 On Windows, just run the new installer. On macOS and Linux, replace the old app
 or AppImage with the new version. Your settings and keys are kept unless the
 release notes say otherwise.
 
+</details>
+
 ## OpenPGP and the Engines
 
-### How do OpenPGP, PGP, and GnuPG (GPG) relate?
+<details>
+<summary>How do OpenPGP, PGP, and GnuPG (GPG) relate?</summary>
 
 - **OpenPGP** is the open standard ([RFC
   4880](https://www.rfc-editor.org/rfc/rfc4880)) for encrypted email, files, and
@@ -48,7 +58,10 @@ app. GpgFrontend is an easy-to-use front-end for OpenPGP. It uses GnuPG as its
 main engine and, since v2.2.0, also offers an optional rPGP engine, making
 OpenPGP encryption easy for everyone.
 
-### Which engines does GpgFrontend use?
+</details>
+
+<details>
+<summary>Which engines does GpgFrontend use?</summary>
 
 GpgFrontend supports more than one engine.
 
@@ -60,13 +73,19 @@ GpgFrontend also offers an **rPGP** backend for certain uses. The rPGP engine is
 written in Rust and supports newer OpenPGP features, including OpenPGP v6 / RFC
 9580.
 
-### What is the rPGP engine?
+</details>
+
+<details>
+<summary>What is the rPGP engine?</summary>
 
 The rPGP engine is another OpenPGP backend that GpgFrontend uses for certain
 tasks. It is written in Rust and lets GpgFrontend offer a complete OpenPGP
 experience without needing a separate GnuPG install.
 
-### Does rPGP replace GnuPG in GpgFrontend?
+</details>
+
+<details>
+<summary>Does rPGP replace GnuPG in GpgFrontend?</summary>
 
 No. In the regular GpgFrontend desktop edition, GnuPG is still the default and
 main backend.
@@ -75,7 +94,10 @@ The rPGP engine is an extra backend for certain uses, such as sandbox-friendly
 operation and newer OpenPGP features. Some advanced features available through
 GnuPG may not work through rPGP yet.
 
-### Can I use the same keys with GnuPG and rPGP?
+</details>
+
+<details>
+<summary>Can I use the same keys with GnuPG and rPGP?</summary>
 
 Not always. GnuPG and rPGP store keys separately in GpgFrontend, and some key
 types, packet formats, or newer OpenPGP features may not be fully compatible
@@ -84,9 +106,12 @@ between the two engines.
 If you need full compatibility with existing GnuPG setups, use the regular
 GpgFrontend desktop edition with the GnuPG backend.
 
+</details>
+
 ## GpgFrontend Lite (Mac App Store)
 
-### Is GpgFrontend available on the Mac App Store?
+<details>
+<summary>Is GpgFrontend available on the Mac App Store?</summary>
 
 Yes. **GpgFrontend Lite** is on the Mac App Store as a lightweight,
 sandbox-friendly edition for macOS.
@@ -99,7 +124,10 @@ GpgFrontend Lite is fully self-contained, uses the rPGP engine, and does not
 include GnuPG. If you need the full GnuPG-based desktop experience, install the
 regular GpgFrontend edition from GitHub, Homebrew, or other package channels.
 
-### Why is there a separate GpgFrontend Lite edition?
+</details>
+
+<details>
+<summary>Why is there a separate GpgFrontend Lite edition?</summary>
 
 GpgFrontend Lite is not a replacement for the regular GpgFrontend desktop
 edition. It is a separate Mac App Store edition made for the macOS App Sandbox.
@@ -121,15 +149,19 @@ encryption, decryption, signing, verification, and local key management.
 | **GnuPG Integration** | Yes (System GPG)             | No (Self-contained)               |
 | **Best For**          | Professional & Critical Work | Modern v6 Workflows & Quick Tasks |
 
-:::note[Technical background]
+<Aside type="note" title="Technical background">
 
 The sandbox-related challenges around bundling and integrating GnuPG in a
 movable macOS App Bundle have been discussed in the GnuPG development community.
 
 See also: [GnuPG and macOS App Sandbox](https://lists.gnupg.org/pipermail/gnupg-devel/2022-May/035065.html)
-:::
 
-### Where are keys stored in GpgFrontend Lite?
+</Aside>
+
+</details>
+
+<details>
+<summary>Where are keys stored in GpgFrontend Lite?</summary>
 
 GpgFrontend Lite stores its key data locally inside the app-managed macOS
 sandbox storage. It does not upload your keys or messages to any server.
@@ -137,7 +169,10 @@ sandbox storage. It does not upload your keys or messages to any server.
 Please back up the OpenPGP keys you create or import in GpgFrontend Lite. If your
 keys are lost, encrypted data may not be recoverable.
 
-### Can GpgFrontend Lite use my existing GnuPG keyring?
+</details>
+
+<details>
+<summary>Can GpgFrontend Lite use my existing GnuPG keyring?</summary>
 
 No. GpgFrontend Lite does not include or link to GnuPG, so it cannot directly use
 your existing GnuPG keyring.
@@ -146,7 +181,10 @@ To use a key from another OpenPGP app, export the key from that app and import i
 into GpgFrontend Lite. Be careful when exporting secret keys, and keep your
 backups safe.
 
-### Which version should I use: GpgFrontend or GpgFrontend Lite?
+</details>
+
+<details>
+<summary>Which version should I use: GpgFrontend or GpgFrontend Lite?</summary>
 
 Use the regular GpgFrontend desktop edition if you need the full GnuPG-based
 experience, advanced settings, or full compatibility with existing GnuPG setups.
@@ -154,21 +192,24 @@ experience, advanced settings, or full compatibility with existing GnuPG setups.
 Use GpgFrontend Lite if you prefer a simple, self-contained Mac App Store edition
 for everyday OpenPGP tasks on macOS.
 
+</details>
+
 ## Why GPG / OpenPGP
 
-### Why choose GPG/OpenPGP over other encryption tools?
+<details>
+<summary>Why choose GPG/OpenPGP over other encryption tools?</summary>
 
-- Open Source and Audited: GPG is open-source, free, and maintained by a large
-  community. Its code has been reviewed for decades, which builds security and
-  trust.
-- No Vendor Lock-In: Fully standards-based. Works across major platforms, email
-  apps, and tools. Your keys and data stay portable.
-- Full Set of Features: Supports symmetric/asymmetric encryption, digital
+- **Open source and audited**: GPG is open-source, free, and maintained by a
+  large community. Its code has been reviewed for decades, which builds security
+  and trust.
+- **No vendor lock-in**: fully standards-based. Works across major platforms,
+  email apps, and tools. Your keys and data stay portable.
+- **Full set of features**: supports symmetric/asymmetric encryption, digital
   signatures, key management, key revocation, and a strong web-of-trust model.
-- Transparency and Control: Every encryption step is visible and adjustable. You
-  decide how your data is secured, with no hidden algorithms or automation.
-- Works Together: Compatible with any OpenPGP-compliant software, so your data
-  stays easy to read and share.
+- **Transparency and control**: every encryption step is visible and adjustable.
+  You decide how your data is secured, with no hidden algorithms or automation.
+- **Works together**: compatible with any OpenPGP-compliant software, so your
+  data stays easy to read and share.
 
 Closed-source tools may limit which platforms they run on, hide how data is
 encrypted, or lock you into their ecosystem.
@@ -179,21 +220,27 @@ encrypted, or lock you into their ecosystem.
   automation, and nothing is hidden unless you want it to be.
 </Aside>
 
-### How secure is GPG?
+</details>
+
+<details>
+<summary>How secure is GPG?</summary>
 
 When used correctly, GPG gives strong protection:
 
 - Strong algorithms and key sizes are available, in line with modern standards.
-- Open source: The code is constantly reviewed by experts around the world.
-- No mass leaks: No major flaw has ever led to a wide compromise of GPG private
+- Open source: the code is constantly reviewed by experts around the world.
+- No mass leaks: no major flaw has ever led to a wide compromise of GPG private
   keys.
 - Most risks come from user mistakes, such as weak passphrases, mishandled keys,
   or device malware, not from GPG itself.
 
-Bottom line: Your keys and passphrase are just as important as the software you
+Bottom line: your keys and passphrase are just as important as the software you
 use.
 
-### Has GnuPG ever been successfully attacked?
+</details>
+
+<details>
+<summary>Has GnuPG ever been successfully attacked?</summary>
 
 According to the official [GnuPG FAQ
 11.8](https://gnupg.org/faq/gnupg-faq.html#successful_attacks):
@@ -202,31 +249,40 @@ According to the official [GnuPG FAQ
 > answer is a flat "no". We are unaware of any credible reports of any of the
 > ciphers used in GnuPG having ever been successfully cryptanalyzed."
 
-### What makes GPG/OpenPGP different from instant messengers or built-in encryption?
+</details>
 
-- No accounts or servers: You don't need to register or rely on any service.
-- Long-term trust: Keys can be used for years, supporting file, email, and
+<details>
+<summary>What makes GPG/OpenPGP different from instant messengers or built-in encryption?</summary>
+
+- No accounts or servers: you don't need to register or rely on any service.
+- Long-term trust: keys can be used for years, supporting file, email, and
   software signing and "web of trust" models.
-- Works offline: Encrypt or sign files for transfer over any medium, with no
+- Works offline: encrypt or sign files for transfer over any medium, with no
   internet needed.
-- Manual and open: Everything is under your control, with no forced automation or
+- Manual and open: everything is under your control, with no forced automation or
   cloud syncing.
 
 Instant messengers (Signal, Matrix, etc.) are great for real-time chat but need
 accounts, central servers, and frequent key changes, so they're less suited to
 offline or anonymous use.
 
-### When is GPG/OpenPGP the best tool?
+</details>
 
-- Secure file exchange with strangers: Journalists, whistleblowers, or anyone who
+<details>
+<summary>When is GPG/OpenPGP the best tool?</summary>
+
+- Secure file exchange with strangers: journalists, whistleblowers, or anyone who
   needs anonymous document transfer.
-- Publishing signed content: Software releases, scientific results, or public
+- Publishing signed content: software releases, scientific results, or public
   statements that need long-term verification.
-- Air-gapped environments: Moving encrypted data between computers that are never
+- Air-gapped environments: moving encrypted data between computers that are never
   connected to the internet.
-- Full transparency: Every encryption step is visible and can be checked.
+- Full transparency: every encryption step is visible and can be checked.
 
-### Why not just use password-based encryption?
+</details>
+
+<details>
+<summary>Why not just use password-based encryption?</summary>
 
 Public-key encryption (like GPG) is more flexible and secure:
 
@@ -235,15 +291,21 @@ Public-key encryption (like GPG) is more flexible and secure:
 - Digital signatures prove who wrote a message and that it wasn't changed.
 - Keys can be revoked or replaced at any time without breaking old data.
 
-### Can I use GPG with keys or data from other programs?
+</details>
+
+<details>
+<summary>Can I use GPG with keys or data from other programs?</summary>
 
 Yes. If your keys and encrypted data are in an OpenPGP-compatible format, GnuPG
 and GpgFrontend can work with them. This includes most keys and data from
 compliant GPG or older PGP programs.
 
+</details>
+
 ## Using GpgFrontend
 
-### What if I see "GnuPG not installed correctly"?
+<details>
+<summary>What if I see "GnuPG not installed correctly"?</summary>
 
 This message mainly applies to GpgFrontend versions before **2.2.0**, or to
 GnuPG-specific workflows in the regular desktop edition.
@@ -261,38 +323,56 @@ GnuPG-specific features, please install GnuPG:
 - **Windows:** Recent regular desktop builds include GnuPG. If needed, you can
   also download GnuPG from the [official GnuPG website](https://www.gnupg.org/download/).
 
-### How do I import or export keys in GpgFrontend?
+</details>
+
+<details>
+<summary>How do I import or export keys in GpgFrontend?</summary>
 
 Use the Key Management section to import or export public/private keys. You can
 also drag and drop key files directly into the app's Key ToolBox.
 
-### Can I encrypt and decrypt files as well as text?
+</details>
+
+<details>
+<summary>Can I encrypt and decrypt files as well as text?</summary>
 
 Yes, GpgFrontend handles both text and files. Use the file options in the main
 interface to protect or unlock files.
 
-### Does GpgFrontend support OpenPGP smart cards or tokens?
+</details>
+
+<details>
+<summary>Does GpgFrontend support OpenPGP smart cards or tokens?</summary>
 
 Yes, if your GnuPG supports smart cards. Manage your smart cards directly in the
 SmartCard Controller. Smart card support needs the **GnuPG engine**; the rPGP
 engine does not support smart cards or tokens.
 
-### Is GpgFrontend available in my language?
+</details>
+
+<details>
+<summary>Is GpgFrontend available in my language?</summary>
 
 GpgFrontend supports many languages. You can change the display language from the
 `Settings > General` tab. Want to help translate? See the [contribution
 guide](/appendix/translate-interface) on GitHub!
 
-### What are Nightly versions?
+</details>
+
+<details>
+<summary>What are Nightly versions?</summary>
 
 These are auto-generated test builds with new features and fixes still being
 tested. They are less stable than official releases, may include breaking
 changes, and are not GPG-signed. They are not recommended for production. Always
 check the SHA256 checksum. Please report feedback and issues on GitHub.
 
+</details>
+
 ## Your Keys, Privacy, and Security
 
-### How does GpgFrontend handle passphrases or PINs?
+<details>
+<summary>How does GpgFrontend handle passphrases or PINs?</summary>
 
 This depends on the engine used by the active key database.
 
@@ -309,39 +389,59 @@ For app-specific encryption (e.g., KeyPackage), passphrases and PINs are used
 only in memory and cleared right away. Advanced users can turn on PIN caching and
 adjust security levels.
 
-### Can lost passwords or keys be recovered?
+</details>
+
+<details>
+<summary>Can lost passwords or keys be recovered?</summary>
 
 No. For your security, neither GpgFrontend nor the developer can recover lost
 passwords or private keys. Make sure to back up your private key and remember
 your passphrase!
 
-### How does GpgFrontend keep communication secure?
+</details>
+
+<details>
+<summary>How does GpgFrontend keep communication secure?</summary>
 
 It uses a proven OpenPGP engine (GnuPG by default, or the rPGP engine when
 chosen) with strong encryption algorithms. Only the intended recipients can
 decrypt your messages.
 
-### What data does GpgFrontend collect?
+</details>
+
+<details>
+<summary>What data does GpgFrontend collect?</summary>
 
 GpgFrontend does not collect or send any personal or usage data. All encryption
 runs locally. Update checks can be turned off, and there is no tracking or
 analytics built in.
 
+</details>
+
 ## Community and Support
 
-### How can I request a new feature?
+<details>
+<summary>How can I request a new feature?</summary>
 
 You can suggest new features by opening an issue on GitHub or contacting the
 maintainer directly.
 
-### Found a bug?
+</details>
+
+<details>
+<summary>Found a bug?</summary>
 
 If you run into any issues with GpgFrontend, please report them on the GitHub
 repository. You can also contact me directly if you're not on GitHub; see the
 [Contact](/overview/contact) section for details.
 
-### Interested in contributing?
+</details>
+
+<details>
+<summary>Interested in contributing?</summary>
 
 Feel free to change GpgFrontend's code and submit a Pull Request with your
 improvements. You can also send patches by email if you prefer to contribute
 anonymously.
+
+</details>
