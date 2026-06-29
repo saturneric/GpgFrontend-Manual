@@ -10,13 +10,12 @@ import { Tabs, TabItem } from "@astrojs/starlight/components";
 import { Steps } from "@astrojs/starlight/components";
 import { Aside } from "@astrojs/starlight/components";
 
-Welcome to your new cryptographic workspace. **GpgFrontend** is engineered to
-make OpenPGP/LibrePGP encryption predictable, absolute, and accessible across
-any system. This operational manual will guide you through the initial
-calibration of your machine, ensuring your environment is secured and ready for
-its first deployment.
+Welcome to your new encryption workspace. **GpgFrontend** is built to make
+OpenPGP/LibrePGP encryption reliable, simple, and easy to use on any system.
+This guide walks you through the first setup of your machine, so your environment
+is secure and ready to use.
 
-<Aside type="caution" title="System Directive: Engine Compatibility">
+<Aside type="caution" title="Engine Compatibility">
   Since v2.2.0, GpgFrontend can run on either the **GnuPG** engine or the
   built-in **rPGP** engine. For the full GnuPG-based experience (smart cards,
   owner trust, existing keyrings), the **GnuPG 2.4 engine or later** is
@@ -25,10 +24,10 @@ its first deployment.
   but several GnuPG-specific modules will remain unavailable.
 </Aside>
 
-## Cryptographic Engines
+## Step 1: Choose Your Engine
 
-GpgFrontend relies on a backend engine to handle cryptographic tasks. Refer to
-the table below to see what your system needs:
+GpgFrontend uses a backend engine to do the actual encryption work. Find your
+system in the table below to see which engine is best for you:
 
 | Platform         | Recommended Engine  | Notes                                                      |
 | :--------------- | :------------------ | :--------------------------------------------------------- |
@@ -38,14 +37,13 @@ the table below to see what your system needs:
 | **Linux**        | **GnuPG**           | Pre-installed in most distros. Check with `gpg --version`. |
 | **BSD**          | **GnuPG**           | Must be installed manually via ports/pkg.                  |
 
-> **Note:** If GnuPG is missing (v2.2.0+), GpgFrontend will automatically fall
-> back to the built-in **rPGP** engine to maintain basic functionality.
+> **Note:** If GnuPG is missing (v2.2.0+), GpgFrontend will automatically switch
+> to the built-in **rPGP** engine to keep the basics working.
 
-## Installation Guide
+## Step 2: Install GpgFrontend
 
-Select your operating system to view the recommended installation steps. For
-more advanced methods (WinGet, Flatpak), visit our
-[Downloads](/overview/downloads) page.
+Pick your operating system to see the recommended steps. For other methods
+(WinGet, Flatpak), visit our [Downloads](/overview/downloads) page.
 
 <Tabs>
   <TabItem label="Windows">
@@ -93,7 +91,7 @@ more advanced methods (WinGet, Flatpak), visit our
   </TabItem>
 </Tabs>
 
-## Next Steps
+## Step 3: Next Steps
 
 If you are new to PGP, we strongly recommend reading our [Fundamental Concepts](/guides/fundamental-concepts/) guide first.
 
