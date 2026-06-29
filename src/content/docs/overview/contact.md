@@ -6,25 +6,18 @@ sidebar:
   order: 5
 ---
 
-Contact on this page is intended for technical collaboration and feedback. This
-space is dedicated to fostering the well-being and advancement of humanity. If
-you have any technical questions or suggestions on how to enhance this software,
-your insights are very much welcome.
+The contact details on this page are for technical questions, feedback, and
+working together. If you have a technical question or an idea to improve this
+software, I'd love to hear it.
 
-For email correspondence, I strongly prefer plain text over HTML format.
+For email, I strongly prefer plain text over HTML.
 
 ## Personal Details
 
 - **Preferred Name:** Eric
-- **Legal Name:** Yu Hu
+- **Family Name:** Hu (in formal settings, please use Mr. Hu)
 - **Email:** [eric@bktus.com](mailto:eric@bktus.com) (server in Germany)
 - **Headquarters:** Germany
-
-> **Note on Names**: I’ve used the name Eric since childhood, and prefer it in
-> nearly all non-Chinese contexts, especially online. My legal name, Yu Hu, is
-> only truly accurate in Chinese characters and is rarely needed outside of
-> legal or formal situations. It’s provided here mainly for code signing
-> certificate verification. In formal settings, please use Mr. Hu.
 
 ## About My Domain
 
@@ -34,9 +27,9 @@ It has no hidden meaning! I just wanted a name that blended technology and
 community, reflecting values like innovation, connectivity, and collaboration.
 :)
 
-## Language Proficiency
+## Languages
 
-I can use the following languages and welcome communication in any of them:
+I can use these languages and welcome messages in any of them:
 
 - English
 - Chinese
@@ -44,9 +37,8 @@ I can use the following languages and welcome communication in any of them:
 
 ## Secure Communication (GPG Public Key)
 
-For secure and encrypted communication, below is my long-term PGP public key.
-Please ensure any encrypted messages are sent in plain text format and avoid
-rich text formats like HTML.
+For secure, encrypted messages, here is my long-term PGP public key. Please send
+any encrypted messages as plain text, not rich text like HTML.
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -65,4 +57,4 @@ NBzq630J
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
-This setup is designed to maintain privacy and security in our communications.
+This keeps our messages private and secure.
