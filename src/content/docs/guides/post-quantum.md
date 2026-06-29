@@ -3,32 +3,63 @@ title: Post-Quantum Cryptography
 description: "Generate and use post-quantum OpenPGP keys in GpgFrontend, including ML-KEM (Kyber), ML-DSA, and SLH-DSA quantum-resistant algorithms."
 sidebar:
   label: Post-Quantum Keys
-  order: 7
 ---
 
-GpgFrontend is one of the first desktop OpenPGP applications that lets you
-generate and use **post-quantum keys** from a graphical interface, no command
-line required. This guide explains what post-quantum cryptography is, why it
-matters today, and how to create your first quantum-resistant key.
+GpgFrontend is one of the first desktop apps that lets you make and use
+**post-quantum keys** with a few clicks, no command line needed. This page explains
+in plain words what that means, why it might matter to you, and how to make your
+first one.
 
-## Why Post-Quantum Matters
+## Why You Might Need This
 
-Classical public-key algorithms such as RSA and elliptic curves (ECDSA, EdDSA,
-ECDH) rely on math problems that a sufficiently large quantum computer could
-solve. Such a computer does not exist yet, but the threat is already real
-because of **"harvest now, decrypt later"**: an adversary can record your
-encrypted messages today and decrypt them years later once quantum hardware
-matures.
+Today's encryption is safe because breaking it would take even the fastest normal
+computer billions of years. The math is just too hard. Think of it as a lock that
+no machine on Earth can pick.
 
-For anything that must stay confidential for a long time, switching to
-**quantum-resistant** algorithms now is the only reliable defense. This is why
-NIST standardized a new post-quantum (PQC) suite, and why the OpenPGP ecosystem
-is adopting it.
+**Quantum computers** are a new and very different kind of computer. A big enough
+one could do that hard math quickly, and pick today's locks. Machines that powerful
+don't exist yet. But there is a catch:
 
-## Supported Algorithms
+> Someone can copy your locked messages **today**, save them, and wait. When a
+> strong quantum computer finally arrives, they unlock everything they saved, even
+> messages from years ago.
 
-GpgFrontend exposes the NIST-standardized PQC suite through the OpenPGP draft.
-These algorithms require **version 6 (v6) keys**.
+This is called **"harvest now, decrypt later."** So the real question isn't "can
+anyone read this today?" It's "does this need to stay secret for many years?"
+
+If the answer is yes, it makes sense to start using new, **quantum-proof**
+encryption now, before quantum computers catch up. This is why the experts at NIST
+created a new set of these algorithms, and why OpenPGP is starting to use them.
+
+:::tip[Do you actually need this?]
+
+- **Probably not yet, for everyday use.** If your secrets only matter for a short
+  while, today's normal keys are perfectly safe.
+- **Worth a head start** if you protect things that must stay private for a decade
+  or more, like medical, legal, or personal records.
+- **Still experimental.** See the warning at the bottom of this page before you
+  rely on these keys.
+
+:::
+
+## What You Can Make
+
+GpgFrontend offers the new NIST-approved post-quantum algorithms. They come in two
+jobs, just like normal keys: some are for **encryption** (locking messages) and
+some are for **signing** (proving a message is really from you).
+
+A quick plain-words guide:
+
+- **ML-KEM** (once called Kyber): for **encryption**. GpgFrontend always pairs it
+  with a classic key, so your protection is never weaker than today's, even if one
+  part is later found to have a flaw.
+- **ML-DSA** (once called Dilithium): for **signing**, also paired with a classic
+  key.
+- **SLH-DSA** (SPHINCS+): also for **signing**. It is built on a very simple,
+  well-trusted idea (hashing), which makes it the most cautious, safe-bet choice.
+
+These all need the newer **version 6 (v6)** key format. The table below lists the
+exact options for reference:
 
 | Algorithm                  | OpenPGP Type | Purpose    | Engine support          |
 | -------------------------- | ------------ | ---------- | ----------------------- |
@@ -40,59 +71,43 @@ These algorithms require **version 6 (v6) keys**.
 | SLH-DSA-SHAKE-128F         | Hash-based   | Signing    | rPGP 0.1.2              |
 | SLH-DSA-SHAKE-256S         | Hash-based   | Signing    | rPGP 0.1.2              |
 
-A quick primer on the families:
-
-- **ML-KEM** (formerly Kyber) is the standardized key-encapsulation mechanism
-  used for **encryption**. GpgFrontend uses it in a _hybrid_ construction,
-  combining it with a classical curve (X25519 or X448) so your security is at
-  least as strong as the classical part even if one scheme is later weakened.
-- **ML-DSA** (formerly Dilithium) is a lattice-based **signature** algorithm,
-  also offered as a hybrid with Ed25519/Ed448.
-- **SLH-DSA** (SPHINCS+) is a **stateless hash-based signature** scheme. It
-  relies only on the security of hash functions, making it a conservative
-  choice with very strong assurances.
-
-## Generate Your First Post-Quantum Key
+## Make a Post-Quantum Key
 
 1. Open **Key Management** and click **New Keypair** to open the **Generate Key**
    dialog.
-2. Choose how to pick a post-quantum algorithm:
-   - **Easy Mode**: open the **Profile** dropdown and select a profile listed
-     under the **Post-Quantum** section header.
+2. Choose a post-quantum algorithm:
+   - **Easy Mode**: open the **Profile** dropdown and pick a profile under the
+     **Post-Quantum** heading.
    - **Advanced Mode** (the **Primary Key** / **Subkey** tabs): open the
-     **Algorithm** dropdown and choose an entry under the **Post-Quantum**
-     section header. The algorithm list is grouped into family tiers
-     (classical, **ECC**, and **Post-Quantum**) so the quantum-resistant options
-     are easy to find.
-3. Pick an algorithm:
-   - For **encryption**, choose an **ML-KEM (Kyber)** option (a subkey
-     algorithm).
+     **Algorithm** dropdown and pick an option under the **Post-Quantum** heading.
+     The list is grouped (classical, **ECC**, **Post-Quantum**), so the
+     quantum-proof options are easy to spot.
+3. Pick by job:
+   - For **encryption**, choose an **ML-KEM (Kyber)** option.
    - For **signing**, choose **ML-DSA** or **SLH-DSA**.
-4. Make sure the active engine supports your choice. Most PQC algorithms are
-   provided by the **rPGP** engine; you can switch engines if an option is not
-   available.
+4. Make sure the active engine supports your choice. Most of these options come from
+   the **rPGP** engine, so switch engines if one isn't available.
 5. Fill in your name, email, and validity period, then generate the key.
 
-Post-quantum algorithms require the **v6** key format. In Advanced Mode the
-**Key Format** is switched to v6 and locked automatically once a post-quantum
-algorithm is selected, so you don't need to set it manually.
+These algorithms need the **v6** key format. In Advanced Mode, GpgFrontend switches
+to v6 and locks it automatically once you pick a post-quantum algorithm, so you
+don't have to set it yourself.
 
-That's it, you now hold a post-quantum OpenPGP key.
+That's it. You now hold a post-quantum OpenPGP key.
 
 :::caution[Experimental, by design]
 
-Post-quantum OpenPGP is based on a **draft specification** that is still
-evolving, and support here is **experimental**.
+Post-quantum OpenPGP is based on a **draft standard** that is still changing, and
+support here is **experimental**.
 
-- These keys are **not yet interoperable** with classical PGP tools, and most
-  PQC algorithms are currently available only through the **rPGP** engine.
-- Treat PQC keys as a way to **experiment with and prepare for** the
-  quantum-safe future, not as a drop-in replacement for protecting critical
-  production secrets today.
-- The on-disk format may change as the standard is finalized.
+- These keys **don't work with classic PGP tools yet**, and most of these options
+  are only in the **rPGP** engine.
+- Treat them as a way to **try out and prepare for** the quantum-safe future, not
+  as a replacement for protecting critical secrets today.
+- The file format may change as the standard is finished.
 
-For long-lived signing and identity needs that must interoperate widely, keep
-using a classical key (for example Ed25519) alongside your PQC experiments.
+For long-term signing and identity that must work everywhere, keep using a classic
+key (such as Ed25519) alongside your post-quantum experiments.
 
 :::
 
