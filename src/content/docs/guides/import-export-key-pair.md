@@ -6,7 +6,9 @@ sidebar:
 ---
 
 GpgFrontend gives you several ways to **import** keys (bring them in) and
-**export** keys (save or share them). This page covers each one.
+**export** keys (save or share them). You'll usually do this for two reasons: to
+**share your public key** with someone, or to **back up** your own keys. This page
+covers each method.
 
 ## Import a Key
 
@@ -102,3 +104,11 @@ You can export your private key in two ways:
 1. **Full export**: includes all key data, plus the user IDs and their signatures.
 2. **Minimal export**: includes only the key data, without the extra user ID
    signatures.
+
+:::tip[Back up your keys]
+
+Export your **private key** (use **Full export**) and keep it somewhere safe and
+offline, such as an encrypted drive. If you ever lose your keys, this backup is the
+only way to get them back.
+
+:::
