@@ -5,128 +5,104 @@ sidebar:
   order: 3
 ---
 
-GpgFrontend provides a flexible and user-friendly interface for generating
-GnuPG-compatible key pairs. The updated **Generate Key** dialog introduces
-multiple configuration levels from simplified templates to advanced
-cryptographic control, catering to both normal and expert users.
+GpgFrontend makes it easy to create OpenPGP key pairs that work with GnuPG. **If
+you're new, you can make a key in three quick steps: open the dialog, enter your
+name and email, and click Generate.** GpgFrontend fills in safe defaults for
+everything else. You can change those defaults later if you want (see
+[Customize Your Key](#customize-your-key-optional)).
 
-## Launch the Generate Key Dialog
+## Step 1: Open the Generate Key Dialog
 
-In the **Key Management** interface, click on the **“New Keypair”** button. This
-opens the **Generate Key** window, where you can define your identity and
-configure key parameters.
+In the **Main Window**, click **New Keypair**. This opens the
+**Generate Key** window, where you set your identity and key options.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/79fe9ef30cbc5e10e7eda6aca7ee22616e874267.webp)
+![](https://image.cdn.bktus.com/i/2026/06/30/398635c90c069535c343216224f5fa4d881dd605.webp)
 
-## Enter User Information
+## Step 2: Enter Your Information
 
-- **Name**: Required. Enter your full name (minimum 5 characters).
-- **Email**: Required. Must be in a valid email format.
-- **Comment**: Optional. Helps distinguish this key from others.
+- **Name**: Required. Your full name (at least 5 characters).
+- **Email**: Required. Must be a valid email address.
+- **Comment**: Optional. Helps tell this key apart from others.
 
-The refresh button next to the identity fields fills in a **random anonymous
-identity**. This is handy for throwaway or test keys when you don't want to tie
-the key to a real name or address.
+The refresh button next to these fields fills in a **random anonymous identity**.
+This is handy for throwaway or test keys, when you don't want to link the key to a
+real name or address.
 
-## Choose Key Database
+## Step 3: Generate the Key
 
-Select the **Key Database** where the generated key pair will be stored (e.g.,
-`0: TEST`).
+GpgFrontend already picks safe defaults for you, including the recommended
+**Ed25519** key type. So once you've entered your name and email, you can make
+your key right away:
 
-## Configure Key Settings
+- Check the summary in the lower panel.
+- Click the **Generate** button.
+- When asked, enter a strong **passphrase** (and type it again to confirm). This
+  protects your private key, so pick something strong and don't forget it.
+- GpgFrontend creates the key and tells you when it's done.
 
-The **Generate Key** dialog offers two configuration modes:
+That's all you need to get started. Want to change the key type or how long it
+lasts? See [Customize Your Key](#customize-your-key-optional) before you click
+**Generate**.
 
-### Easy Mode
+---
 
-Easy Mode simplifies key generation using ready-made **profiles** instead of
-exposing every cryptographic option. It is split into two sections:
+## Customize Your Key (Optional)
+
+You can skip this. GpgFrontend's defaults are a safe choice. Use these settings
+only if you want to change the key type, how long it lasts, or its structure
+before you generate.
+
+Easy Mode uses ready-made **profiles** instead of showing every option. It has two
+parts:
 
 **Profile**
 
 - **Name**: Pick a profile from the dropdown. Profiles are grouped by algorithm
-  family under section headers:
-  - **(Classical)**: traditional profiles such as RSA.
+  type:
+  - **(Classical)**: older profiles such as RSA.
   - **ECC**: elliptic-curve profiles. The Ed25519 (Curve25519) profile is the
-    recommended modern default and is pre-selected when available.
+    recommended modern default and is picked for you when available.
   - **Post-Quantum**: quantum-resistant profiles (rPGP engine only).
-- **Save / Delete / Reset**: Manage the profile list. **Save** stores your
-  current configuration as a new named profile, **Delete** removes the selected
-  profile, and **Reset** restores the profile list to its default set. The
-  built-in `Custom` profile is reserved and cannot be deleted.
+- **Save / Delete / Reset**: Manage the profile list. **Save** stores your current
+  settings as a new named profile, **Delete** removes the selected profile, and
+  **Reset** restores the default list. The built-in `Custom` profile cannot be
+  deleted.
 
-Only profiles whose algorithms are supported by the currently selected engine
-and key database are listed.
+Only profiles that work with your current engine and key database are shown.
 
 **Basic**
 
-- **Validity Period**: Choose from preset options (e.g., 3 months, 2 years, 10
-  years, or _Non Expired_).
+- **Validity Period**: Pick how long the key stays valid (for example, 3 months, 2
+  years, 10 years, or _Never Expires_).
 - **Combination**:
   - **Primary Key Only**
-  - **Primary Key With Subkey**: Useful when separating signing and encryption
-    functions.
-
-> Recommended for users who prefer a faster and more guided setup process.
+  - **Primary Key With Subkey**: useful for keeping signing and encryption
+    separate.
 
 :::note
 
-When the rPGP engine is selected, expiration options are hidden because the
-backend currently has limited support for setting key validity periods.
+When the rPGP engine is selected, the expiration options are hidden, because the
+engine has limited support for setting how long a key stays valid.
 
 :::
 
-### Advanced Mode (Primary Key & Subkey Tabs)
+For full control over the algorithm, key length, and format, switch to Advanced
+Mode (the **Primary Key** and **Subkey** tabs). The supported algorithms and
+compatibility notes are below.
 
-Switch to the **Primary Key** and **Subkey** tabs for detailed cryptographic
-control. Available options include:
+## Advanced Options
 
-- **Algorithm**: RSA, DSA, ED25519, ED448, Brainpool, NIST, CV25519, and others.
-- **Key Length**: Adjustable for applicable algorithms (e.g., RSA: 2048, 3072,
-  4096 bits).
-- **Key Format** (Primary Key tab, **rPGP engine only**): Choose the OpenPGP
-  packet format:
-  - **v4 (Compatible)**: the interoperable default, supported across the wider
-    OpenPGP ecosystem.
-  - **v6 (Modern)**: the RFC 9580 format. It is opt-in because v6 support is
-    still limited in parts of the ecosystem, and is required for post-quantum
-    algorithms.
+You can skip this section unless you need fine control. It covers the full list of
+algorithms and some compatibility notes.
 
-  This selector is hidden when the GnuPG engine is active. GnuPG ignores the
-  requested format and decides the key version itself (see the caution below).
-- **Expiration**: Set a specific expiry date or mark the key as non-expiring.
-- **Usage Flags**:
-  - Encrypt
-  - Sign
-  - Authenticate
-  - Certify (for primary keys)
-- **Passphrase Protection**: Enable or disable passphrase requirement via the
-  **No Passphrase** option.
+### Supported Algorithms for the Primary Key
 
-> When a post-quantum algorithm is selected, the **v6** key format is required
-> and is enforced automatically.
+A primary key stands for your identity and certifies your user IDs, so it must be
+able to sign or certify. That's why the primary key list only shows
+signing-capable algorithms. Encryption-only algorithms (such as ECDH, X448,
+Curve25519, ElGamal, or Kyber/ML-KEM) are used for subkeys instead.
 
-> Ideal for experienced users who require full control over key structure and
-> behavior.
-
-## Generate the Key Pair
-
-Once configuration is complete:
-
-- Review the summary in the lower panel.
-- Click the **“Generate”** button.
-- GpgFrontend will begin the generation process and confirm when complete.
-
-## Primary Key Supported Algorithms
-
-Primary keys are mainly used to represent identity, certify user IDs, and
-establish trust. For this reason, primary key algorithms are limited to
-algorithms that can perform signing or certification operations. Encryption-only
-algorithms such as ECDH, X448, Curve25519, ElGamal, or Kyber/ML-KEM are used as
-subkey algorithms instead.
-
-Available algorithms depend on the selected OpenPGP engine, engine version, and
-key format.
+The algorithms you see depend on the engine, its version, and the key format.
 
 | Algorithm group                 | Purpose                      | Engine           |
 | ------------------------------- | ---------------------------- | ---------------- |
@@ -139,34 +115,27 @@ key format.
 | SLH-DSA-SHAKE variants          | PQC Sign / Auth              | rPGP only        |
 | ML-DSA hybrid variants          | Hybrid PQC Sign / Auth       | rPGP only        |
 
-:::caution[rPGP 25519 Keys Are Not GnuPG-Compatible]
+### Compatibility Notes
 
-The rPGP engine can import existing 25519 keys generated by GnuPG, but the
-reverse does not hold. When rPGP generates an Ed25519 or Curve25519 key, it uses
-the modern RFC 9580 Ed25519 / X25519 algorithm encoding, not the legacy EdDSA /
-ECDH-Curve25519 encoding that GnuPG uses. As a result, rPGP-generated 25519 keys
-are not compatible with GnuPG, **even when you choose the v4 key format**. Treat
-rPGP-generated 25519 keys as rPGP-only.
+Some keys made by one engine can't be used by the other. Keep these points in
+mind before you share a key:
 
-All PQC-related keys generated by rPGP additionally use the OpenPGP v6 format.
-This includes ML-DSA, SLH-DSA, and rPGP-generated hybrid KEM keys. These keys
-are intended for testing, evaluation, and rPGP-based workflows, and should not
-be used when GnuPG interoperability is required.
+- **rPGP 25519 keys are rPGP-only.** rPGP can import 25519 keys made by GnuPG, but
+  not the other way around. When rPGP makes an Ed25519 or Curve25519 key, it uses
+  the modern RFC 9580 encoding, not the older encoding GnuPG uses, so GnuPG can't
+  read it, even if you pick the v4 format.
+- **rPGP post-quantum keys are rPGP-only too.** ML-DSA, SLH-DSA, and hybrid KEM
+  keys made by rPGP always use the OpenPGP v6 format. They are meant for testing
+  and rPGP-based work, not for use with GnuPG.
+- **GnuPG chooses its own key format.** When you use the GnuPG engine, GnuPG picks
+  the format based on its version and settings; GpgFrontend doesn't set it, and
+  the Key Format selector doesn't apply. Current releases make **v4** keys, but
+  newer versions (such as the 2.5.x line) may make **v5** keys, which many other
+  OpenPGP tools can't read.
 
-:::
+:::caution[Check the format before sharing widely]
 
-:::caution[GnuPG Key Format Is Decided by GnuPG]
-
-When the **GnuPG engine** is used, the OpenPGP key format is chosen by GnuPG
-itself, based on the GnuPG version and its configuration. GpgFrontend does not
-set or override it, and the Key Format selector above does not apply.
-
-Current GnuPG releases generate **v4** keys. Be aware that newer GnuPG versions
-(for example, the 2.5.x development line) may, depending on their behavior and
-configuration, generate keys in a newer format such as **v5**, which is **not
-compatible with many other OpenPGP tools**. The exact conditions under which
-GnuPG emits such a format are determined by GnuPG and are outside GpgFrontend's
-control. If you require maximum interoperability, verify the key format your
-GnuPG version produces before distributing the key.
+If you need your key to work with as many tools as possible, check what format
+your engine and version actually produce before you share the key.
 
 :::
