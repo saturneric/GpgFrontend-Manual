@@ -13,7 +13,27 @@ export default defineConfig({
       plugins: [starlightThemeNova(), starlightLinksValidator()],
       title: "GpgFrontend",
       description: "A Free, Easy-to-Use, Cross-Platform OpenPGP Crypto Tool.",
+      lastUpdated: true,
       head: [
+        {
+          tag: "meta",
+          attrs: { property: "og:type", content: "website" },
+        },
+        {
+          tag: "meta",
+          attrs: { property: "og:site_name", content: "GpgFrontend" },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            property: "og:url",
+            content: "https://gpgfrontend.bktus.com",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: { name: "twitter:card", content: "summary_large_image" },
+        },
         {
           tag: "meta",
           attrs: {
@@ -81,6 +101,14 @@ export default defineConfig({
         },
       ],
       customCss: ["./src/styles/custom.css"],
+      expressiveCode: {
+        themes: ["github-dark", "github-light"],
+        styleOverrides: { codeFontSize: "0.9rem" },
+        defaultProps: {
+          showLineNumbers: true,
+          wrap: true,
+        },
+      },
     }),
     sitemap(),
   ],
