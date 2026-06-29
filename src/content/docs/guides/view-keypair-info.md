@@ -3,318 +3,262 @@ title: View Key Pair Details
 description: "Inspect OpenPGP key pair details in GpgFrontend, including owner UIDs, primary key, subkeys, algorithms, and validity information."
 sidebar:
   label: Key Pair Details
+  order: 7
 ---
 
-You can view the details of a key pair by right-clicking on the key pair in the
-key toolbox or key management interface and selecting "Show key details".
+The **Key Details** window shows everything about a key: who it belongs to, its
+primary key and subkeys, the signatures on it, and the actions you can take.
 
-This section may include a brief introduction to gpg-related concepts and could
-be relatively long.
-
-Here is a randomly generated private key. The most significant difference
-between this and the previous key is that the key pair with only the public key
-is used for encryption only, but if you possess the private key, you can perform
-more actions (it also depends on your algorithm; DSA can only be used for
-signatures).
+To open it, right-click a key in the **Key Toolbox** or the **Key Management**
+window and choose **Show Key Details**. Double-clicking a key also opens this window.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/707eab9708c7cf9af472a5e05295d132d831f223.webp)
 
 ## General Info
 
-This interface provides some useful information to help you manage your key pair
-properly.
+This part of the window helps you manage the key. Here is what each piece means.
 
 ### Owner
 
-This section enables you to know the owner of this key pair. This information is
-not fixed and can be changed. You can create a new UID in the UID section and
-set it as the primary UID to change it.
-
-According to the OpenPGP protocol, this part is divided into Name, Email, and
-Comment.
+Who the key belongs to. This isn't fixed: you can change it by creating a new UID
+in the UID section and setting it as the primary UID. OpenPGP splits this into
+**Name**, **Email**, and **Comment**.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/a648820ee997bce65d3b65ebb7c3056b37e1597d.webp)
 
 ### Primary Key
 
-This part is the information of the primary key of the key pair. The primary key
-is very crucial because without it, you cannot perform related management
-operations like adding and revoking sub-keys (similar to not being able to open
-the key ring). Let's introduce the information of the primary key separately
-below. If you want to learn more, see the [Fundamental
-Concepts](/guides/fundamental-concepts) section.
+The primary key is the heart of the key pair. Without its private part you can't do
+management tasks like adding or revoking subkeys, much like not being able to open
+the keyring. To learn more, see [Fundamental Concepts](/guides/fundamental-concepts).
 
-The absence of the master key means that the private key of the master key does
-not exist, but this doesn't mean that neither the public key nor the private key
-exists. Please remember: Each subkey and primary key consist of a pair of public
-and private keys.
+A "missing" primary key means the _private part_ of the primary key is absent, not
+that the whole key is gone. Remember: the primary key and every subkey is itself a
+pair of a public and a private key.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/8b3235e625749d20effc4a7f334e7dacd2688923.webp)
 
 #### Key ID
 
-This is the unique identifier of the key, which is fixed and unchanging. Note
-that this key ID is the key ID of the primary key. The key ID is uniquely
-determined after the key is generated. Compared with the fingerprint, the key ID
-is shorter and more user-friendly.
+A short, unique ID for the key, fixed when the key is made. This is the primary
+key's ID. It is shorter and easier to read than the fingerprint.
 
 #### Algorithm
 
-This refers to the algorithm used for key generation. This also pertains to the
-generation algorithm of the primary key. The generation algorithm determines the
-properties and capabilities of the key. Algorithms such as RSA can be used for
-both encryption and signatures, whereas DSA can only be used for signatures.
-More modern algorithms like ECDH (Elliptic-curve Diffie-Hellman) are used for
-secure key exchange, and ECDSA (Elliptic Curve Digital Signature Algorithm) is
-employed for digital signatures. These elliptic curve algorithms offer enhanced
-security with shorter key lengths compared to traditional algorithms.
+The algorithm the primary key was made with. It decides what the key can do. For
+example, RSA can encrypt and sign, while DSA can only sign. Modern elliptic-curve
+algorithms like ECDH (for key exchange) and ECDSA (for signatures) give strong
+security with shorter keys.
 
-### Algorithm Detail
+#### Algorithm Detail
 
-Algorithm Detail displays both the key type and the key length. In some cases,
-the key algorithm shown here is more precise. For example, it can specify
-particular algorithms such as ED25519 or NISTP256, providing detailed
-information about the specific cryptographic methods employed.
+Shows the key type and length together, and is sometimes more exact than the
+Algorithm field, naming the specific method such as ED25519 or NISTP256.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/1a4c3220e4952de2ba8bbdfc01a42d48dce6337c.webp)
 
 #### Key Size
 
-This is the length of the primary key. Generally, the longer the key, the harder
-it is to crack the ciphertext. But at the same time, it takes more time for a
-single operation. Generally speaking, a length of 2048 bits is safe enough (this
-refers to the key generated using the RSA algorithm).
+The length of the primary key. Longer keys are harder to break but slower to use.
+For RSA, 2048 bits is generally safe enough.
 
 #### Usage
 
-This shows what the key pair can be used for, as the union of the capabilities
-of the primary key and all subkeys. The possible capabilities are
-**Certificate**, **Encrypt**, **Sign**, and **Auth**. For example, if any
-available (sub)key can sign, the **Sign** capability is listed here.
+What the key pair can do, combining the abilities of the primary key and all
+subkeys. The possible abilities are **Certify**, **Encrypt**, **Sign**, and
+**Auth**. For example, if any subkey can sign, **Sign** is listed here.
 
 #### Owner Trust Level
 
-This shows how much you trust the owner of this key pair to correctly verify and
-sign other keys, as part of the web-of-trust model. This field is only shown
-when the active engine reports owner trust (GnuPG); engines that do not support
-owner trust hide it.
+How much you trust this key's owner to correctly verify and sign other keys, part
+of the web-of-trust model. This field is shown only when the active engine reports
+owner trust (GnuPG); engines that don't support it hide the field.
 
 #### Create Date
 
-This is the creation time of the primary key, shown in your local time.
+When the primary key was made, shown in your local time.
 
-#### Expires on
+#### Expires On
 
-This is the expiration time of the primary key. When the primary key expires, it
-will become invalid and you can't use it for any operation. In addition, the
-subkeys in the key pair will also be unavailable. Fortunately, you can change
-the expiration time of the primary key at any time, or even set it to never
-expire. The prerequisite for this is that the primary key exists in the key
-pair.
+When the primary key expires. After that it can't be used for any operation, and
+its subkeys stop working too. You can change the expiration time whenever you like,
+or set it to never expire, as long as the primary key's private part exists.
 
 #### Key Format Version
 
-This shows the OpenPGP packet format of the primary key, displayed as `v4` or
-`v6`. `v4` is the widely compatible default, while `v6` is the modern RFC 9580
-format used for post-quantum and other newer keys.
+The OpenPGP packet format of the primary key, shown as `v4` or `v6`. `v4` is the
+widely compatible default; `v6` is the modern RFC 9580 format used for
+post-quantum and other newer keys.
 
-This field is only shown when the active engine can report it. The rPGP engine
-parses the key packet and exposes the format version, whereas GnuPG/GPGME does
-not, so the field is hidden for keys loaded through the GnuPG engine.
+This field is shown only when the active engine can report it. The rPGP engine
+reads the key packet and shows the format version, while GnuPG/GPGME does not, so
+it is hidden for keys loaded through the GnuPG engine.
 
 #### Last Update
 
-This is the time when the content of the key pair was last updated. Operations
-such as adding a UID or subkey will modify the content of the key pair.
+When the key pair's content last changed. Adding a UID or subkey counts as a
+change.
 
 #### Primary Key Existence
 
-This indicates whether the actual content of the primary key exists, shown as
-**Exists** or **Not Exists**. When the primary key does not exist, if there are
-still available subkeys in the key pair, the key pair can still be used for
-normal operations. However, in the
-above case, the content of the key pair cannot be modified (that is, operations
-such as adding UID or subkey cannot be performed), and the key pair cannot sign
-other key pairs.
+Whether the primary key's actual content is present, shown as **Exists** or **Not
+Exists**. If it is missing but the key pair still has usable subkeys, you can keep
+using the key for normal tasks. You just can't change its content (no adding UIDs
+or subkeys) or use it to sign other keys.
 
 ### Fingerprint
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/bc688aa06bc3db294001b429018e5a79e888be44.webp)
 
-The fingerprint of the key pair is used for humans to quickly compare whether
-the key pair is the expected key pair. This field is unique for all keys in the
-world. You can certainly do this with the key ID mentioned above.
-
-This also refers to the fingerprint of the primary key.
+The fingerprint is a unique code people use to quickly check that a key is the one
+they expect. It is unique for every key in the world. (You can also compare the
+Key ID above.) This is the primary key's fingerprint.
 
 ## UID Info
 
-User ID (UID) is used to identify a key, mainly for human identification. It's
-similar to a name tag that accompanies a key ring, indicating who the key ring
-belongs to. By looking at the UID, users can get a rough idea of whether a key
-pair is what they expected. However, for accurate identification, fingerprints
-or key IDs should be compared. A key can have multiple UIDs, but a key pair can
-only have one primary UID, which is always listed first in the interface.
+A User ID (UID) is the label that says who a key belongs to, like a name tag on a
+keyring. It gives you a rough idea whether a key is the one you expect, but for
+sure identification you should compare fingerprints or key IDs. A key can have
+several UIDs, but only one **primary UID**, which is always shown first.
 
 ![View Key Pair Details UID](https://image.cdn.bktus.com/i/2025/06/24/6ba422bf970ce94533b798e9ebb24e2465f3d45e.webp)
 
-UID has three elements: Name, Email, Comment. The name should be at least five
-characters long, and the email should conform to the format. The rules for
-comments are relatively loose.
+Each UID has three parts: **Name**, **Email**, and **Comment**. The name should be
+at least five characters and the email must be a valid format; comments are
+flexible.
 
-### Signature of UID
+### Signatures on a UID
 
-The lower section of the interface displays the signature of the selected User
-ID (UID), not the checked one. This is a key trust system. When someone receives
-your public key, they can use their private key to sign your nameplate,
-indicating their recognition of your public key. Afterward, they can upload the
-keyring with their signature to the keyserver. If many people do the same, the
-public key on the keyserver will have numerous signatures, making it
-trustworthy.
+The lower part of the window shows the signatures on the selected UID (the one you
+clicked, not the one ticked). Signatures are how trust is built: when someone
+receives your public key, they can sign your UID with their key to vouch for it,
+then share the signed key on a key server. The more people who do this, the more
+trustworthy the key looks.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/c79c00d20a087f7a123fbbbf65bd1fd5e7c22bee.webp)
 
-You can also use the primary key of another key pair to sign a UID. Generally, a
-primary UID of a key pair with many valid signatures is considered more
-trustworthy.
+You can also sign a UID with the primary key of another key pair. A primary UID
+with many valid signatures is generally seen as more trustworthy.
 
-As shown in the image, some signatures do not have the signer's UID identified.
-If you need to identify these signatures, you can try importing the
-corresponding key from other sources, such as key servers. The Key ID is already
-provided, which can help you locate and import the necessary keys to recognize
-the signer's UID.
+Some signatures may not show the signer's UID, as in the image above. To identify
+them, import the matching key from another source, such as a key server. The Key
+ID is shown, which helps you find and import the right key.
 
 ## Subkey Info
 
-The subkey mechanism is a core feature of GnuPG, designed to enhance both security and operational flexibility. While powerful, subkeys can introduce some complexity for new users. Here are the fundamentals to help you understand and manage subkeys effectively:
+Subkeys are a core GnuPG feature that improves both security and flexibility. They
+can feel complex at first, so here are the basics:
 
-- Key Pair as a Keyring: Think of your GPG key pair as a keyring, with a primary
-  key (the “master” key) and zero or more subkeys.
-- Primary Key vs Subkeys: The primary key is the root of trust. It certifies
-  subkeys and is typically reserved for critical actions, such as signing other
-  keys (certification) or adding user IDs.
-- The subkey can perform related operations (such as signing, encryption) in the
-  absence or unavailability of the primary key.
-- The functions of subkeys can overlap, and when both subkeys can be used for
-  signing, the earlier one is selected.
-- Subkeys can use more algorithms than the primary key, but usually have the
-  same effect on daily operations.
-- Security Isolation: If a subkey is ever compromised, only that subkey needs to
-  be revoked and replaced. The trust chain anchored by the primary key remains
-  intact. However, if the primary key is compromised, the entire key structure is
-  at risk, as it controls all subkeys and certifications.
+- **Keyring model**: think of your key pair as a keyring, with one primary key and
+  zero or more subkeys.
+- **Primary key vs subkeys**: the primary key is the root of trust. It certifies
+  subkeys and is kept for critical actions like signing other keys or adding UIDs.
+- **Daily work**: subkeys handle tasks like signing and encryption, even when the
+  primary key is absent or unavailable.
+- **Overlap**: if two subkeys can both sign, the earlier one is used.
+- **More algorithms**: subkeys can use more algorithms than the primary key, but
+  for daily use the effect is the same.
+- **Security isolation**: if a subkey is compromised, you revoke just that one and
+  the trust anchored by the primary key stays intact. But if the primary key is
+  compromised, the whole key structure is at risk.
 
-As shown in the Key Details window (see below), all subkeys and the primary key
-are listed along with their properties (algorithm, size, usage, etc.), allowing
-for clear management and monitoring.
+The Key Details window lists the primary key and all subkeys with their properties
+(algorithm, size, usage, and so on), so you can manage them at a glance.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/3b87a8d639d8be4cf99d6fc4fc1b5d8c4168be3d.webp)
 
-### Key in Smart Card
+### Key on a Smart Card
 
-Key in Smart Card indicates whether a particular (sub)key’s private component
-has been moved to a hardware smart card.
+Shows whether a (sub)key's private part has been moved to a hardware smart card.
 
-- When a key is moved to a smart card, its private part is physically
-  transferred and removed from your local key database.
-- This change is irreversible. The private key now exists only on the smart card
-  and cannot be extracted back theoretically.
-- This provides strong protection against malware or key theft: cryptographic
-  operations using that key (such as signing or decrypting) will now require the
-  smart card to be present and unlocked.
+- When a key is moved to a smart card, its private part is physically transferred
+  to the card and removed from your local key database.
+- This can't be undone. The private key now lives only on the card and can't be
+  pulled back.
+- It is strong protection against malware and key theft: using that key to sign or
+  decrypt now needs the card present and unlocked.
 
-> Tip: Moving your encryption or signing subkey to a smart card is highly
-> recommended for > users seeking maximum security.
+:::tip
+
+Moving your encryption or signing subkey to a smart card is a great choice if you
+want the strongest security.
+
+:::
 
 ## Operations
 
-In this column, what you can do differs for a key pair that only has a public
-key and a key pair that includes a private key.
+What you can do here depends on whether the key pair has only a public key, or a
+private key too.
 
-### Operations on a Public Key
+### On a Public Key
 
-This interface provides various general operations that can be performed on the
-selected public key. Below is an explanation of each button's function.
+These are the actions available for a public key.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/56b96c1420da618873ca707c6e7da4ab6e1d7a25.webp)
 
 #### Export Public Key
 
-This button allows you to export the public key to a file. Exporting a public
-key is useful when you need to share it with others or upload it to a keyserver.
-The exported file can then be distributed or backed up as needed.
+Saves the public key to a file, ready to share with others, upload to a key
+server, or back up.
 
-#### Key Server Operation (Pubkey)
+#### Key Server Operations
 
-This dropdown menu provides options for interacting with keyservers. A keyserver
-is a repository where public keys are stored and can be retrieved by others. The
-operations include refreshing your public key with updates from the keyserver.
+A dropdown for working with key servers (a place where public keys are stored and
+shared). For example, you can refresh your copy of the public key with updates from
+the server.
 
 #### Set Owner Trust Level
 
-This button allows you to set the trust level for the owner of the public key.
-Trust levels are part of the web of trust model used in public key
-infrastructures. By setting the trust level, you indicate how much you trust the
-key owner to correctly verify and sign other keys. This affects how your system
-evaluates the validity of signatures made by the key owner.
+Sets how much you trust this key's owner to correctly verify and sign other keys,
+part of the web-of-trust model. This affects how your system judges the signatures
+that owner makes.
 
-> Note: Owner trust is a GnuPG concept and is only available with the GnuPG
-> engine. The rPGP engine does not support owner trust, so this button (and the
-> Owner Trust Level field in the General Info) is hidden when rPGP is the active
-> engine.
+:::note
 
-### Operations on a Private Key
+Owner trust is a GnuPG concept, available only with the GnuPG engine. With the
+rPGP engine, this button (and the Owner Trust Level field in General Info) is
+hidden.
 
-This interface provides various general operations that can be performed on the
-selected key pair, including both public and private key operations. Below is an
-explanation of each button's function:
+:::
+
+### On a Private Key
+
+When the key pair includes a private key, you get more actions, covering both the
+public and private parts.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/55ac60792266c3e13254b53a47fe468cdba93048.webp)
 
 #### Export Public Key
 
-This button allows you to export the public key to a file. This is useful for
-sharing your public key with others or for uploading it to a keyserver. The
-exported file can be distributed or backed up as needed.
+Saves the public key to a file, for sharing, uploading to a key server, or backup.
 
 #### Export Private Key
 
-This button provides options for exporting the private key. There are typically
-two modes for exporting:
+Exports the private key. There are usually two modes:
 
-- **Export Complete Private Key**: This exports the entire private key,
-  including all associated information. It is used when you need a full backup
-  or when transferring the key to another system.
-- **Export Minimal Private Key**: This exports only the essential components of
-  the private key, minimizing the amount of data. This can be useful for more
-  secure key transfers or for environments with specific security requirements.
+- **Export Complete Private Key**: the entire private key with all its
+  information. Use this for a full backup or to move the key to another system.
+- **Export Minimal Private Key**: only the essential parts, with less data. Useful
+  for more secure transfers or environments with strict requirements.
 
 #### Modify Expiration Datetime (Primary Key)
 
-This button allows you to modify the expiration date and time of the primary
-key. This is important for managing the key's lifecycle and ensuring that it
-remains valid for the desired period. Adjusting the expiration date can help
-maintain security by ensuring keys are periodically reviewed and updated.
+Changes the expiration date and time of the primary key. This helps you manage the
+key's lifecycle and keep it valid for as long as you need.
 
-#### Modify Password
+#### Change Password
 
-This button enables you to change the password that protects the private key.
-Changing the password can enhance security, especially if you suspect that the
-current password may have been compromised or if you want to follow best
-practices for regular password updates.
+Changes the password that protects the private key. Worth doing if you think the
+current one may be exposed, or as part of regular good habits.
 
-#### Key Server Operation (Pubkey)
+#### Key Server Operations
 
-This dropdown menu provides options for interacting with keyservers using the
-public key. Operations might include uploading the public key to a keyserver, or
-refreshing the key from the keyserver. Keyservers facilitate the distribution
-and retrieval of public keys.
+A dropdown for working with key servers using the public key, such as uploading it
+or refreshing it from the server.
 
 #### Revoke Certificate Operation
 
-This dropdown menu provides options for generating a revocation certificate for
-the key or importing an existing revocation certificate. Revoking a certificate
-is necessary if the key has been compromised or is no longer needed. This action
-invalidates the key, ensuring it cannot be maliciously used. Revocation
-information is typically uploaded to a keyserver to inform others about the
-revoked status of the key.
+A dropdown to create a revocation certificate for the key, or import an existing
+one. Revoke a key if it is compromised or no longer needed: this marks it invalid
+so it can't be misused. The revocation is usually uploaded to a key server so
+others learn the key is revoked.
