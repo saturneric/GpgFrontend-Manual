@@ -2,83 +2,95 @@
 title: Text Operations
 description: "Encrypt, decrypt, sign, and verify text in GpgFrontend using OpenPGP public key cryptography with simple, intuitive workflows."
 sidebar:
-  order: 5
+  order: 4
 ---
 
-GpgFrontend is a user-friendly graphical interface for GnuPG that simplifies the
-core cryptographic operations: **encryption**, **decryption**, **signing**, and
-**verification**. It supports secure communication through public key
-cryptography and provides intuitive workflows for both beginners and advanced
-users.
+GpgFrontend lets you do four things with text: **encrypt** it (hide it),
+**decrypt** it (read it), **sign** it (prove it came from you), and **verify** a
+signature (check it really did). This page walks through each one.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/a08c744eff9339df43a39a22d948c806e473a6c8.webp)
+![](https://image.cdn.bktus.com/i/2026/06/30/8a3b4ad29fce3f6969e8cdb2a10f9efcb06f7ba0.webp)
 
-## Understanding the Basics
+## Before You Start
 
-Public key cryptography relies on key pairs:
+These tasks use a pair of keys:
 
-- **Public Key**: Used to encrypt or verify.
-- **Private Key**: Used to decrypt or sign.
+- **Public key**: used to **encrypt** a message for someone, or to **verify** their
+  signature.
+- **Private key**: used to **decrypt** a message sent to you, or to **sign** your
+  own.
 
-Before performing encryption or signing operations, users must generate their
-own key pair and exchange public keys with their communication partners.
+So before you begin, [make your own key pair](/guides/generate-key/) and swap
+public keys with the people you write to. You encrypt with their public key; they
+decrypt with their private key.
 
-## Encrypting Text
+## Encrypt Text
 
-Use the recipient's **public key** to encrypt plaintext. This method:
+To hide a message so only one person can read it, encrypt it with **their public
+key**. Only their private key can open it.
 
-- Produces a shorter ciphertext.
-- Does **not** reveal the sender's identity.
-- Is ideal when anonymity is preferred.
+This way:
 
-> 🔐 Tip: Don’t use your own public key to encrypt unless you're sending a
-> message to yourself.
+- The result is short.
+- It does **not** reveal who sent it, which is good when you want to stay
+  anonymous.
+
+:::tip
+
+Don't encrypt with your own public key unless the message is meant for you. Use
+the recipient's public key, or only you will be able to read it.
+
+:::
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/19483c04524fd94afff85cac502a1030bdb4c477.gif)
 
-## Signing Text
+## Decrypt Text
 
-Use your **private key** to sign text without encrypting it:
+To read an encrypted message sent to you, paste or load the ciphertext into
+GpgFrontend. The tool then:
 
-- This confirms authorship.
-- Anyone with your public key can verify it.
+- Picks the correct **private key** for you.
+- Tells you if it can't find a matching key.
 
-Check the key’s `Usage` column for `S` to confirm it's suitable for signing.
-
-![](https://image.cdn.bktus.com/i/2025/06/24/8c6db160d26f94e75138134d319c29bd2c3736b7.gif)
-
-## Decrypting Text
-
-Paste or load the ciphertext into GpgFrontend. The tool will:
-
-- Automatically use the correct **private key**.
-- Notify you if no valid key is available.
-
-> ✅ No need to check `Usage` manually; the tool handles key matching.
+You don't need to choose a key by hand. GpgFrontend matches it for you.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/5e16d1a75fb7e7bfb4d14f7fadd57144494b131c.gif)
 
-## Verifying Signatures
+## Sign Text
 
-To verify a detached or embedded signature:
+To prove a message came from you, sign it with **your private key**. The text stays
+readable; signing adds proof, not secrecy.
 
-- Use the sender’s **public key**.
-- Paste or load the signed message.
+- It confirms you wrote it.
+- Anyone with your public key can check it.
 
-GpgFrontend will:
+Before you sign, look at the key's `Usage` column for an `S`, which means the key
+can sign.
 
-- Check the integrity.
-- Report any mismatch or missing public keys.
+![](https://image.cdn.bktus.com/i/2025/06/24/8c6db160d26f94e75138134d319c29bd2c3736b7.gif)
 
-> 📥 If the required public key is missing, GpgFrontend prompts you to import
-> it.
+## Verify a Signature
+
+To check that a signed message is genuine, use the **sender's public key**. Paste
+or load the signed message, and GpgFrontend will:
+
+- Check that the message wasn't changed.
+- Report any mismatch or a missing public key.
+
+:::note
+
+If you don't have the sender's public key yet, GpgFrontend asks you to import it
+first.
+
+:::
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/6ccba3133341e6e6ea095a2dc00bf23c63ed8f56.gif)
 
-## Best Practices
+## Safety Tips
 
-- Always verify a message **before** decrypting when possible.
-- Share only your **public key**, and **never** your private key.
-- Use **Encrypt & Sign** for secure and authenticated communication.
-- Use **Sign Only** for publishing documents or messages that require integrity
-  but not secrecy.
+- **Verify before you trust.** Check a signature before you act on a message.
+- **Share only your public key.** Never give out your private key.
+- **Encrypt and sign together** for messages that should be both private and
+  proven.
+- **Sign only** (no encryption) for public documents that need to be trusted but
+  not hidden.
