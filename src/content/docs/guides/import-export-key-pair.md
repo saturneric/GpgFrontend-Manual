@@ -7,8 +7,8 @@ sidebar:
 
 GpgFrontend gives you several ways to **import** keys (bring them in) and
 **export** keys (save or share them). You'll usually do this for two reasons: to
-**share your public key** with someone, or to **back up** your own keys. This page
-covers each method.
+**share your public key** with someone, or to **back up** your own keys. This
+page covers each method.
 
 ## Import a Key
 
