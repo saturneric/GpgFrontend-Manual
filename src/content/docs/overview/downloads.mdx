@@ -9,7 +9,7 @@ GpgFrontend is ready to install. Pick the option that works best for you below.
 For step-by-step setup help, see the [Getting Started Guide](/overview/getting-started/).
 
 import { LinkCard, CardGrid } from "@astrojs/starlight/components";
-import { Tabs, TabItem, Badge } from "@astrojs/starlight/components";
+import { Tabs, TabItem, Badge, Aside } from "@astrojs/starlight/components";
 
 ## Direct Downloads
 
@@ -76,19 +76,17 @@ Pick your platform below:
       />
     </CardGrid>
 
-    :::caution[About GpgFrontend Lite]
+    <Aside type="caution" title="About GpgFrontend Lite">
+      **GpgFrontend Lite** is made for the strict macOS sandbox. It leaves out
+      GnuPG and uses only the memory-safe **rPGP engine** for a smooth Mac App
+      Store experience. If you want the full experience, including GnuPG support
+      and advanced hardware token support, install the standard Desktop Edition
+      via Homebrew or GitHub.
 
-    **GpgFrontend Lite** is made for the strict macOS sandbox. It leaves out
-    GnuPG and uses only the memory-safe **rPGP engine** for a smooth Mac App
-    Store experience. If you want the full experience, including GnuPG support
-    and advanced hardware token support, install the standard Desktop Edition
-    via Homebrew or GitHub.
-
-    **Back up your keys right away.** Lite stores your keys inside an Apple
-    sandbox, so removing the app or resetting your system can erase them, and
-    lost keys mean your data is gone for good.
-
-    :::
+      **Back up your keys right away.** Lite stores your keys inside an Apple
+      sandbox, so removing the app or resetting your system can erase them, and
+      lost keys mean your data is gone for good.
+    </Aside>
 
   </TabItem>
   <TabItem label="Linux">
