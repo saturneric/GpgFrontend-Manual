@@ -7,182 +7,169 @@ sidebar:
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
-This documentation explains the layout and features of the latest GpgFrontend
-interface, helping users to efficiently utilize all cryptographic operations in
-different workspaces.
+This page gives you a tour of the GpgFrontend window, so you can find your way
+around and do your tasks with ease.
 
 <Tabs>
-  <TabItem label="macOS">
-    ![](https://image.cdn.bktus.com/i/2025/06/24/8725f93f511017055e6df799dac5262a5e9c3254.webp)
-  </TabItem>
   <TabItem label="Windows">
-    ![](https://image.cdn.bktus.com/i/2025/06/25/82aae58a6e35a26aec366cea65178057a8817f12.webp)
+    ![](https://image.cdn.bktus.com/i/2026/06/29/d1db291bcdcb3d324f63ebefb79ddef88a74217f.webp)
+  </TabItem>
+  <TabItem label="macOS">
+    ![](https://image.cdn.bktus.com/i/2026/06/29/d4edebb69dfc39c8bb7115cc8a6da00cecef096d.webp)
   </TabItem>
   <TabItem label="Linux">
-    ![](https://image.cdn.bktus.com/i/2025/06/25/126a292375472a3c559a0a0de775283e4ea05875.webp)
+    ![](https://image.cdn.bktus.com/i/2026/06/29/0846ffe84e7d4879c129676caf09b60c1f2cfdcb.webp)
   </TabItem>
 </Tabs>
 
-## Workspace Overview
+## The Window at a Glance
 
-GpgFrontend organizes your cryptographic workflow into multiple workspaces
-(tabs), making it easy to work with files, plain text, and email data
-simultaneously.
+The window has four main parts:
 
-There are three main workspace types, each represented by a tab:
+- **Operations Bar** (top): the main buttons, like Encrypt, Decrypt, Sign, and
+  Verify.
+- **Workspaces** (center): tabs where you work on files, text, or email.
+- **Key Toolbox** (right): the list of your keys.
+- **Status Panel**: shows the result of each task.
 
-- File Panel: For batch file and folder operations.
-- Text Editor: For editing and encrypting/decrypting plain text.
-- Mail Editor: For handling email messages in a dedicated editor.
+The rest of this page looks at each part in turn.
 
-You can open multiple tabs of each type and switch between them as needed.
+## Workspaces
+
+GpgFrontend splits your work into tabs called workspaces, so you can work on
+files, plain text, and email at the same time.
+
+There are three kinds of workspace, each shown as a tab:
+
+- **File Panel**: work on files and folders.
+- **Text Editor**: write, encrypt, and decrypt plain text.
+- **Mail Editor**: work with email messages.
+
+You can open many tabs of each kind and switch between them whenever you like.
 
 ### File Panel
 
-The File Panel is dedicated to cryptographic operations on files and folders. It
-allows you to:
+The File Panel handles tasks on files and folders. You can:
 
 - Browse and select files or folders from your system.
-- Encrypt, decrypt, sign, or verify one or multiple files.
-- Switch between ASCII and binary output modes.
-- Activate Batch Mode for multi-file operations.
-- Automatically handle folder archiving/encryption (see the File Operations
-  section for details).
+- Encrypt, decrypt, sign, or verify one file or many at once.
+- Choose between text (ASCII) and binary output.
+- Turn on Batch Mode to work on many files at once.
+- Automatically pack and encrypt whole folders (see the File Operations guide for
+  details).
 
-Files and folders selected via Open are always opened in a File Panel tab.
+Files and folders you open always appear in a File Panel tab.
 
 ### Text Editor
 
-The Text Editor allows users to input any desired text or work on existing
-files.
+The Text Editor lets you type new text or open existing files.
 
-#### Key Features
+#### Main Features
 
-- **Operations Bar**: Located at the top, it provides options to encrypt,
-  decrypt, sign, and verify text directly.
-- **Standard Shortcuts**: Supports basic shortcuts like **Ctrl+C**, **Ctrl+V**,
-  and **Ctrl+S** for copying, pasting, and saving text.
-- **Plain Text Format**: Text is encoded in UTF-8 without formatting to ensure
-  clarity and compatibility. Future plans may include rich text editing.
-- Files up to **1MB** are supported. Larger files may cause performance issues
-  and are not recommended.
-- While loading large files, editing will be temporarily disabled until the
-  entire file is processed.
+- **Operations Bar**: at the top, with buttons to encrypt, decrypt, sign, and
+  verify text.
+- **Standard Shortcuts**: supports basic shortcuts like **Ctrl+C**, **Ctrl+V**,
+  and **Ctrl+S** for copy, paste, and save.
+- **Plain Text Only**: text is saved as UTF-8 with no formatting, for clarity and
+  compatibility. Rich text editing may come later.
+- Files up to **1 MB** work best. Bigger files may slow things down and aren't
+  recommended.
+- While a large file loads, editing is paused until it finishes.
 
 ### Mail Editor
 
-The Mail Editor is specifically designed for working with EML-format email
-messages.
+The Mail Editor is made for email messages in EML format.
 
-- Open and Edit EML Files: Load .eml files (standard email format) directly for
-  viewing and editing their content.
-- Compose, Encrypt, Sign, and Verify Emails: Easily write or modify email
-  content and apply encryption, digital signatures, or verify received
-  signatures.
+- **Open and edit EML files**: load .eml files (a standard email format) to view
+  and edit them.
+- **Write and secure email**: write or change email content, then encrypt, sign,
+  or verify it.
 
 :::caution[Note]
 
-The Mail Editor is optimized for .eml files, ensuring compatibility with standard email clients and maintaining proper formatting and metadata during cryptographic operations.
+The Mail Editor works best with .eml files. This keeps things compatible with
+normal email apps and keeps the formatting and details intact during your tasks.
 
 :::
 
-## Information Panel
+## Status Panel
 
-The **Information Panel** displays the results of current operations (e.g.,
-encryption, decryption, signing) and their status, such as success or failure.
-It provides helpful details about the operation, such as timestamps, key IDs,
+The **Status Panel** shows what happened after each task (encrypt, decrypt,
+sign) and whether it worked. It also shows useful details like the time, key IDs,
 and algorithms used.
 
 ### Color Coding for Status
 
-- **Green**: Indicates a successful operation with no issues.
-- **Yellow**: Suggests a successful operation but with potential warnings.
-- **Red**: Signifies an unsuccessful operation or critical errors.
+- **Green**: the task worked, no problems.
+- **Yellow**: the task worked, but with a warning to check.
+- **Red**: the task failed, or there was a serious error.
 
 ### Switching Views
 
-The panel offers two views, selectable with the segmented switch at the top:
+The panel has two views. Use the switch at the top to change them:
 
-- **Status**: A summary report of the operation, presented as an easy-to-read
-  card view.
-- **Details**: The raw status text exactly as reported by the engine.
+- **Status**: a short, easy-to-read summary of the task.
+- **Details**: the full, raw text straight from the engine.
 
-Your choice is remembered across operations and sessions, so the panel keeps
-showing the view you prefer.
+Your choice is remembered, so the panel keeps showing the view you like.
 
 ### Panel Actions
 
-- **Copy**: Copies the status text to the clipboard.
-- **Save**: Saves the status text as a plain text file (UTF-8).
-- **Magnify**: Opens the generated summary document in a larger view. This
-  action is only available while the **Status** view is showing a generated
-  document.
-- **Clear**: Clears all content from the Information Panel, resetting it for the
-  next operation.
+- **Copy**: copies the status text to the clipboard.
+- **Save**: saves the status text as a plain text file (UTF-8).
+- **Magnify**: opens the summary in a bigger view. Available only when the
+  **Status** view is showing a summary.
+- **Clear**: empties the panel, ready for the next task.
 
 ## Key Toolbox
 
-Located on the right side, the Key Toolbox lists all your available keys,
-including public, private, and key groups.
+On the right side, the **Key Toolbox** lists all your keys: public keys, private
+keys, and key groups.
 
-Key features:
+Main features:
 
-- Selection: Tick boxes to choose keys for current operations.
-- Type/Usage/Email: Quickly review each key’s function.
-- Tab Filtering: Tabs let you quickly filter keys by type or status.
+- **Selection**: tick the boxes to pick keys for a task.
+- **Type / Usage / Email**: see at a glance what each key is for.
+- **Tab filtering**: use the tabs to filter keys by type or status.
 
-Keys that are expired, revoked, or unavailable are hidden by default, but can be
-managed in the Manage Keys interface.
+Keys that are expired, revoked, or unavailable are hidden by default. You can find
+them in the **Manage Keys** window.
 
-### Understanding the Key Toolbox Table
+### Reading the Key Toolbox Table
 
-The Key Toolbox contains detailed information about each key. Some of the
-columns and codes(in the Type and Usage columns) may not be immediately obvious
-for new users. This section explains the meaning of these fields and codes, so
-you can confidently interpret key types, usage, and status in your daily
-cryptographic operations.
+Each key has some columns and short codes (in the Type and Usage columns) that
+aren't obvious at first. Here is what they mean.
 
 - **Type**:
-  - `pub`: Public key (for encryption or verification).
-  - `pub/sec`: Key pair with both public and private keys.
-  - `pub/sec#`: Key pair with missing primary key.
-  - `pub/sec^`: Key pair with components stored on a smart card.
-  - `group`: Key Group (a collection of public keys used as one recipient for
-    encryption).
-- **Usage**: Indicates key functionality with codes:
-  - `C`: Certification – can certify (sign) other keys (typically primary keys only)
-  - `E`: Encryption – can encrypt data to this key
-  - `S`: Signing – can create digital signatures
-  - `A`: Authentication – can be used for authentication (e.g. SSH)
-
-### Categories
-
-The toolbox categorizes keys by type (e.g., public or private) using tabs.
-Expired or revoked keys are not displayed by default and can be viewed in
-**Manage Keys**.
+  - `pub`: a public key (for encryption or verification).
+  - `pub/sec`: a key pair with both a public and a private key.
+  - `pub/sec#`: a key pair whose primary key is missing.
+  - `pub/sec^`: a key pair stored on a smart card.
+  - `group`: a key group (several public keys used together as one recipient).
+- **Usage** (what the key can do):
+  - `C` (Certification): can sign other keys (usually primary keys only).
+  - `E` (Encryption): can encrypt data to this key.
+  - `S` (Signing): can create digital signatures.
+  - `A` (Authentication): can be used to log in (for example, SSH).
 
 ## Operations Bar
 
-The Operations Bar at the top provides one-click access to all core
-cryptographic and workspace features. Here are the main buttons, from left to
-right:
+The **Operations Bar** at the top gives you one-click access to the main
+features. Here are the buttons, from left to right:
 
-1. **Open**: Open a file or directory, launching the File Panel for file-based
-   operations.
-2. **Workspace**: Manage and switch between different workspaces or tabs, such
-   as File Panel, Text Editor, and Mail Editor.
-3. **Encrypt**: Encrypt the currently selected file(s) or text using the
-   selected recipient keys.
-4. **Decrypt**: Decrypt the currently selected encrypted file(s) or text. No key
-   selection is required, because gpg will automatically detect and use the
-   appropriate private key(s) from your keyring.
-5. **Sign**: Digitally sign the selected file(s) or text with your private key.
-6. **Verify**: Verify the signature of the selected file(s) or text.
-7. **New Keypair**: Generate a new key pair.
-8. **Import Key...**: Import existing public or private keys into your keyring.
-9. **Manage Keys**: Access the key management interface.
+1. **Open**: open a file or folder in the File Panel.
+2. **Workspace**: manage and switch between tabs (File Panel, Text Editor, Mail
+   Editor).
+3. **Encrypt**: lock the selected files or text for the chosen recipients.
+4. **Decrypt**: unlock the selected files or text. You don't need to pick a key;
+   GPG finds the right private key for you.
+5. **Sign**: sign the selected files or text with your private key.
+6. **Verify**: check the signature on the selected files or text.
+7. **New Keypair**: make a new key pair.
+8. **Import Key...**: add existing public or private keys.
+9. **Manage Keys**: open the key management window.
 
 ### Customization
 
-You can hide unused functions or add frequently used ones via the view settings
-menu in the application.
+You can hide buttons you don't use, or add ones you use often, from the view
+settings menu.
