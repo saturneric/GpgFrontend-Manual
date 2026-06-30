@@ -3,107 +3,94 @@ title: Key Groups
 description: "Create and use key groups in GpgFrontend to encrypt to multiple recipients at once, treating a collection of public keys as a single key."
 ---
 
-A Key Group is a powerful feature in GpgFrontend that allows you to manage and
-utilize a collection of public keys as if they were a single public key. This
-greatly simplifies encryption and access control when you want to address
-multiple recipients or roles at once.
+A Key Group lets you bundle many public keys together and use them as one key.
+This makes it easy to send an encrypted message or file to several people at the
+same time.
 
 ## What is a Key Group?
 
-A Key Group is essentially a named set of public keys. Instead of encrypting
-data separately for each individual recipient, you can create a group, add the
-relevant public keys, and use the group for encryption. All members of the group
-will be able to decrypt messages or files encrypted to that group.
+Think of a Key Group as a mailing list for encryption. You give the group a name
+and put public keys inside it. When you encrypt to the group, every person whose
+key is in the group can open the message.
 
-## Key Group Characteristics
+Without a group, you would have to pick each person's key one by one. With a
+group, you pick the group once and you are done.
 
-- Collection of Public Keys: A key group consists of one or more public keys.
-- Treated as a Single Key: In GpgFrontend, you can use a key group anywhere a
-  single public key would be used, such as for encryption, sharing, or defining
-  access.
-- Nested Key Groups: Key groups can contain other key groups. This allows you to
-  create complex, hierarchical access structures or role-based groups.
-- Flexible Management: You can easily add, remove, or reorganize members (public
-  keys or other key groups) within a group at any time.
-- Naming and Organization: Each key group can be given a unique name for easy
-  identification and usage.
+## What you should know
 
-## How to Create and Use Key Groups
+- A group holds one or more public keys.
+- You can use a group anywhere you would use a single public key, such as when
+  you encrypt a file.
+- A group can hold other groups inside it. This helps you build bigger groups
+  out of smaller ones.
+- You can add or remove keys from a group at any time.
+- Each group has a name so you can find it easily.
 
-1. Select Keys to Group: At the Key ToolBox panel, select the public keys you
-   want to add to your group by checking the boxes in the “Select” column.
-2. Click the “Create Key Group” Button: Once you have selected the desired keys,
-   click the Key Group button (key icon) in the toolbar above the key list.
-3. Fill in Group Information: A dialog titled New Key Group will appear. Fill in
-   the group’s name, email(optional), and an optional comment. Click
-   Create to make the group.
-4. Key Group Appears in List: After creation, your new key group will appear in
-   the key list with Type shown as group. You can now use this group for
-   encryption and other operations. It works just like a single public key.
+## Create a Key Group
+
+1. **Pick the keys.** In the Key ToolBox panel, check the box in the "Select"
+   column next to each public key you want in the group.
+2. **Click the Key Group button.** It is the key icon in the toolbar above the
+   key list.
+3. **Fill in the details.** A window called New Key Group opens. Type a name. The
+   email and comment are optional. Click Create.
+4. **Done.** Your new group shows up in the key list with the Type set to
+   "group". You can now use it just like a single public key.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/c70891d9ad74b21074be03c7a1d0aabf77d9ea3a.webp)
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/bf35548136bc176635dc0fd1175795597701e1dc.webp)
 
-## Manage Members and Nested Groups
+## Edit a group
 
-You can edit a key group at any time. Double-click the group entry (or use the
-group management menu) to open the Key Group Management window. Here you can add
-or remove keys, or even nest groups within groups.
+You can change a group whenever you want. Double-click the group in the list (or
+use the group management menu) to open the Key Group Management window. From
+there you can add keys, remove keys, or put other groups inside the group.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/4c4c9e18c0c850b4d1bbbf8e0861e7f24fa72269.webp)
 
-## Typical Use Cases
+## When to use Key Groups
 
-- Team Encryption: Encrypt a document once for an entire project team or
-  department. All team members (whose keys are in the group) can decrypt it.
-- Role-Based Access: Define groups such as “Developers”, “Managers”, or
-  “Auditors” and grant or revoke access by modifying group membership.
-- Nested Structures: Organize key groups hierarchically, e.g., a “Project A”
-  group containing “Frontend Team” and “Backend Team” key groups.
+- **A whole team.** Encrypt a file once for your whole team. Everyone whose key
+  is in the group can open it.
+- **Roles.** Make groups like "Developers", "Managers", or "Auditors". To give
+  or take away access, just change who is in the group.
+- **Groups inside groups.** Build a big group from smaller ones. For example, a
+  "Project A" group can hold a "Frontend Team" group and a "Backend Team" group.
 
-## Special Notes & Behaviors for Key Groups
+## Things to keep in mind
 
-Key Groups in GpgFrontend offer flexibility and powerful management for
-encryption workflows, but they also come with specific behaviors and rules that
-ensure proper usage and system integrity. The following notes highlight
-important details about how Key Groups work, their operational constraints, and
-how they interact with the broader GpgFrontend environment. Understanding these
-points will help you make the most of Key Groups while avoiding common pitfalls.
+Key Groups are easy to use, but they follow a few rules. Read these so you know
+what to expect.
 
-### Owner Trust Propagation
+### Setting trust for the whole group
 
-You can right-click on a Key Group entry to set the Owner Trust level for the
-group. When you do this, the Owner Trust value is applied to all public keys
-contained within the group (including recursively for nested groups). This is a
-convenient way to manage trust settings for many users at once.
+Right-click a group and set the Owner Trust level. That trust level is then
+applied to every key in the group, including keys in any groups nested inside it.
+This is a fast way to set trust for many people at once.
 
-### Membership & Encryption Capability
+### Only encryption keys can join
 
-Only keys marked with the E (Encrypt) usage flag can be added to a Key Group. If
-a key does not support encryption, you will not be able to include it.
+You can only add a key that can encrypt (it has the E flag). If a key cannot
+encrypt, you cannot add it to a group.
 
-### Automatic Disabling of Invalid Groups
+### Broken groups turn off by themselves
 
-Auto-Disabling on Startup: If, upon startup, any key in a Key Group no longer
-meets requirements (e.g., is deleted or loses encryption capability), the Key
-Group will be automatically disabled.
+When you start GpgFrontend, it checks each group. If a key in a group is gone or
+can no longer encrypt, the group is turned off.
 
-- Disabled Key Groups are not shown in the Key ToolBox.
-- You can still view and manage them in the Key Management interface, where they
-  are highlighted in red to indicate their invalid status.
-- The disabled status will propagate: if a nested group becomes unavailable, any
-  parent group containing it is also disabled.
+- A turned-off group does not show in the Key ToolBox.
+- You can still see and fix it in the Key Management screen, where it is shown in
+  red so you know something is wrong.
+- If a group inside another group breaks, the outer group is turned off too.
 
-### Key Group Usage and Limitations
+### What groups can and cannot do
 
-Key Groups as Encryption Targets Only: In GpgFrontend, a Key Group is treated as
-a single entity for encryption purposes. Therefore, Key Groups cannot be used
-for signing, decryption, or certification.
+A Key Group is only for encryption. You cannot use a group to sign, to decrypt,
+or to certify.
 
-### Independence from GnuPG keygroups
+### Groups stay inside GpgFrontend
 
-Key Groups Are Local to GpgFrontend: GpgFrontend Key Groups are internal objects
-managed only by GpgFrontend. They are not connected to GnuPG’s "keygroup"
-feature or to the `gpg.conf` file. This means Key Groups are only visible and
-usable within GpgFrontend, and will not appear in other OpenPGP tools.
+Key Groups live only inside GpgFrontend. They are not the same as GnuPG's
+"keygroup" feature and they are not saved in the `gpg.conf` file. Other OpenPGP
+tools will not see your groups.

@@ -5,130 +5,146 @@ sidebar:
   label: Trust Chain Management
 ---
 
-## Background: Understanding Trust Management
+## What trust means here
 
-Trust management is a fundamental concept in OpenPGP-based systems. Users must
-establish whether they can trust a particular public key to authenticate
-communications and verify signatures. Building a secure and efficient trust
-model is essential for maintaining communication integrity without relying on
-centralized authorities.
+When you get someone's public key, how do you know it really belongs to them? In
+OpenPGP, there is no central office that checks this for you. Instead, you decide
+who to trust. This is called the Web of Trust.
 
-In decentralized environments, the responsibility for managing trust rests with
-each individual user. This document introduces the key mechanisms behind trust
-management in GpgFrontend and outlines current behaviors and design decisions.
+This page shows how GpgFrontend helps you build that trust, and what it can and
+cannot do today.
 
-:::note[Requires the GnuPG engine]
+:::note[Needs the GnuPG engine]
 
-The trust features described here, namely setting Owner Trust and signing the
-UIDs of other keys, are GnuPG concepts and are only available when GnuPG is the
-active engine. The rPGP engine does not support Owner Trust or UID signing, so
-the related menu items and dialogs are hidden when rPGP is active. Switch to the
-GnuPG backend to manage your trust chain.
+The trust features on this page (setting Owner Trust and signing the UIDs of
+other keys) come from GnuPG. They only work when GnuPG is the active engine. The
+rPGP engine does not support them, so the related menus and dialogs are hidden
+when rPGP is on. Switch to GnuPG to manage your trust.
 
 :::
 
-## Owner Trust Mechanism
+## Owner Trust
 
-The Owner Trust mechanism in OpenPGP is a way for users to manage the
-trustworthiness of public keys in a decentralized manner. After verifying the
-fingerprint of a key and ensuring its authenticity, a user can assign an "Owner
-Trust" level to the key. This level indicates how much the user trusts the key
-owner to sign other people's keys accurately.
+Owner Trust is your answer to one question: **how much do I trust this person to
+vouch for other people's keys?**
 
-Owner Trust is not about whether the key itself is valid; rather, it defines the
-user's confidence in the key owner's ability to vouch for others. This
-distinction allows users to build personalized and scalable Web of Trust models
-without relying heavily on external signatures or centralized authorities.
+First you check that a key really belongs to the right person, usually by
+comparing its fingerprint. Then you give the key an Owner Trust level. That level
+says how much you trust the owner to correctly sign other people's keys.
+
+Owner Trust is **not** about whether the key itself is real. It is about how much
+you trust the owner to vouch for others. This is what lets you build your own Web
+of Trust without depending on a central authority.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/38399d86fb330ca20eab85c33c03331797d32679.webp)
 
-Typical trust levels include:
+The trust levels are:
 
-- **Unknown**: No trust decision has been made.
-- **None**: The key owner is not trusted to certify other keys.
-- **Marginal**: The key owner is partially trusted.
-- **Full**: The key owner is completely trusted.
-- **Ultimate**: The user owns this key personally (automatically assigned to
-  their own keys).
+- **Unknown:** You have not decided yet.
+- **None:** You do not trust this owner to vouch for other keys.
+- **Marginal:** You trust this owner a little.
+- **Full:** You trust this owner completely.
+- **Ultimate:** This is your own key. GpgFrontend sets this for you.
 
-By using Owner Trust, users can securely manage communication without requiring
-constant updates from key servers, maintaining both simplicity and control over
-their trust network.
+With Owner Trust, you stay in control of your trust network and you do not need
+constant updates from key servers.
 
-### Setting Owner Trust
+### How to set Owner Trust
 
-GpgFrontend makes it easy to manage Owner Trust levels for any key in your
-collection directly from the Key Toolbox.
-
-To change the Owner Trust level:
-
-1. Locate the Key: Find the desired public key (or key group) in the Key Toolbox
+1. **Find the key.** Locate the public key (or key group) in the Key Toolbox
    table.
-2. Open the Context Menu: Right-click on the key entry to display the context
-   menu.
-3. Set Owner Trust Level: Select the “Set Owner Trust Level” option.
+2. **Right-click it.** This opens the context menu.
+3. **Choose "Set Owner Trust Level".**
 
-A dialog will appear allowing you to choose the appropriate trust level
-(Unknown, None, Marginal, Full, Ultimate).
+A window opens where you pick the level (Unknown, None, Marginal, Full, or
+Ultimate).
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/4b7624b599a5f310d059843c872cf81e6b089ba4.webp)
 
-## Signing UIDs and Current Limitations
+## How Owner Trust and signing work together
 
-In GpgFrontend, users can sign the UID (User ID) of another user’s OpenPGP
-public key to confirm its authenticity. However, during the initial design
-phase, the potential need to synchronize these signatures with key servers was
-not fully considered.
+Owner Trust and signing a UID answer two different questions:
+
+- **Signing a UID** says: "Is this key really this person?" This is about the
+  key's **validity**.
+- **Owner Trust** says: "How much do I trust this person to vouch for other
+  people's keys?" This is about trusting the owner as a **referee**.
+
+The two connect like this. GnuPG treats a key as valid for you when either:
+
+- You signed its UID yourself (your own key has Ultimate trust, so your signature
+  counts fully), or
+- It was signed by people you gave Owner Trust to. By default, one **Full**-trust
+  signer is enough, or three **Marginal**-trust signers.
+
+So Owner Trust is the dial that decides **how much other people's signatures
+count** toward making a key valid in your eyes. Signing is the act of vouching;
+Owner Trust is how much you let other people's vouching influence you.
+
+This is also why we suggest Owner Trust over signing for everyday use. It gives
+you the same result without pushing signatures onto public key servers.
+
+## Signing UIDs (not recommended)
+
+You can sign the UID (the name and email) on someone else's public key to say "I
+checked this, and it is really them."
+
+:::caution[We no longer recommend this]
+
+A normal UID signature is meant to be shared on key servers, and that causes the
+problems below (server rules and key bloat). For your own trust decisions, you
+usually do not need that. Set **Owner Trust** to control how much you rely on
+someone, and only sign a UID when you truly need to certify that a key belongs to
+a person.
+
+:::
+
+When GpgFrontend was first designed, sending these signatures to key servers was
+not fully planned for.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/d974152f4b2b850d228408b99d37ea487a3cf914.webp)
 
-### Current Behavior
+### What happens now
 
-- GpgFrontend does not automatically upload signed UIDs to OpenPGP key servers.
-- Whether a signature update is accepted depends entirely on the specific key
-  server’s policy.
+- GpgFrontend does not upload your signed UIDs to key servers on its own.
+- If you do upload one, whether it is accepted depends on each key server's
+  rules.
 
-### Reasons for not enforcing automatic synchronization
+### Why uploads are not automatic
 
-Uncontrollable Behavior of Key Servers
+**Key servers behave differently.**
 
-- Different servers (e.g., keys.openpgp.org, SKS servers) have varied policies
-  regarding third-party signatures.
-- Some servers accept them; others require UID validation or reject them
-  altogether.
+- Servers like keys.openpgp.org and SKS servers treat third-party signatures
+  differently.
+- Some accept them, some need the UID checked first, and some reject them.
 
-Potential Key Size Inflation
+**Keys would get bigger.**
 
-- Each additional signature increases the public key’s size.
-- Frequent uploads of third-party signatures would cause key bloat, impacting
-  synchronization and performance.
+- Every extra signature makes the public key larger.
+- Uploading lots of third-party signatures would bloat keys and slow down syncing.
 
-Practical User Behavior
+**Most people do not need it.**
 
-- Most users verify fingerprints manually and rely on Owner Trust.
-- Synchronizing all third-party signatures to public servers is often
-  unnecessary for typical use cases.
+- Most users check fingerprints by hand and rely on Owner Trust.
+- Uploading every third-party signature to public servers is usually not needed.
 
-## Special Considerations for Organizational Users
+## For organizations
 
-In organizational environments (e.g., large enterprises), simple Owner Trust is
-often inadequate. In these cases, a Certificate Authority (CA)-based trust model
-is used:
+In a big company, plain Owner Trust is often not enough. Larger groups usually
+use a Certificate Authority (CA) instead:
 
-- A trusted internal CA signs the members' keys.
-- Members only need to trust the CA's signature rather than validating each
-  colleague's key individually.
-- This process is similar to the X.509 certificate system and is often
-  implemented through gpgsm (S/MIME-based solutions).
+- A trusted internal CA signs each member's key.
+- Members only need to trust the CA, not check every coworker's key one by one.
+- This works like the X.509 certificate system and is usually done with gpgsm
+  (an S/MIME setup).
 
-Currently, GpgFrontend does not support gpgsm or CA certificate management, but
-future development may consider it based on user demand.
+GpgFrontend does not support gpgsm or CA management yet. It may be added later if
+users want it.
 
-## Possible Future Enhancements
+## What might come later
 
-- Provide an optional prompt after signing a UID, asking if the user wishes to
-  upload the updated key to a key server.
-- Clearly warn users about potential issues of key bloat when uploading
-  third-party signatures.
-- Explore the implementation of organizational trust models such as CA-based
-  signature management and certificate presentation.
+- An optional prompt after you sign a UID, asking if you want to upload the
+  updated key.
+- A clear warning about key bloat when uploading third-party signatures.
+- Support for organization trust models, such as CA-based signing and
+  certificates.
