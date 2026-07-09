@@ -6,81 +6,67 @@ sidebar:
   order: 4
 ---
 
-Keeping your public keys in sync with those stored on a key server is crucial
-for secure communications. This synchronization ensures that any changes to
-public keys, such as revocations or the addition of subkeys, are reflected in
-your local keyring. Without this, you may be vulnerable to security risks like
-man-in-the-middle attacks or authentication errors.
+The public keys you have saved locally can go stale. The key's owner may
+revoke it, extend it, or add a new subkey, and your local copy knows nothing
+about that. **Syncing** asks a key server for the latest version of each key
+and updates your local copy.
 
-## Importance of Public Key Synchronization
+Why this matters:
 
-**Key Revocation:** If a key is revoked by its owner, it's vital to stop using
-it immediately. Revocation might occur if the private key is compromised or if
-the key is no longer used.
+- **Revoked keys**: If a key was revoked (for example, because its private key
+  was stolen), you must stop using it right away. Without a sync, you cannot
+  see the revocation.
+- **New subkeys**: If someone added a new signing subkey, signatures made with
+  it look invalid to you until your local copy learns about the new subkey.
 
-**Subkey Updates:** If a new signing subkey is generated, it's essential for
-your local gpg to recognize it. Without the updated information, gpg won't
-authenticate signatures made with the new subkey.
+A good habit: sync before you start an important encrypted conversation, and
+every now and then in between.
 
-## How to Sync Public Keys
+## Sync Your Public Keys
 
-GpgFrontend automates the public key synchronization process through a
-user-friendly interface. Here’s how to use it:
+1. In the main window, click **Manage Keys** to open the Key Management
+   interface.
 
-1. Open the Key Management Interface: Navigate to the Key Management interface
-   by clicking on the "Manage Keys" button in the main interface.
-2. Select Keys to Sync: In the list of public keys, you can select specific keys
-   to sync by checking the boxes next to them. If you want to sync all public keys,
-   you do not need to select any specific keys.
-3. Click the Sync Public Key Button: Locate and click the **Sync Public Key**
-   button. This button is represented by a cloud icon with a refresh symbol,
-   located in the toolbar at the top of the Key Management interface.If you have
-   selected specific keys, the synchronization process will initiate for those
-   keys. If no keys are selected, a confirmation prompt will appear, asking you to
-   confirm if you want to synchronize all public keys.
-4. Synchronization Process: The feature works by checking all the public keys in
-   your possession against the key server. If there is an updated version of a key
-   you own, GpgFrontend will import the new details to your local keyring.
+2. Choose what to sync:
+
+   - To sync **specific keys**, check the boxes next to them.
+   - To sync **all** public keys, leave all boxes unchecked.
+
+3. Click the **Sync Public Key** button in the toolbar. It is the cloud icon
+   with a refresh symbol.
+
+   - If you selected keys, only those are synced.
+   - If you selected nothing, GpgFrontend asks you to confirm syncing all
+     public keys.
+
+4. GpgFrontend checks each key against the key server. If the server has a
+   newer version, the updates are imported into your local keyring.
 
 ![](https://image.cdn.bktus.com/i/2025/06/28/38eefac3220f864b5e4a1fe98681f8cef817ef21.webp)
 
-By following these steps, you can ensure that your public keys are always
-up-to-date, enhancing the security and reliability of your cryptographic
-communications.
+## Which Key Server Is Used
 
-### Choosing the Right Key Server
+Since GpgFrontend v2.1.6, **Sync** and **Export** always use
+`https://keys.openpgp.org`. This server uses the Verifying Keyserver (VKS)
+API, which gives better security and consistent results worldwide. You cannot
+change the server for these two operations.
 
-To know which key server GpgFrontend interacts with, follow these steps:
+The **default key server** you set in Settings applies only to key
+**searches and imports**:
 
-1. Go to the settings section of GpgFrontend.
-2. The default key server configured will be listed here.
+1. Open the **Settings** and go to the key server section. The current default
+   server is listed there.
+
+2. To use a different one for searches and imports, add your preferred key
+   server and set it as the default.
 
 ![](https://image.cdn.bktus.com/i/2025/06/28/86bc996c90eb449dee681a86be15797015128f5c.webp)
 
-If you need to use a different key server:
+## Tips
 
-1. Navigate to the key server settings within GpgFrontend.
-2. Add your preferred key server's details.
-3. Set it as the default for future synchronizations.
-
-:::caution[Changes (v2.1.6 and later)]
-
-Setting a default key server **only affects key searches/imports**.
-
-- **Export** and **Sync** operations are no longer affected by this setting.
-- These operations **always use `https://keys.openpgp.org`**, which implements
-  the Verifying Keyserver (VKS) API.
-
-This behavior ensures improved security and global consistency in public key
-management.
-
-:::
-
-## Best Practices for Key Synchronization
-
-- **Regular Sync:** Regularly sync your keys to ensure you have the latest
-  updates, especially before engaging in secure communication.
-- **Verify Changes:** After syncing, verify any changes or updates to ensure
-  they are legitimate.
-- **Secure Network:** Always perform key synchronization over a secure network
-  to prevent interception or tampering.
+- **Sync regularly**: Especially before you encrypt something important or
+  verify a signature that fails unexpectedly.
+- **Check what changed**: After a sync, look at any updated keys and make sure
+  the changes make sense.
+- **Use a trusted network**: Sync over a network you trust, not open public
+  Wi-Fi you know nothing about.
