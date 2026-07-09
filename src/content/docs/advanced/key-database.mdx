@@ -8,208 +8,184 @@ sidebar:
 
 import { Steps } from "@astrojs/starlight/components";
 
-GpgFrontend provides **Multi-Key Database Support**, allowing users to manage
-multiple isolated OpenPGP key databases in one application. This is useful when
-you want to separate keys for different projects, organizations, identities, or
-security levels.
+A **key database** is the place where GpgFrontend keeps your keys. Normally you
+have just one. GpgFrontend also lets you set up **several key databases**, each
+one fully separate from the others.
 
-Starting with GpgFrontend v2.2.0, key database management is integrated into the
-main **Settings** dialog. The old **GnuPG Controller** window has been removed.
+Why would you want more than one? A few common reasons:
 
-## Features
+- Keep **work keys and personal keys** apart, so you never mix them up.
+- Give each **project, team, or customer** its own set of keys.
+- Keep **test keys** away from the keys you really use.
+- Try the experimental **rPGP engine** (for example, for OpenPGP v6 keys)
+  without touching your normal GnuPG keys.
 
-- **Multiple Key Databases**: Manage separate key databases for different
-  purposes or contexts.
-- **Per-Database Engine Selection**: Choose the OpenPGP engine used by each key
-  database, such as GnuPG or the experimental rPGP engine when available.
-- **Flexible Switching**: Switch between configured databases from the main
-  interface.
-- **Customizable Management**: Add, edit, reorder, or remove key databases as
-  needed.
-
-## Benefits
-
-- **Improved Separation**: Keep personal, project, organization, or test keys in
-  different databases.
-- **Better Workflow Control**: Use different key databases for different tasks
-  without mixing unrelated keys.
-- **Engine-Aware Testing**: Use GnuPG-backed databases for maximum compatibility
-  and rPGP-backed databases for testing newer OpenPGP features such as OpenPGP
-  v6.
-- **Reduced Operational Risk**: Avoid accidentally using keys from the wrong
-  project or security context.
-
-## Accessing the Multi-Key Database Feature
-
-To manage multiple key databases, follow these steps:
-
-<Steps>
-
-1. Open **Settings** from the main application menu.
-
-2. Go to the **Key Database** section.
-
-3. Here, you can view all configured key databases, including their names,
-   paths, order, and selected OpenPGP engines.
-
-4. Add, edit, reorder, or remove key databases as needed.
-
-</Steps>
+If one key database is enough for you, you can skip this page. GpgFrontend
+works fine without ever opening these settings.
 
 :::note
 
-In GpgFrontend v2.2.0 and later, the previous **GnuPG Controller** window has
-been removed. Key database management is now part of the unified **Settings**
-interface.
+Since GpgFrontend v2.2.0, key databases are managed in the main **Settings**
+dialog. The old **GnuPG Controller** window no longer exists.
 
 :::
 
-## Managing Key Databases
+## Open the Key Database Settings
 
-The **Key Database** settings page allows you to manage all configured key
-databases.
+<Steps>
 
-### Adding a New Key Database
+1. Open **Settings** from the main menu.
 
-To add a new key database:
+2. Go to the **Key Database** section.
 
-- Click **Add New Key Database**.
-- Specify a display name for the database.
-- Select the database path or use the default suggested location.
-- Choose the OpenPGP engine when the option is available.
+</Steps>
 
-A new key database creates an isolated environment for generated or imported
-keys.
+You now see a list of all your key databases. For each one, the list shows its
+name, its folder path, and the OpenPGP engine it uses.
 
-:::note[Engine Selection]
+The **first database in the list is the default**. It is the one GpgFrontend
+uses when you start the application. On a normal setup, it points to your GnuPG
+home directory.
 
-GnuPG remains the recommended default engine for daily use and maximum
-interoperability. The experimental rPGP engine can be used for supported
-databases when testing newer OpenPGP features such as OpenPGP v6 or selected
-post-quantum algorithms.
+## Add a New Key Database
+
+<Steps>
+
+1. In the **Key Database** settings, click **Add New Key Database**.
+
+2. Give it a clear **name**, such as `Work`, `Personal`, or `rPGP Test`. A good
+   name helps you pick the right database later.
+
+3. Pick a **folder path** for the database, or keep the suggested one.
+
+4. If the option is shown, choose the **engine** (GnuPG or rPGP). If you are
+   not sure, keep **GnuPG**. It is the standard choice and works with
+   everything.
+
+</Steps>
+
+The new database starts empty. Any key you generate or import while it is
+selected goes into this database only.
+
+:::note[What is the Relative Path option?]
+
+If you turn on **Relative Path**, GpgFrontend stores the folder path relative
+to the application folder instead of as a full path. Use this in
+[Portable Mode](/advanced/portable-mode), or when you move GpgFrontend between
+computers, so the path stays valid on every machine.
 
 :::
 
-**Relative Path Support:** If you enable the Relative Path option, the specified
-absolute path will be converted to a path relative to the GpgFrontend
-application directory. This is useful for Portable Mode or when moving the
-application between different systems, because key database paths can remain
-valid across different host environments.
+## Switch Between Databases
 
-### Editing and Reordering Key Databases
+You do not need to open Settings to change databases:
 
-Right-click a database entry, or use the available management buttons, to access
-actions such as:
+<Steps>
 
-- **Move Up / Move Down**: Reorder the database list.
-- **Move to Top**: Move a database to the top of the list. The first database is
-  treated as the default key database.
-- **Edit**: Rename the database, adjust its path, or change supported settings.
-- **Remove**: Remove the database from the GpgFrontend configuration.
+1. In the main window, open the dropdown at the top of the **Key Toolbox**.
+
+2. Pick the database you want. The key list now shows only the keys in that
+   database.
+
+</Steps>
+
+From then on, everything you do (generate, import, export, encrypt, sign,
+verify) uses the keys in the selected database.
+
+:::tip
+
+Before you generate or import a key, glance at the dropdown to make sure the
+right database is selected. This is the easiest way to avoid putting a key in
+the wrong place.
+
+:::
+
+## Edit, Reorder, or Remove a Database
+
+In the **Key Database** settings, right-click a database (or use the buttons)
+to:
+
+- **Edit**: Change its name, path, or other settings.
+- **Move Up / Move Down / Move to Top**: Change the order of the list.
+  Remember, the first entry is the default database.
+- **Remove**: Take the database out of GpgFrontend's list. This does **not**
+  delete the keys on disk. It only removes the entry from the configuration.
 
 :::caution
 
-Some changes to key database settings may require restarting GpgFrontend before
-they take full effect.
+Some changes only take effect after you restart GpgFrontend. If the
+application asks you to restart, do it before you continue working.
 
 :::
 
-### Switching Between Databases
+## Understand Engines (GnuPG vs rPGP)
 
-- Use the **Key Toolbox** dropdown in the main interface to switch between
-  configured databases.
-- Select the desired database, and the corresponding keys will be displayed.
-- Operations such as key generation, import, export, encryption, signing, and
-  verification will use the currently selected key database where applicable.
+Each key database uses exactly one engine:
 
-### Changing the Engine of a Key Database
+- **GnuPG**: The standard engine. Recommended for daily use. Keys are stored
+  in a GnuPG keyring.
+- **rPGP**: An experimental engine. Useful for testing newer OpenPGP features,
+  such as OpenPGP v6 or some post-quantum algorithms. Keys are stored in a
+  file named `gf_keydb.sqlite`.
 
-Each key database is bound to one engine at a time, and this includes the
-**default key database** (the first entry in the list, also called the default
-channel). The engine you select determines which key store GpgFrontend reads at
-that database's path. A GnuPG keyring and an rPGP `gf_keydb.sqlite` store can sit
-in the same directory, but they are **separate stores and are never merged**.
+The important part: these two stores can live in the **same folder**, but they
+are **completely separate**. GpgFrontend only reads the store that belongs to
+the database's current engine. It never merges them.
 
-This matters most for the default key database, which normally points at your
-GnuPG home directory:
+### What happens when you change a database's engine
 
-- If you set the default database's engine to **rPGP** and restart GpgFrontend,
-  the application creates and reads a `gf_keydb.sqlite` file inside that GnuPG
-  home directory and shows only the rPGP keys. Your existing **GnuPG keys are
-  not displayed** in the default database while rPGP is active.
-- If you switch the default database's engine back to **GnuPG** and restart, the
-  application reads the GnuPG keyring again, and the **rPGP store is not read**,
-  so its keys are not displayed.
+Say your default database points to your GnuPG home directory:
+
+- You set its engine to **rPGP** and restart. GpgFrontend now creates and
+  reads a `gf_keydb.sqlite` file in that folder, and shows only rPGP keys.
+  Your GnuPG keys are still on disk, but they are **not shown**.
+- You set the engine back to **GnuPG** and restart. GpgFrontend reads the
+  GnuPG keyring again. Now the rPGP keys are the ones **not shown**.
 
 :::caution[Switching engines hides keys, it does not delete them]
 
-Changing a database's engine does not move, convert, or delete any keys. Keys
-that belong to the inactive engine simply are not shown, because GpgFrontend only
-reads the store for the currently selected engine. To see a given set of keys
-again, select the engine that owns them and restart if prompted.
+Changing the engine never moves, converts, or deletes any keys. Keys that
+belong to the other engine are simply not shown. To see them again, switch
+back to their engine and restart.
 
-If you need both GnuPG and rPGP keys available at the same time, create
-**separate key databases**, one per engine, instead of switching the engine on a
-single database.
+If you want GnuPG keys and rPGP keys available at the same time, do not keep
+switching one database back and forth. Instead, create **two databases**, one
+per engine, and switch between them from the Key Toolbox dropdown.
 
 :::
 
-## About `gf_keydb.sqlite`
+## The `gf_keydb.sqlite` File
 
-Starting with the 2.2 series, GpgFrontend may create a `gf_keydb.sqlite` file in
-configured key database directories.
+Starting with the 2.2 series, GpgFrontend may create a file named
+`gf_keydb.sqlite` inside a key database folder. What it holds depends on the
+engine:
 
-For **rPGP** key databases, this SQLite database stores rPGP-managed key material
-and metadata.
+- **rPGP database**: This file holds the actual key material, including
+  private keys. Treat it as sensitive.
+- **GnuPG database**: GnuPG itself still holds all key material. Here the file
+  only stores GpgFrontend's own metadata and may be empty.
 
-For **GnuPG** key databases, private and public key material remains managed by
-GnuPG. In this case, `gf_keydb.sqlite` is used only for GpgFrontend-managed
-metadata and may be empty.
-
-:::tip[How each engine stores keys]
-
-The two engines keep your keys in fundamentally different places, which affects
-backups and security expectations. For a full explanation, see
+For a full explanation of where each engine keeps your keys, see
 [How Keys Are Stored (GnuPG vs rPGP)](/advanced/key-storage).
 
-:::
+## Back Up Your Databases
 
-:::caution[Backup Notice]
+Back up each database based on its engine:
 
-Back up each key database according to its engine type.
+- **GnuPG database**: Back up the GnuPG home directory it points to, plus your
+  revocation certificates.
+- **rPGP database**: Back up the whole database folder, including
+  `gf_keydb.sqlite`. Remember that this file can contain private keys.
 
-For GnuPG databases, back up the corresponding GnuPG home directory and your
-revocation certificates.
+Store backups in a safe, encrypted place.
 
-For rPGP databases, back up the database directory that contains
-`gf_keydb.sqlite`, because it may contain rPGP-managed key material.
+## Tips
 
-:::
-
-## Use Cases for Multi-Key Databases
-
-- **Project Isolation**: Keep keys for different projects separate to avoid
-  accidental cross-use.
-- **Personal and Work Separation**: Store personal and work-related keys in
-  different databases.
-- **Organization or Team Separation**: Maintain separate databases for different
-  departments, teams, or customer environments.
-- **Testing New Engines**: Use a dedicated rPGP database to test OpenPGP v6 or
-  experimental algorithms without affecting your main GnuPG keyring.
-- **Sensitive Key Handling**: Keep high-value or sensitive keys in a dedicated
-  database with stricter backup and access procedures.
-
-## Tips for Effective Multi-Key Database Usage
-
-- **Use clear names**: Name databases according to their purpose, such as
-  `Personal`, `Work`, `Project Alpha`, or `rPGP Test`.
-- **Check the active database before operating**: Make sure you are using the
-  intended database before importing keys, generating keys, encrypting files, or
-  signing data.
-- **Back up regularly**: Back up each database and store backups in secure,
-  encrypted locations.
-- **Separate stable and experimental workflows**: Use GnuPG-backed databases for
-  daily work and separate rPGP-backed databases for testing experimental
-  features.
-- **Review database contents periodically**: Remove unused keys, check
-  expiration dates, and verify that keys are stored in the intended database.
+- **Name databases by purpose**: `Personal`, `Work`, `Project Alpha`,
+  `rPGP Test`. Avoid names that only make sense today.
+- **Check the dropdown first**: Always confirm which database is active before
+  you generate, import, encrypt, or sign.
+- **Keep experiments separate**: Do daily work in GnuPG databases. Use a
+  dedicated rPGP database for testing new features.
+- **Clean up now and then**: Remove keys you no longer use, check expiry
+  dates, and make sure each key lives in the database you meant it for.

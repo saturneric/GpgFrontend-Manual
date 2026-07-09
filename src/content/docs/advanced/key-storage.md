@@ -6,89 +6,103 @@ sidebar:
   order: 3
 ---
 
-GpgFrontend supports two OpenPGP engines, and they store your keys in
-fundamentally different ways. Understanding this difference matters for backups,
-security expectations, and interoperability with other tools. This page explains
-where each engine keeps key material and what protects it.
+GpgFrontend can use two different OpenPGP engines: **GnuPG** and **rPGP**. They
+store your keys in very different places, and that difference matters for three
+practical questions:
 
-For managing multiple databases and choosing an engine per database, see
+- **What do I need to back up?**
+- **What protects my secret keys on disk?**
+- **Can other tools (like the `gpg` command line) see my keys?**
+
+This page answers those questions for each engine. To learn how to set up
+databases and pick an engine for each one, see
 [Multi-Key Database](/advanced/key-database).
 
 ## Quick Comparison
 
-| Aspect              | GnuPG engine                                  | rPGP engine                                        |
-| ------------------- | --------------------------------------------- | -------------------------------------------------- |
-| Who stores the keys | GnuPG, through its own home directory         | GpgFrontend, in its own key database               |
-| Storage format      | GnuPG keyring (`pubring.kbx`) and `private-keys-v1.d/` | A SQLite database, `gf_keydb.sqlite`      |
-| Secret key handling | Managed by `gpg-agent`                        | Stored directly by GpgFrontend                     |
-| Protection at rest  | GnuPG's own mechanisms plus passphrase        | OS file permissions plus the key's own passphrase  |
-| External tools      | The `gpg` command line and other GnuPG tools can use the same home directory | rPGP keys are managed only by GpgFrontend |
+| Aspect              | GnuPG engine                                                   | rPGP engine                                    |
+| ------------------- | -------------------------------------------------------------- | ---------------------------------------------- |
+| Who stores the keys | GnuPG, in its own home directory                               | GpgFrontend, in its own database file          |
+| Storage format      | GnuPG keyring (`pubring.kbx`) and `private-keys-v1.d/`         | A SQLite database, `gf_keydb.sqlite`           |
+| Secret key handling | Managed by `gpg-agent`                                         | Stored directly by GpgFrontend                 |
+| Protection at rest  | GnuPG's own mechanisms plus passphrase                         | File permissions plus the key's own passphrase |
+| Other tools         | The `gpg` command line and other GnuPG tools see the same keys | Only GpgFrontend can use these keys            |
+| What to back up     | The GnuPG home directory                                       | The folder that contains `gf_keydb.sqlite`     |
 
 ## GnuPG Engine
 
-When a key database uses the GnuPG engine, GpgFrontend does not store the keys
-itself. It talks to GnuPG through GPGME, and GnuPG owns the key material:
+With the GnuPG engine, GpgFrontend does not store your keys at all. It asks
+GnuPG to do the work (through the GPGME library), and GnuPG owns the keys.
 
-- **Public keys** live in the GnuPG keyring (the keybox, `pubring.kbx`) inside
-  the GnuPG home directory for that database.
-- **Secret keys** are held by `gpg-agent` under `private-keys-v1.d/`, and all
-  private-key operations (signing, decryption) go through the agent.
-- **Passphrase caching** is handled by `gpg-agent`.
+**Where the keys live:**
 
-Because the keys live in a standard GnuPG home directory, the same directory can
-be used by the `gpg` command line and other GnuPG-based tools. For a GnuPG
-database, GpgFrontend's own `gf_keydb.sqlite` file holds only GpgFrontend
-metadata (such as key groups) and may be empty of key material.
+- **Public keys** are in the GnuPG keyring file (`pubring.kbx`) inside the
+  GnuPG home directory of that database.
+- **Secret keys** are held by `gpg-agent` under `private-keys-v1.d/`. Every
+  operation that needs a private key (signing, decryption) goes through the
+  agent, and the agent also handles passphrase caching.
 
-To back up a GnuPG database, back up its GnuPG home directory and your
+**What this means for you:**
+
+- Other GnuPG tools, including the `gpg` command line, can use the exact same
+  keys, because they all read the same home directory.
+- GpgFrontend's own `gf_keydb.sqlite` file in a GnuPG database holds only
+  GpgFrontend metadata (such as key groups). It contains no key material and
+  may be empty.
+
+**What to back up:** The GnuPG home directory of the database, plus your
 revocation certificates.
 
 ## rPGP Engine
 
-When a key database uses the rPGP engine, GpgFrontend manages the keys directly,
-without GnuPG or `gpg-agent`. Keys are stored in a SQLite database named
-`gf_keydb.sqlite` in the database directory, alongside its `-wal` and `-shm`
-sidecar files (the database uses WAL journaling).
+With the rPGP engine, GpgFrontend stores and manages the keys itself. GnuPG
+and `gpg-agent` are not involved at all.
 
-The database holds both metadata (fingerprints, key IDs, algorithms,
-capabilities, user IDs, subkeys) and the actual OpenPGP public and secret key
-blocks.
+**Where the keys live:**
 
-### How rPGP Key Material Is Protected
+- Everything is in one SQLite database file, `gf_keydb.sqlite`, inside the
+  database folder. Next to it you may see `-wal` and `-shm` helper files;
+  they belong to the database too.
+- The file holds both the key details (fingerprints, key IDs, algorithms,
+  user IDs, subkeys) and the actual public and secret key blocks.
 
-The SQLite database itself is **not encrypted**. The secret key blocks are
-stored as OpenPGP key packets, which are protected only by the passphrase you
-set on the key (if any). To keep other local users from reading the key
-material, GpgFrontend restricts the storage to the current user through
-operating-system file permissions:
+**What protects the secret keys:**
 
-- The database directory is set to owner-only access (`0700`).
-- The `gf_keydb.sqlite` file and its `-wal` / `-shm` sidecars are set to
-  owner-only read and write (`0600`).
+The database file itself is **not encrypted**. Two things protect your keys:
 
-:::caution[Set a passphrase for rPGP secret keys]
+1. **File permissions**: GpgFrontend limits access to your user account only.
+   The database folder is set to owner-only access (`0700`), and the database
+   files to owner-only read and write (`0600`). This keeps other users on the
+   same computer out.
+2. **The key's own passphrase**: A secret key with a passphrase is stored
+   encrypted inside the database, just like in a normal OpenPGP key file.
 
-Because the rPGP database does not add its own encryption layer, a secret key
-generated **without** a passphrase is protected at rest only by file
-permissions. For sensitive keys, set a passphrase so the secret key packet is
-encrypted inside the database.
+:::caution[Always set a passphrase for rPGP secret keys]
+
+A secret key created **without** a passphrase sits in the database with no
+encryption of its own. File permissions are then its only protection. For any
+key you care about, set a passphrase, so the secret key stays encrypted even
+if someone gets a copy of the database file.
 
 :::
 
-To back up an rPGP database, back up the database directory that contains
-`gf_keydb.sqlite`, because it contains the rPGP-managed key material.
+**What to back up:** The whole database folder that contains
+`gf_keydb.sqlite`. Remember that this backup contains your secret keys, so
+store it somewhere safe and encrypted.
 
-## Interoperability
+## Working with Other Tools
 
-The storage difference is closely tied to key compatibility:
+The storage difference goes hand in hand with key compatibility:
 
-- GnuPG keys can be imported into and used by the rPGP engine.
-- rPGP-generated 25519 and post-quantum keys are not compatible with GnuPG. See
-  the compatibility notes in [Generate Key Pair](/guides/generate-key) and
+- Keys made with GnuPG can be imported into an rPGP database and used there.
+- The other direction is limited: 25519 and post-quantum keys generated by
+  rPGP do **not** work with GnuPG. See the compatibility notes in
+  [Generate Key Pair](/guides/generate-key) and
   [Comparison of Algorithms](/extra/algorithms-comparison).
 
-For this reason, keep keys that need maximum interoperability in a GnuPG-backed
-database, and use rPGP-backed databases for testing newer OpenPGP features.
+The simple rule: keep the keys you use with other people and other tools in a
+**GnuPG** database, and use **rPGP** databases for testing newer OpenPGP
+features.
 
 ## Related Topics
 
