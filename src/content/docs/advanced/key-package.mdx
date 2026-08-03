@@ -17,7 +17,7 @@ you set up a new machine or want the same identity on a second device.
 When you create a KeyPackage, GpgFrontend produces **two files**, and you set
 **one PIN**. You need all three to import the keys later:
 
-1. The **KeyPackage file** (`.gpgpack`): Holds your keys, encrypted.
+1. The **KeyPackage file** (`.gfpack`): Holds your keys, encrypted.
 2. The **key file** (`.key`): Holds the encryption key for the KeyPackage,
    itself protected by your PIN.
 3. Your **PIN**: You choose it during creation. Without it, the KeyPackage
@@ -25,7 +25,7 @@ When you create a KeyPackage, GpgFrontend produces **two files**, and you set
 
 Keep this in mind before you start: if you lose any one of the three, the
 KeyPackage is useless. That is by design. Someone who steals just the
-`.gpgpack` file, or even both files but not the PIN, cannot read your keys.
+`.gfpack` file, or even both files but not the PIN, cannot read your keys.
 
 ## Create a KeyPackage
 
@@ -44,7 +44,7 @@ KeyPackage is useless. That is by design. Someone who steals just the
      `KeyPackage_<random id>`. Click **Generate Key Package Name** if you want
      a different one.
    - **Output path**: Click **Select Output Path** and choose where to save
-     the `.gpgpack` file.
+     the `.gfpack` file.
    - **Passphrase**: Click **Generate and Save Passphrase**. This creates the
      key file. You will be asked to set a **PIN**. Pick a strong one and keep
      it to yourself.
@@ -67,7 +67,7 @@ KeyPackage is useless. That is by design. Someone who steals just the
 
 ## Transfer It to the Other Device
 
-Move **both files**, the `.gpgpack` file and the `.key` file, to the target
+Move **both files**, the `.gfpack` file and the `.key` file, to the target
 device. Use a safe method, such as an encrypted USB drive, encrypted email, or
 a secure network channel.
 
@@ -86,7 +86,7 @@ On the target device:
 
    ![](https://image.cdn.bktus.com/i/2025/06/28/aec995410df49d0b532329a611ef68f10cd1885f.webp)
 
-3. In the file dialog, choose the `.gpgpack` file you transferred.
+3. In the file dialog, choose the `.gfpack` file you transferred.
 
 4. In the next file dialog, choose the matching `.key` file.
 
@@ -100,7 +100,7 @@ On the target device:
 
 Once the keys are imported and working:
 
-- Delete the `.gpgpack` file and the `.key` file from **all** devices and
+- Delete the `.gfpack` file and the `.key` file from **all** devices and
   from any place they passed through (USB drives, email attachments, cloud
   folders, download folders).
 - Never share the files or the PIN with anyone you do not trust.
