@@ -3,7 +3,7 @@ title: KeyPackage Functionality
 description: "Securely package and transfer OpenPGP public and private keys between devices with GpgFrontend's encrypted KeyPackage feature."
 sidebar:
   label: KeyPackage
-  order: 3
+  order: 5
 ---
 
 import { Steps, Aside } from "@astrojs/starlight/components";
@@ -11,6 +11,20 @@ import { Steps, Aside } from "@astrojs/starlight/components";
 A **KeyPackage** is an encrypted file that holds a set of your OpenPGP keys.
 Use it to move your keys safely from one computer to another, for example when
 you set up a new machine or want the same identity on a second device.
+
+:::note[Two different files, two different jobs]
+
+GpgFrontend can save two kinds of file, and they are easy to mix up:
+
+- A **KeyPackage** (`.gfpack`) carries **keys**. Use it when you only want to
+  move keys.
+- A **profile file** (`.gfp`) carries a **whole setup**: keys, settings and
+  saved state together. See [Profiles](/advanced/profiles/).
+
+If you want your new computer to look and behave exactly like the old one, you
+want a profile file. If you only want your keys, you want a KeyPackage.
+
+:::
 
 ## The Three Pieces You Need
 

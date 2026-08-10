@@ -3,7 +3,7 @@ title: Multi-Key Database Support
 description: "Manage multiple isolated OpenPGP key databases in GpgFrontend with per-database engine selection for separate identities, projects, or teams."
 sidebar:
   label: Multi-Key Database
-  order: 2
+  order: 3
 ---
 
 import { Steps } from "@astrojs/starlight/components";
@@ -36,31 +36,39 @@ dialog. The old **GnuPG Controller** window no longer exists.
 
 1. Open **Settings** from the main menu.
 
-2. Go to the **Key Database** section.
+2. Choose **Key Databases**, under **Keys & Engines**.
 
 </Steps>
 
-You now see a list of all your key databases. For each one, the list shows its
-name, its folder path, and the OpenPGP engine it uses.
+You now see a list of all your key databases, with the name you gave each one,
+the engine it uses, its folder, and whether it is working. A database whose
+folder has been moved or deleted shows as **Inactive**.
 
 The **first database in the list is the default**. It is the one GpgFrontend
 uses when you start the application. On a normal setup, it points to your GnuPG
 home directory.
 
+You can have up to eight.
+
 ## Add a New Key Database
 
 <Steps>
 
-1. In the **Key Database** settings, click **Add New Key Database**.
+1. In the **Key Databases** settings, click **Add New Key Database**.
 
 2. Give it a clear **name**, such as `Work`, `Personal`, or `rPGP Test`. A good
    name helps you pick the right database later.
 
-3. Pick a **folder path** for the database, or keep the suggested one.
-
-4. If the option is shown, choose the **engine** (GnuPG or rPGP). If you are
+3. If the option is shown, choose the **engine** (GnuPG or rPGP). If you are
    not sure, keep **GnuPG**. It is the standard choice and works with
    everything.
+
+4. Choose a **Mode**:
+
+   - **Automatic**: GpgFrontend picks a safe place to keep it. Just give it a
+     name and you are done. Use this unless you have a reason not to.
+   - **Manual**: you pick the folder yourself. For people setting up something
+     specific, such as pointing at an existing GnuPG home directory.
 
 </Steps>
 
@@ -69,10 +77,18 @@ selected goes into this database only.
 
 :::note[What is the Relative Path option?]
 
-If you turn on **Relative Path**, GpgFrontend stores the folder path relative
-to the application folder instead of as a full path. Use this in
-[Portable Mode](/advanced/portable-mode), or when you move GpgFrontend between
-computers, so the path stays valid on every machine.
+In **Manual** mode you can turn on **Convert to Relative Path**. GpgFrontend
+then remembers where the folder is in relation to the application, instead of
+as a full path. Use this in [Portable Mode](/advanced/portable-mode/), or when
+you move GpgFrontend between computers, so the path keeps working everywhere.
+
+:::
+
+:::tip[Keys can live inside a profile]
+
+If you make a [profile](/advanced/profiles/) that holds its own keys, its key
+database travels with it. That is what lets you save a whole setup to one file
+and open it on another computer.
 
 :::
 
@@ -102,7 +118,7 @@ the wrong place.
 
 ## Edit, Reorder, or Remove a Database
 
-In the **Key Database** settings, right-click a database (or use the buttons)
+In the **Key Databases** settings, right-click a database (or use the buttons)
 to:
 
 - **Edit**: Change its name, path, or other settings.
@@ -113,8 +129,8 @@ to:
 
 :::caution
 
-Some changes only take effect after you restart GpgFrontend. If the
-application asks you to restart, do it before you continue working.
+Every change here needs a restart. GpgFrontend tells you when you click OK and
+offers to restart for you.
 
 :::
 

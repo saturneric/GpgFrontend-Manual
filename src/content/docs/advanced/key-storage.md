@@ -3,7 +3,7 @@ title: How Keys Are Stored (GnuPG vs rPGP)
 description: "Understand how GpgFrontend's GnuPG and rPGP engines store OpenPGP keys differently, and what it means for backups, security, and interoperability."
 sidebar:
   label: Key Storage
-  order: 3
+  order: 4
 ---
 
 GpgFrontend can use two different OpenPGP engines: **GnuPG** and **rPGP**. They
@@ -16,7 +16,17 @@ practical questions:
 
 This page answers those questions for each engine. To learn how to set up
 databases and pick an engine for each one, see
-[Multi-Key Database](/advanced/key-database).
+[Multi-Key Database](/advanced/key-database/).
+
+:::note[Keys can also live inside a profile]
+
+Since v2.2.2, a [profile](/advanced/profiles/) can hold its own keys instead of
+sharing the ones on your computer. When it does, the key database sits inside
+the profile folder and travels with it.
+
+Everything on this page still applies. Only the location changes.
+
+:::
 
 ## Quick Comparison
 
