@@ -2,7 +2,7 @@
 title: Generate and Use Subkey(s)
 description: "Add and manage OpenPGP subkeys in GpgFrontend for signing, encryption, or authentication while keeping your primary key secure."
 sidebar:
-  order: 6
+  order: 11
 ---
 
 A **subkey** is an extra key attached to your main key (the **primary key**).
@@ -40,7 +40,7 @@ you know you need to:
   curve (for example, ED25519 = 256 bits). For RSA/DSA you can pick 2048, 3072, or
   4096 bits.
 - **Expiration Date**: how long the subkey lasts. Pick a preset (like 1 or 2
-  years), an exact date, or **Non Expired** to never expire. (Only for GnuPG engine)
+  years), an exact date, or **Non Expired** to never expire.
 - **Second Algorithm**: shown only for **hybrid** algorithms (such as the
   post-quantum ML-KEM/Kyber options). It lets you pick the classical part that is
   paired with the hybrid one (you also get a **Second Key Length** field).
@@ -65,6 +65,17 @@ keep your primary key offline.
 ![](https://image.cdn.bktus.com/i/2026/06/30/66dbd8460933ec7cd6bfece33daa84e2d622d90f.webp)
 
 That's all you need to add a subkey.
+
+:::tip[Change one subkey's passphrase on its own]
+
+Since v2.2.2 you can give a single subkey a new passphrase without touching the
+others. Open the key's details, go to the **Subkeys** tab, right-click the
+subkey, and choose **Change Passphrase**.
+
+GpgFrontend asks for the current passphrase first, and only asks you to pick a
+new one once the old one has actually worked.
+
+:::
 
 ## Why Subkeys Help
 

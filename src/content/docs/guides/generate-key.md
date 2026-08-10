@@ -20,13 +20,22 @@ In the **Main Window**, click **New Keypair**. This opens the
 
 ## Step 2: Enter Your Information
 
-- **Name**: Required. Your full name (at least 5 characters).
+- **Name**: Required. Your full name.
 - **Email**: Required. Must be a valid email address.
 - **Comment**: Optional. Helps tell this key apart from others.
 
 The refresh button next to these fields fills in a **random anonymous identity**.
 This is handy for throwaway or test keys, when you don't want to link the key to a
 real name or address.
+
+A few rules apply to what you can type here:
+
+- The name cannot be empty.
+- The name and comment cannot contain `(`, `)`, `<`, or `>`.
+- The email has to be a complete address, not just part of one.
+- A name shorter than five characters is allowed, but GpgFrontend asks you to
+  confirm it first. Short names are usually a typo, and they make your key
+  harder for other people to recognise.
 
 ## Step 3: Generate the Key
 
@@ -107,13 +116,27 @@ The algorithms you see depend on the engine, its version, and the key format.
 | Algorithm group                 | Purpose                      | Engine           |
 | ------------------------------- | ---------------------------- | ---------------- |
 | RSA                             | Sign / Encrypt / Auth / Cert | GnuPG, rPGP      |
-| DSA                             | Sign / Auth / Cert           | GnuPG, rPGP      |
+| DSA                             | Sign / Auth / Cert           | GnuPG only       |
 | Ed25519 / Ed448                 | Sign / Auth / Cert           | GnuPG, rPGP      |
 | NIST P-256 / P-384 / P-521      | Sign / Auth / Cert           | GnuPG, rPGP      |
 | Brainpool P-256 / P-384 / P-512 | Sign / Auth / Cert           | GnuPG 2.3+       |
 | secp256k1                       | Sign / Auth / Cert           | GnuPG 2.3+, rPGP |
 | SLH-DSA-SHAKE variants          | PQC Sign / Auth              | rPGP only        |
 | ML-DSA hybrid variants          | Hybrid PQC Sign / Auth       | rPGP only        |
+
+:::note[Some old choices are gone on rPGP]
+
+Since v2.2.2, the rPGP engine will not make weak keys any more, following
+RFC 9580:
+
+- **RSA below 2048 bits** is no longer offered.
+- **DSA** cannot be made at all.
+
+This only affects making new keys. Old RSA-1024 and DSA keys still import and
+still work. The GnuPG engine still offers both, for compatibility with older
+setups.
+
+:::
 
 ### Compatibility Notes
 
@@ -130,8 +153,11 @@ mind before you share a key:
 - **GnuPG chooses its own key format.** When you use the GnuPG engine, GnuPG picks
   the format based on its version and settings; GpgFrontend doesn't set it, and
   the Key Format selector doesn't apply. Current releases make **v4** keys, but
-  newer versions (such as the 2.5.x line) may make **v5** keys, which many other
-  OpenPGP tools can't read.
+  newer versions (such as the 2.5.x line) may make **v5** keys.
+- **v5 keys are LibrePGP, not RFC 9580.** LibrePGP is a separate standard that
+  split off from OpenPGP. A v5 key works with GnuPG and other LibrePGP tools,
+  but the rPGP engine cannot read one, and neither can many other OpenPGP
+  tools. Keep v5 keys in a GnuPG key database.
 
 :::caution[Check the format before sharing widely]
 
