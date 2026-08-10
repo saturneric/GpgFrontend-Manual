@@ -74,10 +74,10 @@ engine still offers the smaller sizes.
 
 ### DSA (Digital Signature Algorithm)
 
-- **What it is**: an older signing algorithm, once the standard partner to
+- **What it is**: an older signing algorithm, once commonly paired with
   ElGamal encryption.
-- **Where it stands now**: superseded. EdDSA and ECDSA are faster, smaller, and
-  safer.
+- **Where it stands now**: outdated. Newer algorithms such as EdDSA and ECDSA
+  are faster, smaller, and safer.
 - **In GpgFrontend**: since v2.2.2, the rPGP engine cannot generate DSA keys at
   all, following RFC 9580. GnuPG still offers it for older setups. Existing DSA
   keys still import and verify.
