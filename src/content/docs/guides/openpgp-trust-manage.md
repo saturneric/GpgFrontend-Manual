@@ -2,6 +2,7 @@
 title: Best Practices for OpenPGP Trust Chain Management
 description: "Manage the OpenPGP web of trust in GpgFrontend by setting Owner Trust levels and signing other keys' UIDs to build a reliable, decentralized trust model."
 sidebar:
+  order: 16
   label: Trust Chain Management
 ---
 
@@ -61,6 +62,15 @@ Ultimate).
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/4b7624b599a5f310d059843c872cf81e6b089ba4.webp)
 
+:::tip[Several keys at once]
+
+Since v2.2.2 you can do a batch. In the **Manage Keys** window, tick the keys
+you want, then choose **Bulk**, then **Set Owner Trust for Checked Keys...**.
+They all get the same level. See
+[Manage Your Keys](/guides/key-management/).
+
+:::
+
 ## How Owner Trust and signing work together
 
 Owner Trust and signing a UID answer two different questions:
@@ -98,6 +108,13 @@ someone, and only sign a UID when you truly need to certify that a key belongs t
 a person.
 
 :::
+
+If you do need to sign one, there are two ways in. Open the key's details and
+use the **UID** tab, or right-click the key in the **Manage Keys** window and
+choose **Certify Key...**. The second one is new in v2.2.2.
+
+You cannot certify your own key, and GpgFrontend greys the action out to say
+so.
 
 When GpgFrontend was first designed, sending these signatures to key servers was
 not fully planned for.
