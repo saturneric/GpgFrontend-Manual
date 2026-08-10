@@ -1,0 +1,202 @@
+---
+title: "Profiles"
+description: "Keep separate GpgFrontend setups side by side, each with its own keys, settings and saved state, and carry one between computers in a single file."
+sidebar:
+  label: Profiles
+  order: 1
+---
+
+import { Steps, Aside } from "@astrojs/starlight/components";
+
+A **profile** is one complete GpgFrontend setup: its own keys, its own
+settings, and its own saved state. Think of it like a separate user account
+inside the program.
+
+You already have one, and it works. If one setup is enough for you, you can
+skip this page.
+
+:::note[New in v2.2.2]
+
+Profiles were added in GpgFrontend v2.2.2. Before that, the program had one
+setup and one only.
+
+:::
+
+## Why You Might Want a Second One
+
+- **Keep work and personal apart.** Two profiles, two sets of keys, no chance
+  of sending something with the wrong one.
+- **Carry your setup with you.** Save a profile to a file, take it to another
+  computer, and pick up where you left off.
+- **Try something out.** Make a spare profile to test a key or a setting,
+  then delete it when you are done.
+
+## The Kinds of Profile
+
+The program shows a short type next to each profile:
+
+- **Default**: the one you get when you install GpgFrontend normally.
+- **Portable**: the one a portable copy uses. See
+  [Portable Mode](/advanced/portable-mode/).
+- **Local**: one you made yourself on this computer.
+- **From a package**: a profile you opened straight from a file. It is not
+  kept on this computer.
+
+## Where Your Profile Lives
+
+The **Default** profile is stored here:
+
+| System  | Folder                                            |
+| ------- | ------------------------------------------------- |
+| Windows | `C:\Users\<you>\AppData\Local\BKTUS\GpgFrontend\` |
+| macOS   | `~/Library/Application Support/BKTUS/GpgFrontend/` |
+| Linux   | `~/.local/share/BKTUS/GpgFrontend/`               |
+
+Profiles you make yourself live in a `profiles` folder inside that one. You do
+not have to go looking for them: **Manage Profiles** has an **Open Folder**
+button that takes you straight there.
+
+:::tip[Nightly builds stay out of your way]
+
+Test builds keep their files in a separate folder of their own. Trying a
+nightly version never touches the setup your installed version uses.
+
+:::
+
+## The Profiles Menu
+
+Everything to do with profiles sits in the **Profiles** menu in the menu bar:
+
+- **Manage Profiles**: see every profile on this computer, and open or remove
+  one.
+- **Open Recent**: jump back to a profile you used lately.
+- **New Profile**: start a fresh, empty setup on this computer.
+- **Open Profile File**: work inside a profile file, leaving it a file.
+- **Import Profile File**: copy a profile file onto this computer for good.
+- **Export This Profile**: save the profile you are using now to a file.
+
+You can also see which profile you are in at any time. Look at the bottom
+right corner of the window: it says the profile name, and clicking it opens
+**Manage Profiles**.
+
+## Make a New Profile
+
+<Steps>
+
+1. Open **Profiles** in the menu bar, then choose **New Profile**.
+
+2. Give it a name, such as `Work`.
+
+3. Answer one question: should this profile hold its own keys, or share the
+   keys you already use?
+
+   - **Start with an empty keyring**: the profile keeps its own keys, separate
+     from everything else. It starts out with none, so you import or make some
+     inside it. This is the only kind you can save to a file and carry away.
+   - **Use the system GnuPG keyring**: the profile uses the same keys you
+     already have. Handy, but those keys are shared with the rest of your
+     computer, so they are not really separate and they cannot travel inside a
+     profile file.
+
+4. Click OK. The program offers to open the new profile straight away.
+
+</Steps>
+
+Opening a profile always opens a **second window**. The window you were in
+stays exactly as it was.
+
+:::note[One window per profile]
+
+The same profile cannot be open in two windows at once. If you try, the
+program tells you it is already open somewhere else. This is on purpose:
+two windows writing to one profile would damage it.
+
+:::
+
+## Save a Profile to a File
+
+A profile file has the ending `.gfp`. It holds the whole setup, keys included,
+in one file you can copy anywhere.
+
+<Steps>
+
+1. Open the profile you want to save.
+
+2. Choose **Profiles**, then **Export This Profile**.
+
+3. Click **Choose** and pick where to put the file.
+
+4. Decide whether to include your workspace files. This is off to start with.
+
+5. Leave **Protect with a passphrase** turned on and type a passphrase twice.
+
+6. Click **Export**.
+
+</Steps>
+
+<Aside type="caution" title="The file holds your keys">
+
+Keep the passphrase on. Without it, anyone who gets the file can read your
+keys and everything else in the profile, and can change it before you open
+it.
+
+There is no way to recover the passphrase if you forget it. Write it down
+somewhere safe.
+
+</Aside>
+
+## Open a Profile File on Another Computer
+
+You have two ways to do this, and they behave differently.
+
+### Copy it onto the computer
+
+Choose **Profiles**, then **Import Profile File**. Pick the `.gfp` file, type
+its passphrase, and give the profile a name. It is now a normal profile on
+this computer, and the file is not needed any more.
+
+### Work straight out of the file
+
+Choose **Profiles**, then **Open Profile File**. Or just double-click the
+`.gfp` file.
+
+Nothing is added to this computer. When you close the window, the program asks
+**Save Changes?** and writes your changes back into the same file. This is the
+one to use on a computer you do not want to leave anything on.
+
+:::caution[Do not just close and walk away]
+
+If you choose **Discard**, everything you did in that session is gone. The
+copy the program was running from is deleted when the window closes.
+
+:::
+
+## Delete a Profile
+
+Choose **Profiles**, then **Manage Profiles**. Pick the profile and click
+**Delete**.
+
+The program asks twice, because there is no undo. Its keys, settings and
+saved state are removed from this computer for good. Export it to a file
+first if you might want it back.
+
+You cannot delete the profile you are currently using, or one that is open in
+another window.
+
+## For Advanced Users
+
+You can pick a profile when starting the program from a terminal:
+
+```bash
+# open a profile you made, using its folder name
+gpgfrontend --profile a3f19c
+
+# open a profile file
+gpgfrontend ~/Documents/work.gfp
+```
+
+`--profile` wants the profile's **folder name**, not the name you gave it. You
+can see the folder in **Manage Profiles**.
+
+If you name a profile that does not exist, the program stops and says so. It
+does not create one for you.
