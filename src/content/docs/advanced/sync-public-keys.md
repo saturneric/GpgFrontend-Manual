@@ -3,7 +3,7 @@ title: Synchronizing Public Keys with Key Server
 description: "Keep your local OpenPGP keyring current by synchronizing public keys with key servers in GpgFrontend to catch revocations and subkey updates."
 sidebar:
   label: Sync Public Keys
-  order: 4
+  order: 6
 ---
 
 The public keys you have saved locally can go stale. The key's owner may
@@ -54,8 +54,8 @@ change the server for these two operations.
 The **default key server** you set in Settings applies only to key
 **searches and imports**:
 
-1. Open the **Settings** and go to the key server section. The current default
-   server is listed there.
+1. Open **Settings** and choose **Key Servers**, under **Keys & Engines**. The
+   current default server is listed there.
 
 2. To use a different one for searches and imports, add your preferred key
    server and set it as the default.
