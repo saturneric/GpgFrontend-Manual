@@ -26,9 +26,9 @@ Protection**.
 
 The default. The key sits in a file that only your user account can read.
 
-This is fine for a computer only you use. Anyone who can already read your
-files as you could read the key, but at that point they could read most other
-things too.
+This is fine for a computer only you use. Anyone who can read your files
+could also read the key, but someone with that much access could read most
+of your other things anyway.
 
 ### System keychain
 
@@ -55,8 +55,8 @@ This choice is greyed out when it cannot work:
 You choose a PIN, and GpgFrontend asks for it every time it opens. Nothing it
 saved can be read until you type it.
 
-This is the strongest of the three. It is also the only one that can lose you
-data.
+This is the strongest of the three. It is also the only one where you can
+lose data.
 
 :::caution[A forgotten PIN cannot be recovered]
 
@@ -76,7 +76,8 @@ the current PIN to do it.
 
 ## Secure Level
 
-Just above it you will find **Secure Level**. It has four settings:
+On the same settings page, just above the key protection choices, you will
+find **Secure Level**. It has four settings:
 
 - **Standard**: no extra hardening. The default.
 - **Enhanced**: wipes memory as soon as it is finished with it.

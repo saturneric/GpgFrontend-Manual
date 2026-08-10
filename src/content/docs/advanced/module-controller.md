@@ -86,8 +86,8 @@ packages, because their contents are read-only.
 
 ## For Developers
 
-Two more tabs are there for development work, and you can ignore them
-otherwise.
+The last two tabs are for development work. You can ignore them unless you
+are building a module.
 
 **Global Register Table** shows the values modules and the core share with each
 other, such as detected GnuPG paths and version check results. Use the search

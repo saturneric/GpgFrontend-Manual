@@ -42,7 +42,7 @@ unavailable.
 
 At the **Maximum** Secure Level, the program's key is replaced every week. Old
 files stay readable because each one records which key it was written with, so
-GpgFrontend can still open them and move them across to the new key.
+GpgFrontend can still open them and re-encrypt them with the new key.
 
 You never see this happen.
 

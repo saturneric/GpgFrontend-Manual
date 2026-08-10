@@ -64,9 +64,9 @@ something sensitive.
 
 Everything from Strong. It adds no further memory protection.
 
-What it adds instead is that GpgFrontend changes its own internal key every
-week. That is about the data the program saves, not about memory, and it has a
-catch worth reading before you turn it on. See
+Instead, it makes GpgFrontend replace its own internal key every week. That
+is about the data the program saves, not about memory, and it has a catch
+worth reading before you turn it on. See
 [Application Secure Key](/advanced/app-secure-key/).
 
 ## What Strong and Maximum Need

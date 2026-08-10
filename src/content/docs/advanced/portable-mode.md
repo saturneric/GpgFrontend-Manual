@@ -32,8 +32,8 @@ drive. That is all there is to it.
 :::note[Changed in v2.2.2]
 
 Older versions had a `PortableMode=true` switch in an `ENV.ini` file, and
-before that a `PORTABLE.txt` file. Both are gone. If you were using one, they
-no longer do anything, and you should download the portable build instead.
+before that a `PORTABLE.txt` file. Both are gone and no longer do anything.
+If you were using one, download the portable build instead.
 
 :::
 
