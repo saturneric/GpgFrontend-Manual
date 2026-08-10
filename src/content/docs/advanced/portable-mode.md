@@ -1,82 +1,73 @@
 ---
 title: "Portable Mode"
-description: "Run GpgFrontend in Portable Mode from a USB drive, keeping all data and configuration in the app directory and leaving no trace on the host."
+description: "Run GpgFrontend from a USB drive with a portable download, keeping all data and settings next to the application and leaving nothing on the host computer."
 sidebar:
   label: Portable Mode
-  order: 1
+  order: 2
 ---
 
-Normally, GpgFrontend saves its settings and data in your system's user
-folders. **Portable Mode** changes that: everything is saved next to the
-application itself, in one folder.
+A **portable** copy of GpgFrontend keeps everything in its own folder, right
+next to the program. Nothing is written to the computer's user folders, so
+nothing of yours is left behind.
 
 Use it when you want to:
 
 - Run GpgFrontend **from a USB drive** and carry it between computers.
-- Use GpgFrontend on a **shared or temporary computer** without leaving your
-  data behind on it.
-- **Back up or move** the whole application, with all its settings, by copying
-  one folder.
+- Use GpgFrontend on a **shared or borrowed computer**.
+- **Move your whole setup** by copying one folder.
 
-## How It Works
+## You Choose It When You Download
 
-With Portable Mode on:
+Portable is not a setting inside the program. It is a separate download.
 
-- All configuration, logs, application data, secure keys, and modules are
-  stored inside the application's own folder.
-- Nothing is written to the system's user data folders. No personal data is
-  left on the host computer.
+On the [Downloads](/overview/downloads/) page you will find two kinds of file
+for each system:
 
-It works the same way on Windows, Linux, and macOS. On Linux, the AppImage and
-Flatpak builds are detected automatically, and data is placed in the
-application directory accordingly.
+- **Installed**: the normal choice. Settings and keys go in your user folder.
+- **Portable**: everything stays in the program's own folder.
 
-## Turn Portable Mode On
+Pick the portable one and unpack it wherever you want it, such as onto a USB
+drive. That is all there is to it.
 
-1. Open the folder where the GpgFrontend program is located (its working
-   directory).
+:::note[Changed in v2.2.2]
 
-2. Find the file named `ENV.ini`. If it does not exist, create it.
-
-3. Add this line to the file:
-
-   ```ini
-   PortableMode=true
-   ```
-
-4. Save the file and restart GpgFrontend.
-
-That's it. From now on, GpgFrontend keeps all of its files inside its own
-folder.
-
-:::tip[Turn it on before you start using the app]
-
-You can enable Portable Mode at any time, but it is best to do it **before you
-set up GpgFrontend for the first time**. That way, all your data is portable
-from the start, and nothing is left in the system folders.
+Older versions had a `PortableMode=true` switch in an `ENV.ini` file, and
+before that a `PORTABLE.txt` file. Both are gone. If you were using one, they
+no longer do anything, and you should download the portable build instead.
 
 :::
 
-## Turn Portable Mode Off
+:::caution[The two do not share anything]
 
-1. Open `ENV.ini` again.
+An installed copy and a portable copy keep completely separate data. Moving
+from one to the other looks like starting from scratch. Your keys are not
+carried over on their own.
 
-2. Change the line to `PortableMode=false`, or delete the line.
+To bring a setup across, see [Profiles](/advanced/profiles/). You can save your
+whole setup to one file and open it in the other copy.
 
-3. Restart GpgFrontend.
+:::
 
-The data already stored in the portable folder stays where it is, but new data
-is saved to the default system folders again.
+## Where Things Are Kept
+
+A portable copy stores its settings, keys, logs and modules in the folder it
+was unpacked into. On Linux, an AppImage uses the folder that holds the
+`.AppImage` file.
+
+That means whoever holds the drive holds your keys. Keep it somewhere safe,
+and use a strong passphrase on your private keys.
+
+## What a Portable Copy Cannot Do
+
+A portable copy cannot use your computer's password store to protect its own
+key. That store belongs to one computer, and a portable copy has to work on
+any computer you plug it into.
+
+That option is greyed out for you, so there is nothing to do. See
+[Application Secure Key](/advanced/app-secure-key/) if you want the details.
 
 ## Tip: Moving Between Computers
 
-If you use several [key databases](/advanced/key-database), turn on the
-**Relative Path** option for each one. Then the database paths keep working
-even when the drive gets a different letter or mount point on another
-computer.
-
-## Older Versions
-
-The `ENV.ini` method works in GpgFrontend v2.1.9 and later. In versions before
-v2.1.9, you enabled Portable Mode differently: by creating an empty file named
-`PORTABLE.txt` in the working directory.
+If you use several [key databases](/advanced/key-database/), turn on the
+**Relative Path** option for each one. The paths then keep working even when
+the drive gets a different letter or mount point on the next computer.
