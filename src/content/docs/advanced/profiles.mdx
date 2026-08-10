@@ -145,6 +145,34 @@ somewhere safe.
 
 </Aside>
 
+### What Goes In, and What Does Not
+
+The file carries your settings, your saved state, your key groups and
+categories, and any keys kept **inside** the profile.
+
+It does not carry logs, modules, or **keys kept outside the profile**. That
+last one is the surprising one.
+
+Keys live outside the profile when your key database points at a folder
+elsewhere, such as your system GnuPG home directory. That happens when you
+chose **Manual** mode for the database, or when you told the profile to use the
+keys you already had.
+
+Such a database is still named in the file, but it arrives empty on the other
+computer, and shows as **Inactive** until you point it at a folder there.
+
+<Aside type="tip" title="Check before you rely on it">
+
+The export window lists what is going in, including a line for **Keys stored
+inside this profile**. If that line says nothing is there, your keys are not
+travelling.
+
+To send those keys too, use a [KeyPackage](/advanced/key-package/) alongside
+the profile file. See also
+[Which Databases Travel](/advanced/key-database/#which-databases-travel).
+
+</Aside>
+
 ## Open a Profile File on Another Computer
 
 You have two ways to do this, and they behave differently.

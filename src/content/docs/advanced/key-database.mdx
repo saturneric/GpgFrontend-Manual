@@ -90,6 +90,10 @@ If you make a [profile](/advanced/profiles/) that holds its own keys, its key
 database travels with it. That is what lets you save a whole setup to one file
 and open it on another computer.
 
+**Automatic** mode puts the database inside the profile, so it travels.
+**Manual** mode usually points somewhere else, and then it does not. See
+[Which Databases Travel](#which-databases-travel) below.
+
 :::
 
 ## Switch Between Databases
@@ -194,6 +198,39 @@ Back up each database based on its engine:
   `gf_keydb.sqlite`. Remember that this file can contain private keys.
 
 Store backups in a safe, encrypted place.
+
+## Which Databases Travel
+
+If you save a [profile](/advanced/profiles/) to a `.gfp` file to move it to
+another computer, some key databases come along and some do not.
+
+What decides it is **where the folder is**, not which mode you chose:
+
+- A database in a folder **inside the profile** travels. Its keys are packed
+  into the file. **Automatic** mode always puts it there.
+- A database in a folder **anywhere else** does not travel. **Manual** mode
+  normally points somewhere else, such as your system GnuPG home directory.
+
+A database that does not travel is still listed in the file by name, but its
+keys stay on the old computer.
+
+When you open the profile on the other computer, GpgFrontend tells you which
+databases were left behind. Each one shows as **Inactive** in the Key Databases
+settings until you edit it and point it at a folder on the new computer.
+
+:::caution[Nothing warns you loudly at export time]
+
+The export window mentions this in small grey text under **What goes in**. It
+is easy to miss.
+
+If you want your keys to travel with the profile, check that the database is in
+**Automatic** mode, or that the folder you picked in **Manual** mode sits
+inside the profile.
+
+If it does not, and you still want those keys on the other computer, move them
+across separately with a [KeyPackage](/advanced/key-package/).
+
+:::
 
 ## Tips
 
