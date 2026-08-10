@@ -353,9 +353,92 @@ engine does not support smart cards or tokens.
 <details>
 <summary>Is GpgFrontend available in my language?</summary>
 
-GpgFrontend supports many languages. You can change the display language from the
-`Settings > General` tab. Want to help translate? See the [contribution
+GpgFrontend supports many languages. Open **Settings**, choose **General**, and
+pick your language. Want to help translate? See the [contribution
 guide](/appendix/translate-interface) on GitHub!
+
+</details>
+
+<details>
+<summary>I cannot find a setting. Where did the tabs go?</summary>
+
+The settings window was rebuilt in v2.2.2. The row of tabs across the top is
+gone, replaced by a search box and a list of pages down the left side.
+
+Type what you are after into the search box. It matches page names and the
+settings on them, so you do not have to guess. See [Finding Your
+Settings](/guides/settings/).
+
+</details>
+
+<details>
+<summary>What is a profile?</summary>
+
+A profile is one complete GpgFrontend setup: its own keys, its own settings,
+and its own saved state. You already have one, and one is enough for most
+people.
+
+Make a second one if you want to keep work and personal keys apart, or if you
+want a setup you can carry to another computer. See
+[Profiles](/advanced/profiles/).
+
+</details>
+
+<details>
+<summary>Can I move my whole setup to another computer?</summary>
+
+Yes. Open the **Profiles** menu and choose **Export This Profile**. That writes
+your keys, settings and saved state into a single `.gfp` file, protected by a
+passphrase you choose.
+
+On the other computer, use **Import Profile File**, or just double-click the
+file. See [Profiles](/advanced/profiles/).
+
+</details>
+
+<details>
+<summary>What is IM Encrypt?</summary>
+
+Normal encrypted text is a big block that chat apps often break. **IM Encrypt**
+turns your message into one short line that pastes cleanly into any messenger.
+
+The other person just presses **Decrypt** as usual. See [Instant
+Messaging](/guides/instant-messaging/).
+
+</details>
+
+<details>
+<summary>Where did my favourite keys go?</summary>
+
+The **Favourite** tab was replaced by key categories in v2.2.2. Categories do
+the same job and more: you can have as many as you like, name them, and give
+each one a colour.
+
+Old favourites are not carried over, so you need to make a category and put
+those keys back in it. See [Key Categories](/guides/key-categories/).
+
+</details>
+
+<details>
+<summary>Why can I no longer generate a DSA key?</summary>
+
+On the rPGP engine, DSA and RSA keys below 2048 bits are no longer offered for
+new keys, because RFC 9580 no longer considers them good enough.
+
+Existing keys of those kinds still import and still work. The GnuPG engine
+still offers both if you really need one.
+
+</details>
+
+<details>
+<summary>What happened to the startup self-check?</summary>
+
+It was removed in v2.2.2. GpgFrontend no longer verifies its own libraries
+while starting.
+
+Checking that your download is genuine is still worth doing, and is better done
+before you install. See [Code & Binary
+Verify](/appendix/code-binary-verify/).
 
 </details>
 

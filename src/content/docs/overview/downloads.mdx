@@ -9,7 +9,7 @@ GpgFrontend is ready to install. Pick the option that works best for you below.
 For step-by-step setup help, see the [Getting Started Guide](/overview/getting-started/).
 
 import { LinkCard, CardGrid } from "@astrojs/starlight/components";
-import { Tabs, TabItem, Badge, Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem, Aside } from "@astrojs/starlight/components";
 
 ## Direct Downloads
 
@@ -28,17 +28,32 @@ Other options, for special cases only:
 - [**Nightly Builds**](https://github.com/saturneric/GpgFrontend/releases/nightly): early test builds for testers and contributors, not for everyday use.
 - [**Mirror Site**](https://ftp.bktus.com/GpgFrontend/): the same files from another source, with no tracking or sign-in.
 
+### Installed or Portable?
+
+Most downloads come in two flavours, and you need to pick one:
+
+- **Installed**: the normal choice. Your settings and keys go in your user
+  folder, where they belong.
+- **Portable**: everything stays in the program's own folder, so you can run it
+  from a USB drive and leave nothing behind.
+
+The two do not share anything. Switching from one to the other looks like
+starting from scratch, so pick the one you want up front. See
+[Portable Mode](/advanced/portable-mode/).
+
+macOS is installed only.
+
 ### Understanding the File Names
 
 Use this table to find the right file for your system.
 
 | Filename Pattern               | What It's For                                                    |
 | ------------------------------ | ---------------------------------------------------------------- |
-| `-windows-x86_64-portable.zip` | Leaves no trace on Windows. Run it straight from a USB drive.    |
 | `-windows-x86_64.msix`         | Modern MSIX installer for Windows (Recommended).                 |
 | `-windows-x86_64.msi`          | Standard MSI installer; made for enterprise setups.              |
 | `-macos-<ver>.dmg`             | macOS disk image; `<ver>` shows the lowest macOS version needed. |
 | `-linux-<arch>.AppImage`       | Standalone Linux app. Make it executable, then run it.           |
+| `-portable`                    | A portable build of that same file.                              |
 | `*.sig`                        | Signature file. Always use it to check the download is genuine.  |
 | `-qt5-`                        | Older system build (e.g., Windows 7, Ubuntu 20.04).              |
 

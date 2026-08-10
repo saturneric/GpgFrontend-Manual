@@ -8,7 +8,6 @@ sidebar:
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 import { Steps } from "@astrojs/starlight/components";
-import { Aside } from "@astrojs/starlight/components";
 
 Welcome to your new encryption workspace. **GpgFrontend** is built to make
 OpenPGP/LibrePGP encryption reliable, simple, and easy to use on any system.
@@ -82,7 +81,19 @@ Pick your operating system to see the recommended steps. For other methods
   </TabItem>
 </Tabs>
 
-## Step 3: Next Steps
+## Step 3: The First Time You Open It
+
+A short welcome window appears the first time GpgFrontend runs, and only that
+time.
+
+The first page has a **Language** setting. Pick yours there and the whole
+window changes over straight away, so you do not have to read the rest in
+English. The rest of the welcome offers links to the basics.
+
+Nothing in it is permanent. You can close it at any point, and everything it
+sets can be changed later in **Settings**.
+
+## Step 4: Next Steps
 
 If you are new to PGP, we strongly recommend reading our [Fundamental Concepts](/guides/fundamental-concepts/) guide first.
 
@@ -93,6 +104,21 @@ If you are new to PGP, we strongly recommend reading our [Fundamental Concepts](
 - [Encrypting Text Messages](/guides/text-operations/)
 - [Import/Export Keys](/guides/import-export-key-pair/)
 - [Using Smart Cards (YubiKey, etc.)](/guides/smart-card/)
+
+:::note[Installed or portable?]
+
+Most downloads come in two flavours. The **installed** one keeps your settings
+and keys in your user folder, and is what you want unless you have a reason to
+choose otherwise. The **portable** one keeps everything next to the program, so
+you can run it from a USB drive.
+
+They do not share data, so pick one before you start setting things up. See
+[Portable Mode](/advanced/portable-mode/).
+
+If you need more than one setup on the same computer, that is what
+[Profiles](/advanced/profiles/) are for.
+
+:::
 
 :::tip[Pro Tip]
 Need to understand the layout? Check the [Interface Understanding](/guides/understand-interface/) guide to familiarize yourself with the workspace.
