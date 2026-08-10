@@ -24,13 +24,15 @@ around and do your tasks with ease.
 
 ## The Window at a Glance
 
-The window has four main parts:
+The window has five main parts:
 
 - **Operations Bar** (top): the main buttons, like Encrypt, Decrypt, Sign, and
   Verify.
 - **Workspaces** (center): tabs where you work on files, text, or email.
 - **Key Toolbox** (right): the list of your keys.
 - **Status Panel**: shows the result of each task.
+- **Status Bar** (bottom): tells you which setup and which engine you are
+  using.
 
 The rest of this page looks at each part in turn.
 
@@ -57,6 +59,9 @@ The File Panel handles tasks on files and folders. You can:
 - Turn on Batch Mode to work on many files at once.
 - Automatically pack and encrypt whole folders (see the File Operations guide for
   details).
+
+Along the top is a **path bar** showing the folder you are in, one step at a
+time. Click any step to jump straight there.
 
 Files and folders you open always appear in a File Panel tab.
 
@@ -101,8 +106,9 @@ and algorithms used.
 ### Color Coding for Status
 
 - **Green**: the task worked, no problems.
-- **Yellow**: the task worked, but with a warning to check.
-- **Red**: the task failed, or there was a serious error.
+- **Orange**: the task worked, but with a warning to check.
+- **Red**: the task failed, or the result cannot be trusted.
+- **Grey**: nothing has happened yet.
 
 ### Switching Views
 
@@ -130,10 +136,34 @@ Main features:
 
 - **Selection**: tick the boxes to pick keys for a task.
 - **Type / Usage / Email**: see at a glance what each key is for.
-- **Tab filtering**: use the tabs to filter keys by type or status.
+- **Search**: the box at the top finds keys by name, email, key ID, or
+  fingerprint. Press **Escape** to clear it.
+- **Categories**: the thin coloured strip beside the list filters your keys.
+  See [Key Categories](/guides/key-categories/).
 
 Keys that are expired, revoked, or unavailable are hidden by default. You can find
-them in the **Manage Keys** window.
+them in the **Manage Keys** window, which is also where you look after your keys
+rather than just pick them. See [Manage Your Keys](/guides/key-management/).
+
+### The Small Buttons Above the List
+
+- **Refresh**: read your keys again from disk.
+- **Sync Public Key**: fetch updates for your keys from the key server.
+- **Check All** and **Uncheck All**: tick or untick every key in the current
+  category. The uncheck button carries a small number showing how many keys
+  are ticked right now.
+- **Columns**: choose which columns to show, and reset their widths.
+- **New Key Group**: make a group from the keys you have ticked.
+- **Key database**: switch between key databases. The button shows the name of
+  the one you are in.
+
+:::tip[Keep your ticks between sessions]
+
+Open **Settings**, go to **General**, and tick **Remember which keys are
+checked in the key list between restarts**. GpgFrontend then brings back your
+usual recipients each time it opens.
+
+:::
 
 ### Reading the Key Toolbox Table
 
@@ -151,6 +181,17 @@ aren't obvious at first. Here is what they mean.
   - `E` (Encryption): can encrypt data to this key.
   - `S` (Signing): can create digital signatures.
   - `A` (Authentication): can be used to log in (for example, SSH).
+- **Status** (whether the key is fit to use):
+  - `OK`: nothing wrong with it.
+  - `Expiring Soon`: still works, but runs out shortly.
+  - `Expired`, `Revoked`, `Disabled`: cannot be used.
+
+Rows are tinted to match the Status column, so a problem key stands out
+without reading it.
+
+Use the **Columns** button to show or hide columns such as **Expire Date** and
+**Status**. Each key list remembers its own choice, so you can keep the Key
+Toolbox short and the Manage Keys window detailed.
 
 ## Operations Bar
 
@@ -171,5 +212,24 @@ features. Here are the buttons, from left to right:
 
 ### Customization
 
-You can hide buttons you don't use, or add ones you use often, from the view
-settings menu.
+You can hide buttons you don't use, or add ones you use often. Open
+**Settings**, go to **Appearance**, and tick what you want under **Actions**.
+
+Two of them are off to start with and worth knowing about:
+
+- **Sym. Encrypt**: encrypt with a passphrase instead of a key. See
+  [Symmetric Crypto](/guides/symmetric-encrypt-decrypt/).
+- **IM Encrypt**: turn your text into one short line for a chat app. See
+  [Instant Messaging](/guides/instant-messaging/).
+
+## Status Bar
+
+Along the bottom of the window, on the right, three small labels tell you what
+you are working with. Click any of them for more.
+
+- **Profile**: which setup this window is using. Click it to manage your
+  setups. See [Profiles](/advanced/profiles/).
+- **Engine**: the OpenPGP engine and its version, such as `GnuPG 2.4.3`. Hover
+  it to see which key database you are in.
+- **Mode**: whether this is an installed copy or a portable one. See
+  [Portable Mode](/advanced/portable-mode/).

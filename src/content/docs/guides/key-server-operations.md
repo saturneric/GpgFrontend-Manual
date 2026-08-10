@@ -1,6 +1,8 @@
 ---
 title: Key Server Operations
 description: "Search, import, export, and synchronize OpenPGP public keys with key servers using GpgFrontend's graphical interface."
+sidebar:
+  order: 15
 ---
 
 A key server is a place on the internet that stores public keys. Think of it as a
@@ -40,7 +42,11 @@ sync keys. You do not need to type any commands.
 > - `https://keyserver.ubuntu.com`
 >
 > These are just suggestions to start with. You can change the list in
-> **Settings → Key Servers**.
+> **Settings**, under **Keys & Engines**, on the **Key Servers** page.
+>
+> That page comes from the `KeyServerSync` module. If you cannot find it, the
+> module is switched off. See
+> [Module Controller](/advanced/module-controller/).
 
 ### After you import
 
@@ -130,7 +136,7 @@ find your key.
 
 ### How to turn it on
 
-1. Go to the `Settings -> Network` tab.
+1. Open **Settings** and choose **Network**.
 2. Under **Network Ability**, check the box: `Automatically fetch key publish
 status from key server`.
 3. Restart GpgFrontend to apply the change.
