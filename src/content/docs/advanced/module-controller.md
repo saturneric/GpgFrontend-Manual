@@ -1,185 +1,104 @@
 ---
-title: "Module Controller: Extending GpgFrontend Functionality"
-description: "Manage modular extensions in GpgFrontend with the Module Controller, enabling features like email, version checks, and key synchronization."
+title: "Module Controller"
+description: "See which GpgFrontend modules you have, switch them on or off, and add your own."
 sidebar:
   label: Module Controller
-  order: 7
+  order: 11
 ---
 
-The **Module Controller** in **GpgFrontend** allows users to manage modular
-extensions that enhance the core functionality of the application. These modules
-provide features such as email integration, version checking, and key
-synchronization, offering flexibility for different workflows.
+A **module** is an optional piece of GpgFrontend that adds a feature. Some come
+with the program, such as the one that handles email and the one that talks to
+key servers. You can also add your own.
 
-This guide provides an overview of the **Module Controller** interface,
-instructions for managing modules, and guidance for advanced users interested in
-developing custom modules.
+The **Module Controller** is where you see what you have and switch things on
+or off. Open it with **Advanced**, then **Open Module Controller**.
 
-## Accessing the Module Controller
+Most people never need this page. Modules that come with GpgFrontend are on
+already.
 
-To access the **Module Controller**:
+## The Module List
 
-1. Open the **Advanced** menu in the top toolbar.
-2. Select **Open Module Controller**.
+The first tab, **Registered Modules**, lists everything you have. Click a
+module to see its details on the right.
 
-![](https://image.cdn.bktus.com/i/2024/11/29/fa515b3c-d9b1-70f5-c355-832b6bf07a38.webp)
+Each module is labelled:
 
-The **Module Controller** interface consists of the following tabs:
+- **Integrated**: comes with GpgFrontend.
+- **External**: something you added yourself.
+- **Auto**: starts on its own when GpgFrontend opens.
 
-- **Registered Modules**
-- **Global Register Table**
+If the list is long, use the search box at the top, or the drop-down beside it
+to show only the active, inactive, integrated, or external ones.
 
-## Registered Modules Tab
+## Switch a Module On or Off
 
-The **Registered Modules** tab displays all available modules and provides tools
-for managing their activation, metadata, and storage.
+Select the module and click **Activate** or **Deactivate**. That takes effect
+straight away.
 
-![](https://image.cdn.bktus.com/i/2025/06/28/543b81d81b4adf03f039aeca2176247b2a1be705.webp)
+To decide whether it comes back next time, tick or untick **Activate on
+Start**.
 
-### Key Features
+:::caution[Some features disappear with their module]
 
-**Module List**
-
-- The left panel lists all currently available modules.
-- Modules prefixed with `*` are **Integrated Modules**, meaning they are bundled
-  with the GpgFrontend application.
-
-**Module Information**: When a module is selected, detailed metadata is
-displayed in the right panel, including:
-
-- **ID**: The unique identifier of the module.
-- **Version**: The current module version.
-- **SDK Version**: The version of the SDK required by the module.
-- **Path**: The physical location of the module file.
-- **Activation Status**: Indicates whether the module is active or set to
-  auto-activate.
-
-```text title="Example"
-- ID: com.bktus.gpgfrontend.module.email
-- Version: 1.0.0
-- SDK Version: 2.1.5
-- Path: /path/to/module/file
-- Auto Activate: True
-- Active: True
-```
-
-**Module Actions**
-
-- **Deactivate**: Temporarily disables the selected module.
-- **Disable Auto Activate**: Prevents the module from loading automatically when
-  GpgFrontend starts.
-
-**Show Mods Directory**
-
-- Opens the directory where external modules are stored. Users can manually add
-  or remove custom modules by placing or deleting files in this directory.
-
-:::tip[Tip for Integrated Modules]
-
-- **Windows/Mac Users**: Integrated Modules (prefixed with `*`) can be removed
-  by deleting the corresponding `.dll` (Windows) or `.dylib` (Mac) file from the
-  `modules` directory.
-- **Linux Users**: Due to the nature of **AppImage** and **Flatpak** packages,
-  removing Integrated Modules may require recompiling and repackaging the
-  application.
+Turning off a module removes what it does. Switch off the key server module,
+for example, and the **Key Servers** page vanishes from Settings, along with
+key server search and publishing.
 
 :::
 
-## Global Register Table Tab
+### If nothing can be switched on
 
-The **Global Register Table** provides a detailed view of the internal data
-structure used by GpgFrontend and its modules. This table is primarily useful
-for developers and advanced users who want to debug or inspect module
-interactions with the core application.
+GpgFrontend can be told to load fewer modules, or none at all. If that is the
+case, the Module Controller says so and points you at the setting.
 
-### Key Features
+You can change it in **Settings**, **General**, under **Module Loading
+Policy**:
 
-**Key-Value Data**
+- **All Modules**: everything, including ones you added.
+- **Only Integrated Modules**: just the ones that came with the program.
+- **Disable**: none at all.
 
-- Displays the hierarchical structure of global variables, including:
-- Module-specific settings (e.g., version checking, state tracking).
-- GnuPG paths and environment configurations.
+## Modules Can Add Settings Pages
 
-```text title="Example"
-gpgme:
- ctx:
-   app_path: /opt/homebrew/Cellar/gnupg/2.4.5_1/bin/gpg
-   gnupg_version: 2.4.5
-   gpgconf_path: /opt/homebrew/bin/gpgconf
-```
+Since v2.2.2, a module can add its own page to the settings window.
 
-**Navigation**: Expand nodes to explore detailed properties for modules or core components.
+The one you already have is **Key Servers**, under **Keys & Engines**. It only
+appears while the key server module is active, which is why it is not always
+there. See [Finding Your Settings](/guides/settings/).
 
-![](https://image.cdn.bktus.com/i/2025/06/28/5a7e617a2d9f1a0efd3e939075c5074e1bd40043.webp)
+## Adding Your Own Module
 
-## Developing Custom Modules
+Click **Show Mods Directory**. That opens the folder GpgFrontend reads
+external modules from. Put the module file there and click **Refresh**.
 
-The **Module Controller** supports custom modules, allowing developers to extend
-GpgFrontend's functionality for specialized use cases. All modules adhere to a
-strict **C ABI (Application Binary Interface)** and are dynamically linked to
-the `libgpgfrontend_sdk` library.
+Module files end in `.dll` on Windows, `.dylib` on macOS, and `.so` on Linux.
 
-### Key Points for Developers
+:::tip[Back up the folder first]
 
-**C ABI Compliance**: Modules must be implemented using the C ABI to ensure
-compatibility across all supported platforms (Windows, macOS, Linux).
+Make a copy of the modules folder before you change anything in it. It is much
+quicker than working out afterwards what you removed.
 
-**Dynamic SDK Linking**: Modules interact with GpgFrontend by linking
-dynamically to the **libgpgfrontend_sdk** library. This library provides the
-necessary interfaces for module initialization, data exchange, and runtime
-interaction.
+:::
 
-**SDK Limitations**: The current SDK API is still under development and may not
-cover all potential use cases. Developers are encouraged to contact the project
-maintainer for guidance or feature requests.
+To remove a module that came with GpgFrontend, delete its file from the
+`modules` folder. On Linux this may not be possible with AppImage or Flatpak
+packages, because their contents are read-only.
 
-**Getting Started**: Place the compiled module file (`.dll`, `.dylib`, or `.so`)
-in the `modules` directory. Use the **Show Mods Directory** button to locate
-this directory.
+## For Developers
 
-:::tip[Tips for Managing Modules]
+Two more tabs are there for development work, and you can ignore them
+otherwise.
 
-1. **Backup Before Changes**: Always create a backup of the `modules` directory
-   before making changes, especially when adding or removing modules.
-2. **Regular Updates**: Check for updates to both GpgFrontend and its modules to
-   ensure compatibility and access to the latest features.
-3. **Safe Removal**: Follow the guidelines for deleting Integrated Modules based
-   on your platform to avoid accidental issues.
-4. **Use Global Register Table for Debugging**: Advanced users can verify module
-   configurations and GPG environment paths through the **Global Register Table**.
-   :::
+**Global Register Table** shows the values modules and the core share with each
+other, such as detected GnuPG paths and version check results. Use the search
+box, or **Expand All**, to look around.
 
-## Example Module: Version Checking
+**Debugger** lets you fire an event or set a value by hand, to see how a module
+reacts.
 
-The **VersionChecking** module is a bundled example of how GpgFrontend uses
-modules to provide additional functionality.
+Modules are plain shared libraries with a C interface, linked against
+`libgpgfrontend_sdk`. The SDK is still growing, so if something you need is
+missing, please get in touch.
 
-### Features:
-
-- Checks the current application version.
-- Displays release notes for new updates.
-- Notifies users when an upgrade is available.
-
-### Metadata:
-
-```text title="Example"
-- ID: com.bktus.gpgfrontend.module.version_checking
-- Version: 1.0.0
-- Auto Activate: True
-```
-
-### Global Register Table:
-
-```text title="Example"
-com.bktus.gpgfrontend.module.version_checking:
-  current_version: v2.1.5
-  need_upgrade: false
-  latest_version: v2.1.5
-```
-
-By leveraging the **Module Controller**, users can customize and extend
-GpgFrontend to suit their needs. Developers interested in creating new modules
-are encouraged to experiment with the SDK and collaborate with the maintainer
-for additional API support. For more details, visit the [GpgFrontend Modules
-GitHub
-Repository](https://github.com/saturneric/GpgFrontend-Modules/blob/main/README.md).
+For the source and examples, see the
+[GpgFrontend Modules repository](https://github.com/saturneric/GpgFrontend-Modules/blob/main/README.md).
