@@ -3,6 +3,7 @@ title: Comparison of Cryptographic Algorithms
 description: "Compare OpenPGP cryptographic algorithms supported by GpgFrontend, including RSA, ECC, and post-quantum options, across the GnuPG and rPGP engines."
 sidebar:
   label: Comparison of Algorithms
+  order: 1
 ---
 
 GpgFrontend supports many algorithms across two engines: the mature **GnuPG**
@@ -62,6 +63,24 @@ The exact choices you see depend on the engine, its version, and the key format.
 - **Trade-off**: slower than elliptic-curve algorithms, especially key generation
   and decryption, because of its larger key sizes. As computers get faster, larger
   keys are needed to stay secure.
+
+:::note[RSA below 2048 bits cannot be generated on rPGP]
+
+Since v2.2.2, the rPGP engine follows RFC 9580 and will not make an RSA key
+smaller than 2048 bits. Older small keys still import and still work. The GnuPG
+engine still offers the smaller sizes.
+
+:::
+
+### DSA (Digital Signature Algorithm)
+
+- **What it is**: an older signing algorithm, once the standard partner to
+  ElGamal encryption.
+- **Where it stands now**: superseded. EdDSA and ECDSA are faster, smaller, and
+  safer.
+- **In GpgFrontend**: since v2.2.2, the rPGP engine cannot generate DSA keys at
+  all, following RFC 9580. GnuPG still offers it for older setups. Existing DSA
+  keys still import and verify.
 
 ### ElGamal (ELG-E)
 

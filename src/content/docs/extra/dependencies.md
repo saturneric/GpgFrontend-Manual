@@ -3,9 +3,10 @@ title: Dependencies and Acknowledgements
 description: "Libraries and third-party dependencies used by GpgFrontend, with their licenses and acknowledgements, including OpenSSL and libsodium."
 sidebar:
   label: Dependencies
+  order: 2
 ---
 
-# Libraries
+## Libraries
 
 GpgFrontend incorporates various libraries and binaries, each with their own
 license terms. For more information or to obtain the source code, please visit
@@ -22,7 +23,7 @@ derivation. OpenSSL may also still be used indirectly by Qt or the operating
 system for network communication, such as HTTPS/TLS connections. Therefore, this
 change does not mean OpenSSL is completely absent from all runtime environments.
 
-## Common
+### Common
 
 - **Qt (Open Source)**: [https://www.qt.io](https://www.qt.io)
 - **GnuPG**: [https://gnupg.org](https://gnupg.org)
@@ -31,21 +32,22 @@ change does not mean OpenSSL is completely absent from all runtime environments.
 - **libarchive**: [https://www.libarchive.org](https://www.libarchive.org)
 - **libsodium**: [https://libsodium.gitbook.io/doc](https://libsodium.gitbook.io/doc)
 
-## Windows
+### Windows
 
 - **MSYS2**: [https://www.msys2.org](https://www.msys2.org)
 - **mingw-w64**: [https://www.mingw-w64.org](https://www.mingw-w64.org)
 
-## Linux
+### Linux
 
 - **AppImage**: [https://appimage.org](https://appimage.org)
+- **libsecret**: [https://gitlab.gnome.org/GNOME/libsecret](https://gitlab.gnome.org/GNOME/libsecret)
 
-## macOS
+### macOS
 
 - **macOS Application Bundles**: [Link](https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/AboutBundles/AboutBundles.html)
 - **Xcode Command Line Tools**: [https://developer.apple.com/xcode/](https://developer.apple.com/xcode/)
 
-# Icons
+## Icons
 
 The icons utilized in this software are sourced from [Alibaba
 Iconfont](https://www.iconfont.cn/). This vector icon library is free of use,
