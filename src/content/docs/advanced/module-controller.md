@@ -40,7 +40,8 @@ Start**.
 
 :::caution[Some features disappear with their module]
 
-Turning off a module removes what it does. Switch off the key server module,
+Turning off a module removes the features it provides. Switch off the key
+server module,
 for example, and the **Key Servers** page vanishes from Settings, along with
 key server search and publishing.
 

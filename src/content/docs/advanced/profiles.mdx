@@ -69,7 +69,7 @@ Everything to do with profiles sits in the **Profiles** menu in the menu bar:
 
 - **Manage Profiles**: see every profile on this computer, and open or remove
   one.
-- **Open Recent**: jump back to a profile you used lately.
+- **Open Recent**: jump back to a profile you used recently.
 - **New Profile**: start a fresh, empty setup on this computer.
 - **Open Profile File**: work inside a profile file without copying it onto
   this computer.
@@ -137,9 +137,9 @@ in one file you can copy anywhere.
 
 <Aside type="caution" title="The file holds your keys">
 
-Keep the passphrase on. Without it, anyone who gets the file can read your
-keys and everything else in the profile, and can change it before you open
-it.
+Keep the passphrase protection turned on. Without it, anyone who gets the
+file can read your keys and everything else in the profile, and can change it
+before you open it.
 
 There is no way to recover the passphrase if you forget it. Write it down
 somewhere safe.
@@ -159,8 +159,9 @@ elsewhere, such as your system GnuPG home directory. That happens when you
 chose **Manual** mode for the database, or when you told the profile to use the
 keys you already had.
 
-Such a database is still named in the file, but it arrives empty on the other
-computer, and shows as **Inactive** until you point it at a folder there.
+That kind of database is still listed in the file, but it arrives empty on
+the other computer, and shows as **Inactive** until you point it at a folder
+there.
 
 <Aside type="tip" title="Check before you rely on it">
 
@@ -224,8 +225,8 @@ gpgfrontend --profile a3f19c
 gpgfrontend ~/Documents/work.gfp
 ```
 
-`--profile` wants the profile's **folder name**, not the name you gave it. You
-can see the folder in **Manage Profiles**.
+`--profile` needs the profile's **folder name**, not the name you gave it.
+You can see the folder name in **Manage Profiles**.
 
 If you name a profile that does not exist, the program stops and says so. It
 does not create one for you.

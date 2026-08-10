@@ -7,10 +7,10 @@ sidebar:
 ---
 
 Besides your keys, GpgFrontend saves a few things of its own: key server
-entries, key generation profiles, window positions, and similar. The sensitive
+entries, key generation profiles, window positions, and so on. The sensitive
 parts are encrypted with the program's own key.
 
-This all happens on its own. There is nothing to set up and nothing to
+All of this happens automatically. There is nothing to set up and nothing to
 maintain. This page is here for people who want to know what is going on.
 
 For the key that does the protecting, and the choices you have about it, see
@@ -18,12 +18,12 @@ For the key that does the protecting, and the choices you have about it, see
 
 ## How It Works
 
-Each saved item is encrypted on its own, with its own key worked out from the
-program's key and that item's name. Nothing is encrypted with one shared key,
-so getting at one item tells an attacker nothing about the others.
+Each saved item is encrypted on its own, with its own key made from the
+program's key and the item's name. Nothing is encrypted with one shared key,
+so breaking into one item tells an attacker nothing about the others.
 
-The encryption is authenticated. If a file is altered, GpgFrontend notices and
-refuses it rather than using bad data.
+The encryption also detects tampering. If someone changes a file, GpgFrontend
+notices and refuses to use it.
 
 Files are written in a way that cannot leave a half-finished result behind. If
 the program or the computer stops in the middle of a write, the old version
@@ -31,8 +31,9 @@ survives intact.
 
 ## Where the Files Are
 
-Inside your profile, in a folder called `data_objs`. Each file is named after a
-scrambled version of what it holds, so the file names give nothing away.
+The files live inside your profile, in a folder called `data_objs`. Each file
+is named after a scrambled version of what it holds, so the file names give
+nothing away.
 
 Each [Secure Level](/advanced/memory-security/) keeps its data apart from the
 others. That is why lowering the level makes data saved at a higher one

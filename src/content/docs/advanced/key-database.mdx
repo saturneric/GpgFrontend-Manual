@@ -48,7 +48,7 @@ The **first database in the list is the default**. It is the one GpgFrontend
 uses when you start the application. On a normal setup, it points to your GnuPG
 home directory.
 
-You can have up to eight.
+You can have up to eight databases.
 
 ## Add a New Key Database
 
@@ -67,8 +67,8 @@ You can have up to eight.
 
    - **Automatic**: GpgFrontend picks a safe place to keep it. Just give it a
      name and you are done. Use this unless you have a reason not to.
-   - **Manual**: you pick the folder yourself. For people setting up something
-     specific, such as pointing at an existing GnuPG home directory.
+   - **Manual**: you pick the folder yourself. Use this only for special
+     setups, such as pointing at an existing GnuPG home directory.
 
 </Steps>
 
@@ -218,10 +218,10 @@ When you open the profile on the other computer, GpgFrontend tells you which
 databases were left behind. Each one shows as **Inactive** in the Key Databases
 settings until you edit it and point it at a folder on the new computer.
 
-:::caution[Nothing warns you loudly at export time]
+:::caution[This is easy to miss when you export]
 
-The export window mentions this in small grey text under **What goes in**. It
-is easy to miss.
+The export window only mentions this in small grey text under **What goes
+in**, so it is easy to overlook.
 
 If you want your keys to travel with the profile, check that the database is in
 **Automatic** mode, or that the folder you picked in **Manual** mode sits

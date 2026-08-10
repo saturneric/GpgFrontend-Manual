@@ -6,9 +6,8 @@ sidebar:
   order: 8
 ---
 
-GpgFrontend keeps one key of its own. It uses it to lock the things the
-program saves for you: settings, cached details, key server entries, and
-similar.
+GpgFrontend keeps one key of its own. This key locks the data the program
+saves for you: settings, cached details, key server entries, and so on.
 
 This is **not** one of your OpenPGP keys. It never touches your messages,
 your files, or your keyring. GpgFrontend makes it for you the first time it
@@ -32,7 +31,8 @@ of your other things anyway.
 
 ### System keychain
 
-GpgFrontend hides its key in the place your computer already keeps passwords:
+GpgFrontend stores its key in the place where your computer already keeps
+passwords:
 
 - **Windows**: Credential Manager
 - **macOS**: your login keychain
@@ -61,8 +61,8 @@ lose data.
 :::caution[A forgotten PIN cannot be recovered]
 
 There is no reset that keeps your data. If you cannot remember the PIN, the
-only way to start the program again is to throw the key away, and everything
-it was protecting becomes unreadable for good.
+only way to start the program again is to delete the key. Everything the key
+was protecting then becomes unreadable forever.
 
 GpgFrontend offers that as **Forgot PIN? Reset** after three wrong tries, and
 warns you twice before doing it.
@@ -87,9 +87,9 @@ find **Secure Level**. It has four settings:
 The first three are about memory, and are explained on
 [Memory Security](/advanced/memory-security/).
 
-**Maximum** is the only one that affects this page. It swaps the key for a
-fresh one every week, so an old copy of your saved data stops being useful
-quickly.
+**Maximum** is the only one that affects this page. It replaces the key with
+a new one every week. So if someone steals an old copy of your saved data, it
+soon becomes useless to them.
 
 :::caution[Turning Maximum back off]
 
@@ -106,9 +106,9 @@ restart for you.
 
 ## Where the Key Is Kept
 
-Inside the profile you are using, in a folder called `secure`. If you use
-several [profiles](/advanced/profiles/), each has its own key, and each can
-have its own protection setting.
+The key lives inside the profile you are using, in a folder called `secure`.
+If you use several [profiles](/advanced/profiles/), each has its own key, and
+each can have its own protection setting.
 
 :::note[Changed in v2.2.2]
 

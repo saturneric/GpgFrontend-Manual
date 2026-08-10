@@ -43,8 +43,8 @@ Choose this if you want the best speed and the fewest surprises.
 
 ### Enhanced (1)
 
-Everything sensitive goes into buffers that are wiped clean when they are
-allocated and wiped again when they are released.
+Everything sensitive goes into memory buffers that are wiped clean before use
+and wiped again after use.
 
 This costs almost nothing and is a sensible step up.
 
@@ -57,7 +57,7 @@ so it does not end up on your disk by accident.
 GpgFrontend also clears the text box and its undo history before encrypting or
 decrypting, so your plain text cannot be brought back with Ctrl+Z.
 
-This is the strongest memory protection, and what to pick if you are handling
+This is the strongest memory protection. Pick it if you are handling
 something sensitive.
 
 ### Maximum (3)
@@ -86,5 +86,5 @@ GpgFrontend keeps your secrets in memory for as short a time as it can, avoids
 making extra copies, and wipes what it can before letting memory go.
 
 It cannot protect you from someone who already controls your computer. If
-malware is running as you, or someone has your unlocked machine, no memory
-setting saves you.
+malware is running under your account, or someone is sitting at your unlocked
+computer, no memory setting can save you.

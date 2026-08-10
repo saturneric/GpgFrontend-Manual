@@ -27,7 +27,7 @@ for each system:
 - **Portable**: everything stays in the program's own folder.
 
 Pick the portable one and unpack it wherever you want it, such as onto a USB
-drive. That is all there is to it.
+drive. That is all you need to do.
 
 :::note[Changed in v2.2.2]
 
@@ -39,9 +39,9 @@ If you were using one, download the portable build instead.
 
 :::caution[The two do not share anything]
 
-An installed copy and a portable copy keep completely separate data. Moving
-from one to the other looks like starting from scratch. Your keys are not
-carried over on their own.
+An installed copy and a portable copy keep completely separate data. If you
+move from one to the other, you start with empty settings and no keys.
+Nothing is carried over on its own.
 
 To bring a setup across, see [Profiles](/advanced/profiles/). You can save your
 whole setup to one file and open it in the other copy.
@@ -63,7 +63,7 @@ A portable copy cannot use your computer's password store to protect its own
 key. That store belongs to one computer, and a portable copy has to work on
 any computer you plug it into.
 
-That option is greyed out for you, so there is nothing to do. See
+That option is greyed out for you, so there is nothing you need to do. See
 [Application Secure Key](/advanced/app-secure-key/) if you want the details.
 
 ## Tip: Moving Between Computers
