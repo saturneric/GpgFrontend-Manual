@@ -14,6 +14,13 @@ jobs:
     with:
       image: gpgfrontend/manual
       registry: git.stdv.de
+      # Gitea 1.27 does not materialize workflow_call input defaults, so every
+      # input has to be passed explicitly by the caller.
+      checkout: true
+      push: true
+      context: "."
+      dockerfile: "Dockerfile"
+      platforms: "linux/amd64"
     secrets:
       REGISTRY_USER: ${{ secrets.DOCKER_USERNAME }}
       REGISTRY_PASS: ${{ secrets.DOCKER_PASSWORD }}
