@@ -1,0 +1,124 @@
+---
+title: "Instant Messaging"
+description: "Turn an encrypted message into one short line you can paste into any chat app, and share a secret phrase so your messages do not stand out."
+sidebar:
+  label: Instant Messaging
+  order: 7
+---
+
+import { Steps } from "@astrojs/starlight/components";
+
+Normal encrypted text is a big block that starts with `-----BEGIN PGP
+MESSAGE-----`. It is obvious at a glance, it is long, and chat apps often
+break it by adding line breaks or turning parts of it into links.
+
+**Instant messaging** solves that. It turns your encrypted message into a
+single short line of letters and numbers that pastes cleanly into any chat
+app, and that does not announce what it is.
+
+:::note[New in v2.2.2]
+
+Instant messaging was added in GpgFrontend v2.2.2.
+
+:::
+
+## Send a Message
+
+<Steps>
+
+1. Type your message in the Text Editor.
+
+2. Tick the person you are writing to in the Key Toolbox.
+
+3. Choose **Operations**, then **IM Encrypt**. The shortcut is **Ctrl+M**.
+
+</Steps>
+
+Your text is replaced by one long line. Copy it and paste it into your chat
+app.
+
+If you also want the other person to know the message really came from you,
+use **IM Encrypt & Sign** instead. The shortcut is **Ctrl+Shift+M**.
+
+:::tip[Put the buttons on the toolbar]
+
+Open **Settings**, go to **Appearance**, and tick **IM Encrypt** or **IM
+Encrypt Sign** under **Actions**. The buttons then sit in the Operations Bar
+with the others.
+
+:::
+
+## Read a Message
+
+Paste the line into the Text Editor and press **Decrypt**, exactly as you
+would for any other message. GpgFrontend works out on its own that it is an
+instant message.
+
+There is no separate button for reading one. If the sender signed it, use
+**Decrypt & Verify** to check the signature too.
+
+## Share a Secret Phrase
+
+Out of the box, your messages still look like nothing in particular to most
+people. But anyone who knows GpgFrontend can recognise them for what they are.
+
+To stop that, you and the person you write to can share a **secret phrase**.
+Once you both have the same one, your messages look like plain random text to
+everyone else.
+
+<Steps>
+
+1. Open **Settings** and go to **Instant Messaging**.
+
+2. Click **Generate**. A long phrase appears.
+
+3. Click **Copy** and send the phrase to your friend privately. Not over the
+   chat app you are trying to protect.
+
+4. Your friend opens the same page and clicks **Paste**.
+
+5. You both look at the **Book Fingerprint**, a short code such as
+   `3F9A-1C4E`. Read it out to each other. If the two codes match, you are
+   set.
+
+</Steps>
+
+The fingerprint is safe to say out loud or send anywhere. The phrase is not.
+
+:::caution[You must both use exactly the same phrase]
+
+If the phrases do not match, your friend cannot read your messages at all.
+The fingerprint check exists so you catch this straight away.
+
+:::
+
+### What Happens Without a Phrase
+
+Nothing breaks. Your message is still properly encrypted, and only the person
+you sent it to can read it.
+
+The only thing you lose is the disguise. Without a shared phrase, GpgFrontend
+falls back to a built-in one that every copy of the program has, so anyone who
+knows the program can tell your message is an encrypted GpgFrontend message.
+
+The first time you use IM Encrypt without a phrase, the program says so and
+offers to take you to the settings page.
+
+## If the Message Is Too Long
+
+Instant messages are meant for short notes. If yours is too long, GpgFrontend
+tells you and does nothing.
+
+Either shorten the text, or send it the normal way with **Encrypt**. There is
+no length limit on a normal encrypted message.
+
+## Good to Know
+
+- The shared phrase hides **what kind** of message you are sending. It is not
+  what keeps the message secret. Your OpenPGP keys do that, with or without a
+  phrase.
+- The phrase is stored in GpgFrontend's own protected storage, not in a plain
+  settings file.
+- One phrase covers everyone you use it with. If you want to keep two
+  conversations apart, you need a phrase per person, and you have to change it
+  in settings when you switch.

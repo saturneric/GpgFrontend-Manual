@@ -1,11 +1,23 @@
 ---
 title: Key Groups
 description: "Create and use key groups in GpgFrontend to encrypt to multiple recipients at once, treating a collection of public keys as a single key."
+sidebar:
+  label: Key Group
+  order: 13
 ---
 
 A Key Group lets you bundle many public keys together and use them as one key.
 This makes it easy to send an encrypted message or file to several people at the
 same time.
+
+:::note[Not the same as a key category]
+
+A key group is something you can **encrypt to**. It behaves like a key.
+
+A [key category](/guides/key-categories/) only tidies up your key list. You
+cannot encrypt to one.
+
+:::
 
 ## What is a Key Group?
 

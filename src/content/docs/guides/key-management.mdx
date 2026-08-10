@@ -1,0 +1,150 @@
+---
+title: "Manage Your Keys"
+description: "Use the Key Management window to find, copy, export, certify, and renew your OpenPGP keys, one at a time or in bulk."
+sidebar:
+  label: Manage Keys
+  order: 12
+---
+
+import { Steps } from "@astrojs/starlight/components";
+
+The **Key Management** window is where you look after your keys. Open it with
+the **Manage Keys** button in the toolbar.
+
+The Key Toolbox in the main window and this window show the same keys, but they
+are for different jobs. The Toolbox is for **picking** a key for a task. This
+window is for **doing something to** a key.
+
+## What You Are Looking At
+
+Three parts:
+
+- **Down the left**: your categories. Click one to show only those keys. See
+  [Key Categories](/guides/key-categories/).
+- **In the middle**: your keys, one per row.
+- **Above the list**: buttons for refreshing, ticking keys, choosing columns,
+  and switching key database.
+
+## Find a Key
+
+Type in the search box at the top. It looks at the name, the email address, the
+key ID, and the fingerprint, so any of those will find the key.
+
+You can paste a fingerprint with spaces in it and it still matches.
+
+- **Ctrl+F** jumps to the search box.
+- **Escape** clears it.
+- Click a column heading to sort by it. Click again to reverse it.
+
+## The Line Along the Bottom
+
+The bottom of the window keeps a running count: how many keys you have, how
+many you own the private half of, how many run out soon, and how many have
+expired or been revoked.
+
+It is the quickest way to notice that something needs your attention. If it
+says a key is expiring soon, the **Expiring Soon** category shows you which
+one.
+
+## Right-Click a Key
+
+This is where most of the work happens. Right-click any key for a menu of
+things you can do to it. All of this is new in v2.2.2.
+
+### Look at it
+
+- **Show Key Details**: everything about the key. See
+  [Key Pair Details](/guides/view-keypair-info/).
+
+### Copy something
+
+- **Copy Fingerprint**: the long code people use to check they have the right
+  key. This is the one to read out over the phone.
+- **Copy Key ID**: the short code. Easier to type, but less exact.
+- **Copy Email**: the address on the key.
+- **Copy Public Key Block**: the whole public key as text, ready to paste into
+  an email or a web page.
+
+### Save it to a file
+
+- **Export Public Key...**: saves the half you can safely give away.
+- **Export Private Key...**: saves the half you must keep.
+
+:::caution[Be careful with the private one]
+
+A private key file is your identity. Anyone who gets it can read messages sent
+to you and sign things as you.
+
+Save it somewhere only you can reach, such as an encrypted drive, and never
+send it anywhere.
+
+:::
+
+### Change it
+
+- **Set Expiry...**: change when the key runs out, or stop it expiring.
+- **Certify Key...**: sign someone else's key to say you have checked it is
+  really theirs. See
+  [Trust Chain Management](/guides/openpgp-trust-manage/).
+- **Generate Revocation Certificate...**: make the file that lets you cancel
+  this key later. Do this now, not when you need it. See
+  [Key Revocation](/advanced/key-revocation/).
+
+### Key servers
+
+- **Search Keyserver...**: look someone up online. Started from a key you have
+  selected, the search is already filled in for you.
+- **Publish Key to Keyserver...**: upload your public key so others can find
+  it.
+- **Refresh Selected from Keyserver**: fetch the latest copy of a key, in case
+  the owner has changed or revoked it.
+
+See [Key Server Operations](/guides/key-server-operations/) for what these do
+in full.
+
+## Work on Several Keys at Once
+
+<Steps>
+
+1. Tick the box beside each key you want.
+
+2. Open the **Bulk** menu.
+
+3. Pick what to do:
+
+   - **Set Owner Trust for Checked Keys...**: give them all the same trust
+     level.
+   - **Extend Expiry of Checked Keys...**: push back the expiry date on all of
+     them at once. Useful once a year, when several keys come due together.
+   - **Back Up All Private Keys...**: save every private key you have into one
+     file. The best way to make a full backup.
+
+</Steps>
+
+:::note[What "checked" means]
+
+Ticking a box and clicking a row are two different things.
+
+Actions that say **Checked** work on the ticked boxes. If you have not ticked
+anything, they fall back to whatever row you have clicked.
+
+:::
+
+## When an Action Is Greyed Out
+
+If a menu item is greyed out, hover over it. The tooltip says why.
+
+The usual reasons are simple:
+
+- **"Select a key first."** Nothing is selected.
+- **"Select exactly one key for this."** The action only makes sense on one key
+  at a time.
+- **"Only available for a key you own the private half of."** You cannot change
+  someone else's key.
+- **"This key carries no email address."** Nothing to copy.
+- **"Certifying is for vouching for someone else's key."** You do not need to
+  certify your own.
+
+Actions your OpenPGP engine cannot do at all are hidden rather than greyed out,
+so a short menu usually means you are on the rPGP engine. See
+[Multi-Key Database](/advanced/key-database/).

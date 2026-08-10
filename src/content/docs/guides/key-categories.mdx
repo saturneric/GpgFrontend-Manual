@@ -1,0 +1,114 @@
+---
+title: "Key Categories"
+description: "Sort your keys into named, coloured categories so a long key list stays easy to work with."
+sidebar:
+  label: Key Categories
+  order: 14
+---
+
+import { Steps } from "@astrojs/starlight/components";
+
+Once you have a lot of keys, finding the right one takes longer than it should.
+A **category** is a label you put on keys to tidy them up, such as `Work`,
+`Family`, or `Servers`.
+
+A category changes nothing about the keys themselves. It only changes what you
+see.
+
+:::note[Not the same as a key group]
+
+A **key group** is a shortcut for encrypting to several people at once, and it
+shows up in the key list as something you can pick as a recipient.
+
+A **category** never does that. It is only a way of sorting the list. See
+[Key Group](/guides/key-group/) if that is what you are after.
+
+:::
+
+## Where to Find Them
+
+Categories appear in two places:
+
+- **Key Management window**: a list down the left side. This is where you
+  create and change them.
+- **Key Toolbox** in the main window: a thin coloured strip. You can switch
+  between categories here, but not edit them.
+
+Clicking a category shows only the keys in it.
+
+## The Ready-Made Ones
+
+Some categories are always there and fill themselves in:
+
+- **All**: every key.
+- **Has Private Key**: keys you own.
+- **Only Public Key**: other people's keys.
+- **Key Group**: your key groups.
+- **Expiring Soon**: keys that run out in the next 30 days.
+- **Expired**, **Revoked**, **Disabled**, **No Primary Key**: keys with a
+  problem.
+
+You cannot rename or delete these.
+
+:::tip[Change what "soon" means]
+
+Open **Settings**, go to **General**, and set **Warn about keys expiring
+within** to any number of days you like.
+
+:::
+
+## Make Your Own
+
+<Steps>
+
+1. Open the **Key Management** window.
+
+2. Click the **+** button at the bottom of the category list.
+
+3. Type a name and click OK.
+
+4. Pick a colour if you want one, or just click Cancel to get an automatic
+   one.
+
+</Steps>
+
+## Put Keys in a Category
+
+<Steps>
+
+1. Find the key in the key list. Select several at once if you like.
+
+2. Right-click it and open the **Category** submenu.
+
+3. Tick the category you want.
+
+</Steps>
+
+To take a key out again, go to that category, right-click the key, and choose
+**Remove From This Category**.
+
+A key can be in as many categories as you like.
+
+## Rename, Recolour, Reorder
+
+Right-click a category you made for **Rename Category**, **Set Colour**, and
+**Reset Colour**.
+
+To change the order, drag a category up or down the list. The order is
+remembered.
+
+**Delete Category** removes the label only. Your keys are never touched.
+
+:::note[Where the Favourite tab went]
+
+GpgFrontend v2.2.2 replaced the old **Favourite** tab with categories. Old
+favourites are not carried over, so make a category and put those keys back in
+it.
+
+:::
+
+## Good to Know
+
+- Categories belong to one key database. If you use more than one, each has
+  its own set. See [Multi-Key Database](/advanced/key-database/).
+- The search box searches inside the category you are looking at.
