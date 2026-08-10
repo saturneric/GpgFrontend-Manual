@@ -193,9 +193,9 @@ This is a faster way to switch output modes without opening the main settings.
 
 ![](https://image.cdn.bktus.com/i/2025/04/09/ea2c8b52-2a49-ee18-5897-5cf3d72115a5.webp)
 
-## If Something Goes Wrong Part Way
+## If an Operation Is Interrupted
 
-Since v2.2.2, GpgFrontend writes its result somewhere out of the way first and
+Since v2.2.2, GpgFrontend writes its result to a temporary file first and
 only puts it in place once it is complete.
 
 If an operation fails or is interrupted, you get no output file at all, rather

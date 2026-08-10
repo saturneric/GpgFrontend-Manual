@@ -109,9 +109,9 @@ a person.
 
 :::
 
-If you do need to sign one, there are two ways in. Open the key's details and
-use the **UID** tab, or right-click the key in the **Manage Keys** window and
-choose **Certify Key...**. The second one is new in v2.2.2.
+If you do need to sign one, there are two ways to do it. Open the key's
+details and use the **UID** tab, or right-click the key in the **Manage Keys**
+window and choose **Certify Key...**. The second way is new in v2.2.2.
 
 You cannot certify your own key, and GpgFrontend greys the action out to say
 so.

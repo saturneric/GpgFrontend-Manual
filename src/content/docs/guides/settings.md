@@ -35,14 +35,14 @@ If you would rather browse, the pages are sorted into four groups:
 
 | Page                  | Group          | What you change there                                                     |
 | --------------------- | -------------- | ------------------------------------------------------------------------- |
-| **General**           | Application    | Language, which engine to use, what the file panel opens at, expiry warnings |
-| **Appearance**        | Application    | Theme, icon size, which buttons appear on the toolbar, fonts               |
+| **General**           | Application    | Language, which engine to use, file panel start folder, expiry warnings   |
+| **Appearance**        | Application    | Theme, icon size, which buttons appear on the toolbar, fonts              |
 | **Network**           | Application    | Proxy settings                                                            |
 | **Key Databases**     | Keys & Engines | Add, edit and remove key databases                                        |
 | **GnuPG**             | Keys & Engines | Point at your own GnuPG, clear the password cache, restart GnuPG          |
 | **rPGP**              | Keys & Engines | How long the rPGP engine remembers a passphrase                           |
 | **Key Servers**       | Keys & Engines | The list of key servers, and which one is the default                     |
-| **Instant Messaging** | Features       | Your shared secret phrase for [instant messaging](/guides/instant-messaging/) |
+| **Instant Messaging** | Features       | Your phrase for [instant messaging](/guides/instant-messaging/)           |
 | **Advanced**          | System         | How the program protects its own key, and how much it writes to the log   |
 
 Some pages only show up when they apply to you. **GnuPG** and **rPGP** appear
