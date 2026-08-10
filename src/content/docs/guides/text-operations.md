@@ -44,6 +44,21 @@ the recipient's public key, or only you will be able to read it.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/19483c04524fd94afff85cac502a1030bdb4c477.gif)
 
+### If You Are Asked to Pick a Subkey
+
+Some people have more than one encryption subkey on their key. When that
+happens, GpgFrontend opens **Select Encryption Key(s)** and asks which one to
+use. Expand a key to see its subkeys.
+
+If you have no reason to prefer one, just confirm the selection GpgFrontend
+offers. This dialog does not appear when there is only one sensible choice.
+
+### Sending to a Chat App
+
+A normal encrypted message is a large block of text, and chat apps often mangle
+it. GpgFrontend has a second kind of encryption made for exactly that case. See
+[Instant Messaging](/guides/instant-messaging/).
+
 ## Decrypt Text
 
 To read an encrypted message sent to you, paste or load the ciphertext into

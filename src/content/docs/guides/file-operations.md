@@ -32,6 +32,29 @@ The File Panel is where you work on files. There are two ways to open it.
 
 ![](https://image.cdn.bktus.com/i/2025/06/24/acb0e681d8f383589727d0012c3842c487033fa1.webp)
 
+## Getting Around the File Panel
+
+The **path bar** across the top shows the folder you are in, one step at a
+time. Click any step to jump straight to it. There is a **Home** step at the
+start.
+
+To type a path instead, click the edit button at the end of the path bar, or
+press **Ctrl+L**. You can use `~` for your home folder.
+
+The rest of the toolbar gives you:
+
+- **Up**: go to the folder above. **Backspace** does the same.
+- **Refresh**: read the folder from disk again.
+- **Volumes**: jump to a USB drive or another mounted disk.
+- **Show**: choose what the list shows, and make a new folder or file.
+- **Filter**: type here to show only files whose name contains that text.
+
+Along the bottom you can see how many items are in the folder, how many you
+have selected, and how much space is left on the disk.
+
+To delete something, right-click it and choose **Move to Trash**. GpgFrontend
+asks first.
+
 ## Encrypt, Decrypt, Sign, or Verify a File
 
 Once a file is selected in the File Panel, pick the right key in the **Key
@@ -162,11 +185,19 @@ text-friendly output, for example to paste into an email.
 
 **Or toggle it from the File Panel:**
 
-1. In the File Panel, find the toolbar at the top right.
-2. Click the gear or three-line icon to open the menu.
-3. Choose **ASCII Mode**. When checked, you get `.asc` files instead of `.gpg` or
+1. In the File Panel toolbar, open the **Show** menu.
+2. Tick **Use ASCII Armor**. You then get `.asc` files instead of `.gpg` or
    `.sig`.
 
 This is a faster way to switch output modes without opening the main settings.
 
 ![](https://image.cdn.bktus.com/i/2025/04/09/ea2c8b52-2a49-ee18-5897-5cf3d72115a5.webp)
+
+## If Something Goes Wrong Part Way
+
+Since v2.2.2, GpgFrontend writes its result somewhere out of the way first and
+only puts it in place once it is complete.
+
+If an operation fails or is interrupted, you get no output file at all, rather
+than a half-written one sitting next to your original. Your input file is never
+touched either way.
