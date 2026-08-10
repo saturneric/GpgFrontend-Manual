@@ -1,6 +1,8 @@
 ---
 title: System Requirement
 description: "Recommended hardware and operating system requirements for running GpgFrontend on Windows, macOS, and Linux."
+sidebar:
+  order: 1
 ---
 
 The following are mainly the recommended system requirements for running
@@ -27,6 +29,18 @@ For smooth operation, we recommend:
 
 - Minimum 2.2.0 (but some features may not work properly)
 - Recommended 2.4.0+
+
+## Optional on Linux
+
+To let GpgFrontend keep its own key in your system password store, you need a
+password service running, such as GNOME Keyring or KWallet, plus the libsecret
+library:
+
+- Debian and Ubuntu: `libsecret-1-0`
+- Fedora: `libsecret`
+
+Without these, that option is greyed out in the settings. Everything else works
+as normal. See [Application Secure Key](/advanced/app-secure-key/).
 
 ## Network
 

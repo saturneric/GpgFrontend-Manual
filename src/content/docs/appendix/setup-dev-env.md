@@ -2,6 +2,7 @@
 title: Setting Up Your Local Development Environment
 description: "Set up a local GpgFrontend development environment that mirrors the GitHub Actions CI pipeline, including GitHub Codespaces for quick onboarding."
 sidebar:
+  order: 5
   label: Development Environment
 ---
 

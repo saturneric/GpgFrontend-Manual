@@ -1,6 +1,8 @@
 ---
 title: Code & Binary Verify
 description: "Verify the authenticity and integrity of GpgFrontend binaries using digital signatures and reproducible, automated GitHub Actions builds."
+sidebar:
+  order: 2
 ---
 
 To enhance the security and integrity of software distribution, it’s crucial for
