@@ -55,7 +55,7 @@ offers. This dialog does not appear when there is only one sensible choice.
 
 ### Sending to a Chat App
 
-A normal encrypted message is a large block of text, and chat apps often mangle
+A normal encrypted message is a large block of text, and chat apps often break
 it. GpgFrontend has a second kind of encryption made for exactly that case. See
 [Instant Messaging](/guides/instant-messaging/).
 

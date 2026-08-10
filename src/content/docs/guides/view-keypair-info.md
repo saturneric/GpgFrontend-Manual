@@ -94,14 +94,14 @@ Which key format the primary key uses, shown as `v4`, `v5`, or `v6`.
 - `v5` is the format from **LibrePGP**, a separate standard that split off from
   OpenPGP. GnuPG 2.5 and later can make and use v5 keys.
 
-The two standards are not interchangeable. A v5 key works with GnuPG and other
-LibrePGP tools, and a v6 key works with RFC 9580 tools. Many tools support only
-one of the two.
+The two standards are not compatible with each other. A v5 key works with
+GnuPG and other LibrePGP tools, and a v6 key works with RFC 9580 tools. Many
+tools support only one of the two.
 
 :::caution[The rPGP engine cannot read v5 keys]
 
 rPGP follows RFC 9580 only. It can tell you that a key is v5, but it cannot
-open it, so such a key shows up but cannot be used.
+open it. The key shows up in the list, but you cannot use it.
 
 If you work with v5 keys, use a GnuPG key database for them. See
 [Multi-Key Database](/advanced/key-database/).

@@ -6,8 +6,8 @@ sidebar:
   order: 19
 ---
 
-The settings window changed shape in v2.2.2. The row of tabs along the top is
-gone. In its place there is a search box and a list of pages down the left
+The settings window was redesigned in v2.2.2. The row of tabs along the top
+is gone. In its place there is a search box and a list of pages down the left
 side.
 
 Open it with **Settings** in the menu bar. On macOS it is called

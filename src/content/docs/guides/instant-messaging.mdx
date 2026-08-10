@@ -14,7 +14,7 @@ break it by adding line breaks or turning parts of it into links.
 
 **Instant messaging** solves that. It turns your encrypted message into a
 single short line of letters and numbers that pastes cleanly into any chat
-app, and that does not announce what it is.
+app, and that does not reveal what it is.
 
 :::note[New in v2.2.2]
 
@@ -107,7 +107,7 @@ offers to take you to the settings page.
 ## If the Message Is Too Long
 
 Instant messages are meant for short notes. If yours is too long, GpgFrontend
-tells you and does nothing.
+tells you and leaves your text unchanged.
 
 Either shorten the text, or send it the normal way with **Encrypt**. There is
 no length limit on a normal encrypted message.
@@ -119,6 +119,6 @@ no length limit on a normal encrypted message.
   phrase.
 - The phrase is stored in GpgFrontend's own protected storage, not in a plain
   settings file.
-- One phrase covers everyone you use it with. If you want to keep two
-  conversations apart, you need a phrase per person, and you have to change it
-  in settings when you switch.
+- GpgFrontend keeps one phrase at a time, and it is used for everyone you
+  write to. If you want a different phrase for each person, you have to change
+  the phrase in settings when you switch conversations.

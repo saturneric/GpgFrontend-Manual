@@ -64,8 +64,9 @@ Ultimate).
 
 :::tip[Several keys at once]
 
-Since v2.2.2 you can do a batch. In the **Manage Keys** window, tick the keys
-you want, then choose **Bulk**, then **Set Owner Trust for Checked Keys...**.
+Since v2.2.2 you can set several at once. In the **Manage Keys** window, tick
+the keys you want, then choose **Bulk**, then **Set Owner Trust for Checked
+Keys...**.
 They all get the same level. See
 [Manage Your Keys](/guides/key-management/).
 

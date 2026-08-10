@@ -72,8 +72,8 @@ Since v2.2.2 you can give a single subkey a new passphrase without touching the
 others. Open the key's details, go to the **Subkeys** tab, right-click the
 subkey, and choose **Change Passphrase**.
 
-GpgFrontend asks for the current passphrase first, and only asks you to pick a
-new one once the old one has actually worked.
+GpgFrontend asks for the current passphrase first. Only after you enter it
+correctly does it ask you to pick a new one.
 
 :::
 

@@ -128,7 +128,7 @@ You can export your private key in two ways:
 Exporting keys one at a time is fine for sharing, but a poor way to make a
 backup. It is too easy to miss one.
 
-Since v2.2.2 you can save the lot in one go. In the **Manage Keys** window,
+Since v2.2.2 you can save them all in one go. In the **Manage Keys** window,
 open the **Bulk** menu and choose **Back Up All Private Keys...**. That writes
 every private key in the keyring into a single protected file.
 
