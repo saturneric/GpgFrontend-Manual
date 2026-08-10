@@ -1,0 +1,167 @@
+---
+title: "OpenPGP Smart Cards"
+description: "Use an OpenPGP smart card such as a YubiKey or Nitrokey with GpgFrontend: read the card, change its PINs, make keys on it, and move a key onto it."
+sidebar:
+  label: Smart Card
+  order: 17
+---
+
+import { Steps } from "@astrojs/starlight/components";
+
+A **smart card** is a small piece of hardware, such as a YubiKey or a
+Nitrokey, that holds your private key and does the signing and decrypting
+itself.
+
+The point is simple: the private key never leaves the card. Even if someone
+takes over your computer, they cannot copy the key. They can only use it while
+the card is plugged in, and only if they know your PIN.
+
+GpgFrontend can read your card, change its settings, make new keys on it, and
+move an existing key onto it. Open it with **Smart Card** in the toolbar.
+
+:::note[Needs the GnuPG engine]
+
+Smart cards only work with the GnuPG engine. The rPGP engine cannot talk to a
+card. If the smart card window is empty or missing, switch your key database
+over to GnuPG first.
+
+:::
+
+## Before You Start
+
+### Two PINs, not one
+
+Your card has two codes, and they do different jobs.
+
+- **User PIN**: the everyday one. You type it to sign or decrypt. Often six
+  digits to begin with.
+- **Admin PIN**: the one for changing the card itself, such as making keys or
+  resetting the User PIN. Often eight digits to begin with.
+
+Change both from their factory values before you use the card seriously.
+
+:::caution[Too many wrong tries locks the card]
+
+Get the User PIN wrong too often and the card locks. You then need the Admin
+PIN or a reset code to unlock it. Lose those as well and your only way back is
+a factory reset, which erases every key on the card.
+
+:::
+
+### The card holds private keys only
+
+Your public key is not stored on the card, and does not need to be. Share it
+the usual way. See
+[Import and Export Keys](/guides/import-export-key-pair/).
+
+You can set a **public key URL** on the card, which tells other software where
+to fetch your public key from. That is a convenience, not a requirement.
+
+### Key stubs
+
+Once your keyring knows about a card key, it keeps a small placeholder called
+a **stub**. The stub is not the key. It just tells GnuPG "this one lives on a
+card, go ask the card".
+
+In the key list, a key like this shows the type `pub/sec^`.
+
+If you lose the card, the stub stays behind but is useless. Keep this in mind
+before you move your only copy of a key onto a card.
+
+## Finding Your Way Around
+
+The window has three parts:
+
+1. **At the top**: the card selector. If you have more than one card plugged
+   in, pick the one you mean here. The cardholder name and a status light sit
+   next to it.
+2. **In the middle**: what the card says about itself. Who it belongs to, its
+   serial number, how many PIN attempts are left, and the keys it is holding.
+3. **Along the bottom**: the buttons.
+
+The buttons are:
+
+- **Cardholder**: change the name, language, login data, or public key URL
+  stored on the card.
+- **Access Codes**: change the User PIN, the Admin PIN, or the reset code.
+- **Generate Card Keys**: make brand new keys on the card itself.
+- **Move Key to Card**: put a key you already have onto the card.
+- **Fetch**: read the card again and bring your keyring up to date with it.
+- **Refresh**: reload what is shown on screen.
+
+There is also a **More Actions** button with **Restart All Gpg-Agents**, which
+is worth trying if your card is plugged in but not being seen.
+
+## Make New Keys on the Card
+
+**Generate Card Keys** creates the keys on the card itself, so the private key
+has never existed anywhere else. This is the safest way to use a card.
+
+The catch is that you cannot back the key up, because it cannot be copied off.
+If the card is lost or breaks, that key is gone. Plan for that: many people
+keep a separate offline key for certifying, and treat the card keys as
+replaceable.
+
+## Move an Existing Key to the Card
+
+New in v2.2.2. Use this when you already have a key you want to move onto
+hardware.
+
+:::caution[This moves the key, it does not copy it]
+
+The private key is **removed from your computer**. Only a stub is left behind.
+Afterwards the key can only be used with the card in hand, and there is no way
+to undo it.
+
+:::
+
+<Steps>
+
+1. Open the smart card window and click **Move Key to Card**.
+
+2. Pick the key database, then pick the one key or subkey you want to move.
+   Only GnuPG key databases can do this.
+
+3. Read the warning and confirm.
+
+4. When GpgFrontend offers to **Back Up First**, say yes. Save the file
+   somewhere safe. This backup is your only way back if the card fails.
+
+5. If the key could go in more than one slot, choose which: signature,
+   encryption, or authentication.
+
+6. Wait for the confirmation. Your keyring is updated on its own.
+
+</Steps>
+
+You can also start this from a single subkey: open the key's details, go to
+the **Subkeys** tab, right-click the subkey, and choose **Move to Card**.
+
+## Common Questions
+
+### How many keys fit on a card?
+
+Most OpenPGP cards have three slots: one for signing, one for encryption, and
+one for authentication. Some cards differ, so check the maker's
+documentation.
+
+### My card is plugged in but nothing shows up
+
+Try, in this order:
+
+1. **Refresh**.
+2. **More Actions**, then **Restart All Gpg-Agents**.
+3. Unplug the card and plug it back in.
+4. Check that your key database is using the GnuPG engine.
+
+### Can one device do more than OpenPGP?
+
+Yes. Devices like a YubiKey usually hold several separate applications at
+once: OpenPGP for GpgFrontend, FIDO2 for passwordless website logins, and PIV
+for corporate smart card logins.
+
+They are independent. Making an OpenPGP key does not touch your passkeys, and
+each has its own PINs. You will need different software for each one.
+
+The device's total storage is shared, though, so each application has its own
+limits.
