@@ -10,7 +10,7 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest-server
-    uses: https://git.bktus.com/pub/workflows/.gitea/workflows/docker-build.yaml@v0.0.3
+    uses: Pub/workflows/.gitea/workflows/docker-build.yaml@v0.0.3
     with:
       image: gpgfrontend/manual
       registry: git.stdv.de
