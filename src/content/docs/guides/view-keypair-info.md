@@ -100,16 +100,10 @@ tools support only one of the two.
 
 :::caution[The rPGP engine cannot read v5 keys]
 
-rPGP follows RFC 9580 only. It can tell you that a key is v5, but it cannot
-open it. The key shows up in the list, but you cannot use it.
-
-If you work with v5 keys, use a GnuPG key database for them. See
-[Multi-Key Database](/advanced/key-database/).
+rPGP follows RFC 9580 only. It cannot use a v5 key. If you work with v5 keys,
+use a GnuPG key database for them. See [Multi-Key Database](/advanced/key-database/).
 
 :::
-
-This field is shown only when the active engine can report it. The rPGP engine
-can; GnuPG cannot, so it is hidden for keys loaded through the GnuPG engine.
 
 #### Last Update
 

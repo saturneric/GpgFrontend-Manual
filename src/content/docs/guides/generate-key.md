@@ -88,13 +88,6 @@ Only profiles that work with your current engine and key database are shown.
   - **Primary Key With Subkey**: useful for keeping signing and encryption
     separate.
 
-:::note
-
-When the rPGP engine is selected, the expiration options are hidden, because the
-engine has limited support for setting how long a key stays valid.
-
-:::
-
 For full control over the algorithm, key length, and format, switch to Advanced
 Mode (the **Primary Key** and **Subkey** tabs). The supported algorithms and
 compatibility notes are below.
