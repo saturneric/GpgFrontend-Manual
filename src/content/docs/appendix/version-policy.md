@@ -6,10 +6,10 @@ sidebar:
   order: 6
 ---
 
-Every copy of GpgFrontend has a version number, like `v2.2.2`. That number is not
-a score, and it does not tell you how much work went into the release.
+Every copy of GpgFrontend has a version number, like `v2.2.2`. That number does
+not tell you how big a release was or how much work went into it.
 
-It tells you which chapter of GpgFrontend you are holding.
+It tells you which chapter of the project you are holding.
 
 ## What the Numbers Mean
 
@@ -50,12 +50,12 @@ actually changed.
 You may have heard of **Semantic Versioning**. It is a common set of rules for
 numbering software.
 
-Those rules were written for code libraries, which are pieces of software that
-other programmers build their own programs on top of. The numbers answer one
-question: _did something break for the programmers using this?_
+Those rules were written for code libraries: software that other programmers
+build their own programs on top of. The numbers answer one question: _did
+something break for the programmers using this?_
 
-GpgFrontend is an app you use, not a library programmers build on. Nobody writes
-code against it, so that question has nothing to answer.
+GpgFrontend is an app you use, not a library programmers build on. No other
+program is built on top of it, so that question does not apply.
 
 So the numbers here answer a different question: _what is this app trying to be
 right now?_
@@ -87,7 +87,7 @@ release. The direction did not change, so the series did not either.
 | **2.1** | A modern toolkit, more control over GnuPG, and a long run of steady, careful releases.        |
 | **2.2** | Two engines instead of one, plus support for newer OpenPGP standards.                         |
 
-The 2.0 release notes show the number being picked on purpose, and explain why:
+The 2.0 release notes show that the number was picked on purpose:
 
 > "Since the core part of the code and the organizational structure are different
 > from the previous version, **the version number of this version of GpgFrontend
@@ -95,10 +95,10 @@ The 2.0 release notes show the number being picked on purpose, and explain why:
 
 ## Why the Numbers Stay Small
 
-GpgFrontend has been going since 2021 and the first number has changed once.
+GpgFrontend has been going since 2021, and the first number has changed once.
 
-Many projects raise that number often, because a bigger number looks like
-progress. This project does not do that. The number moves when the app really
+Many projects raise their version numbers often, because a bigger number looks
+like progress. This project does not. The number moves when the app really
 changes, and stays put when it does not.
 
 That is a deliberate choice, described in the maintainer's article

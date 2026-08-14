@@ -6,11 +6,11 @@ sidebar:
   order: 7
 ---
 
-AI coding tools help build GpgFrontend. They never touch your keys, they do not
-do the encryption, and nothing reaches you without a person deciding what it
-should do and checking that it does.
+AI coding tools help build GpgFrontend. They never touch your keys, and they do
+not write the encryption. Every change is planned and checked by a person before
+it reaches you.
 
-This page explains the whole arrangement, so you can judge it for yourself.
+This page explains how that works, so you can judge it for yourself.
 
 ## The Short Answer
 
@@ -26,12 +26,11 @@ If you only read one thing, read this table.
 
 ## The Project Came First
 
-This is not a project that was made by asking a machine for an app.
+GpgFrontend was not made by asking a machine for an app.
 
-Work started in **May 2021**. Roughly two thirds of every change ever made to
-GpgFrontend was written before any AI tool touched it, and so was the whole
-shape of the program. The parts that decide whether it is safe to use were
-designed and written by hand:
+Work started in **May 2021**. About two thirds of all changes were written
+before any AI tool touched the project, and so was the whole design. The parts
+that keep the app safe were designed and written by hand:
 
 | When     | What                                                                                                |
 | :------- | :-------------------------------------------------------------------------------------------------- |
@@ -44,26 +43,24 @@ maintainer's article ["The Past and Present of
 GpgFrontend"](https://blog.bktus.com/en/archives/u8hywl/).
 
 GpgFrontend is also not the biggest system its
-[maintainer](https://blog.bktus.com/en/about-me/) has worked on. From 2022 to
-2024 that meant backend engineering at Tencent, on systems far larger and busier
-than this app, and since 2025 a master's degree at KaIT. Cryptography and
-security, networking and distributed systems, and the Linux kernel are the
-working fields here, not weekend reading.
+[maintainer](https://blog.bktus.com/en/about-me/) has worked on. Behind it are
+years of backend engineering on far larger systems, and graduate study in
+cryptography, security and computer systems.
 
-That background includes knowing how these models actually work and where they
-fall down. They are treated as what they are: fast, tireless, and confident even
-when they are wrong.
+That background includes knowing how these AI models work and where they fail.
+They are treated as what they are: fast, tireless, and confident even when they
+are wrong.
 
 ## What the Tools Actually Do
 
 They are an assistant. They write ordinary code, tests, interface work and
 documentation, and they help review changes for mistakes.
 
-The plain reason for using them is speed. The maintainer puts the work at more
-than five times faster than before.
+The first reason for using them is speed. The maintainer estimates that work now
+goes more than five times faster than before.
 
-The more useful change is what now gets done at all. Two kinds of work used to
-be put off:
+The more important change is what gets done at all. Two kinds of work used to be
+put off:
 
 - **Tests.** Writing them is slow and dull, and it was easy to keep postponing.
   The app now ships with well over a thousand automated tests, around 20,000
@@ -72,11 +69,9 @@ be put off:
   settings pages. There are 66 of those, and about 53,000 lines of interface
   code, most of it the same patterns over and over.
 
-Handing that work to an assistant leaves the maintainer free for the part that
-needs judgment: designing how the app is put together, and trying out new ideas.
-
-That is the trade. The tools do the patient, repetitive work. The thinking about
-how the app should be built stays exactly where it was.
+That is the trade. The tools do the slow, repetitive work. The maintainer keeps
+the work that needs judgment: designing how the app fits together, and trying
+out new ideas.
 
 ## What They Are Not Allowed to Do
 
@@ -87,11 +82,11 @@ handling keys is done by **GnuPG** and **rPGP**. Those are long-standing,
 independent projects with their own developers, their own review and their own
 audits. GpgFrontend asks them to do the job rather than inventing its own.
 
-This one you can check without trusting anybody. The source code contains no
-encryption algorithms of its own. It calls out to the GnuPG library from more
-than four hundred places across its core, and to the rPGP library from the Rust
-side. There is no home made cryptography in it to get wrong, whoever or whatever
-wrote the surrounding code.
+You can check this yourself, without trusting anybody. The source code contains
+no encryption algorithms of its own. It calls the GnuPG library from more than
+four hundred places, and the rPGP library from the Rust side. There is no
+home-made cryptography in it to get wrong, no matter who or what wrote the
+surrounding code.
 
 **They are not in the app.** Neither GpgFrontend nor any of its modules contains
 an AI feature or contacts an AI service. Nothing you type, encrypt, sign or open
@@ -131,8 +126,8 @@ You are welcome to use AI tools. Two rules apply:
    output you have not read and tried.
 
 The same goes for bug reports. Check the problem against the real code and
-include the steps to reproduce it. A report describing something an AI tool
-merely guessed at costs time this project does not have.
+include the steps to reproduce it. A report based only on an AI guess wastes
+time the project does not have.
 
 For everything else, see [Contributing to
 GpgFrontend](/appendix/contribute/).
@@ -142,8 +137,8 @@ GpgFrontend](/appendix/contribute/).
 The project links to an [AI-assisted
 Wiki](https://deepwiki.com/saturneric/GpgFrontend), generated automatically from
 the source code by an outside service. It is useful for finding your way around,
-but it is not written by the maintainer and it can be wrong about details. Treat
-it as a map, not as the territory. The source code is the truth.
+but it is not written by the maintainer and it can be wrong about details. Use
+it to get oriented, and check anything important against the source code.
 
 This manual is a different case. The maintainer's first language is Chinese, and
 the manual is written in English, so AI tools help turn rough notes into clear
@@ -161,9 +156,9 @@ Plenty of projects use these tools quietly. For an ordinary app, that might not
 matter much.
 
 A security tool is different. If you cannot see how something is made, you are
-being asked to trust it on faith. Saying plainly what is used, what it is never
-allowed near, and what every change has to pass is a better basis for trust than
-saying nothing.
+being asked to trust it on faith. This page says plainly what the tools are used
+for, what they are kept away from, and how every change is checked. That is a
+better basis for trust than silence.
 
 Being open about using these tools is not the same as being built by them. The
 design, the security decisions, and the responsibility for this app stay with the
