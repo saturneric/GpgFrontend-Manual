@@ -63,6 +63,10 @@ export default defineConfig({
             content: "https://gpgfrontend.bktus.com/images/og-default.png",
           },
         },
+        {
+          tag: "script",
+          attrs: { src: "/scripts/lightbox.js", defer: true },
+        },
       ],
       logo: {
         src: "./src/assets/logo.svg",
