@@ -13,6 +13,10 @@ changes via GitHub pull requests or sending git patches via email. Below, you'll
 find the steps to set up your environment, make changes, and how to submit those
 changes. Additionally, you'll find contact information for further assistance.
 
+You are welcome to use AI tools in your work. Before you do, read the two rules
+in the [AI Policy](/appendix/ai-policy/#if-you-contribute): you must understand
+every line you send, and you must have built and run it yourself.
+
 ## Wiki
 
 An AI-assisted Wiki has been generated through automated analysis of the

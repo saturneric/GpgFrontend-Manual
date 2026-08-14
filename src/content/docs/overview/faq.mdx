@@ -36,6 +36,10 @@ On Windows, just run the new installer. On macOS and Linux, replace the old app
 or AppImage with the new version. Your settings and keys are kept unless the
 release notes say otherwise.
 
+Note that the built-in update check only offers newer releases from your own
+series (for example, 2.2.x). Moving to a new series is a step you take
+yourself; see the [Version Numbering Policy](/appendix/version-policy/).
+
 </details>
 
 ## OpenPGP and the Engines
@@ -451,6 +455,10 @@ tested. They are less stable than official releases, may include breaking
 changes, and are not GPG-signed. They are not recommended for production. Always
 check the SHA256 checksum. Please report feedback and issues on GitHub.
 
+For how stable, beta and nightly builds relate, see [Stable, Beta, and
+Nightly](/appendix/version-policy/#stable-beta-and-nightly) in the Version
+Numbering Policy.
+
 </details>
 
 ## Your Keys, Privacy, and Security
@@ -500,9 +508,33 @@ GpgFrontend does not collect or send any personal or usage data. All encryption
 runs locally. Update checks can be turned off, and there is no tracking or
 analytics built in.
 
+There is also no AI feature in the app, and nothing you do is ever sent to an
+AI service. See the [AI Policy](/appendix/ai-policy/).
+
 </details>
 
 ## Community and Support
+
+<details>
+<summary>Is GpgFrontend really free? Can I donate?</summary>
+
+Yes, it is completely free, and no, the project does not take donations. There
+is no paid version and no locked features. If someone asks you to pay for
+GpgFrontend, it is not from this project. See
+[Free & No Donations](/appendix/free-no-donation/) for the full story, and for
+ways to help that matter more than money.
+
+</details>
+
+<details>
+<summary>Is AI used to build GpgFrontend?</summary>
+
+AI coding tools help write ordinary code, tests and documentation, under the
+direction and review of the maintainer. There is no AI in the app itself, and
+AI does not write the cryptography; that is done by GnuPG and rPGP. The
+[AI Policy](/appendix/ai-policy/) explains the whole arrangement.
+
+</details>
 
 <details>
 <summary>How can I request a new feature?</summary>
@@ -526,6 +558,8 @@ repository. You can also contact me directly if you're not on GitHub; see the
 
 Feel free to change GpgFrontend's code and submit a Pull Request with your
 improvements. You can also send patches by email if you prefer to contribute
-anonymously.
+anonymously. See [Contributing to GpgFrontend](/appendix/contribute/) to get
+started, and the [AI Policy](/appendix/ai-policy/#if-you-contribute) if you use
+AI tools in your work.
 
 </details>
