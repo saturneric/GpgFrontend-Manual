@@ -118,4 +118,7 @@ export default defineConfig({
   ],
   output: "static",
   adapter: netlify({ imageCDN: false }),
+  redirects: {
+    "/appendix/setup-dev-env/": "/appendix/contribute/",
+  },
 });

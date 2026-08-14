@@ -3,7 +3,7 @@ title: AI Policy
 description: "How AI coding tools are used to develop GpgFrontend, what they are not allowed to do, and how every change is checked before it reaches you."
 sidebar:
   label: AI Policy
-  order: 7
+  order: 6
 ---
 
 AI coding tools help build GpgFrontend. They never touch your keys, and they do

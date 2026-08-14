@@ -3,7 +3,7 @@ title: Version Numbering Policy
 description: "What GpgFrontend version numbers mean, why they do not follow Semantic Versioning, and what each release series set out to do."
 sidebar:
   label: Version Policy
-  order: 6
+  order: 5
 ---
 
 Every copy of GpgFrontend has a version number, like `v2.2.2`. That number does
