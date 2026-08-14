@@ -20,9 +20,11 @@ private things private.
 where paying for a privacy tool could get them in trouble. If the tool had a
 price, it would fail exactly the people who need it most.
 
-The license locks this in. GpgFrontend uses the **GPL-3.0** license, which says
-the code is free and must stay free. Even a future maintainer could not change
-that.
+The license (**GPL-3.0**) makes the code free forever: anyone may read it,
+change it and share it. Nobody can take that away.
+
+The zero price is our own promise on top of that: the official app will never
+cost money.
 
 ## Why No Donations?
 
@@ -57,13 +59,13 @@ gift.
 
 ## Is Someone Asking You for Money?
 
-Then it is not us. Nobody is allowed to sell GpgFrontend or to collect
-donations in its name.
+Then it is not us. This project never charges anything and never collects
+donations.
 
-If you see a copy for sale, or a site asking for donations for GpgFrontend, do
-not pay. Get your copy from the official [Downloads](/overview/downloads/) page
-instead. It is always free, and you can check it is genuine with
-[Code & Binary Verify](/appendix/code-binary-verify/).
+The license lets other people share the code, even for a price. That may be
+legal, but you never need to pay anyone. The same app is always free on the
+official [Downloads](/overview/downloads/) page, and you can check your copy
+is real with [Code & Binary Verify](/appendix/code-binary-verify/).
 
 ## Want to Help Anyway?
 
