@@ -72,28 +72,38 @@ This feature adds an extra layer of transparency and verification for users.
 
 ## Public Key for Verification
 
-Below is the public key used for signing the commits and binary files, which can
-be used to verify the authenticity of our releases:
+All commits and binary packages are signed with the maintainer's OpenPGP key.
+The key and its fingerprint are published at
+[bktus.com/openpgp](https://bktus.com/openpgp/). Get the key there, check the
+fingerprint, and use it to verify the `.sig` file that comes with each release.
 
-### Key Fingerprint
+## When the Stakes Are Very High
 
-```
-12F7E8858CF15BEC9975FF3C5CA3DA246843FD03
-```
+The checks above are enough for everyday use. But if your safety, your freedom
+or your work depends on this software, hold it to a higher standard: do not use
+any prebuilt binary at all, not even ours.
 
-### Public Key (OpenPGP)
+Every prebuilt binary asks you to trust the machines and services that built
+it. For most people that trust is reasonable. In a truly critical situation, it
+is a risk you do not need to take, because you can remove it: build the app
+yourself, from source code you have checked.
 
-```
------BEGIN PGP PUBLIC KEY BLOCK-----
+If you are in that situation, this is the path:
 
-mDMEZsEF1xYJKwYBBAHaRw8BAQdAPZ3dA2od9HFaiaJRr1TEEeRMfAcrBp8oqQPa
-R16Icva0OHNhdHVybmVyaWMoZm9yIGNvZGUgb3IgYmluYXJ5IHNpZ24gb25seSk8
-ZXJpY0Bia3R1cy5jb20+iJkEExYKAEECGyMFCwkIBwICIgIGFQoJCAsCBBYCAwEC
-HgcCF4AWIQQS9+iFjPFb7Jl1/zxco9okaEP9AwUCak/5lAUJB4YCzQAKCRBco9ok
-aEP9A2XlAP9oSRnrx/FoWrrb1ykaN91+gU2lCI89sP+0b6xjsPVR/gD+ILOYmW0N
-97/LfmFW9t+kxvsTpoblvwS2is7DeTt3vg8=
-=7fLZ
------END PGP PUBLIC KEY BLOCK-----
-```
+1. **Get the source, not a binary.** Clone the repository and check out an
+   official release tag. Verify the tag's GPG signature with the maintainer's
+   key from [bktus.com/openpgp](https://bktus.com/openpgp/).
+2. **Read before you build.** Review the code yourself, or have someone you
+   trust review it. Pay attention to the build scripts too, not only the app
+   code.
+3. **Build on a machine you trust.** Use a clean, freshly installed system used
+   only for this build. Install the compiler and libraries from your operating
+   system's official repositories. Keep the machine offline once everything is
+   downloaded, if you can.
+4. **Keep your own record.** Note the commit hash you built and the checksums
+   of what you produced, so you can tell later whether anything changed.
 
-Updated: 09.07.2026
+Build instructions are in the
+[development environment guide](/appendix/setup-dev-env/). This path costs real
+time and skill. That is the honest price of not having to trust anyone else's
+build.
