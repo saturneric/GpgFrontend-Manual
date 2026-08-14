@@ -19,7 +19,7 @@ and the more advanced setups come later, so you can skip them until you need the
 2. Open the **Keychain** tab.
 3. Click **Generate A New Subkey**.
 
-![](https://image.cdn.bktus.com/i/2026/06/30/3d94fa5ca42185abee5dfdfc1530961902fbe680.webp)
+![][img-1]
 
 ### Step 1: Choose What the Subkey Is For
 
@@ -62,7 +62,7 @@ keep your primary key offline.
 - When asked, enter your key's **passphrase** to confirm.
 - The new subkey appears under the **Keychain** tab.
 
-![](https://image.cdn.bktus.com/i/2026/06/30/66dbd8460933ec7cd6bfece33daa84e2d622d90f.webp)
+![][img-2]
 
 That's all you need to add a subkey.
 
@@ -140,25 +140,25 @@ current OpenPGP backend." Use a GnuPG-backed key database for this.
    primary key, the button is labeled **Export Primary Key** instead.)
 5. **Save the file**: choose a secure folder and save the subkey as its own file.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/b4f1dc5e6eb6f683300564a4ba998e48d22b75b4.webp)
+![][img-3]
 
 ### Step 2: Import the Subkey into Another Database
 
 1. **Pick the key database**: choose the right key database in the **Key Toolbox**.
 
-![Switch Key Database](https://image.cdn.bktus.com/i/2024/11/29/0e8ff19e-4189-65db-5732-1a2e79d9b8a6.webp)
+![Switch Key Database][img-4]
 
 2. **Import the file**: click **Import Key** in the top toolbar and choose
    **File**. Browse to the exported subkey file.
 
-   ![Import the Subkey](https://image.cdn.bktus.com/i/2024/11/29/8f3456ba-6275-4ef9-8e41-49b9b6bc0dfa.webp)
+   ![Import the Subkey][img-5]
 
 3. **Select the file**: pick the subkey file and click **Open** to import it into
    the chosen key database.
 4. **Check it**: find the subkey in the **Key Toolbox**, then click it to open its
    **Key Details** (Key ID, Algorithm, Key Size, Usage).
 
-   ![Verify Imported Subkey](https://image.cdn.bktus.com/i/2024/11/29/ac01142d-1ffa-ba32-daac-36ddf0729ff1.webp)
+   ![Verify Imported Subkey][img-6]
 
 ### Step 3: Use a Key Without Its Primary Key
 
@@ -170,12 +170,12 @@ In the **Key Toolbox**, a `#` next to the **Type** (for example, **pub/sec#**)
 means the primary key isn't in this key database. This is expected when you have
 removed the primary key on purpose and kept the subkeys for daily use.
 
-![Meaning of '#' Symbol](https://image.cdn.bktus.com/i/2024/11/29/78d9bc07-8b96-302b-25d1-cbb88815f16a.webp)
+![Meaning of '#' Symbol][img-7]
 
 To confirm, open the subkey's **Key Details**. The **Primary Key Existence**
 section should say **Not Exists**.
 
-![Primary Key Not Exists](https://image.cdn.bktus.com/i/2024/11/29/05594a4b-cdad-7ad4-070b-58e24701cce3.webp)
+![Primary Key Not Exists][img-8]
 
 **What still works** with only subkeys present:
 
@@ -183,7 +183,7 @@ section should say **Not Exists**.
 - You can **sign**, but only if you kept a signing subkey. So make a signing
   subkey when you first create the key, if you'll need one later.
 
-![Use Subkey to Encrypt](https://image.cdn.bktus.com/i/2024/11/29/20047766-48ab-f4a3-175c-241c7d5c0dbf.webp)
+![Use Subkey to Encrypt][img-9]
 
 **What you can't do** without the primary key:
 
@@ -303,3 +303,13 @@ Keep these points in mind before you share a key made with the rPGP engine:
   version. The current rPGP engine supports only some hybrid pairings, such as
   **Kyber-768 + Curve25519** and **Kyber-1024 + X448**. Other pairings may need
   GnuPG 2.5+ or may not be available.
+
+[img-1]: https://image.cdn.bktus.com/i/2026/06/30/3d94fa5ca42185abee5dfdfc1530961902fbe680.webp
+[img-2]: https://image.cdn.bktus.com/i/2026/06/30/66dbd8460933ec7cd6bfece33daa84e2d622d90f.webp
+[img-3]: https://image.cdn.bktus.com/i/2025/06/24/b4f1dc5e6eb6f683300564a4ba998e48d22b75b4.webp
+[img-4]: https://image.cdn.bktus.com/i/2024/11/29/0e8ff19e-4189-65db-5732-1a2e79d9b8a6.webp
+[img-5]: https://image.cdn.bktus.com/i/2024/11/29/8f3456ba-6275-4ef9-8e41-49b9b6bc0dfa.webp
+[img-6]: https://image.cdn.bktus.com/i/2024/11/29/ac01142d-1ffa-ba32-daac-36ddf0729ff1.webp
+[img-7]: https://image.cdn.bktus.com/i/2024/11/29/78d9bc07-8b96-302b-25d1-cbb88815f16a.webp
+[img-8]: https://image.cdn.bktus.com/i/2024/11/29/05594a4b-cdad-7ad4-070b-58e24701cce3.webp
+[img-9]: https://image.cdn.bktus.com/i/2024/11/29/20047766-48ab-f4a3-175c-241c7d5c0dbf.webp

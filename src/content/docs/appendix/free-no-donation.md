@@ -71,7 +71,7 @@ is real with [Code & Binary Verify](/appendix/code-binary-verify/).
 
 These things help more than money would:
 
-- **Star it on [GitHub](https://github.com/saturneric/GpgFrontend).** That is
+- **Star it on [GitHub][github-gpgfrontend].** That is
   the official donation button. :)
 - **Report bugs.** A clear bug report, with the steps to repeat it, is a real
   gift.
@@ -79,3 +79,5 @@ These things help more than money would:
 - **[Contribute](/appendix/contribute/)** code, or fix a page in this manual.
 - **Tell someone.** The project grows when the people who need it hear about
   it.
+
+[github-gpgfrontend]: https://github.com/saturneric/GpgFrontend

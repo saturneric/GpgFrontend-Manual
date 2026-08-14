@@ -48,7 +48,7 @@ yourself; see the [Version Numbering Policy](/appendix/version-policy/).
 <summary>How do OpenPGP, PGP, and GnuPG (GPG) relate?</summary>
 
 - **OpenPGP** is the open standard ([RFC
-  4880](https://www.rfc-editor.org/rfc/rfc4880)) for encrypted email, files, and
+  4880][rfc4880]) for encrypted email, files, and
   digital signatures.
 - **PGP** was the original closed-source software from the 1990s. It is rarely
   used today, but the name is sometimes used loosely to mean the OpenPGP
@@ -158,7 +158,7 @@ encryption, decryption, signing, verification, and local key management.
 The sandbox-related challenges around bundling and integrating GnuPG in a
 movable macOS App Bundle have been discussed in the GnuPG development community.
 
-See also: [GnuPG and macOS App Sandbox](https://lists.gnupg.org/pipermail/gnupg-devel/2022-May/035065.html)
+See also: [GnuPG and macOS App Sandbox][gnupg-sandbox-mail]
 
 </Aside>
 
@@ -247,7 +247,7 @@ use.
 <summary>Has GnuPG ever been successfully attacked?</summary>
 
 According to the official [GnuPG FAQ
-11.8](https://gnupg.org/faq/gnupg-faq.html#successful_attacks):
+11.8][gnupg-faq]:
 
 > "If you mean, "has GnuPG traffic ever been successfully cryptanalyzed?", the
 > answer is a flat "no". We are unaware of any credible reports of any of the
@@ -325,7 +325,7 @@ GnuPG-specific features, please install GnuPG:
 - **Linux:** Install GnuPG via your package manager, for example
   `sudo apt install gpg` or `sudo dnf install gnupg`.
 - **Windows:** Recent regular desktop builds include GnuPG. If needed, you can
-  also download GnuPG from the [official GnuPG website](https://www.gnupg.org/download/).
+  also download GnuPG from the [official GnuPG website][gnupg-download].
 
 </details>
 
@@ -563,3 +563,8 @@ started, and the [AI Policy](/appendix/ai-policy/#if-you-contribute) if you use
 AI tools in your work.
 
 </details>
+
+[rfc4880]: https://www.rfc-editor.org/rfc/rfc4880
+[gnupg-sandbox-mail]: https://lists.gnupg.org/pipermail/gnupg-devel/2022-May/035065.html
+[gnupg-faq]: https://gnupg.org/faq/gnupg-faq.html#successful_attacks
+[gnupg-download]: https://www.gnupg.org/download/

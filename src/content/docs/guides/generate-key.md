@@ -16,7 +16,7 @@ everything else. You can change those defaults later if you want (see
 In the **Main Window**, click **New Keypair**. This opens the
 **Generate Key** window, where you set your identity and key options.
 
-![](https://image.cdn.bktus.com/i/2026/06/30/398635c90c069535c343216224f5fa4d881dd605.webp)
+![][img-1]
 
 ## Step 2: Enter Your Information
 
@@ -158,3 +158,5 @@ If you need your key to work with as many tools as possible, check what format
 your engine and version actually produce before you share the key.
 
 :::
+
+[img-1]: https://image.cdn.bktus.com/i/2026/06/30/398635c90c069535c343216224f5fa4d881dd605.webp

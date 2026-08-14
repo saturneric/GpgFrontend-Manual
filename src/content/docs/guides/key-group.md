@@ -49,9 +49,9 @@ group, you pick the group once and you are done.
 4. **Done.** Your new group shows up in the key list with the Type set to
    "group". You can now use it just like a single public key.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/c70891d9ad74b21074be03c7a1d0aabf77d9ea3a.webp)
+![][img-1]
 
-![](https://image.cdn.bktus.com/i/2025/06/24/bf35548136bc176635dc0fd1175795597701e1dc.webp)
+![][img-2]
 
 ## Edit a group
 
@@ -59,7 +59,7 @@ You can change a group whenever you want. Double-click the group in the list (or
 use the group management menu) to open the Key Group Management window. From
 there you can add keys, remove keys, or put other groups inside the group.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/4c4c9e18c0c850b4d1bbbf8e0861e7f24fa72269.webp)
+![][img-3]
 
 ## When to use Key Groups
 
@@ -106,3 +106,7 @@ or to certify.
 Key Groups live only inside GpgFrontend. They are not the same as GnuPG's
 "keygroup" feature and they are not saved in the `gpg.conf` file. Other OpenPGP
 tools will not see your groups.
+
+[img-1]: https://image.cdn.bktus.com/i/2025/06/24/c70891d9ad74b21074be03c7a1d0aabf77d9ea3a.webp
+[img-2]: https://image.cdn.bktus.com/i/2025/06/24/bf35548136bc176635dc0fd1175795597701e1dc.webp
+[img-3]: https://image.cdn.bktus.com/i/2025/06/24/4c4c9e18c0c850b4d1bbbf8e0861e7f24fa72269.webp

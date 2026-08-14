@@ -40,10 +40,10 @@ that keep the app safe were designed and written by hand:
 
 That work came from years of reading and studying, as described in the
 maintainer's article ["The Past and Present of
-GpgFrontend"](https://blog.bktus.com/en/archives/u8hywl/).
+GpgFrontend"][blog-history].
 
 GpgFrontend is also not the biggest system its
-[maintainer](https://blog.bktus.com/en/about-me/) has worked on. Behind it are
+[maintainer][blog-about-me] has worked on. Behind it are
 years of backend engineering on far larger systems, and graduate study in
 cryptography, security and computer systems.
 
@@ -135,7 +135,7 @@ GpgFrontend](/appendix/contribute/).
 ## The Wiki and This Manual
 
 The project links to an [AI-assisted
-Wiki](https://deepwiki.com/saturneric/GpgFrontend), generated automatically from
+Wiki][deepwiki-gpgfrontend], generated automatically from
 the source code by an outside service. It is useful for finding your way around,
 but it is not written by the maintainer and it can be wrong about details. Use
 it to get oriented, and check anything important against the source code.
@@ -163,3 +163,7 @@ better basis for trust than silence.
 Being open about using these tools is not the same as being built by them. The
 design, the security decisions, and the responsibility for this app stay with the
 person who has been maintaining it since 2021.
+
+[blog-history]: https://blog.bktus.com/en/archives/u8hywl/
+[blog-about-me]: https://blog.bktus.com/en/about-me/
+[deepwiki-gpgfrontend]: https://deepwiki.com/saturneric/GpgFrontend

@@ -42,7 +42,7 @@ every now and then in between.
 4. GpgFrontend checks each key against the key server. If the server has a
    newer version, the updates are imported into your local keyring.
 
-![](https://image.cdn.bktus.com/i/2025/06/28/38eefac3220f864b5e4a1fe98681f8cef817ef21.webp)
+![][img-1]
 
 ## Which Key Server Is Used
 
@@ -60,7 +60,7 @@ The **default key server** you set in Settings applies only to key
 2. To use a different one for searches and imports, add your preferred key
    server and set it as the default.
 
-![](https://image.cdn.bktus.com/i/2025/06/28/86bc996c90eb449dee681a86be15797015128f5c.webp)
+![][img-2]
 
 ## Tips
 
@@ -70,3 +70,6 @@ The **default key server** you set in Settings applies only to key
   the changes make sense.
 - **Use a trusted network**: Sync over a network you trust, not open public
   Wi-Fi you know nothing about.
+
+[img-1]: https://image.cdn.bktus.com/i/2025/06/28/38eefac3220f864b5e4a1fe98681f8cef817ef21.webp
+[img-2]: https://image.cdn.bktus.com/i/2025/06/28/86bc996c90eb449dee681a86be15797015128f5c.webp

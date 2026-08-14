@@ -37,7 +37,7 @@ Owner Trust is **not** about whether the key itself is real. It is about how muc
 you trust the owner to vouch for others. This is what lets you build your own Web
 of Trust without depending on a central authority.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/38399d86fb330ca20eab85c33c03331797d32679.webp)
+![][img-1]
 
 The trust levels are:
 
@@ -60,7 +60,7 @@ constant updates from key servers.
 A window opens where you pick the level (Unknown, None, Marginal, Full, or
 Ultimate).
 
-![](https://image.cdn.bktus.com/i/2025/06/24/4b7624b599a5f310d059843c872cf81e6b089ba4.webp)
+![][img-2]
 
 :::tip[Several keys at once]
 
@@ -120,7 +120,7 @@ so.
 When GpgFrontend was first designed, sending these signatures to key servers was
 not fully planned for.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/d974152f4b2b850d228408b99d37ea487a3cf914.webp)
+![][img-3]
 
 ### What happens now
 
@@ -166,3 +166,7 @@ users want it.
 - A clear warning about key bloat when uploading third-party signatures.
 - Support for organization trust models, such as CA-based signing and
   certificates.
+
+[img-1]: https://image.cdn.bktus.com/i/2025/06/24/38399d86fb330ca20eab85c33c03331797d32679.webp
+[img-2]: https://image.cdn.bktus.com/i/2025/06/24/4b7624b599a5f310d059843c872cf81e6b089ba4.webp
+[img-3]: https://image.cdn.bktus.com/i/2025/06/24/d974152f4b2b850d228408b99d37ea487a3cf914.webp

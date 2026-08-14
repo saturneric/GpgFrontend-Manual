@@ -25,7 +25,7 @@ sync keys. You do not need to type any commands.
    click the Import Key button (the one with a downward arrow).
 2. **Pick "Keyserver".** In the drop-down menu, choose Keyserver as the source.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/3660f65893c4e79954486f1b3cfb5cb6b09a13d0.webp)
+![][img-1]
 
 ### Steps to import
 
@@ -34,7 +34,7 @@ sync keys. You do not need to type any commands.
 3. Click **Search**.
 4. When you see a result, double-click it to import the key.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/0dc8821cc3c83c7bb3266f3a1059ce59fabc4a8f.webp)
+![][img-2]
 
 > GpgFrontend already lists a few key servers for you, such as:
 >
@@ -61,7 +61,7 @@ You can then check:
 - The UID and key ID
 - Whether the key is expired or revoked (use the Key Manager filters)
 
-![](https://image.cdn.bktus.com/i/2025/06/24/4efe7862bc47b95387a8ee247d4b767dbbfa36b6.webp)
+![][img-3]
 
 ## Send your public key to a key server
 
@@ -69,7 +69,7 @@ You can upload your public key so other people can find it and send you encrypte
 messages.
 
 Since v2.1.6, GpgFrontend uploads keys to
-[https://keys.openpgp.org](https://keys.openpgp.org) by default. This server uses
+[https://keys.openpgp.org][keys-openpgp] by default. This server uses
 the **Verifying Keyserver (VKS) Interface**, which gives extra protection against
 spam and fake keys.
 
@@ -87,7 +87,7 @@ To upload:
 2. Go to the **Operations** tab.
 3. Click **"Upload key pair to key server"**.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/34505c6435d485dc2f8ce680a8c8f630fbb18b2a.webp)
+![][img-4]
 
 ## Sync a public key
 
@@ -123,7 +123,7 @@ you are the owner, so you should **publish** your updates instead of pulling the
 ## Check if your key is published
 
 GpgFrontend v2.1.6 can check on its own whether your public key is published on
-[keys.openpgp.org](https://keys.openpgp.org). This helps you know if people can
+[keys.openpgp.org][keys-openpgp]. This helps you know if people can
 find your key.
 
 ### What it does
@@ -132,7 +132,7 @@ find your key.
 - If your key is found on `keys.openpgp.org`, you see a message in the **Key
   Details** tab, like this:
 
-![](https://image.cdn.bktus.com/i/2025/06/24/e52d18a85267987f8202ba6ede39068b3c6e140b.webp)
+![][img-5]
 
 ### How to turn it on
 
@@ -141,7 +141,7 @@ find your key.
 status from key server`.
 3. Restart GpgFrontend to apply the change.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/b2daf0876b29278e703f4721f7f68c22ffa1752b.webp)
+![][img-6]
 
 ### Notes
 
@@ -156,3 +156,11 @@ status from key server`.
 - Always check a key before you trust it.
 - Keep your keys clean: revoke and update them if they are stolen.
 - Never upload a private key to any server.
+
+[img-1]: https://image.cdn.bktus.com/i/2025/06/24/3660f65893c4e79954486f1b3cfb5cb6b09a13d0.webp
+[img-2]: https://image.cdn.bktus.com/i/2025/06/24/0dc8821cc3c83c7bb3266f3a1059ce59fabc4a8f.webp
+[img-3]: https://image.cdn.bktus.com/i/2025/06/24/4efe7862bc47b95387a8ee247d4b767dbbfa36b6.webp
+[keys-openpgp]: https://keys.openpgp.org
+[img-4]: https://image.cdn.bktus.com/i/2025/06/24/34505c6435d485dc2f8ce680a8c8f630fbb18b2a.webp
+[img-5]: https://image.cdn.bktus.com/i/2025/06/24/e52d18a85267987f8202ba6ede39068b3c6e140b.webp
+[img-6]: https://image.cdn.bktus.com/i/2025/06/24/b2daf0876b29278e703f4721f7f68c22ffa1752b.webp

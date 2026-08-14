@@ -102,4 +102,6 @@ Modules are plain shared libraries with a C interface, linked against
 missing, please get in touch.
 
 For the source and examples, see the
-[GpgFrontend Modules repository](https://github.com/saturneric/GpgFrontend-Modules/blob/main/README.md).
+[GpgFrontend Modules repository][modules-readme].
+
+[modules-readme]: https://github.com/saturneric/GpgFrontend-Modules/blob/main/README.md

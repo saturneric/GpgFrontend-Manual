@@ -66,13 +66,13 @@ Each address must be a plain address (`alice@example.com`) or the
 
 :::
 
-![](https://image.cdn.bktus.com/i/2025/06/24/84f732220b3a967aa5d3986f79475bdfcf53454e.webp)
+![][img-1]
 
-![](https://image.cdn.bktus.com/i/2025/06/24/610ba60f2cd8eeddbcfbbc57aa602cff61197065.webp)
+![][img-2]
 
-![](https://image.cdn.bktus.com/i/2025/06/24/fea933e12bf46516d6a1385698b6afa94e7543a0.webp)
+![][img-3]
 
-![](https://image.cdn.bktus.com/i/2025/06/24/ee90e5bb25c7accdccf70f17c1986e53e0b4e81f.webp)
+![][img-4]
 
 ### Step 2: Encrypt (Optional)
 
@@ -84,7 +84,7 @@ To hide the content so only the recipient can read it:
 You can sign and encrypt together for a message that is both private and proven to
 be from you.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/f8fe32d6e3502a1ba3503189fa40e4348bd4cc81.webp)
+![][img-5]
 
 ### Step 3: Save and Send
 
@@ -107,7 +107,7 @@ Remember, GpgFrontend doesn't send the email. Your email app does.
 A signed email shows a **Good Digital Signature** message. An encrypted email is
 shown decrypted.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/64b84451fd044cfd0c081161dad3057c5fde25a4.webp)
+![][img-6]
 
 ### Understand the Results
 
@@ -165,3 +165,10 @@ tools.
   encryption.
 - **Offline by design**: every operation runs on your computer. Your private keys
   and message contents are never sent to outside servers.
+
+[img-1]: https://image.cdn.bktus.com/i/2025/06/24/84f732220b3a967aa5d3986f79475bdfcf53454e.webp
+[img-2]: https://image.cdn.bktus.com/i/2025/06/24/610ba60f2cd8eeddbcfbbc57aa602cff61197065.webp
+[img-3]: https://image.cdn.bktus.com/i/2025/06/24/fea933e12bf46516d6a1385698b6afa94e7543a0.webp
+[img-4]: https://image.cdn.bktus.com/i/2025/06/24/ee90e5bb25c7accdccf70f17c1986e53e0b4e81f.webp
+[img-5]: https://image.cdn.bktus.com/i/2025/06/24/f8fe32d6e3502a1ba3503189fa40e4348bd4cc81.webp
+[img-6]: https://image.cdn.bktus.com/i/2025/06/24/64b84451fd044cfd0c081161dad3057c5fde25a4.webp

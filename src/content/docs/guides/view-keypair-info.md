@@ -12,7 +12,7 @@ primary key and subkeys, the signatures on it, and the actions you can take.
 To open it, right-click a key in the **Key Toolbox** or the **Key Management**
 window and choose **Show Key Details**. Double-clicking a key also opens this window.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/707eab9708c7cf9af472a5e05295d132d831f223.webp)
+![][img-1]
 
 ## General Info
 
@@ -24,7 +24,7 @@ Who the key belongs to. This isn't fixed: you can change it by creating a new UI
 in the UID section and setting it as the primary UID. OpenPGP splits this into
 **Name**, **Email**, and **Comment**.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/a648820ee997bce65d3b65ebb7c3056b37e1597d.webp)
+![][img-2]
 
 ### Primary Key
 
@@ -36,7 +36,7 @@ A "missing" primary key means the _private part_ of the primary key is absent, n
 that the whole key is gone. Remember: the primary key and every subkey is itself a
 pair of a public and a private key.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/8b3235e625749d20effc4a7f334e7dacd2688923.webp)
+![][img-3]
 
 #### Key ID
 
@@ -55,7 +55,7 @@ security with shorter keys.
 Shows the key type and length together, and is sometimes more exact than the
 Algorithm field, naming the specific method such as ED25519 or NISTP256.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/1a4c3220e4952de2ba8bbdfc01a42d48dce6337c.webp)
+![][img-4]
 
 #### Key Size
 
@@ -119,7 +119,7 @@ or subkeys) or use it to sign other keys.
 
 ### Fingerprint
 
-![](https://image.cdn.bktus.com/i/2025/06/24/bc688aa06bc3db294001b429018e5a79e888be44.webp)
+![][img-5]
 
 The fingerprint is a unique code people use to quickly check that a key is the one
 they expect. It is unique for every key in the world. (You can also compare the
@@ -132,7 +132,7 @@ keyring. It gives you a rough idea whether a key is the one you expect, but for
 sure identification you should compare fingerprints or key IDs. A key can have
 several UIDs, but only one **primary UID**, which is always shown first.
 
-![View Key Pair Details UID](https://image.cdn.bktus.com/i/2025/06/24/6ba422bf970ce94533b798e9ebb24e2465f3d45e.webp)
+![View Key Pair Details UID][img-6]
 
 Each UID has three parts: **Name**, **Email**, and **Comment**. The name should be
 at least five characters and the email must be a valid format; comments are
@@ -146,7 +146,7 @@ receives your public key, they can sign your UID with their key to vouch for it,
 then share the signed key on a key server. The more people who do this, the more
 trustworthy the key looks.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/c79c00d20a087f7a123fbbbf65bd1fd5e7c22bee.webp)
+![][img-7]
 
 You can also sign a UID with the primary key of another key pair. A primary UID
 with many valid signatures is generally seen as more trustworthy.
@@ -176,7 +176,7 @@ can feel complex at first, so here are the basics:
 The Key Details window lists the primary key and all subkeys with their properties
 (algorithm, size, usage, and so on), so you can manage them at a glance.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/3b87a8d639d8be4cf99d6fc4fc1b5d8c4168be3d.webp)
+![][img-8]
 
 ### Key on a Smart Card
 
@@ -222,7 +222,7 @@ private key too.
 
 These are the actions available for a public key.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/56b96c1420da618873ca707c6e7da4ab6e1d7a25.webp)
+![][img-9]
 
 #### Export Public Key
 
@@ -254,7 +254,7 @@ hidden.
 When the key pair includes a private key, you get more actions, covering both the
 public and private parts.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/55ac60792266c3e13254b53a47fe468cdba93048.webp)
+![][img-10]
 
 #### Export Public Key
 
@@ -290,3 +290,14 @@ A dropdown to create a revocation certificate for the key, or import an existing
 one. Revoke a key if it is compromised or no longer needed: this marks it invalid
 so it can't be misused. The revocation is usually uploaded to a key server so
 others learn the key is revoked.
+
+[img-1]: https://image.cdn.bktus.com/i/2025/06/24/707eab9708c7cf9af472a5e05295d132d831f223.webp
+[img-2]: https://image.cdn.bktus.com/i/2025/06/24/a648820ee997bce65d3b65ebb7c3056b37e1597d.webp
+[img-3]: https://image.cdn.bktus.com/i/2025/06/24/8b3235e625749d20effc4a7f334e7dacd2688923.webp
+[img-4]: https://image.cdn.bktus.com/i/2025/06/24/1a4c3220e4952de2ba8bbdfc01a42d48dce6337c.webp
+[img-5]: https://image.cdn.bktus.com/i/2025/06/24/bc688aa06bc3db294001b429018e5a79e888be44.webp
+[img-6]: https://image.cdn.bktus.com/i/2025/06/24/6ba422bf970ce94533b798e9ebb24e2465f3d45e.webp
+[img-7]: https://image.cdn.bktus.com/i/2025/06/24/c79c00d20a087f7a123fbbbf65bd1fd5e7c22bee.webp
+[img-8]: https://image.cdn.bktus.com/i/2025/06/24/3b87a8d639d8be4cf99d6fc4fc1b5d8c4168be3d.webp
+[img-9]: https://image.cdn.bktus.com/i/2025/06/24/56b96c1420da618873ca707c6e7da4ab6e1d7a25.webp
+[img-10]: https://image.cdn.bktus.com/i/2025/06/24/55ac60792266c3e13254b53a47fe468cdba93048.webp

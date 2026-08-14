@@ -34,11 +34,11 @@ Each system also adds its own check on top:
 ### Windows
 
 All programs and installers are signed with a
-[Certum](https://www.certum.eu/en/certum-by-asseco/) code signing certificate.
+[Certum][certum] code signing certificate.
 Windows checks this itself. You can also look at it yourself: right-click the
 file, open Properties, and look at Digital Signatures.
 
-![](https://image.cdn.bktus.com/i/2025/06/25/2eb0e5a1ff970b6d97ed38f18b45476c9aad6ee7.webp)
+![][img-1]
 
 ### macOS
 
@@ -46,7 +46,7 @@ The app is signed with an Apple developer certificate and passes Apple's
 notarization check. macOS verifies both automatically the first time you open
 the app. If the app had been changed, macOS would refuse to start it.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/cbc3a2ec86515bf5882d1249179e5e06053ada5f.webp)
+![][img-2]
 
 ### Linux
 
@@ -54,7 +54,7 @@ The AppImage comes with a `.sig` file, like the other packages. Check it with
 GPG before you run the app. Flatpak and other formats bring their own
 signature and sandbox systems on top.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/690c6b534ab54130dfa100f85a8cc299a0223ff5.webp)
+![][img-3]
 
 ## Check Inside the App
 
@@ -63,13 +63,13 @@ and the exact branch and commit hash of the source code this copy was built
 from. That lets you match your running app to a specific point in the public
 code history.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/fe75a2c041c9e5a7823d0c4d8820bf35501117cd.webp)
+![][img-4]
 
 ## The Signing Key
 
 All commits and release packages are signed with the maintainer's OpenPGP key.
 The key and its fingerprint are published at
-[bktus.com/openpgp](https://bktus.com/openpgp/). Get the key there, check the
+[bktus.com/openpgp][bktus-openpgp]. Get the key there, check the
 fingerprint, and use it to verify the `.sig` file that comes with each release.
 
 ## When the Stakes Are Very High
@@ -86,7 +86,7 @@ If you are in that situation, this is the path:
 
 1. **Get the source, not a binary.** Clone the repository and check out an
    official release tag. Verify the tag's GPG signature with the maintainer's
-   key from [bktus.com/openpgp](https://bktus.com/openpgp/).
+   key from [bktus.com/openpgp][bktus-openpgp].
 2. **Read before you build.** Review the code yourself, or have someone you
    trust review it. Pay attention to the build scripts too, not only the app
    code.
@@ -102,3 +102,10 @@ Build instructions are in the
 costs
 real time and skill. That is the honest price of not having to trust anyone
 else's build.
+
+[certum]: https://www.certum.eu/en/certum-by-asseco/
+[img-1]: https://image.cdn.bktus.com/i/2025/06/25/2eb0e5a1ff970b6d97ed38f18b45476c9aad6ee7.webp
+[img-2]: https://image.cdn.bktus.com/i/2025/06/24/cbc3a2ec86515bf5882d1249179e5e06053ada5f.webp
+[img-3]: https://image.cdn.bktus.com/i/2025/06/24/690c6b534ab54130dfa100f85a8cc299a0223ff5.webp
+[img-4]: https://image.cdn.bktus.com/i/2025/06/24/fe75a2c041c9e5a7823d0c4d8820bf35501117cd.webp
+[bktus-openpgp]: https://bktus.com/openpgp/

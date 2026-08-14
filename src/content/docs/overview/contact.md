@@ -11,15 +11,19 @@ I'd like to hear it.
 
 ## How to Reach Me
 
-- **Email:** [eric@bktus.com](mailto:eric@bktus.com)
+- **Email:** [eric@bktus.com][eric]
 - **Languages:** English, Chinese, or German
 - **Format:** Please send plain text, not HTML.
 
 For my OpenPGP public key, reply times, and other details, see
-[bktus.com/contact](https://bktus.com/contact/).
+[bktus.com/contact][bktus-contact].
 
 ## Bugs and Feature Requests
 
 For anything about the software itself, an issue on the
-[GitHub repository](https://github.com/saturneric/GpgFrontend/issues) is often
+[GitHub repository][github-issues] is often
 faster than email, since it keeps the discussion in one place.
+
+[eric]: mailto:eric@bktus.com
+[bktus-contact]: https://bktus.com/contact/
+[github-issues]: https://github.com/saturneric/GpgFrontend/issues

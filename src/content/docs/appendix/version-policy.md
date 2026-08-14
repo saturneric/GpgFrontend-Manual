@@ -41,7 +41,7 @@ Instant Messaging tokens, a new key list, and a rebuilt settings window.
 
 :::note[How to tell how big a release is]
 Do not judge it by the number. Read the release notes on the
-[releases page](https://github.com/saturneric/GpgFrontend/releases). They say what
+[releases page][github-releases]. They say what
 actually changed.
 :::
 
@@ -102,7 +102,7 @@ like progress. This project does not. The number moves when the app really
 changes, and stays put when it does not.
 
 That is a deliberate choice, described in the maintainer's article
-["The Past and Present of GpgFrontend"](https://blog.bktus.com/en/archives/u8hywl/):
+["The Past and Present of GpgFrontend"][blog-history]:
 
 > "I firmly believe that **steady progress is more valuable than blind
 > innovation**."
@@ -138,3 +138,6 @@ The app's built-in update check only offers you newer versions **from your own
 series**. It will not move you to a different one on its own. Moving to a new
 series is something you choose to do yourself, by downloading it from the
 [Downloads](/overview/downloads/) page.
+
+[github-releases]: https://github.com/saturneric/GpgFrontend/releases
+[blog-history]: https://blog.bktus.com/en/archives/u8hywl/

@@ -22,7 +22,7 @@ The File Panel is where you work on files. There are two ways to open it.
 3. The File Panel opens. If you picked a file, it is highlighted and ready. If you
    picked a folder, you see its contents and can choose files inside.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/2365c709356b1339898043390a1ff7ac232e05f4.webp)
+![][img-1]
 
 **Using the File Panel button:**
 
@@ -30,7 +30,7 @@ The File Panel is where you work on files. There are two ways to open it.
 2. Choose a folder in the dialog.
 3. A new **File Panel** tab opens showing that folder. Click the file you want.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/acb0e681d8f383589727d0012c3842c487033fa1.webp)
+![][img-2]
 
 ## Getting Around the File Panel
 
@@ -67,9 +67,9 @@ Toolbox** and click the matching toolbar button:
 - **Verify**: make sure the sender's **public key** is in your keyring, then click
   **Verify**.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/5ed085a7ac16c34a1e6ba46707597e91a93b6ecc.gif)
+![][img-3]
 
-![](https://image.cdn.bktus.com/i/2025/06/24/3dceea13ad31f488a347f3b0d4b1fb998487f223.gif)
+![][img-4]
 
 ## Drag and Drop Files
 
@@ -126,9 +126,9 @@ handle several at once.
 
 Batch Mode is handy when you have many files to process at once.
 
-![](https://image.cdn.bktus.com/i/2025/04/09/24a8b950-ff08-2133-0ee2-5003095f1ff7.webp)
+![][img-5]
 
-![](https://image.cdn.bktus.com/i/2025/06/24/41efb25fd3a691a57c04a0a2ec4b0e651ceb556c.gif)
+![][img-6]
 
 ## Encrypt or Decrypt a Whole Folder
 
@@ -181,7 +181,7 @@ text-friendly output, for example to paste into an email.
 2. Find the option **Use Binary Mode for File Operations**.
 3. Check it for binary (`.gpg` / `.sig`), or uncheck it for ASCII (`.asc`).
 
-![](https://image.cdn.bktus.com/i/2025/06/24/40365f1a7b1ac8d24ac8c11c45e77476a465eab7.webp)
+![][img-7]
 
 **Or toggle it from the File Panel:**
 
@@ -191,7 +191,7 @@ text-friendly output, for example to paste into an email.
 
 This is a faster way to switch output modes without opening the main settings.
 
-![](https://image.cdn.bktus.com/i/2025/04/09/ea2c8b52-2a49-ee18-5897-5cf3d72115a5.webp)
+![][img-8]
 
 ## If an Operation Is Interrupted
 
@@ -201,3 +201,12 @@ only puts it in place once it is complete.
 If an operation fails or is interrupted, you get no output file at all, rather
 than a half-written one sitting next to your original. Your input file is never
 touched either way.
+
+[img-1]: https://image.cdn.bktus.com/i/2025/06/24/2365c709356b1339898043390a1ff7ac232e05f4.webp
+[img-2]: https://image.cdn.bktus.com/i/2025/06/24/acb0e681d8f383589727d0012c3842c487033fa1.webp
+[img-3]: https://image.cdn.bktus.com/i/2025/06/24/5ed085a7ac16c34a1e6ba46707597e91a93b6ecc.gif
+[img-4]: https://image.cdn.bktus.com/i/2025/06/24/3dceea13ad31f488a347f3b0d4b1fb998487f223.gif
+[img-5]: https://image.cdn.bktus.com/i/2025/04/09/24a8b950-ff08-2133-0ee2-5003095f1ff7.webp
+[img-6]: https://image.cdn.bktus.com/i/2025/06/24/41efb25fd3a691a57c04a0a2ec4b0e651ceb556c.gif
+[img-7]: https://image.cdn.bktus.com/i/2025/06/24/40365f1a7b1ac8d24ac8c11c45e77476a465eab7.webp
+[img-8]: https://image.cdn.bktus.com/i/2025/04/09/ea2c8b52-2a49-ee18-5897-5cf3d72115a5.webp

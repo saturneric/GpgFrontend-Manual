@@ -35,18 +35,18 @@ older systems, while Curve25519 stays fast for everyday work.
 
 ## At a Glance
 
-| Algorithm                | Group       | Used for         | Engines         | Notes                                  |
-| ------------------------ | ----------- | ---------------- | --------------- | -------------------------------------- |
-| RSA                      | Classical   | Sign + Encrypt   | GnuPG, rPGP     | Best compatibility; slower             |
-| ElGamal (ELG-E)          | Classical   | Encrypt only     | GnuPG           | Rarely needed today                    |
-| ECDSA (NIST curves)      | Elliptic    | Sign             | GnuPG, rPGP     | Standardized by NIST                   |
-| EdDSA (Ed25519 / Ed448)  | Elliptic    | Sign             | GnuPG, rPGP     | Modern default for signing             |
-| ECDH (Curve25519 / X448) | Elliptic    | Encrypt          | GnuPG, rPGP     | Modern default for encryption          |
-| Brainpool curves         | Elliptic    | Sign + Encrypt   | GnuPG 2.3+      | Non-NIST alternative                   |
-| secp256k1                | Elliptic    | Sign             | GnuPG 2.3+, rPGP| Used in blockchain                     |
-| ML-DSA                   | Post-Quantum| Sign             | rPGP only       | Experimental, OpenPGP v6               |
-| SLH-DSA                  | Post-Quantum| Sign             | rPGP only       | Experimental; large signatures         |
-| Kyber / ML-KEM           | Post-Quantum| Encrypt          | GnuPG 2.5+, rPGP| Experimental; always hybrid            |
+| Algorithm                | Group        | Used for       | Engines          | Notes                          |
+| ------------------------ | ------------ | -------------- | ---------------- | ------------------------------ |
+| RSA                      | Classical    | Sign + Encrypt | GnuPG, rPGP      | Best compatibility; slower     |
+| ElGamal (ELG-E)          | Classical    | Encrypt only   | GnuPG            | Rarely needed today            |
+| ECDSA (NIST curves)      | Elliptic     | Sign           | GnuPG, rPGP      | Standardized by NIST           |
+| EdDSA (Ed25519 / Ed448)  | Elliptic     | Sign           | GnuPG, rPGP      | Modern default for signing     |
+| ECDH (Curve25519 / X448) | Elliptic     | Encrypt        | GnuPG, rPGP      | Modern default for encryption  |
+| Brainpool curves         | Elliptic     | Sign + Encrypt | GnuPG 2.3+       | Non-NIST alternative           |
+| secp256k1                | Elliptic     | Sign           | GnuPG 2.3+, rPGP | Used in blockchain             |
+| ML-DSA                   | Post-Quantum | Sign           | rPGP only        | Experimental, OpenPGP v6       |
+| SLH-DSA                  | Post-Quantum | Sign           | rPGP only        | Experimental; large signatures |
+| Kyber / ML-KEM           | Post-Quantum | Encrypt        | GnuPG 2.5+, rPGP | Experimental; always hybrid    |
 
 The exact choices you see depend on the engine, its version, and the key format.
 
@@ -56,7 +56,7 @@ The exact choices you see depend on the engine, its version, and the key format.
 
 - **What it is**: one of the most widely used public key algorithms. Introduced in
   1977, it relies on the difficulty of factoring large prime numbers.
-  ([more](https://en.wikipedia.org/wiki/RSA_cryptosystem))
+  ([more][wiki-rsa])
 - **Key sizes**: usually 2048 bits or larger; 4096 bits for higher security.
 - **Used for**: both encryption and signing. The standard for SSL/TLS certificates
   and well supported on legacy systems.
@@ -86,7 +86,7 @@ engine still offers the smaller sizes.
 
 - **What it is**: an encryption-only algorithm based on the Diffie-Hellman problem.
   In OpenPGP it is used for encryption, not signing.
-  ([more](https://en.wikipedia.org/wiki/ElGamal_encryption))
+  ([more][wiki-elgamal])
 - **Key sizes**: usually 2048 bits or more.
 - **Strength**: it produces a different ciphertext each time, even for the same
   message, which gives semantic security.
@@ -95,34 +95,34 @@ engine still offers the smaller sizes.
 
 ## Elliptic Curve Cryptography (ECC)
 
-[Elliptic Curve Cryptography](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography)
+[Elliptic Curve Cryptography][wiki-ecc]
 gives strong security with much smaller keys than RSA, which makes it a good fit
 when computing power or storage is limited. OpenPGP uses ECC in a few forms.
 
-- [**ECDH**](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman)
+- [**ECDH**][wiki-ecdh]
   (key exchange): lets two sides agree on a shared secret over an open channel,
   which is then used for encryption. It does not sign.
-- [**ECDSA**](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm)
+- [**ECDSA**][wiki-ecdsa]
   (signing): creates and checks digital signatures, so a reader can confirm a
   message came from you and wasn't changed.
 - **EdDSA** (signing): a newer signature scheme, covered below.
 
 ### Common Curves
 
-- [**NIST curves (P-256, P-384, P-521)**](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf):
+- [**NIST curves (P-256, P-384, P-521)**][fips-186-5]:
   standardized by NIST and widely used in secure communication. P-256 gives about
   128-bit security (enough for most uses); P-384 and P-521 raise this, with P-521
   giving around 256-bit security for high-security needs.
-- [**Brainpool curves (P-256, P-384, P-512)**](https://www.rfc-editor.org/rfc/rfc5639):
+- [**Brainpool curves (P-256, P-384, P-512)**][rfc5639]:
   an alternative to the NIST curves with similar strength but independently chosen
   parameters. Often used where non-NIST curves are preferred for compliance.
 - **Curve25519 and X448**: optimized for speed and common in modern apps.
-  - [**Curve25519**](https://en.wikipedia.org/wiki/Curve25519): used for key
-    exchange (the partner of [Ed25519](https://en.wikipedia.org/wiki/EdDSA#Ed25519)),
+  - [**Curve25519**][wiki-curve25519]: used for key
+    exchange (the partner of [Ed25519][wiki-eddsa]),
     with about 128-bit security. Very efficient.
-  - [**X448**](https://en.wikipedia.org/wiki/Curve448): a higher-security option
+  - [**X448**][wiki-curve448]: a higher-security option
     (about 224-bit), at a small cost in speed.
-- [**secp256k1**](https://www.secg.org/sec2-v2.pdf): a non-NIST curve best known
+- [**secp256k1**][sec2-v2]: a non-NIST curve best known
   for its use in Bitcoin and other blockchains, where fast signature checking
   matters.
 
@@ -134,10 +134,10 @@ be faster, safer, and harder to misuse than older schemes like DSA or ECDSA.
 - **Deterministic**: unlike ECDSA and DSA, it doesn't need a fresh random number
   for each signature, which avoids a common source of bugs and weak signatures.
 - **Curves**:
-  - [**Ed25519**](https://en.wikipedia.org/wiki/EdDSA#Ed25519): about 128-bit
+  - [**Ed25519**][wiki-eddsa]: about 128-bit
     security, fast, with small keys. Great for secure messaging, blockchain, and
     most modern uses.
-  - [**Ed448**](https://en.wikipedia.org/wiki/Curve448): about 224-bit security for
+  - [**Ed448**][wiki-curve448]: about 224-bit security for
     cases that need stronger or longer-term protection, at some cost in speed.
 
 ### Why ECDH Can't Be a Primary Key
@@ -150,7 +150,7 @@ encryption subkeys.
 
 ### OpenPGP v6 and the 25519 Compatibility Catch
 
-OpenPGP v6 ([RFC 9580](https://www.rfc-editor.org/rfc/rfc9580)) adds new algorithm
+OpenPGP v6 ([RFC 9580][rfc9580]) adds new algorithm
 identifiers and formats for modern curves like **Ed25519**, **Ed448**, **X25519**,
 and **X448**. These are encoded differently from the older 25519 keys that GnuPG
 usually makes (EdDSA over Ed25519 and ECDH over Curve25519).
@@ -235,3 +235,16 @@ Under rPGP, Kyber-768 pairs with Curve25519 and Kyber-1024 pairs with X448.
 Hybrid KEM keys are more sensitive to compatibility than classic RSA or Curve25519
 keys, and the two engines don't encode them the same way. If you need the widest
 compatibility, prefer classic RSA or Curve25519 keys for now.
+
+[wiki-rsa]: https://en.wikipedia.org/wiki/RSA_cryptosystem
+[wiki-elgamal]: https://en.wikipedia.org/wiki/ElGamal_encryption
+[wiki-ecc]: https://en.wikipedia.org/wiki/Elliptic-curve_cryptography
+[wiki-ecdh]: https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman
+[wiki-ecdsa]: https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm
+[fips-186-5]: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf
+[rfc5639]: https://www.rfc-editor.org/rfc/rfc5639
+[wiki-curve25519]: https://en.wikipedia.org/wiki/Curve25519
+[wiki-eddsa]: https://en.wikipedia.org/wiki/EdDSA#Ed25519
+[wiki-curve448]: https://en.wikipedia.org/wiki/Curve448
+[sec2-v2]: https://www.secg.org/sec2-v2.pdf
+[rfc9580]: https://www.rfc-editor.org/rfc/rfc9580

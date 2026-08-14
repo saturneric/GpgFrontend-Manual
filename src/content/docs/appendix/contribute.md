@@ -16,7 +16,7 @@ every line you send, and you must have built and run it yourself.
 
 ## Wiki
 
-An [AI-generated Wiki](https://deepwiki.com/saturneric/GpgFrontend) is built
+An [AI-generated Wiki][deepwiki-gpgfrontend] is built
 automatically from the source code. It gives a good overview of the
 architecture, the design ideas, and the main components.
 
@@ -32,7 +32,7 @@ All contributions should follow these rules:
 - **C Standard:** C code must follow the C99 standard.
 - **Rust Standard:** Since v2.2, GpgFrontend includes a Rust component (the
   rPGP engine), located under the `rust/` directory and built into the project
-  via [Corrosion](https://github.com/corrosion-rs/corrosion). Rust code must
+  via [Corrosion][github-corrosion]. Rust code must
   build with the Rust 2024 edition (Rust 1.85 or newer) and should be formatted
   with `rustfmt` and pass `clippy` using their default configurations.
 - **Compilers:** Your C/C++ code should compile with both GCC (8.0 or newer)
@@ -63,7 +63,7 @@ local build behaves the same way as the official builds.
 - **Compilers:** GCC 8+ or Clang 9+ (on Windows, the MinGW toolchain from
   MSYS2).
 - **Rust toolchain:** Rust 1.85 or newer. Install it through
-  [rustup](https://rustup.rs/) on Linux and macOS. On Windows with MSYS2, the
+  [rustup][rustup] on Linux and macOS. On Windows with MSYS2, the
   `mingw-w64-x86_64-rust` package from the list below is used instead. The
   build expects `cargo` on your `PATH`.
 
@@ -76,7 +76,7 @@ git clone https://github.com/saturneric/GpgFrontend.git
 cd GpgFrontend
 ```
 
-[BKTUS](https://bktus.com):
+[BKTUS][bktus]:
 
 ```bash
 git clone https://git.bktus.com/GpgFrontend/GpgFrontend.git
@@ -134,7 +134,7 @@ brew install cmake ninja automake texinfo libarchive googletest libsodium
 ```
 
 - **For Windows (via MSYS2):** Set up MSYS2 according to [its
-  documentation](https://www.msys2.org/), open the MINGW64 shell, and install
+  documentation][msys2], open the MINGW64 shell, and install
   the necessary packages:
 
 ```bash
@@ -164,7 +164,7 @@ Any Qt 6.x release works; CI currently builds against Qt 6.10.3. The required
 modules are Core, Widgets, PrintSupport, Network, LinguistTools, Xml, and Sql,
 plus Concurrent for the modules sub-project.
 
-- On Linux, use the [Qt online installer](https://www.qt.io/download-qt-installer)
+- On Linux, use the [Qt online installer][qt-installer]
   or your package manager (on Ubuntu: `qt6-base-dev qt6-tools-dev` and related
   packages).
 - On macOS, use the Qt online installer or `brew install qt`.
@@ -215,7 +215,7 @@ implement your changes while following the technical requirements above, and
 run the tests before submitting.
 
 Commit messages follow the [Conventional
-Commits](https://www.conventionalcommits.org/) style used throughout the
+Commits][conventionalcommits] style used throughout the
 project history: `type(scope): subject`, for example `fix(ui): correct key
 list refresh`.
 
@@ -237,3 +237,11 @@ changes and the reasons for them in your email.
 Stuck, or unsure how to start? Ask. The maintainer's email address is on the
 [Contact](/overview/contact/) page, and a question early is better than a lot
 of work in the wrong direction.
+
+[deepwiki-gpgfrontend]: https://deepwiki.com/saturneric/GpgFrontend
+[github-corrosion]: https://github.com/corrosion-rs/corrosion
+[rustup]: https://rustup.rs/
+[bktus]: https://bktus.com
+[msys2]: https://www.msys2.org/
+[qt-installer]: https://www.qt.io/download-qt-installer
+[conventionalcommits]: https://www.conventionalcommits.org/

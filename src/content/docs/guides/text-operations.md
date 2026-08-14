@@ -9,7 +9,7 @@ GpgFrontend lets you do four things with text: **encrypt** it (hide it),
 **decrypt** it (read it), **sign** it (prove it came from you), and **verify** a
 signature (check it really did). This page walks through each one.
 
-![](https://image.cdn.bktus.com/i/2026/06/30/8a3b4ad29fce3f6969e8cdb2a10f9efcb06f7ba0.webp)
+![][img-1]
 
 ## Before You Start
 
@@ -42,7 +42,7 @@ the recipient's public key, or only you will be able to read it.
 
 :::
 
-![](https://image.cdn.bktus.com/i/2025/06/24/19483c04524fd94afff85cac502a1030bdb4c477.gif)
+![][img-2]
 
 ### If You Are Asked to Pick a Subkey
 
@@ -69,7 +69,7 @@ GpgFrontend. The tool then:
 
 You don't need to choose a key by hand. GpgFrontend matches it for you.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/5e16d1a75fb7e7bfb4d14f7fadd57144494b131c.gif)
+![][img-3]
 
 ## Sign Text
 
@@ -82,7 +82,7 @@ readable; signing adds proof, not secrecy.
 Before you sign, look at the key's `Usage` column for an `S`, which means the key
 can sign.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/8c6db160d26f94e75138134d319c29bd2c3736b7.gif)
+![][img-4]
 
 ## Verify a Signature
 
@@ -99,7 +99,7 @@ first.
 
 :::
 
-![](https://image.cdn.bktus.com/i/2025/06/24/6ccba3133341e6e6ea095a2dc00bf23c63ed8f56.gif)
+![][img-5]
 
 ## Safety Tips
 
@@ -109,3 +109,9 @@ first.
   proven.
 - **Sign only** (no encryption) for public documents that need to be trusted but
   not hidden.
+
+[img-1]: https://image.cdn.bktus.com/i/2026/06/30/8a3b4ad29fce3f6969e8cdb2a10f9efcb06f7ba0.webp
+[img-2]: https://image.cdn.bktus.com/i/2025/06/24/19483c04524fd94afff85cac502a1030bdb4c477.gif
+[img-3]: https://image.cdn.bktus.com/i/2025/06/24/5e16d1a75fb7e7bfb4d14f7fadd57144494b131c.gif
+[img-4]: https://image.cdn.bktus.com/i/2025/06/24/8c6db160d26f94e75138134d319c29bd2c3736b7.gif
+[img-5]: https://image.cdn.bktus.com/i/2025/06/24/6ccba3133341e6e6ea095a2dc00bf23c63ed8f56.gif

@@ -115,4 +115,6 @@ key (such as Ed25519) alongside your post-quantum experiments.
 ## Further Reading
 
 - [Comparison of Cryptographic Algorithms](/extra/algorithms-comparison/)
-- [NIST Post-Quantum Cryptography](https://csrc.nist.gov/projects/post-quantum-cryptography)
+- [NIST Post-Quantum Cryptography][nist-pqc]
+
+[nist-pqc]: https://csrc.nist.gov/projects/post-quantum-cryptography

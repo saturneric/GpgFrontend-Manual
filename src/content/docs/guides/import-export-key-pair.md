@@ -15,9 +15,9 @@ page covers each method.
 You can import a public or private key in a few ways. Find them on the toolbar, or
 open the action menu in the key management section for more options.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/65a0c1fce233c2fc15afd362b432eb53f684c73d.webp)
+![][img-1]
 
-![](https://image.cdn.bktus.com/i/2025/06/24/0f9c76d074dd6c364603baea3c565e66c9a8d62d.webp)
+![][img-2]
 
 ### From a File
 
@@ -80,7 +80,7 @@ wherever you need.
 Use the key pair's **Operations** tab to save the public key to a file, as shown
 below. Pick a folder for the file first.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/b9ea951b5c94e8f18cc22e6e415778b97818718f.webp)
+![][img-3]
 
 #### Export Several at Once
 
@@ -88,7 +88,7 @@ To export the public keys of several key pairs together, select them in the key
 management view and click **Export to Clipboard**. This copies the data to your
 clipboard, ready to paste into any app or file.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/0ce7919189489923f38e3871e407dad96b788174.webp)
+![][img-4]
 
 #### Export for SSH
 
@@ -105,7 +105,7 @@ You can also find private key options on the detail page of a key that holds a
 private part (the primary key or a subkey). Pick a destination, and GpgFrontend
 exports the private key there.
 
-![](https://image.cdn.bktus.com/i/2025/06/24/9dbc57b795542a5f9c2f78875d5be1f9c692ed0d.webp)
+![][img-5]
 
 :::caution[Never share your private key]
 
@@ -141,3 +141,9 @@ Back up your revocation certificates in the same place. See
 [Key Revocation](/advanced/key-revocation/).
 
 :::
+
+[img-1]: https://image.cdn.bktus.com/i/2025/06/24/65a0c1fce233c2fc15afd362b432eb53f684c73d.webp
+[img-2]: https://image.cdn.bktus.com/i/2025/06/24/0f9c76d074dd6c364603baea3c565e66c9a8d62d.webp
+[img-3]: https://image.cdn.bktus.com/i/2025/06/24/b9ea951b5c94e8f18cc22e6e415778b97818718f.webp
+[img-4]: https://image.cdn.bktus.com/i/2025/06/24/0ce7919189489923f38e3871e407dad96b788174.webp
+[img-5]: https://image.cdn.bktus.com/i/2025/06/24/9dbc57b795542a5f9c2f78875d5be1f9c692ed0d.webp
