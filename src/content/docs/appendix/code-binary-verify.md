@@ -98,6 +98,7 @@ If you are in that situation, this is the path:
    of what you produced, so you can tell later whether anything changed.
 
 Build instructions are in the
-[development environment guide](/appendix/setup-dev-env/). This path costs
+[contributing guide](/appendix/contribute/#set-up-your-environment). This path
+costs
 real time and skill. That is the honest price of not having to trust anyone
 else's build.
