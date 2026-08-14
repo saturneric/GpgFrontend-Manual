@@ -5,30 +5,39 @@ sidebar:
   order: 1
 ---
 
-The following are mainly the recommended system requirements for running
-GpgFrontend. However, these are not strict requirements, and the application may
-run smoothly on lower-spec machines.
+These are the recommended requirements for running GpgFrontend. They are not
+strict; the app may run fine on weaker machines too.
 
 ## Hardware
 
 For smooth operation, we recommend:
 
-- RAM: 2 GB for basic desktop environments;
-- Disk: 200 MB free for the Application itself, plus additional space for GnuPG and user data;
-- CPU: Dual-core processor or better for general use;
+- RAM: 2 GB or more
+- Disk: 200 MB free for the app itself, plus space for GnuPG and your data
+- CPU: a dual-core processor or better
 
 ## OS
 
-- Windows 10 or later (Windows 7 possible with the Qt5 version, but not recommended)
-- macOS 15 or later
-- Ubuntu 22.04 or later
+- Windows 10 or later (Windows 7 can work with the separate Qt5 build, but it
+  is not recommended)
+- macOS 15 or later, on both Intel and Apple Silicon
+- Ubuntu 22.04 or later, or a comparable Linux distribution, on both x86_64
+  and arm64
 
 > Note: Only 64-bit machines are supported.
 
 ## GnuPG
 
-- Minimum 2.2.0 (but some features may not work properly)
-- Recommended 2.4.0+
+- Minimum 2.2.0. Versions below 2.1.0 are refused at startup, and some
+  features need newer versions than 2.2.0.
+- Recommended: 2.4.0 or later.
+- On Windows, the official packages already include a recent GnuPG, so there
+  is nothing extra to install.
+
+Since v2.2, the app also ships a second, built-in engine (rPGP). If GnuPG is
+missing or too old, the app still starts and works through rPGP, but the
+features that depend on GnuPG, such as smart cards, stay unavailable until a
+working GnuPG is found.
 
 ## Optional on Linux
 
@@ -44,5 +53,5 @@ as normal. See [Application Secure Key](/advanced/app-secure-key/).
 
 ## Network
 
-Although not necessary for basic operation, an active Internet connection may be
-required for software updates or uploading public keys to key servers.
+GpgFrontend works without the Internet. You only need a connection for
+optional things, such as update checks or sending public keys to key servers.
