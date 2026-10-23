@@ -171,3 +171,7 @@ GpgFrontend supports more than one engine:
 
 If you're new, use the **GnuPG engine** unless you specifically want to try the
 newer features.
+
+Each key database opens with its own engine. You choose the engine of the
+built-in key database in **Settings** > **Key Databases**. See
+[Key Database](/advanced/key-database/).

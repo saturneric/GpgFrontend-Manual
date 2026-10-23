@@ -5,10 +5,14 @@ sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Aside, Tabs, TabItem } from "@astrojs/starlight/components";
 
 This page gives you a tour of the GpgFrontend window, so you can find your way
 around and do your tasks with ease.
+
+When GpgFrontend starts, a small **Starting GpgFrontend** window may appear
+first. It shows a progress bar and a line that says what is being loaded, such
+as your key databases or modules. The main window opens when it is done.
 
 <Tabs>
   <TabItem label="Windows">
@@ -29,8 +33,8 @@ The window has five main parts:
 - **Operations Bar** (top): the main buttons, like Encrypt, Decrypt, Sign, and
   Verify.
 - **Workspaces** (center): tabs where you work on files, text, or email.
-- **Key Toolbox** (right): the list of your keys.
-- **Status Panel**: shows the result of each task.
+- **Key ToolBox** (right): the list of your keys.
+- **Status Panel** (below the workspace): shows the result of each task.
 - **Status Bar** (bottom): tells you which setup and which engine you are
   using.
 
@@ -77,9 +81,34 @@ The Text Editor lets you type new text or open existing files.
   and **Ctrl+S** for copy, paste, and save.
 - **Plain Text Only**: text is saved as UTF-8 with no formatting, for clarity and
   compatibility. Rich text editing may come later.
+- **Built-in font**: by default the editor uses JetBrains Mono NL, a font that
+  comes with GpgFrontend. It covers Latin, Greek and Cyrillic letters. Other
+  scripts, such as Arabic or Chinese, use a font from your system. To pick
+  another font, open **Settings** > **Appearance**.
 - Files up to **1 MB** work best. Bigger files may slow things down and aren't
   recommended.
 - While a large file loads, editing is paused until it finishes.
+
+#### Text Direction
+
+Some languages, such as Arabic and Hebrew, are written from right to left. To
+change which way the text runs, click **View** > **Text Direction**, or
+right-click in the editor and choose **Text Direction**. There are three
+choices:
+
+- **Automatic**: each line follows the direction of its own first letter. This
+  is the default.
+- **Left-to-Right**: every line runs from left to right.
+- **Right-to-Left**: every line runs from right to left.
+
+The choice applies only to the tab you are in. It is not saved: every new tab
+starts with **Automatic**.
+
+<Aside type="note" title="New in v2.2.3">
+
+**Text Direction** and the built-in JetBrains Mono NL font are new.
+
+</Aside>
 
 ### Mail Editor
 
@@ -87,8 +116,18 @@ The Mail Editor is made for email messages in EML format.
 
 - **Open and edit EML files**: load .eml files (a standard email format) to view
   and edit them.
-- **Write and secure email**: write or change email content, then encrypt, sign,
-  or verify it.
+- **Write and secure email**: to start a new message, click **File** >
+  **Workspace** > **Mail Editor**. Write or change the message, then encrypt,
+  sign, or verify it.
+- **Two views**: at the top of an email tab, click **Message** to see the
+  message as you would read it, or **Raw Source** to see the raw text of the
+  file.
+
+In an email tab, the Status Panel starts as a thin bar, so the message has more
+room. It opens again when a new result arrives.
+
+For everything you can do with email, see the
+[Email overview](/email/overview/).
 
 :::caution[Note]
 
@@ -119,6 +158,28 @@ The panel has two views. Use the switch at the top to change them:
 
 Your choice is remembered, so the panel keeps showing the view you like.
 
+### Making the Panel Smaller
+
+You can shrink the panel to a thin bar when you need more room:
+
+- Click **Collapse** to shrink it to a thin bar. The bar still shows a
+  coloured dot and the result of the last task.
+- Click **Expand**, or double-click the bar, to open it again.
+- Click the **X** on the bar to close the panel. To bring it back, click
+  **View** > **Status Panel**.
+
+When a new result arrives, the panel opens again by itself, even if you
+collapsed or closed it.
+
+Email tabs shrink the panel to a bar on their own. A panel you dragged out into
+its own window (a floating panel) is never shrunk this way.
+
+<Aside type="note" title="New in v2.2.3">
+
+The Status Panel can now collapse to a thin bar.
+
+</Aside>
+
 ### Panel Actions
 
 - **Copy**: copies the status text to the clipboard.
@@ -127,14 +188,15 @@ Your choice is remembered, so the panel keeps showing the view you like.
   **Status** view is showing a summary.
 - **Clear**: empties the panel, ready for the next task.
 
-## Key Toolbox
+## Key ToolBox
 
-On the right side, the **Key Toolbox** lists all your keys: public keys, private
+On the right side, the **Key ToolBox** lists all your keys: public keys, private
 keys, and key groups.
 
 Main features:
 
-- **Selection**: tick the boxes to pick keys for a task.
+- **Selection**: tick the boxes to pick keys for a task. With the keyboard,
+  move to a key and press **Space** to tick or untick it.
 - **Type / Usage / Email**: see at a glance what each key is for.
 - **Search**: the box at the top finds keys by name, email, key ID, or
   fingerprint. Press **Escape** to clear it.
@@ -148,14 +210,13 @@ rather than just pick them. See [Manage Your Keys](/guides/key-management/).
 ### The Small Buttons Above the List
 
 - **Refresh**: read your keys again from disk.
-- **Sync Public Key**: fetch updates for your keys from the key server.
 - **Check All** and **Uncheck All**: tick or untick every key in the current
   category. The uncheck button shows a small count of how many keys are
   ticked right now.
 - **Columns**: choose which columns to show, and reset their widths.
 - **New Key Group**: make a group from the keys you have ticked.
-- **Key database**: switch between key databases. The button shows the name of
-  the one you are in.
+- **Key database button**: switch between key databases. The button shows the
+  name of the one you are in. See [Key Database](/advanced/key-database/).
 
 :::tip[Keep your ticks between sessions]
 
@@ -165,7 +226,7 @@ usual recipients each time it opens.
 
 :::
 
-### Reading the Key Toolbox Table
+### Reading the Key ToolBox Table
 
 Each key has some columns and short codes (in the Type and Usage columns) that
 aren't obvious at first. Here is what they mean.
@@ -191,7 +252,7 @@ glance.
 
 Use the **Columns** button to show or hide columns such as **Expire Date** and
 **Status**. Each key list remembers its own choice, so you can keep the Key
-Toolbox short and the Manage Keys window detailed.
+ToolBox short and the Manage Keys window detailed.
 
 ## Operations Bar
 
@@ -207,7 +268,7 @@ features. Here are the buttons, from left to right:
 5. **Sign**: sign the selected files or text with your private key.
 6. **Verify**: check the signature on the selected files or text.
 7. **New Keypair**: make a new key pair.
-8. **Import Key...**: add existing public or private keys.
+8. **Import**: add existing public or private keys.
 9. **Manage Keys**: open the key management window.
 
 ### Customization
@@ -215,12 +276,12 @@ features. Here are the buttons, from left to right:
 You can hide buttons you don't use, or add ones you use often. Open
 **Settings**, go to **Appearance**, and tick what you want under **Actions**.
 
-Two of them are off by default and worth knowing about:
+One of them is off by default and worth knowing about: **Sym. Encrypt**. It
+encrypts with a passphrase instead of a key. See
+[Symmetric Crypto](/guides/symmetric-encrypt-decrypt/).
 
-- **Sym. Encrypt**: encrypt with a passphrase instead of a key. See
-  [Symmetric Crypto](/guides/symmetric-encrypt-decrypt/).
-- **IM Encrypt**: turn your text into one short line for a chat app. See
-  [Instant Messaging](/guides/instant-messaging/).
+Instant messaging has no toolbar buttons. Its actions are in the
+**Operations** menu. See [Instant Messaging](/guides/instant-messaging/).
 
 ## Status Bar
 

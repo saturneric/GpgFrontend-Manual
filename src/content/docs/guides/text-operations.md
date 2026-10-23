@@ -56,8 +56,15 @@ offers. This dialog does not appear when there is only one sensible choice.
 ### Sending to a Chat App
 
 A normal encrypted message is a large block of text, and chat apps often break
-it. GpgFrontend has a second kind of encryption made for exactly that case. See
+it. GpgFrontend has a second kind of encryption made for exactly that case. You
+find it in the **Operations** menu. See
 [Instant Messaging](/guides/instant-messaging/).
+
+### Checks Before Encrypting
+
+GpgFrontend checks your recipients before it encrypts. For example, it tells
+you when a key has expired, and it can ask you to confirm when you encrypt to
+more than one person. See [Encryption Safety](/guides/encryption-safety/).
 
 ## Decrypt Text
 
@@ -100,6 +107,30 @@ first.
 :::
 
 ![][img-5]
+
+## Your Text Is Kept Exactly as Typed
+
+GpgFrontend works on the exact text in the editor tab. It does not change line
+endings, and it does not swap special spaces for normal ones. This matters for
+signatures: a signature only checks out if the text is exactly the same,
+character for character.
+
+Pressing **Shift+Enter** now starts a normal new line, the same as **Enter**.
+
+:::note[Changed in v2.2.3]
+
+Earlier versions sometimes changed line endings and special spaces before an
+operation. Because v2.2.3 keeps the text exactly, a signature may now check
+differently than it did in v2.2.2. If a signature made with an older version
+fails to verify, ask the sender to sign the text again.
+
+:::
+
+## Undo After an Operation
+
+By default, you cannot undo an encrypt or decrypt with Ctrl+Z. This keeps your
+plain text from staying in memory. You can turn undo on in **Settings**. See
+[Memory Security](/advanced/memory-security/#undo-after-an-operation).
 
 ## Safety Tips
 
