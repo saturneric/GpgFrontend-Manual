@@ -3,7 +3,7 @@ title: "Portable Mode"
 description: "Run GpgFrontend from a USB drive with a portable download, keeping all data and settings next to the application and leaving nothing on the host computer."
 sidebar:
   label: Portable Mode
-  order: 2
+  order: 3
 ---
 
 A **portable** copy of GpgFrontend keeps everything in its own folder, right
@@ -68,6 +68,15 @@ That option is greyed out for you, so there is nothing you need to do. See
 
 ## Tip: Moving Between Computers
 
-If you use several [key databases](/advanced/key-database/), turn on the
-**Relative Path** option for each one. The paths then keep working even when
-the drive gets a different letter or mount point on the next computer.
+Key databases you add on the **In Profile** tab are kept inside the portable
+folder, so they move with it. You do not need to do anything for them.
+
+If you also use key databases on the **Local Only** tab, tick **Convert to
+Relative Path** when you add or edit each one. In a portable copy this box is
+ticked for you. GpgFrontend then remembers the folder in relation to the
+program, not as a full path. The path keeps working even when the drive gets a
+different letter or mount point on the next computer. Keep those folders on
+the same drive as GpgFrontend.
+
+See [Multi-Key Database](/advanced/key-database/) for how to add and edit key
+databases.

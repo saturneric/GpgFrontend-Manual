@@ -3,242 +3,504 @@ title: Multi-Key Database Support
 description: "Manage multiple isolated OpenPGP key databases in GpgFrontend with per-database engine selection for separate identities, projects, or teams."
 sidebar:
   label: Multi-Key Database
-  order: 3
+  order: 4
 ---
 
-import { Steps } from "@astrojs/starlight/components";
+import { Steps, Aside } from "@astrojs/starlight/components";
 
-A **key database** is the place where GpgFrontend keeps your keys. Normally you
-have just one. GpgFrontend also lets you set up **several key databases**, each
-one fully separate from the others.
+A **key database** is a folder where GpgFrontend keeps your keys. Every key you
+make or import goes into one key database.
 
-Why would you want more than one? A few common reasons:
+Most people need only one. GpgFrontend gives you one from the start, called the
+**Built-in Key Database**. You can also add more. Each one is fully separate
+from the others.
+
+Why add more than one? A few common reasons:
 
 - Keep **work keys and personal keys** apart, so you never mix them up.
 - Give each **project, team, or customer** its own set of keys.
 - Keep **test keys** away from the keys you really use.
-- Try the experimental **rPGP engine** (for example, for OpenPGP v6 keys)
-  without touching your normal GnuPG keys.
+- Try the **rPGP engine** (for example, for OpenPGP v6 keys) without touching
+  your normal GnuPG keys.
 
-If one key database is enough for you, you can skip this page. GpgFrontend
-works fine without ever opening these settings.
+If one key database is enough for you, you can skip this page.
 
-:::note
+<Aside type="note" title="Changed in v2.2.3">
 
-Since GpgFrontend v2.2.0, key databases are managed in the main **Settings**
-dialog. The old **GnuPG Controller** window no longer exists.
+Changes to your key databases now take effect as soon as you click **OK**.
+GpgFrontend no longer needs to restart.
 
-:::
+</Aside>
 
 ## Open the Key Database Settings
 
 <Steps>
 
-1. Open **Settings** from the main menu.
+1. Click **Settings** in the menu bar. On macOS, open the GpgFrontend menu and
+   choose **Preferences**.
 
-2. Choose **Key Databases**, under **Keys & Engines**.
+2. In the list on the left, under **Keys & Engines**, click **Key Databases**.
 
 </Steps>
 
-You now see a list of all your key databases, with the name you gave each one,
-the engine it uses, its folder, and whether it is working. A database whose
-folder has been moved or deleted shows as **Inactive**.
+The page has two parts:
 
-The **first database in the list is the default**. It is the one GpgFrontend
-uses when you start the application. On a normal setup, it points to your GnuPG
-home directory.
+- At the top, a box called **Built-in Key Database**.
+- Below it, two tabs: **In Profile** and **Local Only**. They list the key
+  databases you added yourself.
 
-You can have up to eight databases.
+Nothing you change on this page is saved until you click **OK**. If you click
+**Cancel**, every change you made in the settings window is thrown away.
 
-## Add a New Key Database
+## The Built-in Key Database
+
+The **Built-in Key Database** is the key database GpgFrontend gives you. It is
+always listed first. In menus and window titles it is called **Built-in**.
+
+Where it lives depends on your [profile](/advanced/profiles/):
+
+- **This computer's built-in key database**: normally your GnuPG home
+  directory. That is the same place the `gpg` command line uses.
+- **This profile's own built-in key database**: when your profile keeps its own
+  keys, the built-in database is a folder inside the profile.
+
+The box shows three things:
+
+- **Key engine:** the engine that opens the built-in database. The line under
+  it says what that means. With GnuPG it reads "Uses keys in the GnuPG home
+  directory." With rPGP it reads "Uses the rPGP key database at this
+  location."
+- The database's role. You see **Default** in bold when it is the default
+  database. Otherwise you see a **Use as Default** button. See
+  [Choose the Default Key Database](#choose-the-default-key-database).
+- **Location:** the full path of its folder. Click **Copy** to copy the path.
+
+### Change the Built-in Database's Engine
 
 <Steps>
 
-1. In the **Key Databases** settings, click **Add New Key Database**.
+1. Open the **Key Databases** settings page.
 
-2. Give it a clear **name**, such as `Work`, `Personal`, or `rPGP Test`. A good
-   name helps you pick the right database later.
+2. In the **Built-in Key Database** box, pick an engine from **Key engine:**.
 
-3. If the option is shown, choose the **engine** (GnuPG or rPGP). If you are
-   not sure, keep **GnuPG**. It is the standard choice and works with
-   everything.
-
-4. Choose a **Mode**:
-
-   - **Automatic**: GpgFrontend picks a safe place to keep it. Just give it a
-     name and you are done. Use this unless you have a reason not to.
-   - **Manual**: you pick the folder yourself. Use this only for special
-     setups, such as pointing at an existing GnuPG home directory.
+3. Click **OK**.
 
 </Steps>
 
-The new database starts empty. Any key you generate or import while it is
-selected goes into this database only.
+This choice applies only to the built-in database. Other key databases always
+open with their own engine.
 
-:::note[What is the Relative Path option?]
+<Aside type="note" title="Changed in v2.2.3">
 
-In **Manual** mode you can turn on **Convert to Relative Path**. GpgFrontend
-then remembers where the folder is in relation to the application, instead of
-as a full path. Use this in [Portable Mode](/advanced/portable-mode/), or when
-you move GpgFrontend between computers, so the path keeps working everywhere.
+This choice used to be **Default Engine:** on the **General** page. It now
+lives here, as **Key engine:** in the **Built-in Key Database** box.
 
-:::
+The built-in database was called **DEFAULT** before. It is now shown as
+**Built-in**.
 
-:::tip[Keys can live inside a profile]
+</Aside>
 
-If you make a [profile](/advanced/profiles/) that holds its own keys, its key
-database travels with it. That is what lets you save a whole setup to one file
-and open it on another computer.
+<Aside type="caution" title="Changing the engine hides keys, it does not delete them">
 
-**Automatic** mode puts the database inside the profile, so it travels.
-**Manual** mode usually points somewhere else, so it usually does not. See
-[Which Databases Travel](#which-databases-travel) below.
+GnuPG and rPGP keep their keys in different files, even in the same folder.
+GpgFrontend shows only the keys that belong to the engine in use. It never
+moves, converts, or merges them.
 
-:::
+So if you switch the built-in database from GnuPG to rPGP, your GnuPG keys are
+still on disk, but you no longer see them. Switch back and they appear again.
 
-## Switch Between Databases
+If you want GnuPG keys and rPGP keys at the same time, do not keep switching.
+Add a second key database with the other engine instead.
 
-You do not need to open Settings to change databases:
+</Aside>
+
+### Turn the Built-in Database Off or On
+
+The title of the box has a checkbox. Clear it to stop using the built-in
+database, then click **OK**. Tick it again to bring it back.
+
+You can only turn it off when you have at least one other key database.
+
+If your computer's OpenPGP engine does not report a key database, the box is
+greyed out and says so: "The OpenPGP engine on this computer does not report a
+key database, so there is no built-in one to use."
+
+## Choose the Default Key Database
+
+One key database is the **default**. GpgFrontend uses it when an operation does
+not pick a key database on its own. It is also the one the main window shows
+when it starts.
+
+At first, the built-in database is the default. To make another one the
+default:
 
 <Steps>
 
-1. In the main window, open the dropdown at the top of the **Key Toolbox**.
+1. Open the **Key Databases** settings page.
 
-2. Pick the database you want. The key list now shows only the keys in that
-   database.
+2. Choose one:
+
+   - For the built-in database, click **Use as Default** in its box.
+   - For a database you added, open the **In Profile** or **Local Only** tab,
+     click its row, then click **Use as Default** under the list. You can also
+     right-click the row and choose **Use as Default**.
+
+3. Click **OK**.
 
 </Steps>
 
-From then on, everything you do (generate, import, export, encrypt, sign,
-verify) uses the keys in the selected database.
+The default database shows **Default** in the **Role** column, or in bold in the
+**Built-in Key Database** box.
 
-:::tip
+If you remove the default database, or turn the built-in one off, the choice
+goes away. GpgFrontend then falls back to the built-in database, or to the
+first database in the list if the built-in one is off.
 
-Before you generate or import a key, glance at the dropdown to make sure the
-right database is selected. This is the easiest way to avoid putting a key in
-the wrong place.
+<Aside type="note" title="Smart cards follow later">
 
-:::
+When you move the default from one GnuPG database to another, this note may
+appear:
 
-## Edit, Reorder, or Remove a Database
+"Smart cards stay with the previous default database until GpgFrontend
+restarts. To move them sooner, apply this change, then use "Restart All
+Gpg-Agents" in the Smart Card Controller."
 
-In the **Key Databases** settings, right-click a database (or use the buttons)
-to:
+See [Smart Card](/guides/smart-card/) for the Smart Card Controller.
 
-- **Edit**: Change its name, path, or other settings.
-- **Move Up / Move Down / Move to Top**: Change the order of the list.
-  Remember, the first entry is the default database.
-- **Remove**: Take the database out of GpgFrontend's list. This does **not**
-  delete the keys on disk. It only removes the entry from the configuration.
+</Aside>
 
-:::caution
+<Aside type="note" title="Changed in v2.2.3">
 
-Every change here needs a restart. GpgFrontend tells you when you click OK and
-offers to restart for you.
+Before, the first database in the list was always the default. Now you choose
+the default with **Use as Default**, and the order of the list does not decide
+it.
 
-:::
+</Aside>
 
-## Understand Engines (GnuPG vs rPGP)
+## Add a Key Database
+
+You can add a key database in two places. Choose by where the keys should live.
+
+| Tab            | Where the folder is                                | Goes with your profile?                                   |
+| -------------- | -------------------------------------------------- | --------------------------------------------------------- |
+| **In Profile** | Inside your profile. GpgFrontend picks the folder. | Yes. A [profile package](/advanced/profiles/) carries it. |
+| **Local Only** | Any folder you choose.                             | No. It stays on this computer.                            |
+
+If you are not sure, use **In Profile**.
+
+<Aside type="note" title="Changed in v2.2.3">
+
+The add window no longer has a **Mode** choice with **Automatic** and
+**Manual**. **Automatic** is now the **In Profile** tab. **Manual** is now the
+**Local Only** tab. The **Path** field is now called **Folder**.
+
+</Aside>
+
+### Add One Inside Your Profile
+
+<Steps>
+
+1. Open the **Key Databases** settings page and click the **In Profile** tab.
+
+2. Click **Add Key Database**. The **Add Key Database** window opens.
+
+3. Type a **Name**, such as `Work` or `Personal`. GpgFrontend suggests a name
+   like `Key DB 1` that you can keep or change.
+
+4. If an **Engine** choice is shown, pick **GnuPG** or **rPGP**. If you are not
+   sure, keep **GnuPG**. You cannot change the engine later.
+
+5. Click **OK** in the window, then click **OK** in the settings window.
+
+</Steps>
+
+You do not choose a folder. GpgFrontend makes one named after the database,
+inside your profile. The **Folder** line shows where, for example
+`@profile/dbs/Work`. Here `@profile` means "your profile folder".
+
+### Add One on This Computer Only
+
+Use this to point at a folder you already have, such as an existing GnuPG home
+directory, or a folder on another drive.
+
+<Steps>
+
+1. Open the **Key Databases** settings page and click the **Local Only** tab.
+
+2. Click **Add Key Database On This Computer**. A window with the same name
+   opens.
+
+3. Type a **Name**. GpgFrontend suggests a name like `External Key DB 1`.
+
+4. Click **Choose Folder…** and pick the folder. It must be a folder that
+   already exists and that you can read.
+
+5. If you use GpgFrontend from a USB drive, tick **Convert to Relative Path**.
+   See [Portable Mode](/advanced/portable-mode/).
+
+6. If an **Engine** choice is shown, pick **GnuPG** or **rPGP**. You cannot
+   change it later.
+
+7. Click **OK** in the window, then click **OK** in the settings window.
+
+</Steps>
+
+A Local Only database never goes into a profile package. It is also always
+opened after the databases inside your profile.
+
+### Rules for Names
+
+- A name can use letters, numbers, spaces, `-` and `_`.
+- Two key databases cannot have the same name. Upper and lower case count as
+  the same, so `Work` and `work` clash.
+- The name `DEFAULT` is kept for the built-in database. You cannot use it.
+
+## Edit, Rename, Reorder, or Remove a Key Database
+
+On the **In Profile** or **Local Only** tab, right-click a database. The menu
+has:
+
+- **Move Up**, **Move Down**, **Move To Top**: change the order of the list.
+  The order is only the order the databases are listed and opened in. It does
+  not choose the default.
+- **Use as Default**: make this the default database.
+- **Open**: open its folder in your file manager.
+- **Copy Folder Path**: copy the full path of its folder.
+- **Edit**: change the database. See below.
+- **Remove**: take it off the list.
+
+### Rename a Database Inside Your Profile
+
+<Steps>
+
+1. On the **In Profile** tab, right-click the database and choose **Edit**. The
+   **Rename Key Database** window opens.
+
+2. Type the new **Name** and click **OK**.
+
+3. Click **OK** in the settings window.
+
+</Steps>
+
+The folder is named after the database, so GpgFrontend renames the folder too.
+This happens when you click **OK** in the settings window, not before.
+
+If a folder with the new name is already there, GpgFrontend stops and shows
+**Key Database Folder Already Exists**. Pick another name.
+
+### Edit a Local Only Database
+
+On the **Local Only** tab, right-click the database and choose **Edit**. The
+**Edit Key Database** window opens. You can change the **Name**, pick another
+folder with **Choose Folder…**, and tick **Convert to Relative Path**.
+
+The **Engine** is shown but greyed out. A database keeps the engine it was made
+with.
+
+### Remove a Database
+
+<Steps>
+
+1. Right-click the database and choose **Remove**.
+
+2. In **Confirm Deletion**, click **Yes**.
+
+3. Click **OK** in the settings window.
+
+</Steps>
+
+Removing only takes the database off GpgFrontend's list. The folder and the
+keys in it stay on disk.
+
+GpgFrontend needs at least one key database, so you cannot remove the last
+one.
+
+## What Happens When You Click OK
+
+GpgFrontend opens your key databases again with the new settings. It does not
+restart.
+
+While it works, a small window called **Applying Key Database Changes** is
+shown, and you cannot use the program. This can take a few seconds, mostly with
+GnuPG on Windows.
+
+The status bar at the bottom of the main window then says how it went:
+
+- **Key databases updated.** Everything worked.
+- **Key databases updated, with problems.** A **Key Database Changes** window
+  tells you which databases could not be opened.
+- **Key database changes were not applied.** The key databases in use stay as
+  they were.
+
+### Operations Still Running
+
+Sometimes a key database you changed or removed is still busy, for example
+with a large file being encrypted. Then GpgFrontend asks first, in a window
+called **Operations Still Running**. It lists each busy database and how many
+operations it is running.
+
+- Click **Apply** to go ahead. The running work finishes on the key database
+  as it was before.
+- Click **Cancel** to keep the settings window open and change nothing yet.
+  On macOS the Preferences window is already closing at this point, so your
+  changes are applied anyway.
+
+### Windows Tied to a Removed Database
+
+Some windows belong to one key database, such as a **Key Details** window. If
+you remove that database, or it can no longer be opened, the window is greyed
+out. Its title gets "(key database no longer available)" at the end. Close it.
+
+If the main window was showing a database that is gone, it switches back to the
+default one. The status bar says: "The key database "…" is no longer available;
+showing the default one."
+
+If you started an action just as the databases changed, you may see **Key
+Databases Changed**. Nothing was done. Check the selected keys and try again.
+
+## Switch Between Key Databases in the Main Window
+
+You do not need the settings window to change which keys you see.
+
+<Steps>
+
+1. In the main window, find the **key database button** above the key list. It
+   shows the name of the database you are in.
+
+2. Click it. A menu lists all your key databases. Each entry shows the name,
+   the engine, and the word **Default** for the default one.
+
+3. Click the database you want. The key list now shows only its keys.
+
+</Steps>
+
+Hold the mouse over the button or a menu entry to see more about that
+database: whether it is the default, where it is kept (for example "Kept
+inside your profile" or "On this computer only"), its engine, and its folder.
+
+From then on, everything you do in the main window (generate, import, export,
+encrypt, sign) uses the keys in that database.
+
+The database name also appears in other places, so you always know where you
+are:
+
+- the **Key Database** choice in the window for making a new key;
+- the title of a **Key Details** window, such as `Key Details (Work)`;
+- the list of databases when you move a key to a smart card;
+- the engine part of the status bar.
+
+<Aside type="tip">
+
+Before you make or import a key, look at the key database button. It is the
+easiest way to avoid putting a key in the wrong place.
+
+</Aside>
+
+## Engines: GnuPG and rPGP
 
 Each key database uses exactly one engine:
 
-- **GnuPG**: The standard engine. Recommended for daily use. Keys are stored
-  in a GnuPG keyring.
-- **rPGP**: An experimental engine. Useful for testing newer OpenPGP features,
-  such as OpenPGP v6 or some post-quantum algorithms. Keys are stored in a
-  file named `gf_keydb.sqlite`.
+- **GnuPG**: the standard engine. Recommended for daily use. Keys are kept in a
+  GnuPG keyring, and the `gpg` command line can see them.
+- **rPGP**: a newer engine, built into GpgFrontend. Useful for newer OpenPGP
+  features, such as OpenPGP v6 or some post-quantum algorithms. Keys are kept
+  in a file named `gf_keydb.sqlite`.
 
-The important part: these two stores can live in the **same folder**, but they
-are **completely separate**. GpgFrontend only reads the store that belongs to
-the database's current engine. It never merges them.
+How the engine is chosen:
 
-### What happens when you change a database's engine
+- The built-in database uses **Key engine:** in its box. You can change it.
+- A database you added keeps the engine you picked when you made it. You cannot
+  change it.
 
-Say your default database points to your GnuPG home directory:
+The **Engine** choice only shows up when your copy of GpgFrontend has both
+engines.
 
-- You set its engine to **rPGP** and restart. GpgFrontend now creates and
-  reads a `gf_keydb.sqlite` file in that folder, and shows only rPGP keys.
-  Your GnuPG keys are still on disk, but they are **not shown**.
-- You set the engine back to **GnuPG** and restart. GpgFrontend reads the
-  GnuPG keyring again. Now the rPGP keys are the ones **not shown**.
+<Aside type="note" title="New in v2.2.3">
 
-:::caution[Switching engines hides keys, it does not delete them]
+The rPGP engine now remembers passphrases separately for each key database. A
+passphrase you typed for a key in one database is never used for another
+database.
 
-Changing the engine never moves, converts, or deletes any keys. Keys that
-belong to the other engine are simply not shown. To see them again, switch
-back to their engine and restart.
+</Aside>
 
-If you want GnuPG keys and rPGP keys available at the same time, do not keep
-switching one database back and forth. Instead, create **two databases**, one
-per engine, and switch between them from the Key Toolbox dropdown.
+For where each engine keeps its keys, and what that means for safety and
+backups, see [How Keys Are Stored](/advanced/key-storage/).
 
-:::
+## Limits and Error Messages
 
-## The `gf_keydb.sqlite` File
+- You can have **up to 8 key databases**, counting the built-in one. Adding a
+  ninth shows **Maximum Key Database Limit Reached**. Remove one first.
+- You need **at least one** key database. Trying to remove the last one, or to
+  turn off the built-in one when it is the only one, shows **Key Database
+  Required**.
+- Two key databases cannot use **the same folder**. Trying shows **Duplicate
+  Key Database Paths**.
+- When the folder you pick cannot be used, you see **Illegal GnuPG Key Database
+  Path**, **Invalid Key Database Path**, **Invalid Key Database Paths**, or
+  **Failed to Create Key Database Directory**. Pick another folder.
+- If GpgFrontend cannot read your saved list of key databases, you see
+  **Unreadable Key Database Settings** when you click **OK**. Click **Save** to
+  replace it with the list on screen, or **Cancel** to keep it. The old list
+  cannot be brought back after you save.
+- At start, **Invalid Key Databases** lists any database that could not be
+  opened. On the **Key Databases** page, such a database shows **Inactive** in
+  the **Status** column. Edit it to point at the right folder, or remove it.
 
-Starting with the 2.2 series, GpgFrontend may create a file named
-`gf_keydb.sqlite` inside a key database folder. What it holds depends on the
-engine:
+### Long Folder Paths With GnuPG
 
-- **rPGP database**: This file holds the actual key material, including
-  private keys. Treat it as sensitive.
-- **GnuPG database**: GnuPG itself still holds all key material. Here the file
-  only stores GpgFrontend's own metadata and may be empty.
+On Linux and macOS, GnuPG cannot work in a folder whose path is very long. When
+that happens, GpgFrontend quietly makes a short link to the folder in a
+temporary place and gives GnuPG that link instead. Your keys stay where they
+are. You do not need to do anything.
 
-For a full explanation of where each engine keeps your keys, see
-[How Keys Are Stored (GnuPG vs rPGP)](/advanced/key-storage).
+Only if that short link cannot be made do you see **Key Database Path Too
+Long**. Then pick a folder with a shorter path. This does not affect rPGP
+databases.
 
-## Back Up Your Databases
+## What Travels in a Profile Package
 
-Back up each database based on its engine:
+When you save your [profile](/advanced/profiles/) to a `.gfp` file to move it to
+another computer:
 
-- **GnuPG database**: Back up the GnuPG home directory it points to, plus your
-  revocation certificates.
-- **rPGP database**: Back up the whole database folder, including
-  `gf_keydb.sqlite`. Remember that this file can contain private keys.
+- **In Profile** databases travel. Their keys go into the file.
+- **Local Only** databases never travel. Their keys stay on this computer.
+- The **built-in** database travels only when it is **this profile's own**
+  built-in key database. When it is this computer's GnuPG home directory, the
+  person who opens the file uses their own built-in database instead.
 
-Store backups in a safe, encrypted place.
+If you want keys from a database that does not travel, send them separately
+with a [KeyPackage](/advanced/key-package/).
 
-## Which Databases Travel
+## Sandbox Builds (Flatpak and Mac App Store)
 
-If you save a [profile](/advanced/profiles/) to a `.gfp` file to move it to
-another computer, some key databases come along and some do not.
+Sandboxed builds can only keep key databases inside the profile. So in the
+Flatpak and Mac App Store builds:
 
-What decides it is **where the folder is**, not which mode you chose:
+- the **Local Only** tab is hidden;
+- **Choose Folder…** and **Convert to Relative Path** are not shown;
+- the **Built-in Key Database** box has no checkbox, so the built-in database
+  is always on;
+- **Edit** is not in the right-click menu.
 
-- A database in a folder **inside the profile** travels. Its keys are packed
-  into the file. **Automatic** mode always puts it there.
-- A database in a folder **anywhere else** does not travel. **Manual** mode
-  normally points somewhere else, such as your system GnuPG home directory.
+## Back Up Your Key Databases
 
-A database that does not travel is still listed in the file by name, but its
-keys stay on the old computer.
+Back up each database according to its engine:
 
-When you open the profile on the other computer, GpgFrontend tells you which
-databases were left behind. Each one shows as **Inactive** in the Key Databases
-settings until you edit it and point it at a folder on the new computer.
+- **GnuPG database**: back up the folder it uses, plus your revocation
+  certificates.
+- **rPGP database**: back up the whole folder, including `gf_keydb.sqlite`.
+  This file can contain private keys.
 
-:::caution[This is easy to miss when you export]
+To find a folder, right-click the database and choose **Open** or **Copy Folder
+Path**. For the built-in database, use **Copy** next to **Location:**.
 
-The export window only mentions this in small grey text under **What goes
-in**, so it is easy to overlook.
-
-If you want your keys to travel with the profile, check that the database is in
-**Automatic** mode, or that the folder you picked in **Manual** mode sits
-inside the profile.
-
-If it does not, and you still want those keys on the other computer, move them
-across separately with a [KeyPackage](/advanced/key-package/).
-
-:::
+Keep backups in a safe, encrypted place.
 
 ## Tips
 
 - **Name databases by purpose**: `Personal`, `Work`, `Project Alpha`,
-  `rPGP Test`. Avoid names that only make sense today.
-- **Check the dropdown first**: Always confirm which database is active before
-  you generate, import, encrypt, or sign.
-- **Keep experiments separate**: Do daily work in GnuPG databases. Use a
-  dedicated rPGP database for testing new features.
-- **Clean up now and then**: Remove keys you no longer use, check expiry
-  dates, and make sure each key lives in the database you meant it for.
+  `rPGP Test`.
+- **Check the key database button first**: make sure you are in the right
+  database before you make, import, encrypt, or sign.
+- **Keep experiments apart**: do daily work in a GnuPG database. Use a separate
+  rPGP database for trying new features.

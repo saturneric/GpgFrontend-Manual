@@ -3,7 +3,7 @@ title: How Keys Are Stored (GnuPG vs rPGP)
 description: "Understand how GpgFrontend's GnuPG and rPGP engines store OpenPGP keys differently, and what it means for backups, security, and interoperability."
 sidebar:
   label: Key Storage
-  order: 4
+  order: 5
 ---
 
 GpgFrontend can use two different OpenPGP engines: **GnuPG** and **rPGP**. They
@@ -25,6 +25,33 @@ sharing the ones on your computer. When it does, the key database sits inside
 the profile folder and travels with it.
 
 Everything on this page still applies. Only the location changes.
+
+:::
+
+## Where the Key Database Folders Are
+
+Each key database is one folder. Where that folder is depends on the kind of
+key database:
+
+- **The built-in key database**: normally your GnuPG home directory. When your
+  [profile](/advanced/profiles/) keeps its own keys, it is a folder inside the
+  profile instead. To see the exact path, open the **Key Databases** settings
+  page and look at **Location:** in the **Built-in Key Database** box.
+- **A key database on the In Profile tab**: a folder inside your profile,
+  named after the database. The settings page shows it as
+  `@profile/dbs/<Name>`, where `@profile` means "your profile folder". Renaming
+  the database renames this folder.
+- **A key database on the Local Only tab**: the folder you chose yourself.
+
+Whichever engine a key database uses, its keys are in that folder. With the
+rPGP engine, look for the `gf_keydb.sqlite` file there.
+
+:::note[Changed in v2.2.3]
+
+The **Automatic** and **Manual** choices are gone. What used to be
+**Automatic** is now the **In Profile** tab, and the folder is still
+`@profile/dbs/<Name>`. What used to be **Manual** is now the **Local Only**
+tab. See [Multi-Key Database](/advanced/key-database/).
 
 :::
 
