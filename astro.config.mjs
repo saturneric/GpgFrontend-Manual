@@ -92,6 +92,10 @@ export default defineConfig({
           items: [{ autogenerate: { directory: "guides" } }],
         },
         {
+          label: "Email",
+          items: [{ autogenerate: { directory: "email" } }],
+        },
+        {
           label: "Advanced Features",
           items: [{ autogenerate: { directory: "advanced" } }],
         },
@@ -120,5 +124,7 @@ export default defineConfig({
   adapter: netlify({ imageCDN: false }),
   redirects: {
     "/appendix/setup-dev-env/": "/appendix/contribute/",
+    "/advanced/sync-public-keys/": "/guides/key-server-operations/",
+    "/guides/email-operations/": "/email/compose-protect/",
   },
 });
