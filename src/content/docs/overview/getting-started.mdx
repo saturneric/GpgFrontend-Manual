@@ -27,8 +27,9 @@ system in the table below to see which engine is best for you:
 | **Linux**        | **GnuPG**           | Pre-installed in most distros. Check with `gpg --version`. |
 | **BSD**          | **GnuPG**           | Must be installed manually via ports/pkg.                  |
 
-> **Note:** If GnuPG is missing (v2.2.0+), GpgFrontend will automatically switch
-> to the built-in **rPGP** engine to keep the basics working.
+> **Note:** GpgFrontend needs GnuPG 2.2.0 or newer. If GnuPG is missing, or
+> older than 2.1.0, GpgFrontend does not use it. It switches to the built-in
+> **rPGP** engine instead, so the basics keep working.
 
 ## Step 2: Install GpgFrontend
 
@@ -83,12 +84,22 @@ Pick your operating system to see the recommended steps. For other methods
 
 ## Step 3: The First Time You Open It
 
-A short welcome window appears the first time GpgFrontend runs, and only that
-time.
+When GpgFrontend starts, a small **Starting GpgFrontend** window may appear. It
+shows a progress bar while your keys and modules load. Wait for it to finish.
+The main window then opens.
 
-The first page has a **Language** setting. Pick yours there and the window
-switches to it straight away, so you do not have to read the rest in English.
-The rest of the welcome offers links to the basics.
+A short **Welcome to GpgFrontend** window appears the first time GpgFrontend
+runs, and only that time.
+
+1. The first page has a **Language:** setting. Pick yours there and the window
+   switches to it straight away, so you do not have to read the rest in
+   English.
+2. The next page offers links to the basics.
+3. The last page, **Ready to use**, has a **Check for updates on startup**
+   checkbox. It is off unless you tick it. If you tick it, GpgFrontend quietly
+   checks for a new version at most once a day. See
+   [Settings](/guides/settings/#the-updates-page). Sandboxed builds, such as
+   Flatpak, do not show this checkbox.
 
 Nothing in it is permanent. You can close it at any point, and everything it
 sets can be changed later in **Settings**.

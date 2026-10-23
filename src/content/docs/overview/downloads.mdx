@@ -24,7 +24,7 @@ almost everyone.
 
 Other options, for special cases only:
 
-- [**Older Version (v2.1.x)**][github-v2-1-x]: only if you specifically need the GnuPG-only build.
+- [**Older Version (v2.1.x)**][github-v2-1-x]: only if you specifically need the GnuPG-only build, or a Qt5 build for an older system such as Windows 7.
 - [**Nightly Builds**][github-nightly]: early test builds for testers and contributors, not for everyday use.
 - [**Mirror Site**][ftp-gpgfrontend]: the same files from another source, with no tracking or sign-in.
 
@@ -55,14 +55,28 @@ Use this table to find the right file for your system.
 | `-linux-<arch>.AppImage`       | Standalone Linux app. Make it executable, then run it.           |
 | `-portable`                    | Marks the portable version of a build.                           |
 | `*.sig`                        | Signature file. Always use it to check the download is genuine.  |
-| `-qt5-`                        | Older system build (e.g., Windows 7, Ubuntu 20.04).              |
 
-<Aside type="note" title="Qt5 builds moved to the Mirror Site">
-  Starting with **v2.2.1**, the Qt5 (`-qt5-`) builds are no longer on the GitHub
-  releases page. They now live only on the [Mirror
-  Site][ftp-gpgfrontend]. These builds are for older systems
-  only. If your system is current, use the standard build instead.
+<Aside type="note" title="Changed in v2.2.3">
+  There are no Qt5 (`-qt5-`) builds of v2.2.x any more. Qt5 builds exist only
+  for the older v2.1.x line. If your system needs one, for example Windows 7,
+  download a [v2.1.x release][github-v2-1-x].
 </Aside>
+
+### About Nightly Builds
+
+[Nightly builds][github-nightly] are made automatically from the newest code.
+They are less tested, so do not use them for anything you cannot afford to
+lose.
+
+- Like stable releases, they come as **installed** or **portable**. There is
+  no portable build for macOS.
+- For macOS there is only a `.dmg` file. Apple has checked it (it is
+  notarized).
+- The downloads are larger than stable ones, because they include extra
+  information for finding bugs. The app runs just as fast.
+- They are not GPG-signed, so there are no `.sig` files. Use the
+  `SHA256SUMS.txt` file instead. See
+  [Checking a Nightly Build](/appendix/code-binary-verify/#checking-a-nightly-build).
 
 ## Package Managers and App Stores
 
