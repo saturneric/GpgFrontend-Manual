@@ -61,14 +61,17 @@ You can skip this. GpgFrontend's defaults are a safe choice. Use these settings
 only if you want to change the key type, how long it lasts, or its structure
 before you generate.
 
-Easy Mode uses ready-made **profiles** instead of showing every option. It has two
-parts:
+The **Generate Key** window has three tabs: **Easy Mode**, **Primary Key**, and
+**Subkey**. You start on **Easy Mode**.
+
+**Easy Mode** uses ready-made **profiles** instead of showing every option. It has
+two parts:
 
 **Profile**
 
 - **Name**: Pick a profile from the dropdown. Profiles are grouped by algorithm
   type:
-  - **(Classical)**: older profiles such as RSA.
+  - Older profiles such as RSA come first, with no heading above them.
   - **ECC**: elliptic-curve profiles. The Ed25519 (Curve25519) profile is the
     recommended modern default and is picked for you when available.
   - **Post-Quantum**: quantum-resistant profiles (rPGP engine only).
@@ -88,8 +91,8 @@ Only profiles that work with your current engine and key database are shown.
   - **Primary Key With Subkey**: useful for keeping signing and encryption
     separate.
 
-For full control over the algorithm, key length, and format, switch to Advanced
-Mode (the **Primary Key** and **Subkey** tabs). The supported algorithms and
+For full control over the algorithm, key length, and format, use the **Primary
+Key** and **Subkey** tabs. The supported algorithms and
 compatibility notes are below.
 
 ## Advanced Options
@@ -106,28 +109,38 @@ Curve25519, ElGamal, or Kyber/ML-KEM) are used for subkeys instead.
 
 The algorithms you see depend on the engine, its version, and the key format.
 
-| Algorithm group                 | Purpose                      | Engine           |
-| ------------------------------- | ---------------------------- | ---------------- |
-| RSA                             | Sign / Encrypt / Auth / Cert | GnuPG, rPGP      |
-| DSA                             | Sign / Auth / Cert           | GnuPG only       |
-| Ed25519 / Ed448                 | Sign / Auth / Cert           | GnuPG, rPGP      |
-| NIST P-256 / P-384 / P-521      | Sign / Auth / Cert           | GnuPG, rPGP      |
-| Brainpool P-256 / P-384 / P-512 | Sign / Auth / Cert           | GnuPG 2.3+       |
-| secp256k1                       | Sign / Auth / Cert           | GnuPG 2.3+, rPGP |
-| SLH-DSA-SHAKE variants          | PQC Sign / Auth              | rPGP only        |
-| ML-DSA hybrid variants          | Hybrid PQC Sign / Auth       | rPGP only        |
+| Algorithm group                 | Purpose                      | Engine                          |
+| ------------------------------- | ---------------------------- | ------------------------------- |
+| RSA                             | Sign / Encrypt / Auth / Cert | GnuPG, rPGP (3072 bits or more) |
+| DSA                             | Sign / Auth / Cert           | GnuPG only                      |
+| Ed25519 / Ed448                 | Sign / Auth / Cert           | GnuPG, rPGP                     |
+| NIST P-256 / P-384 / P-521      | Sign / Auth / Cert           | GnuPG, rPGP                     |
+| Brainpool P-256 / P-384 / P-512 | Sign / Auth / Cert           | GnuPG 2.3+                      |
+| secp256k1                       | Sign / Auth / Cert           | GnuPG 2.3+                      |
+| SLH-DSA-SHAKE variants          | PQC Sign / Auth              | rPGP only                       |
+| ML-DSA hybrid variants          | Hybrid PQC Sign / Auth       | rPGP only                       |
 
 :::note[Some old choices are gone on rPGP]
 
 Since v2.2.2, the rPGP engine will not make weak keys any more, following
 RFC 9580:
 
-- **RSA below 2048 bits** is no longer offered.
 - **DSA** cannot be made at all.
+- **RSA below 3072 bits** is no longer offered.
+- **secp256k1** is no longer offered. The current OpenPGP standard does not
+  include this curve.
 
-This only affects making new keys. Old RSA-1024 and DSA keys still import and
-still work. The GnuPG engine still offers both, for compatibility with older
-setups.
+This only affects making new keys. Old RSA-1024, RSA-2048, DSA, and secp256k1
+keys still import and still work. The GnuPG engine still offers all of them,
+for compatibility with older setups.
+
+:::
+
+:::note[Changed in v2.2.3]
+
+On rPGP, the smallest RSA key for a new key went up from 2048 to 3072 bits. New
+secp256k1 keys can now only be made with GnuPG. GpgFrontend also no longer
+deletes the last UID of a v4 key.
 
 :::
 
@@ -147,6 +160,10 @@ mind before you share a key:
   the format based on its version and settings; GpgFrontend doesn't set it, and
   the Key Format selector doesn't apply. Current releases make **v4** keys, but
   newer versions (such as the 2.5.x line) may make **v5** keys.
+- **A v4 key always keeps at least one UID.** A v4 key stores its usage and
+  expiry with its UIDs (User IDs, the name and email on the key). So GpgFrontend
+  will not let you delete the last UID of a v4 key. Add a new UID first if you
+  want to replace it. v6 keys do not have this limit.
 - **v5 keys are LibrePGP, not RFC 9580.** LibrePGP is a separate standard that
   split off from OpenPGP. A v5 key works with GnuPG and other LibrePGP tools,
   but the rPGP engine cannot read one, and neither can many other OpenPGP

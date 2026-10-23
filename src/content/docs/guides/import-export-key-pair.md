@@ -36,7 +36,7 @@ it.
 
 ### From a Key Server (public keys only)
 
-Search a key server and import public keys from it. Enter the email or ID you are
+Open the **Import Key** menu and choose **Key Server**. Enter the email or ID you are
 looking for, pick a key server, and click search. GpgFrontend shows the matching
 public keys. You can import several at once, or double-click one row to import just
 that key. This method imports **public keys only**.
@@ -45,7 +45,7 @@ For the full steps, see [Key Server Operations](/guides/key-server-operations/).
 
 ### By Drag and Drop
 
-Drag a key file straight onto the Key Toolbox, then follow the prompts to import
+Drag a key file straight onto the Key ToolBox, then follow the prompts to import
 it.
 
 ## Export a Key
@@ -62,8 +62,8 @@ Your public key is safe to give to anyone. There are a few ways to export it.
 
 #### The Quick Way
 
-Right-click the key in the **Manage Keys** window and choose **Export Public
-Key...**. Pick where to save it, and you are done. New in v2.2.2.
+Click **Manage Keys** to open the **KeyPair Management** window. Right-click the
+key there and choose **Export Public Key...**. Pick where to save it, and you are done. New in v2.2.2.
 
 If you only want to paste it somewhere rather than save a file, use **Copy
 Public Key Block** in the same menu. See
@@ -71,7 +71,7 @@ Public Key Block** in the same menu. See
 
 #### Append to the Editor
 
-Right-click a key in the Key Toolbox and choose **Append Select Key(s) to Editor**.
+Right-click a key in the Key ToolBox and choose **Append Public Key to Editor**.
 This adds the public key to the end of the editor page, where you can copy it
 wherever you need.
 
@@ -85,7 +85,7 @@ below. Pick a folder for the file first.
 #### Export Several at Once
 
 To export the public keys of several key pairs together, select them in the key
-management view and click **Export to Clipboard**. This copies the data to your
+management view and click **Export To Clipboard**. This copies the data to your
 clipboard, ready to paste into any app or file.
 
 ![][img-4]
@@ -98,8 +98,8 @@ do **Authentication** (the `A` flag).
 
 ### Export a Private Key
 
-The quickest way is to right-click the key in the **Manage Keys** window and
-choose **Export Private Key...**. New in v2.2.2.
+The quickest way is to right-click the key in the **KeyPair Management**
+window and choose **Export Private Key...**. New in v2.2.2.
 
 You can also find private key options on the detail page of a key that holds a
 private part (the primary key or a subkey). Pick a destination, and GpgFrontend
@@ -119,17 +119,18 @@ key is meaningless on its own. So the two are bundled together in the export.
 
 You can export your private key in two ways:
 
-1. **Full export**: includes all key data, plus the user IDs and their signatures.
-2. **Minimal export**: includes only the key data, without the extra user ID
+1. **Export Full Secret Key**: includes all key data, plus the user IDs and their
    signatures.
+2. **Export Shortest Secret Key**: includes only the key data, without the extra
+   user ID signatures.
 
 ## Back Up Everything at Once
 
 Exporting keys one at a time is fine for sharing, but a poor way to make a
 backup. It is too easy to miss one.
 
-Since v2.2.2 you can save them all in one go. In the **Manage Keys** window,
-open the **Bulk** menu and choose **Back Up All Private Keys...**. That writes
+Since v2.2.2 you can save them all in one go. In the **KeyPair Management**
+window, open the **Bulk** menu and choose **Back Up All Private Keys...**. That writes
 every private key in the keyring into a single protected file.
 
 :::tip[Back up your keys]

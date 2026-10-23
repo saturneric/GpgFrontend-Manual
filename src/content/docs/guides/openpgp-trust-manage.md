@@ -41,8 +41,9 @@ of Trust without depending on a central authority.
 
 The trust levels are:
 
-- **Unknown:** You have not decided yet.
-- **None:** You do not trust this owner to vouch for other keys.
+- **Undefined:** You have not decided yet. (A key whose level you never set
+  shows **Unknown** in its details.)
+- **Never:** You do not trust this owner to vouch for other keys.
 - **Marginal:** You trust this owner a little.
 - **Full:** You trust this owner completely.
 - **Ultimate:** This is your own key. GpgFrontend sets this for you.
@@ -52,20 +53,20 @@ constant updates from key servers.
 
 ### How to set Owner Trust
 
-1. **Find the key.** Locate the public key (or key group) in the Key Toolbox
+1. **Find the key.** Locate the public key (or key group) in the Key ToolBox
    table.
 2. **Right-click it.** This opens the context menu.
 3. **Choose "Set Owner Trust Level".**
 
-A window opens where you pick the level (Unknown, None, Marginal, Full, or
+A window opens where you pick the level (Undefined, Never, Marginal, Full, or
 Ultimate).
 
 ![][img-2]
 
 :::tip[Several keys at once]
 
-Since v2.2.2 you can set several at once. In the **Manage Keys** window, tick
-the keys you want, then choose **Bulk**, then **Set Owner Trust for Checked
+Since v2.2.2 you can set several at once. In the **KeyPair Management** window,
+tick the keys you want, then open the **Operations** menu and choose **Bulk**, then **Set Owner Trust for Checked
 Keys...**.
 They all get the same level. See
 [Manage Your Keys](/guides/key-management/).
@@ -111,8 +112,8 @@ a person.
 :::
 
 If you do need to sign one, there are two ways to do it. Open the key's
-details and use the **UID** tab, or right-click the key in the **Manage Keys**
-window and choose **Certify Key...**. The second way is new in v2.2.2.
+details and use the **UIDs** tab, or right-click the key in the **KeyPair
+Management** window and choose **Certify Key...**. The second way is new in v2.2.2.
 
 You cannot certify your own key, and GpgFrontend greys the action out to say
 so.

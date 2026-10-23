@@ -6,16 +6,16 @@ sidebar:
   order: 12
 ---
 
-import { Steps } from "@astrojs/starlight/components";
+import { Steps, Aside } from "@astrojs/starlight/components";
 
-The **Key Management** window is where you look after your keys. Open it with
-the **Manage Keys** button in the toolbar.
+The **KeyPair Management** window is where you look after your keys. Open it
+with the **Manage Keys** button in the toolbar.
 
-The Key Toolbox in the main window and this window show the same keys, but they
+The Key ToolBox in the main window and this window show the same keys, but they
 are for different jobs. The Toolbox is for **picking** a key for a task. This
 window is for **doing something to** a key.
 
-![Key Management window][img-1]
+![KeyPair Management window][img-1]
 
 ## What You Are Looking At
 
@@ -60,6 +60,8 @@ things you can do to it. All of this is new in v2.2.2.
 
 ### Copy something
 
+These are in the **Copy** submenu.
+
 - **Copy Fingerprint**: the long code people use to check they have the right
   key. This is the one to read out over the phone.
 - **Copy Key ID**: the short code. Easier to type, but less exact.
@@ -94,15 +96,32 @@ send it anywhere.
 
 ### Key servers
 
-- **Search Keyserver...**: look someone up online. If you start it with a key
-  selected, the search box is already filled in for you.
-- **Publish Key to Keyserver...**: upload your public key so others can find
-  it.
-- **Refresh Selected from Keyserver**: fetch the latest copy of a key, in case
-  the owner has changed or revoked it.
+A key server is a website that stores public keys, so people can find each
+other's keys.
+
+- **Publish Public Key to Key Server**: upload your public key so others can
+  find it.
+- **Refresh Public Key From Key Server**: fetch the latest copy of a key, in
+  case the owner has changed or revoked it.
+
+You also find both items in the **Operations** menu at the top of the window.
+
+Both act on the keys you have ticked. If you have not ticked any, they act on
+the row you clicked. They do not work on a key group.
+
+To look someone up on a key server, open the **Import Key** menu and choose
+**Key Server**.
 
 See [Key Server Operations](/guides/key-server-operations/) for what these do
 in full.
+
+<Aside type="note" title="Changed in v2.2.3">
+
+The key server items now come from a module that comes with GpgFrontend. They
+now work on many keys at once. If the module is turned off, these items are
+gone. See [Module Controller](/advanced/module-controller/).
+
+</Aside>
 
 ## Work on Several Keys at Once
 

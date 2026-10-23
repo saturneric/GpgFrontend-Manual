@@ -32,6 +32,13 @@ If the answer is yes, it makes sense to start using new, **quantum-proof**
 encryption now, before quantum computers catch up. This is why the experts at NIST
 created a new set of these algorithms, and why OpenPGP is starting to use them.
 
+:::note[Changed in v2.2.3]
+
+The rPGP engine now follows the finished standard for post-quantum OpenPGP
+(RFC 9980). In v2.2.2 it followed an earlier draft of that standard.
+
+:::
+
 :::tip[Do you actually need this?]
 
 - **Probably not yet, for everyday use.** If your secrets only matter for a short
@@ -74,15 +81,15 @@ exact options for reference:
 
 ## Make a Post-Quantum Key
 
-1. Open **Key Management** and click **New Keypair** to open the **Generate Key**
-   dialog.
+1. Open the **KeyPair Management** window and click **New Keypair** to open the
+   **Generate Key** dialog.
 2. Choose a post-quantum algorithm:
-   - **Easy Mode**: open the **Profile** dropdown and pick a profile under the
-     **Post-Quantum** heading.
-   - **Advanced Mode** (the **Primary Key** / **Subkey** tabs): open the
-     **Algorithm** dropdown and pick an option under the **Post-Quantum** heading.
-     The list is grouped (classical, **ECC**, **Post-Quantum**), so the
-     quantum-proof options are easy to spot.
+   - On the **Easy Mode** tab: in the **Profile** box, open the **Name** dropdown
+     and pick a profile under the **Post-Quantum** heading.
+   - On the **Primary Key** or **Subkey** tab: open the **Algorithm** dropdown and
+     pick an option under the **Post-Quantum** heading. The list starts with the
+     classic options (no heading), then the **ECC** heading, then the
+     **Post-Quantum** heading, so the quantum-proof options are easy to spot.
 3. Pick by job:
    - For **encryption**, choose an **ML-KEM (Kyber)** option.
    - For **signing**, choose **ML-DSA** or **SLH-DSA**.
@@ -90,22 +97,41 @@ exact options for reference:
    the **rPGP** engine, so switch engines if one isn't available.
 5. Fill in your name, email, and validity period, then generate the key.
 
-These algorithms need the **v6** key format. In Advanced Mode, GpgFrontend switches
-to v6 and locks it automatically once you pick a post-quantum algorithm, so you
+These algorithms need the **v6** key format. On the **Primary Key** tab,
+GpgFrontend switches to v6 and locks it automatically once you pick a post-quantum algorithm, so you
 don't have to set it yourself.
 
 That's it. You now hold a post-quantum OpenPGP key.
 
+## Encrypt to Post-Quantum and Classic Keys Together
+
+You may pick some recipients with post-quantum keys and some with classic keys
+in the same message. GpgFrontend then shows a warning called **Mixed Recipient
+Types**.
+
+Here is why. The message is locked once, and that lock is shared with every
+recipient. If someone can break a classic recipient's key, they can read the
+whole message. So the post-quantum protection does not hold for it.
+
+- Click **Cancel** to go back. Then encrypt one message for the post-quantum
+  recipients and a separate one for the others.
+- Click **Encrypt Anyway** if that risk is fine for you.
+
+:::note[New in v2.2.3]
+
+The **Mixed Recipient Types** warning is new.
+
+:::
+
 :::caution[Experimental, by design]
 
-Post-quantum OpenPGP is based on a **draft standard** that is still changing, and
-support here is **experimental**.
+Post-quantum OpenPGP now has a finished standard, but support for it is still
+**new**, both here and in other apps.
 
 - These keys **don't work with classic PGP tools yet**, and most of these options
   are only in the **rPGP** engine.
 - Treat them as a way to **try out and prepare for** the quantum-safe future, not
   as a replacement for protecting critical secrets today.
-- The file format may change as the standard is finished.
 
 For long-term signing and identity that must work everywhere, keep using a classic
 key (such as Ed25519) alongside your post-quantum experiments.

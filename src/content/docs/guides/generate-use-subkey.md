@@ -17,7 +17,7 @@ and the more advanced setups come later, so you can skip them until you need the
 
 1. Double-click the key pair in the **Key ToolBox** list.
 2. Open the **Keychain** tab.
-3. Click **Generate A New Subkey**.
+3. Click **New Subkey**. The **Generate New Subkey** window opens.
 
 ![][img-1]
 
@@ -25,10 +25,10 @@ and the more advanced setups come later, so you can skip them until you need the
 
 The one choice that really matters is what the subkey will do:
 
-- **Key Usage**: pick `Encrypt` (to lock messages and files sent to you) or
-  `Sign` (to prove things came from you). Most people want one of these. There is
-  also `Authenticate`, used for logins like SSH, but you can skip it unless you
-  need it.
+- **Usage**: tick **Encrypt** (to lock messages and files sent to you) or
+  **Sign** (to prove things came from you). Most people want one of these. There
+  is also **Authentication**, used for logins like SSH, but you can skip it unless
+  you need it.
 
 Everything else has a safe default. You can leave these alone, or change them if
 you know you need to:
@@ -37,9 +37,9 @@ you know you need to:
   include RSA, DSA, and ECC types such as ED25519, ED448, CV25519, SECP256K1,
   Brainpool, and NIST curves.
 - **Key Length**: bigger is stronger but slower. For curve types this is set by the
-  curve (for example, ED25519 = 256 bits). For RSA/DSA you can pick 2048, 3072, or
-  4096 bits.
-- **Expiration Date**: how long the subkey lasts. Pick a preset (like 1 or 2
+  curve (for example, ED25519 = 256 bits). For RSA you can pick up to 4096 bits.
+  The rPGP engine offers only 3072 or 4096 bits for RSA.
+- **Expire Date**: how long the subkey lasts. Pick a preset (like 1 or 2
   years), an exact date, or **Non Expired** to never expire.
 - **Second Algorithm**: shown only for **hybrid** algorithms (such as the
   post-quantum ML-KEM/Kyber options). It lets you pick the classical part that is
@@ -69,7 +69,7 @@ That's all you need to add a subkey.
 :::tip[Change one subkey's passphrase on its own]
 
 Since v2.2.2 you can give a single subkey a new passphrase without touching the
-others. Open the key's details, go to the **Subkeys** tab, right-click the
+others. Open the key's details, go to the **Keychain** tab, right-click the
 subkey, and choose **Change Passphrase**.
 
 GpgFrontend asks for the current passphrase first. Only after you enter it
@@ -144,18 +144,18 @@ current OpenPGP backend." Use a GnuPG-backed key database for this.
 
 ### Step 2: Import the Subkey into Another Database
 
-1. **Pick the key database**: choose the right key database in the **Key Toolbox**.
+1. **Pick the key database**: choose the right key database in the **Key ToolBox**.
 
 ![Switch Key Database][img-4]
 
-2. **Import the file**: click **Import Key** in the top toolbar and choose
+2. **Import the file**: click **Import** in the top toolbar and choose
    **File**. Browse to the exported subkey file.
 
    ![Import the Subkey][img-5]
 
 3. **Select the file**: pick the subkey file and click **Open** to import it into
    the chosen key database.
-4. **Check it**: find the subkey in the **Key Toolbox**, then click it to open its
+4. **Check it**: find the subkey in the **Key ToolBox**, then click it to open its
    **Key Details** (Key ID, Algorithm, Key Size, Usage).
 
    ![Verify Imported Subkey][img-6]
@@ -166,7 +166,7 @@ Once the subkey is in its own database, you can move your primary key somewhere
 safe and delete it from GpgFrontend. The key still works for everyday tasks, with
 a few limits.
 
-In the **Key Toolbox**, a `#` next to the **Type** (for example, **pub/sec#**)
+In the **Key ToolBox**, a `#` next to the **Type** (for example, **pub/sec#**)
 means the primary key isn't in this key database. This is expected when you have
 removed the primary key on purpose and kept the subkeys for daily use.
 
@@ -275,10 +275,10 @@ detail, see [Comparison of Cryptographic Algorithms](/extra/algorithms-compariso
 | Algorithm                       | Purpose                | Engine           |
 | ------------------------------- | ---------------------- | ---------------- |
 | RSA                             | Encrypt / Sign / Auth  | GnuPG, rPGP      |
-| DSA                             | Sign / Auth            | GnuPG, rPGP      |
+| DSA                             | Sign / Auth            | GnuPG only       |
 | ElGamal (`ELG-E`)               | Encrypt                | GnuPG            |
 | Ed25519                         | Sign / Auth            | GnuPG, rPGP      |
-| Ed448                           | Sign / Auth            | GnuPG 2.3+, rPGP |
+| Ed448                           | Sign / Auth            | rPGP only        |
 | Curve25519 / CV25519            | Encrypt                | GnuPG, rPGP      |
 | X448                            | Encrypt                | GnuPG 2.3+, rPGP |
 | NIST P-256 / P-384 / P-521      | Encrypt / Sign / Auth  | GnuPG, rPGP      |

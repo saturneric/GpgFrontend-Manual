@@ -17,7 +17,11 @@ takes over your computer, they cannot copy the key. They can only use it while
 the card is plugged in, and only if they know your PIN.
 
 GpgFrontend can read your card, change its settings, make new keys on it, and
-move an existing key onto it. Open it with **Smart Card** in the toolbar.
+move an existing key onto it. To open it, go to the **Advanced** menu and choose
+**Open Smart Card Controller**. The **Smart Card Controller** window opens.
+
+The **Advanced** menu is not shown in sandboxed builds (Flatpak and the Mac App
+Store edition), so this window is not available there.
 
 :::note[Needs the GnuPG engine]
 
@@ -33,7 +37,7 @@ over to GnuPG first.
 
 Your card has two codes, and they do different jobs.
 
-- **User PIN**: the everyday one. You type it to sign or decrypt. Often six
+- **PIN** (also called the User PIN): the everyday one. You type it to sign or decrypt. Often six
   digits to begin with.
 - **Admin PIN**: the one for changing the card itself, such as making keys or
   resetting the User PIN. Often eight digits to begin with.
@@ -84,13 +88,14 @@ The buttons are:
 
 - **Cardholder**: change the name, language, login data, or public key URL
   stored on the card.
-- **Access Codes**: change the User PIN, the Admin PIN, or the reset code.
+- **Access Codes**: choose **Change PIN**, **Change Admin PIN**, or **Change
+  Reset Code**.
 - **Generate Card Keys**: make brand new keys on the card itself.
 - **Move Key to Card**: put a key you already have onto the card.
 - **Fetch**: read the card again and bring your keyring up to date with it.
 - **Refresh**: reload what is shown on screen.
 
-There is also a **More Actions** button with **Restart All Gpg-Agents**, which
+There is also a **More** button with **Restart All Gpg-Agents**, which
 is worth trying if your card is plugged in but not detected.
 
 ## Make New Keys on the Card
@@ -118,7 +123,7 @@ to undo it.
 
 <Steps>
 
-1. Open the smart card window and click **Move Key to Card**.
+1. Open the **Smart Card Controller** window and click **Move Key to Card**.
 
 2. Pick the key database, then pick the one key or subkey you want to move.
    Only GnuPG key databases can do this.
@@ -136,7 +141,7 @@ to undo it.
 </Steps>
 
 You can also start this from a single subkey: open the key's details, go to
-the **Subkeys** tab, right-click the subkey, and choose **Move to Card**.
+the **Keychain** tab, right-click the subkey, and choose **Move to Card**.
 
 ## Common Questions
 
@@ -151,7 +156,7 @@ documentation.
 Try, in this order:
 
 1. **Refresh**.
-2. **More Actions**, then **Restart All Gpg-Agents**.
+2. **More**, then **Restart All Gpg-Agents**.
 3. Unplug the card and plug it back in.
 4. Check that your key database is using the GnuPG engine.
 

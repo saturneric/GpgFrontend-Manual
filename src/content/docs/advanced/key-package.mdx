@@ -3,7 +3,7 @@ title: KeyPackage Functionality
 description: "Securely package and transfer OpenPGP public and private keys between devices with GpgFrontend's encrypted KeyPackage feature."
 sidebar:
   label: KeyPackage
-  order: 5
+  order: 6
 ---
 
 import { Steps, Aside } from "@astrojs/starlight/components";
@@ -45,19 +45,21 @@ KeyPackage is useless. That is by design. Someone who steals just the
 
 <Steps>
 
-1. In the main window, open the key management interface and click
+1. In the main window, click **Manage Keys** to open the **KeyPair Management**
+   window. Check the box next to each key you want to pack, then click
    **Export Key**.
 
-2. Choose the option to export as a **KeyPackage**. A dialog opens.
+2. Choose **Export As Key Package**. The **Export As Key Package** dialog
+   opens.
 
    ![][img-1]
 
 3. Fill in the three fields:
 
-   - **Name**: A name is already generated for you, in the form
+   - **Key Package Name**: A name is already generated for you, in the form
      `KeyPackage_<random id>`. Click **Generate Key Package Name** if you want
      a different one.
-   - **Output path**: Click **Select Output Path** and choose where to save
+   - **Output Path**: Click **Select Output Path** and choose where to save
      the `.gfpack` file.
    - **Passphrase**: Click **Generate and Save Passphrase**. This creates the
      key file. You will be asked to set a **PIN**. Pick a strong one and keep
@@ -94,7 +96,7 @@ On the target device:
 
 <Steps>
 
-1. Open the key management interface and click **Import Key**.
+1. Open the **KeyPair Management** window and click **Import Key**.
 
 2. From the dropdown menu, select **Key Package**.
 

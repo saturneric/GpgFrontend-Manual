@@ -49,8 +49,8 @@ the revocation is recognized by others.
 
 ## Generating a Key Revocation Certificate
 
-Since v2.2.2 there is a shortcut: right-click the key in the **Manage Keys**
-window and choose **Generate Revocation Certificate...**. That takes you
+Since v2.2.2 there is a shortcut: right-click the key in the **KeyPair
+Management** window and choose **Generate Revocation Certificate...**. That takes you
 straight to step 3 below.
 
 The longer route through the key's own window still works, and is described
@@ -63,8 +63,8 @@ here in full.
 
    ![][img-1]
 
-2. Select `Generate Revocation Certificate`: At the bottom dropdown labeled
-   `Revoke Certificate Operation`, choose Generate Revocation Certificate.
+2. Select **Generate Revoke Certificate**: At the bottom dropdown labeled
+   **Revoke Certificate Operation**, choose **Generate Revoke Certificate**.
 
 3. Specify the Revocation Reason: Choose one reason code from the dropdown.
     Optionally provide free-form text for a more detailed explanation (e.g., lost,
@@ -87,8 +87,8 @@ here in full.
 
 1. Open the Key Details Dialog: Navigate again to `Key Details → Operations`.
 
-2. Select "Import Revocation Certificate": From the Revoke Certificate Operation
-   dropdown, choose Import Revocation Certificate.
+2. Select **Import Revoke Certificate**: From the **Revoke Certificate
+   Operation** dropdown, choose **Import Revoke Certificate**.
 
 3. Import the `.rev` File: In the file-selection dialog, locate and open the
    previously saved `.rev` file.
@@ -98,7 +98,10 @@ here in full.
 
    ![][img-3]
 
-5. Publish to a Public Key Server
+5. Publish to a Public Key Server: on the same **Operations** tab, open
+   **Key Server Operations** and choose **Publish Public Key to Key Server**. See
+   [Key Server Operations](/guides/key-server-operations/). You can also do it
+   from the command line:
     ```shell
     gpg --keyserver hkps://keyserver.ubuntu.com --send-keys <YOUR_KEY_ID>
     ```

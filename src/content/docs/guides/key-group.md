@@ -42,10 +42,9 @@ group, you pick the group once and you are done.
 
 1. **Pick the keys.** In the Key ToolBox panel, check the box in the "Select"
    column next to each public key you want in the group.
-2. **Click the Key Group button.** It is the key icon in the toolbar above the
-   key list.
-3. **Fill in the details.** A window called New Key Group opens. Type a name. The
-   email and comment are optional. Click Create.
+2. **Click the New Key Group button.** It is in the toolbar above the key list.
+3. **Fill in the details.** A window called **New Key Group** opens. Type a
+   **Name**. The **Email** and **Comment** are optional. Click **Create**.
 4. **Done.** Your new group shows up in the key list with the Type set to
    "group". You can now use it just like a single public key.
 
@@ -55,11 +54,59 @@ group, you pick the group once and you are done.
 
 ## Edit a group
 
-You can change a group whenever you want. Double-click the group in the list (or
-use the group management menu) to open the Key Group Management window. From
-there you can add keys, remove keys, or put other groups inside the group.
+You can change a group whenever you want. Double-click the group in the list to
+open the **Key Group Management** window.
 
 ![][img-3]
+
+:::note[Changed in v2.2.3]
+
+The **Key Group Management** window has a new layout. It also shows groups
+inside groups as a tree.
+
+:::
+
+The window has three parts:
+
+- **At the top**: the group's name, with two buttons:
+  - **Edit…** changes the group's name, email, and comment.
+  - **Delete Group…** deletes the group. The keys in it are not deleted.
+- **On the left, Members**: the keys and groups that are in this group now. A
+  group inside this group shows its own members below it. Type in the **Filter
+  members** box to find a member.
+- **On the right, Available Keys**: keys and groups you can still add.
+
+### Add keys to the group
+
+1. In **Available Keys**, check the box next to each key or group you want.
+2. Click **Add**, or press **Alt+Left**.
+
+Press **Ctrl+F** to jump to the search box above **Available Keys**.
+
+### Remove keys from the group
+
+1. In **Members**, check the box next to each key you want to take out.
+2. Click **Remove**, or press **Alt+Right**. You can also press **Delete**.
+
+### Right-click a member
+
+Right-click a key or group in **Members** for these choices:
+
+- **Remove from Group**: take this member out of the group. This shows only for
+  direct members, not for keys inside a nested group.
+- **Manage Group…**: open a nested group in its own **Key Group Management**
+  window.
+- **Key Details…**: show the details of a key.
+
+### Change the name, email, or comment
+
+1. Click **Edit…** at the top of the window.
+2. The **Edit Key Group** window opens. Change the **Name**, **Email**, or
+   **Comment**.
+3. Click **Save**.
+
+These details only name the group. Changing them does not change which keys are
+in it.
 
 ## When to use Key Groups
 

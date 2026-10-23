@@ -9,14 +9,15 @@ sidebar:
 The **Key Details** window shows everything about a key: who it belongs to, its
 primary key and subkeys, the signatures on it, and the actions you can take.
 
-To open it, right-click a key in the **Key Toolbox** or the **Key Management**
+To open it, right-click a key in the **Key ToolBox** or the **KeyPair Management**
 window and choose **Show Key Details**. Double-clicking a key also opens this window.
 
 ![][img-1]
 
 ## General Info
 
-This part of the window helps you manage the key. Here is what each piece means.
+This part is on the **KeyPair** tab. It helps you manage the key. Here is what
+each piece means.
 
 ### Owner
 
@@ -65,8 +66,10 @@ For RSA, 2048 bits is generally safe enough.
 #### Usage
 
 What the key pair can do, combining the abilities of the primary key and all
-subkeys. The possible abilities are **Certify**, **Encrypt**, **Sign**, and
-**Auth**. For example, if any subkey can sign, **Sign** is listed here.
+subkeys. The possible abilities are **Certificate** (it can sign other keys and
+its own subkeys), **Encrypt**, **Sign**, and **Auth** (it can prove who you are,
+for example to log in). For example, if any subkey can sign, **Sign** is listed
+here.
 
 #### Owner Trust Level
 
@@ -127,7 +130,7 @@ Key ID above.) This is the primary key's fingerprint.
 
 ## UID Info
 
-A User ID (UID) is the label that says who a key belongs to, like a name tag on a
+This part is on the **UIDs** tab. A User ID (UID) is the label that says who a key belongs to, like a name tag on a
 keyring. It gives you a rough idea whether a key is the one you expect, but for
 sure identification you should compare fingerprints or key IDs. A key can have
 several UIDs, but only one **primary UID**, which is always shown first.
@@ -137,6 +140,10 @@ several UIDs, but only one **primary UID**, which is always shown first.
 Each UID has three parts: **Name**, **Email**, and **Comment**. The name should be
 at least five characters and the email must be a valid format; comments are
 flexible.
+
+You cannot delete the primary UID. On a v4 key you also cannot delete the last
+UID, because the key needs it to keep working. Add a new UID first if you want
+to replace it. This rule is new in v2.2.3.
 
 ### Signatures on a UID
 
@@ -173,14 +180,15 @@ can feel complex at first, so here are the basics:
   the trust anchored by the primary key stays intact. But if the primary key is
   compromised, the whole key structure is at risk.
 
-The Key Details window lists the primary key and all subkeys with their properties
+The **Keychain** tab lists the primary key and all subkeys with their properties
 (algorithm, size, usage, and so on), so you can manage them at a glance.
 
 ![][img-8]
 
-### Key on a Smart Card
+### Key in Smart Card
 
-Shows whether a (sub)key's private part has been moved to a hardware smart card.
+The **Key in Smart Card** field shows **Yes** if a (sub)key's private part has
+been moved to a hardware smart card, and **No** if not.
 
 - When a key is moved to a smart card, its private part is physically transferred
   to the card and removed from your local key database.
@@ -204,7 +212,7 @@ Right-click a subkey in the list for actions that apply to just that one:
   the others as they are. New in v2.2.2.
 - **Move to Card**: move this subkey onto a smart card. See
   [OpenPGP Smart Cards](/guides/smart-card/).
-- **Set Expiry**: give this subkey its own expiry date.
+- **Edit Expire Date**: give this subkey its own expiry date.
 
 :::note[Setting an expiry now works on rPGP too]
 
@@ -215,7 +223,7 @@ can now do it as well, for both primary keys and subkeys.
 
 ## Operations
 
-What you can do here depends on whether the key pair has only a public key, or a
+These actions are on the **Operations** tab. What you can do here depends on whether the key pair has only a public key, or a
 private key too.
 
 ### On a Public Key
@@ -232,8 +240,21 @@ server, or back up.
 #### Key Server Operations
 
 A dropdown for working with key servers (a place where public keys are stored and
-shared). For example, you can refresh your copy of the public key with updates from
-the server.
+shared). It has three choices:
+
+- **Publish Public Key to Key Server**: upload the public key.
+- **Refresh Public Key From Key Server**: get the latest copy of the public key.
+- **Check Publication Status**: ask the key server whether it has this key.
+
+See [Key Server Operations](/guides/key-server-operations/) for details.
+
+:::note[Changed in v2.2.3]
+
+The Key Details window no longer checks the key server by itself, and no longer
+shows a notice that the key is published. Use **Check Publication Status**
+when you want to know.
+
+:::
 
 #### Set Owner Trust Level
 
@@ -262,34 +283,58 @@ Saves the public key to a file, for sharing, uploading to a key server, or backu
 
 #### Export Private Key
 
-Exports the private key. There are usually two modes:
+Exports the private key. There are two choices:
 
-- **Export Complete Private Key**: the entire private key with all its
-  information. Use this for a full backup or to move the key to another system.
-- **Export Minimal Private Key**: only the essential parts, with less data. Useful
-  for more secure transfers or environments with strict requirements.
+- **Export Full Secret Key**: the entire private key with all its information.
+  Use this for a full backup or to move the key to another system.
+- **Export Shortest Secret Key**: only the essential parts, with less data.
+  Useful for more secure transfers or environments with strict requirements.
 
 #### Modify Expiration Datetime (Primary Key)
 
 Changes the expiration date and time of the primary key. This helps you manage the
 key's lifecycle and keep it valid for as long as you need.
 
-#### Change Password
+#### Modify Password
 
 Changes the password that protects the private key. Worth doing if you think the
 current one may be exposed, or as part of regular good habits.
 
 #### Key Server Operations
 
-A dropdown for working with key servers using the public key, such as uploading it
-or refreshing it from the server.
+The same key server dropdown as for a public key: publish, refresh, or check
+the public key on the key server.
 
 #### Revoke Certificate Operation
 
-A dropdown to create a revocation certificate for the key, or import an existing
-one. Revoke a key if it is compromised or no longer needed: this marks it invalid
+A dropdown with two choices: **Generate Revoke Certificate** creates a
+revocation certificate for the key, and **Import Revoke Certificate** imports an
+existing one. See [Key Revocation](/advanced/key-revocation/). Revoke a key if it is compromised or no longer needed: this marks it invalid
 so it can't be misused. The revocation is usually uploaded to a key server so
 others learn the key is revoked.
+
+## How a Key Shows Up in Results
+
+After you verify a signature or decrypt a message, the result panel says what
+happened. Some lines there come from the key's details on this page.
+
+- **Valid**: the signature is correct. With the rPGP engine you see **Valid**,
+  not **Fully Valid**. rPGP has no owner trust, so it does not say how much you
+  trust the signer. Check the fingerprint to be sure who signed.
+- **Signing Key Not Authorized**: the signature is correct, but the key that
+  made it does not have **Sign** in its usage. The signature is not accepted.
+- **Signing Key Expired**: the key has expired. With the rPGP engine, if the key
+  had already expired _when the signature was made_, the result says so and the
+  signature fails.
+- **Symmetric Encryption Algorithm**: after you decrypt a message with a key,
+  this line names the cipher and its mode, for example `AES256.OCB`. The rPGP
+  engine now shows this line too.
+
+:::note[Changed in v2.2.3]
+
+These result lines are new or clearer for the rPGP engine.
+
+:::
 
 [img-1]: https://image.cdn.bktus.com/i/2025/06/24/707eab9708c7cf9af472a5e05295d132d831f223.webp
 [img-2]: https://image.cdn.bktus.com/i/2025/06/24/a648820ee997bce65d3b65ebb7c3056b37e1597d.webp

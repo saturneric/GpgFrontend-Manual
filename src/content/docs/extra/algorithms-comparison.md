@@ -43,7 +43,7 @@ older systems, while Curve25519 stays fast for everyday work.
 | EdDSA (Ed25519 / Ed448)  | Elliptic     | Sign           | GnuPG, rPGP      | Modern default for signing     |
 | ECDH (Curve25519 / X448) | Elliptic     | Encrypt        | GnuPG, rPGP      | Modern default for encryption  |
 | Brainpool curves         | Elliptic     | Sign + Encrypt | GnuPG 2.3+       | Non-NIST alternative           |
-| secp256k1                | Elliptic     | Sign           | GnuPG 2.3+, rPGP | Used in blockchain             |
+| secp256k1                | Elliptic     | Sign           | GnuPG 2.3+       | Used in blockchain             |
 | ML-DSA                   | Post-Quantum | Sign           | rPGP only        | Experimental, OpenPGP v6       |
 | SLH-DSA                  | Post-Quantum | Sign           | rPGP only        | Experimental; large signatures |
 | Kyber / ML-KEM           | Post-Quantum | Encrypt        | GnuPG 2.5+, rPGP | Experimental; always hybrid    |
@@ -64,11 +64,17 @@ The exact choices you see depend on the engine, its version, and the key format.
   and decryption, because of its larger key sizes. As computers get faster, larger
   keys are needed to stay secure.
 
-:::note[RSA below 2048 bits cannot be generated on rPGP]
+:::note[RSA below 3072 bits cannot be generated on rPGP]
 
-Since v2.2.2, the rPGP engine follows RFC 9580 and will not make an RSA key
-smaller than 2048 bits. Older small keys still import and still work. The GnuPG
-engine still offers the smaller sizes.
+The rPGP engine follows RFC 9580 and will not make an RSA key smaller than 3072
+bits. Older small keys still import and still work. The GnuPG engine still
+offers the smaller sizes.
+
+:::
+
+:::note[Changed in v2.2.3]
+
+The smallest new RSA key on rPGP went up from 2048 to 3072 bits.
 
 :::
 
@@ -124,7 +130,9 @@ when computing power or storage is limited. OpenPGP uses ECC in a few forms.
     (about 224-bit), at a small cost in speed.
 - [**secp256k1**][sec2-v2]: a non-NIST curve best known
   for its use in Bitcoin and other blockchains, where fast signature checking
-  matters.
+  matters. Only the GnuPG engine can make new secp256k1 keys, because the
+  current OpenPGP standard does not include this curve. rPGP can still import
+  and use existing ones. (Changed in v2.2.3: rPGP could make them before.)
 
 ### EdDSA (Ed25519 and Ed448)
 
@@ -174,8 +182,9 @@ should be treated as rPGP-only for now.**
 ## Post-Quantum Cryptography (PQC)
 
 Post-Quantum Cryptography is a set of algorithms meant to stay secure even against
-future large-scale quantum computers. In OpenPGP, PQC support is still new and
-based on draft specifications, not settled practice.
+future large-scale quantum computers. In OpenPGP, PQC support is still new. The
+rPGP engine follows the finished standard for it, [RFC 9980][rfc9980] (since
+v2.2.3; before, it followed a draft).
 
 GpgFrontend v2.2 adds experimental PQC key generation through its multi-engine
 design, mainly via the Rust-based **rPGP** engine.
@@ -219,8 +228,8 @@ an encryption subkey, pairing a post-quantum part with a classical ECDH part.
 Unlike ML-DSA and SLH-DSA above, Kyber is **not rPGP-only**. Both engines support
 it:
 
-- **GnuPG** 2.5.0 or later. The GnuPG bundled with GpgFrontend v2.2.1 is 2.5.20, so
-  it works out of the box with the GnuPG engine.
+- **GnuPG** 2.5.0 or later. The Windows build of GpgFrontend v2.2.3 comes with
+  GnuPG 2.5.21, so it works out of the box with the GnuPG engine.
 - **rPGP** 0.1.2 or later.
 
 Available sizes:
@@ -248,3 +257,4 @@ compatibility, prefer classic RSA or Curve25519 keys for now.
 [wiki-curve448]: https://en.wikipedia.org/wiki/Curve448
 [sec2-v2]: https://www.secg.org/sec2-v2.pdf
 [rfc9580]: https://www.rfc-editor.org/rfc/rfc9580
+[rfc9980]: https://www.rfc-editor.org/rfc/rfc9980
