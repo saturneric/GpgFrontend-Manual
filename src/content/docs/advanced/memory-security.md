@@ -54,9 +54,6 @@ Everything from Enhanced, plus the memory holding your secrets is **locked**.
 Locked memory cannot be written to the swap file or into a hibernation image,
 so it does not end up on your disk by accident.
 
-GpgFrontend also clears the text box and its undo history before encrypting or
-decrypting, so your plain text cannot be brought back with Ctrl+Z.
-
 This is the strongest memory protection. Pick it if you are handling
 something sensitive.
 
@@ -68,6 +65,72 @@ Instead, it makes GpgFrontend replace its own internal key every week. That
 is about the data the program saves, not about memory, and it has a catch
 worth reading before you turn it on. See
 [Application Secure Key](/advanced/app-secure-key/).
+
+## Undo After an Operation
+
+When you encrypt or decrypt text, the result replaces what was in the editor
+tab. If undo were allowed there, pressing Ctrl+Z after encrypting would bring
+your plain text back. To allow that, the program would have to keep the plain
+text in memory.
+
+So by default, you **cannot** undo an encrypt, decrypt or other operation in
+the text editor. The old text is gone once the result appears.
+
+If you want undo back:
+
+1. Open **Settings** and go to **General**.
+2. Under **Operation**, tick **Allow undoing encrypt, decrypt and other
+   operations in the text editor.**
+3. Click **OK**. On macOS, close the window instead.
+
+Leave it off if you handle sensitive text. As the setting's tip says, undo
+keeps the previous text in memory, and after encrypting that is the
+plaintext.
+
+:::note[Changed in v2.2.3]
+
+Undo after an operation is now off by default, and has its own setting.
+
+:::
+
+## Unsaved Editor Tabs
+
+The setting **Cache text editor contents.** is on by default. It keeps the
+text in your editor tabs, so nothing is lost when you close the program.
+
+What it does:
+
+- While you type, GpgFrontend keeps a copy of every unsaved editor tab. This
+  includes tabs that hold plain text, such as a message you just decrypted.
+- The copy is kept in the program's own saved data, which is locked with the
+  program's key. See [Application Data Storage](/advanced/app-data-storage/).
+- When you quit, the program does not ask you to save your tabs. It just
+  closes.
+- The next time you start GpgFrontend, your tabs come back.
+
+The trade-off is simple. With the cache on, you never lose a draft. But your
+unsaved text, plain text included, stays on the disk in locked form until you
+close those tabs or turn the cache off.
+
+If you would rather nothing is kept:
+
+1. Open **Settings** and go to **General**.
+2. Under **Operation**, untick **Cache text editor contents.**
+3. Click **OK**. On macOS, close the window instead.
+
+With the cache off, quitting asks whether to save your unsaved tabs, and
+any cached tabs are cleared the next time the program starts.
+
+:::note[Changed in v2.2.3]
+
+**Cache text editor contents.** is now on by default, and cached tabs are
+brought back at the next start.
+
+:::
+
+When you quit and the program is sure it will close, it also wipes the text
+out of every open tab. This happens after the cache is saved and after any
+question about saving has been answered.
 
 ## What Strong and Maximum Need
 

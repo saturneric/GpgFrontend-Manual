@@ -10,6 +10,10 @@ Besides your keys, GpgFrontend saves a few things of its own: key server
 entries, key generation profiles, window positions, and so on. The sensitive
 parts are encrypted with the program's own key.
 
+This also holds the copy of your unsaved text editor tabs, when **Cache text
+editor contents.** is on. It is on by default. See
+[Unsaved Editor Tabs](/advanced/memory-security/#unsaved-editor-tabs).
+
 All of this happens automatically. There is nothing to set up and nothing to
 maintain. This page is here for people who want to know what is going on.
 

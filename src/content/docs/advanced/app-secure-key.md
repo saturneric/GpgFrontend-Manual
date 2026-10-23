@@ -50,6 +50,33 @@ This choice is greyed out when it cannot work:
 - On Linux, when **no password service is set up**. Install one and switch it
   on, then try again.
 
+Point at the greyed-out choice to see why it is not available.
+
+#### If the keychain is locked on Linux
+
+On Linux, your password service may still be locked when GpgFrontend starts,
+for example right after you log in. GpgFrontend then asks the system to
+unlock it.
+
+1. Your system shows its own unlock window. If you do not see it, look behind
+   the GpgFrontend window and other open windows.
+2. Type the password for your keyring. This is often your login password.
+
+If the keychain stays locked, GpgFrontend shows **Secure Key Unavailable**.
+Click **Show Details...** to see the reason your system gave. Then:
+
+- Click **Quit**, unlock your keychain, and start GpgFrontend again. This
+  costs nothing and keeps your data.
+- Only click **Reset Secure Key** if you are sure the secret is gone for good.
+  Everything the key protected becomes unreadable.
+
+:::note[New in v2.2.3]
+
+On Linux, GpgFrontend now asks the system to unlock a locked keychain, and
+shows the system's reason when it cannot read it.
+
+:::
+
 ### PIN at startup
 
 You choose a PIN, and GpgFrontend asks for it every time it opens. Nothing it
@@ -71,8 +98,17 @@ Your OpenPGP keys are not affected. Only the program's own saved data is.
 
 :::
 
-Use **Change PIN** on the same settings page to pick a new one later. You need
-the current PIN to do it.
+Use **Change PIN…** on the same settings page to pick a new one later. You
+need the current PIN to do it.
+
+### Profiles that have no choice
+
+- A profile **opened from a file** uses the file's passphrase to protect its
+  key. To change it, export the profile again with a new passphrase. See
+  [Profiles](/advanced/profiles/).
+- A [temporary profile](/advanced/temporary-profiles/) has no key protection
+  at all. Its key is held in memory only and is destroyed when the window
+  closes, so there is nothing to protect. All three choices are greyed out.
 
 ## Secure Level
 
@@ -97,7 +133,9 @@ While Maximum is on, your data is saved with keys that keep changing. If you
 lower the level, the program stops loading those keys, and anything saved
 while Maximum was on can no longer be read. It is deleted a short while later.
 
-GpgFrontend asks you to confirm this before it happens.
+GpgFrontend asks you to confirm this before it happens. The message is called
+**Turn Off Weekly Key Rotation?** and ends with **Lower the level anyway?**.
+Click **Yes** to go ahead, or **No** to keep Maximum.
 
 :::
 
