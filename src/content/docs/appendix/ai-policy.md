@@ -132,13 +132,12 @@ time the project does not have.
 For everything else, see [Contributing to
 GpgFrontend](/appendix/contribute/).
 
-## The Wiki and This Manual
+## The Source Code and This Manual
 
-The project links to an [AI-assisted
-Wiki][deepwiki-gpgfrontend], generated automatically from
-the source code by an outside service. It is useful for finding your way around,
-but it is not written by the maintainer and it can be wrong about details. Use
-it to get oriented, and check anything important against the source code.
+The source code is well commented. Comments explain why the code works the way
+it does, not only what it does. If you want to find your way around, an AI
+coding assistant pointed at the source code can help you explore it. As with
+any tool, check anything important against the code itself.
 
 This manual is a different case. The maintainer's first language is Chinese, and
 the manual is written in English, so AI tools help turn rough notes into clear
@@ -166,4 +165,3 @@ person who has been maintaining it since 2021.
 
 [blog-history]: https://blog.bktus.com/en/archives/u8hywl/
 [blog-about-me]: https://blog.bktus.com/en/about-me/
-[deepwiki-gpgfrontend]: https://deepwiki.com/saturneric/GpgFrontend

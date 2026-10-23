@@ -24,7 +24,7 @@ was made, and anyone can repeat it.
 
 ## Every Package Is Signed
 
-Since version 1.0.5, every release package is signed with the maintainer's
+Since version 1.0.5, every stable release package is signed with the maintainer's
 OpenPGP key. Next to each download there is a small `.sig` file. With standard
 GPG tools, you can use it to check that the package is genuine and was not
 changed by anyone.
@@ -56,12 +56,66 @@ signature and sandbox systems on top.
 
 ![][img-3]
 
+## Checking a Nightly Build
+
+Nightly builds are not signed with the maintainer's key, so they have no
+`.sig` files. Each nightly comes with two other files instead:
+
+- `SHA256SUMS.txt` lists every file of the build with its checksum. A checksum
+  is a short fingerprint of a file. If the file changes, the checksum changes.
+- `SHA256SUMS.txt.sigstore.json` proves that GitHub Actions made
+  `SHA256SUMS.txt` for this project.
+
+There is also a `build-records.json` file. It records which build job made
+each file.
+
+### Step 1: Check the Checksum
+
+Put your download in the same folder as `SHA256SUMS.txt`. Open a terminal in
+that folder and run the command for your system.
+
+On Linux:
+
+```sh
+sha256sum -c --ignore-missing SHA256SUMS.txt
+```
+
+On macOS:
+
+```sh
+shasum -a 256 -c --ignore-missing SHA256SUMS.txt
+```
+
+On Windows, run the Linux command in Git Bash or WSL.
+
+Your file should be listed with `OK`. Any other result means the file is not
+the one that was built. Do not use it.
+
+### Step 2: Check Who Built It (Optional)
+
+This step needs the [cosign][cosign-install] tool. Put
+`SHA256SUMS.txt.sigstore.json` in the same folder and run:
+
+```sh
+cosign verify-blob SHA256SUMS.txt --bundle SHA256SUMS.txt.sigstore.json \
+  --certificate-identity https://github.com/saturneric/GpgFrontend/.github/workflows/build.yml@refs/heads/main \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com
+```
+
+If it prints `Verified OK`, the checksum list was signed by this project's
+build on GitHub, from the `main` branch. The signature is also written to
+Rekor, a public log that anyone can search. Because Step 1 checked your file
+against that list, your file is covered too.
+
 ## Check Inside the App
 
-Open the About window from the Help menu. It shows the version, the platform,
-and the exact branch and commit hash of the source code this copy was built
-from. That lets you match your running app to a specific point in the public
-code history.
+Open **Help** > **About**, then the **Build Information** tab. It shows the
+version, the libraries GpgFrontend was built with, and the exact **Git
+Branch:** and **Git Commit:** of the source code. That lets you match your
+running app to a specific point in the public code history.
+
+To copy these details, for example into a bug report, click **Copy Build
+Information**.
 
 ![][img-4]
 
@@ -109,3 +163,4 @@ else's build.
 [img-3]: https://image.cdn.bktus.com/i/2025/06/24/690c6b534ab54130dfa100f85a8cc299a0223ff5.webp
 [img-4]: https://image.cdn.bktus.com/i/2025/06/24/fe75a2c041c9e5a7823d0c4d8820bf35501117cd.webp
 [bktus-openpgp]: https://bktus.com/openpgp/
+[cosign-install]: https://docs.sigstore.dev/cosign/system_config/installation/

@@ -14,15 +14,15 @@ You are welcome to use AI tools in your work. Before you do, read the two rules
 in the [AI Policy](/appendix/ai-policy/#if-you-contribute): you must understand
 every line you send, and you must have built and run it yourself.
 
-## Wiki
+## Find Your Way Around
 
-An [AI-generated Wiki][deepwiki-gpgfrontend] is built
-automatically from the source code. It gives a good overview of the
-architecture, the design ideas, and the main components.
+The source code is well commented. Comments explain why things are done the
+way they are, so reading the code around your change is the best way to learn
+the project. An AI coding assistant pointed at the repository can also help
+you explore it and find the right place to start.
 
-Read it before you dive into the code. Knowing the layout of the project first
-saves a lot of time. It is mostly accurate, but it is machine-written, so
-check anything important against the source itself.
+If you want to write a module rather than change the application, start with
+[Write Modules](/advanced/write-modules/).
 
 ## Technical Requirements
 
@@ -33,8 +33,9 @@ All contributions should follow these rules:
 - **Rust Standard:** Since v2.2, GpgFrontend includes a Rust component (the
   rPGP engine), located under the `rust/` directory and built into the project
   via [Corrosion][github-corrosion]. Rust code must
-  build with the Rust 2024 edition (Rust 1.85 or newer) and should be formatted
-  with `rustfmt` and pass `clippy` using their default configurations.
+  build with the Rust 2024 edition and Rust 1.88 or newer (the `pgp` 0.21 crate
+  needs 1.88). It should be formatted with `rustfmt` and pass `clippy` using
+  their default configurations.
 - **Compilers:** Your C/C++ code should compile with both GCC (8.0 or newer)
   and Clang (9.0 or newer). MSVC is not supported; on Windows the project is
   built with MinGW inside MSYS2.
@@ -44,6 +45,9 @@ All contributions should follow these rules:
   with the maintainer first.
 - **Code Formatting:** Use the `.clang-format` and `.clang-tidy` configurations
   in the repository to format and check your code.
+- **Copyright Headers:** New source files need the project's copyright header.
+  `scripts/copyright_checking.py` checks for it, and `--fix` adds it to files
+  that have none (see [Python Helper Scripts](#python-helper-scripts)).
 - **Unit Testing:** If you add a feature or change behavior, please add unit
   tests to cover it.
 - **Documentation:** Update the documentation to match your changes.
@@ -62,7 +66,7 @@ local build behaves the same way as the official builds.
   repository first.
 - **Compilers:** GCC 8+ or Clang 9+ (on Windows, the MinGW toolchain from
   MSYS2).
-- **Rust toolchain:** Rust 1.85 or newer. Install it through
+- **Rust toolchain:** Rust 1.88 or newer. Install it through
   [rustup][rustup] on Linux and macOS. On Windows with MSYS2, the
   `mingw-w64-x86_64-rust` package from the list below is used instead. The
   build expects `cargo` on your `PATH`.
@@ -88,8 +92,9 @@ cd GpgFrontend
 
 After entering the project directory, initialize and update the submodules.
 This step is required: the submodules provide gpgme, libassuan, libgpg-error,
-Corrosion, the Qt translations, and the modules sub-project. If you skip it,
-the build will fail.
+Corrosion, Lua (`third_party/lua`, used by the module UI scripts), the Qt
+translations, and the modules sub-project. If you skip it, the build will
+fail.
 
 ```bash
 git submodule update --init --recursive
@@ -106,8 +111,9 @@ git config --global core.eol lf
 
 ### Install Dependencies
 
-Besides Qt, the build needs libarchive, libsodium, and GoogleTest, plus the
-autotools packages used to build gpgme from the bundled submodule.
+Besides Qt, the build needs libarchive, libsodium, OpenSSL, and GoogleTest,
+plus the autotools packages used to build gpgme from the bundled submodule.
+OpenSSL is used by the email module for TLS connections.
 
 - **On Ubuntu 22.04 or later:**
 
@@ -115,7 +121,7 @@ autotools packages used to build gpgme from the bundled submodule.
 sudo apt-get update
 sudo apt-get install -y build-essential git cmake ninja-build \
   autoconf automake gettext texinfo \
-  libarchive-dev libsodium-dev libgtest-dev
+  libarchive-dev libssl-dev libsodium-dev libgtest-dev
 ```
 
 If the `libgtest-dev` package on your distribution is too old, build GoogleTest
@@ -130,7 +136,15 @@ cmake --build googletest/build && sudo cmake --install googletest/build
 - **On macOS 15 or later:**
 
 ```bash
-brew install cmake ninja automake texinfo libarchive googletest libsodium
+brew install cmake ninja automake texinfo libarchive googletest libsodium openssl@3
+```
+
+Homebrew's `openssl@3` is not on the default search path, and the LibreSSL
+headers that come with macOS do not work. Point CMake at it when you
+configure:
+
+```bash
+-DOPENSSL_ROOT_DIR="$(brew --prefix openssl@3)"
 ```
 
 - **For Windows (via MSYS2):** Set up MSYS2 according to [its
@@ -145,7 +159,7 @@ pacman -S git msys2-devel base-devel msys2-runtime-devel \
   mingw-w64-x86_64-libarchive mingw-w64-x86_64-libsodium \
   mingw-w64-x86_64-gtest mingw-w64-x86_64-libassuan \
   mingw-w64-x86_64-autotools mingw-w64-x86_64-texinfo \
-  mingw-w64-x86_64-rust mingw-w64-x86_64-ccache
+  mingw-w64-x86_64-rust mingw-w64-x86_64-ccache mingw-w64-x86_64-openssl
 ```
 
 :::caution[Windows build environment]
@@ -160,7 +174,8 @@ may work but are not officially verified.
 
 ### Install Qt 6
 
-Any Qt 6.x release works; CI currently builds against Qt 6.10.3. The required
+Any Qt 6.x release works; CI currently builds against Qt 6.11.3 (set in
+`.github/actions/install-qt6/action.yml`). The required
 modules are Core, Widgets, PrintSupport, Network, LinguistTools, Xml, and Sql,
 plus Concurrent for the modules sub-project.
 
@@ -170,6 +185,13 @@ plus Concurrent for the modules sub-project.
 - On macOS, use the Qt online installer or `brew install qt`.
 - On Windows with MSYS2, Qt is already covered by the `mingw-w64-x86_64-qt6-*`
   packages above.
+
+:::note[Qt5]
+
+The `main` branch builds with Qt 6 only. Qt5 builds are made only from the
+`release/2.1` branch, for the v2.1.x line.
+
+:::
 
 ## Build the Project
 
@@ -193,6 +215,26 @@ Notes:
 - On macOS, CI configures with the Xcode generator (`-G Xcode`) to produce the
   official application bundles. For everyday development builds, Ninja works
   there too. Code signing and notarization are only needed for distribution.
+  Remember `-DOPENSSL_ROOT_DIR` (see above).
+- Add `-DGPGFRONTEND_MODULES_BUILD_TESTS=ON` to also build the modules' own
+  unit tests.
+- `GPGFRONTEND_BUILD_APP_IMAGE` is deprecated. The AppImage is now made from
+  the tree that `cmake --install` produces.
+
+### Module Binding Options
+
+Two cache options decide how integrated modules are tied to their native
+libraries. You only need them when you package a release:
+
+- `GPGFRONTEND_INTEGRATED_MODULE_NATIVE_BINDING`: `OFF` (the default, right
+  for a development tree and a normal local install) or `REQUIRED`. Official
+  Windows and AppImage releases set `REQUIRED`.
+- `GPGFRONTEND_INTEGRATED_MODULE_BINDING_ALGORITHM`: `AUTO` (the default),
+  `FILE_SHA256` or `PE_AUTHENTICODE_SHA256`. Naming one is a check: configure
+  fails if it does not match what the platform needs.
+
+Modules you build outside the tree always need a binding. See
+[Write Modules](/advanced/write-modules/).
 
 ## Run the Tests
 
@@ -204,13 +246,58 @@ QT_QPA_PLATFORM=offscreen ./scripts/run_tests.sh
 ```
 
 Setting `QT_QPA_PLATFORM=offscreen` lets the tests run headless, without a
-display server. The script also accepts flags such as `--unit-only`,
-`--stress-only`, and `-f FILTER`; see its header comments for details.
+display server. By default the script runs the Rust tests (`cargo test`), the
+C++ unit tests and the stress tests, each in its own phase. Run
+`./scripts/run_tests.sh --help` for the full list. The most useful options:
+
+| Option                 | What it does                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| `--unit-only`          | Run only the unit tests.                                                        |
+| `-f PATTERN`           | Run a single GoogleTest filter and nothing else.                                |
+| `--modules-only`       | Run only the modules' own test binaries.                                        |
+| `--require-modules`    | Fail, instead of skip, when module test binaries are missing. Use it in CI.     |
+| `--large-file-only`    | Run the large-file tests. They need `gpg`, `sq` and about 15 GiB of free space. |
+| `-p N`, `--parallel N` | Split the unit tests across N processes (`auto` picks a number for you).        |
+| `--fresh-homes`        | With `-p`, wipe the per-process home folders first.                             |
+| `--shard-timeout S`    | With `-p`, stop a process after S seconds (default 900).                        |
+| `--asan`               | Run against a separate AddressSanitizer and UBSan build in `build-asan/`.       |
+| `--asan-gui`           | Build that sanitizer tree if needed and start the real app from it.             |
+| `--reconfigure`        | With `--asan` or `--asan-gui`, configure the sanitizer build from scratch.      |
+
+The module tests only exist if you configured with
+`-DGPGFRONTEND_MODULES_BUILD_TESTS=ON`.
+
+The old separate ASan scripts are gone. Use `--asan` and `--asan-gui` instead.
+
+:::caution[`--asan-gui` uses your real data]
+
+`--asan-gui` starts the app with your real GpgFrontend settings and keys, so
+you can repeat your own steps. Keep that in mind before you try anything risky.
+
+:::
+
+## Python Helper Scripts
+
+The Python scripts in `scripts/` need Python 3.14 or newer. Their dependencies
+are listed in `scripts/pyproject.toml` and locked in `scripts/uv.lock`, and
+they are managed with [uv][uv]. There is no `requirements.txt` any more.
+
+```bash
+uv sync --project scripts
+uv run --project scripts python scripts/copyright_checking.py
+```
+
+`copyright_checking.py` only checks by default and never writes. Add `--fix`
+to add the header to files that have none.
+
+The old `.devcontainer/` setup was removed. Set up your environment with the
+steps above instead.
 
 ## Make Your Changes
 
-The repository uses a single-branch model: development happens on `main`, and
-releases are tagged from it. Create a new branch from `main` for your work,
+Development happens on `main`, and releases are tagged from it. The
+`release/2.1` branch keeps the older v2.1.x line (including its Qt5 builds)
+alive. Create a new branch from `main` for your work,
 implement your changes while following the technical requirements above, and
 run the tests before submitting.
 
@@ -238,10 +325,10 @@ Stuck, or unsure how to start? Ask. The maintainer's email address is on the
 [Contact](/overview/contact/) page, and a question early is better than a lot
 of work in the wrong direction.
 
-[deepwiki-gpgfrontend]: https://deepwiki.com/saturneric/GpgFrontend
 [github-corrosion]: https://github.com/corrosion-rs/corrosion
 [rustup]: https://rustup.rs/
 [bktus]: https://bktus.com
 [msys2]: https://www.msys2.org/
 [qt-installer]: https://www.qt.io/download-qt-installer
 [conventionalcommits]: https://www.conventionalcommits.org/
+[uv]: https://docs.astral.sh/uv/

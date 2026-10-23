@@ -18,18 +18,26 @@ For smooth operation, we recommend:
 
 ## OS
 
-- Windows 10 or later (Windows 7 can work with the separate Qt5 build, but it
-  is not recommended)
+- Windows 10 or later. Windows 7 can only run the older v2.1.x line, which
+  still has Qt5 builds. It is not recommended.
 - macOS 15 or later, on both Intel and Apple Silicon
 - Ubuntu 22.04 or later, or a comparable Linux distribution, on both x86_64
   and arm64
 
 > Note: Only 64-bit machines are supported.
 
+:::note[Changed in v2.2.3]
+
+There are no Qt5 builds of v2.2.x. If your system needs Qt5, use a v2.1.x
+release. See [Downloads](/overview/downloads/).
+
+:::
+
 ## GnuPG
 
-- Minimum 2.2.0. Versions below 2.1.0 are refused at startup, and some
-  features need newer versions than 2.2.0.
+- Minimum 2.2.0. Some features need newer versions than 2.2.0.
+- GnuPG older than 2.1.0 is not used at all. GpgFrontend still starts, but it
+  uses the built-in rPGP engine instead.
 - Recommended: 2.4.0 or later.
 - On Windows, the official packages already include a recent GnuPG, so there
   is nothing extra to install.
@@ -54,4 +62,5 @@ as normal. See [Application Secure Key](/advanced/app-secure-key/).
 ## Network
 
 GpgFrontend works without the Internet. You only need a connection for
-optional things, such as update checks or sending public keys to key servers.
+optional things, such as update checks, key servers, or sending and reading
+email.

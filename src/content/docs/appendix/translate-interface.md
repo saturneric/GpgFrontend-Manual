@@ -29,10 +29,14 @@ edited with [Qt Linguist][qt-linguist], a graphical tool. The basics:
 2. The application's translation files are located in
    [`resource/lfs/locale/ts`][locale-ts-dir],
    named `GpgFrontend.<locale>.ts` (for example `GpgFrontend.de_DE.ts`).
-   Integrated modules keep their own translations under
-   `modules/src/<module>/ts/`, so the application and every module always share
-   the same set of languages.
-3. To update an existing language, edit the corresponding `.ts` file. This is
+   Integrated modules keep their own translation files under
+   `modules/src/<module>/ts/`, for example
+   `modules/src/m_email/ts/ModuleEMail.de_DE.ts`. The application and every
+   module always share the same set of languages.
+3. Many features now come from modules: email, instant messaging, key
+   servers, update checking and more. If you cannot find a string in
+   `GpgFrontend.<locale>.ts`, look in the module's own file.
+4. To update an existing language, edit the corresponding `.ts` file. This is
    the most common contribution.
 
 ### How the `.ts` Files Are Generated

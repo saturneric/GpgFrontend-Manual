@@ -6,27 +6,27 @@ sidebar:
   order: 5
 ---
 
-Every copy of GpgFrontend has a version number, like `v2.2.2`. That number does
+Every copy of GpgFrontend has a version number, like `v2.2.3`. That number does
 not tell you how big a release was or how much work went into it.
 
 It tells you which chapter of the project you are holding.
 
 ## What the Numbers Mean
 
-A version number has three parts. Here is `v2.2.2`:
+A version number has three parts. Here is `v2.2.3`:
 
 | Part      | Name       | What it means                                                   |
 | :-------- | :--------- | :-------------------------------------------------------------- |
-| **2**.2.2 | Generation | The app was rebuilt from the ground up. This has happened once. |
-| 2.**2**.2 | Series     | The app took a new direction.                                   |
-| 2.2.**2** | Release    | A new version came out inside that direction.                   |
+| **2**.2.3 | Generation | The app was rebuilt from the ground up. This has happened once. |
+| 2.**2**.3 | Series     | The app took a new direction.                                   |
+| 2.2.**3** | Release    | A new version came out inside that direction.                   |
 
-The first two numbers together are called the **series**. In `v2.2.2`, the series
+The first two numbers together are called the **series**. In `v2.2.3`, the series
 is **2.2**. This is the part that matters most, and it is how the project talks
 about its own versions.
 
 The last number just counts releases inside the series. `v2.2.1` came first, then
-`v2.2.2`.
+`v2.2.2`, then `v2.2.3`.
 
 ## A Big Release Can Still Be a Small Number
 
@@ -38,6 +38,9 @@ the app kept going in the same direction.
 For example, `v2.2.1` to `v2.2.2` looks like a tiny step. That release added
 [Profiles](/advanced/profiles/), portable profile files you can carry around,
 Instant Messaging tokens, a new key list, and a rebuilt settings window.
+
+`v2.2.3` was just as big. It added sending and reading email, signed modules,
+temporary profiles, and key databases that change without a restart.
 
 :::note[How to tell how big a release is]
 Do not judge it by the number. Read the release notes on the
@@ -111,7 +114,7 @@ That is a deliberate choice, described in the maintainer's article
 
 Not every build is meant for everyday use:
 
-- **Stable** is a normal release, like `v2.2.2`. This is the one you want.
+- **Stable** is a normal release, like `v2.2.3`. This is the one you want.
 - **Beta** has extra text on the end, like `v2.2.0-beta.1`. It is an early look at
   a new series, for people who want to help test it.
 - **Nightly** is an automatic test build, made from the newest code. It can be

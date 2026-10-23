@@ -31,6 +31,11 @@ change does not mean OpenSSL is completely absent from all runtime environments.
 - **OpenSSL**: [https://openssl-library.org][openssl-library]
 - **libarchive**: [https://www.libarchive.org][libarchive]
 - **libsodium**: [https://libsodium.gitbook.io/doc][libsodium]
+- **Lua** 5.4.7 (MIT License): [https://www.lua.org][lua]. Built into
+  GpgFrontend to run the scripts that place module menus, buttons and
+  settings pages.
+- **VMime** (GPL-3.0): [https://www.vmime.org][vmime]. Used by the email
+  module to read, build and send email messages.
 
 ### Windows
 
@@ -46,6 +51,13 @@ change does not mean OpenSSL is completely absent from all runtime environments.
 
 - **macOS Application Bundles**: [Link][apple-aboutbundles]
 - **Xcode Command Line Tools**: [https://developer.apple.com/xcode/][apple-xcode]
+
+## Fonts
+
+GpgFrontend includes the **JetBrains Mono NL** 2.304 font, from the
+[JetBrains Mono][jetbrains-mono] project. It is the default font of the text editor
+and the Status Panel. The font is licensed under the SIL Open Font License 1.1
+(OFL-1.1), and the font files are included unchanged.
 
 ## Icons
 
@@ -67,3 +79,6 @@ commercially utilized.
 [apple-aboutbundles]: https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/AboutBundles/AboutBundles.html
 [apple-xcode]: https://developer.apple.com/xcode/
 [iconfont]: https://www.iconfont.cn/
+[lua]: https://www.lua.org
+[vmime]: https://www.vmime.org
+[jetbrains-mono]: https://github.com/JetBrains/JetBrainsMono
