@@ -1,0 +1,61 @@
+# Manual screenshot manifest. Paths in `doc` are relative to the Manual repo;
+# paths in `sources` and `global_sources` are relative to the GpgFrontend repo.
+# Frame sizes are logical pixels and are scaled by the capture DPR (2).
+#
+# Phase 1: four entries, dry run only. Nothing here has been applied yet.
+
+defaults:
+  platform: windows11
+  locale: en_US
+  theme: light
+  size: 1100x680
+  fonts: ["Noto Sans", "Noto Sans CJK SC"]
+  clock: "2026-01-15T10:00:00Z"
+  timeout_ms: 30000
+  frame: {radius: 8, shadow: 12, padding: 24}
+  diff: {tolerance: 16, threshold: 0.001}
+  preview_platforms: [linux-xvfb]
+
+global_sources:
+  - src/screenshot/
+  - resource/screenshot/
+  - scripts/screenshot/
+
+entries:
+  - id: main-window
+    doc: src/content/docs/guides/understand-interface.mdx
+    ref: img-1  # the "Windows" tab of the window tour
+    scenario: main-window
+    size: 1100x680
+    sources:
+      - src/ui/main_window/
+      - src/ui/widgets/
+      - src/core/utils/GpgUtils.cpp
+
+  - id: key-generate-dialog
+    doc: src/content/docs/guides/generate-key.md
+    ref: img-1  # "Step 1: Open the Generate Key Dialog"
+    scenario: key-generate-dialog
+    size: auto  # natural dialog size
+    sources:
+      - src/ui/dialog/key_generate/
+      - src/core/model/GpgKeyGenerateInfo.cpp
+
+  - id: text-decrypt-verify-result
+    doc: src/content/docs/guides/text-operations.md
+    ref: img-1  # page header image; img-3/img-5 are animated GIFs
+    scenario: text-decrypt-verify-result
+    size: 1100x680
+    sources:
+      - src/ui/main_window/
+      - src/ui/widgets/
+    highlight: InfoBoardWidget
+
+  - id: main-window-menu-popup
+    doc: src/content/docs/guides/key-server-operations.md
+    ref: img-1  # "click Keys in the menu bar, then Import Key"
+    scenario: main-window-menu-popup
+    size: 1100x680
+    sources:
+      - src/ui/main_window/
+    highlight: {name: importKeyFromKeyServer, style: arrow}

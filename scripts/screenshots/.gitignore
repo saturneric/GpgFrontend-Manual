@@ -1,0 +1,3 @@
+.venv/
+.screenshots-cache/
+__pycache__/
