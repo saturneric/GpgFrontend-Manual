@@ -52,6 +52,8 @@ group, you pick the group once and you are done.
 
 ![][img-2]
 
+![A key group in the Key ToolBox][img-4]
+
 ## Edit a group
 
 You can change a group whenever you want. Double-click the group in the list to
@@ -157,3 +159,4 @@ tools will not see your groups.
 [img-1]: https://image.cdn.bktus.com/i/2025/06/24/c70891d9ad74b21074be03c7a1d0aabf77d9ea3a.webp
 [img-2]: https://image.cdn.bktus.com/i/2025/06/24/bf35548136bc176635dc0fd1175795597701e1dc.webp
 [img-3]: https://image.cdn.bktus.com/i/2025/06/24/4c4c9e18c0c850b4d1bbbf8e0861e7f24fa72269.webp
+[img-4]: TODO

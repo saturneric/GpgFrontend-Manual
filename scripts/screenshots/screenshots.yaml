@@ -305,7 +305,7 @@ entries:
 
   - id: sym-encrypt-button
     doc: src/content/docs/guides/symmetric-encrypt-decrypt.mdx
-    ref: img-2  # the Sym. Encrypt button
+    ref: img-2  # the Encrypt button, which holds Sym. Encrypt
     scenario: sym-encrypt-button
     highlight: symEncryptButton
     sources: [src/ui/main_window/]
@@ -497,6 +497,58 @@ entries:
     scenario: about-build-info
     size: auto
     sources: [src/ui/dialog/help/]
+
+  # Phase 3: pages updated for v2.2.3, using scenarios that already exist.
+  - id: operations-bar
+    doc: src/content/docs/guides/understand-interface.mdx
+    ref: img-4  # "Operations Bar"
+    scenario: main-window
+    crop: cryptToolBar
+    sources: [src/ui/main_window/]
+
+  - id: encrypt-button-list
+    doc: src/content/docs/guides/understand-interface.mdx
+    ref: img-5  # "Buttons With More Than One Action"
+    scenario: sym-encrypt-menu
+    sources: [src/ui/main_window/]
+
+  - id: status-panel-report
+    doc: src/content/docs/guides/understand-interface.mdx
+    ref: img-6  # "Reading the Report"
+    scenario: text-decrypt-verify-result
+    crop: InfoBoardWidget
+    sources:
+      - src/ui/widgets/
+      - src/ui/function/InfoBoardReport.cpp
+      - src/ui/function/InfoBoardCardConverter.cpp
+
+  - id: settings-key-databases
+    doc: src/content/docs/advanced/key-database.mdx
+    ref: img-1  # "Open the Key Database Settings"
+    scenario: settings-key-databases
+    size: 900x660
+    sources: [src/ui/dialog/settings/, ui/KeyDatabasesSettings.ui]
+
+  - id: key-database-switch-menu
+    doc: src/content/docs/advanced/key-database.mdx
+    ref: img-2  # "Switch Between Key Databases in the Main Window"
+    scenario: key-database-menu
+    highlight: [switchContextButton, keyDatabaseWork]
+    sources: [src/ui/widgets/KeyList.cpp, src/ui/function/KeyDatabaseDisplayNames.cpp]
+
+  - id: key-categories-toolbox
+    doc: src/content/docs/guides/key-categories.mdx
+    ref: img-2  # the category strip in the Key ToolBox
+    scenario: main-window-key-groups
+    highlight: KeyCategoryList
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: key-group-in-toolbox
+    doc: src/content/docs/guides/key-group.md
+    ref: img-4  # the new group listed in the Key ToolBox
+    scenario: main-window-key-groups
+    highlight: key_group
+    sources: [src/ui/main_window/, src/ui/widgets/]
 
   # Made by hand: other operating systems and their own windows.
   - id: interface-macos
