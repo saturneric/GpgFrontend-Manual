@@ -24,7 +24,7 @@ global_sources:
 entries:
   - id: main-window
     doc: src/content/docs/guides/understand-interface.mdx
-    ref: img-1  # the "Windows" tab of the window tour
+    ref: img-1  # the window tour at the top of the page
     scenario: main-window
     size: 1280x960
     sources:
@@ -550,15 +550,7 @@ entries:
     highlight: key_group
     sources: [src/ui/main_window/, src/ui/widgets/]
 
-  # Made by hand: other operating systems and their own windows.
-  - id: interface-macos
-    doc: src/content/docs/guides/understand-interface.mdx
-    ref: img-2
-    status: manual-only
-  - id: interface-linux
-    doc: src/content/docs/guides/understand-interface.mdx
-    ref: img-3
-    status: manual-only
+  # Made by hand: windows the screenshot mode cannot render.
   - id: windows-signature
     doc: src/content/docs/appendix/code-binary-verify.md
     ref: img-1

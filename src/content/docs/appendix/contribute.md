@@ -295,6 +295,28 @@ to add the header to files that have none.
 The old `.devcontainer/` setup was removed. Set up your environment with the
 steps above instead.
 
+## Manual Screenshots
+
+The screenshots in this manual are made automatically, not by hand.
+GpgFrontend has a hidden screenshot mode that opens each window in a fixed
+state, with demo keys, a fixed clock and the same fonts every time. The
+scripts in the Manual repository's `scripts/screenshots/` folder start that
+mode, take each picture, upload it and put the new link into the page. Its
+`README.md` explains how to run them.
+
+- **Windows only:** every screenshot is taken on Windows 11, in English, with
+  the light theme. The manual shows only these, so there is one set to keep up
+  to date. macOS and Linux look a little different, but the windows and
+  buttons are the same.
+- **Build option:** the scripts need a binary configured with
+  `-DGPGFRONTEND_BUILD_SCREENSHOT_MODE=ON`. It cannot be combined with
+  `GPGFRONTEND_BUILD_STABLE`.
+- **Where the scenes live:** each window state is a scenario in
+  `src/screenshot/`, and the demo data is in `resource/screenshot/`.
+- **Changes are noticed:** each screenshot lists the source files it depends
+  on. When you change one of them, the next run marks that screenshot as out
+  of date and takes it again.
+
 ## Make Your Changes
 
 Development happens on `main`, and releases are tagged from it. The
