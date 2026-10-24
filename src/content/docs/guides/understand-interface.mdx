@@ -180,10 +180,37 @@ The Status Panel can now collapse to a thin bar.
 
 </Aside>
 
+### Reading the Report
+
+In the **Status** view, each result is drawn as a small report page with the
+heading **SECURITY OPERATION REPORT**. It has short cards for each file or
+piece of text, with the important facts lined up.
+
+The report also has a round stamp with a check mark, a cross, or an
+exclamation mark. It shows the result at a glance, in the same colours as
+above.
+
+<Aside type="caution">
+
+The stamp is only a picture. It is **not** a digital signature, and it does not
+prove anything about the data. To check a signature, use **Verify** and read
+the result.
+
+</Aside>
+
+<Aside type="note" title="Changed in v2.2.3">
+
+The report has a new look. A cancelled or failed task now always shows a
+clear card, never an empty one.
+
+</Aside>
+
 ### Panel Actions
 
 - **Copy**: copies the status text to the clipboard.
-- **Save**: saves the status text as a plain text file (UTF-8).
+- **Save**: what it saves depends on the view.
+  - In the **Status** view, it saves the report as a picture (a PNG file).
+  - In the **Details** view, it saves the text as a plain text file.
 - **Magnify**: opens the summary in a bigger view. Available only when the
   **Status** view is showing a summary.
 - **Clear**: empties the panel, ready for the next task.
@@ -263,22 +290,66 @@ features. Here are the buttons, from left to right:
 2. **Workspace**: manage and switch between tabs (File Panel, Text Editor, Mail
    Editor).
 3. **Encrypt**: lock the selected files or text for the chosen recipients.
+   This button can also hold **Encrypt & Sign** and **Sym. Encrypt**.
 4. **Decrypt**: unlock the selected files or text. You don't need to pick a key;
-   GPG finds the right private key for you.
+   GPG finds the right private key for you. This button can also hold
+   **Decrypt & Verify**.
 5. **Sign**: sign the selected files or text with your private key.
 6. **Verify**: check the signature on the selected files or text.
 7. **New Keypair**: make a new key pair.
 8. **Import**: add existing public or private keys.
 9. **Manage Keys**: open the key management window.
 
+### Buttons With More Than One Action
+
+Some actions are close cousins, so they share one button:
+
+- The **Encrypt** button holds **Encrypt**, **Encrypt & Sign** and
+  **Sym. Encrypt**.
+- The **Decrypt** button holds **Decrypt** and **Decrypt & Verify**.
+
+Here is how to use such a button:
+
+- **Click it** to run the action shown on the button.
+- **Right-click it, or press and hold it,** to see all its actions. Then pick
+  the one you want.
+- If the action on the button can't be used right now, a click opens the list
+  instead. So you can still reach the other actions.
+
+**Sym. Encrypt** is never the action shown on the button. You always pick it
+from the list.
+
+<Aside type="note" title="Changed in v2.2.3">
+
+Before v2.2.3, every ticked action had its own button. Now related actions
+share one button, and all the buttons have the same width.
+
+</Aside>
+
 ### Customization
 
-You can hide buttons you don't use, or add ones you use often. Open
-**Settings**, go to **Appearance**, and tick what you want under **Actions**.
+You can hide buttons you don't use, or add ones you use often:
 
-One of them is off by default and worth knowing about: **Sym. Encrypt**. It
+1. Open **Settings** and go to **Appearance**.
+2. Under **Toolbar**, tick what you want in the **Actions** list. The list is
+   arranged by button: the Encrypt row, then the Decrypt row, then Sign and
+   Verify.
+3. If you ticked more than one action in the Encrypt or Decrypt row, an
+   **On click** choice appears for that row. Pick the action you want a plain
+   click to run. The other ticked actions stay in the right-click list.
+
+**On click** only lists the actions you ticked. It does not show at all when a
+row has only one action ticked.
+
+One action is off by default and worth knowing about: **Sym. Encrypt**. It
 encrypts with a passphrase instead of a key. See
 [Symmetric Crypto](/guides/symmetric-encrypt-decrypt/).
+
+<Aside type="note" title="New in v2.2.3">
+
+The **On click** choice is new in v2.2.3.
+
+</Aside>
 
 Instant messaging has no toolbar buttons. Its actions are in the
 **Operations** menu. See [Instant Messaging](/guides/instant-messaging/).

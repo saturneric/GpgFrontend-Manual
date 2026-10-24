@@ -38,19 +38,30 @@ approach is:
 
 To encrypt text using symmetric encryption in GpgFrontend (v2.1.9 and later):
 
-### Enable Symmetric Encryption Feature
+### Find Sym. Encrypt
+
+The easiest way: open the **Operations** menu and choose **Sym. Encrypt**.
+
+You can also put it on the toolbar:
 
 1. Open **Settings** and choose **Appearance**.
 2. Under **Toolbar**, in the **Actions** list, tick `Sym. Encrypt`.
 
 ![][img-1]
 
-### Access the Symmetric Encryption Button
-
-After enabling, you'll see a dedicated `Sym. Encrypt` button on the main
-interface.
+`Sym. Encrypt` does not get a button of its own. It joins the **Encrypt**
+button. To use it, right-click the **Encrypt** button (or press and hold it),
+then choose `Sym. Encrypt` from the list. If no key is checked, a plain click
+on **Encrypt** also opens this list.
 
 ![][img-2]
+
+<Aside type="note" title="Changed in v2.2.3">
+
+Before v2.2.3, `Sym. Encrypt` had its own toolbar button. Now it is in the
+**Encrypt** button's list.
+
+</Aside>
 
 ### Enter the Text or Select a File
 
@@ -59,7 +70,8 @@ interface.
 
 ### Symmetric Encryption
 
-1. Without selecting any public key, click the `Sym. Encrypt` button.
+1. Without checking any public key, choose `Sym. Encrypt` from the
+   **Operations** menu, or from the **Encrypt** button's list.
 2. When prompted, enter a strong, unique password.
 3. This password becomes your encryption key.
 4. The text or file will be encrypted into ciphertext.

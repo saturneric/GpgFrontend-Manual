@@ -41,7 +41,7 @@ If you would rather browse, the pages are sorted into four groups:
 | Page                  | Group          | What you change there                                                                  |
 | --------------------- | -------------- | -------------------------------------------------------------------------------------- |
 | **General**           | Application    | Language, how operations behave, where the File Panel opens, which modules to look for |
-| **Appearance**        | Application    | Theme, icon size, which buttons appear on the toolbar, fonts                           |
+| **Appearance**        | Application    | Theme, icon size, which actions appear on the toolbar and what a click runs, fonts    |
 | **Network**           | Application    | Proxy settings                                                                         |
 | **Updates**           | Application    | Whether GpgFrontend checks for a new version when it starts                            |
 | **Key Databases**     | Keys & Engines | Your key databases, which one is the default, and the built-in database's engine       |

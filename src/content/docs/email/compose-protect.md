@@ -155,8 +155,9 @@ Then use the **Security menu**:
 The result shows in the **Status Panel**. The status button changes to tell you
 what the message is now, for example **Encrypted**.
 
-You can also use the **Sign**, **Encrypt** and **Encrypt & Sign** buttons on
-the main toolbar. They do the same thing.
+You can also use the **Sign** and **Encrypt** buttons on the main toolbar. They
+do the same thing. **Encrypt & Sign** is in the **Encrypt** button's list:
+right-click the button to find it.
 
 ### What the Security Menu Offers
 
