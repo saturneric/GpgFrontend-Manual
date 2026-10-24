@@ -327,13 +327,18 @@ def load_manifest(path: Path) -> Manifest:
     return parse_manifest(data, path)
 
 
+# Top-level scripts that prepare a run but never touch what is rendered.
+NOT_PIPELINE = frozenset({"shoot.py"})
+
+
 def pipeline_files(pipeline_dir: Path = SCRIPT_DIR) -> dict[str, str]:
     """sha256 of every pipeline file: top-level *.py plus requirements.txt.
 
-    Tests live under tests/ and are not part of the pipeline.
+    Tests live under tests/ and are not part of the pipeline, nor is
+    anything in NOT_PIPELINE.
     """
     pipeline_dir = Path(pipeline_dir)
-    files = sorted(pipeline_dir.glob("*.py"))
+    files = sorted(f for f in pipeline_dir.glob("*.py") if f.name not in NOT_PIPELINE)
     req = pipeline_dir / "requirements.txt"
     if req.exists():
         files.append(req)
