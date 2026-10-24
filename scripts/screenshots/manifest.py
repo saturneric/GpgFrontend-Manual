@@ -29,7 +29,7 @@ BUILTIN_DEFAULTS: dict[str, Any] = {
     "platform": "windows11",
     "locale": "en_US",
     "theme": "light",
-    "size": "1100x680",
+    "size": "1280x960",
     "fonts": ["Noto Sans", "Noto Sans CJK SC"],
     "clock": "2026-01-15T10:00:00Z",
     "timeout_ms": 30000,

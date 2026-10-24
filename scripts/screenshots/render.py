@@ -26,7 +26,7 @@ from common import (DEFAULT_CACHE, DEFAULT_MANIFEST, PipelineError, UsageError, 
                     load_json, split_ids)
 from manifest import Entry, Manifest, load_manifest
 
-XVFB_SCREEN = "-screen 0 2560x1600x24"
+XVFB_SCREEN = "-screen 0 3200x2000x24"
 EXIT_REASONS = {
     2: "usage-or-precondition",
     3: "timeout",
@@ -357,7 +357,7 @@ class Renderer:
             return RunOutcome(False, code, "environment-gate", ",".join(map(str, env_record["gate_failures"])), env)
         if probe:
             return RunOutcome(True, code, env=env, geometry=None)
-        problem = check_geometry(record, out)
+        problem = check_geometry(record, out, entry.size)
         if problem:
             return RunOutcome(False, code, "geometry", problem, env)
         return RunOutcome(True, code, env=env, geometry=record)
@@ -384,7 +384,14 @@ class Renderer:
         return self._run(entry, probe=False, dest_dir=dest_dir, stem=entry.id)
 
 
-def check_geometry(geometry: dict[str, Any], png: Path) -> str:
+def check_geometry(geometry: dict[str, Any], png: Path,
+                   size: Optional[tuple[int, int]] = None) -> str:
+    """Whether a render record is well formed and matches its PNG.
+
+    With @p size (logical, as the entry asks for it), the captured window
+    must also be exactly that size, so a window resized after the binary's
+    own check is not taken for a good render.
+    """
     if geometry.get("schema") != 1:
         return f"unsupported geometry schema {geometry.get('schema')!r}"
     if geometry.get("error"):
@@ -401,6 +408,15 @@ def check_geometry(geometry: dict[str, Any], png: Path) -> str:
         return f"image_size {geometry.get('image_size')} does not match the PNG {actual}"
     if not isinstance(geometry.get("widgets"), dict) or not isinstance(geometry.get("missing", []), list):
         return "widgets/missing malformed"
+    if size is not None:
+        expected = [size[0] * 2, size[1] * 2]
+        window = next((layer for layer in geometry.get("layers") or []
+                       if isinstance(layer, dict) and layer.get("name") == "window"), None)
+        rect = window.get("rect") if window else None
+        if not isinstance(rect, list) or len(rect) != 4:
+            return "no window layer to check the size against"
+        if list(rect[2:]) != expected:
+            return f"size-mismatch: window captured at {rect[2]}x{rect[3]}, expected {expected[0]}x{expected[1]}"
     return ""
 
 

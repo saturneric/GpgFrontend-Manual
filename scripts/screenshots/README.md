@@ -35,34 +35,34 @@ Pass it with `--binary`, or set `GF_SCREENSHOT_BINARY`.
 
 ## Files
 
-| File | Purpose |
-|---|---|
-| `screenshots.yaml` | the manifest: defaults, global sources, entries |
-| `screenshots.lock.json` | committed record per entry: url, hashes, commit, env |
-| `.screenshots-cache/` | ignored: previews, baselines, transactions, `last-run.json` |
-| `check.py` | status report and inventory |
-| `run.py` | select, render, post-process, diff, upload, apply, recover |
-| `render.py` | runs the binary in a throwaway environment (also a debug CLI) |
-| `postprocess.py` | frame, shadow, padding, highlights, PNG and lossless WebP |
-| `diff.py` | compares with the local baseline |
-| `upload.py` | EasyImages upload |
-| `txn.py` | the durable upload/apply transaction |
-| `apply.py` | doc definition and lock writes |
-| `manifest.py`, `docrefs.py`, `envhash.py`, `fonts.py`, `gitutil.py`, `common.py` | shared pieces |
+| File                                                                             | Purpose                                                       |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `screenshots.yaml`                                                               | the manifest: defaults, global sources, entries               |
+| `screenshots.lock.json`                                                          | committed record per entry: url, hashes, commit, env          |
+| `.screenshots-cache/`                                                            | ignored: previews, baselines, transactions, `last-run.json`   |
+| `check.py`                                                                       | status report and inventory                                   |
+| `run.py`                                                                         | select, render, post-process, diff, upload, apply, recover    |
+| `render.py`                                                                      | runs the binary in a throwaway environment (also a debug CLI) |
+| `postprocess.py`                                                                 | frame, shadow, padding, highlights, PNG and lossless WebP     |
+| `diff.py`                                                                        | compares with the local baseline                              |
+| `upload.py`                                                                      | EasyImages upload                                             |
+| `txn.py`                                                                         | the durable upload/apply transaction                          |
+| `apply.py`                                                                       | doc definition and lock writes                                |
+| `manifest.py`, `docrefs.py`, `envhash.py`, `fonts.py`, `gitutil.py`, `common.py` | shared pieces                                                 |
 
 ## Manifest
 
 ```yaml
 defaults:
-  platform: windows11          # the only reference platform
+  platform: windows11 # the only reference platform
   locale: en_US
-  theme: light                 # light | dark
-  size: 1100x680               # logical size, or "auto" for a dialog's natural size
+  theme: light # light | dark
+  size: 1280x960 # logical size, or "auto" for a dialog's natural size
   fonts: ["Noto Sans", "Noto Sans CJK SC"]
   clock: "2026-01-15T10:00:00Z"
   timeout_ms: 30000
-  frame: {radius: 8, shadow: 12, padding: 24}   # logical px, scaled by DPR 2
-  diff: {tolerance: 16, threshold: 0.001}
+  frame: { radius: 8, shadow: 12, padding: 24 } # logical px, scaled by DPR 2
+  diff: { tolerance: 16, threshold: 0.001 }
   preview_platforms: [linux-xvfb]
 global_sources: [src/screenshot/, resource/screenshot/, scripts/screenshot/]
 entries:
@@ -71,11 +71,11 @@ entries:
     ref: img-1
     scenario: main-window
     sources: [src/ui/main_window/]
-    highlight: InfoBoardWidget            # or {name: X, style: box|arrow}, or a list
+    highlight: InfoBoardWidget # or {name: X, style: box|arrow}, or a list
   - id: drag-to-applications
     doc: src/content/docs/overview/getting-started.mdx
     ref: img-1
-    status: manual-only                   # or animated; never rendered
+    status: manual-only # or animated; never rendered
 ```
 
 `sources` and `global_sources` are paths in the GpgFrontend repository. Any
@@ -87,19 +87,19 @@ entry key can override a default.
 python check.py --gpgfrontend ../../../GpgFrontend [--binary <exe>] [--inventory] [--json]
 ```
 
-| Status | Meaning |
-|---|---|
-| `missing` | the ref has no definition, an empty or `TODO` URL, or the entry has no lock record |
-| `unmanaged` | an image ref (reference, inline or `<img>`) that is not in the manifest |
-| `orphan` | a manifest entry whose ref is no longer on the page |
-| `unknown-baseline` | the lock commit is not in the repository, or not an ancestor of HEAD |
-| `outdated` | the entry's sources or the global sources changed since the lock commit |
-| `inputs-changed` | settings, pipeline scripts, requirements or the optimizer changed |
-| `env-changed` | the probed environment hash differs from the lock |
-| `env-unchecked` | no binary, so the environment was not probed (or the probe failed; see details) |
-| `dirty-sources` | uncommitted changes in the relevant sources |
-| `platform-mismatch` | the probed platform is not the entry's platform |
-| `ok` | none of the above |
+| Status              | Meaning                                                                            |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| `missing`           | the ref has no definition, an empty or `TODO` URL, or the entry has no lock record |
+| `unmanaged`         | an image ref (reference, inline or `<img>`) that is not in the manifest            |
+| `orphan`            | a manifest entry whose ref is no longer on the page                                |
+| `unknown-baseline`  | the lock commit is not in the repository, or not an ancestor of HEAD               |
+| `outdated`          | the entry's sources or the global sources changed since the lock commit            |
+| `inputs-changed`    | settings, pipeline scripts, requirements or the optimizer changed                  |
+| `env-changed`       | the probed environment hash differs from the lock                                  |
+| `env-unchecked`     | no binary, so the environment was not probed (or the probe failed; see details)    |
+| `dirty-sources`     | uncommitted changes in the relevant sources                                        |
+| `platform-mismatch` | the probed platform is not the entry's platform                                    |
+| `ok`                | none of the above                                                                  |
 
 Without a binary, every entry is `env-unchecked` and never `ok`. Each distinct
 (locale, theme, fonts, clock, size) is probed once per run.
@@ -212,7 +212,7 @@ throwaway directory, `<work root>/run`, emptied before every render:
   `TEMP`, the Key Databases settings page shows that path, and a per-user temp
   folder would put your account name into the manual.
 - Linux: `HOME`, `XDG_*` and `TMPDIR` point into it, under
-  `xvfb-run -s "-screen 0 2560x1600x24"`. The default work root is
+  `xvfb-run -s "-screen 0 3200x2000x24"`. The default work root is
   `/tmp/gf-shot-<uid>`. Keep `--work-root` short: gpg-agent's socket lives
   deep inside it and Unix sockets are limited to 108 bytes.
 
@@ -245,7 +245,10 @@ risk small.
 ## Windows 11 checklist (reference renders)
 
 1. Dispatch `build.yml` with `screenshot: true`, then download the
-   `gpgfrontend-screenshot-windows-2022-portable` artifact and extract it.
+   `screenshot-windows-2022-portable` artifact. Extract the portable zip in
+   the same folder as its `BUILD-INFO.json`, so the freshness check finds the
+   commit. CI only builds this binary and checks nothing: the steps below,
+   on this machine, are the first time it runs.
 2. Install Noto Sans and Noto Sans CJK SC if they are not installed.
 3. Run a dry run, in light and dark (set `theme` in the manifest, or add
    entries):
@@ -256,6 +259,7 @@ risk small.
    ```
 
    Any gate failure is reported by name.
+
 4. Review the previews in `.screenshots-cache\preview\`.
 5. If anything fails, send `.screenshots-cache\last-run.json` and the env
    records in `.screenshots-cache\preview\*.json`. They contain no `del` links.

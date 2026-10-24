@@ -15,7 +15,7 @@ import postprocess
 import upload
 from common import UsageError
 from manifest import Highlight, load_manifest, parse_manifest
-from render import RenderConfig, Renderer
+from render import RenderConfig, Renderer, check_geometry
 
 
 def geometry(w: int, h: int, **extra) -> dict:
@@ -92,7 +92,7 @@ class ManifestTest(unittest.TestCase):
         x, y = m.entries
         self.assertIsNone(x.size)
         self.assertEqual(x.size_str, "auto")
-        self.assertEqual(y.size, (1100, 680))
+        self.assertEqual(y.size, (1280, 960))
         self.assertEqual(y.fonts, ("Noto Sans", "Noto Sans CJK SC"))
         self.assertEqual(y.highlight, (Highlight("a"), Highlight("b", "arrow")))
         self.assertEqual(y.diff, {"tolerance": 16, "threshold": 0.001})
@@ -173,6 +173,34 @@ class RendererTest(World):
     def test_screenshot_list(self) -> None:
         listed = self.renderer().list_scenarios()
         self.assertEqual(listed["key-generate-dialog"], {"size": "auto", "capture_mode": "dialog"})
+
+
+class CheckGeometryTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = short_tempdir("gfgeo")
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+
+    def record(self, image: tuple[int, int], window: list[int]) -> tuple[dict, Path]:
+        png = self.tmp / "r.png"
+        Image.new("RGBA", image, (240, 240, 240, 255)).save(png)
+        return geometry(*image, layers=[{"name": "window", "rect": window}]), png
+
+    def test_window_at_the_requested_size_passes(self) -> None:
+        g, png = self.record((2200, 1360), [0, 0, 2200, 1360])
+        self.assertEqual(check_geometry(g, png, (1100, 680)), "")
+
+    def test_window_resized_late_is_caught(self) -> None:
+        g, png = self.record((2482, 1712), [0, 0, 2482, 1712])
+        self.assertIn("size-mismatch", check_geometry(g, png, (1100, 680)))
+
+    def test_composite_checks_the_window_layer_not_the_canvas(self) -> None:
+        g, png = self.record((2400, 1360), [0, 0, 2200, 1360])
+        g["capture_mode"] = "composite"
+        self.assertEqual(check_geometry(g, png, (1100, 680)), "")
+
+    def test_auto_size_skips_the_check(self) -> None:
+        g, png = self.record((300, 200), [0, 0, 300, 200])
+        self.assertEqual(check_geometry(g, png, None), "")
 
 
 class UploadParseTest(unittest.TestCase):

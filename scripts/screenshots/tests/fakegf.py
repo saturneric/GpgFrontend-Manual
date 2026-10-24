@@ -29,10 +29,10 @@ from PIL import Image, ImageDraw  # noqa: E402
 import envhash  # noqa: E402
 
 SCENARIOS = {
-    "main-window": ("1100x680", "window"),
+    "main-window": ("1280x960", "window"),
     "key-generate-dialog": ("auto", "dialog"),
-    "text-decrypt-verify-result": ("1100x680", "window"),
-    "main-window-menu-popup": ("1100x680", "composite"),
+    "text-decrypt-verify-result": ("1280x960", "window"),
+    "main-window-menu-popup": ("1280x960", "composite"),
     "demo": ("320x200", "window"),
 }
 

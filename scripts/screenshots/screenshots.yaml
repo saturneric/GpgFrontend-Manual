@@ -8,7 +8,7 @@ defaults:
   platform: windows11
   locale: en_US
   theme: light
-  size: 1100x680
+  size: 1280x960
   fonts: ["Noto Sans", "Noto Sans CJK SC"]
   clock: "2026-01-15T10:00:00Z"
   timeout_ms: 30000
@@ -26,7 +26,7 @@ entries:
     doc: src/content/docs/guides/understand-interface.mdx
     ref: img-1  # the "Windows" tab of the window tour
     scenario: main-window
-    size: 1100x680
+    size: 1280x960
     sources:
       - src/ui/main_window/
       - src/ui/widgets/
@@ -45,7 +45,7 @@ entries:
     doc: src/content/docs/guides/text-operations.md
     ref: img-1  # page header image; img-3/img-5 are animated GIFs
     scenario: text-decrypt-verify-result
-    size: 1100x680
+    size: 1280x960
     sources:
       - src/ui/main_window/
       - src/ui/widgets/
@@ -55,7 +55,7 @@ entries:
     doc: src/content/docs/guides/key-server-operations.md
     ref: img-1  # "click Keys in the menu bar, then Import Key"
     scenario: main-window-menu-popup
-    size: 1100x680
+    size: 1280x960
     sources:
       - src/ui/main_window/
     highlight: {name: importKeyFromKeyServer, style: arrow}
