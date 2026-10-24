@@ -121,23 +121,125 @@ the name before you click.
 
 ## Encrypt, Decrypt, Sign, or Verify a File
 
-Once a file is selected in the File Panel, pick the right key in the **Key
-Toolbox** and click the matching toolbar button:
+The buttons are the same as for text: **Encrypt**, **Decrypt**, **Sign** and
+**Verify** on the toolbar, or the same items in the **Operations** menu. They
+act on the file you selected in the File Panel. See
+[Find the Buttons](/guides/text-operations/#find-the-buttons) for the full list
+and shortcuts.
 
-- **Encrypt**: choose the recipient's **public key**, then click **Encrypt**.
-- **Decrypt**: make sure your **private key** is in your keyring, then click
-  **Decrypt**. You don't need to pick a key; GpgFrontend finds the right one.
-- **Sign**: choose your **private key**, then click **Sign**.
-- **Verify**: make sure the sender's **public key** is in your keyring, then click
-  **Verify**.
+GpgFrontend never changes your original file. It always writes a **new file**
+next to it, in the same folder. The new file's name tells you what it is:
 
-GpgFrontend checks your choice of keys before it starts. For example, it tells
-you why a key cannot be used to encrypt. See
-[Encryption Safety](/guides/encryption-safety/).
+| Task    | You select       | New file made          | Example          |
+| ------- | ---------------- | ---------------------- | ---------------- |
+| Encrypt | `report.pdf`     | name + `.gpg`          | `report.pdf.gpg` |
+| Sign    | `report.pdf`     | name + `.sig`          | `report.pdf.sig` |
+| Decrypt | `report.pdf.gpg` | name without `.gpg`    | `report.pdf`     |
+| Verify  | `report.pdf.sig` | nothing, only a result |                  |
+
+If you turned on ASCII output, encrypting and signing make `.asc` files
+instead. See [Choose ASCII or Binary Output](#choose-ascii-or-binary-output).
+
+If a file with the new name is already there, GpgFrontend asks first. It only
+replaces the old file after the task has worked. If the task fails, no new file
+is left behind.
+
+### Encrypt a File
+
+You need the **recipient's public key**.
+
+1. **Select the file.** In the File Panel, click the file once so it is
+   highlighted.
+2. **Pick the recipient.** In the **Key ToolBox** on the right, tick the box in
+   front of the recipient's public key. Tick your own key too if you want to
+   open the file later yourself.
+3. **Click Encrypt.**
+4. **Answer any questions.** GpgFrontend may stop to check your recipients. See
+   [Encryption Safety](/guides/encryption-safety/).
+5. **Find the new file.** It appears in the same folder, for example
+   `report.pdf.gpg`. The **Status Panel** shows whether it worked.
+6. **Send the new file**, not the original.
 
 ![][img-3]
 
+:::caution
+
+If you tick **no key** and click **Encrypt**, GpgFrontend asks for a password
+and encrypts with that instead
+([symmetric encryption](/guides/symmetric-encrypt-decrypt/)). If you meant to
+encrypt for a person, click **Cancel** and tick their key first.
+
+:::
+
+### Decrypt a File
+
+You need **your private key**.
+
+1. **Select the encrypted file** in the File Panel, for example
+   `report.pdf.gpg`.
+2. **Click Decrypt.** You do not need to tick a key. GpgFrontend finds the
+   right one.
+3. **Enter your passphrase** when asked.
+4. **Find the new file.** It appears in the same folder, with `.gpg` (or
+   `.asc`) taken off the end: `report.pdf`. If the name has no such ending,
+   GpgFrontend adds `.out` instead.
+
+If the file was also signed, use **Decrypt & Verify** from the **Operations**
+menu (or the **Decrypt** button's list) to check the signature at the same
+time.
+
 ![][img-4]
+
+### Sign a File
+
+Signing makes a small, separate signature file. The original file stays as it
+is. You send both files together. You need **your private key**.
+
+1. **Select the file** in the File Panel.
+2. **Pick your key.** In the **Key ToolBox**, tick the box in front of **your
+   own** key. If you tick no key, GpgFrontend shows **No Key Checked** and
+   stops.
+3. **Click Sign.**
+4. **Enter your passphrase** when asked.
+5. **Find the signature file.** It appears next to the original, for example
+   `report.pdf.sig`.
+6. **Send both files**: `report.pdf` and `report.pdf.sig`. Keep their names as
+   they are.
+
+:::caution
+
+After signing, do not change the original file, not even by saving it again
+without edits. If it changes, the signature no longer matches.
+
+:::
+
+### Verify a File
+
+You need **the sender's public key**, and both files: the original and its
+signature.
+
+1. **Put both files in the same folder**, with their names unchanged, for
+   example `report.pdf` and `report.pdf.sig`.
+2. **Select the signature file** (`report.pdf.sig` or `report.pdf.asc`) in the
+   File Panel. Select the signature, not the original.
+3. **Click Verify.** You do not need to tick a key.
+4. **Read the result** in the **Status Panel**: green means the file is
+   unchanged and signed by the key shown; red means it was changed or the
+   signature does not match.
+
+GpgFrontend finds the original by taking `.sig` or `.asc` off the signature's
+name. If it cannot find that file, a window called **File to be Verified**
+asks for the full path of the original:
+
+- Type or paste the full path to the original file and click **OK**.
+- Leave the box **empty** and click **OK** if the file you selected holds the
+  data and the signature together in one file.
+
+If you select a `.gpg` or `.pgp` file, GpgFrontend treats it as one file that
+holds both the data and the signature.
+
+If the sender's public key is missing, the **Missing Keys** window opens. See
+[If the Sender's Key Is Missing](/guides/text-operations/#if-the-senders-key-is-missing).
 
 ## Drag and Drop Files
 
