@@ -20,6 +20,7 @@ from typing import Any, Optional
 from PIL import Image
 
 import envhash
+import hkpmock
 import fonts
 import gitutil
 from common import (DEFAULT_CACHE, DEFAULT_MANIFEST, PipelineError, UsageError, canonical_json,
@@ -188,6 +189,19 @@ class Renderer:
             raise UsageError(f"{self.xvfb[0]} not found; it is needed for Linux previews")
         self._font_cache: dict[str, dict] = {}
         self._probe_cache: dict[tuple, RunOutcome] = {}
+        self._key_server: Optional[hkpmock.MockKeyServer] = None
+
+    def key_server(self) -> Optional[hkpmock.MockKeyServer]:
+        """The local mock key server, started on first use; None without demo keys."""
+        directory = self.fixtures().parent / "keyserver"
+        if self._key_server is None and (directory / "listing.colons").is_file():
+            self._key_server = hkpmock.MockKeyServer(directory)
+        return self._key_server
+
+    def close(self) -> None:
+        if self._key_server is not None:
+            self._key_server.close()
+            self._key_server = None
 
     # Paths -----------------------------------------------------------------
 
@@ -237,6 +251,9 @@ class Renderer:
         session = fresh_session_base()
         if session is not None:
             env[SESSION_STORAGE_ENV] = str(session)
+        key_server = self.key_server()
+        if key_server is not None:
+            env[hkpmock.PROXY_ENV] = key_server.address
         return env
 
     # Command lines -----------------------------------------------------------

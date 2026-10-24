@@ -40,7 +40,7 @@ BUILTIN_DEFAULTS: dict[str, Any] = {
 
 _ENTRY_KEYS = {
     "id", "doc", "ref", "scenario", "locale", "platform", "size", "theme",
-    "fonts", "clock", "timeout_ms", "sources", "highlight", "status",
+    "fonts", "clock", "timeout_ms", "sources", "highlight", "crop", "status",
     "frame", "diff",
 }
 _DEFAULT_KEYS = set(BUILTIN_DEFAULTS)
@@ -76,6 +76,7 @@ class Entry:
     timeout_ms: int
     sources: tuple[str, ...]
     highlight: tuple[Highlight, ...]
+    crop: str | None  # a named widget the image is cut down to, or the whole capture
     status: str | None
     frame: dict[str, Any] = field(hash=False, compare=False)
     diff: dict[str, Any] = field(hash=False, compare=False)
@@ -107,6 +108,7 @@ class Entry:
             "timeout_ms": self.timeout_ms,
             "sources": list(self.sources),
             "highlight": [h.as_dict() for h in self.highlight],
+            "crop": self.crop,
             "status": self.status,
             "frame": dict(self.frame),
             "diff": dict(self.diff),
@@ -241,6 +243,9 @@ def _resolve_entry(index: int, raw: Any, defaults: dict[str, Any]) -> Entry:
     if not isinstance(timeout_ms, int) or timeout_ms <= 0:
         raise _fail(where, "timeout_ms must be a positive integer")
     doc = raw["doc"].replace("\\", "/").strip()
+    crop = raw.get("crop")
+    if crop is not None and (not isinstance(crop, str) or not crop.strip()):
+        raise _fail(where, f"crop must be a widget name, got {crop!r}")
     return Entry(
         id=entry_id,
         doc=doc,
@@ -255,6 +260,7 @@ def _resolve_entry(index: int, raw: Any, defaults: dict[str, Any]) -> Entry:
         timeout_ms=timeout_ms,
         sources=_str_list(where + ".sources", raw.get("sources")),
         highlight=_highlights(where, raw.get("highlight")),
+        crop=crop.strip() if crop else None,
         status=status,
         frame=_merge_section(where + ".frame", defaults["frame"], raw.get("frame"), _FRAME_KEYS),
         diff=_merge_section(where + ".diff", defaults["diff"], raw.get("diff"), _DIFF_KEYS),

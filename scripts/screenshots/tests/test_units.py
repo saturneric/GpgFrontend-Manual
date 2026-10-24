@@ -57,6 +57,17 @@ class PostprocessTest(unittest.TestCase):
                                     self.tmp, "r")
         self.assertEqual(len({plain.pixels_sha256, boxed.pixels_sha256, arrow.pixels_sha256}), 3)
 
+    def test_crop_cuts_to_the_named_widget(self) -> None:
+        from dataclasses import replace
+        entry = replace(self.entry_with(Highlight("box")), crop="box")
+        out = postprocess.process(self.raw, geometry(200, 120), entry, self.tmp, "c")
+        pad = self.entry.frame["padding"] * 2
+        with Image.open(out.png) as img:
+            self.assertEqual(img.size, (60 + 2 * pad, 30 + 2 * pad))
+        with self.assertRaises(postprocess.PostprocessError) as ctx:
+            postprocess.process(self.raw, geometry(200, 120), replace(self.entry, crop="nowhere"), self.tmp, "x")
+        self.assertEqual(ctx.exception.reason, "highlight-unknown")
+
     def test_unknown_or_missing_highlight_fails(self) -> None:
         for name, reason in (("gone", "highlight-missing"), ("nowhere", "highlight-unknown")):
             with self.assertRaises(postprocess.PostprocessError) as ctx:
@@ -113,8 +124,12 @@ class ManifestTest(unittest.TestCase):
 
     def test_real_manifest_loads(self) -> None:
         m = load_manifest(Path(__file__).resolve().parents[1] / "screenshots.yaml")
-        self.assertEqual([e.id for e in m.entries], ["main-window", "key-generate-dialog",
-                                                      "text-decrypt-verify-result", "main-window-menu-popup"])
+        ids = [e.id for e in m.entries]
+        self.assertEqual(ids[:4], ["main-window", "key-generate-dialog",
+                                   "text-decrypt-verify-result", "main-window-menu-popup"])
+        self.assertEqual(len(ids), len(set(ids)))
+        targets = [(e.doc, e.ref) for e in m.entries]
+        self.assertEqual(len(targets), len(set(targets)), "two entries replace the same image")
 
 
 class RendererTest(World):

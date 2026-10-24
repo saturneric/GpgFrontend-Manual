@@ -144,6 +144,14 @@ def apply_highlights(image: Image.Image, geometry: dict[str, Any], highlights: t
     return Image.alpha_composite(image, overlay)
 
 
+def apply_crop(image: Image.Image, geometry: dict[str, Any], crop: str | None) -> Image.Image:
+    """Cut the capture down to one named widget, after highlights are drawn."""
+    if crop is None:
+        return image
+    x, y, w, h = _rect_for(geometry, crop)
+    return image.crop((x, y, x + w, y + h))
+
+
 def apply_frame(image: Image.Image, frame: dict[str, Any], dpr: int) -> Image.Image:
     radius = int(frame["radius"]) * dpr
     blur = int(frame["shadow"]) * dpr
@@ -200,6 +208,7 @@ def process(raw_png: Path, geometry: dict[str, Any], entry: Entry, out_dir: Path
     if list(image.size) != list(geometry.get("image_size") or []):
         raise PostprocessError("size-mismatch", f"PNG {image.size} vs geometry {geometry.get('image_size')}")
     image = apply_highlights(image, geometry, entry.highlight, dpr)
+    image = apply_crop(image, geometry, entry.crop)
     image = apply_frame(image, entry.frame, dpr)
     png = Path(out_dir) / f"{stem}.png"
     webp = Path(out_dir) / f"{stem}.webp"

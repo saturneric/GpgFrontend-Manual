@@ -2,7 +2,7 @@
 # paths in `sources` and `global_sources` are relative to the GpgFrontend repo.
 # Frame sizes are logical pixels and are scaled by the capture DPR (2).
 #
-# Phase 1: four entries, dry run only. Nothing here has been applied yet.
+# Phase 1 entries first, then Phase 2 batches. Nothing has been applied yet.
 
 defaults:
   platform: windows11
@@ -59,3 +59,467 @@ entries:
     sources:
       - src/ui/main_window/
     highlight: {name: importKeyFromKeyServer, style: arrow}
+
+  # Phase 2, batch 1: Key Details, owner trust and revocation.
+  - id: key-details-overview
+    doc: src/content/docs/guides/view-keypair-info.md
+    ref: img-1  # the Key Details window
+    scenario: key-details-keypair
+    size: auto
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: key-details-owner
+    doc: src/content/docs/guides/view-keypair-info.md
+    ref: img-2  # "Owner"
+    scenario: key-details-keypair
+    size: auto
+    crop: ownerBox
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: key-details-primary-key
+    doc: src/content/docs/guides/view-keypair-info.md
+    ref: img-3  # "Primary Key"
+    scenario: key-details-keypair
+    size: auto
+    crop: primaryKeyBox
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: key-details-algorithm-detail
+    doc: src/content/docs/guides/view-keypair-info.md
+    ref: img-4  # "Algorithm Detail"
+    scenario: key-details-keypair
+    size: auto
+    crop: primaryKeyBox
+    highlight: algorithmDetail
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: key-details-fingerprint
+    doc: src/content/docs/guides/view-keypair-info.md
+    ref: img-5  # "Fingerprint"
+    scenario: key-details-keypair
+    size: auto
+    crop: fingerprintBox
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: key-details-uids
+    doc: src/content/docs/guides/view-keypair-info.md
+    ref: img-6  # "UID Info"
+    scenario: key-details-uids
+    size: auto
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: key-details-uid-signatures
+    doc: src/content/docs/guides/view-keypair-info.md
+    ref: img-7  # "Signatures on a UID"
+    scenario: key-details-uids
+    size: auto
+    crop: uidSignatureBox
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: key-details-keychain
+    doc: src/content/docs/guides/view-keypair-info.md
+    ref: img-8  # "Subkey Info"
+    scenario: key-details-keychain
+    size: auto
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: key-details-operations-public
+    doc: src/content/docs/guides/view-keypair-info.md
+    ref: img-9  # "On a Public Key"
+    scenario: key-details-operations-public
+    size: auto
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: key-details-operations-private
+    doc: src/content/docs/guides/view-keypair-info.md
+    ref: img-10  # "On a Private Key"
+    scenario: key-details-operations
+    size: auto
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: owner-trust-column
+    doc: src/content/docs/guides/openpgp-trust-manage.md
+    ref: img-1  # "Owner Trust": the Trust column in KeyPair Management
+    scenario: key-management-window
+    size: 1200x760
+    highlight: trustColumn
+    sources: [src/ui/main_window/, src/core/model/GpgKeyTableModel.cpp]
+
+  - id: owner-trust-context-menu
+    doc: src/content/docs/guides/openpgp-trust-manage.md
+    ref: img-2  # "How to set Owner Trust"
+    scenario: key-context-menu
+    highlight: {name: setOwnerTrustLevel, style: arrow}
+    sources: [src/ui/main_window/]
+
+  - id: uid-signatures-highlighted
+    doc: src/content/docs/guides/openpgp-trust-manage.md
+    ref: img-3  # "Signing UIDs"
+    scenario: key-details-uids
+    size: auto
+    highlight: uidSignatureBox
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: revoke-certificate-button
+    doc: src/content/docs/advanced/key-revocation.mdx
+    ref: img-1  # "Generating a Key Revocation Certificate"
+    scenario: key-details-operations
+    size: auto
+    highlight: revokeCertificateButton
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: revocation-options
+    doc: src/content/docs/advanced/key-revocation.mdx
+    ref: img-2  # the reason code and text
+    scenario: revocation-options-dialog
+    size: auto
+    sources: [src/ui/dialog/RevocationOptionsDialog.cpp, src/ui/function/GenerateRevocationCert.cpp]
+
+  - id: revoked-key-details
+    doc: src/content/docs/advanced/key-revocation.mdx
+    ref: img-3  # a revoked key in Key Details
+    scenario: key-details-revoked
+    size: auto
+    sources: [src/ui/dialog/keypair_details/, src/ui/main_window/]
+
+  # Phase 2, batch 2: key management, categories, groups, import and export.
+  - id: key-management
+    doc: src/content/docs/guides/key-management.mdx
+    ref: img-1  # the KeyPair Management window
+    scenario: key-management-window
+    size: 1200x760
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: key-categories
+    doc: src/content/docs/guides/key-categories.mdx
+    ref: img-1  # "Where to Find Them"
+    scenario: key-management-window
+    size: 1200x760
+    highlight: KeyCategoryList
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: import-key-toolbar
+    doc: src/content/docs/guides/import-export-key-pair.md
+    ref: img-1  # Import on the main toolbar
+    scenario: main-window
+    highlight: importKeyButton
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: import-key-key-management
+    doc: src/content/docs/guides/import-export-key-pair.md
+    ref: img-2  # Import Key in KeyPair Management
+    scenario: key-management-window
+    size: 1200x760
+    highlight: importKeyButton
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: export-public-key
+    doc: src/content/docs/guides/import-export-key-pair.md
+    ref: img-3  # "Save to a File"
+    scenario: key-details-operations
+    size: auto
+    highlight: exportPublicKeyButton
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: export-checked-keys
+    doc: src/content/docs/guides/import-export-key-pair.md
+    ref: img-4  # "Export Several at Once"
+    scenario: key-management-checked
+    size: 1200x760
+    highlight: [checkColumn, exportKeyButton]
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: export-private-key
+    doc: src/content/docs/guides/import-export-key-pair.md
+    ref: img-5  # "Export a Private Key"
+    scenario: key-details-operations
+    size: auto
+    highlight: exportPrivateKeyButton
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: key-group-checked-keys
+    doc: src/content/docs/guides/key-group.md
+    ref: img-1  # tick the keys, then the new-group button
+    scenario: main-window-checked-keys
+    highlight: [checkColumn, keyGroupButton]
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: key-group-create
+    doc: src/content/docs/guides/key-group.md
+    ref: img-2  # the New Key Group dialog
+    scenario: key-group-create-dialog
+    size: auto
+    sources: [src/ui/dialog/KeyGroupCreationDialog.cpp, src/ui/widgets/KeyList.cpp]
+
+  - id: key-group-manage
+    doc: src/content/docs/guides/key-group.md
+    ref: img-3  # "Edit a group"
+    scenario: key-group-manage-dialog
+    size: auto
+    sources: [src/ui/dialog/KeyGroupManageDialog.cpp]
+
+  # Phase 2, batch 3: main window operations, files and symmetric encryption.
+  # The former animations are stills of the moment that matters; encrypting
+  # is shown before the click, since its output differs on every run.
+  - id: index-main-window
+    doc: src/content/docs/index.mdx
+    ref: img-1  # "See GpgFrontend in Action"
+    scenario: text-decrypt-verify-result
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: text-encrypt
+    doc: src/content/docs/guides/text-operations.md
+    ref: img-2  # "Encrypt Text"
+    scenario: text-encrypt-ready
+    highlight: [checkColumn, encryptButton]
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: text-decrypt
+    doc: src/content/docs/guides/text-operations.md
+    ref: img-3  # "Decrypt Text"
+    scenario: text-decrypt-result
+    highlight: InfoBoardWidget
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: text-sign
+    doc: src/content/docs/guides/text-operations.md
+    ref: img-4  # "Sign Text"
+    scenario: text-sign-result
+    highlight: InfoBoardWidget
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: text-verify
+    doc: src/content/docs/guides/text-operations.md
+    ref: img-5  # "Verify a Signature"
+    scenario: text-verify-result
+    highlight: InfoBoardWidget
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: settings-sym-encrypt
+    doc: src/content/docs/guides/symmetric-encrypt-decrypt.mdx
+    ref: img-1  # Appearance > Toolbar > Sym. Encrypt
+    scenario: settings-sym-encrypt
+    size: 900x660
+    highlight: symmetricEncrCheckBox
+    sources: [src/ui/dialog/settings/]
+
+  - id: sym-encrypt-button
+    doc: src/content/docs/guides/symmetric-encrypt-decrypt.mdx
+    ref: img-2  # the Sym. Encrypt button
+    scenario: sym-encrypt-button
+    highlight: symEncryptButton
+    sources: [src/ui/main_window/]
+
+  - id: file-panel-open
+    doc: src/content/docs/guides/file-operations.md
+    ref: img-1  # a file picked in the File Panel
+    scenario: file-panel
+    highlight: [openButton, fileTree]
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: file-panel-workspace-menu
+    doc: src/content/docs/guides/file-operations.md
+    ref: img-2  # Workspace > New File Panel
+    scenario: workspace-menu
+    highlight: newFilePanel
+    sources: [src/ui/main_window/]
+
+  - id: file-encrypt
+    doc: src/content/docs/guides/file-operations.md
+    ref: img-3  # encrypting a file
+    scenario: file-panel
+    highlight: [checkColumn, encryptButton]
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: file-decrypt-verify
+    doc: src/content/docs/guides/file-operations.md
+    ref: img-4  # decrypting and verifying a file
+    scenario: file-decrypt-verify-result
+    highlight: InfoBoardWidget
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: file-batch-mode-button
+    doc: src/content/docs/guides/file-operations.md
+    ref: img-5  # the batch mode button
+    scenario: file-batch
+    crop: fileToolRow
+    highlight: batchModeButton
+    sources: [src/ui/widgets/]
+
+  - id: file-batch-mode
+    doc: src/content/docs/guides/file-operations.md
+    ref: img-6  # several files at once
+    scenario: file-batch
+    highlight: [fileTree, encryptButton]
+    sources: [src/ui/main_window/, src/ui/widgets/]
+
+  - id: settings-binary-mode
+    doc: src/content/docs/guides/file-operations.md
+    ref: img-7  # Settings > General > Use Binary Mode
+    scenario: settings-binary-mode
+    size: 900x660
+    highlight: asciiModeCheckBox
+    sources: [src/ui/dialog/settings/]
+
+  - id: file-options-ascii-armor
+    doc: src/content/docs/guides/file-operations.md
+    ref: img-8  # options menu > Use ASCII Armor
+    scenario: file-options-menu
+    crop: optionsArea
+    highlight: useAsciiArmor
+    sources: [src/ui/widgets/]
+
+  - id: sym-encrypt-menu
+    doc: src/content/docs/guides/symmetric-encrypt-decrypt.mdx
+    ref: img-3  # running it: the encrypt button's Sym. Encrypt entry
+    scenario: sym-encrypt-menu
+    highlight: symEncrypt
+    sources: [src/ui/main_window/]
+
+  # Phase 2, batch 4: subkeys, key packages, the key server and build info.
+  # The key server is render.py's local mock (hkpmock.py), reached through a
+  # proxy as http://keys.example.org; nothing leaves the machine.
+  - id: subkey-new-subkey
+    doc: src/content/docs/guides/generate-use-subkey.md
+    ref: img-1  # Keychain tab > New Subkey
+    scenario: key-details-keychain
+    size: auto
+    highlight: newSubkeyButton
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: subkey-generate
+    doc: src/content/docs/guides/generate-use-subkey.md
+    ref: img-2  # the Generate New Subkey window
+    scenario: subkey-generate-dialog
+    size: auto
+    sources: [src/ui/dialog/key_generate/]
+
+  - id: subkey-export
+    doc: src/content/docs/guides/generate-use-subkey.md
+    ref: img-3  # "Export a Subkey"
+    scenario: keychain-subkey
+    size: auto
+    highlight: exportSubkeyButton
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: subkey-switch-database
+    doc: src/content/docs/guides/generate-use-subkey.md
+    ref: img-4  # "Switch Key Database"
+    scenario: key-database-menu
+    highlight: keyDatabaseWork
+    sources: [src/ui/widgets/]
+
+  - id: subkey-import-file
+    doc: src/content/docs/guides/generate-use-subkey.md
+    ref: img-5  # "Import the Subkey"
+    scenario: import-menu
+    highlight: importFromFile
+    sources: [src/ui/main_window/]
+
+  - id: subkey-imported
+    doc: src/content/docs/guides/generate-use-subkey.md
+    ref: img-6  # "Verify Imported Subkey"
+    scenario: work-keychain-subkey
+    size: auto
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: subkey-hash-symbol
+    doc: src/content/docs/guides/generate-use-subkey.md
+    ref: img-7  # "Meaning of '#' Symbol"
+    scenario: work-key-list
+    highlight: aliceType
+    sources: [src/ui/widgets/, src/core/model/GpgKeyTableModel.cpp]
+
+  - id: subkey-primary-not-exists
+    doc: src/content/docs/guides/generate-use-subkey.md
+    ref: img-8  # "Primary Key Not Exists"
+    scenario: work-keypair
+    size: auto
+    highlight: primaryKeyExistence
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: subkey-encrypt
+    doc: src/content/docs/guides/generate-use-subkey.md
+    ref: img-9  # "Use Subkey to Encrypt"
+    scenario: work-encrypt-ready
+    highlight: encryptButton
+    sources: [src/ui/main_window/]
+
+  - id: key-package-export-menu
+    doc: src/content/docs/advanced/key-package.mdx
+    ref: img-1  # Export Key > Export As Key Package
+    scenario: key-package-export-menu
+    size: 1200x760
+    highlight: exportKeyPackage
+    sources: [src/ui/main_window/]
+
+  - id: key-package-export-dialog
+    doc: src/content/docs/advanced/key-package.mdx
+    ref: img-2  # the Export As Key Package dialog
+    scenario: key-package-export-dialog
+    size: auto
+    sources: [src/ui/dialog/import_export/ExportKeyPackageDialog.cpp]
+
+  - id: key-package-import-menu
+    doc: src/content/docs/advanced/key-package.mdx
+    ref: img-3  # Import Key > Key Package
+    scenario: key-package-import-menu
+    size: 1200x760
+    highlight: importKeyPackage
+    sources: [src/ui/main_window/]
+
+  - id: key-server-search
+    doc: src/content/docs/guides/key-server-operations.md
+    ref: img-2  # search results
+    scenario: key-server-search
+    size: 820x600
+    highlight: [searchEdit, searchResults]
+    sources: [src/ui/main_window/]
+
+  - id: key-server-import
+    doc: src/content/docs/guides/key-server-operations.md
+    ref: img-3  # "After You Import"
+    scenario: key-server-import
+    size: auto
+    sources: [src/ui/dialog/import_export/KeyImportDetailDialog.cpp]
+
+  - id: key-server-operations
+    doc: src/content/docs/guides/key-server-operations.md
+    ref: img-4  # "Work With One Key"
+    scenario: key-server-operations
+    size: auto
+    highlight: publishKey
+    sources: [src/ui/dialog/keypair_details/]
+
+  - id: build-information
+    doc: src/content/docs/appendix/code-binary-verify.md
+    ref: img-4  # About > Build Information; changes with every build
+    scenario: about-build-info
+    size: auto
+    sources: [src/ui/dialog/help/]
+
+  # Made by hand: other operating systems and their own windows.
+  - id: interface-macos
+    doc: src/content/docs/guides/understand-interface.mdx
+    ref: img-2
+    status: manual-only
+  - id: interface-linux
+    doc: src/content/docs/guides/understand-interface.mdx
+    ref: img-3
+    status: manual-only
+  - id: windows-signature
+    doc: src/content/docs/appendix/code-binary-verify.md
+    ref: img-1
+    status: manual-only
+  - id: macos-notarization
+    doc: src/content/docs/appendix/code-binary-verify.md
+    ref: img-2
+    status: manual-only
+  - id: linux-signature
+    doc: src/content/docs/appendix/code-binary-verify.md
+    ref: img-3
+    status: manual-only
+  - id: drag-to-applications
+    doc: src/content/docs/overview/getting-started.mdx
+    ref: img-1
+    status: manual-only

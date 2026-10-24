@@ -72,6 +72,7 @@ entries:
     scenario: main-window
     sources: [src/ui/main_window/]
     highlight: InfoBoardWidget # or {name: X, style: box|arrow}, or a list
+    crop: ownerBox # optional: cut the image down to this named widget
   - id: drag-to-applications
     doc: src/content/docs/overview/getting-started.mdx
     ref: img-1
