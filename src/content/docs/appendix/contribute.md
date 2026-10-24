@@ -174,14 +174,16 @@ may work but are not officially verified.
 
 ### Install Qt 6
 
-Any Qt 6.x release works; CI currently builds against Qt 6.11.3 (set in
+Qt 6.5 or later is required; CI currently builds against Qt 6.11.3 (set in
 `.github/actions/install-qt6/action.yml`). The required
 modules are Core, Widgets, PrintSupport, Network, LinguistTools, Xml, and Sql,
 plus Concurrent for the modules sub-project.
 
 - On Linux, use the [Qt online installer][qt-installer]
   or your package manager (on Ubuntu: `qt6-base-dev qt6-tools-dev` and related
-  packages).
+  packages). The packaged Qt of Ubuntu 22.04 (6.2) and 24.04 (6.4) is too
+  old; use the online installer there, or a newer distribution such as
+  Debian 13.
 - On macOS, use the Qt online installer or `brew install qt`.
 - On Windows with MSYS2, Qt is already covered by the `mingw-w64-x86_64-qt6-*`
   packages above.

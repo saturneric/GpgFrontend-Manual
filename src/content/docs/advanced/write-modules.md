@@ -56,7 +56,8 @@ identity header, wires up translations, and builds and signs the `.gfmodule`
 package. `LUA_SCRIPTS` needs the `ui` capability. The script is embedded in the
 module and covered by its signature.
 
-The module must match the Qt major version of the GpgFrontend build it runs in.
+The module must match the Qt major version of the GpgFrontend build it runs in,
+and needs Qt 6.5 or later.
 
 ## `module.json`
 
