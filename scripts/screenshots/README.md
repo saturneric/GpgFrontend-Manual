@@ -5,8 +5,39 @@ mode. They render each image, post-process it, compare it with the last one,
 upload it to the image CDN and rewrite the `[img-N]: url` definition in the
 page. Everything runs locally. Nothing is uploaded unless you pass `--upload`.
 
-The scripts never run git in this repository. They only read the GpgFrontend
-repository, with `rev-parse`, `cat-file`, `merge-base`, `diff` and `status`.
+The scripts never run git in this repository. The pipeline only reads the
+GpgFrontend repository, with `rev-parse`, `cat-file`, `merge-base`, `diff` and
+`status`. Only the `shoot.py` helper writes to it: it clones it, or
+fast-forwards a clean clone.
+
+## Quick start
+
+`shoot.py` does the whole job in one command. It creates the venv, clones or
+updates GpgFrontend, checks the fonts, then runs `run.py`:
+
+```powershell
+cd scripts\screenshots
+py -3 shoot.py --binary <path>\GpgFrontend.exe --install-fonts   # dry run
+py -3 shoot.py --binary <path>\GpgFrontend.exe --upload          # render, upload, rewrite docs
+```
+
+| Option                                                 | Meaning                                                                                                                                 |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `--binary`                                             | screenshot-mode binary (else `GF_SCREENSHOT_BINARY`)                                                                                    |
+| `--gpgfrontend`                                        | GpgFrontend clone (else `GF_SHOTS_GPGFRONTEND`, else `GpgFrontend-Src` next to this repository); cloned when missing                    |
+| `--ref`                                                | branch to clone and fast-forward, default `main`                                                                                        |
+| `--no-update`                                          | use the clone as it is                                                                                                                  |
+| `--install-fonts`                                      | Windows: download the pinned Noto Sans 2.015 and Noto Sans CJK SC 2.004 releases, check their sha256, install them for the current user |
+| `--ignore-running`                                     | start although another GpgFrontend is running                                                                                           |
+| `--only`, `--force`, `--repeat`, `--apply`, `--upload` | passed to `run.py`                                                                                                                      |
+| `--recover`                                            | only `run.py --recover`                                                                                                                 |
+| `-- <args>`                                            | anything else for `run.py`, e.g. `-- --accept-baseline main-window`                                                                     |
+
+The clone is only updated when it is on `--ref` and has no uncommitted changes
+to tracked files; otherwise the run stops and says why. The run also stops
+while another GpgFrontend is running, because its writes to the per-user app
+data would fail the footprint check. `shoot.py` is not part of `inputs_hash`.
+The exit code is `run.py`'s; 2 also covers a setup step that failed.
 
 ## Setup
 
@@ -40,6 +71,7 @@ Pass it with `--binary`, or set `GF_SCREENSHOT_BINARY`.
 | `screenshots.yaml`                                                               | the manifest: defaults, global sources, entries               |
 | `screenshots.lock.json`                                                          | committed record per entry: url, hashes, commit, env          |
 | `.screenshots-cache/`                                                            | ignored: previews, baselines, transactions, `last-run.json`   |
+| `shoot.py`                                                                       | one-command helper: venv, GpgFrontend clone, fonts, `run.py`  |
 | `check.py`                                                                       | status report and inventory                                   |
 | `run.py`                                                                         | select, render, post-process, diff, upload, apply, recover    |
 | `render.py`                                                                      | runs the binary in a throwaway environment (also a debug CLI) |
@@ -249,18 +281,17 @@ risk small.
    the same folder as its `BUILD-INFO.json`, so the freshness check finds the
    commit. CI only builds this binary and checks nothing: the steps below,
    on this machine, are the first time it runs.
-2. Install Noto Sans and Noto Sans CJK SC if they are not installed.
-3. Run a dry run, in light and dark (set `theme` in the manifest, or add
-   entries):
+2. Close any running GpgFrontend. Run a dry run; `--install-fonts` installs
+   Noto Sans and Noto Sans CJK SC if they are missing:
 
    ```powershell
-   .venv\Scripts\python run.py --gpgfrontend <GpgFrontend repo> --binary <path>\GpgFrontend.exe `
-       --only main-window,key-generate-dialog,text-decrypt-verify-result,main-window-menu-popup --repeat 2
+   py -3 shoot.py --binary <path>\GpgFrontend.exe --install-fonts --force --repeat 2
    ```
 
    Any gate failure is reported by name.
 
-4. Review the previews in `.screenshots-cache\preview\`.
+3. Review the previews in `.screenshots-cache\preview\`.
+4. When they are right, run it again with `--upload` to replace the images.
 5. If anything fails, send `.screenshots-cache\last-run.json` and the env
    records in `.screenshots-cache\preview\*.json`. They contain no `del` links.
 
