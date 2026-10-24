@@ -229,10 +229,10 @@ the **Key Servers** settings page, the module is turned off. See
 - Never upload a private key to any server.
 
 [img-1]:
-  https://image.cdn.bktus.com/i/2025/06/24/3660f65893c4e79954486f1b3cfb5cb6b09a13d0.webp
+  https://image.cdn.bktus.com/i/2026/10/25/9a4f7f24b06350ca33c12537e24132a8aa5f5b9e-0.webp
 [img-2]:
-  https://image.cdn.bktus.com/i/2025/06/24/0dc8821cc3c83c7bb3266f3a1059ce59fabc4a8f.webp
+  https://image.cdn.bktus.com/i/2026/10/25/9f2cad47949d7c4f240af7c56b16a39bc835acfe-0.webp
 [img-3]:
-  https://image.cdn.bktus.com/i/2025/06/24/4efe7862bc47b95387a8ee247d4b767dbbfa36b6.webp
+  https://image.cdn.bktus.com/i/2026/10/25/a177f77e64b91ca9b4e70cf220c76cb26ed928cc-0.webp
 [img-4]:
-  https://image.cdn.bktus.com/i/2025/06/24/34505c6435d485dc2f8ce680a8c8f630fbb18b2a.webp
+  https://image.cdn.bktus.com/i/2026/10/25/cf48e6741b2783b5515468d8cebfbae60cd4402f-0.webp

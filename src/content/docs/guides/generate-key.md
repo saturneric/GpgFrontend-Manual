@@ -176,4 +176,4 @@ your engine and version actually produce before you share the key.
 
 :::
 
-[img-1]: https://image.cdn.bktus.com/i/2026/06/30/398635c90c069535c343216224f5fa4d881dd605.webp
+[img-1]: https://image.cdn.bktus.com/i/2026/10/25/95cc2834979501ae38df682d66247dc014cd829e-0.webp

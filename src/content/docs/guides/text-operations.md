@@ -141,8 +141,8 @@ plain text from staying in memory. You can turn undo on in **Settings**. See
 - **Sign only** (no encryption) for public documents that need to be trusted but
   not hidden.
 
-[img-1]: https://image.cdn.bktus.com/i/2026/06/30/8a3b4ad29fce3f6969e8cdb2a10f9efcb06f7ba0.webp
-[img-2]: https://image.cdn.bktus.com/i/2025/06/24/19483c04524fd94afff85cac502a1030bdb4c477.gif
-[img-3]: https://image.cdn.bktus.com/i/2025/06/24/5e16d1a75fb7e7bfb4d14f7fadd57144494b131c.gif
-[img-4]: https://image.cdn.bktus.com/i/2025/06/24/8c6db160d26f94e75138134d319c29bd2c3736b7.gif
-[img-5]: https://image.cdn.bktus.com/i/2025/06/24/6ccba3133341e6e6ea095a2dc00bf23c63ed8f56.gif
+[img-1]: https://image.cdn.bktus.com/i/2026/10/25/c907844a077196ac1863fd0555febb222e7af009-0.webp
+[img-2]: https://image.cdn.bktus.com/i/2026/10/25/b35cf459fb95b156a99489dc098b694925f2f07b-0.webp
+[img-3]: https://image.cdn.bktus.com/i/2026/10/25/1700acb9bf24d4221a6803d5ced85e276aa2c728-0.webp
+[img-4]: https://image.cdn.bktus.com/i/2026/10/25/1eaf74f27c05412471bb5213357296ed8acd4928-0.webp
+[img-5]: https://image.cdn.bktus.com/i/2026/10/25/e2bd1c117432909b8d5d55545e55d068650eccc3-0.webp

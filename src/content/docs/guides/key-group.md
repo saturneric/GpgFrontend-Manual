@@ -156,7 +156,7 @@ Key Groups live only inside GpgFrontend. They are not the same as GnuPG's
 "keygroup" feature and they are not saved in the `gpg.conf` file. Other OpenPGP
 tools will not see your groups.
 
-[img-1]: https://image.cdn.bktus.com/i/2025/06/24/c70891d9ad74b21074be03c7a1d0aabf77d9ea3a.webp
-[img-2]: https://image.cdn.bktus.com/i/2025/06/24/bf35548136bc176635dc0fd1175795597701e1dc.webp
-[img-3]: https://image.cdn.bktus.com/i/2025/06/24/4c4c9e18c0c850b4d1bbbf8e0861e7f24fa72269.webp
-[img-4]: TODO
+[img-1]: https://image.cdn.bktus.com/i/2026/10/25/57e048acae5d42e3a10525cdb04063ca86e1d313-0.webp
+[img-2]: https://image.cdn.bktus.com/i/2026/10/25/1dbb1a9a7c3b0485afb742541f7ca84ade0df728-0.webp
+[img-3]: https://image.cdn.bktus.com/i/2026/10/25/b3aac622bf1127f32ad3ab69979bc75ba70e2f04-0.webp
+[img-4]: https://image.cdn.bktus.com/i/2026/10/25/1df29ddb6cbc7e0c069083a26b9b8e8fe9067da3-0.webp

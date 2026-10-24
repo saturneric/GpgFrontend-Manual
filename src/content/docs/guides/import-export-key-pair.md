@@ -143,8 +143,8 @@ Back up your revocation certificates in the same place. See
 
 :::
 
-[img-1]: https://image.cdn.bktus.com/i/2025/06/24/65a0c1fce233c2fc15afd362b432eb53f684c73d.webp
-[img-2]: https://image.cdn.bktus.com/i/2025/06/24/0f9c76d074dd6c364603baea3c565e66c9a8d62d.webp
-[img-3]: https://image.cdn.bktus.com/i/2025/06/24/b9ea951b5c94e8f18cc22e6e415778b97818718f.webp
-[img-4]: https://image.cdn.bktus.com/i/2025/06/24/0ce7919189489923f38e3871e407dad96b788174.webp
-[img-5]: https://image.cdn.bktus.com/i/2025/06/24/9dbc57b795542a5f9c2f78875d5be1f9c692ed0d.webp
+[img-1]: https://image.cdn.bktus.com/i/2026/10/25/89b5efe0a8c06de2117dc72c62ac7df6cada8c7e-0.webp
+[img-2]: https://image.cdn.bktus.com/i/2026/10/25/abf57aec551b57ef4d64cca52cb789af1f7427bf-0.webp
+[img-3]: https://image.cdn.bktus.com/i/2026/10/25/325f7d43bec3eb3f9e8663eefe54ca975e13cd79-0.webp
+[img-4]: https://image.cdn.bktus.com/i/2026/10/25/5e494676304a77f8e488862567fbf1aba6e51782-0.webp
+[img-5]: https://image.cdn.bktus.com/i/2026/10/25/ff3e0ec7b761365a2c2b1a1aafd15887abb49ba2-0.webp

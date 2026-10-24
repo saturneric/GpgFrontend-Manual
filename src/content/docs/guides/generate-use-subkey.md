@@ -304,12 +304,12 @@ Keep these points in mind before you share a key made with the rPGP engine:
   **Kyber-768 + Curve25519** and **Kyber-1024 + X448**. Other pairings may need
   GnuPG 2.5+ or may not be available.
 
-[img-1]: https://image.cdn.bktus.com/i/2026/06/30/3d94fa5ca42185abee5dfdfc1530961902fbe680.webp
-[img-2]: https://image.cdn.bktus.com/i/2026/06/30/66dbd8460933ec7cd6bfece33daa84e2d622d90f.webp
-[img-3]: https://image.cdn.bktus.com/i/2025/06/24/b4f1dc5e6eb6f683300564a4ba998e48d22b75b4.webp
-[img-4]: https://image.cdn.bktus.com/i/2024/11/29/0e8ff19e-4189-65db-5732-1a2e79d9b8a6.webp
-[img-5]: https://image.cdn.bktus.com/i/2024/11/29/8f3456ba-6275-4ef9-8e41-49b9b6bc0dfa.webp
-[img-6]: https://image.cdn.bktus.com/i/2024/11/29/ac01142d-1ffa-ba32-daac-36ddf0729ff1.webp
-[img-7]: https://image.cdn.bktus.com/i/2024/11/29/78d9bc07-8b96-302b-25d1-cbb88815f16a.webp
-[img-8]: https://image.cdn.bktus.com/i/2024/11/29/05594a4b-cdad-7ad4-070b-58e24701cce3.webp
-[img-9]: https://image.cdn.bktus.com/i/2024/11/29/20047766-48ab-f4a3-175c-241c7d5c0dbf.webp
+[img-1]: https://image.cdn.bktus.com/i/2026/10/25/3d80f37afdcba716f159e71845e4061579fd1f42-0.webp
+[img-2]: https://image.cdn.bktus.com/i/2026/10/25/78a292d6564af52d3d3eea1cb075ec1049cd3594-0.webp
+[img-3]: https://image.cdn.bktus.com/i/2026/10/25/b81c094eeb21ab2960363edfc0e3d0a0d59cade2-0.webp
+[img-4]: https://image.cdn.bktus.com/i/2026/10/25/1fa8f6a2ad0da9c2a71ca2863f240989e3ef73d7-0.webp
+[img-5]: https://image.cdn.bktus.com/i/2026/10/25/b6f773ca4059abe8a98eff10277dd7b3efd93490-0.webp
+[img-6]: https://image.cdn.bktus.com/i/2026/10/25/f22c7532447bd6871215688ad6fa0cbda92434cb-0.webp
+[img-7]: https://image.cdn.bktus.com/i/2026/10/25/b82131ba65e55baf29d58c15870d2763a34a165d-0.webp
+[img-8]: https://image.cdn.bktus.com/i/2026/10/25/33d147efb4b19d95e25b9affae748fbd9638a20b-0.webp
+[img-9]: https://image.cdn.bktus.com/i/2026/10/25/95c95c3b8efcf06171c881bcea380b96aa977b44-0.webp
