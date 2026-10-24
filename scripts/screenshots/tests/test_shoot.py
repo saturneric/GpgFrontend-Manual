@@ -139,6 +139,65 @@ class FontPackageTest(unittest.TestCase):
         self.assertFalse((self.tmp / "cache" / "pkg.zip").exists())
 
 
+class DemoDataTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = short_tempdir("gfsd")
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+        base = self.tmp / "resource" / "screenshot"
+        write(base / "demo-gnupghome" / "pubring.kbx", "x")
+        write(base / "demo-gnupghome" / "private-keys-v1.d" / "A.key", "x")
+        write(base / "fixtures" / "decrypt-verify.asc", "x")
+        write(base / "keyserver" / "listing.colons", "x")
+        self.base = base
+
+    def test_complete_demo_data_passes(self) -> None:
+        self.assertEqual(shoot.missing_demo_data(self.tmp), [])
+        shoot.check_demo_data(self.tmp)
+
+    def test_missing_secret_keys_are_named(self) -> None:
+        shutil.rmtree(self.base / "demo-gnupghome" / "private-keys-v1.d")
+        (self.base / "demo-gnupghome" / "private-keys-v1.d").mkdir()  # present but empty
+        with self.assertRaisesRegex(shoot.ShootError, "demo secret keys"):
+            shoot.check_demo_data(self.tmp)
+
+    def test_missing_key_server_data_is_named(self) -> None:
+        (self.base / "keyserver" / "listing.colons").unlink()
+        self.assertEqual(len(shoot.missing_demo_data(self.tmp)), 1)
+        self.assertIn("key server", shoot.missing_demo_data(self.tmp)[0])
+
+
+class Sized:
+    def __init__(self, size, fonts=("Noto Sans",)) -> None:
+        self.size = size
+        self.fonts = fonts
+
+
+class DisplayTest(unittest.TestCase):
+    def test_largest_fixed_size_ignores_auto(self) -> None:
+        entries = [Sized((1280, 960)), Sized((1200, 760)), Sized(None), Sized((900, 1000))]
+        self.assertEqual(shoot.largest_size(entries), (1280, 1000))
+        self.assertIsNone(shoot.largest_size([Sized(None)]))
+
+    def test_4k_at_200_percent_fits(self) -> None:
+        # 3840x2160 with a 72 px taskbar
+        self.assertEqual(shoot.display_problem((1280, 960), (3840, 2088)), "")
+
+    def test_small_display_is_reported(self) -> None:
+        problem = shoot.display_problem((1280, 960), (2560, 1528))
+        self.assertIn("2592x2016", problem)
+        self.assertIn("2560x1528", problem)
+
+    def test_families_are_collected_once_in_order(self) -> None:
+        entries = [Sized(None, ("Noto Sans", "Noto Sans CJK SC")), Sized(None, ("Noto Sans",))]
+        self.assertEqual(shoot.manifest_families(entries), ["Noto Sans", "Noto Sans CJK SC"])
+
+    def test_only_narrows_the_selection(self) -> None:
+        every = shoot.selected_entries(None)
+        one = shoot.selected_entries(every[0].id)
+        self.assertEqual([e.id for e in one], [every[0].id])
+        self.assertTrue(all(e.renderable for e in every))
+
+
 class PipelineFilesTest(unittest.TestCase):
     def test_helper_is_not_part_of_inputs_hash(self) -> None:
         tmp = short_tempdir("gfsp")

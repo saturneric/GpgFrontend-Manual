@@ -13,7 +13,8 @@ fast-forwards a clean clone.
 ## Quick start
 
 `shoot.py` does the whole job in one command. It creates the venv, clones or
-updates GpgFrontend, checks the fonts, then runs `run.py`:
+updates GpgFrontend, checks the demo data, the fonts and the display, then
+runs `run.py`:
 
 ```powershell
 cd scripts\screenshots
@@ -29,6 +30,7 @@ py -3 shoot.py --binary <path>\GpgFrontend.exe --upload          # render, uploa
 | `--no-update`                                          | use the clone as it is                                                                                                                  |
 | `--install-fonts`                                      | Windows: download the pinned Noto Sans 2.015 and Noto Sans CJK SC 2.004 releases, check their sha256, install them for the current user |
 | `--ignore-running`                                     | start although another GpgFrontend is running                                                                                           |
+| `--no-display-check`                                   | Windows: skip the check that the largest capture fits the display                                                                       |
 | `--only`, `--force`, `--repeat`, `--apply`, `--upload` | passed to `run.py`                                                                                                                      |
 | `--recover`                                            | only `run.py --recover`                                                                                                                 |
 | `-- <args>`                                            | anything else for `run.py`, e.g. `-- --accept-baseline main-window`                                                                     |
@@ -36,7 +38,13 @@ py -3 shoot.py --binary <path>\GpgFrontend.exe --upload          # render, uploa
 The clone is only updated when it is on `--ref` and has no uncommitted changes
 to tracked files; otherwise the run stops and says why. The run also stops
 while another GpgFrontend is running, because its writes to the per-user app
-data would fail the footprint check. `shoot.py` is not part of `inputs_hash`.
+data would fail the footprint check. It stops when the clone lacks the demo
+secret keys or the mock key server's keys (`resource/screenshot/keyserver`),
+which the decrypt, sign and key server scenarios need. On Windows it stops
+when the largest selected fixed size, plus the title bar, does not fit the
+primary display's work area at 2x (1280x960 needs about 2592x2016 px, so a
+4K display at 200%); a window the platform shrinks would fail the size check
+only after it was rendered. `shoot.py` is not part of `inputs_hash`.
 The exit code is `run.py`'s; 2 also covers a setup step that failed.
 
 ## Setup

@@ -12,17 +12,22 @@ Steps, each stopping with a message when it cannot go on:
 2. Clones the GpgFrontend repository, or fast-forwards an existing clone. A
    clone with local changes, or on another branch, is left alone and the run
    stops; `--no-update` uses it as it is.
-3. Checks that every font family in the manifest resolves. On Windows,
-   `--install-fonts` downloads the pinned Noto releases, verifies them and
-   installs them for the current user (no admin rights needed).
-4. Refuses to start while another GpgFrontend is running: its writes to the
+3. Checks the clone has the demo data the scenarios need: the demo secret
+   keys (decrypt and sign scenarios) and the mock key server's keys.
+4. Checks that every font family the selected entries use resolves. On
+   Windows, `--install-fonts` downloads the pinned Noto releases, verifies them
+   and installs them for the current user (no admin rights needed).
+5. Windows: checks that the largest selected capture fits the primary
+   display's work area at 2x, since a window the platform shrinks fails the
+   size check only after it has been rendered.
+6. Refuses to start while another GpgFrontend is running: its writes to the
    per-user app data would fail the footprint check.
-5. Runs run.py with the options given here, plus anything after `--`.
+7. Runs run.py with the options given here, plus anything after `--`.
 
 This helper only prepares and calls the pipeline. It is not part of
 `inputs_hash`, and it never runs git in the Manual repository.
 
-`--recover` skips steps 2-4 and runs `run.py --recover`.
+`--recover` skips steps 2-6 and runs `run.py --recover`.
 """
 
 from __future__ import annotations
@@ -53,6 +58,20 @@ BINARY_ENV = "GF_SCREENSHOT_BINARY"
 CDN_ENVS = ("GF_MANUAL_CDN_API", "GF_MANUAL_CDN_TOKEN")
 
 _FONTS_KEY = r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+
+# What render.py hands the binary from the clone, relative to its root. A
+# directory must hold at least one file.
+DEMO_DATA = (
+    ("resource/screenshot/demo-gnupghome/pubring.kbx", "the demo keyring"),
+    ("resource/screenshot/demo-gnupghome/private-keys-v1.d", "the demo secret keys"),
+    ("resource/screenshot/fixtures", "the demo fixtures"),
+    ("resource/screenshot/keyserver/listing.colons", "the mock key server's keys"),
+)
+
+CAPTURE_DPR = 2
+# Room around a fixed-size window: Windows 11 title bar and resize borders,
+# in logical pixels, with some slack.
+FRAME_ALLOWANCE = (16, 48)
 
 
 class ShootError(Exception):
@@ -125,6 +144,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="Windows: download and install missing Noto fonts for this user")
     p.add_argument("--ignore-running", action="store_true",
                    help="start even though another GpgFrontend is running")
+    p.add_argument("--no-display-check", action="store_true",
+                   help="Windows: skip the check that the largest capture fits the display")
     p.add_argument("--only", help="comma separated entry ids")
     p.add_argument("--force", action="store_true", help="render every entry, stale or not")
     p.add_argument("--repeat", type=int, help="render N times and require identical bytes")
@@ -251,18 +272,46 @@ def sync_source(path: Path, ref: str, url: str, update: bool) -> str:
     return new
 
 
-# --- 3. fonts --------------------------------------------------------------------
+# --- 3. demo data ----------------------------------------------------------------
 
 
-def manifest_families() -> list[str]:
+def missing_demo_data(source: Path) -> list[str]:
+    missing = []
+    for rel, what in DEMO_DATA:
+        path = source / rel
+        present = any(path.iterdir()) if path.is_dir() else path.is_file()
+        if not present:
+            missing.append(f"{what} ({rel})")
+    return missing
+
+
+def check_demo_data(source: Path) -> None:
+    missing = missing_demo_data(source)
+    if missing:
+        raise ShootError(f"{source} lacks " + "; ".join(missing)
+                         + ". Update the clone to a GpgFrontend commit that has them")
+
+
+# --- 4. fonts --------------------------------------------------------------------
+
+
+def selected_entries(only: Optional[str]) -> list:
+    """The renderable entries this run may render; unknown ids are run.py's to report."""
     from manifest import load_manifest  # needs the venv (PyYAML)
 
+    entries = [e for e in load_manifest(HERE / "screenshots.yaml").entries if e.renderable]
+    if only:
+        ids = {part.strip() for part in only.split(",") if part.strip()}
+        entries = [e for e in entries if e.id in ids]
+    return entries
+
+
+def manifest_families(entries: list) -> list[str]:
     families: list[str] = []
-    for entry in load_manifest(HERE / "screenshots.yaml").entries:
-        if entry.renderable:
-            for family in entry.fonts:
-                if family not in families:
-                    families.append(family)
+    for entry in entries:
+        for family in entry.fonts:
+            if family not in families:
+                families.append(family)
     return families
 
 
@@ -332,10 +381,10 @@ def install_user_fonts(files: list[tuple[Path, str]]) -> None:  # pragma: no cov
                                              smto_abortifhung, 1000, None)
 
 
-def ensure_fonts(install: bool) -> None:
+def ensure_fonts(families: list[str], install: bool) -> None:
     if os.name != "nt":
         return  # Linux previews: the binary's own font gate reports by name
-    missing = missing_fonts(manifest_families())
+    missing = missing_fonts(families)
     if not missing:
         return
     packages = {p.family: p for p in FONT_PACKAGES}
@@ -349,12 +398,63 @@ def ensure_fonts(install: bool) -> None:
         pkg = packages[family]
         archive = fetch_package(pkg, CACHE / "fonts")
         install_user_fonts(extract_members(archive, pkg, CACHE / "fonts" / "files"))
-    still = missing_fonts(manifest_families())
+    still = missing_fonts(families)
     if still:
         raise ShootError(f"font(s) still not resolved after installing: {', '.join(still)}")
 
 
-# --- 4. running GpgFrontend --------------------------------------------------------
+# --- 5. display --------------------------------------------------------------------
+
+
+def largest_size(entries: list) -> Optional[tuple[int, int]]:
+    """The largest fixed logical size among @p entries; "auto" sizes do not count."""
+    sizes = [e.size for e in entries if e.size is not None]
+    if not sizes:
+        return None
+    return max(w for w, _ in sizes), max(h for _, h in sizes)
+
+
+def display_problem(size: tuple[int, int], work_area_px: tuple[int, int]) -> str:
+    """Why a window of logical @p size cannot be shown at 2x, or ""."""
+    need = ((size[0] + FRAME_ALLOWANCE[0]) * CAPTURE_DPR, (size[1] + FRAME_ALLOWANCE[1]) * CAPTURE_DPR)
+    if work_area_px[0] >= need[0] and work_area_px[1] >= need[1]:
+        return ""
+    return (f"the largest capture, {size[0]}x{size[1]} logical, needs about {need[0]}x{need[1]} px "
+            f"of work area at {CAPTURE_DPR}x including the title bar, but the primary display "
+            f"offers {work_area_px[0]}x{work_area_px[1]} px. Use a larger primary display, hide "
+            "the taskbar, or pass --only for smaller entries (--no-display-check skips this)")
+
+
+def primary_work_area_px() -> Optional[tuple[int, int]]:  # pragma: no cover - Windows only
+    """The primary display's work area in physical pixels, or None if unknown."""
+    if os.name != "nt":
+        return None
+    import ctypes
+    from ctypes import wintypes
+
+    user32 = ctypes.windll.user32
+    try:
+        # Per-monitor aware, so the rectangle comes back in physical pixels.
+        user32.SetProcessDpiAwarenessContext(ctypes.c_void_p(-4))
+    except (AttributeError, OSError):
+        pass
+    rect = wintypes.RECT()
+    if not user32.SystemParametersInfoW(0x0030, 0, ctypes.byref(rect), 0):  # SPI_GETWORKAREA
+        return None
+    return rect.right - rect.left, rect.bottom - rect.top
+
+
+def check_display(entries: list) -> None:
+    size = largest_size(entries)
+    area = primary_work_area_px()
+    if size is None or area is None:
+        return
+    problem = display_problem(size, area)
+    if problem:
+        raise ShootError(problem)
+
+
+# --- 6. running GpgFrontend --------------------------------------------------------
 
 
 def running_gpgfrontend() -> list[str]:
@@ -422,7 +522,11 @@ def main(argv: Optional[list[str]] = None) -> int:
                     raise ShootError(f"--upload needs {', '.join(unset)} set")
             source = (args.gpgfrontend or default_source()).resolve()
             sync_source(source, args.ref, args.repo_url, update=not args.no_update)
-            ensure_fonts(args.install_fonts)
+            check_demo_data(source)
+            entries = selected_entries(args.only)
+            ensure_fonts(manifest_families(entries), args.install_fonts)
+            if not args.no_display_check:
+                check_display(entries)
             running = running_gpgfrontend()
             if running and not args.ignore_running:
                 raise ShootError("GpgFrontend is running; close it first (its app data writes would "
