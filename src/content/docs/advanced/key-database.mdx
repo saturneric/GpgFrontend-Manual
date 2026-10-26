@@ -46,8 +46,11 @@ GpgFrontend no longer needs to restart.
 The page has two parts:
 
 - At the top, a box called **Built-in Key Database**.
-- Below it, two tabs: **In Profile** and **Local Only**. They list the key
-  databases you added yourself.
+- Below it, three tabs:
+  - **In Profile** and **Local Only** list the key databases you added
+    yourself.
+  - **Recycle Bin** lists key databases you removed from **In Profile**. Their
+    keys are still on this computer.
 
 ![The Key Databases page in Settings][img-1]
 
@@ -220,6 +223,10 @@ You do not choose a folder. GpgFrontend makes one named after the database,
 inside your profile. The **Folder** line shows where, for example
 `@profile/dbs/Work`. Here `@profile` means "your profile folder".
 
+If a removed database with the same name is still in the **Recycle Bin**, you
+see **Key Database Folder Already Exists**. Restore that one, delete it for
+good, or pick another name.
+
 ### Add One on This Computer Only
 
 Use this to point at a folder you already have, such as an existing GnuPG home
@@ -259,17 +266,27 @@ opened after the databases inside your profile.
 
 ## Edit, Rename, Reorder, or Remove a Key Database
 
-On the **In Profile** or **Local Only** tab, right-click a database. The menu
-has:
+To change the order of the list, drag a database up or down on the **In
+Profile** or **Local Only** tab. The order is only the order the databases are
+listed and opened in. It does not choose the default.
 
-- **Move Up**, **Move Down**, **Move To Top**: change the order of the list.
-  The order is only the order the databases are listed and opened in. It does
-  not choose the default.
+Right-click a database on one of those tabs. The menu has:
+
 - **Use as Default**: make this the default database.
 - **Open**: open its folder in your file manager.
 - **Copy Folder Path**: copy the full path of its folder.
 - **Edit**: change the database. See below.
-- **Remove**: take it off the list.
+- **Move to Recycle Bin** (on **In Profile**) or **Remove Reference** (on
+  **Local Only**): take it off the list. See
+  [Remove a Database](#remove-a-database).
+
+<Aside type="note" title="Changed in v2.2.4">
+
+You now drag a database to move it. The **Move Up**, **Move Down** and **Move
+To Top** menu entries are gone. The old **Remove** entry is now called **Move
+to Recycle Bin** or **Remove Reference**, depending on the tab.
+
+</Aside>
 
 ### Rename a Database Inside Your Profile
 
@@ -288,7 +305,9 @@ The folder is named after the database, so GpgFrontend renames the folder too.
 This happens when you click **OK** in the settings window, not before.
 
 If a folder with the new name is already there, GpgFrontend stops and shows
-**Key Database Folder Already Exists**. Pick another name.
+**Key Database Folder Already Exists**. Pick another name. If that folder is
+in the **Recycle Bin**, you can also restore it or delete it for good first.
+See [Restore or Delete a Removed Database](#restore-or-delete-a-removed-database).
 
 ### Edit a Local Only Database
 
@@ -301,21 +320,97 @@ with.
 
 ### Remove a Database
 
+What happens depends on the tab the database is on.
+
 <Steps>
 
-1. Right-click the database and choose **Remove**.
+1. Right-click the database:
+   - On **In Profile**, choose **Move to Recycle Bin**.
+   - On **Local Only**, choose **Remove Reference**.
 
-2. In **Confirm Deletion**, click **Yes**.
+2. A window with the same name asks you to confirm. Click **Yes**.
 
 3. Click **OK** in the settings window.
 
 </Steps>
 
-Removing only takes the database off GpgFrontend's list. The folder and the
-keys in it stay on disk.
+Nothing is deleted:
+
+- A database from **In Profile** goes to the **Recycle Bin** tab. Its folder
+  and keys stay on this computer, and you can bring it back later.
+- A database from **Local Only** is only forgotten. GpgFrontend stops using
+  it, and its folder is left as it is. It does not go to the Recycle Bin.
 
 GpgFrontend needs at least one key database, so you cannot remove the last
 one.
+
+## Restore or Delete a Removed Database
+
+<Aside type="note" title="New in v2.2.4">
+
+Key databases you remove from **In Profile** now wait in the **Recycle Bin**
+tab, instead of just being dropped from the list.
+
+</Aside>
+
+Open the **Recycle Bin** tab. It shows each removed database with its
+**Name**, **Engine**, **Size** and **Folder**. The size may show `…` for a
+moment while GpgFrontend measures it.
+
+A database you just removed shows up here after you click **OK** in the
+settings window.
+
+### Bring a Database Back
+
+<Steps>
+
+1. On the **Recycle Bin** tab, click the database.
+
+2. Click **Restore**. The database moves to the **In Profile** tab.
+
+3. Click **OK** in the settings window.
+
+</Steps>
+
+You may see one of these messages:
+
+- **Key Database Name Taken**: another database in the list has the same name.
+  Rename or remove that one first, then restore.
+- **Choose an Engine**: GpgFrontend cannot tell which engine made the
+  database. Its **Engine** column says **Unknown**. Pick the engine from the
+  list.
+- **Engine Not Available**: the database was made with an engine that your
+  copy of GpgFrontend does not have.
+
+### Delete a Database for Good
+
+<Aside type="caution">
+
+This deletes the folder and every key in it, private keys included. It happens
+at once. It cannot be undone, and clicking **Cancel** in the settings window
+does not bring the keys back. Make a backup first if you are not sure.
+
+</Aside>
+
+<Steps>
+
+1. On the **Recycle Bin** tab, click the database.
+
+2. Click **Delete Permanently**.
+
+3. A warning asks if you want to delete the database and everything in it.
+   Click **Delete Permanently** again.
+
+</Steps>
+
+The status bar then says **Key database folder deleted.**
+
+If the folder could not be deleted, or only partly, you see **Folder Not
+Deleted** with the reason. For example, the folder may still be in use. Wait a
+moment and try again.
+
+To look at a removed database's files first, right-click it and choose
+**Open** or **Copy Folder Path**.
 
 ## What Happens When You Click OK
 
@@ -468,9 +563,13 @@ another computer:
 
 - **In Profile** databases travel. Their keys go into the file.
 - **Local Only** databases never travel. Their keys stay on this computer.
+- Databases in the **Recycle Bin** never travel.
 - The **built-in** database travels only when it is **this profile's own**
   built-in key database. When it is this computer's GnuPG home directory, the
   person who opens the file uses their own built-in database instead.
+
+Your **default** choice travels too, if the database it names travels or is
+the built-in one. If not, the other computer picks its own default.
 
 If you want keys from a database that does not travel, send them separately
 with a [KeyPackage](/advanced/key-package/).
@@ -485,6 +584,8 @@ Flatpak and Mac App Store builds:
 - the **Built-in Key Database** box has no checkbox, so the built-in database
   is always on;
 - **Edit** is not in the right-click menu.
+
+The **Recycle Bin** tab works the same as in other builds.
 
 ## Back Up Your Key Databases
 
