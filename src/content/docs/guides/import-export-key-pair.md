@@ -130,8 +130,10 @@ Exporting keys one at a time is fine for sharing, but a poor way to make a
 backup. It is too easy to miss one.
 
 Since v2.2.2 you can save them all in one go. In the **KeyPair Management**
-window, open the **Bulk** menu and choose **Back Up All Private Keys...**. That writes
-every private key in the keyring into a single protected file.
+window, open the **Bulk** menu and choose **Back Up All Private Keys...**. That
+writes every private key in the keyring into a single protected
+[KeyPackage](/advanced/key-package/). The same three-step window opens as for
+any KeyPackage, with all private keys already included.
 
 :::tip[Back up your keys]
 

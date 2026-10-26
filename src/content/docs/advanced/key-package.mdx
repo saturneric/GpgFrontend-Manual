@@ -33,7 +33,8 @@ When you create a KeyPackage, GpgFrontend produces **two files**, and you set
 
 1. The **KeyPackage file** (`.gfpack`): Holds your keys, encrypted.
 2. The **key file** (`.key`): Holds the encryption key for the KeyPackage,
-   itself protected by your PIN.
+   itself protected by your PIN. It is saved next to the KeyPackage file,
+   unless you choose another place, such as a separate drive.
 3. Your **PIN**: You choose it during creation. Without it, the KeyPackage
    cannot be opened.
 
@@ -43,43 +44,71 @@ KeyPackage is useless. That is by design. Someone who steals just the
 
 ## Create a KeyPackage
 
+A window called **Export As Key Package** walks you through three steps:
+**Contents**, **Location** and **Protection**. Click **Continue** to go to the
+next step, or **Back** to change something.
+
 <Steps>
 
 1. In the main window, click **Manage Keys** to open the **KeyPair Management**
    window. Check the box next to each key you want to pack, then click
    **Export Key**.
 
-2. Choose **Export As Key Package**. The **Export As Key Package** dialog
+2. Choose **Export As Key Package**. The **Export As Key Package** window
    opens.
 
    ![][img-1]
 
-3. Fill in the three fields:
+3. **Contents**: check which keys go in. A table lists each key and, in the
+   **Exported** column, whether it goes in as **Public**, **Public and
+   private**, or is **Left out: no private key**. Two boxes change this:
 
-   - **Key Package Name**: A name is already generated for you, in the form
-     `KeyPackage_<random id>`. Click **Generate Key Package Name** if you want
-     a different one.
-   - **Output Path**: Click **Select Output Path** and choose where to save
-     the `.gfpack` file.
-   - **Passphrase**: Click **Generate and Save Passphrase**. This creates the
-     key file. You will be asked to set a **PIN**. Pick a strong one and keep
-     it to yourself.
+   - **Only export keys with a private key**: leaves out keys that are
+     public only.
+   - **Include private keys**: adds your private keys to the package. Only
+     turn this on if you really need to move private keys, for example to set
+     up the same identity on another device. A warning reminds you that
+     anyone with the package, the key file and the PIN can then use your keys.
 
-     ![][img-2]
+   Click **Continue**.
 
-4. Check the optional settings:
+   ![][img-2]
 
-   - **Include secret key (Think twice before acting)**: Adds your private
-     keys to the package. Only turn this on if you really need to move private
-     keys, for example to set up the same identity on another device.
-   - **Exclude keys that do not have a private key**: Leaves out keys that are
-     public-only.
+4. **Location**: choose where to save the files.
 
-5. Review everything, then click **OK**. GpgFrontend creates the KeyPackage
-   and confirms that it is encrypted (for example with AES-256-GCM) and safe
-   to transfer.
+   - **Package name**: a name is already filled in, in the form
+     `KeyPackage_<random id>`. Click **Generate name** for a different one.
+   - **Save to**: click **Browse...** and choose where to save the `.gfpack`
+     file.
+   - **Key file**: the key file is saved beside the package. To keep it apart,
+     click **Browse...** and choose another place. **Keep next to the
+     package** puts it back beside the package.
+
+   Click **Continue**.
+
+5. **Protection**: type a **PIN** of at least 8 characters, and type it again
+   under **Repeat**. Or click **Generate a strong PIN**. Pick a strong one and
+   keep it to yourself. The PIN cannot be recovered.
+
+   Check the summary of what you chose, then click **Export key package**.
+
+6. The **Key Package Exported** window shows where both files were saved.
+   Click **Show in Folder** to see them, or **Done** to close it.
 
 </Steps>
+
+<Aside type="note" title="Changed in v2.2.4">
+
+Exporting a KeyPackage is now a guided window with three steps. It used to be
+a single window, where you clicked **Generate and Save Passphrase** to make the
+key file. You can now also save the key file in a different place than the
+package.
+
+</Aside>
+
+To back up every private key at once, open the **Bulk** menu in the
+**KeyPair Management** window and choose **Back Up All Private Keys...**. The
+same window opens, with all your private keys already included.
 
 ## Transfer It to the Other Device
 
@@ -98,19 +127,49 @@ On the target device:
 
 1. Open the **KeyPair Management** window and click **Import Key**.
 
-2. From the dropdown menu, select **Key Package**.
+2. From the dropdown menu, select **Key Package**. The **Import Key Package**
+   window opens. It walks you through three steps: **Files**, **Unlock** and
+   **Keys**.
 
    ![][img-3]
 
-3. In the file dialog, choose the `.gfpack` file you transferred.
+3. **Files**: next to **Key package**, click **Browse...** and choose the
+   `.gfpack` file you transferred.
 
-4. In the next file dialog, choose the matching `.key` file.
+   If the key file is in the same folder, GpgFrontend finds it by itself and
+   says **Found beside the package.** If not, click **Browse...** next to
+   **Key file** and choose the matching `.key` file. Click **Continue**.
 
-5. Enter the **PIN** you set when you created the KeyPackage.
+4. **Unlock**: enter the **PIN** you set when you created the KeyPackage, then
+   click **Continue**. This only opens the package. Nothing is imported yet.
 
-6. GpgFrontend decrypts the package and imports your keys.
+   If the PIN is wrong, the window says so and you can try again. Your chosen
+   files are kept.
+
+5. **Keys**: a table lists the keys in the package. The **Status** column says
+   what importing each key would do:
+
+   - **New** or **New, with private key**: the key is not here yet.
+   - **Adds the private key**: you already have the public key, and the
+     package adds its private key.
+   - **Already here**: you already have this key. Importing it again can
+     still bring newer details, such as new signatures.
+
+   Untick any key you do not want. **Select all** and **Select none** help with
+   long lists.
+
+6. Click **Import keys**. The window closes and **Key Import Details** shows
+   what was imported.
 
 </Steps>
+
+<Aside type="note" title="Changed in v2.2.4">
+
+Importing a KeyPackage is now a guided window with three steps. You can see
+the keys in a package and pick which ones to import. Before, GpgFrontend asked
+for the two files and the PIN one after another, then imported every key.
+
+</Aside>
 
 ## Clean Up After the Import
 
@@ -156,9 +215,14 @@ protection has improved over time:
   **libsodium**, matching the rest of GpgFrontend's application-managed
   cryptography. This is also why the format changed again.
 
-The PIN you set does not encrypt the KeyPackage directly. Instead, it protects
-the key file, which in turn holds the actual encryption key. This is why the
-import needs both files and the PIN.
+Today the keys are encrypted with a random passphrase, 256 characters long,
+using XChaCha20-Poly1305 (a modern way to lock data that also detects
+tampering). That passphrase is then locked with your PIN, using Argon2id (a
+method that makes guessing the PIN slow), and written to the key file.
+
+So the PIN does not encrypt the KeyPackage directly. It protects the key file,
+which in turn holds the actual encryption key. This is why the import needs
+both files and the PIN.
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/25/aedf03593706cf3e278bd1f28a55d012d06416b1-0.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/25/a4433781e33a39f82394f8c084f49c0ac6d075ee-0.webp

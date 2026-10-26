@@ -170,23 +170,30 @@ in one file you can copy anywhere.
 1. Open the profile you want to save.
 
 2. Choose **Profiles**, then **Export This Profile...**. The **Export Profile**
-   window opens.
+   window opens. It walks you through three steps: **Contents**,
+   **Protection** and **Save**. Click **Continue** to go on, or **Back** to
+   change something.
 
-3. Under **Save to**, click **Choose...** and pick where to put the file. The
-   window then shows the file name, the folder and how much free space is
-   left there.
+3. **Contents**: look at the list of what goes into the file. If you also
+   want to take your workspace files, tick **Include workspace files**. It is
+   off to start with. Click **Continue**.
 
-4. Under **What goes in**, look at the list. If you also want to take your
-   workspace files, tick **My workspace files**. It is off to start with.
+4. **Protection**: type a passphrase. A passphrase is a password, often made
+   of several words. It must be at least 8 characters long. Type it again
+   under **Repeat** to confirm it.
 
-5. Under **Protection**, type a passphrase. A passphrase is a password, often
-   made of several words. It must be at least 8 characters long. Type it a
-   second time to confirm it.
+   If you cannot think of a good one, click **Generate a strong passphrase**.
+   The program makes one, shows it, and copies it to the clipboard. Write it
+   down somewhere safe right away. Click **Continue**.
 
-   If you cannot think of a good one, click **Generate**. The program makes a
-   strong passphrase and shows it so you can write it down.
+5. **Save**: check the summary. Next to **Save to**, click **Browse...** and
+   pick where to put the file. The window shows how much free space is left
+   on that drive.
 
-6. Click **Export**.
+6. Click **Export backup**.
+
+7. The **Profile Exported** window shows the file name, folder and size.
+   Click **Show in Folder** to see the file, or **Done** to close it.
 
 </Steps>
 
@@ -198,6 +205,14 @@ safe.
 
 </Aside>
 
+<Aside type="note" title="Changed in v2.2.4">
+
+Saving a profile is now a guided window with three steps, instead of one
+window with several boxes. When it is done, **Show in Folder** takes you to
+the file.
+
+</Aside>
+
 <Aside type="note" title="Changed in v2.2.3">
 
 A passphrase is now required. You can no longer save a profile file without
@@ -206,19 +221,19 @@ passphrase with Argon2id. These are strong, modern ways to lock data.
 
 </Aside>
 
-If the place you picked may be too small, a warning appears at the bottom of
-the window. The file is packed smaller as it is written, so it may still fit.
+If the place you picked may be too small, a warning appears on the **Save**
+step. The file is packed smaller as it is written, so it may still fit.
 
 ### What Goes In, and What Does Not
 
-The **What goes in** list shows each part and its size:
+The list on the **Contents** step shows each part and its size:
 
 - **Settings**
 - **Saved state, key groups and categories**
 - **This profile's own key**. This is the key that locks the profile's saved
   data. See [Application Secure Key](/advanced/app-secure-key/).
 - **Keys stored inside this profile**
-- **My workspace files**, only if you ticked it
+- **My workspace files**, only if you ticked **Include workspace files**
 
 The list ends with a line that says what never goes in: **Never included:
 logs, modules, and keys kept elsewhere.**
@@ -228,6 +243,10 @@ when the profile uses the system GnuPG keyring, or when a key database is
 kept on this computer only. Those keys stay where they are. When the profile
 is opened on another computer, the program says such a database **is
 unavailable** until you point it at a folder there.
+
+Key databases in the [Recycle Bin](/advanced/key-database/#restore-or-delete-a-removed-database)
+also stay behind. Your choice of default key database goes in, as long as the
+database it names goes in too.
 
 Settings that only make sense on this computer also stay behind. For example,
 the place where a custom GnuPG is installed, the workspace folder, and how this
