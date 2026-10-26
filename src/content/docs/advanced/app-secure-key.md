@@ -160,6 +160,20 @@ OpenPGP keys, messages or files.
 
 :::
 
+### If the Key File Is Missing
+
+The key is kept in a file called `app.key` in the `secure` folder. If that file
+is gone, but the profile still holds data locked with it, GpgFrontend shows
+**Secure Key Missing** when it starts. This usually happens when the data
+folder was restored or copied without the key file.
+
+- Click **Quit** to keep your data safe. Put `app.key` back from your backup,
+  then start GpgFrontend again. Click **Show Details...** to see where the file
+  is expected.
+- Click **Create New Key** only if you cannot get the file back. A second
+  window, **Reset to Default**, asks you to confirm. GpgFrontend then starts,
+  but everything it locked with the old key can never be read again.
+
 ## Good Habits
 
 - Back up your OpenPGP private keys and revocation certificates separately.
