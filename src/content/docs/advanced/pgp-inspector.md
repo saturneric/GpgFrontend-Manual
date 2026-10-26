@@ -48,30 +48,60 @@ The menu item is greyed out when the current tab holds no OpenPGP data. It is
 also greyed out when the tab holds more than 16 MiB, because the inspector does
 not read data that large.
 
-:::note[Flatpak and Mac App Store Lite]
+:::note[Mac App Store Lite]
 
-These versions hide the **Advanced** menu. Use the right-click menu in the Text
+This version hides the **Advanced** menu. Use the right-click menu in the Text
 Editor instead.
 
 :::
 
 ## Read the Window
 
-The window has a search box at the top, a tree in the middle and a summary line
-at the bottom.
+The window has a search box at the top, a list of parts on the left, details
+on the right, and a summary line at the bottom.
 
-### The Tree
+:::note[Changed in v2.2.4]
 
-The tree has two columns: **Structure** and **Value**. It has three levels:
+The window was redesigned. It used to show everything in one tree with a
+**Structure** and a **Value** column. Now the left side lists the parts, and
+the details of the part you click appear in tabs on the right.
+
+:::
+
+### The List on the Left
+
+The list has two levels:
 
 1. **Blocks.** One for each piece of OpenPGP data in the tab. A block line says
-   what kind it is, for example "Block 1: armored, ..." for text that starts
-   with `-----BEGIN PGP`, or "Block 1: cleartext-signed message" for a signed
-   text that you can still read.
-2. **Packets.** The parts inside a block. A packet line looks like
-   `#1  Signature (tag 2)  v4  @0x0000  189 B`. It gives the packet's number,
-   its kind, its version, where it starts in the data, and its size.
-3. **Fields.** The details of each packet, as a label and a value.
+   what kind it is, for example "Block 1: Cleartext Signed Message", and then
+   how many packets it holds.
+2. **Packets.** The parts inside a block. Each line shows the packet's number
+   and kind (for example `#1  Signature`), a short summary, and its size.
+   Packets inside other packets get numbers like `#2.3`.
+
+Click a line to see its details on the right.
+
+### The Tabs on the Right
+
+Each tab is a table with a **Field** and a **Value** column. Tabs with nothing
+to show are hidden.
+
+- **Overview**: the main details of the packet. A **Problem** line comes
+  first, if there is one. A **Framing** group at the end says where the packet
+  starts (**Offset**), how it is wrapped (**Header**, **Body**) and its
+  **Size**.
+- **Subpackets**: the extra details inside a signature, such as who made it
+  and when.
+- **Key Material**, **Signature Material** or **Session Key Material**: the
+  numbers that make up the key, signature or locked message key. Each value
+  says how many bytes it has. Private key material is never shown, only that it
+  is there.
+- **Hex**: the raw bytes of the packet, with labels.
+
+For keys, **Overview** also shows the **Public Key Algorithm**, the **Key
+Size** and, for keys based on elliptic curves, the **Curve**.
+
+When you click from one packet to the next, the tab you picked stays open.
 
 Here is what some common words mean:
 
@@ -91,8 +121,9 @@ Here is what some common words mean:
 | **CRC24**                                                | A checksum of a text block. `ok` means it matches. `mismatch` means the text was changed or damaged. |
 | **Problem**                                              | Something is wrong with this part. The value says what.                                              |
 
-A block whose checksum does not match is shown in a danger colour. A block or
-packet with a problem is shown in a warning colour.
+A line is coloured only when something is wrong with it. A block whose
+checksum does not match is shown in red. Other problems are shown in a warning
+colour. Hold the mouse over the line to see the reason.
 
 Encrypted parts stay encrypted. The inspector shows that they are there and how
 big they are, but not what they say.
@@ -108,8 +139,8 @@ the inspector can read.
 ### Search
 
 Type in the search box (**Search packets, fields and values**) to show only the
-lines that contain your words, in either column. When a packet matches, all its
-fields stay visible. Clear the box to see everything again.
+packets whose details contain your words. Matching lines in the tabs are shown
+in bold. Clear the box to see everything again.
 
 ## If the Menu Item Is Missing
 

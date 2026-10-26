@@ -6,7 +6,7 @@ sidebar:
   order: 14
 ---
 
-import { Steps } from "@astrojs/starlight/components";
+import { Steps, Aside } from "@astrojs/starlight/components";
 
 Once you have a lot of keys, finding the right one takes longer than it should.
 A **category** is a label you put on keys to tidy them up, such as `Work`,
@@ -67,14 +67,35 @@ within** to any number of days you like.
 
 1. Open the **KeyPair Management** window.
 
-2. Click the **+** button at the bottom of the category list.
+2. Click the **+** button at the bottom of the category list, or right-click
+   the list and choose **New Category...**. The **New Category** window opens.
 
-3. Type a name and click OK.
+3. Type a **Name**, such as `Work Contacts`. A name can be up to 64
+   characters. Two categories cannot have the same name, and upper and lower
+   case count as the same.
 
-4. Pick a colour if you want one, or just click Cancel to get an automatic
-   one.
+4. Under **Colour**, click one of the colours. A colour no other category
+   uses is already picked for you. For any other colour, click the last one
+   (**Custom Colour...**).
+
+   The top of the window shows how the category will look in the list.
+
+5. Click **Create**.
 
 </Steps>
+
+You can also make a category and fill it in one go. Select some keys,
+right-click them, open the **Category** submenu (called **Add To Category** in
+the main window) and choose **New Category...**. The window then says how
+many of the selected keys will be added to the new category.
+
+<Aside type="note" title="Changed in v2.2.4">
+
+Making or changing a category now uses one window, with the name, the colour
+and a preview together. It used to ask for the name and the colour in two
+separate small windows.
+
+</Aside>
 
 ## Put Keys in a Category
 
@@ -95,13 +116,17 @@ A key can be in as many categories as you like.
 
 ## Rename, Recolour, Reorder
 
-Right-click one of your own categories to find **Rename Category**, **Set
-Colour**, and **Reset Colour**.
+Right-click one of your own categories to find:
+
+- **Edit Category...**: change its name and colour in the same window as
+  above. Click **Save** when you are done. (Before v2.2.4 this was **Rename
+  Category**.)
+- **Set Colour...** and **Reset Colour**: change only the colour.
 
 To change the order, drag a category up or down the list. The order is
 remembered.
 
-**Delete Category** removes the label only. Your keys are never touched.
+**Delete Category...** removes the label only. Your keys are never touched.
 
 :::note[Where the Favourite tab went]
 
