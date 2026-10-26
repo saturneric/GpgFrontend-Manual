@@ -57,6 +57,8 @@ Some pages only show up when they apply to you:
 - **GnuPG** and **rPGP** appear only if your copy has that engine.
 - **Network** does not appear in sandboxed builds, such as Flatpak or the Mac
   App Store edition.
+- **Updates** is not in the Flatpak or Mac App Store builds, which get their
+  updates from Flathub or the App Store.
 - **Updates**, **Key Servers**, **Instant Messaging** and **Mail Accounts**
   come from built-in modules. Each one appears only while its module is
   switched on. You can check that in
@@ -159,8 +161,9 @@ appears on **Help** > **Check for Updates**.
 GpgFrontend only checks after the first-run setup has asked you whether you
 want this.
 
-To check yourself, click **Help** > **Check for Updates**. The window tells you
-one of these things:
+To check yourself, click **Help** > **Check for Updates**. If you have not
+turned the check on, the window does not check by itself. Click **Check now**
+to check once. The window then tells you one of these things:
 
 - **You're up to date**.
 - A new version is available. The window names it, offers a button to

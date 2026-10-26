@@ -23,8 +23,12 @@ Click **Advanced** in the menu bar, then **Open Module Controller**.
 :::note[Flatpak and Mac App Store Lite]
 
 These versions run in a sandbox (a closed-off space the system gives the app).
-They hide the **Advanced** menu, so the Module Controller is not available
-there. They also hide the **Module Discovery** setting.
+The Module Controller is not available there, and the **Module Discovery**
+setting is hidden.
+
+The Flatpak version shows the **Advanced** menu, with the items that modules
+add to it, but without **Open Module Controller**. The Mac App Store Lite
+version hides the whole menu.
 
 :::
 
@@ -53,8 +57,12 @@ in the module list, what the module does, and where its features appear.
   **Workspace**, adds **Open IMAP Controller** to the **Advanced** menu, and
   adds the **Mail Accounts** settings page under **Features**.
 
-The Mac App Store Lite version does not include **VersionChecking** or
-**GatherGnupgInfo**.
+Some versions leave modules out:
+
+- The Mac App Store Lite version does not include **VersionChecking** or
+  **GatherGnupgInfo**.
+- The Flatpak version does not include **VersionChecking**, because Flathub
+  delivers its updates.
 
 :::caution[Features leave with their module]
 

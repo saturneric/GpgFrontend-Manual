@@ -32,8 +32,8 @@ this account to receive**, fill in the server, and save a password.
 If you have no account with receiving turned on, GpgFrontend says **No mail
 account** and asks you to set one up in Settings first.
 
-The **Advanced** menu is hidden in sandboxed builds, such as Flatpak or the Mac
-App Store edition. There, the IMAP Controller is not available.
+The **Advanced** menu is hidden in the Mac App Store edition. There, the IMAP
+Controller is not available.
 
 ## It Only Reads
 

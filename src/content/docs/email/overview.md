@@ -52,8 +52,8 @@ account. See [Mail Accounts and Sending](/email/accounts-sending/).
 
 :::note[Don't see Open IMAP Controller?]
 
-The **Advanced** menu is hidden in sandboxed builds, such as Flatpak or the Mac
-App Store edition. In those builds, **Open IMAP Controller** is not available.
+The **Advanced** menu is hidden in the Mac App Store edition. In that build,
+**Open IMAP Controller** is not available.
 
 If no account has receiving turned on, the app tells you to set one up in
 Settings first.
