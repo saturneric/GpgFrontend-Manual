@@ -42,7 +42,7 @@ profile.
 ### From Manage Profiles
 
 1. Open **Profiles**, then **Manage Profiles...**.
-2. Click **New Temporary**.
+2. Click **New**, then **New Temporary Profile**.
 
 ### From a terminal
 

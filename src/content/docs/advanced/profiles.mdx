@@ -56,8 +56,8 @@ The **Default** profile is stored here:
 | Linux   | `~/.local/share/BKTUS/GpgFrontend/`                |
 
 Profiles you make yourself live in a `profiles` folder inside that one. You do
-not have to go looking for them: **Manage Profiles** has an **Open Folder**
-button that takes you straight there.
+not have to go looking for them: in **Manage Profiles**, pick a profile and
+choose **Show in Folder** from the **⋯** button or the right-click menu.
 
 :::tip[Nightly builds stay out of your way]
 
@@ -98,23 +98,30 @@ this page needs the full edition.
 
 <Steps>
 
-1. Open **Profiles** in the menu bar, then choose **New Profile...**.
+1. Open **Profiles** in the menu bar, then choose **New Profile...**. You can
+   also open **Manage Profiles...**, click **New**, then **New Profile...**.
+   The **New Profile** window opens. It walks you through three steps:
+   **Name**, **Keys** and **Settings**.
 
-2. In the **Name** box, type a name, such as `Work`. This name shows in the
-   profile list and the status bar. You can change it later.
+2. **Name**: type a name, such as `Work`. This name shows in the profile list
+   and the status bar. You can change it later. Click **Continue**.
 
-3. Under **Keys**, click one of the two tiles:
+3. **Keys**: choose where the profile's built-in key database lives. Click
+   one of the two choices:
 
-   - **Start with an empty keyring** (marked **Recommended**): the profile
-     keeps its own keys, separate from everything else. It starts out with
-     none, so you import or make some inside it. Only keys kept like this can
-     be saved to a profile file and carried away.
-   - **Use the system GnuPG keyring**: the profile uses the keys you already
-     have. Handy, but those keys are shared with the rest of your computer, so
-     they are not really separate, and they cannot travel inside a profile
-     file.
+   - **This profile's own built-in key database** (marked **Recommended**):
+     the profile keeps its own keys, separate from everything else. It starts
+     out empty, so you import or make keys inside it. Its keys go with the
+     profile when you save it to a file.
+   - **This computer's built-in key database**: the profile uses keys that are
+     shared with other programs or profiles on this computer. With GnuPG, these
+     are your existing keys in the GnuPG home directory. Handy, but they are
+     not really separate, and they cannot travel inside a profile file.
 
-4. Under **Settings**, choose what the new profile starts with. See
+   You can add more key databases later in **Settings**, under **Key
+   Databases**. Click **Continue**.
+
+4. **Settings**: choose what the new profile starts with. See
    [Pick Which Settings to Copy](#pick-which-settings-to-copy) below.
 
 5. Click **Create Profile**. The program asks whether to open the new profile
@@ -127,7 +134,7 @@ stays exactly as it was.
 
 ### Pick Which Settings to Copy
 
-The **Settings** card lets the new profile start with the settings of the
+The **Settings** step lets the new profile start with the settings of the
 window you are in, so you do not have to set everything up again.
 
 - **Start with this window's settings** turns all the groups below it on or
@@ -149,6 +156,14 @@ protection and proxy credentials.**
 
 The **New Profile** window was redesigned, and it can now copy settings from
 the window you start it in.
+
+</Aside>
+
+<Aside type="note" title="Changed in v2.2.4">
+
+**New Profile** is now a guided window with three steps. The two key choices
+used to be called **Start with an empty keyring** and **Use the system GnuPG
+keyring**.
 
 </Aside>
 
@@ -408,8 +423,9 @@ and damage its saved data.
 
 ## Delete a Profile
 
-Choose **Profiles**, then **Manage Profiles...**. Pick the profile and click
-**Delete**.
+Choose **Profiles**, then **Manage Profiles...**. Pick the profile, then
+choose **Delete...** from the **⋯** button or the right-click menu. You can
+also press Del.
 
 The program asks twice, because there is no undo. Its keys, settings and
 saved state are removed from this computer for good. Export it to a file
@@ -434,7 +450,8 @@ gpgfrontend --temp-profile
 ```
 
 `--profile` needs the profile's **folder name**, not the name you gave it.
-You can see the folder name in **Manage Profiles**.
+To see it, open **Manage Profiles** and point at the profile's name. The full
+folder path appears, and the folder name is its last part.
 
 If you name a profile that does not exist, the program stops and says so. It
 does not create one for you.
