@@ -78,20 +78,20 @@ The **General** page has these parts.
 
 ### Base
 
-- **Default Workspace As:** choose whether GpgFrontend starts with the
-  **File Panel** or the **Text Editor**.
-- **File Panel Opens At:** the folder the File Panel shows first.
-- **Module Discovery:** which modules GpgFrontend looks for when it starts.
-  The choices are **Only Integrated Modules**, **Also Look For Modules I've
-  Added** and **Disable**. Looking for a module never runs it. See
-  [Module Controller](/advanced/module-controller/) for the rest. A change here
-  takes effect the next time you start GpgFrontend.
+**Module Discovery:** decides which modules GpgFrontend looks for when it
+starts. The choices are **Only Integrated Modules**, **Also Look For Modules
+I've Added** and **Disable**. Looking for a module never runs it. See
+[Module Controller](/advanced/module-controller/) for the rest. A change here
+takes effect the next time you start GpgFrontend.
 
-Sandboxed builds hide **Default Workspace As:**, **File Panel Opens At:** and
-**Module Discovery:**.
+Sandboxed builds hide the whole **Base** box.
 
 ### Operation
 
+- **Default Workspace As:** choose whether GpgFrontend starts with the
+  **File Panel** or the **Text Editor**.
+- **File Panel Opens At:** the folder the File Panel shows first. Sandboxed
+  builds hide this and **Default Workspace As:**.
 - **Cache text editor contents.** keeps your open text tabs, including ones you
   have not saved, so they come back the next time you start GpgFrontend. They
   are stored encrypted. This is **on** by default.

@@ -44,6 +44,9 @@ pair of a public and a private key.
 A short, unique ID for the key, fixed when the key is made. This is the primary
 key's ID. It is shorter and easier to read than the fingerprint.
 
+Click the Key ID to copy it. A small note, **Copied to clipboard**, confirms
+it.
+
 #### Algorithm
 
 The algorithm the primary key was made with. It decides what the key can do. For
@@ -128,6 +131,9 @@ The fingerprint is a unique code people use to quickly check that a key is the o
 they expect. It is unique for every key in the world. (You can also compare the
 Key ID above.) This is the primary key's fingerprint.
 
+Click the fingerprint to copy it. The copy has no spaces, even though the
+window shows the fingerprint in groups.
+
 ## UID Info
 
 This part is on the **UIDs** tab. A User ID (UID) is the label that says who a key belongs to, like a name tag on a
@@ -185,8 +191,12 @@ can feel complex at first, so here are the basics:
   the trust anchored by the primary key stays intact. But if the primary key is
   compromised, the whole key structure is at risk.
 
-The **Keychain** tab lists the primary key and all subkeys with their properties
-(algorithm, size, usage, and so on), so you can manage them at a glance.
+The **Keychain** tab lists the primary key and all subkeys. For each one, the
+list shows its **Key ID**, **Key Type**, **Algorithm** and **Usage**. If there
+are more than five, scroll the list.
+
+Click a row to see all its details below the list, such as its size, dates and
+fingerprint. Here, too, you can click the Key ID or the fingerprint to copy it.
 
 ![][img-8]
 

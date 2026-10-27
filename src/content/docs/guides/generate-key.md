@@ -84,7 +84,8 @@ and how long the key is valid. You can manage profiles in
   then.
 - **Protect the secret key with a passphrase**: on by default. Keep it on.
   You are asked for the passphrase while the key is made. With GnuPG, GnuPG
-  asks in a window of its own, and may ask twice if the key has a subkey.
+  asks in a window of its own. For a post-quantum or hybrid key, it may ask
+  a second time for the subkey.
 
 If you turn the passphrase off, a warning reminds you that anyone who gets
 your secret key file can then sign and decrypt as you.
