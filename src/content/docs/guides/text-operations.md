@@ -154,7 +154,8 @@ key**.
    own** key. Pick a key that can sign: its **Usage** column shows an `S`.
 3. **Click Sign.** Or press Ctrl+Shift+I.
 4. **Choose a key, if asked.** If you ticked no key that can sign, or your key
-   has more than one signing subkey, a window called **Select Signing Key(s)**
+   has more than one signing subkey that still works (not revoked or expired),
+   a window called **Select Signing Key(s)**
    opens. Tick the key or subkey to use and click **Confirm**.
 5. **Enter your passphrase.** Type the passphrase of your private key.
 6. **See the result.** Your text now sits between two lines:

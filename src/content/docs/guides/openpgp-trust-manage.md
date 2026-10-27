@@ -111,12 +111,40 @@ a person.
 
 :::
 
-If you do need to sign one, there are two ways to do it. Open the key's
-details and use the **UIDs** tab, or right-click the key in the **KeyPair
-Management** window and choose **Certify Key...**. The second way is new in v2.2.2.
+If you do need to certify (sign) someone's key, compare its fingerprint with
+the owner first, in person or over a channel you trust. Then:
 
-You cannot certify your own key, and GpgFrontend greys the action out to say
-so.
+1. Start the certification in one of two ways:
+   - To certify **every** user ID of a key, right-click the key in the
+     **KeyPair Management** window, open **Key Operations** and choose
+     **Certify Key...**.
+   - To certify **one** user ID, open the key's details, go to the **UIDs**
+     tab, right-click the user ID and choose **Certify User ID...**.
+2. The **Certify Key** (or **Certify User ID**) window opens. Under
+   **Certifying**, check the name and the **Fingerprint** once more.
+3. Under **Certify with**, tick the private key you want to certify with. If
+   only one of your keys can do it, it is ticked already.
+4. Choose when the certification **Expires**. The default is **Never**.
+5. Click **Certify**, and type your passphrase when asked. A **Certification
+   Complete** message confirms it.
+
+You can also certify one of your own keys with another of your own keys.
+**Certify Key...** is only greyed out when you have no private key to certify
+with. Certifying needs the GnuPG engine.
+
+:::note[Changed in v2.2.4]
+
+The certify window was redesigned. It used to be called **Sign For Key's
+UID(s)**, with a **Sign** button. On the **UIDs** tab, **Sign UID** is now
+**Certify User ID...**. GpgFrontend now always certifies with the key you
+tick.
+
+:::
+
+To take back a certification you made, open the key's details and go to the
+**UIDs** tab. Click the user ID, then right-click the certification in
+**Certifications of Selected User ID** and choose **Revoke Certification...**.
+You need the private key that made the certification.
 
 When GpgFrontend was first designed, sending these signatures to key servers was
 not fully planned for.

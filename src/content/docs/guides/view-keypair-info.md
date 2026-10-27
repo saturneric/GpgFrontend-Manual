@@ -145,18 +145,22 @@ You cannot delete the primary UID. On a v4 key you also cannot delete the last
 UID, because the key needs it to keep working. Add a new UID first if you want
 to replace it. This rule is new in v2.2.3.
 
-### Signatures on a UID
+### Certifications on a UID
 
-The lower part of the window shows the signatures on the selected UID (the one you
-clicked, not the one ticked). Signatures are how trust is built: when someone
+The lower part of the window, **Certifications of Selected User ID**, shows the
+signatures (certifications) on the selected UID (the one you clicked, not the
+one ticked). Signatures are how trust is built: when someone
 receives your public key, they can sign your UID with their key to vouch for it,
 then share the signed key on a key server. The more people who do this, the more
 trustworthy the key looks.
 
 ![][img-7]
 
-You can also sign a UID with the primary key of another key pair. A primary UID
-with many valid signatures is generally seen as more trustworthy.
+You can also certify a UID with one of your own private keys: right-click the
+UID and choose **Certify User ID...**. To take back a certification you made,
+right-click it in the lower part and choose **Revoke Certification...**. See
+[Trust Chain Management](/guides/openpgp-trust-manage/). A primary UID with
+many valid certifications is generally seen as more trustworthy.
 
 Some signatures may not show the signer's UID, as in the image above. To identify
 them, import the matching key from another source, such as a key server. The Key
@@ -173,7 +177,8 @@ can feel complex at first, so here are the basics:
   subkeys and is kept for critical actions like signing other keys or adding UIDs.
 - **Daily work**: subkeys handle tasks like signing and encryption, even when the
   primary key is absent or unavailable.
-- **Overlap**: if two subkeys can both sign, the earlier one is used.
+- **Overlap**: if more than one subkey can sign, GpgFrontend asks which one to
+  use when you sign text or a file.
 - **More algorithms**: subkeys can use more algorithms than the primary key, but
   for daily use the effect is the same.
 - **Security isolation**: if a subkey is compromised, you revoke just that one and

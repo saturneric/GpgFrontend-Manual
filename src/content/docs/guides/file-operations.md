@@ -200,10 +200,13 @@ is. You send both files together. You need **your private key**.
    own** key. If you tick no key, GpgFrontend shows **No Key Checked** and
    stops.
 3. **Click Sign.**
-4. **Enter your passphrase** when asked.
-5. **Find the signature file.** It appears next to the original, for example
+4. **Choose a key, if asked.** If your key has more than one signing subkey
+   that still works (not revoked or expired), a window called **Select Signing
+   Key(s)** opens. Tick the key or subkey to use and click **Confirm**.
+5. **Enter your passphrase** when asked.
+6. **Find the signature file.** It appears next to the original, for example
    `report.pdf.sig`.
-6. **Send both files**: `report.pdf` and `report.pdf.sig`. Keep their names as
+7. **Send both files**: `report.pdf` and `report.pdf.sig`. Keep their names as
    they are.
 
 :::caution
