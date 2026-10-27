@@ -218,8 +218,9 @@ Notes:
   official application bundles. For everyday development builds, Ninja works
   there too. Code signing and notarization are only needed for distribution.
   Remember `-DOPENSSL_ROOT_DIR` (see above).
-- Add `-DGPGFRONTEND_MODULES_BUILD_TESTS=ON` to also build the modules' own
-  unit tests.
+- The unit tests are off by default. Add `-DGPGFRONTEND_BUILD_TESTS=ON` to
+  build them (this needs GoogleTest), and `-DGPGFRONTEND_MODULES_BUILD_TESTS=ON`
+  to also build the modules' own unit tests.
 - `GPGFRONTEND_BUILD_APP_IMAGE` is deprecated. The AppImage is now made from
   the tree that `cmake --install` produces.
 
@@ -240,8 +241,10 @@ Modules you build outside the tree always need a binding. See
 
 ## Run the Tests
 
-The test suite is compiled into the main binary. Run it through the helper
-script, which builds the project if needed and parses the test results:
+The test suite is compiled into the main binary, but only when you configured
+with `-DGPGFRONTEND_BUILD_TESTS=ON`. Without it, the script stops and tells
+you to reconfigure. Run the tests through the helper script, which builds the
+project if needed and parses the test results:
 
 ```bash
 QT_QPA_PLATFORM=offscreen ./scripts/run_tests.sh
@@ -309,8 +312,9 @@ mode, take each picture, upload it and put the new link into the page. Its
   to date. macOS and Linux look a little different, but the windows and
   buttons are the same.
 - **Build option:** the scripts need a binary configured with
-  `-DGPGFRONTEND_BUILD_SCREENSHOT_MODE=ON`. It cannot be combined with
-  `GPGFRONTEND_BUILD_STABLE`.
+  `-DGPGFRONTEND_BUILD_SCREENSHOT_MODE=ON` and
+  `-DGPGFRONTEND_BUILD_TESTS=ON`. It cannot be combined with
+  `GPGFRONTEND_BUILD_MODE=release`.
 - **Where the scenes live:** each window state is a scenario in
   `src/screenshot/`, and the demo data is in `resource/screenshot/`.
 - **Changes are noticed:** each screenshot lists the source files it depends
