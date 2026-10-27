@@ -52,8 +52,8 @@ Each address can be written as `alice@example.com` or as
 
 As you type an address, GpgFrontend suggests matching addresses:
 
-- In **From:**, it suggests your mail accounts first, then the addresses on
-  your own private keys.
+- In **From:**, it suggests your enabled mail accounts first, then the
+  addresses on your own private keys.
 - In **To:**, **Cc:** and **Bcc:**, it suggests the addresses on the keys in
   your key database.
 

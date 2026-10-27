@@ -180,12 +180,12 @@ You decide what to do:
 
 **Cancel** is the default, so pressing Enter does not save by accident.
 
-## HTML Messages Are Shown as Source
+## HTML Messages Open as Source
 
 Some messages are written in HTML, the language of web pages. GpgFrontend
-never draws them as a web page. It shows the HTML code as plain text instead,
-with this notice: "This message was written in HTML. It is shown as its source
-rather than rendered: nothing here loads images or follows links."
+first shows the HTML code as plain text, with this notice: "This message was
+written in HTML. It is shown as its source rather than rendered: nothing here
+loads images or follows links."
 
 This is safer:
 
@@ -194,6 +194,39 @@ This is safer:
 - **No surprise links.** Nothing opens a website on its own.
 - **What you see is what is there.** HTML can hide text, or make one link look
   like another. As plain text, nothing is hidden.
+
+This only happens when a message has no plain-text version. If it has one,
+GpgFrontend shows that instead.
+
+### Preview an HTML Message
+
+To read the message the way it was laid out, click **Show Preview** on the
+notice. The message is then shown formatted, still safely:
+
+- Nothing is loaded from the internet. Pictures from the web stay blank. Only
+  pictures sent inside the message are shown.
+- Scripts in the message never run.
+- Clicking a link asks **Open Link?** first, and shows the full address. Click
+  **Open** to open it in your browser. Links that are not web or mail links
+  are never opened.
+
+Click **Show Source** to go back to the HTML code. Each message opens as
+source again the next time.
+
+**Show Preview** is only there when your system can show HTML:
+
+- **macOS**: always.
+- **Windows**: when the Microsoft Edge WebView2 Runtime is installed.
+- **Linux**: only in builds that include the optional WebEngine module.
+
+If the button says **Restart to Show Preview**, the preview was just
+installed. Restart GpgFrontend to use it.
+
+:::note[New in v2.2.4]
+
+HTML messages can now be previewed.
+
+:::
 
 ## Messages Are Checked Again When Your Keys Change
 

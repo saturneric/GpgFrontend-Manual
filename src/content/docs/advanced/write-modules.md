@@ -99,21 +99,30 @@ capability name fails the build with a list of the valid names.
 ## Capabilities
 
 `capabilities` decides what the module can reach. The names below are the full
-list in v2.2.3.
+list in v2.2.4.
 
 **Granted and enforced.** When the module activates, GpgFrontend gives it only
 the API groups it declared. A call into a group it did not declare does nothing,
 returns its failure value and logs one line that names the missing capability.
 
-| Name        | Gives access to                                                                 |
-| ----------- | ------------------------------------------------------------------------------- |
-| `gpg`       | Signing, encryption, decryption, verification, keys, key lists, result analysis |
-| `pgp`       | OpenPGP packet structure inspection, with no keyring or engine                  |
-| `ui`        | A Lua UI script, commands, theme colours by role                                |
-| `ui.custom` | The module's own native widgets, mounted by the script. Requires `ui`           |
-| `editor`    | Reading the document the user has open                                          |
-| `storage`   | Settings, caches, the shared runtime register table                             |
-| `process`   | Running an external program                                                     |
+| Name            | Gives access to                                                                           |
+| --------------- | ----------------------------------------------------------------------------------------- |
+| `gpg`           | Signing, encryption, decryption, verification, keys, key lists, result analysis           |
+| `pgp`           | OpenPGP packet structure inspection, with no keyring or engine                            |
+| `ui`            | A Lua UI script, commands, theme colours by role                                          |
+| `ui.custom`     | The module's own native widgets, mounted by the script. Requires `ui`                     |
+| `html.view`     | A read-only HTML view inside one of the module's own widgets. Requires `ui.custom`        |
+| `html.provider` | The renderer behind HTML views. Requires `ui.custom`. The library stays loaded until exit |
+| `editor`        | Reading the document the user has open                                                    |
+| `storage`       | Settings, caches, the shared runtime register table                                       |
+| `process`       | Running an external program                                                               |
+
+`html.view` and `html.provider` are new in v2.2.4. With `html.view`, call
+`gf::ui::HtmlViewAvailability()` and, when it returns `kOK`, create a
+`gf::ui::HtmlView` (see `GFModuleHtmlView.h`). The Host owns the safety
+rules: no network, no scripts, and a prompt before any link opens. Without a
+renderer every call answers Unavailable, so keep a plain-text fallback. The
+email module uses this for its HTML preview.
 
 **Recorded only.** `network` is signed and shown to the user, but GpgFrontend
 cannot enforce it. A module reaches the network through Qt directly. Declare it

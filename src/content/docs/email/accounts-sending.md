@@ -35,52 +35,88 @@ look like `imap.example.com` and `smtp.example.com`.
 1. Click **Edit** > **Settings**.
 2. In the **Features** group, click **Mail Accounts**.
 
-If you have no account yet, the page says **No mail accounts yet**. Click
-**Add an Account** to start.
-
 ## Add an Account
 
-1. Click **Add** (or **Add an Account** if the list is empty).
-2. Fill in the three sections described below.
-3. Type your password in the **Password** box.
-4. Click **Test Connection** in each section to check it works.
-5. Click **OK** at the bottom of the Settings window to save.
+If you have no account yet, the page says **No mail accounts yet**. Click
+**Add an Account**. If you already have one, click **Add Account...** under
+the list. The **Add Mail Account** window opens. It has four steps:
+**Account**, **Servers**, **Check** and **Review**.
+
+1. **Your Account**: type **Your name** (as people will see it), your **Email
+   address**, and your **Password**. Click **Continue**.
+2. **Servers**: GpgFrontend fills in the servers for you, from your address.
+   Choose what the account is for: **Send and receive**, **Receive only** or
+   **Send only**. Check the servers under **Server settings**. If they are
+   wrong, click **Edit**, change them, and click **Done**. Click **Continue**.
+3. **Connection Check**: GpgFrontend signs in to each server, without sending
+   or changing anything. It runs by itself. When everything works, click
+   **Continue**.
+4. **Review**: check the details. Turn on **Use as the default account** if you
+   want this account to be offered first when you send. Your first account
+   always becomes the default.
+5. Click **Add Account**.
+6. Click **OK** at the bottom of the Settings window to save.
 
 Nothing is saved until you click **OK**. If you click **Cancel**, your changes
 are thrown away.
 
-### Identity
+:::note[Changed in v2.2.4]
 
-This is how you appear to others.
+Adding an account is now a guided window that finds your servers for you.
+Before, you clicked **Add** and filled in the **Identity**, **Receiving
+(IMAP)** and **Sending (SMTP)** sections yourself.
 
-- **Display name**: your name, as people will see it. For example, `Alice Smith`.
-- **Email address**: your email address. This is required.
-- **Reply-To**: where replies should go, if not to your email address. Leave
-  it empty if you are not sure. It shows **Optional**.
+:::
 
-### Receiving (IMAP)
+### How GpgFrontend Finds Your Servers
 
-1. Check **Use this account to receive**.
-2. **Server**: the IMAP server address from your mail provider.
-3. **Connection**: how to protect the connection. See
-   [Connection Choices](#connection-choices) below.
-4. **Username**: usually your full email address.
-5. **Sent folder**: leave it empty. It shows **Discovered automatically**. Type
-   a folder name only if your copies of sent mail end up in the wrong place.
+- For well-known providers, such as Gmail, Outlook.com, iCloud, Yahoo, GMX or
+  Posteo, GpgFrontend already knows the servers.
+- For other addresses, it asks your DNS server (the internet's address book)
+  where the mail servers for your domain are. Before it does, the first step
+  tells you so. Nothing is looked up while you type.
+- If nothing is found, it guesses addresses such as `imap.example.com` and
+  `smtp.example.com`.
 
-### Sending (SMTP)
+The **Source** line under **Server settings** says where the servers came
+from: built-in settings for your provider, found in DNS, guessed, or
+**Entered by you**. If it says the servers were guessed, check them with your
+provider's help pages.
 
-1. Check **Use this account to send**.
-2. **Server**: the SMTP server address from your mail provider.
-3. **Connection**: see [Connection Choices](#connection-choices) below.
-4. **Username**: usually your full email address.
+### If the Check Fails
+
+Each server shows **Connected** or **Failed**, with the reason. You can:
+
+- Click **Back**, fix the servers, and come back. Then click **Retry**.
+- Tick **Add this account anyway and fix the connection later**, if you want
+  to set it up later in Settings.
+
+Click **Stop** to stop the check. Nothing is then verified.
+
+## Change an Account
+
+Click an account in the list to see its details. They are in three parts:
+
+- **Account**: **Display name**, **Email address** and **Password**.
+- **Servers**: for receiving and for sending, a **Use this account to
+  receive** or **Use this account to send** box, the **Server**, and the
+  **Connection** type.
+- **Advanced** (click to open):
+  - **Reply-To**: where replies should go, if not to your email address. Leave
+    it empty if you are not sure.
+  - **Incoming user name** and **Outgoing user name**: usually your full email
+    address. Leave the outgoing one empty to send without signing in.
+  - **Sent folder**: leave it empty. It shows **Discovered automatically**.
+    Type a folder name only if your copies of sent mail end up in the wrong
+    place.
 
 You can turn on receiving, sending, or both. An account that does neither
 cannot be used.
 
 ### Connection Choices
 
-The **Connection** list decides how your password and mail are protected on
+The **Connection** list (called **Security** in the **Add Mail Account**
+window) decides how your password and mail are protected on
 the way to the server. Both choices use **TLS**, which is the standard way to
 encrypt the connection between your computer and the server.
 
@@ -118,10 +154,10 @@ without changing your main password.
 
 ## Test the Connection
 
-1. Click **Test Connection** in the **Receiving (IMAP)** or **Sending (SMTP)**
-   section.
+1. Click **Test Connection** in the **Servers** part. It tests every server the
+   account uses, one after the other.
 2. Wait. It shows **Testing...**. Click **Stop** if it takes too long.
-3. Read the result below the button:
+3. Read the result under each server. Until you test, it says **Not tested**.
    - **Connected successfully.** means it works.
    - Otherwise, you see what went wrong and a hint. For example, **Check the
      user name and password.** or **Check the server address for a typo.**
@@ -146,16 +182,29 @@ If you click **Yes**, GpgFrontend trusts **only this exact certificate** for thi
 account. Any other certificate, even a new one from the same server, is still
 refused. Click **Test Connection** again to confirm it works.
 
-The section then says **Trusting one certificate**, followed by the
-fingerprint. Click **Stop trusting it** to undo this.
+Under **Advanced**, the account then says **Receiving server** or **Sending
+server**, followed by **Trusting one certificate** and the fingerprint. Click
+**Stop trusting it** to undo this.
 
 ## Manage Your Accounts
 
-- **Add**: make a new account.
-- **Remove**: delete the selected account. GpgFrontend asks first. Its saved
-  password is deleted too.
-- **Set as Default**: make the selected account the first choice when you send.
-  The default account shows **(default)** after its name.
+Right-click an account in the list:
+
+- **Set as Default**: make the account the first choice when you send. Its
+  details then say **Default account**.
+- **Disable**: keep the account, but stop using it. A disabled account is not
+  offered for sending or fetching mail, and it is never the default. Its
+  settings and password are kept. Choose **Enable** to use it again.
+- **Remove**: delete the account. GpgFrontend asks first. Its saved password is
+  deleted too.
+
+As always on this page, the change takes effect when you click **OK**.
+
+:::note[New in v2.2.4]
+
+You can now disable an account without removing it.
+
+:::
 
 GpgFrontend checks your accounts before it saves them. It tells you if, for
 example, an email address is missing, a server is not filled in, or two
@@ -207,7 +256,7 @@ The **Result** section then shows two lines:
 - **Copy in Sent**: was a copy put in your Sent folder?
   - **Yes, saved to ...** names the folder.
   - Many mail servers do not keep a copy of what you send. So GpgFrontend puts
-    one in your Sent folder itself, using your **Receiving (IMAP)** settings.
+    one in your Sent folder itself, using the account's incoming (IMAP) server.
   - If the account only sends, there is no mailbox, so no copy is kept. The
     message was still sent.
 
@@ -243,8 +292,9 @@ To stop a send on purpose, click **Stop** next to **Submission** instead.
 
 ## If Something Goes Wrong
 
-- **"No outgoing account is configured."** Add an account with **Use this
-  account to send** checked.
+- **"No outgoing account is configured."** Add an account that can send, or
+  check **Use this account to send** on an existing one. Make sure the account
+  is not disabled.
 - **"No password is stored for this account..."** Open **Mail Accounts**, select
   the account, type the password in the **Password** box, and click **OK**.
 - **The test says the password is wrong.** Check the username. If your provider

@@ -21,8 +21,9 @@ another email app first.
 ## Before You Start
 
 You need a mail account with receiving turned on. See
-[Mail Accounts and Sending](/email/accounts-sending/). In short: check **Use
-this account to receive**, fill in the server, and save a password.
+[Mail Accounts and Sending](/email/accounts-sending/). In short: add the
+account with **Send and receive** or **Receive only**, or check **Use this
+account to receive** on an existing one. Disabled accounts are not listed.
 
 ## Open the IMAP Controller
 
