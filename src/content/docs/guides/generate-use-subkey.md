@@ -17,35 +17,43 @@ and the more advanced setups come later, so you can skip them until you need the
 
 1. Double-click the key pair in the **Key ToolBox** list.
 2. Open the **Keychain** tab.
-3. Click **New Subkey**. The **Generate New Subkey** window opens.
+3. Click **New Subkey**. The **Add Subkey** window opens.
 
 ![][img-1]
 
 ### Step 1: Choose What the Subkey Is For
 
-The one choice that really matters is what the subkey will do:
+Under **What is the subkey for?**, click one choice:
 
-- **Usage**: tick **Encrypt** (to lock messages and files sent to you) or
-  **Sign** (to prove things came from you). Most people want one of these. There
-  is also **Authentication**, used for logins like SSH, but you can skip it unless
-  you need it.
+- **Encryption** (picked for you): for messages and files others send to you.
+- **Signing**: for everyday signing, so the primary key can be kept somewhere
+  safer.
+- **Authentication**: for logging in, for example over SSH. Skip it unless you
+  need it.
 
-Everything else has a safe default. You can leave these alone, or change them if
-you know you need to:
+Each choice shows the algorithm it will use, matched to your primary key. A
+choice that does not fit your key says **Not available for this key.**
 
-- **Algorithm**: the type of key. The default is fine for most people. Choices
-  include RSA, DSA, and ECC types such as ED25519, ED448, CV25519, SECP256K1,
-  Brainpool, and NIST curves.
-- **Key Length**: bigger is stronger but slower. For curve types this is set by the
-  curve (for example, ED25519 = 256 bits). For RSA you can pick up to 4096 bits.
-  The rPGP engine offers only 3072 or 4096 bits for RSA.
-- **Expire Date**: how long the subkey lasts. Pick a preset (like 1 or 2
-  years), an exact date, or **Non Expired** to never expire.
-- **Second Algorithm**: shown only for **hybrid** algorithms (such as the
-  post-quantum ML-KEM/Kyber options). It lets you pick the classical part that is
-  paired with the hybrid one (you also get a **Second Key Length** field).
-- **No Passphrase**: make the subkey without its own passphrase, if the engine
-  allows it.
+Then pick when the subkey **Expires**. The default is **2 years**. You can
+pick another period, **Never**, or **Custom date**.
+
+To choose everything yourself, turn on the **Expert Mode** switch. You then
+pick the **Algorithm**, **Key length** and **Usage** (**Encrypt**, **Sign**,
+**Authenticate**). For hybrid algorithms, such as the post-quantum ML-KEM
+ones, **Paired with** and **Its key length** also appear. You can also tick
+**Without a passphrase**, if the engine allows it.
+
+Post-quantum subkeys are only offered for keys in the v6 format. For a v4 key,
+the window tells you so.
+
+:::note[Changed in v2.2.4]
+
+The window used to be called **Generate New Subkey** and showed every option
+at once (**Usage**, **Algorithm**, **Key Length**, **Expire Date**, **Non
+Expired**). Now you pick what the subkey is for, and the detailed choices are
+under **Expert Mode**.
+
+:::
 
 :::tip[Plan ahead]
 
@@ -57,10 +65,11 @@ keep your primary key offline.
 
 ### Step 2: Generate
 
-- Check your choices in the summary (if shown).
 - Click **Generate**.
-- When asked, enter your key's **passphrase** to confirm.
-- The new subkey appears under the **Keychain** tab.
+- When asked, enter your key's **passphrase** to confirm. With GnuPG, the new
+  subkey is protected by the same passphrase as the key pair.
+- A **Subkey Added** message confirms it. The new subkey appears under the
+  **Keychain** tab.
 
 ![][img-2]
 

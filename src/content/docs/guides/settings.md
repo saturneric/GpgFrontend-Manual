@@ -45,6 +45,7 @@ If you would rather browse, the pages are sorted into four groups:
 | **Network**           | Application    | Proxy settings                                                                         |
 | **Updates**           | Application    | Whether GpgFrontend checks for a new version when it starts                            |
 | **Key Databases**     | Keys & Engines | Your key databases, which one is the default, and the built-in database's engine       |
+| **Key Generation**    | Keys & Engines | The default key type, the made-up identity for Quick Generate, and your key profiles   |
 | **GnuPG**             | Keys & Engines | Point at your own GnuPG, clear the password cache, restart GnuPG                       |
 | **rPGP**              | Keys & Engines | How long the rPGP engine remembers a passphrase, and passphrase encryption strength    |
 | **Key Servers**       | Keys & Engines | The list of key servers, and which one is the default                                  |
@@ -131,6 +132,59 @@ to the built-in database. Other databases always open with their own engine.
 
 This page is still changing. For the details, see
 [Key Database](/advanced/key-database/).
+
+## The Key Generation Page
+
+This page decides what [making a new key](/guides/generate-key/) starts with.
+It has two tabs.
+
+:::note[New in v2.2.4]
+
+This page is new.
+
+:::
+
+### The Quick Generate Tab
+
+- **Default key profile**: the key type that is picked first in the
+  **Generate Key** window, and that **Quick Generate** uses. A **profile** is
+  a saved set of key choices. The default is **Ed25519 / X25519 (Modern &
+  Fast)**.
+- **Quick Generate identity**: how the made-up name, email and comment look.
+  **Quick Generate** and the **Fill In Anonymously** button use these. Change
+  them in **Name pattern:**, **Email pattern:** and **Comment pattern:**.
+  **Preview:** shows an example. Click the refresh button next to it for
+  another one.
+
+A pattern is normal text with placeholders in curly braces. For example, the
+default name pattern `anon-{token}` gives `anon-` followed by 8 random letters
+and digits.
+Click **Placeholders** to see them all. Some useful ones:
+
+- `{token}`: 8 random letters and digits, the same in every field.
+- `{domain}` and `{tld}`: a made-up domain. `{tld}` gives `test`, `example` or
+  `invalid`, so no mail can ever reach the address.
+- `{date}`: today's date.
+
+**Restore Default Patterns** puts the three patterns back as they were.
+
+### The Profiles Tab
+
+The list shows every profile and its **Status**: **Default**, **Hidden**,
+**Unavailable** (your engine cannot make it) or **Offered**. Click a profile to
+see what it makes and where it appears in the **Generate Key** window.
+
+- **New…** makes a profile. Choose its **Name**, the **Primary key**, and
+  whether to add a **Subkey**.
+- **Edit…** changes the selected profile.
+- **More** has **Duplicate**, **Set as Default**, **Hide** and **Delete**.
+- Drag a profile, or use the arrow buttons, to change the order.
+
+You cannot delete or hide the default profile. Choose another default first.
+Deleting a profile never changes keys you already made with it.
+
+**Restore Built-in Profiles…** adds back the profiles GpgFrontend comes with,
+if you deleted any. Your own profiles and your changes are kept.
 
 ## The rPGP Page
 

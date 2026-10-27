@@ -6,94 +6,140 @@ sidebar:
 ---
 
 GpgFrontend makes it easy to create OpenPGP key pairs that work with GnuPG. **If
-you're new, you can make a key in three quick steps: open the dialog, enter your
-name and email, and click Generate.** GpgFrontend fills in safe defaults for
-everything else. You can change those defaults later if you want (see
-[Customize Your Key](#customize-your-key-optional)).
+you're new, click New Keypair, type your name, and click Continue until you
+reach Generate.** GpgFrontend fills in safe defaults for everything else.
 
-## Step 1: Open the Generate Key Dialog
+## Open the Key Generation Window
 
-In the **Main Window**, click **New Keypair**. This opens the
-**Generate Key** window, where you set your identity and key options.
+In the **Main Window**, click **New Keypair**. You can also open the **Keys**
+menu and choose **New Keypair**. The **Generate Key** window opens.
 
 ![][img-1]
 
-## Step 2: Enter Your Information
+The window walks you through four steps: **Identity**, **Key Type**,
+**Validity & Protection** and **Review**. Click **Continue** to go to the next
+step, or **Back** to change something.
+
+:::note[Changed in v2.2.4]
+
+Making a key is now a guided window with steps. It used to be one window with
+the tabs **Easy Mode**, **Primary Key** and **Subkey**. The choices that were
+on the **Primary Key** and **Subkey** tabs are now under **Expert Mode**. See
+[Choose Everything Yourself](#choose-everything-yourself-expert-mode).
+
+:::
+
+## Step 1: Identity
+
+Type who the key is for. Others see this name and address when they look up
+your key.
 
 - **Name**: Required. Your full name.
-- **Email**: Required. Must be a valid email address.
-- **Comment**: Optional. Helps tell this key apart from others.
+- **Email**: Optional. If you fill it in, it must be a valid email address.
+- **Comment**: Optional. Helps tell this key apart from others, for example
+  `Work`.
 
-The refresh button next to these fields fills in a **random anonymous identity**.
-This is handy for throwaway or test keys, when you don't want to link the key to a
-real name or address.
+**Fill In Anonymously** makes up a name and an address that reach nobody. This
+is handy for throwaway or test keys, when you don't want to link the key to a
+real name or address. How the made-up identity looks is set in
+[Settings](/guides/settings/#the-key-generation-page).
 
 A few rules apply to what you can type here:
 
-- The name cannot be empty.
-- The name and comment cannot contain `(`, `)`, `<`, or `>`.
-- The email has to be a complete address, not just part of one.
+- **Continue** stays greyed out until you type a name.
+- The name and comment cannot contain `(`, `)`, `<`, `>` or control
+  characters.
 - A name shorter than five characters is allowed, but GpgFrontend asks you to
   confirm it first. Short names are usually a typo, and they make your key
   harder for other people to recognise.
 
-## Step 3: Generate the Key
+At the bottom, the window says which key database the key will be saved in.
+To use another one, close the window, switch to that
+[key database](/advanced/key-database/), and start again.
 
-GpgFrontend already picks safe defaults for you, including the recommended
-**Ed25519** key type. So once you've entered your name and email, you can make
-your key right away:
+## Step 2: Key Type
 
-- Check the summary in the lower panel.
-- Click the **Generate** button.
-- When asked, enter a strong **passphrase** (and type it again to confirm). This
-  protects your private key, so pick something strong and don't forget it.
-- GpgFrontend creates the key and tells you when it's done.
+Choose what kind of key to make. If you are unsure, keep the one marked
+**Recommended**.
 
-That's all you need to get started. Want to change the key type or how long it
-lasts? See [Customize Your Key](#customize-your-key-optional) before you click
-**Generate**.
+- **Modern** (**Recommended**): small, fast keys for signing and encryption.
+  All current OpenPGP software understands them.
+- **Compatibility**: an RSA key, for older systems and software that only
+  accept RSA. Larger and slower to use.
+- **Hybrid encryption**: messages sent to you are also protected against
+  future quantum computers. Only recent software can encrypt to this key. This
+  choice only shows up when your engine supports it. See
+  [Post-Quantum Cryptography](/guides/post-quantum/).
+
+For other key types, open **Advanced options** and pick one from **Other
+profile**. A **profile** is a saved set of key choices, such as the algorithm
+and how long the key is valid. You can manage profiles in
+[Settings](/guides/settings/#the-key-generation-page).
+
+## Step 3: Validity & Protection
+
+- **Valid for**: how long the key can be used. The default is **2 years**. You
+  can pick a period, **Never**, or **Custom date**. A key that expires stops
+  being usable on its own if you lose it. You can extend it at any time before
+  then.
+- **Protect the secret key with a passphrase**: on by default. Keep it on.
+  You are asked for the passphrase while the key is made. With GnuPG, GnuPG
+  asks in a window of its own, and may ask twice if the key has a subkey.
+
+If you turn the passphrase off, a warning reminds you that anyone who gets
+your secret key file can then sign and decrypt as you.
+
+## Step 4: Review and Generate
+
+1. Check the summary: your user ID, the key type, when it expires, and whether
+   it has a passphrase.
+2. Click **Generate**.
+3. If asked, type a strong **passphrase**, and type it again to confirm.
+4. A **Key Generated** message shows your new key's fingerprint. Click **OK**.
+
+## Make a Key in One Click
+
+**Quick Generate** makes a key straight away, with no questions. It uses the
+default profile and a made-up identity, both from
+[Settings](/guides/settings/#the-key-generation-page). This is handy for test
+keys.
+
+To use it, open the **Keys** menu and choose **Quick Generate**. You can also
+hold down or right-click the **New Keypair** button and choose it there.
+
+If the default profile or the identity pattern in Settings cannot be used,
+GpgFrontend asks if you want to make the key step by step instead.
+
+:::note[New in v2.2.4]
+
+**Quick Generate** and the **Key Generation** settings page are new.
+
+:::
 
 ---
 
-## Customize Your Key (Optional)
+## Choose Everything Yourself (Expert Mode)
 
-You can skip this. GpgFrontend's defaults are a safe choice. Use these settings
-only if you want to change the key type, how long it lasts, or its structure
-before you generate.
+You can skip this. GpgFrontend's defaults are a safe choice.
 
-The **Generate Key** window has three tabs: **Easy Mode**, **Primary Key**, and
-**Subkey**. You start on **Easy Mode**.
+Turn on the **Expert Mode** switch at the bottom left of the window, on step 1
+or 2. Step 2 then becomes **Key Details**, where you choose:
 
-**Easy Mode** uses ready-made **profiles** instead of showing every option. It has
-two parts:
+- **Start from**: begin with **Custom** or with any profile, then change what
+  you need.
+- **Primary key**: the **Algorithm**, **Key length**, **Usage** (**Encrypt**,
+  **Sign**, **Authenticate**) and when it **Expires**. For hybrid algorithms,
+  **Paired with** and **Its key length** also appear.
+- **Key format**: **v4 (Compatible)** or **v6 (Modern)**. This is only shown
+  with the rPGP engine. Post-quantum algorithms always use v6.
+- **Add a subkey**: tick it to add a second key under the primary one, usually
+  for encryption. It gets the same choices as the primary key.
 
-**Profile**
+With Expert Mode on, the expiry is set for each key here, so step 3 only asks
+about the passphrase.
 
-- **Name**: Pick a profile from the dropdown. Profiles are grouped by algorithm
-  type:
-  - Older profiles such as RSA come first, with no heading above them.
-  - **ECC**: elliptic-curve profiles. The Ed25519 (Curve25519) profile is the
-    recommended modern default and is picked for you when available.
-  - **Post-Quantum**: quantum-resistant profiles (rPGP engine only).
-- **Save / Delete / Reset**: Manage the profile list. **Save** stores your current
-  settings as a new named profile, **Delete** removes the selected profile, and
-  **Reset** restores the default list. The built-in `Custom` profile cannot be
-  deleted.
-
-Only profiles that work with your current engine and key database are shown.
-
-**Basic**
-
-- **Validity Period**: Pick how long the key stays valid (for example, 3 months, 2
-  years, 10 years, or _Never Expires_).
-- **Combination**:
-  - **Primary Key Only**
-  - **Primary Key With Subkey**: useful for keeping signing and encryption
-    separate.
-
-For full control over the algorithm, key length, and format, use the **Primary
-Key** and **Subkey** tabs. The supported algorithms and
-compatibility notes are below.
+To keep your choices for later, click **Save as Profile…** and give them a
+name. GpgFrontend remembers whether Expert Mode was on for next time.
 
 ## Advanced Options
 
@@ -157,8 +203,8 @@ mind before you share a key:
   keys made by rPGP always use the OpenPGP v6 format. They are meant for testing
   and rPGP-based work, not for use with GnuPG.
 - **GnuPG chooses its own key format.** When you use the GnuPG engine, GnuPG picks
-  the format based on its version and settings; GpgFrontend doesn't set it, and
-  the Key Format selector doesn't apply. Current releases make **v4** keys, but
+  the format based on its version and settings. GpgFrontend doesn't set it, so
+  the **Key format** choice is not shown. Current releases make **v4** keys, but
   newer versions (such as the 2.5.x line) may make **v5** keys.
 - **A v4 key always keeps at least one UID.** A v4 key stores its usage and
   expiry with its UIDs (User IDs, the name and email on the key). So GpgFrontend

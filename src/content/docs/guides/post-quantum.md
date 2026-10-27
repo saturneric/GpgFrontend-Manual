@@ -81,25 +81,27 @@ exact options for reference:
 
 ## Make a Post-Quantum Key
 
-1. Open the **KeyPair Management** window and click **New Keypair** to open the
-   **Generate Key** dialog.
-2. Choose a post-quantum algorithm:
-   - On the **Easy Mode** tab: in the **Profile** box, open the **Name** dropdown
-     and pick a profile under the **Post-Quantum** heading.
-   - On the **Primary Key** or **Subkey** tab: open the **Algorithm** dropdown and
-     pick an option under the **Post-Quantum** heading. The list starts with the
-     classic options (no heading), then the **ECC** heading, then the
-     **Post-Quantum** heading, so the quantum-proof options are easy to spot.
-3. Pick by job:
-   - For **encryption**, choose an **ML-KEM (Kyber)** option.
-   - For **signing**, choose **ML-DSA** or **SLH-DSA**.
-4. Make sure the active engine supports your choice. Most of these options come from
-   the **rPGP** engine, so switch engines if one isn't available.
-5. Fill in your name, email, and validity period, then generate the key.
+1. Open the **KeyPair Management** window and click **New Keypair**. The
+   **Generate Key** window opens.
+2. On the **Identity** step, fill in your name (and email, if you want), then
+   click **Continue**.
+3. On the **Key Type** step, choose a post-quantum option:
+   - The **Hybrid encryption** choice: messages to you are protected by ML-KEM
+     as well as a classic algorithm. Signatures still use Ed25519.
+   - Or open **Advanced options**, then **Other profile**, and pick a profile
+     under the **Post-Quantum** heading. The **Full PQC Hybrid** profiles also
+     use ML-DSA for signing.
+   - Or turn on **Expert Mode** and pick an **Algorithm** under the
+     **Post-Quantum** heading. For encryption, choose an **ML-KEM (Kyber)**
+     option for the subkey. For signing, choose **ML-DSA** or **SLH-DSA**.
+4. Make sure the active engine supports your choice. Choices it cannot make
+   are not shown. Most of these options come from the **rPGP** engine.
+5. Choose how long the key is **Valid for**, then click **Continue** and
+   **Generate**.
 
-These algorithms need the **v6** key format. On the **Primary Key** tab,
-GpgFrontend switches to v6 and locks it automatically once you pick a post-quantum algorithm, so you
-don't have to set it yourself.
+These algorithms need the **v6** key format. GpgFrontend picks v6 for you
+when you choose a post-quantum option. In **Expert Mode**, the **Key format**
+choice is then locked to v6.
 
 That's it. You now hold a post-quantum OpenPGP key.
 
