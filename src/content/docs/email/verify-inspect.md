@@ -83,7 +83,7 @@ The **Message Details** window shows everything GpgFrontend knows about a
 message. To open it, do one of these:
 
 - Click **More** > **Details...**.
-- Press Ctrl+Shift+D.
+- Press Ctrl+Shift+D, or Alt+3.
 - Click the badge, then a details item, such as **Signature Details...** or
   **Encryption Details...**.
 

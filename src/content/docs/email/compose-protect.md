@@ -117,10 +117,9 @@ On a message you are still writing, these buttons are not on the row. You find
 
 Above the body you can switch between two views:
 
-- **Message** (Alt+1): the normal view, with header
-  fields, body and attachments.
-- **Raw Source** (Alt+2): the full message as plain text,
-  exactly as it is stored in the file.
+- **Message**: the normal view, with header fields, body and attachments.
+- **Raw Source**: the full message as plain text, exactly as it is stored in
+  the file.
 
 The raw source is read-only at first. To change it by hand:
 
@@ -158,8 +157,8 @@ The result shows in the **Status Panel**. The status button changes to tell you
 what the message is now, for example **Encrypted**.
 
 You can also use the **Sign** and **Encrypt** buttons on the main toolbar. They
-do the same thing. **Encrypt & Sign** is in the **Encrypt** button's list:
-right-click the button to find it.
+do the same thing. **Encrypt & Sign** is in the **Operations** menu. If you
+added it to the toolbar, it is in the **Encrypt** button's list.
 
 ### What the Security Menu Offers
 
@@ -196,7 +195,9 @@ is.
 
 ### Lock a Message Yourself
 
-You can also lock a message you received, so nobody changes it by accident:
+You can also lock a message you received, so nobody changes it by accident.
+This is only offered for a message that is not signed or encrypted; those are
+locked already.
 
 1. Click **More**.
 2. Click **Read-only**.

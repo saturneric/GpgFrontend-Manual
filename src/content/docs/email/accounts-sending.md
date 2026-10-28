@@ -49,7 +49,10 @@ the list. The **Add Mail Account** window opens. It has four steps:
 2. **Servers**: GpgFrontend fills in the servers for you, from your address.
    Choose what the account is for: **Send and receive**, **Receive only** or
    **Send only**. Check the servers under **Server settings**. If they are
-   wrong, click **Edit**, change them, and click **Done**. Click **Continue**.
+   wrong, click **Edit**, change them, and click **Done**. If your provider
+   wants a login name that is not your email address, open **Login
+   usernames** while editing and fill in **Incoming (IMAP)** and **Outgoing
+   (SMTP)**. Click **Continue**.
 3. **Connection Check**: GpgFrontend signs in to each server, without sending
    or changing anything. It runs by itself. When everything works, click
    **Continue**.
@@ -89,7 +92,9 @@ provider's help pages.
 
 Each server shows **Connected** or **Failed**, with the reason. You can:
 
-- Click **Back**, fix the servers, and come back. Then click **Retry**.
+- Click **Back**, fix the servers, and click **Continue**. The check runs
+  again by itself. To run it again without changing anything, click
+  **Retry**.
 - Tick **Add this account anyway and fix the connection later**, if you want
   to set it up later in Settings.
 

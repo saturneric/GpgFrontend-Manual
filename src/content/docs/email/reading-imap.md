@@ -113,15 +113,22 @@ signature:
 
 ### Attachment Actions
 
-Click **Attachments** on the action row, or right-click a file in the list:
+Click **Attachments** on the action row, or right-click a file in the list.
+Both menus have these:
 
 - **Open**: open the file with the app your computer uses for it.
 - **Save...**: save the selected files to a folder.
-- **Save All...**: save every attachment to a folder.
-- **Import Key**: import the file into your key database. This shows only when
-  the file is an OpenPGP key.
 - **Remove**: take the selected files out of the message. This only works on a
   message you can edit.
+
+Only the **Attachments** menu has:
+
+- **Save All...**: save every attachment to a folder.
+
+Only the right-click menu has:
+
+- **Import Key**: import the file into your key database. This shows only when
+  the file is an OpenPGP key.
 - **Copy Name**: copy the file name.
 
 With **Save All...**, a file never replaces one that is already in the folder.
