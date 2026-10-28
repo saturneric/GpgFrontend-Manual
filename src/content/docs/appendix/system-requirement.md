@@ -21,8 +21,8 @@ For smooth operation, we recommend:
 - Windows 10 or later. Windows 7 can only run the older v2.1.x line, which
   still has Qt5 builds. It is not recommended.
 - macOS 15 or later, on both Intel and Apple Silicon
-- Ubuntu 22.04 or later, or a comparable Linux distribution, on both x86_64
-  and arm64
+- Linux on x86_64: Ubuntu 22.04 or later, or a comparable distribution
+- Linux on arm64: Ubuntu 24.04 or later, or a comparable distribution
 
 > Note: Only 64-bit machines are supported.
 

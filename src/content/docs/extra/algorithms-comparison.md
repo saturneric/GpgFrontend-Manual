@@ -38,15 +38,23 @@ older systems, while Curve25519 stays fast for everyday work.
 | Algorithm                | Group        | Used for       | Engines          | Notes                          |
 | ------------------------ | ------------ | -------------- | ---------------- | ------------------------------ |
 | RSA                      | Classical    | Sign + Encrypt | GnuPG, rPGP      | Best compatibility; slower     |
+| DSA                      | Classical    | Sign           | GnuPG            | Legacy; avoid for new keys     |
 | ElGamal (ELG-E)          | Classical    | Encrypt only   | GnuPG            | Rarely needed today            |
 | ECDSA (NIST curves)      | Elliptic     | Sign           | GnuPG, rPGP      | Standardized by NIST           |
 | EdDSA (Ed25519 / Ed448)  | Elliptic     | Sign           | GnuPG, rPGP      | Modern default for signing     |
 | ECDH (Curve25519 / X448) | Elliptic     | Encrypt        | GnuPG, rPGP      | Modern default for encryption  |
 | Brainpool curves         | Elliptic     | Sign + Encrypt | GnuPG 2.3+       | Non-NIST alternative           |
-| secp256k1                | Elliptic     | Sign           | GnuPG 2.3+       | Used in blockchain             |
+| secp256k1                | Elliptic     | Sign + Encrypt | GnuPG 2.3+       | Used in blockchain             |
 | ML-DSA                   | Post-Quantum | Sign           | rPGP only        | Experimental, OpenPGP v6       |
 | SLH-DSA                  | Post-Quantum | Sign           | rPGP only        | Experimental; large signatures |
 | Kyber / ML-KEM           | Post-Quantum | Encrypt        | GnuPG 2.5+, rPGP | Experimental; always hybrid    |
+
+Some rows have exceptions:
+
+- **Ed448** and **X448** need GnuPG 2.3 or later. An Ed448 **subkey** can only
+  be made with rPGP.
+- **secp256k1** signs as a primary key, and encrypts as a subkey. GpgFrontend
+  does not offer it as a signing subkey.
 
 The exact choices you see depend on the engine, its version, and the key format.
 
@@ -228,8 +236,8 @@ an encryption subkey, pairing a post-quantum part with a classical ECDH part.
 Unlike ML-DSA and SLH-DSA above, Kyber is **not rPGP-only**. Both engines support
 it:
 
-- **GnuPG** 2.5.0 or later. The Windows build of GpgFrontend v2.2.3 comes with
-  GnuPG 2.5.21, so it works out of the box with the GnuPG engine.
+- **GnuPG** 2.5.0 or later. The Windows build of GpgFrontend v2.2.4 comes with
+  GnuPG 2.5.24, so it works out of the box with the GnuPG engine.
 - **rPGP** 0.1.2 or later.
 
 Available sizes:

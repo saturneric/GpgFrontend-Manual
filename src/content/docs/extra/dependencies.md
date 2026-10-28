@@ -19,15 +19,20 @@ performed using OpenSSL, with AES-GCM as the default and only mode.
 Note: Starting with v2.2.0, the internal cryptographic helpers have been
 migrated again from OpenSSL to **libsodium**. This includes application-level
 helpers such as hashing, HMAC, random generation, password hashing, and key
-derivation. OpenSSL may also still be used indirectly by Qt or the operating
-system for network communication, such as HTTPS/TLS connections. Therefore, this
-change does not mean OpenSSL is completely absent from all runtime environments.
+derivation. OpenSSL is still used by the email module, for its secure (TLS)
+connections to mail servers. Qt may also use it for other secure connections.
 
 ### Common
 
 - **Qt (Open Source)**: [https://www.qt.io][qt]
 - **GnuPG**: [https://gnupg.org][gnupg]
 - **GpgME**: [https://gnupg.org/software/gpgme/index.html][gnupg-gpgme]
+- **libgpg-error** and **libassuan**: [https://gnupg.org][gnupg]. Helper
+  libraries of GnuPG that GpgME needs.
+- **rPGP** (the `pgp` crate, Rust): [https://github.com/rpgp/rpgp][rpgp]. The
+  second OpenPGP engine.
+- **Corrosion**: [https://github.com/corrosion-rs/corrosion][corrosion]. Builds
+  the Rust part of GpgFrontend.
 - **OpenSSL**: [https://openssl-library.org][openssl-library]
 - **libarchive**: [https://www.libarchive.org][libarchive]
 - **libsodium**: [https://libsodium.gitbook.io/doc][libsodium]
@@ -41,6 +46,8 @@ change does not mean OpenSSL is completely absent from all runtime environments.
 
 - **MSYS2**: [https://www.msys2.org][msys2]
 - **mingw-w64**: [https://www.mingw-w64.org][mingw-w64]
+- **Microsoft Edge WebView2**: [https://developer.microsoft.com/microsoft-edge/webview2/][webview2].
+  Shows HTML email formatted.
 
 ### Linux
 
@@ -51,6 +58,13 @@ change does not mean OpenSSL is completely absent from all runtime environments.
 
 - **macOS Application Bundles**: [Link][apple-aboutbundles]
 - **Xcode Command Line Tools**: [https://developer.apple.com/xcode/][apple-xcode]
+- **WebKit**: part of macOS. Shows HTML email formatted.
+
+### Optional
+
+- **Qt WebEngine**: [https://doc.qt.io/qt-6/qtwebengine-index.html][qt-webengine].
+  Used only by the optional WebEngine module, which shows HTML email formatted
+  on Linux. The official downloads leave it out.
 
 ## Fonts
 
@@ -82,3 +96,7 @@ commercially utilized.
 [lua]: https://www.lua.org
 [vmime]: https://www.vmime.org
 [jetbrains-mono]: https://github.com/JetBrains/JetBrainsMono
+[rpgp]: https://github.com/rpgp/rpgp
+[corrosion]: https://github.com/corrosion-rs/corrosion
+[webview2]: https://developer.microsoft.com/microsoft-edge/webview2/
+[qt-webengine]: https://doc.qt.io/qt-6/qtwebengine-index.html

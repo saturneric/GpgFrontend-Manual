@@ -29,7 +29,7 @@ If you want to write a module rather than change the application, start with
 All contributions should follow these rules:
 
 - **C++ Standard:** C++ code must follow the C++17 standard.
-- **C Standard:** C code must follow the C99 standard.
+- **C Standard:** C code must follow the C11 standard.
 - **Rust Standard:** Since v2.2, GpgFrontend includes a Rust component (the
   rPGP engine), located under the `rust/` directory and built into the project
   via [Corrosion][github-corrosion]. Rust code must
@@ -209,9 +209,10 @@ Notes:
 
 - `GPGFRONTEND_LINK_GPGME_INTO_CORE=ON` builds gpgme, libassuan, and
   libgpg-error from the bundled submodules and links them statically. Every CI
-  job uses this option, because GpgFrontend needs gpgme 2.0 or newer and most
-  package managers do not ship it yet. This is why the autotools packages
-  (autoconf, automake, gettext, texinfo) are in the dependency lists above.
+  job uses this option, because GpgFrontend is meant to run on gpgme 2.0 or
+  newer and most package managers do not ship it yet. This is why the autotools
+  packages (autoconf, automake, gettext, texinfo) are in the dependency lists
+  above.
 - Adjust the build type (`Release`, `RelWithDebInfo`, etc.) as needed; it
   defaults to `Release` when not set.
 - On macOS, CI configures with the Xcode generator (`-G Xcode`) to produce the
@@ -221,8 +222,8 @@ Notes:
 - The unit tests are off by default. Add `-DGPGFRONTEND_BUILD_TESTS=ON` to
   build them (this needs GoogleTest), and `-DGPGFRONTEND_MODULES_BUILD_TESTS=ON`
   to also build the modules' own unit tests.
-- `GPGFRONTEND_BUILD_APP_IMAGE` is deprecated. The AppImage is now made from
-  the tree that `cmake --install` produces.
+- `GPGFRONTEND_BUILD_APP_IMAGE` is gone. The AppImage is now made from the
+  tree that `cmake --install` produces.
 
 ### Module Binding Options
 
@@ -251,13 +252,20 @@ QT_QPA_PLATFORM=offscreen ./scripts/run_tests.sh
 ```
 
 Setting `QT_QPA_PLATFORM=offscreen` lets the tests run headless, without a
-display server. By default the script runs the Rust tests (`cargo test`), the
-C++ unit tests and the stress tests, each in its own phase. Run
+display server. By default the script runs these phases, one after another:
+the Rust tests (`cargo test`), the modules' tests, the C++ unit tests, the
+stress tests, the key generation coverage sweep, and the slow Rust tests. Run
 `./scripts/run_tests.sh --help` for the full list. The most useful options:
 
 | Option                 | What it does                                                                    |
 | ---------------------- | ------------------------------------------------------------------------------- |
 | `--unit-only`          | Run only the unit tests.                                                        |
+| `--stress-only`        | Run only the stress tests.                                                      |
+| `--coverage-only`      | Run only the sweep that makes a key with every algorithm on offer.              |
+| `--rust-only`          | Run only the Rust tests.                                                        |
+| `--no-rust`            | Skip the Rust tests.                                                            |
+| `-b`, `--build`        | Build the app before running the tests.                                         |
+| `-l LEVEL`             | Set the app's log level: `debug`, `info`, `warn` (default) or `error`.          |
 | `-f PATTERN`           | Run a single GoogleTest filter and nothing else.                                |
 | `--modules-only`       | Run only the modules' own test binaries.                                        |
 | `--require-modules`    | Fail, instead of skip, when module test binaries are missing. Use it in CI.     |

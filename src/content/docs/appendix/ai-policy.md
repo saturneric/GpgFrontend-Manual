@@ -63,11 +63,11 @@ The more important change is what gets done at all. Two kinds of work used to be
 put off:
 
 - **Tests.** Writing them is slow and dull, and it was easy to keep postponing.
-  The app now ships with well over a thousand automated tests, around 20,000
+  The app now has more than four thousand automated tests, around 75,000
   lines of them.
 - **Interface code.** The repetitive part of building windows, dialogs and
-  settings pages. There are 66 of those, and about 53,000 lines of interface
-  code, most of it the same patterns over and over.
+  settings pages. There are dozens of those, and about 87,000 lines of
+  interface code, most of it the same patterns over and over.
 
 That is the trade. The tools do the slow, repetitive work. The maintainer keeps
 the work that needs judgment: designing how the app fits together, and trying
@@ -84,7 +84,7 @@ audits. GpgFrontend asks them to do the job rather than inventing its own.
 
 You can check this yourself, without trusting anybody. The source code contains
 no encryption algorithms of its own. It calls the GnuPG library from more than
-four hundred places, and the rPGP library from the Rust side. There is no
+two hundred places, and the rPGP library from the Rust side. There is no
 home-made cryptography in it to get wrong, no matter who or what wrote the
 surrounding code.
 
@@ -103,7 +103,7 @@ Using an assistant does not lower the bar. Every change clears the same checks:
 | :------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
 | **A person directed it**   | What the change should do is decided first. The result is then checked against that, and rewritten if it does not match. |
 | **It builds**              | It compiles on Windows, macOS and Linux.                                                                                 |
-| **It passes the tests**    | More than a thousand automated tests, around 20,000 lines of them, run against the code.                                 |
+| **It passes the tests**    | More than four thousand automated tests, around 75,000 lines of them, run against the code.                              |
 | **It still interoperates** | Separate tests check that keys and messages still work with GnuPG and follow the OpenPGP standard.                       |
 
 Nothing is accepted just because a tool produced it. A change that cannot be
