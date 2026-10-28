@@ -121,13 +121,6 @@ If you would rather nothing is kept:
 With the cache off, quitting asks whether to save your unsaved tabs, and
 any cached tabs are cleared the next time the program starts.
 
-:::note[Changed in v2.2.3]
-
-**Cache text editor contents.** is now on by default, and cached tabs are
-brought back at the next start.
-
-:::
-
 When you quit and the program is sure it will close, it also wipes the text
 out of every open tab. This happens after the cache is saved and after any
 question about saving has been answered.

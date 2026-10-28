@@ -68,7 +68,10 @@ Click **Show Details...** to see the reason your system gave. Then:
 - Click **Quit**, unlock your keychain, and start GpgFrontend again. This
   costs nothing and keeps your data.
 - Only click **Reset Secure Key** if you are sure the secret is gone for good.
-  Everything the key protected becomes unreadable.
+  Everything the key protected becomes unreadable. Two windows called
+  **Reset to Default** ask you to confirm first: click **Reset to Default** in
+  the first and **Yes** in the second. **Go Back** or **Cancel** stops the
+  reset.
 
 :::note[New in v2.2.3]
 
@@ -91,7 +94,7 @@ There is no reset that keeps your data. If you cannot remember the PIN, the
 only way to start the program again is to delete the key. Everything the key
 was protecting then becomes unreadable forever.
 
-GpgFrontend offers that as **Forgot PIN? Reset** after three wrong tries, and
+GpgFrontend offers that as **Forgot PIN? Reset…** after three wrong tries, and
 warns you twice before doing it.
 
 Your OpenPGP keys are not affected. Only the program's own saved data is.
@@ -170,9 +173,10 @@ folder was restored or copied without the key file.
 - Click **Quit** to keep your data safe. Put `app.key` back from your backup,
   then start GpgFrontend again. Click **Show Details...** to see where the file
   is expected.
-- Click **Create New Key** only if you cannot get the file back. A second
-  window, **Reset to Default**, asks you to confirm. GpgFrontend then starts,
-  but everything it locked with the old key can never be read again.
+- Click **Create New Key** only if you cannot get the file back. Two windows
+  called **Reset to Default** ask you to confirm: click **Reset to Default** in
+  the first and **Yes** in the second. GpgFrontend then starts, but everything
+  it locked with the old key can never be read again.
 
 ## Good Habits
 

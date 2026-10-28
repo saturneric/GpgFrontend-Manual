@@ -57,6 +57,9 @@ and to download it.
 The check only asks GitHub Releases. See
 [Finding Your Settings](/guides/settings/#the-updates-page).
 
+The Flatpak and Mac App Store builds have no update check. Flathub and the App
+Store bring their updates.
+
 </details>
 
 <details>
@@ -85,8 +88,8 @@ See [System Requirements](/appendix/system-requirement/).
 Today, when people say "PGP encryption," they almost always mean the OpenPGP
 standard, and the tool they actually use is GnuPG (GPG) or another compatible
 app. GpgFrontend is an easy-to-use front-end for OpenPGP. It uses GnuPG as its
-main engine and, since v2.2.0, also offers an optional rPGP engine, making
-OpenPGP encryption easy for everyone.
+main engine and, since the v2.2.x series, also offers an optional rPGP engine,
+making OpenPGP encryption easy for everyone.
 
 </details>
 
@@ -358,8 +361,10 @@ GnuPG-specific features, please install GnuPG:
 <details>
 <summary>How do I import or export keys in GpgFrontend?</summary>
 
-Use the Key Management section to import or export public/private keys. You can
-also drag and drop key files directly into the app's Key ToolBox.
+Click **Manage Keys** to open the **KeyPair Management** window. Its **Key**
+menu has **Import Key** and **Export Key**. You can also drag and drop key
+files directly into the app's Key ToolBox. See
+[Import and Export Keys](/guides/import-export-key-pair/).
 
 </details>
 
@@ -377,7 +382,8 @@ interface to protect or unlock files.
 Yes, if your GnuPG supports smart cards. To manage them, click **Advanced** >
 **Open Smart Card Controller**. This opens the **Smart Card Controller**
 window. Smart card support needs the **GnuPG engine**; the rPGP
-engine does not support smart cards or tokens.
+engine does not support smart cards or tokens. Sandboxed builds (Flatpak and
+the Mac App Store edition) do not have this window.
 
 </details>
 
@@ -436,6 +442,9 @@ passphrase you choose.
 
 On the other computer, use **Import Profile File**, or just double-click the
 file. See [Profiles](/advanced/profiles/).
+
+The Mac App Store Lite edition has no **Profiles** menu. There, back up your
+keys with a [KeyPackage](/advanced/key-package/) instead.
 
 </details>
 
@@ -522,9 +531,10 @@ passphrases or smart card PINs. All PIN entry is handled safely by GnuPG's
 pinentry and `gpg-agent`, separate from GpgFrontend.
 
 With the **rPGP engine**, there is no `gpg-agent` or pinentry, so GpgFrontend
-asks for the passphrase itself and passes it to the rPGP engine. Passphrases are
-kept only in memory while the task runs and then cleared; they are never written
-to disk.
+asks for the passphrase itself and passes it to the rPGP engine. The engine
+keeps it in memory for a while, so you do not have to type it again for every
+task. It is never written to disk. You can set how long it is kept on the
+**rPGP** page in **Settings**.
 
 For app-specific encryption (e.g., KeyPackage), passphrases and PINs are used
 only in memory and cleared right away. Advanced users can turn on PIN caching and

@@ -89,6 +89,23 @@ right corner of the window: it shows the profile name, and clicking it opens
 
 ![The Profiles On This Computer window][img-1]
 
+**Manage Profiles...** opens the **Profiles On This Computer** window. Its list
+has the columns **Name**, **Type**, **Last Opened** and **Status**. A profile
+you have never opened shows **Never** under **Last Opened**. The **Status**
+column can say:
+
+- **This window**: the profile you are using now. Its name is in bold.
+- **Open in another window**: close that window before you open it here.
+- **Not created yet**: its folder does not exist yet.
+
+<Aside type="note" title="Changed in v2.2.4">
+
+The list was tidied up. The column with the internal folder name is gone; point
+at a profile's name to see its folder. A profile you have never opened now
+shows **Never**.
+
+</Aside>
+
 <Aside type="note" title="Not in the Mac App Store Lite edition">
 
 The Lite edition from the Mac App Store has no **Profiles** menu. Everything on
@@ -196,8 +213,9 @@ in one file you can copy anywhere.
    change something.
 
 3. **Contents**: look at the list of what goes into the file. If you also
-   want to take your workspace files, tick **Include workspace files**. It is
-   off to start with. Click **Continue**.
+   want to take your workspace files, tick **Include workspace files**. The
+   box shows their total size after the name. It is off to start with. Click
+   **Continue**.
 
 4. **Protection**: type a passphrase. A passphrase is a password, often made
    of several words. It must be at least 8 characters long. Type it again
@@ -468,6 +486,22 @@ does not create one for you.
 `--temp-profile-settings` in the list of options. The program uses it by
 itself to pass settings to a temporary profile it starts. You do not need to
 type it.
+
+You can also name a profile in the `GF_PROFILE` environment variable, using
+its folder name. This is handy for scripts. `--profile` and a profile file on
+the command line win over it.
+
+```bash
+GF_PROFILE=a3f19c gpgfrontend
+```
+
+A few other options can help when something goes wrong:
+
+- `-v` or `--version`: show the version.
+- `-e` or `--environment`: show details about where GpgFrontend runs.
+- `-l` or `--log-level`: set how much goes into the log. Choose `trace`,
+  `debug`, `info`, `warn` or `error`.
+- `-h` or `--help`: list all options.
 
 [img-1]: TODO
 [img-2]: TODO

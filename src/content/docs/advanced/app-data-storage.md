@@ -17,6 +17,10 @@ editor contents.** is on. It is on by default. See
 All of this happens automatically. There is nothing to set up and nothing to
 maintain. This page is here for people who want to know what is going on.
 
+To clear this saved data (window positions, the key server list and similar),
+open **Settings** > **General** and click **Clear All Data Objects** in the
+**Data** box. Your keys are not touched. Sandboxed builds hide this button.
+
 For the key that does the protecting, and the choices you have about it, see
 [Application Secure Key](/advanced/app-secure-key/).
 
@@ -39,15 +43,21 @@ The files live inside your profile, in a folder called `data_objs`. Each file
 is named after a scrambled version of what it holds, so the file names give
 nothing away.
 
-Each [Secure Level](/advanced/memory-security/) keeps its data apart from the
-others. That is why lowering the level makes data saved at a higher one
-unavailable.
+Below **Maximum**, every [Secure Level](/advanced/memory-security/) uses the
+same key, so you can move between them freely. **Maximum** uses keys that
+change every week (see below). If you lower the level from **Maximum**, data
+saved with those weekly keys can no longer be opened.
+
+GpgFrontend clears out files whose key is gone. It waits a few days first
+(3 days at **Strong** or **Maximum**, 7 days below that), then moves them
+aside, and deletes them later.
 
 ## Key Changes
 
 At the **Maximum** Secure Level, the program's key is replaced every week. Old
 files stay readable because each one records which key it was written with, so
-GpgFrontend can still open them and re-encrypt them with the new key.
+GpgFrontend can still open them. A file moves to the new key the next time
+GpgFrontend saves it.
 
 You never see this happen.
 

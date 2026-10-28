@@ -9,7 +9,7 @@ sidebar:
 The settings window has a search box at the top and a list of pages down the
 left side.
 
-To open it, click **Settings** in the menu bar. On macOS the window is called
+To open it, click **Edit** > **Settings**. On macOS the window is called
 **Preferences**, and you find it under the GpgFrontend menu.
 
 :::note[Changed in v2.2.3]
@@ -46,7 +46,7 @@ If you would rather browse, the pages are sorted into four groups:
 | **Updates**           | Application    | Whether GpgFrontend checks for a new version when it starts                            |
 | **Key Databases**     | Keys & Engines | Your key databases, which one is the default, and the built-in database's engine       |
 | **Key Generation**    | Keys & Engines | The default key type, the made-up identity for Quick Generate, and your key profiles   |
-| **GnuPG**             | Keys & Engines | Point at your own GnuPG, clear the password cache, restart GnuPG                       |
+| **GnuPG**             | Keys & Engines | Point at your own GnuPG, and fix GnuPG when it stops responding                        |
 | **rPGP**              | Keys & Engines | How long the rPGP engine remembers a passphrase, and passphrase encryption strength    |
 | **Key Servers**       | Keys & Engines | The list of key servers, and which one is the default                                  |
 | **Instant Messaging** | Features       | Your phrase for [instant messaging](/guides/instant-messaging/)                        |
@@ -89,9 +89,10 @@ Sandboxed builds hide the whole **Base** box.
 ### Operation
 
 - **Default Workspace As:** choose whether GpgFrontend starts with the
-  **File Panel** or the **Text Editor**.
+  **File Panel** or the **Text Editor**. The default is **File Panel**.
 - **File Panel Opens At:** the folder the File Panel shows first. Sandboxed
-  builds hide this and **Default Workspace As:**.
+  builds hide this and **Default Workspace As:**. They always start with the
+  **Text Editor**, and ask for a folder each time you open a File Panel.
 - **Cache text editor contents.** keeps your open text tabs, including ones you
   have not saved, so they come back the next time you start GpgFrontend. They
   are stored encrypted. This is **on** by default.
@@ -113,11 +114,26 @@ that expire soon.
 
 :::note[Changed in v2.2.3]
 
-**Cache text editor contents.** is now on by default. Undo after an operation
-is now off by default. **Module Discovery** replaces the old module loading
-setting. The default engine moved from this page to the **Key Databases** page.
+Undo after an operation is now off by default. **Module Discovery** replaces the
+old module loading setting. The default engine moved from this page to the **Key
+Databases** page.
 
 :::
+
+### Language
+
+Pick the language GpgFrontend uses. **System Default** follows your operating
+system. Changing it reloads the window.
+
+### Data
+
+- **Reveal in File Explorer**: open the folder where GpgFrontend keeps its
+  data, in your system's file manager.
+- **Clear All Data Objects (Total Size: ...)**: delete the data GpgFrontend has
+  saved for you, such as window positions, states and your key server list.
+  GpgFrontend asks first. See [App Data Storage](/advanced/app-data-storage/).
+
+Sandboxed builds hide the **Data** box.
 
 ## The Key Databases Page
 
@@ -280,6 +296,9 @@ changes on the **Key Databases** page, the built-in database's engine, and
 **Forbid all GnuPG network connection.** on the **GnuPG** page. GpgFrontend
 opens your key databases again, without a restart.
 
+On macOS there are no OK and Cancel buttons. Your changes are saved when you
+close the window.
+
 A few settings still need a restart. If you changed one of them, GpgFrontend
 shows a **Restart Required** message when you click OK. It names the pages
 with these changes. Click **Save and Restart** or **Save and Reload** to apply
@@ -309,6 +328,9 @@ Key database changes and the engine choice no longer need a restart.
 Cancel does not just undo the page you are looking at. It undoes every change
 you made anywhere in the settings window during that visit.
 
+On macOS, choosing **Cancel** in the **Restart Required** message also throws
+away every change you made, and the window closes.
+
 :::
 
 One exception: the buttons in the **Maintenance** part of the GnuPG page act
@@ -318,7 +340,8 @@ straight away. Cancel does not undo those.
 
 The **GnuPG** page has a **Maintenance** section with three buttons. They are
 the first thing to try when GnuPG hangs, forgets your passphrase at the wrong
-moment, or stops seeing your smart card:
+moment, or stops seeing your smart card. Sandboxed builds, such as Flatpak,
+hide this section and the **Clear password cache on exit** option.
 
 - **Clear Password Cache**: make GnuPG forget every passphrase it is holding.
 - **Reload Components**: have GnuPG re-read its settings.

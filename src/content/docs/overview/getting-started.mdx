@@ -27,9 +27,9 @@ system in the table below to see which engine is best for you:
 | **Linux**        | **GnuPG**           | Pre-installed in most distros. Check with `gpg --version`. |
 | **BSD**          | **GnuPG**           | Must be installed manually via ports/pkg.                  |
 
-> **Note:** GpgFrontend needs GnuPG 2.2.0 or newer. If GnuPG is missing, or
-> older than 2.1.0, GpgFrontend does not use it. It switches to the built-in
-> **rPGP** engine instead, so the basics keep working.
+> **Note:** GpgFrontend needs GnuPG 2.2.0 or newer for full support. If GnuPG is
+> missing, or older than 2.1.0, GpgFrontend does not use it. It switches to the
+> built-in **rPGP** engine instead, so the basics keep working.
 
 ## Step 2: Install GpgFrontend
 
@@ -89,7 +89,7 @@ shows a progress bar while your keys and modules load. Wait for it to finish.
 The main window then opens.
 
 A short **Welcome to GpgFrontend** window appears the first time GpgFrontend
-runs, and only that time.
+runs.
 
 1. The first page has a **Language:** setting. Pick yours there and the window
    switches to it straight away, so you do not have to read the rest in
@@ -99,10 +99,14 @@ runs, and only that time.
    checkbox. It is off unless you tick it. If you tick it, GpgFrontend quietly
    checks for a new version at most once a day. See
    [Settings](/guides/settings/#the-updates-page). Sandboxed builds, such as
-   Flatpak, do not show this checkbox.
+   Flatpak, do not show this checkbox. The same page has **Don't show this
+   setup wizard again**, which is ticked. Finish the window with it ticked,
+   and it does not come back. If you untick it, or close the window early, it
+   opens again at the next start.
 
 Nothing in it is permanent. You can close it at any point, and everything it
-sets can be changed later in **Settings**.
+sets can be changed later in **Settings**. To see it again, click **Help** >
+**Open Wizard**.
 
 ## Step 4: Next Steps
 
