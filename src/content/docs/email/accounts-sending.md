@@ -310,4 +310,4 @@ To stop a send on purpose, click **Stop** next to **Submission** instead.
 - **The test says the certificate is expired or not yet valid.** Check that the
   clock on your computer is right.
 
-[img-1]: TODO
+[img-1]: https://image.cdn.bktus.com/i/2026/10/29/bc1850f854bc0ec76fc13cfb497fd7d8056948e7.webp

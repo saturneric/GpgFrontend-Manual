@@ -252,6 +252,6 @@ reloaded.
 
 :::
 
-[img-1]: TODO
-[img-2]: TODO
-[img-3]: TODO
+[img-1]: https://image.cdn.bktus.com/i/2026/10/29/32ed1b86a24e9dc7be25eda5803a9d8e1c027b97.webp
+[img-2]: https://image.cdn.bktus.com/i/2026/10/29/e67688b060714c05a88097631841df4da6ac3227.webp
+[img-3]: https://image.cdn.bktus.com/i/2026/10/29/118e4e5458c46d93173c977ba0ad7a4691e2a231.webp
