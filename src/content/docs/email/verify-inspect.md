@@ -59,6 +59,8 @@ For an encrypted and signed message, click **Decrypt and Verify** instead.
 The badge changes to show the result. The details also appear in the **Status
 Panel**.
 
+![A signed message after Verify Signature][img-1]
+
 ## Can I Open This Encrypted Message?
 
 When a message is encrypted, the body is hidden. In its place you see a panel
@@ -86,6 +88,8 @@ message. To open it, do one of these:
   **Encryption Details...**.
 
 The window has three tabs.
+
+![The Message Details window on its Security tab][img-2]
 
 ### Security
 
@@ -198,6 +202,8 @@ This is safer:
 This only happens when a message has no plain-text version. If it has one,
 GpgFrontend shows that instead.
 
+![An HTML message shown as its source][img-3]
+
 ### Preview an HTML Message
 
 To read the message the way it was laid out, click **Show Preview** on the
@@ -245,3 +251,7 @@ Open messages are now checked again by themselves after your key databases are
 reloaded.
 
 :::
+
+[img-1]: TODO
+[img-2]: TODO
+[img-3]: TODO

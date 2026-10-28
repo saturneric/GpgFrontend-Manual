@@ -152,6 +152,8 @@ Then use the **Security menu**:
    - **Encrypt and Sign...**: do both at once. This is the best choice for a
      private message.
 
+   ![The Security menu of a new message][img-1]
+
 The result shows in the **Status Panel**. The status button changes to tell you
 what the message is now, for example **Encrypted**.
 
@@ -267,3 +269,4 @@ You can skip this section.
 
 [rfc4880]: https://www.rfc-editor.org/rfc/rfc4880
 [rfc3156]: https://www.rfc-editor.org/rfc/rfc3156
+[img-1]: TODO

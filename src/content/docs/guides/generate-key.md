@@ -71,6 +71,8 @@ Choose what kind of key to make. If you are unsure, keep the one marked
   choice only shows up when your engine supports it. See
   [Post-Quantum Cryptography](/guides/post-quantum/).
 
+![The Key Type step][img-2]
+
 For other key types, open **Advanced options** and pick one from **Other
 profile**. A **profile** is a saved set of key choices, such as the algorithm
 and how long the key is valid. You can manage profiles in
@@ -90,11 +92,16 @@ and how long the key is valid. You can manage profiles in
 If you turn the passphrase off, a warning reminds you that anyone who gets
 your secret key file can then sign and decrypt as you.
 
+![The Validity & Protection step][img-3]
+
 ## Step 4: Review and Generate
 
 1. Check the summary: your user ID, the key type, when it expires, and whether
    it has a passphrase.
 2. Click **Generate**.
+
+   ![The Review step, with the Generate button][img-4]
+
 3. If asked, type a strong **passphrase**, and type it again to confirm.
 4. A **Key Generated** message shows your new key's fingerprint. Click **OK**.
 
@@ -107,6 +114,8 @@ keys.
 
 To use it, open the **Keys** menu and choose **Quick Generate**. You can also
 hold down or right-click the **New Keypair** button and choose it there.
+
+![Quick Generate under the New Keypair button][img-5]
 
 If the default profile or the identity pattern in Settings cannot be used,
 GpgFrontend asks if you want to make the key step by step instead.
@@ -135,6 +144,8 @@ or 2. Step 2 then becomes **Key Details**, where you choose:
   with the rPGP engine. Post-quantum algorithms always use v6.
 - **Add a subkey**: tick it to add a second key under the primary one, usually
   for encryption. It gets the same choices as the primary key.
+
+![The Key Details step with Expert Mode on][img-6]
 
 With Expert Mode on, the expiry is set for each key here, so step 3 only asks
 about the passphrase.
@@ -224,3 +235,8 @@ your engine and version actually produce before you share the key.
 :::
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/25/95cc2834979501ae38df682d66247dc014cd829e-0.webp
+[img-2]: TODO
+[img-3]: TODO
+[img-4]: TODO
+[img-5]: TODO
+[img-6]: TODO

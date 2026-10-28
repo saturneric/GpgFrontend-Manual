@@ -120,10 +120,16 @@ the owner first, in person or over a channel you trust. Then:
      **Certify Key...**.
    - To certify **one** user ID, open the key's details, go to the **UIDs**
      tab, right-click the user ID and choose **Certify User ID...**.
+
+   ![Key Operations, Certify Key in the right-click menu][img-4]
+
 2. The **Certify Key** (or **Certify User ID**) window opens. Under
    **Certifying**, check the name and the **Fingerprint** once more.
 3. Under **Certify with**, tick the private key you want to certify with. If
    only one of your keys can do it, it is ticked already.
+
+   ![The Certify Key window][img-5]
+
 4. Choose when the certification **Expires**. The default is **Never**.
 5. Click **Certify**, and type your passphrase when asked. A **Certification
    Complete** message confirms it.
@@ -199,3 +205,5 @@ users want it.
 [img-1]: https://image.cdn.bktus.com/i/2026/10/25/883b6c815bb5a6748a8241fdcacb0912da00e541-0.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/25/19b8432b60308573b13f6f8e5fa8b2809b87a147-0.webp
 [img-3]: https://image.cdn.bktus.com/i/2026/10/25/d54e4e59849b0a142f4150922251aa45e7cc355d-0.webp
+[img-4]: TODO
+[img-5]: TODO

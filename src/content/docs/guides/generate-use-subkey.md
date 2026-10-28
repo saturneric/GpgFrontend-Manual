@@ -43,6 +43,8 @@ pick the **Algorithm**, **Key length** and **Usage** (**Encrypt**, **Sign**,
 ones, **Paired with** and **Its key length** also appear. You can also tick
 **Without a passphrase**, if the engine allows it.
 
+![The Add Subkey window with Expert Mode on][img-10]
+
 Post-quantum subkeys are only offered for keys in the v6 format. For a v4 key,
 the window tells you so.
 
@@ -322,3 +324,4 @@ Keep these points in mind before you share a key made with the rPGP engine:
 [img-7]: https://image.cdn.bktus.com/i/2026/10/25/b82131ba65e55baf29d58c15870d2763a34a165d-0.webp
 [img-8]: https://image.cdn.bktus.com/i/2026/10/25/33d147efb4b19d95e25b9affae748fbd9638a20b-0.webp
 [img-9]: https://image.cdn.bktus.com/i/2026/10/25/95c95c3b8efcf06171c881bcea380b96aa977b44-0.webp
+[img-10]: TODO

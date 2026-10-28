@@ -34,7 +34,7 @@ entries:
 
   - id: key-generate-dialog
     doc: src/content/docs/guides/generate-key.md
-    ref: img-1  # "Step 1: Open the Generate Key Dialog"
+    ref: img-1  # "Open the Key Generation Window": the Identity step
     scenario: key-generate-dialog
     size: auto  # natural dialog size
     sources:
@@ -389,7 +389,7 @@ entries:
 
   - id: subkey-generate
     doc: src/content/docs/guides/generate-use-subkey.md
-    ref: img-2  # the Generate New Subkey window
+    ref: img-2  # the Add Subkey window
     scenario: subkey-generate-dialog
     size: auto
     sources: [src/ui/dialog/key_generate/]
@@ -453,12 +453,14 @@ entries:
     highlight: exportKeyPackage
     sources: [src/ui/main_window/]
 
-  - id: key-package-export-dialog
+  - id: key-package-export-contents
     doc: src/content/docs/advanced/key-package.mdx
-    ref: img-2  # the Export As Key Package dialog
-    scenario: key-package-export-dialog
+    ref: img-2  # the export wizard's Contents step
+    scenario: key-package-export-contents
     size: auto
-    sources: [src/ui/dialog/import_export/ExportKeyPackageDialog.cpp]
+    sources: &export-key-package
+      - src/ui/dialog/import_export/ExportKeyPackageDialog.cpp
+      - src/ui/dialog/import_export/KeyPackageExportSummary.cpp
 
   - id: key-package-import-menu
     doc: src/content/docs/advanced/key-package.mdx
@@ -549,6 +551,187 @@ entries:
     scenario: main-window-key-groups
     highlight: key_group
     sources: [src/ui/main_window/, src/ui/widgets/]
+
+  # Phase 4: the redesigned key generation, key management and profile
+  # windows, and the email module. Email uses committed .eml fixtures and
+  # seeded accounts; nothing connects to a mail server.
+  - id: key-generate-type
+    doc: src/content/docs/guides/generate-key.md
+    ref: img-2  # "Step 2: Key Type"
+    scenario: key-generate-type
+    size: auto
+    sources: [src/ui/dialog/key_generate/, src/core/model/GpgKeyGenerateInfo.cpp]
+
+  - id: key-generate-protection
+    doc: src/content/docs/guides/generate-key.md
+    ref: img-3  # "Step 3: Validity & Protection"
+    scenario: key-generate-protection
+    size: auto
+    sources: [src/ui/dialog/key_generate/, src/core/model/GpgKeyGenerateInfo.cpp]
+
+  - id: key-generate-review
+    doc: src/content/docs/guides/generate-key.md
+    ref: img-4  # "Step 4: Review and Generate"
+    scenario: key-generate-review
+    size: auto
+    sources: [src/ui/dialog/key_generate/, src/core/model/GpgKeyGenerateInfo.cpp]
+    highlight: forwardButton
+
+  - id: quick-generate-menu
+    doc: src/content/docs/guides/generate-key.md
+    ref: img-5  # "Make a Key in One Click"
+    scenario: quick-generate-menu
+    size: 1280x960
+    sources: [src/ui/main_window/]
+    highlight: {name: quickGenerate, style: arrow}
+
+  - id: key-generate-expert
+    doc: src/content/docs/guides/generate-key.md
+    ref: img-6  # "Choose Everything Yourself (Expert Mode)"
+    scenario: key-generate-expert
+    size: 520x620
+    sources: [src/ui/dialog/key_generate/, src/core/model/GpgKeyGenerateInfo.cpp]
+    highlight: expertSwitch
+
+  - id: subkey-generate-expert
+    doc: src/content/docs/guides/generate-use-subkey.md
+    ref: img-10  # Add Subkey with Expert Mode on
+    scenario: subkey-generate-expert
+    size: auto
+    sources: [src/ui/dialog/key_generate/]
+    highlight: expertSwitch
+
+  - id: key-popup-certify
+    doc: src/content/docs/guides/openpgp-trust-manage.md
+    ref: img-4  # certify step 1: Key Operations > Certify Key...
+    scenario: key-popup-certify
+    size: 1200x760
+    sources: [src/ui/main_window/KeyMgmt.cpp]
+    highlight: {name: certifyKey, style: arrow}
+
+  - id: certify-dialog
+    doc: src/content/docs/guides/openpgp-trust-manage.md
+    ref: img-5  # certify step 3: the Certify Key window
+    scenario: certify-dialog
+    size: auto
+    sources: [src/ui/dialog/keypair_details/KeyUIDSignDialog.cpp]
+
+  - id: key-popup-menu
+    doc: src/content/docs/guides/key-management.mdx
+    ref: img-2  # "Right-Click a Key"
+    scenario: key-popup-certify
+    size: 1200x760
+    sources: [src/ui/main_window/KeyMgmt.cpp]
+
+  - id: key-management-bulk-menu
+    doc: src/content/docs/guides/key-management.mdx
+    ref: img-3  # "Work on Several Keys at Once"
+    scenario: key-management-bulk-menu
+    size: 1200x760
+    sources: [src/ui/main_window/KeyMgmt.cpp]
+    highlight: bulkMenu
+
+  - id: key-category-new
+    doc: src/content/docs/guides/key-categories.mdx
+    ref: img-3  # "Make Your Own": the New Category window
+    scenario: key-category-new
+    size: auto
+    sources: [src/ui/dialog/KeyCategoryEditDialog.cpp]
+
+  - id: key-category-submenu
+    doc: src/content/docs/guides/key-categories.mdx
+    ref: img-4  # "Put Keys in a Category"
+    scenario: key-popup-category
+    size: 1200x760
+    sources: [src/ui/main_window/KeyMgmt.cpp]
+    highlight: categoryMenu
+
+  - id: key-package-export-location
+    doc: src/content/docs/advanced/key-package.mdx
+    ref: img-4  # the export wizard's Location step
+    scenario: key-package-export-location
+    size: auto
+    sources: *export-key-package
+
+  - id: key-package-export-protection
+    doc: src/content/docs/advanced/key-package.mdx
+    ref: img-5  # the export wizard's Protection step
+    scenario: key-package-export-protection
+    size: auto
+    sources: *export-key-package
+    highlight: forwardButton
+
+  - id: settings-key-databases-recycle-bin
+    doc: src/content/docs/advanced/key-database.mdx
+    ref: img-3  # "Restore or Delete a Removed Database"
+    scenario: settings-key-databases-recycle-bin
+    size: 900x660
+    sources: [src/ui/dialog/settings/SettingsKeyDatabases.cpp, ui/KeyDatabasesSettings.ui]
+
+  - id: profile-manager
+    doc: src/content/docs/advanced/profiles.mdx
+    ref: img-1  # "The Profiles Menu": Profiles On This Computer
+    scenario: profile-manager
+    size: auto
+    sources: [src/ui/dialog/profile/, src/core/profile/ProfileRegistry.cpp]
+
+  - id: profile-new-keys
+    doc: src/content/docs/advanced/profiles.mdx
+    ref: img-2  # "Make a New Profile", step 3: Keys
+    scenario: profile-new-keys
+    size: auto
+    sources: [src/ui/dialog/profile/]
+
+  - id: profile-new-settings
+    doc: src/content/docs/advanced/profiles.mdx
+    ref: img-3  # "Pick Which Settings to Copy"
+    scenario: profile-new-settings
+    size: auto
+    sources: [src/ui/dialog/profile/]
+
+  - id: profile-export-protection
+    doc: src/content/docs/advanced/profiles.mdx
+    ref: img-4  # "Save a Profile to a File", step 4: Protection
+    scenario: profile-export-protection
+    size: auto
+    sources: [src/ui/dialog/profile/]
+
+  - id: email-accounts-page
+    doc: src/content/docs/email/accounts-sending.md
+    ref: img-1  # "Open the Mail Accounts Page"
+    scenario: email-accounts-page
+    size: 900x660
+    sources: [modules/src/m_email/]
+
+  - id: email-security-menu
+    doc: src/content/docs/email/compose-protect.md
+    ref: img-1  # "Sign or Encrypt the Message": the Security menu
+    scenario: email-security-menu
+    size: 1280x960
+    sources: [modules/src/m_email/]
+    highlight: {name: sign, style: arrow}
+
+  - id: email-verified
+    doc: src/content/docs/email/verify-inspect.md
+    ref: img-1  # "Check the Signature": the badge after Verify
+    scenario: email-verified
+    size: 1280x960
+    sources: [modules/src/m_email/]
+    highlight: securityBadge
+
+  - id: email-signature-details
+    doc: src/content/docs/email/verify-inspect.md
+    ref: img-2  # "The Message Details Window": Security tab
+    scenario: email-signature-details
+    size: auto
+    sources: [modules/src/m_email/]
+
+  - id: email-html-notice
+    doc: src/content/docs/email/verify-inspect.md
+    ref: img-3  # "HTML Messages Open as Source"
+    scenario: email-html-notice
+    size: 1280x960
+    sources: [modules/src/m_email/]
 
   # Made by hand: windows the screenshot mode cannot render.
   - id: windows-signature

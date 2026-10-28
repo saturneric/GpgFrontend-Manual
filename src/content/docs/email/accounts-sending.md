@@ -35,6 +35,8 @@ look like `imap.example.com` and `smtp.example.com`.
 1. Click **Edit** > **Settings**.
 2. In the **Features** group, click **Mail Accounts**.
 
+![The Mail Accounts page in Settings][img-1]
+
 ## Add an Account
 
 If you have no account yet, the page says **No mail accounts yet**. Click
@@ -302,3 +304,5 @@ To stop a send on purpose, click **Stop** next to **Submission** instead.
   [No Sign-In Through a Web Page](#no-sign-in-through-a-web-page).
 - **The test says the certificate is expired or not yet valid.** Check that the
   clock on your computer is right.
+
+[img-1]: TODO
