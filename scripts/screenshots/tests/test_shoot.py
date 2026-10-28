@@ -207,13 +207,60 @@ class PipelineFilesTest(unittest.TestCase):
         self.assertEqual(set(manifest.pipeline_files(tmp)), {"run.py"})
 
 
+class DefaultPathsTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = short_tempdir("gfsd")
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+
+    def test_default_source_is_gpgfrontend_next_to_the_manual(self) -> None:
+        with mock.patch.dict("os.environ", {shoot.SOURCE_ENV: ""}):
+            self.assertEqual(shoot.default_source(), shoot.MANUAL_ROOT.parent / "GpgFrontend")
+
+    def test_default_portable_dir_is_next_to_the_manual(self) -> None:
+        self.assertEqual(shoot.default_portable_dir(), shoot.MANUAL_ROOT.parent / "GpgFrontend Portable")
+
+    def test_portable_binary_finds_the_bundled_exe(self) -> None:
+        exe = write(self.tmp / "bin" / "GpgFrontend.exe", "")
+        with mock.patch.object(shoot.os, "name", "nt"):
+            self.assertEqual(shoot.portable_binary(self.tmp), exe)
+        self.assertIsNone(shoot.portable_binary(self.tmp / "missing"))
+
+    def test_portable_binary_finds_an_appimage(self) -> None:
+        app = write(self.tmp / "GpgFrontend-abc-linux-x86_64-portable.AppImage", "")
+        with mock.patch.object(shoot.os, "name", "posix"):
+            self.assertEqual(shoot.portable_binary(self.tmp), app)
+
+    def test_resolve_binary_falls_back_to_the_portable_bundle(self) -> None:
+        exe = write(self.tmp / "bin" / "GpgFrontend.exe", "")
+        args = shoot.build_parser().parse_args([])
+        with mock.patch.dict("os.environ", {shoot.BINARY_ENV: ""}), \
+                mock.patch.object(shoot, "default_portable_dir", return_value=self.tmp), \
+                mock.patch.object(shoot.os, "name", "nt"):
+            self.assertEqual(shoot.resolve_binary(args), exe.resolve())
+
+    def test_resolve_binary_accepts_the_bundle_folder(self) -> None:
+        exe = write(self.tmp / "bin" / "GpgFrontend.exe", "")
+        args = shoot.build_parser().parse_args(["--binary", str(self.tmp)])
+        with mock.patch.object(shoot.os, "name", "nt"):
+            self.assertEqual(shoot.resolve_binary(args), exe.resolve())
+        empty = self.tmp / "empty"
+        empty.mkdir()
+        args = shoot.build_parser().parse_args(["--binary", str(empty)])
+        with self.assertRaises(shoot.ShootError):
+            shoot.resolve_binary(args)
+
+
 class MainTest(unittest.TestCase):
     def test_missing_binary_is_reported(self) -> None:
+        tmp = short_tempdir("gfsm")
+        self.addCleanup(shutil.rmtree, tmp, True)
         err = io.StringIO()
         with mock.patch.object(shoot, "in_venv", return_value=True), \
+                mock.patch.object(shoot, "default_portable_dir", return_value=tmp / "GpgFrontend Portable"), \
                 mock.patch.dict("os.environ", {shoot.BINARY_ENV: ""}), mock.patch("sys.stderr", err):
             self.assertEqual(shoot.main([]), 2)
         self.assertIn("--binary", err.getvalue())
+        self.assertIn("GpgFrontend Portable", err.getvalue())
 
     def test_upload_needs_credentials(self) -> None:
         tmp = short_tempdir("gfsm")

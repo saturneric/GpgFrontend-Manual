@@ -1,11 +1,11 @@
 {
   "build-information": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -32,7 +32,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -70,21 +70,495 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:29:55Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:21:27Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "7832d25751daa5ade4a8481ad25f84f5895dd5e1901d54e54e0a23b2b7609f59",
-    "pixels_sha256": "9cff05a64426dbaac757890832b26c5bc5f57ec30eaa7c05eecf2d9931421881",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/487907fee2268560ac9795ea97cd820242cdf768-0.webp",
-    "webp_sha256": "87307fd7201c045a34e747a2b2b6e1a7cfda101992912b34421254e577cbd742"
+    "pixels_sha256": "5d4656fd52e21c887ddece9447c1cb61ed94c0d7933c00eef456fc8a6cec0bff",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/633ad6c3f31555b317e20d990090bb27d3aef7fb.webp",
+    "webp_sha256": "61ce0f74705dbe8bda4f8393dd2c169a01a5538accc01ca1df30f4c5761d9231"
+  },
+  "certify-dialog": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:23:44Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "e4d0daea52346a26b53555a0dd7c9a75e7cc54c29acd03962a800e15cb6a8c7c",
+    "pixels_sha256": "1e942b35e8eef895bc7f34c18e25100c08ab8725ddff1871e5fe15b42b103487",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/0924cf01ced4ea29585fff791b7fce53d5fb7b1a.webp",
+    "webp_sha256": "e373d551846aa66e70018c6be1003c78465e8b6b415f44d785a9c0575714802e"
+  },
+  "email-accounts-page": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:25:22Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "dd09a10bfe6f46f780df8204e7082272f2ed670cb1c1f9efc7ece98f5b0515d2",
+    "pixels_sha256": "19a7f030dc905af34644ee431d7d203bd0556bcce1bef0db1e79a6040480a846",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/bc1850f854bc0ec76fc13cfb497fd7d8056948e7.webp",
+    "webp_sha256": "2f06a69f2be6eaf23abf6c62d2fb38b8012e4be66d37947f62b42038257c66b2"
+  },
+  "email-html-notice": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:26:02Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "d001930069284820c7d7c6ca4648cb0715bf8e139ad08e3c9582ceae4605ecad",
+    "pixels_sha256": "c9fa30c6196bf5c2eded841757510f5e33c8f076a54edd6610d69333b1df0d59",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/118e4e5458c46d93173c977ba0ad7a4691e2a231.webp",
+    "webp_sha256": "6c2a558d314907a1d6713feca107308158679a85089b5b375544aee638e3377c"
+  },
+  "email-security-menu": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:25:33Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "5f7e72904ec60014ee59c5d6fb3eeab205e433d038c625cdfb5a995442fa81a8",
+    "pixels_sha256": "83f29a9ea6b8bbe52b0697ee1a8854f75f3a11d0cfb2519f1084a18b6d008a89",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/140538d6102b4420aa0188398965adc4271afdfc.webp",
+    "webp_sha256": "4d0eeb4e46b7c1198b70674c604bb965186e3e52e20d7fd0498d54cffae1b841"
+  },
+  "email-signature-details": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:25:52Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "826c924f4eb74eb4c687ee1a26a190247c1ef01f36178384ac2e111b3853a3e1",
+    "pixels_sha256": "624819aaa5e287ce8e8ac69d411770466ea38dd70134a66d85bfa58060781605",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/e67688b060714c05a88097631841df4da6ac3227.webp",
+    "webp_sha256": "df2dcd405ad35789e79c0188c814c109b46cd506c2f7277974787a4b2b256a4d"
+  },
+  "email-verified": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:25:44Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "50934edf1414efd73f4b59fde3bc7c77e8d711ea6b9165c46837e1b24658370e",
+    "pixels_sha256": "6811f5288ec1bf494eaef0588f298f57d02ec56bdd61d756dbd314ffa8c49387",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/32ed1b86a24e9dc7be25eda5803a9d8e1c027b97.webp",
+    "webp_sha256": "eadeb757214221b21ed2597208fa2551a445febe361c5599ff4c2f0f8b111053"
   },
   "encrypt-button-list": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -111,7 +585,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -149,21 +623,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:30:12Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:21:44Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "ca439a6ed53632a6f4496a042ef68d7829b8c792a95d50013114c5eeb7bcc118",
-    "pixels_sha256": "d6eac41c04f3bab8568c6552776f4f81b978899ab798b80be1886aeed746d288",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/67f6100c6318706c38629e9100d7ea3413a1ddee-0.webp",
-    "webp_sha256": "4222c10233799cb17d9f45c517d349bf2118762cc866ae2d24a2d097e8585ac2"
+    "pixels_sha256": "dfb30c03d4c88398d79134ac68f4c1a1e15a7869ca689ebcb07c0883b6dc4de8",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/a88e4bb194e5d8dac67a355ded5a624eafe190d0.webp",
+    "webp_sha256": "c50ca5bb8c4a4e2931aa17ed5882396be8f50cd6d5c97b3d92091069d1a6a8d2"
   },
   "export-checked-keys": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -190,7 +664,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -228,21 +702,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:23:55Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:15:40Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "3c50311018df77436b5a9e723527d1279b1e3baa13f1b9f50cdebdc817149527",
-    "pixels_sha256": "e450321650e10d0b1822575c6ab553fd080fce21c81454d9cbf7abb7b58215d6",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/5e494676304a77f8e488862567fbf1aba6e51782-0.webp",
-    "webp_sha256": "956ee635f585d2f9e0f3bb30fe6978405429d83a9e5b4a809c95582636538ad7"
+    "pixels_sha256": "7b6818c08cd5b7e11e35379d667bb579eedd9ea0226cbfe3b99449b87aa62a75",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/d817f91f6616bcc6e8f436356b8723e9934bf51f.webp",
+    "webp_sha256": "6d476f16ea4a1455ab4ebc0cdb50c8f5bb01e9b6700283b8a1913b978e03997c"
   },
   "export-private-key": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -269,7 +743,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -307,21 +781,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:24:03Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:15:47Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "69fb98ab3d42eedd3a1f10fa5bb5ac4b08cc14c330226c15f3e4971c3bf8beda",
-    "pixels_sha256": "91e446b401a205d617f8fe23364d18727dd3b32a41a72691b08e0c7be5d8d603",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/ff3e0ec7b761365a2c2b1a1aafd15887abb49ba2-0.webp",
-    "webp_sha256": "69dcb4e1bb3c24ad13b81d06acb20b8f0487a33af9f3bbcc4febba0c7f6402d9"
+    "pixels_sha256": "ff3ad074ee6657d59d44927ef7fe5055cd9a1e9c2240e970067672407e516672",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/c40bb4794c3e0c0d08ba94c3361e9f6d26c95e38.webp",
+    "webp_sha256": "f66c4371cedfb209f04a6d6f8bb738634905713e03116b30071231c4550cc6e5"
   },
   "export-public-key": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -348,7 +822,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -386,21 +860,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:23:45Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:15:30Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "b964578a5aabd6935f1bae52b5bfefa4b9618c559d743a9a6407c9686472b5dd",
-    "pixels_sha256": "53fadf8d1e0032b1fc6171d81e0def4fec00f8447e7bbaf3fb4e464564c0311a",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/325f7d43bec3eb3f9e8663eefe54ca975e13cd79-0.webp",
-    "webp_sha256": "6a44e0fadfe6b0aa3b4194bab731be20c9335e6d303446116b59ed5d22412dd5"
+    "pixels_sha256": "747a00c813a6a0aa9662e5c7a87da7a083b8f7036319a948646f3322b667b015",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/d40a0ca1800f817a0be16a7da9e24f6ca410766a.webp",
+    "webp_sha256": "dc281902713fc7b68714536aec1a500c1f28055e73bb65d082feae7869386b39"
   },
   "file-batch-mode": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -427,7 +901,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -465,21 +939,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:26:46Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:18:28Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "f02e1326223c46066d9a26d0c27601cdbdbd683cb1a666b57651788e2dd982cf",
-    "pixels_sha256": "0d0fe9d88c8fc92df3064212627ba1a287443f6cf016592080911d2fbbc0c520",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/2a0d57c2c691db36488fd9d514d608f48a027c6b-0.webp",
-    "webp_sha256": "ff1c6a1056ec4f6aad6e2f25bc319da6c07d45991da8fc79bee89ac7e81e70e2"
+    "pixels_sha256": "ee23fb9def1de248d2137f2356ff70a889b9f0f2f6ad1b793a74cb1a0b1b9a6f",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/b5c17550ea622d15e2b4e8f8e6e81006e4c1b972.webp",
+    "webp_sha256": "1644ac80077ec55de7679fc79d4915a3e0e219204a1de0f4e637670ad76f8caa"
   },
   "file-batch-mode-button": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -506,7 +980,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -544,9 +1018,9 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:26:35Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:18:17Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "67da08af898e73129ca1cdcc2bf5e5d10a4ca2f927ec2065607a7421495c2cfc",
     "pixels_sha256": "f9869d77f853af2107d78f39d523c34cee02d617a579bb0be739a64852d7d7b3",
     "url": "https://image.cdn.bktus.com/i/2026/10/25/6baa1c0859e26072af0a57125c3731d54e1305e4-0.webp",
@@ -554,11 +1028,11 @@
   },
   "file-decrypt-verify": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -585,7 +1059,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -623,21 +1097,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:26:29Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:18:10Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "c8a8a47ae9c12d3e39e07eff5a3faa20a36933c42f66f986a79e1369ed3243b1",
-    "pixels_sha256": "3ded07f4a9440bda82478bfbcfb2c7d0d5459c7cf905ac030261bfd6350a6c23",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/05813038e56a044e36679ebedd094131602b1a1e-0.webp",
-    "webp_sha256": "5a80d403560ffe0328790d0b55718c8aa5d7eb3bb09fc81e932fbc93dc692222"
+    "pixels_sha256": "eae3749224394c9f71271e61ba4da87e3d5a84dd6180da53f838c387754007e8",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/4f25fbcd3ead4b2441915d222880df2fd54692f3.webp",
+    "webp_sha256": "0c681d2385f4261572a706fc7e96bb9318c13261faac21d46f50580d7d48a7c3"
   },
   "file-encrypt": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -664,7 +1138,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -702,21 +1176,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:26:17Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:17:59Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "6a32e81317c5a9401e5816685cc66c8084ba1d3104b921cc7b5ec4692b0e9f90",
-    "pixels_sha256": "a6c2c093e4435b8cb6260c40e63edc1d9b7fadc07066bec882b7a92208b5151d",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/5b9c8ba233cbbf836845fb2b0b6c7f8950bebd3a-0.webp",
-    "webp_sha256": "426d560128ec6f8094362870b9f4582c30a9d4656fe5d54926705ec0941973fc"
+    "pixels_sha256": "f86c94d84b2cfbcec6e0b4b2015a0efefc524dc516d6877c12b5103de0a057ec",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/16074973fa6f0f4de56f81a8a6e47b4bc8e33307.webp",
+    "webp_sha256": "211c08b069ebe97e62cd7dc0a5e012a9363403f797c4154b6862f6709c3dcc89"
   },
   "file-options-ascii-armor": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -743,7 +1217,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -781,9 +1255,9 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:27:03Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:18:43Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "6f9cbdb490e1aacbda76d411a9ef113f59c9680cffc0f1d604e04f11eaf4f6db",
     "pixels_sha256": "36f93728872fb5da123a275cf68d90cc144835e195369844ce78f9721f294cfa",
     "url": "https://image.cdn.bktus.com/i/2026/10/25/313b19d12f97356c3f5471c544dafa0f0588ce17-0.webp",
@@ -791,11 +1265,11 @@
   },
   "file-panel-open": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -822,7 +1296,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -860,21 +1334,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:25:56Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:17:38Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "990ca9c6b0eeeb5e8fbb0a24ad0de1356848422dea1be2de7e2c827af56107ea",
-    "pixels_sha256": "b9f4750613fab957006143be08d8f094b1dcde3e370808a0fbdf848dc945dc27",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/dbe957857a3deba76219c35e5df0703d3d655458-0.webp",
-    "webp_sha256": "cf9b7b553e427d938800638dd08145ed97125915b4b354e0bd05b643ccc1ecf1"
+    "pixels_sha256": "7faafeef377e477f2332e6c1a4d1d799279247a03d08e9385fa727995fa08562",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/ccec4b1351ea81bf66c53658a0c6a22b921ad271.webp",
+    "webp_sha256": "ebc0489642e1bc9420cca4156a77319f60a769a3eea97b2ca3c2a604f9af3693"
   },
   "file-panel-workspace-menu": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -901,7 +1375,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -939,21 +1413,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:26:06Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:17:48Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "62a8ac257862761e0d3887ba46af8e45615a24cb2531eb3776ca4bc411fc9758",
-    "pixels_sha256": "7385afb73b156beaa69b5fc5d0b5dbd7ae38a63db9ee37c1b4c3b997e8885b54",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/00aa8bd8c452747249b6a647fb0a95411b17118e-0.webp",
-    "webp_sha256": "70d47af82ec572116ba3075727bf685bd7141fb2e63b38a0caea0a5d6a2d4fd9"
+    "pixels_sha256": "84a9cc37db46ec9b6ee0c85ed11fb99a9ffc956b3c33a0d422f9b6899fb47215",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/49aedaa898733c25e3c65ed5920093cf0ca55ea9.webp",
+    "webp_sha256": "96618e4bc16056becb2c1780447a651eec4edee51b2b89f40ad88b94e1bd720c"
   },
   "import-key-key-management": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -980,7 +1454,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1018,21 +1492,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:23:36Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:15:23Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "fb9a67f5d441c9e0aeb04d8b30e60b3a002720477f1154ca4702fad47984e173",
-    "pixels_sha256": "d5818414692f05208e8ca5c9ea288db2a551612f7c4e3f2ca9e7110172669a3d",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/abf57aec551b57ef4d64cca52cb789af1f7427bf-0.webp",
-    "webp_sha256": "5c2ae6843c99f43968a36aea3fb48223cda122bca06b9893c1c9ca2fd63c5068"
+    "pixels_sha256": "3eb16706ca60b05b5f813f29c5ecd4385e5eafc5fcd60259de2bb2fe002ecfe9",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/dbe61f11fc0dcd61814947ff40c46012f4a2235e.webp",
+    "webp_sha256": "aee3915f7e31e6e7d00f47fa90d49688143c54fdacf36a2c4213e44a64e72df8"
   },
   "import-key-toolbar": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1059,7 +1533,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1097,21 +1571,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:23:26Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:15:13Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "f3c88f645d78c558ec770b33922bafdd9e3ae4d15ea2689e3f85df196d8f65de",
-    "pixels_sha256": "2e84985d5dcf17a688cf5f6c7e8866b3feb3a47d63c2277e0b359cd136d6079a",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/89b5efe0a8c06de2117dc72c62ac7df6cada8c7e-0.webp",
-    "webp_sha256": "161adda69a821f6595cc402e17411281fba90e603a51d18d2a67e1c6ba6fe374"
+    "pixels_sha256": "7f05255e8b57c01c67c44a496a073c6f607c20b9fac7fe9b2b7757f1e07a3844",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/9d4152c4ce0d86a1bcf78f2bfc19532c77bfdd96.webp",
+    "webp_sha256": "f54ae95f66b325e80a095e20ffe93a0dbbe1c1919b362e7864bed1cd7d98d3f1"
   },
   "index-main-window": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1138,7 +1612,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1176,21 +1650,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:24:41Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:16:24Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "0f331bc77a08332ab9de9400fef348cb22871232f1c22c6a601a19c35bca9adf",
-    "pixels_sha256": "42b11d8ada1549225443fb295b81c3e44dc4d5475e1649a3e22357b777db53b2",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/9546033b27e7d7ec79e12d79f17e8343993d9557-0.webp",
-    "webp_sha256": "3441144896293aae4159ab0de0cb5a2a94bf522e678cbe2603155ac05e9870cd"
+    "pixels_sha256": "7cb3f6b644607b1d2e66b917e8dfc7e4f0731b56bb0c55983ccfc0f02d40bb7c",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/00e3422f7f7a0b4b514312af9e4770ba4ae26fd6.webp",
+    "webp_sha256": "a516ab6e7cded5840b4e405d0dfbba69a62ed3461764b9e5be921ef730d8378b"
   },
   "key-categories": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1217,7 +1691,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1255,21 +1729,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:23:16Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:15:03Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "29a84602aa5fa361b79b861cd1ce0a31cbf7ed0b07ae3be5a09883b3827ea864",
-    "pixels_sha256": "b2f2e63c180084fbbd6ef4b252079270d6a06b08d03e82efe539830d69699e31",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/5a397086cb32739b402f21f8751446671b43ee05-0.webp",
-    "webp_sha256": "2b01570212fc067238281107d59b310fe805ff26cfb252cbae44c21936098cf8"
+    "pixels_sha256": "fae3518949723717a58e38e9d7ef43f7eaa456d4b5ea665993b762dfd8926041",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/ca771e64a923d5f961e9ce909ed99889274c81b5.webp",
+    "webp_sha256": "98e7006bfa57c108881ebe265ac91dace6106f9ef33aaa09bb8012c039a86b7f"
   },
   "key-categories-toolbox": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1296,7 +1770,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1334,21 +1808,179 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:30:56Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:22:28Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "e12692003a8d83dea4e0f5dbe51a397f6f08f0fe0d1fa95dbb998c3090148550",
-    "pixels_sha256": "68df9585bfa7fa42c1f925a99fb58af4b1644a3f1af3991184420d70de6dc38c",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/8d986d839b48be789b5443418a00106ac6675ac2-0.webp",
-    "webp_sha256": "3410297cbfc29cf6b3c8ac514f58332b3f700e5969a797aebadbae3a45b02d8f"
+    "pixels_sha256": "889dff9244b9dd6f229341fd4b84924ea614265639985f47c07584f9006a9bfc",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/9a698297f4658de16025fd12dbc07cda8fc2c845.webp",
+    "webp_sha256": "abbd47f9d794b9456c76426f76fe98b1e6f7a5b7b527e42c214156a74353472e"
+  },
+  "key-category-new": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:24:12Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "711bba23622e0441ef144d8d3817357875b1d9a47475f9e6d26f9b259c72bbee",
+    "pixels_sha256": "673faa3c5be4836b9bc4d60f16ea896b674462188fbcad4265ee072e3e6216ca",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/1f9c9951dc7ed6942eb4ba815010a3567d3d075f.webp",
+    "webp_sha256": "8ba92d977454363841fca6d6ba20d063b0f731f31fbd873b8a14a2644437d11b"
+  },
+  "key-category-submenu": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:24:22Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "66a62eeb4ccf6a5defa98cd35cfb4a3ac57a37587f35a1342ce245d186c40e5c",
+    "pixels_sha256": "297d66617ee0e54d8b73eaba3975d843576aea11c81fb7bc405181ab20eab768",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/233bbd3a94b43de972f7d8b44258ab97a8406c46.webp",
+    "webp_sha256": "f5a57387f5988d1255b5f00bd1a85234ed78c6adf60df443487fd3af4d97c689"
   },
   "key-database-switch-menu": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1375,7 +2007,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1413,21 +2045,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:30:46Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:22:18Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "d45da6df67cd66151bf292f92cdef22b2955ca17364f72ced3c8c2be94436b9b",
-    "pixels_sha256": "7388b7a45a439a001cce6158244c0a85361a09b614bec76744df0e4cc07ac8c5",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/e08664cadcd122730adf91506aeb75bab8069436-0.webp",
-    "webp_sha256": "fd11f00e7e28fa9bf1fc60d37a1fcccae1767745ed2b439ff645876e39c96f2c"
+    "pixels_sha256": "41f5a9bcb8578942768d8136ef7dcb2299cc15cfc50bc7cf251d5c921508affd",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/125d52b6f4300258e3df3516804d2a3a7a030e77.webp",
+    "webp_sha256": "1f3904015c6914d400b5988d36b9c3b2fa3bac983d3fb534098cdae639f39c6f"
   },
   "key-details-algorithm-detail": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1454,7 +2086,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1492,21 +2124,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:21:15Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:13:10Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "7357cb2da05261766a3b31b95beef8e800bd56d64a78bc7a3f0251897a9f8ff1",
-    "pixels_sha256": "60763cc9a143c238379244a3d1a3a03f7eb066c9bb03162e115b50cf68f73db7",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/e52f93629923e0939157d70ccbb58dc05d730420-0.webp",
-    "webp_sha256": "f3aedf7c07d2e15db27f851ef0fbb00d0984f6513373b4636398e773ea261f6e"
+    "pixels_sha256": "04a8b435059a67ec8f2417ed81d0142f78b5ea4a8edbd18f8799e8ee7b4cfb20",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/cc1b0fd422e916f0f239ae80713c67102baf1e2d.webp",
+    "webp_sha256": "c0cd05225a38fde3cebda1fbdac5ec6f2bde8669532d767953533cf2c464df6e"
   },
   "key-details-fingerprint": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1533,7 +2165,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1571,21 +2203,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:21:22Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:13:18Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "742861a10828ef5bb1c4d291927790e9ddd6e9dd3e16551171469e4f80d5f056",
-    "pixels_sha256": "17040099185e663dc23e8fd5cc66fddec4c7029e6bae3932133094e96bea0234",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/cbc63a372425aef80aa9d271174294208381bfe7-0.webp",
-    "webp_sha256": "4954eecce0d83dde6eb765b35683723b69128b90dc6a3d044b1c6b81884e41fa"
+    "pixels_sha256": "acd1d3ffc1ab0f42d44ec079c25931ce29353c7f343153d4660153e8c581282c",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/ac2b673a4036fe0a875949bea54406bfd861d388.webp",
+    "webp_sha256": "858ed6878365404300640b70e13659a6f70e1a329f8fa0552e4c598fbf2d2682"
   },
   "key-details-keychain": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1612,7 +2244,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1650,21 +2282,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:21:48Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:13:40Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "1597bda8f6a4b5f5b39bc63b7a426feb3233500576751b13023e5ab3da3f7526",
-    "pixels_sha256": "542b755f79bc5fe32f4401aec2bb1b61695f4d28b7669f9982c6f11175f12706",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/6edf084823f685aad6e9c92c01faf16a2e4e5a32-0.webp",
-    "webp_sha256": "e95b6ab1b0c7c5e91a2b14d04d2d2c750dd5360114c6df4af5c24e9743ca0b48"
+    "pixels_sha256": "367836135c2e1e3df177c1476ad62579d70151df90017a5e28b13e281f393509",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/6b59dd0c2167f6619cbc9342f62e605ee0f9f494.webp",
+    "webp_sha256": "16889eb363c8ddc97447f81d2f87efda4fc3607f956c1786cf6a23a1cec47bf2"
   },
   "key-details-operations-private": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1691,7 +2323,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1729,21 +2361,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:22:03Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:13:54Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "befe570cf44b7bc11dffacadaafe40ea36ad4e5622a5eae357eb317109c84fb5",
-    "pixels_sha256": "852bb37e4a722b057a028ae3736f1dc82b95136911655d6e4a4e72c12cfe80b9",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/806f6e0bab705122dfc3b5e524b484b93912ec4a-0.webp",
-    "webp_sha256": "419ebf6d359486336ec3644ce18ae8fc3e0002d59ad1cad455fdd38271393aca"
+    "pixels_sha256": "65a8caddb675c825b25335ea58e2e37f0e8a4e9941d18a3b6ba64478c4c6c5ad",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/44ec9c4dae4afc7f63f1168e34019a4526143d71.webp",
+    "webp_sha256": "0b5b0ed96c2cef2b07bfbac593ebe088a11d33750e48a917a43b11d07f0adf91"
   },
   "key-details-operations-public": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1770,7 +2402,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1808,21 +2440,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:21:55Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:13:47Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "6f711a04be7c9ee3eefaf65bdadd10f32e1c547fa09c61f34e83a1052adca3b5",
-    "pixels_sha256": "6be3ecadfd6486bf07ade0033e286966430bb995cf9a2437d3d9455eadf4880c",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/765b3e3054c7b1a0dadf9f539ee9b3c3f09dc939-0.webp",
-    "webp_sha256": "54e83cc2262329f3c62605cb947cf85b34bfe2fba7375e91a3c9734d28da77b4"
+    "pixels_sha256": "80b68a44905c852ce0181e91118f3d121296d6a2785c77773ca87e2426318f0f",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/e7789687464e4bc16dea921de721274b24dff621.webp",
+    "webp_sha256": "d45d501995ecbed141432354f909ef62dedbe2573e8506e7344b8479b473e384"
   },
   "key-details-overview": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1849,7 +2481,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1887,21 +2519,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:20:50Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:12:47Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "30d10d7e1381b0a1b0f50e8e8284eec41bba0cbca10c0bf1273893ead25fb199",
-    "pixels_sha256": "091e07616794484705da378c12a6ed4aaf43fca6e65f08d134df6096ccadbec7",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/92db1358322ffa54f09c03e1987992036ccbe535-0.webp",
-    "webp_sha256": "f39b072c63a657afeba79df402d8b6d81cf4277c2894c984c9c68e9c038e2936"
+    "pixels_sha256": "eac43d49a020f218730a5c8978471457ec2fbb4b3fc7208789cd3f77870e95d5",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/66b17097a55d4cd3f5c837f30237ec4fadda3a71.webp",
+    "webp_sha256": "60dd36ce6e8f8259d3e67e8edfb65073dca30a6f69f409e3450b10e58cbee1d2"
   },
   "key-details-owner": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -1928,7 +2560,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -1966,21 +2598,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:20:57Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:12:54Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "b3bc9f91525c58e00192e3c1f9fa3005986cd008516a5b3f42fd16fddb127fab",
-    "pixels_sha256": "1621e3ab63607c553053e8095420465880908ad3b52e6b6868a06f0e18786590",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/7436a873ef7c37c2cfb3d45d60455135c55c868c-0.webp",
-    "webp_sha256": "2276b40f348931a164c43a61484f252d16dbb39d93e5b453769a896fda8ecf90"
+    "pixels_sha256": "ec6004ed63658cdaf7f77d920944792bb32d6b89797c5fd247bf3b7972920dff",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/6008b7236bb48312a67575feef3fc75a8698b3f3.webp",
+    "webp_sha256": "bd5a7639fd8ee13f331f448509cb24ce6634721fc80782ad8eacda6b3a1cfe8b"
   },
   "key-details-primary-key": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2007,7 +2639,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2045,21 +2677,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:21:06Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:13:02Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "12ec5aae0c15f8b9666611a897f62adfdae7beaee1bffdaef6a32495314cd889",
-    "pixels_sha256": "b41c455535c5ee189a544d8a5cadd7f71b39ba47fb259bb40445c69616ba2a88",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/5655ee4b9ebc6ff66c2dbb40b85e47e0193f7794-0.webp",
-    "webp_sha256": "5a61a0f3672831e0ddf87a888cbe913653e504434f8cb76b4219b6a4b052ea83"
+    "pixels_sha256": "c2a909b503139844c98cfb8a621ca27bbdf4b8c0d4cb5b76ff905de46e61faec",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/ec063a45786d84fe32c56d09c3c1daed65627df6.webp",
+    "webp_sha256": "f9c80e7f49f7df1d24a633797e353de97e657fa2e2f3c522f77a0c02fdb1de0c"
   },
   "key-details-uid-signatures": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2086,7 +2718,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2124,21 +2756,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:21:39Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:13:33Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "1f2c8de82f61ca129497cd93c3b983a5f2048163c529503b29630f62adf44d92",
-    "pixels_sha256": "3651d334cafb7962a1eb013ecdae3b6a37376170295130c453a1132d4deb7672",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/0cdd4f431999095ea958f8d2fd5ce0bbb0ce0902-0.webp",
-    "webp_sha256": "fac8e149926894ef00f58aaefe8692a34f7892d97a88a7c32197eedfd8689873"
+    "pixels_sha256": "5f590dc4b7c5700f4c85152540cfdca726009d835960f6fdf5d89b8cd1477263",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/af5d35c112bbabe9cbcfb8ec810fb267d81728cc.webp",
+    "webp_sha256": "b79a56d82bb6d8b3c3eda6186a290139988f628279009f2f51df70bfd32e5058"
   },
   "key-details-uids": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2165,7 +2797,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2203,21 +2835,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:21:30Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:13:25Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "e31f89fbeda45829a28984fca2b47bb49c7e9a0ce9030c362401afb61dab9925",
-    "pixels_sha256": "a2a74e164518c846e4c1e39787cf4c778488969c5de8ae4f74d8cc072b99759a",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/953b4f647f0f8324f973cdcf4483fc63edc7c3fd-0.webp",
-    "webp_sha256": "c1c650151f98e0b8db8f964bf403858af38d6750967944cc23a87cfedb3b3a83"
+    "pixels_sha256": "5e0b400e4e8bc564454ffc6b3726c3d24b45da02f4da03bd6a01b41e35b5da0f",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/4bda2e9ef0b6644d6c7fa094a109a3dd252aff4d.webp",
+    "webp_sha256": "4c4dcd5406405e1b9d0ee9ab2ed8c77c34db45a88eacbdfa3e2c05000d628f08"
   },
   "key-generate-dialog": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2244,7 +2876,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2282,21 +2914,337 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:20:20Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:12:18Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "b14704abc95a1bb33d4d5932c2a26bb8959bce952e9b030199af3068dbd1b77c",
-    "pixels_sha256": "292353c085582336f95cf866090564439b07a2cf3a4ae832f5ddbefdcb7782a6",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/95cc2834979501ae38df682d66247dc014cd829e-0.webp",
-    "webp_sha256": "901e8b3bee4089914b06913867f0a5f5d976b1a64c39b9647461acf987259a79"
+    "pixels_sha256": "205f7697104d02f5349bae7cae491f976cb143d927b7105a7d9c53b0de71de47",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/9d186964d2978929afb87bb0035c02918c7d1111.webp",
+    "webp_sha256": "47a363a6be5f75a6886de4f9c6e5c11761c4332f5347d7697c9e057f3278a46e"
+  },
+  "key-generate-expert": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:23:18Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "785d37a2869d1b33437c6e13fcfae69417ae1700d23c3d2cb2677f2e7aeb6a48",
+    "pixels_sha256": "7d9ceb12d90ab4ef372290d91644654a3e8c8c11c7ee280751e5af694195ef33",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/4838dff1fad16c2a34ff1723f09a916c497292d3.webp",
+    "webp_sha256": "7e1636df4ccd6ef6da9c595656d42df0b9e12696031a14b2e76d76903b33bfc1"
+  },
+  "key-generate-protection": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:22:53Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "56f5e3f002b1378e8e7cbceb945bc9d2f61122e5a409f34d81935b6fd9c31e72",
+    "pixels_sha256": "ba9e10ba889b2dcea51568a4edaac88ea2540b7d8476acacb30bcda4b644f86d",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/0c6032658b57d5272d316e9b689301081cfb9597.webp",
+    "webp_sha256": "c7805583e3b20ad09e99fa26fd663cace686e043c79d3a205bc5f20915442878"
+  },
+  "key-generate-review": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:23:01Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "d07598828e14ffcaeb96451d2d0c35415877343bf5965492f0d807a812b2cf69",
+    "pixels_sha256": "c68431e16e8f6e70f582e9b18758f454536b0f55d692bd9323e84fcd58a8c72e",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/66397c12c5f58091deda11bda883d6c337eadeda.webp",
+    "webp_sha256": "88ab8b337edd5384408e6d7dd53f4072b507da30338145672606b08a2a514081"
+  },
+  "key-generate-type": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:22:46Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "926ac03f5db7c4a6c7b90156b1e1879f598bd0b5f274bb5466032c91ad541b6c",
+    "pixels_sha256": "f244d9dcdd1c0e807809f7882c38127e207d58580fbc03e948772ca2654d75d5",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/4ec97307a4b89bef18dd6e5df2ee0935a9b6e042.webp",
+    "webp_sha256": "2ca4951080b3483752c354feb8c1f98e18dd73c844b52b17886ad72ff2f1a7c2"
   },
   "key-group-checked-keys": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2323,7 +3271,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2361,21 +3309,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:24:13Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:15:58Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "852ee1bacfef7f7819b74fc8ee75825e6daa2bf6ae9e7f9a11c6d4ebc447d8e6",
-    "pixels_sha256": "0ee0178088de080803f5a2f4903172d6cb3558db8e200c892a6a9b551f9c1684",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/57e048acae5d42e3a10525cdb04063ca86e1d313-0.webp",
-    "webp_sha256": "b8848b7220d5b60077e22467b6f5b97807f592021083fa0747981d769409ffc8"
+    "pixels_sha256": "1bdfee077e6e7e744472efa3b9063e3ef7a159afc0d93ebc01ede95f029a0e2a",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/09287e967742e8820fe77a691c92561ddd5ce9ba.webp",
+    "webp_sha256": "39b0f7ecad14abe3602fbb6a763b6ac95fdf4862a2e1cea067d142b9138d839a"
   },
   "key-group-create": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2402,7 +3350,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2440,9 +3388,9 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:24:20Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:16:05Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "107c63ad8af6269b5e0b462c8bda5c747a056fd25b9041795e75f22a7ece2e70",
     "pixels_sha256": "ba05e5dc92f84562a2330e07dc058153829f242b1e779ef2d81133323cb75664",
     "url": "https://image.cdn.bktus.com/i/2026/10/25/1dbb1a9a7c3b0485afb742541f7ca84ade0df728-0.webp",
@@ -2450,11 +3398,11 @@
   },
   "key-group-in-toolbox": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2481,7 +3429,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2519,21 +3467,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:31:06Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:22:38Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "1d30c4c2efff3bc4ca95e724d8af3fb067e0cc22151a15c1e7b5c1acdb5031fc",
-    "pixels_sha256": "e5ef569d677ae341a6ed00a883c2a89238ed4392952987da083b0c1b6cfde019",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/1df29ddb6cbc7e0c069083a26b9b8e8fe9067da3-0.webp",
-    "webp_sha256": "56fdadc2bacbbe61eb4e4f4e3ef893f1a7cdd8bc90bd9ba3ad5600705e9aae31"
+    "pixels_sha256": "45c6170b1ae1e39b59a9af6a5e5df0a2182659e251cca551e1a4af545ed12bf7",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/234dc17cbc881903fb036d019dbf4296cb9cebc8.webp",
+    "webp_sha256": "9abe06fcf29dbc91248fb8d38209534eef232f968c3155cdd823f21bd6794514"
   },
   "key-group-manage": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2560,7 +3508,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2598,9 +3546,9 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:24:29Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:16:13Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "34bd851298e426f4b51493b77f40f3183725ad7a2aa41ab89006594b1c1f9085",
     "pixels_sha256": "7301145b829ed89b4d06fcc0008656b206f3ed165766dd411ecac66804f92993",
     "url": "https://image.cdn.bktus.com/i/2026/10/25/b3aac622bf1127f32ad3ab69979bc75ba70e2f04-0.webp",
@@ -2608,11 +3556,11 @@
   },
   "key-management": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2639,7 +3587,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2677,13 +3625,171 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:23:05Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:14:53Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "2396f8cd4f357fed6c38a7a513b297dfd274be6c60c472d41c7e07048195fdf3",
-    "pixels_sha256": "cb97ae9e3c390fa1e6440d5ffb7ca5746efc6f30380629a15ba552774c70f3e5",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/0de66acc2c5f1cb62a9c09b2d5c5877359869295-0.webp",
-    "webp_sha256": "04e8788a4f6474f91f863abd34b393befd213f2e53fc17853b95e44cb8ca1f95"
+    "pixels_sha256": "69e07343c376213ad980f4cdf3d10ec71d6ddb4b25574792953496a7d447ce7c",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/535ae75c57429c0481005630330d64ff4b175ebf.webp",
+    "webp_sha256": "8cc595dfa1985dfdf45f17966532d08aac7742c26546e82b97216a728f59ae78"
+  },
+  "key-management-bulk-menu": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:24:05Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "5235f5981b9231468fdcd78405a935d183140d10e2e2035ae29a822932ff4a27",
+    "pixels_sha256": "d0d2f99c36f0ad469b43d1bb0dddc559e2626e9a9a06346ddb82bf48498d74d3",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/e2561ad66f1d63c97728a79e0c8057454d2624b4.webp",
+    "webp_sha256": "e24c1b7c7fa1baf54647eb0704f4dcf4db460647a5fae0a69adffa0cd852943b"
+  },
+  "key-package-export-contents": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:20:48Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "26075b0f4f57d2b1c205d238272f5af9548a9038255bf0a9b80ad0543e1aa6c3",
+    "pixels_sha256": "68999294849e3766ed9851d77235e2875121f06bbfa28d630777bbb8212c7028",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/8a8737eb27b34b50402a5e40afe595695fe77005.webp",
+    "webp_sha256": "074f001b30951cce0ce966582fe9aed3f33a98a1773021e17e517f3b06e7960d"
   },
   "key-package-export-dialog": {
     "env": {
@@ -2764,13 +3870,13 @@
     "url": "https://image.cdn.bktus.com/i/2026/10/25/a4433781e33a39f82394f8c084f49c0ac6d075ee-0.webp",
     "webp_sha256": "65535424746921fff7141413b693b41898b47f88d846848c4131981dc0b20864"
   },
-  "key-package-export-menu": {
+  "key-package-export-location": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2797,7 +3903,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2835,21 +3941,179 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:29:05Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:24:29Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "66bec3d91d56d70a25c6ed986deaead344aff11841c6a38d243d47d4df9f7174",
+    "pixels_sha256": "93dfde3bf9fd97551c745fd7c2c15f6678826dc5a0a8b280e8c41d7e406745b5",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/0e51bea4d42bae9da44709f0b614fc2705052b81.webp",
+    "webp_sha256": "10042da4fb79c86b15167be6dc17328bdcb1e86f40be425cc68a0b1b9cc6f0e0"
+  },
+  "key-package-export-menu": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:20:41Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "597dbc2cb20e4eed0a79b1abd90b4384501f802173e9733d3d27bf8927b3dc13",
-    "pixels_sha256": "10aa29ed9bdfe431cbc17acb7b4b076f08ab90611211f7c04d41c4973612a447",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/aedf03593706cf3e278bd1f28a55d012d06416b1-0.webp",
-    "webp_sha256": "6b0de337e421a64b1807bcf4458f7898674db24e3f95d2f24a3c3b62cd9d0169"
+    "pixels_sha256": "019c23b6a729d0b0730c7a94d3126bbf2b81a77b94d64129d2425a24c1ed0d48",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/5ce4516e0b524b76f290b937b4eafa70a67bfe17.webp",
+    "webp_sha256": "97bc3ca4fc926591fe0119e880a06aa1cf43c8dfe6c7ac98b36326545dd9e6c1"
+  },
+  "key-package-export-protection": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:24:36Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "0e734bd24b15f1240ecae0b71daef9bba70f34d60c9dc66c51f2a7a8821fc033",
+    "pixels_sha256": "bebb1e97e602ef9f1031001589d95d359c1c08e7af31cdcbdfc1ecb740be5187",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/9ea73b6affd5969d0d64f5c4e8b1cb9b9704c88b.webp",
+    "webp_sha256": "0738589106eab205a718726843dbc253f1c8ab3e83498f379dac1e2962a31de2"
   },
   "key-package-import-menu": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2876,7 +4140,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2914,21 +4178,179 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:29:23Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:20:58Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "626859c8d4bac15374887faea881c1fbd4a417aa4d9570780cb44f2661538637",
-    "pixels_sha256": "71c06ddeecd0c72c9efa5df89a1dc1ab90a06faebd03f6bcdac1f89e9f469e67",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/3dfa06f2265b2d539d1c0bb8f95e05345c059406-0.webp",
-    "webp_sha256": "46cbec7fdd3e8d24955d2509ddbcfff95e520e6cfbe158057caf5cbbc6ba1e0f"
+    "pixels_sha256": "9cc0f9fbbefba8dfd9c60d11a7e268eca25597fbf519309efe69e4a7f57b378b",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/80f942fa8e6b901c53d23e07350ebb1898aad872.webp",
+    "webp_sha256": "f73bcb1df660fd604047d55c5efb149e62085e2b6fe423ad18615aaa3f3bfdcf"
+  },
+  "key-popup-certify": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:23:37Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "821445d923bf73b0842f3b5b42515b5fd37b0ad40c8247b31db029dbfdf79af6",
+    "pixels_sha256": "b809735934d44a94d18b2ebd73141765910998a5fbe17813c193ac5568c7fe64",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/ef33bf516be302ce3c3f474a19cc3f6a796cb17e.webp",
+    "webp_sha256": "5cfe7be557ef554970e7e882715e2a71da8d74a6422d40913c84a38bacb7444b"
+  },
+  "key-popup-menu": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:23:55Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "ba0af1983c36b6722fe769ec9ae878184f2d54f11a12222943028caa00ef8b66",
+    "pixels_sha256": "20ff98b3838f9775531c8e36bb9ab004a64da90cea61fbdd616ffe53ed38bb9e",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/e746633949beba0f15eac09e8e1d0ce845c247c2.webp",
+    "webp_sha256": "6a7f9efb2853e7ad74f3f5e5e45ff58da0a0e12d7b6fdc0ea50f279a0c68b274"
   },
   "key-server-import": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -2955,7 +4377,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -2993,9 +4415,9 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:29:39Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:21:13Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "53ff3db593ebb2dfc70eb054a41d3a9e5f31f45c3fa48d63ca104f0c95ad2165",
     "pixels_sha256": "feb2c5b7346bf3b776b513817c6bc6d414a30d81326dd89f19948916e84e6cef",
     "url": "https://image.cdn.bktus.com/i/2026/10/25/a177f77e64b91ca9b4e70cf220c76cb26ed928cc-0.webp",
@@ -3003,11 +4425,11 @@
   },
   "key-server-operations": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3034,7 +4456,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3072,21 +4494,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:29:47Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:21:20Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "f42364a8d6e1f136e67ea7638f1d7bb0dc2e65311fcbb873a0e2a3d9831ea0f6",
-    "pixels_sha256": "9152d4c7d015e8e3fcef049bc0654b43116ee618607e120c83b777d98eb448bc",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/cf48e6741b2783b5515468d8cebfbae60cd4402f-0.webp",
-    "webp_sha256": "b316fd9c7faa69318eea65e9db8e6018aa1737dd0f7f43dba172b70a8adf61ee"
+    "pixels_sha256": "30a25ae311745dc2c66b334a9e27502e677d5a8be4567ab5235104afcbb72bce",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/f864581705dd31fdb544678e9f29f7c84bb2e185.webp",
+    "webp_sha256": "8e07a8773d8e607a3f21d44fe492e7b03159e0854113e5879ea6dae4bc64a5dc"
   },
   "key-server-search": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3113,7 +4535,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3151,9 +4573,9 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:29:31Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:21:06Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "6c2a92a8f101183998bd46936b1d63a7ce8bc27b1ce3fe5f7cf1695df69eb7e6",
     "pixels_sha256": "d72554ec9258dabbea7c6ea61bfba95ad63fe1c68b6d3768e7dd7f1bdc9b3224",
     "url": "https://image.cdn.bktus.com/i/2026/10/25/9f2cad47949d7c4f240af7c56b16a39bc835acfe-0.webp",
@@ -3161,11 +4583,11 @@
   },
   "main-window": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3192,7 +4614,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3230,21 +4652,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:20:12Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:12:11Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "e371c5e2bce044600f2578ae45c9e725c1eb0391a8702cb72101965685cd7559",
-    "pixels_sha256": "add852af1bd26ee80187c5fa89ac1c0e105b2ced3cb99f869a1e0f5c922da569",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/6b49ddb4975940fa55474104cc0d64cad7f7833e-0.webp",
-    "webp_sha256": "362bf1ed62422290ebc3bca851fd58be284c1a8a967c1a7be3ceb120a01b362b"
+    "pixels_sha256": "b31f6807e8da2bbb14a7c2eaa1001323cbc0be6aff4562b541f3a1eaa2751f8a",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/d4b36dcb5f54f90639b01029b5244ad8a3867e1e.webp",
+    "webp_sha256": "98f1f401a7e6196399c6d2686f1b584a17b344cc0f49d2434fd368665000ba93"
   },
   "main-window-menu-popup": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3271,7 +4693,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3309,21 +4731,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:20:42Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:12:39Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "634be282726127b086e82d76d16a8bcddce8e3f6a06f6e91dfaf5ba0bc2dde91",
-    "pixels_sha256": "1e327ae5c9d3690fb2a9a60d0e2acc51594c358b5cb09b5ec6042b38f63e9c4e",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/9a4f7f24b06350ca33c12537e24132a8aa5f5b9e-0.webp",
-    "webp_sha256": "6d982a8f3eee07a18f0b18df8e90d85388c0e397b2348d547a430a0b8aa644e1"
+    "pixels_sha256": "3c312c3f638bea6e793d7ab072e0b8b69c7447e58298a867137217d2249fe412",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/75eb6f44dcf26a2a8628f99382e41b4788b577b0.webp",
+    "webp_sha256": "cd75c02676bac595687110353000fd5e6f3d9eb157029abf2cfee0409cc80763"
   },
   "operations-bar": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3350,7 +4772,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3388,9 +4810,9 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:30:01Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:21:34Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "1032a1f27c61cba39ce1c8ec573bd028553b6aa8a612a04d752fe75eaf1ae731",
     "pixels_sha256": "cdc59e275c351391daedb73add61d5afdf5eb99885b9ed96a43924bb200b1b5c",
     "url": "https://image.cdn.bktus.com/i/2026/10/25/001e0f26a7c53b45674daac4d2d59e0a009b03be-0.webp",
@@ -3398,11 +4820,11 @@
   },
   "owner-trust-column": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3429,7 +4851,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3467,21 +4889,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:22:13Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:14:04Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "dc71d9cbdf47ff23ab62c103ef90b2a330ae92da94a0ce635ed68923645ccb2e",
-    "pixels_sha256": "037ea315815b1055617385b86de1363b743ab7a8cbcf12b408deedac980d913f",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/883b6c815bb5a6748a8241fdcacb0912da00e541-0.webp",
-    "webp_sha256": "a8cfe0291a3298d99766953647d59567d358b8ec105bfa9c19c27662fe320867"
+    "pixels_sha256": "d239f9d7bade0987bb38cb5b33f097411e8e48c2d3d89623730f73549c59a5d3",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/68b2f26ad4683a128c7f790d71ce169124d15762.webp",
+    "webp_sha256": "e2dfa54eb17cf4156b4b67a653360e3dc47cd66b43f21d01b7943bd8ec19c30d"
   },
   "owner-trust-context-menu": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3508,7 +4930,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3546,21 +4968,416 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:22:24Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:14:14Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "5ece8dbe2783dec8729c4b0f0c2ee1cecc2e32e4507bd4adea1a94dfa1cca729",
-    "pixels_sha256": "05158fd45e66e4bda784825b4bd05eb7beaa36c0079fb3f2f9143583d0111fcc",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/19b8432b60308573b13f6f8e5fa8b2809b87a147-0.webp",
-    "webp_sha256": "4ddbcd8996c79dfeffabf29e77a9ac0b7a6b42ed4a2842eb8b830e21f6dc3168"
+    "pixels_sha256": "0b13e1fe1549f3e3d112bec83128788efca8c3ccf8c62c09407d2c188a529710",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/d1feb390778b877637f39d92dfeb762b0d0ce4c7.webp",
+    "webp_sha256": "df9349e6d43b321221e7fea900008033913343c9d33acaba3b0d2d9c38b11b14"
+  },
+  "profile-export-protection": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:25:14Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "85ac49e0e3a0b4da580c841465648d6e1fe1905683294647f831a6d6e2994a10",
+    "pixels_sha256": "194644c36ca51cf2a18d1365bee6cf6f53a257911755ac56319c18ee196fbdb9",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/a479fbc40d7c41cea15fb9d1362d51512bf8cee3.webp",
+    "webp_sha256": "3306b75578206df5d494175b09f1b1ac97a46bdfece3ef2131ed3183c48312c1"
+  },
+  "profile-manager": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:24:52Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "696b062c4009bc2f93918e09bbd67cf7da8b6dae1b913a4e5555d7313cd00fd4",
+    "pixels_sha256": "67c3fd432c5efddc97ccd95c3793e6b220f45faeffe5942b914436a8153e638d",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/5154e22711c3ffef9664eef1f601f8accdf54950.webp",
+    "webp_sha256": "87893840e8cb2ff78e37644d03868a5f57ca67e73740229acad897bb4cf09960"
+  },
+  "profile-new-keys": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:24:59Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "ea48831d94b27d139a5437a45f710aa0c3092d766d6efa650b5f24d24d96c740",
+    "pixels_sha256": "b983f6b2dcb682325b6a4eef44656a79e2c95324de1864ffcac9fc5e603c36c8",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/b0ba9f4479107c9ac2db912541238545b410eb2b.webp",
+    "webp_sha256": "1fcd244924577034afe0966f91e519b7d1e2c5fb65eb2711551e628e08522bfd"
+  },
+  "profile-new-settings": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:25:06Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "b7b1a2edfd2d30fb64737dc85c9d6bf4ee4607b1c598e0d49bc3f26e874bd8e8",
+    "pixels_sha256": "d1eef6c660d4af53a213a92f0505a2676476eac4b168df423b9e8b70199d0d13",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/8f65e2ce1a010c56c892e479798e08e6c8c02535.webp",
+    "webp_sha256": "fdb247765c85e78cefcaccc1de1f90b1900e5551f86b4b07d77c3cb6621a3730"
+  },
+  "quick-generate-menu": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:23:11Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "fd67fff4a3816f4f3e1a6017e11288597d5be70f0a64959a7c736fd2ac6303a3",
+    "pixels_sha256": "894927e88bf0893049bc3980a2ceeabaa886f01361c83663fc33deb810b0a461",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/208528e1cc46a16714d162c6310726cbd6bba5e6.webp",
+    "webp_sha256": "be66eb4468270e3dbe5da644282f57a6dcc05061c58b18cec99374a60ab7b01e"
   },
   "revocation-options": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3587,7 +5404,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3625,9 +5442,9 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:22:47Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:14:35Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "cf860041660ce84a634441b6c2848b5c8df096b8045411fa1bb234ad98862491",
     "pixels_sha256": "875c654585f6af65c68749f7e6a542f8c2b836455324adb06fe3022a6141110e",
     "url": "https://image.cdn.bktus.com/i/2026/10/25/bd1636252e4729fc80adad6349819590eec5d970-0.webp",
@@ -3635,11 +5452,11 @@
   },
   "revoke-certificate-button": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3666,7 +5483,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3704,21 +5521,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:22:40Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:14:29Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "62d063430ad3bc78ab223728facf1a7e85c8567371ab67a090a2e66bac98be1e",
-    "pixels_sha256": "6b5f18c7818041eec804e0e385c391f0c95c2660d40bff192718c0df1e26d627",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/7f1c2687cdff67872ab2dad90e30186a2982a336-0.webp",
-    "webp_sha256": "8fef9a2cbc5efed7363b9594050b9911224ad731c1b56715b10c2f0da2c0f3df"
+    "pixels_sha256": "e2567c2cffa9828a290fc1c34c4bcf2ffc8ce3004adc81ba56fc07788bdef1a7",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/eac9a1e5ae807b34b5665b95c5213bc8d217ddfb.webp",
+    "webp_sha256": "a10c59400bbe5790a0b3563c9409df0cd85fd08a128f7551b7ac17577ec27092"
   },
   "revoked-key-details": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3745,7 +5562,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3783,21 +5600,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:22:55Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:14:43Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "0e4f7d5b50ce8dedb07b3f8c565e389df75411c596504fe7bf7c6a135e9cbdce",
-    "pixels_sha256": "6b7414b6b6ff890482f7b826b90fdd83473ccc6a6efdd55ff9e6943a3a5b824c",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/2b9c2fad1ec41b22cb1744f35e1afaa521ba6762-0.webp",
-    "webp_sha256": "04c1c4a277ce21968191451a3e514e9dff612b8064f23ca1237d983ba3fc58ee"
+    "pixels_sha256": "0435a1d16c9ca46591a42fc30791a2972a95745d773a43e586649fcb731db402",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/0f33304e22e41e3a1eeaa740ea3ffb1d24decd33.webp",
+    "webp_sha256": "b84847a25bd4020132e348703dbba1e837c11c2599f2ded388f03bb40457837b"
   },
   "settings-binary-mode": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3824,7 +5641,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3862,21 +5679,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:26:55Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:18:36Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "c6b2c62feed7ce9673f03acf9c770fae2a864fe6e352fdb7920fef333f7332e2",
-    "pixels_sha256": "88807e387dfb6363ecde1166fd33df3005e18fd0331fd30528d2f3d12a47d007",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/3c97cca799d7c4af4c93a8dd47442cb851a71472-0.webp",
-    "webp_sha256": "5b182cca203ba339459ca8f0e8a3cf9e9a3a09502278b23497e985a2ee893fcc"
+    "pixels_sha256": "48ba73cc617444a8c6fc9534fa3378a58d0079d258c3c0ceee87fc700e3c729b",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/6f70391c3516fb17fb789cc81c60095719f87b47.webp",
+    "webp_sha256": "a22b3fc05378ff165d2b953a099525f6826f35acf7b78da984e81218eaf300a2"
   },
   "settings-key-databases": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3903,7 +5720,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -3941,21 +5758,100 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:30:32Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:22:04Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "4acb951a47af534e7e1fc40af2a76d270dc87be1a090c92a42e8b609d0b37413",
-    "pixels_sha256": "b267ec29c93b7b351fb8f13569c519f940479fd61454fc910b61d67e022f4c8b",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/f4d1c816ab6ceb08274b8209268dbe46824ce8e8-0.webp",
-    "webp_sha256": "6b3be6ccfffca48567314e00435f6b92a8bbab1eedba4be3a5987ba8df8a1495"
+    "pixels_sha256": "dde7740d21e188413177f9371469d100d2cad9483166bdb1a2d11936d9de3e3a",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/a9397ad0e7372f52f5c26b0ee963cded51b480e4.webp",
+    "webp_sha256": "91256490d951c215b766141f58a394cf97971c6c432571d4aabfd2c53e93045c"
+  },
+  "settings-key-databases-recycle-bin": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:24:45Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "4adfb926ed15b9cd2da8aa172c538f98e3998e8c0c6dd6aafd6754ea7c7649ac",
+    "pixels_sha256": "4044939b45783056e61105e9fb0ccc9d7530740c5c1c65bb26e594c7fe06cd98",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/e0543f5ccc9d3dab5aab6ce69dd17e266dcb0e6b.webp",
+    "webp_sha256": "6cdeffb08f1a84614bd85355a2f9aef86d29077972428cbcb1961099fd896d9f"
   },
   "settings-sym-encrypt": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -3982,7 +5878,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4020,21 +5916,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:25:34Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:17:17Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "c84d665ac64cd051545c5b71bfaabdcde76b579fb7346a225a69f41a4c75711d",
-    "pixels_sha256": "07e3b6dd5a095394bc308479d1782252374014ecd2ae18991963d04c0fb303e8",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/81e553a6e46c5b7460774e1897cfb3b257bc6426-0.webp",
-    "webp_sha256": "cd205713215da6c46802f9facc28e59d53e80a1bab6fd37c4babb611ed6fe8fc"
+    "pixels_sha256": "e4aa8e05429a432f8504bcf647180f12f1f63f8b2340d9e09a2a2942971b16fa",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/656cb6940509af0d0f2fb8bcb5aad1758dace5d1.webp",
+    "webp_sha256": "db08b063de4721b6d0a14dc9f000028991208a2a2c336dfd94e33bdfae493b3c"
   },
   "status-panel-report": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4061,7 +5957,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4099,9 +5995,9 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:30:19Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:21:51Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "ba7599cb2e56325596b678c692ad1bb40e2bcca7ec93f7872075002c43733033",
     "pixels_sha256": "f60991569716b6b032e0a926e795fed22dd3596c32975346ada9c065ab834f02",
     "url": "https://image.cdn.bktus.com/i/2026/10/25/4fe7757dc97c824295a6046d1753160f4d157c42-0.webp",
@@ -4109,11 +6005,11 @@
   },
   "subkey-encrypt": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4140,7 +6036,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4178,21 +6074,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:28:55Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:20:31Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "c5ad841d5518eda11798fd38b78fd17b744d268b2e2a02a1dcf830b469b9a783",
-    "pixels_sha256": "4baee548b4fa5228f1fcaed11d2c92237a9624191127061099bcffc33e841a78",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/95c95c3b8efcf06171c881bcea380b96aa977b44-0.webp",
-    "webp_sha256": "68d8d975b4b80011808fe2753b3688018be3dff9249b7e4c6c651fba3f1fb62d"
+    "pixels_sha256": "e2898fc7ce813721fcee5b9da9a924c39d4a10b41f42970cd723bf0811568812",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/b292cd04448c8bc9a39f883b5324d7d836423c26.webp",
+    "webp_sha256": "998dd347716c3b3e03b9ad2dad1ec2acfee89235751ab67eef661a3f0429b344"
   },
   "subkey-export": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4219,7 +6115,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4257,21 +6153,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:27:38Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:19:16Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "bc570a857c4c6896dde3073180c9345428589122f218c7301775bfc9ce2f9d06",
-    "pixels_sha256": "540d381c287ff11d6412670d8ca6e44fcd53cc68d0d0c35d69f0b425c1ef090c",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/b81c094eeb21ab2960363edfc0e3d0a0d59cade2-0.webp",
-    "webp_sha256": "25e6bdb7642d91278a735ed13dbc05566342ddcabe781681dc07d9056d37b55d"
+    "pixels_sha256": "81c56ad62e6cc11adabf24a556561da594a8385da5357075947c4d1b8315f168",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/4372fa1c1c4a228099930f9cffc053ff81f17542.webp",
+    "webp_sha256": "c3a7fd868a96139b60f038dcdd2d2bcee5d85c3412b7bc139fc922d569fccd7a"
   },
   "subkey-generate": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4298,7 +6194,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4336,21 +6232,100 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:27:29Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:19:08Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "206adbb87a0c00834cf9c89b29ca2bd04b555b6bb16a54a130c5cbe4491edd2c",
-    "pixels_sha256": "86e00c48d5520287c65a636e80fd3c8ec35389f4320fbdd9f3f6b594aad577cd",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/78a292d6564af52d3d3eea1cb075ec1049cd3594-0.webp",
-    "webp_sha256": "c59a2e7709d4f0095bbfedde431803a6834ff0c47142e478234f24e06713931b"
+    "pixels_sha256": "659eea76859f4e3ca438d1fd6f1108d4fbf3eeb7133c2705fe6ea22a76c03aab",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/ff1f3a604f67c9ff86b13397e5430417e2c5103c.webp",
+    "webp_sha256": "fe2daf5dd37791d839efa27f491e9865e13994768cd562fb083d4eec90e12278"
+  },
+  "subkey-generate-expert": {
+    "env": {
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
+      "clock": "2026-01-15T10:00:00Z",
+      "color_scheme": "light",
+      "color_scheme_method": "hint",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
+      "font_files": [
+        {
+          "family": "Noto Sans",
+          "file": "NotoSans-Regular.ttf",
+          "sha256": "f3961a9cde016d41a4879aecda1474d3a36d6bf54fa0e4643de029cc2248b0e8"
+        },
+        {
+          "family": "Noto Sans CJK SC",
+          "file": "NotoSansCJKsc-Regular.otf",
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "family": "Segoe UI",
+          "file": "segoeui.ttf",
+          "sha256": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+        }
+      ],
+      "font_requested": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "font_resolved": [
+        "Noto Sans",
+        "Noto Sans CJK SC"
+      ],
+      "gate_failures": [],
+      "gnupg_version": "2.5.24",
+      "gpg_clock": {
+        "agent_conf": "applied",
+        "gpg_conf": "applied"
+      },
+      "gpg_clock_probe": "ok",
+      "gpgme_version": "2.1.2",
+      "locale": "en_US",
+      "os": {
+        "build": "10.0.26200",
+        "kernel": "10.0.26200",
+        "product": "Windows 11 Version 25H2"
+      },
+      "platform": "windows11",
+      "platform_name": "windows",
+      "qt_version": "6.12.0",
+      "schema": 1,
+      "screen": {
+        "dpr": 2,
+        "geometry": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "logical_dpi": 96,
+        "name": "DELL S2725QC",
+        "physical_dpi": 82,
+        "size": [
+          1920,
+          1080
+        ]
+      },
+      "style": "windows11",
+      "system_font": "Segoe UI",
+      "tz_offset_check": 0,
+      "ui_clock_probe": "ok"
+    },
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:23:26Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
+    "inputs_hash": "76412f5873421dbe00a1ad26e1cf68fd5ead0692fc9e03892569267767301b73",
+    "pixels_sha256": "ebf041f9c2dae9793691fc2f0b9bc7b78f5e2466f4d524d16f57a55d7429c3de",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/2bc8251d01811b8931984fa3dee25e00b579d94c.webp",
+    "webp_sha256": "d3926b891d1d089c6cbd28588efbe89c97f808e26bcbc5f6e5e58f3251035abd"
   },
   "subkey-hash-symbol": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4377,7 +6352,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4415,21 +6390,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:28:28Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:20:06Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "a85671c308d453b29b8bda3d88c248f1e8185626b14c873325d39b80f04df2f4",
-    "pixels_sha256": "b0fccb26b6ea9fe6aa1acb6119811d9cdb3bc30fe3647cde4c78848087d9002d",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/b82131ba65e55baf29d58c15870d2763a34a165d-0.webp",
-    "webp_sha256": "81cc402c1a5d2290c439e70252407a1c6e3c5b38ff153925af5d4240a952f7e8"
+    "pixels_sha256": "ce147dc20088ee3921dbef6abba94b8533b55461ff103b2c55dba40ff9939e82",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/0e6cc94d3cf7ec81c37c521a466333832acaa2e8.webp",
+    "webp_sha256": "95408f3806d576eca461718c334823bcee8a9034f7cd544ef786c500f216e47d"
   },
   "subkey-import-file": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4456,7 +6431,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4494,21 +6469,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:28:02Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:19:40Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "24faeb820496a9f86c875ee51647f79ff7934caf99ea4826f5a4714337401153",
-    "pixels_sha256": "1284a431082688de2d36c8e6b557939e49d2c2835b8206ca1b401467320cf1a1",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/b6f773ca4059abe8a98eff10277dd7b3efd93490-0.webp",
-    "webp_sha256": "bb1a3b0b234c51df00b10b391aa6364137dd06b9be78b2f2bafde0e60dc53f69"
+    "pixels_sha256": "230043d62881cd7a342e0333f1b3bc239a1fa69cd01ce15c757a661a7c9a601f",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/f7c5fe17a01e82198f3f0af12b4690447dc0cbc1.webp",
+    "webp_sha256": "89743f21a99c0fb7e5f29a9cee96a9e7167430c236f3ccadcac22f497ae6808e"
   },
   "subkey-imported": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4535,7 +6510,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4573,21 +6548,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:28:14Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:19:52Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "9c36708876b617b3737be6d7604c8649dd8f2a254d4abf5f1f75bd1bd0bf16d4",
-    "pixels_sha256": "b61c21eda752f2e5f746f2841923e43fbb35041a9a4b7886a5710ec23f0b36d7",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/f22c7532447bd6871215688ad6fa0cbda92434cb-0.webp",
-    "webp_sha256": "2d8aa834cff1abf022576193a0e7233c7e0bb4b24be22392bbe2cdaa11cbf55e"
+    "pixels_sha256": "be04157c96081584d97024e4b6fe7ff532d845641879882c018e39eb815821d3",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/0c88080bec787c683a9bbc96066e42eae714b588.webp",
+    "webp_sha256": "11e1fadd8f428f0f23e4cc8f11d896fb3f010410101a7f13f0c8c3b6bef01e84"
   },
   "subkey-new-subkey": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4614,7 +6589,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4652,21 +6627,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:27:22Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:19:01Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "c6057b67c481dcc531161cd613ecea5b953376f489edebd64adf1140a86a677d",
-    "pixels_sha256": "bdcf2214938c0e7a54aa07c93f14151aa19f3a9d40d71109bb58cd7f663a4700",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/3d80f37afdcba716f159e71845e4061579fd1f42-0.webp",
-    "webp_sha256": "93a76dbe0a79f636b7727486f9b2acb0f3837b4fb6634f9a71cc259d62d318b3"
+    "pixels_sha256": "a9ddbac9a87db31240cd525432f6e42c2e68fb823f882d9f87ebd7ab4877f603",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/4e64224bcb749319f269da127d6e882978176729.webp",
+    "webp_sha256": "70a377f8c0faeb465730f12d242a7183105f0763ee596e260169e99e450c8f14"
   },
   "subkey-primary-not-exists": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4693,7 +6668,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4731,21 +6706,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:28:40Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:20:17Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "f4f953d21996346783c2dab67542b448395111c6f584507eec8c7d1d0a95915e",
-    "pixels_sha256": "98fc9a9bc3d406090047ddc25f73fde02c5c833139f749d1dd88ce7d8b627e9f",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/33d147efb4b19d95e25b9affae748fbd9638a20b-0.webp",
-    "webp_sha256": "0b5b832001cfb238713502cd42ef3db71bf58b1210da1ce6ded72bb48020aba0"
+    "pixels_sha256": "983aaeacdaaad07e3559c2b7963bb3795f951ec9cf7ea4dd0680911de4bea16a",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/5e76df1798336477e6c80f69cebb329638c0975d.webp",
+    "webp_sha256": "ceab5d123649adb04d4880346ddef1131a0ffc7a4cee1eb26bd4ddca29f60680"
   },
   "subkey-switch-database": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4772,7 +6747,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4810,21 +6785,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:27:52Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:19:30Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "28eacfdf7d93fb82e5e3ed4a347fea28bd4f1105b27f950b6c09872d918a3cff",
-    "pixels_sha256": "e7784e0aeb1f4e8c7bcb71bbfc481b99c6e355840f24eafa053e0560531baed8",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/1fa8f6a2ad0da9c2a71ca2863f240989e3ef73d7-0.webp",
-    "webp_sha256": "6a74e16a6cf566dc14a111f5f44db52ee404071737d89ec7e5df27bede7344bd"
+    "pixels_sha256": "988b88029a7787f73327f7d1e76cda396f55b19fe031487640f121109b6b02be",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/553544ec585f2f800d3de2ff65ecc6124e03aec3.webp",
+    "webp_sha256": "e4e5e112639c51115ab27b3318021a3c7ca5c49cd92fbbd6f5714bec612613ce"
   },
   "sym-encrypt-button": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4851,7 +6826,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4889,21 +6864,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:25:44Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:17:27Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "d04adeb3056ebc3b15d5fcabc57cd7b4e2fc0edb615dba5f63aaca8558bc912d",
-    "pixels_sha256": "2e2e2563718161dead3b81eb55d5e4f7b0f80f79f6e7a3d14bc22050d841f6ca",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/9b0276fb441bb2119c00c4b187e4bfc3d0b81f8f-0.webp",
-    "webp_sha256": "03ab429ef7d91c3a9b7a4e28fcf5688235d025449165e7b9400432f775db5fb4"
+    "pixels_sha256": "c360bb4a5c2a0cc155de1e9e7ac49f8f3ef9f4844f943e717189136836336db3",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/bdd24695fb7f6bacacfc47b159a68fc62ca34105.webp",
+    "webp_sha256": "6bb32f184eebe534e238694b02f6a5fae9f1fed9343b3891a30a8704758688f8"
   },
   "sym-encrypt-menu": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -4930,7 +6905,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -4968,21 +6943,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:27:13Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:18:53Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "2c727b9116ebbb116ba5823c7b2f15fb16c26214f5bf05ab7e69f626e3087c47",
-    "pixels_sha256": "2d69325859f2759dea2b4b6d0b0925d578b5f1ea8c73c014bb39f3efef44dd93",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/f2f203e3661288cdda00140a18750197346c42d2-0.webp",
-    "webp_sha256": "1ebad2235de341626805e6ccb808881e20e76c22efc66bbfb1a9cb3520af0f34"
+    "pixels_sha256": "ab9c391b7765ae6139d72c6baa13545dcc2e82d52c952b2e220fb8b8462c5d8b",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/1b1988eeb2f7aae1a4d1c9492037c3203e161d93.webp",
+    "webp_sha256": "a38fe945d83b27fcb66cfe14df4487460e605365f98ce952f0f0cb956a7ff98b"
   },
   "text-decrypt": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -5009,7 +6984,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -5047,21 +7022,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:25:02Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:16:45Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "da47e9ea77e7364171c6b074681c1e38f23c0ce30e72c651c5dcc6a1a5766dff",
-    "pixels_sha256": "87a77da93006e68d751126d94d46991eee5376feb4c03f9e3a91516ee242f0ab",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/1700acb9bf24d4221a6803d5ced85e276aa2c728-0.webp",
-    "webp_sha256": "cdf7d8865cf226033aee7e31c08eb65c2f1390627d03a39513ac67036a1d72db"
+    "pixels_sha256": "ffe9f39ec7355bce59358c62712a54df9582b68068ac41db99440e61a8d9d26d",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/7fa30e7a95daa342fe6bd449b9bf87adc9a7e201.webp",
+    "webp_sha256": "afb932d895e3da6fd729b688009ebc08a473001b61344a468c89176ecd27aa20"
   },
   "text-decrypt-verify-result": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -5088,7 +7063,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -5126,21 +7101,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:20:31Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:12:29Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "b45bd0a8ef179618926a61f95e57b92a999b782881655a38ed0c6db514d92efd",
-    "pixels_sha256": "867d2411b2ef855717c97a0abfe6c373e64028801efe5c4c336edc50e15789cf",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/c907844a077196ac1863fd0555febb222e7af009-0.webp",
-    "webp_sha256": "7569e2b43df4c4d80b08ec21ae8a85f675170d698f6da1d8f7dcf42a378c09d4"
+    "pixels_sha256": "2ba9d47f23a184b54deb84f46bc17e0b9795adec053abacd94eaed1ad51d274b",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/f853f00128ddf1ed270a9597142cac1b1309c775.webp",
+    "webp_sha256": "b7ff088e1c2666e0fe390f8ce1ef368d883f62328f7f17489c7eab8b3abb8326"
   },
   "text-encrypt": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -5167,7 +7142,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -5205,21 +7180,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:24:51Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:16:34Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "625c9da0ff14a92a570c9b2d3db7e0a968655abe295b1121edd9366ca56cc382",
-    "pixels_sha256": "d9cb04475022637a47fb64a65ea0c6f759d9bd9e9240e2f62431b810c30cbb67",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/b35cf459fb95b156a99489dc098b694925f2f07b-0.webp",
-    "webp_sha256": "d22dbcd94c4a1553efcb085e176056d3e5bfb6b03a19b66336e18d5fc1dcfbec"
+    "pixels_sha256": "1229b1ff8a5768b976853a675907dfe0e675d412c0c27f1d3544f9fc0df124c3",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/f3e9a2921b1a554dbd2ae4f208fcd845ea9241bd.webp",
+    "webp_sha256": "faceb6e51dbf7770c7ba464ca6f0f272673ec8a2d58374e36e7d7ac47d3c5a71"
   },
   "text-sign": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -5246,7 +7221,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -5284,21 +7259,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:25:13Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:16:57Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "d74c256c0773740f91444420145726feeea88e698edc5ecece696c00e0257d0e",
-    "pixels_sha256": "1daa49ef02af74cd577f84e1a5ede261d96525f48c4a243097c4e97d7b8c342d",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/1eaf74f27c05412471bb5213357296ed8acd4928-0.webp",
-    "webp_sha256": "8fdee90db05b09e023de817122f85a1b6e85be84b31b8faa23b65594325200ca"
+    "pixels_sha256": "f40b9c9958426f5e80a9ddda98ce4124bf7bc733e7330b2662cb52e3e1974818",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/7e7c28bd3adb85152b3621a53e367745b2670a93.webp",
+    "webp_sha256": "2b011ebce1e892630eab52a48be3873531d3d84978ac21d32a6ff96b2d391930"
   },
   "text-verify": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -5325,7 +7300,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -5363,21 +7338,21 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:25:25Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:17:08Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "40498c195e47a273c596750b8b5bf8e8b14b411982d338b46f1a6e40d8eb6222",
-    "pixels_sha256": "4dda24488c626e1e8509aec08bc6861d7fa9c91ebe4b31c52f7b9ef1fbcc70e2",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/e2bd1c117432909b8d5d55545e55d068650eccc3-0.webp",
-    "webp_sha256": "3b544d483a3ecca533f15d91436ff6e84aa434ccbd7a144acffe1e6810bdd575"
+    "pixels_sha256": "03758e086701b2ca042d2a7cbe7f8cad5c579f0c906dda57ec56a5a6c593e3f4",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/0eace5d510b46b1639c5a7ed4e64c04b77673f1e.webp",
+    "webp_sha256": "b6a6c658c5de59a5d62a2db9c1cf75dec960b2cae4b2a68dc2f4cf648a526c5d"
   },
   "uid-signatures-highlighted": {
     "env": {
-      "build_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+      "build_commit": "c57f74c4050e814bbc5057f65d88759953d9240f",
       "clock": "2026-01-15T10:00:00Z",
       "color_scheme": "light",
       "color_scheme_method": "hint",
-      "env_hash_core": "7ec0c76df5f3e18187f50ca7a23c5d12503f046f3fe7f4558b4edd5ec270ec53",
+      "env_hash_core": "369315bc6261a744af3a1eef6c09e9faaaa5d185c81103bbeec870fc77eaa636",
       "font_files": [
         {
           "family": "Noto Sans",
@@ -5404,7 +7379,7 @@
         "Noto Sans CJK SC"
       ],
       "gate_failures": [],
-      "gnupg_version": "2.5.21",
+      "gnupg_version": "2.5.24",
       "gpg_clock": {
         "agent_conf": "applied",
         "gpg_conf": "applied"
@@ -5442,12 +7417,12 @@
       "tz_offset_check": 0,
       "ui_clock_probe": "ok"
     },
-    "env_hash": "43cbffcf1f6263df9843bab1561ef9f3c1a106a68f11b75abb0ad77c016a2e31",
-    "generated_at": "2026-10-24T18:22:32Z",
-    "gpgfrontend_commit": "8b901eb1e97654b12f1ab404af4e9c65111afcbf",
+    "env_hash": "b980722eb4077ef900238cc75c07e9294c2edce1b7806b3bd22934fceee96ec6",
+    "generated_at": "2026-10-28T16:14:22Z",
+    "gpgfrontend_commit": "b9023dc0ff7630f1a948be615938444508871613",
     "inputs_hash": "887b23caf028112461a60ff33a78671ca651789ea3cfc0bece2e4d4c6f0a9b8a",
-    "pixels_sha256": "2f7b68a1ea2151a999e013970daee99e011675afa33aec1896b369629b94936d",
-    "url": "https://image.cdn.bktus.com/i/2026/10/25/d54e4e59849b0a142f4150922251aa45e7cc355d-0.webp",
-    "webp_sha256": "ebd0adfbc175bee45be78b2f3716ecc0addfe6c10ad39339c1f4a172dfb7d0b8"
+    "pixels_sha256": "18a8c06250722c41c4a07560b987a49f26993057f3f5130cca6bcc53f67f8e7f",
+    "url": "https://image.cdn.bktus.com/i/2026/10/29/5369ac03d7b8cb3e70db7174d5b4cee490ba5e22.webp",
+    "webp_sha256": "bddcdbfd7844fec7da68feca61e3fd358a2b31569f725f631dda2e91745ec8a7"
   }
 }

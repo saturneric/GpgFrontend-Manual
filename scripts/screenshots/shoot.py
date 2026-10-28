@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """One command for the whole screenshot job.
 
-    py -3 shoot.py --binary <path>\\GpgFrontend.exe            # dry run
-    py -3 shoot.py --binary <path>\\GpgFrontend.exe --apply    # write lock and docs
-    py -3 shoot.py --binary <path>\\GpgFrontend.exe --upload   # also upload to the CDN
+    py -3 shoot.py            # dry run
+    py -3 shoot.py --apply    # write lock and docs
+    py -3 shoot.py --upload   # also upload to the CDN
+
+Without --binary the screenshot-mode binary comes from $GF_SCREENSHOT_BINARY,
+else from the extracted portable bundle `GpgFrontend Portable` next to the
+Manual repository. Without --gpgfrontend the clone is `GpgFrontend` next to it.
 
 Steps, each stopping with a message when it cannot go on:
 
@@ -56,6 +60,8 @@ DEFAULT_REF = "main"
 SOURCE_ENV = "GF_SHOTS_GPGFRONTEND"
 BINARY_ENV = "GF_SCREENSHOT_BINARY"
 CDN_ENVS = ("GF_MANUAL_CDN_API", "GF_MANUAL_CDN_TOKEN")
+SOURCE_DIR_NAME = "GpgFrontend"
+PORTABLE_DIR_NAME = "GpgFrontend Portable"
 
 _FONTS_KEY = r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
 
@@ -133,10 +139,12 @@ def build_parser() -> argparse.ArgumentParser:
         description="Prepare everything and run the manual screenshot pipeline.",
         epilog="Arguments after `--` go to run.py unchanged, e.g. -- --accept-baseline main-window",
     )
-    p.add_argument("--binary", type=Path, help=f"screenshot-mode GpgFrontend binary (else ${BINARY_ENV})")
+    p.add_argument("--binary", type=Path,
+                   help=f"screenshot-mode GpgFrontend binary or portable bundle folder (else ${BINARY_ENV}, "
+                        f"else `{PORTABLE_DIR_NAME}` next to the Manual repository)")
     p.add_argument("--gpgfrontend", type=Path,
                    help=f"GpgFrontend clone to create or update (else ${SOURCE_ENV}, "
-                        "else GpgFrontend-Src next to the Manual repository)")
+                        f"else `{SOURCE_DIR_NAME}` next to the Manual repository)")
     p.add_argument("--ref", default=DEFAULT_REF, help="branch to clone and fast-forward (default: main)")
     p.add_argument("--repo-url", default=REPO_URL, help="where to clone GpgFrontend from")
     p.add_argument("--no-update", action="store_true", help="use the GpgFrontend clone as it is")
@@ -165,7 +173,27 @@ def split_passthrough(argv: list[str]) -> tuple[list[str], list[str]]:
 
 def default_source() -> Path:
     env = os.environ.get(SOURCE_ENV)
-    return Path(env) if env else MANUAL_ROOT.parent / "GpgFrontend-Src"
+    return Path(env) if env else MANUAL_ROOT.parent / SOURCE_DIR_NAME
+
+
+def default_portable_dir() -> Path:
+    return MANUAL_ROOT.parent / PORTABLE_DIR_NAME
+
+
+def portable_binary(portable: Path) -> Optional[Path]:
+    """The GpgFrontend binary inside an extracted portable bundle, or None.
+
+    Windows bundles hold `bin/GpgFrontend.exe`; Linux bundles are one AppImage.
+    """
+    if os.name == "nt":
+        candidates = [portable / "bin" / "GpgFrontend.exe", portable / "GpgFrontend.exe"]
+    else:
+        candidates = sorted(portable.glob("*.AppImage")) if portable.is_dir() else []
+        candidates += [portable / "bin" / "GpgFrontend", portable / "GpgFrontend"]
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+    return None
 
 
 def run_py_argv(args: argparse.Namespace, source: Optional[Path], binary: Optional[Path],
@@ -483,7 +511,16 @@ def running_gpgfrontend() -> list[str]:
 def resolve_binary(args: argparse.Namespace) -> Path:
     binary = args.binary or (Path(os.environ[BINARY_ENV]) if os.environ.get(BINARY_ENV) else None)
     if binary is None:
-        raise ShootError(f"--binary or ${BINARY_ENV} is required")
+        portable = default_portable_dir()
+        binary = portable_binary(portable)
+        if binary is None:
+            raise ShootError(f"--binary or ${BINARY_ENV} is required, or extract the screenshot-mode "
+                             f"portable bundle to {portable}")
+    elif binary.is_dir():
+        found = portable_binary(binary)
+        if found is None:
+            raise ShootError(f"no GpgFrontend binary in portable bundle: {binary}")
+        binary = found
     if not binary.is_file():
         raise ShootError(f"binary not found: {binary}")
     return binary.resolve()
