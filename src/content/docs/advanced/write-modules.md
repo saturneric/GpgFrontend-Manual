@@ -213,6 +213,9 @@ Tell your users to:
    you published, and click **Trust This Publisher Key...**;
 4. click **Enable This Module**, then restart GpgFrontend.
 
+Users of the Flatpak and Mac App Store builds cannot load modules you publish.
+Those builds hide **Module Discovery** and the Module Controller.
+
 Trusting your key does not enable anything by itself. Each module signed with it
 must be enabled on its own. External modules are always refused on macOS,
 because macOS only loads code signed with GpgFrontend's own Team ID.

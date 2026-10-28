@@ -46,8 +46,12 @@ in the module list, what the module does, and where its features appear.
   right-click menu. See [OpenPGP Structure Inspector](/advanced/pgp-inspector/).
 - **KeyServerSync**: finds, publishes and refreshes keys on key servers. Adds
   **Key Server** to **Keys**, **Import Key**, the **Key Server Operations**
-  button in key details, and the **Key Servers** settings page under **Keys &
-  Engines**. See [Key Server Operations](/guides/key-server-operations/).
+  button in key details, **Publish Public Key to Key Server** and **Refresh
+  Public Key From Key Server** to the key lists' right-click menus and to the
+  **Operations** menu of the KeyPair Management window, and the **Key
+  Servers** settings page under **Keys & Engines**. It also offers to fetch
+  missing keys when you verify a signature. See
+  [Key Server Operations](/guides/key-server-operations/).
 - **VersionChecking**: checks for a newer GpgFrontend. Adds **Check for
   Updates** to the **Help** menu, and the **Updates** settings page under
   **Application**.
@@ -56,6 +60,10 @@ in the module list, what the module does, and where its features appear.
 - **Email**: writes, reads and protects email. Adds **Mail Editor** to **File**,
   **Workspace**, adds **Open IMAP Controller** to the **Advanced** menu, and
   adds the **Mail Accounts** settings page under **Features**.
+
+One more module, **WebEngine**, is optional. It shows HTML email formatted on
+Linux. It is only there in builds made with it; the official downloads leave it
+out. See [Verify and Inspect](/email/verify-inspect/).
 
 Some versions leave modules out:
 
