@@ -29,18 +29,21 @@ decrypt with their private key.
 Every task on this page works on the text in the current **Text Editor** tab.
 You can start each task in three ways. They all do the same thing:
 
-| Task               | Toolbar button                   | **Operations** menu  | Shortcut     |
-| ------------------ | -------------------------------- | -------------------- | ------------ |
-| Encrypt            | **Encrypt**                      | **Encrypt**          | Ctrl+E       |
-| Encrypt and sign   | in the **Encrypt** button's list | **Encrypt & Sign**   | Ctrl+Shift+E |
-| Decrypt            | **Decrypt**                      | **Decrypt**          | Ctrl+D       |
-| Decrypt and verify | in the **Decrypt** button's list | **Decrypt & Verify** | Ctrl+Shift+D |
-| Sign               | **Sign**                         | **Sign**             | Ctrl+Shift+I |
-| Verify             | **Verify**                       | **Verify**           | Ctrl+Shift+V |
+| Task                         | Toolbar button | **Operations** menu  | Shortcut     |
+| ---------------------------- | -------------- | -------------------- | ------------ |
+| Encrypt                      | **Encrypt**    | **Encrypt**          | Ctrl+E       |
+| Encrypt and sign             | (not at first) | **Encrypt & Sign**   | Ctrl+Shift+E |
+| Encrypt with a password only | (not at first) | **Sym. Encrypt**     | Ctrl+Alt+E   |
+| Decrypt                      | **Decrypt**    | **Decrypt**          | Ctrl+D       |
+| Decrypt and verify           | (not at first) | **Decrypt & Verify** | Ctrl+Shift+D |
+| Sign                         | **Sign**       | **Sign**             | Ctrl+Shift+I |
+| Verify                       | **Verify**     | **Verify**           | Ctrl+Shift+V |
 
 On macOS, press Cmd instead of Ctrl.
 
-To see a button's list, right-click the button, or press and hold it. See
+**Encrypt & Sign**, **Decrypt & Verify** and **Sym. Encrypt** have no toolbar
+button at first. You can add them in **Settings** > **Appearance**. They then
+share a button with **Encrypt** or **Decrypt**. See
 [Buttons With More Than One Action](/guides/understand-interface/#buttons-with-more-than-one-action).
 
 To pick a key, tick the box in front of it in the **Key ToolBox**, the key list
@@ -63,16 +66,17 @@ You need **their public key** in your key list.
    with `-----BEGIN PGP MESSAGE-----`. The **Status Panel** at the bottom shows
    whether it worked.
 7. **Send it.** Copy the whole block, from the `BEGIN` line to the `END` line,
-   and paste it into your email or chat. Or save it with **File**, **Save**.
+   and paste it into your email or chat. Or save it with **File** >
+   **Save File**.
 
 ![][img-2]
 
 :::caution
 
-If you tick **no key at all** and click **Encrypt**, GpgFrontend does not stop.
-It asks you for a password instead and encrypts with that. This is called
-[symmetric encryption](/guides/symmetric-encrypt-decrypt/). If you meant to
-encrypt for a person, click **Cancel** and tick their key first.
+If you tick **no key at all**, **Encrypt** is greyed out. To encrypt with a
+password instead of a key, use **Operations** > **Sym. Encrypt**. This is
+called [symmetric encryption](/guides/symmetric-encrypt-decrypt/). It is only
+offered while no key is ticked.
 
 :::
 
@@ -87,6 +91,9 @@ The encrypted message does not show who sent it. If you also want to prove that
 it came from you, use [Encrypt and Sign](#encrypt-and-sign-at-once).
 
 ### If You Are Asked to Pick a Subkey
+
+This only happens when your key database uses the rPGP engine. With GnuPG,
+GnuPG picks the subkey by itself.
 
 Some people have more than one encryption subkey on their key. When that
 happens, GpgFrontend opens **Select Encryption Key(s)** and asks which one to
@@ -153,10 +160,10 @@ key**.
 2. **Pick your key.** In the **Key ToolBox**, tick the box in front of **your
    own** key. Pick a key that can sign: its **Usage** column shows an `S`.
 3. **Click Sign.** Or press Ctrl+Shift+I.
-4. **Choose a key, if asked.** If you ticked no key that can sign, or your key
-   has more than one signing subkey that still works (not revoked or expired),
-   a window called **Select Signing Key(s)**
-   opens. Tick the key or subkey to use and click **Confirm**.
+4. **Choose a subkey, if asked.** If your key has more than one signing subkey
+   that still works (not revoked or expired), a window called
+   **Select Signing Key(s)** opens. Tick the key or subkey to use and click
+   **Confirm**.
 5. **Enter your passphrase.** Type the passphrase of your private key.
 6. **See the result.** Your text now sits between two lines:
    `-----BEGIN PGP SIGNED MESSAGE-----` at the top and a
@@ -166,6 +173,14 @@ key**.
    `-----END` line, and send it.
 
 ![][img-4]
+
+:::note[Sign is greyed out?]
+
+**Sign** only works when every ticked key can sign. If you ticked no key, or
+one of the ticked keys has no `S` in its **Usage** column, **Sign** is greyed
+out. Untick the keys that can't sign, and tick your own key.
+
+:::
 
 :::caution
 
@@ -201,7 +216,8 @@ The text in the tab is not changed when you verify.
 
 If you don't have the sender's public key, a window called **Missing Keys**
 opens. It lists the fingerprints of the missing keys and asks whether to fetch
-them from the key server.
+them from the key server. This window comes from the KeyServerSync module. If
+that module is turned off, the window does not appear.
 
 - Click **Yes** to search the key server for the key.
 - Click **No** to stop. You can
@@ -224,14 +240,15 @@ the best choice for private messages.
 2. **Pick the recipient.** Tick the box in front of the recipient's public key
    in the **Key ToolBox**.
 3. **Start it.** Open the **Operations** menu and choose **Encrypt & Sign**, or
-   press Ctrl+Shift+E. On the toolbar, it is in the **Encrypt** button's list.
+   press Ctrl+Shift+E. If you added it to the toolbar, it is in the
+   **Encrypt** button's list.
 4. **Choose your signing key.** The **Select Signing Key(s)** window always
    opens here. Tick **your own** key and click **Confirm**.
 5. **Enter your passphrase.**
 6. **See the result.** The text becomes a `-----BEGIN PGP MESSAGE-----` block,
    just like normal encryption. The signature is hidden inside it.
 
-Unlike plain **Encrypt**, this one needs at least one ticked recipient key.
+Like plain **Encrypt**, this needs at least one ticked recipient key.
 
 ## Decrypt and Verify at Once
 
@@ -239,8 +256,8 @@ Use this when you receive a message that was encrypted **and** signed.
 
 1. **Paste the message** into a text tab.
 2. **Start it.** Open the **Operations** menu and choose **Decrypt & Verify**,
-   or press Ctrl+Shift+D. On the toolbar, it is in the **Decrypt** button's
-   list.
+   or press Ctrl+Shift+D. If you added it to the toolbar, it is in the
+   **Decrypt** button's list.
 3. **Enter your passphrase.**
 4. **Read the result.** The readable text appears in the tab. The **Status
    Panel** shows both results: whether decryption worked, and whether the

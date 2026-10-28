@@ -36,6 +36,10 @@ The new panel opens at the folder set in **Settings**, **General**, **File
 Panel Opens At:**. You can pick **Profile Workspace**, **Home Folder** or
 **Working Directory** there.
 
+The Flatpak and Mac App Store builds hide that setting. There, a window called
+**Select Default Path** asks you to pick a folder each time you open a new
+File Panel.
+
 ![][img-2]
 
 ## Getting Around the File Panel
@@ -72,8 +76,26 @@ text you type.
 Along the bottom you can see how many items are in the folder, how many you
 have selected, and how much space is left on the disk.
 
-To delete something, right-click it and choose **Move to Trash**. GpgFrontend
-asks first.
+To delete something, right-click it and choose **Move to Trash**, or press
+**Del**. GpgFrontend asks first.
+
+## Right-Click a File or Folder
+
+Right-click an item in the File Panel to see what you can do with it:
+
+- **Open**: open the file in a GpgFrontend tab. **Enter** does the same.
+- **Open with Default Application**: open the item in the app your system uses
+  for it.
+- **New**: make an **Empty File** or a **Folder**. See
+  [Make or Rename Files and Folders](#make-or-rename-files-and-folders).
+- **Rename**: give the item a new name. **F2** does the same.
+- **Move to Trash**: move the item to your system's Trash, where you can still
+  get it back.
+- **Copy Path**: copy the full path of the item to the clipboard.
+- **Refresh**: read the folder from disk again.
+- **Calculate Hash**: work out checksums of the file and show them in the
+  **Status Panel**. Use them to check that a download is complete and
+  unchanged.
 
 ## Make or Rename Files and Folders
 
@@ -164,10 +186,9 @@ You need the **recipient's public key**.
 
 :::caution
 
-If you tick **no key** and click **Encrypt**, GpgFrontend asks for a password
-and encrypts with that instead
-([symmetric encryption](/guides/symmetric-encrypt-decrypt/)). If you meant to
-encrypt for a person, click **Cancel** and tick their key first.
+If you tick **no key**, **Encrypt** is greyed out. To encrypt the file with a
+password instead, use **Operations** > **Sym. Encrypt**
+([symmetric encryption](/guides/symmetric-encrypt-decrypt/)).
 
 :::
 
@@ -180,13 +201,13 @@ You need **your private key**.
 2. **Click Decrypt.** You do not need to tick a key. GpgFrontend finds the
    right one.
 3. **Enter your passphrase** when asked.
-4. **Find the new file.** It appears in the same folder, with `.gpg` (or
-   `.asc`) taken off the end: `report.pdf`. If the name has no such ending,
+4. **Find the new file.** It appears in the same folder, with `.gpg`, `.pgp`
+   or `.asc` taken off the end: `report.pdf`. If the name has no such ending,
    GpgFrontend adds `.out` instead.
 
 If the file was also signed, use **Decrypt & Verify** from the **Operations**
-menu (or the **Decrypt** button's list) to check the signature at the same
-time.
+menu to check the signature at the same time. If you added it to the toolbar,
+it is also in the **Decrypt** button's list.
 
 ![][img-4]
 
@@ -197,8 +218,8 @@ is. You send both files together. You need **your private key**.
 
 1. **Select the file** in the File Panel.
 2. **Pick your key.** In the **Key ToolBox**, tick the box in front of **your
-   own** key. If you tick no key, GpgFrontend shows **No Key Checked** and
-   stops.
+   own** key. If you tick no key, or a key that can't sign, **Sign** is greyed
+   out.
 3. **Click Sign.**
 4. **Choose a key, if asked.** If your key has more than one signing subkey
    that still works (not revoked or expired), a window called **Select Signing
@@ -317,8 +338,8 @@ intact.
 
 When you encrypt a folder, GpgFrontend:
 
-1. Packs it into a single `.tar` archive (using the tar tool), combining all files
-   and subfolders.
+1. Packs it into a single `.tar` archive, combining all files and subfolders.
+   GpgFrontend does this itself; you don't need a separate tar program.
 2. Encrypts that archive, giving you a `.tar.gpg` (binary) or `.tar.asc` (ASCII)
    file, depending on your output mode.
 

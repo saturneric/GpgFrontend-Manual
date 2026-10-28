@@ -29,7 +29,7 @@ and menus are the same.
 
 The window has five main parts:
 
-- **Operations Bar** (top): the main buttons, like Encrypt, Decrypt, Sign, and
+- **Toolbars** (top): the main buttons, like Encrypt, Decrypt, Sign, and
   Verify.
 - **Workspaces** (center): tabs where you work on files, text, or email.
 - **Key ToolBox** (right): the list of your keys.
@@ -51,6 +51,16 @@ There are three kinds of workspace, each shown as a tab:
 - **Mail Editor**: work with email messages.
 
 You can open many tabs of each kind and switch between them whenever you like.
+
+Right-click a tab's title for three more choices:
+
+- **Close**: close the tab.
+- **Copy Path**: copy the path of the tab's file or folder.
+- **Reveal in File Browser**: show the file or folder in your system's file
+  manager.
+
+**Copy Path** and **Reveal in File Browser** are greyed out for a tab that is
+not saved to a file yet.
 
 ### File Panel
 
@@ -74,7 +84,7 @@ The Text Editor lets you type new text or open existing files.
 
 #### Main Features
 
-- **Operations Bar**: at the top, with buttons to encrypt, decrypt, sign, and
+- **Toolbar buttons**: at the top, with buttons to encrypt, decrypt, sign, and
   verify text.
 - **Standard Shortcuts**: supports basic shortcuts like **Ctrl+C**, **Ctrl+V**,
   and **Ctrl+S** for copy, paste, and save.
@@ -84,8 +94,8 @@ The Text Editor lets you type new text or open existing files.
   comes with GpgFrontend. It covers Latin, Greek and Cyrillic letters. Other
   scripts, such as Arabic or Chinese, use a font from your system. To pick
   another font, open **Settings** > **Appearance**.
-- Files up to **1 MB** work best. Bigger files may slow things down and aren't
-  recommended.
+- Files larger than **4 MB** do not open in the Text Editor. To encrypt or
+  sign a bigger file, select it in the File Panel instead.
 - While a large file loads, editing is paused until it finishes.
 
 #### Text Direction
@@ -127,6 +137,10 @@ room. It opens again when a new result arrives.
 
 For everything you can do with email, see the
 [Email overview](/email/overview/).
+
+The Mail Editor comes from the **Email** module. If that module is turned off,
+**Mail Editor** is not in the **Workspace** menu. See
+[Module Controller](/advanced/module-controller/).
 
 :::caution[Note]
 
@@ -254,6 +268,26 @@ usual recipients each time it opens.
 
 :::
 
+### Right-Click a Key
+
+Right-click a key in the Key ToolBox to work with it straight away:
+
+- **Append Public Key to Editor**: add the public key block to the text in the
+  current tab.
+- **Append Create DateTime to Editor**, **Append Expire DateTime to Editor**
+  and **Append Fingerprint to Editor**: add that detail to the text.
+- **Copy Email**, **Copy Default UID** and **Copy Key ID**: copy that detail to
+  the clipboard.
+- **Set Owner Trust Level**: say how much you trust the key's owner. See
+  [Trust Management](/guides/openpgp-trust-manage/). This needs the GnuPG
+  engine.
+- **Add To Category**: put the key in one of your categories.
+- **Show Key Details**: open the key's details window.
+
+The KeyServerSync module adds **Publish Public Key to Key Server** and
+**Refresh Public Key From Key Server** to this menu. See
+[Key Server Operations](/guides/key-server-operations/).
+
 ### Reading the Key ToolBox Table
 
 Each key has some columns and short codes (in the Type and Usage columns) that
@@ -282,35 +316,42 @@ Use the **Columns** button to show or hide columns such as **Expire Date** and
 **Status**. Each key list remembers its own choice, so you can keep the Key
 ToolBox short and the Manage Keys window detailed.
 
-## Operations Bar
+## Toolbars
 
-The **Operations Bar** at the top gives you one-click access to the main
-features. Here are the buttons, from left to right:
+The toolbars at the top give you one-click access to the main features. There
+are three of them: **File**, **Operations** and **Keys**. Here are their
+buttons, from left to right:
 
 1. **Open**: open a file or folder in the File Panel.
-2. **Workspace**: manage and switch between tabs (File Panel, Text Editor, Mail
-   Editor).
-3. **Encrypt**: lock the selected files or text for the chosen recipients.
-   This button can also hold **Encrypt & Sign** and **Sym. Encrypt**.
-4. **Decrypt**: unlock the selected files or text. You don't need to pick a key;
-   GPG finds the right private key for you. This button can also hold
-   **Decrypt & Verify**.
-5. **Sign**: sign the selected files or text with your private key.
-6. **Verify**: check the signature on the selected files or text.
-7. **New Keypair**: make a new key pair. Hold it down or right-click it for
+2. **Workspace**: open a new tab (File Panel, Text Editor or Mail Editor).
+3. **Save File**: save the file in the current tab.
+4. **Encrypt**: lock the selected files or text for the chosen recipients.
+5. **Decrypt**: unlock the selected files or text. You don't need to pick a key;
+   GPG finds the right private key for you.
+6. **Sign**: sign the selected files or text with your private key.
+7. **Verify**: check the signature on the selected files or text.
+8. **New Keypair**: make a new key pair. Hold it down or right-click it for
    **Quick Generate**, which makes a key in one click.
-8. **Import**: add existing public or private keys.
-9. **Manage Keys**: open the key management window.
+9. **Import**: add existing public or private keys.
+10. **Manage Keys**: open the key management window.
 
-![The Operations Bar at the top of the main window][img-4]
+![The Operations toolbar at the top of the main window][img-4]
+
+To hide or show a toolbar, open the **View** menu and click its name. Two more
+toolbars are hidden at first: **Edit** (Copy, Paste, Select All) and **Text
+Tools** (Quote, Remove spacing).
+
+**Encrypt & Sign**, **Decrypt & Verify** and **Sym. Encrypt** are not on the
+toolbar at first. You can always find them in the **Operations** menu, or add
+them to the toolbar (see [Customization](#customization)).
 
 ### Buttons With More Than One Action
 
-Some actions are close cousins, so they share one button:
+When you add more actions to the toolbar, close cousins share one button:
 
-- The **Encrypt** button holds **Encrypt**, **Encrypt & Sign** and
+- The **Encrypt** button can hold **Encrypt**, **Encrypt & Sign** and
   **Sym. Encrypt**.
-- The **Decrypt** button holds **Decrypt** and **Decrypt & Verify**.
+- The **Decrypt** button can hold **Decrypt** and **Decrypt & Verify**.
 
 Here is how to use such a button:
 
@@ -347,8 +388,9 @@ You can hide buttons you don't use, or add ones you use often:
 **On click** only lists the actions you ticked. It does not show at all when a
 row has only one action ticked.
 
-One action is off by default and worth knowing about: **Sym. Encrypt**. It
-encrypts with a passphrase instead of a key. See
+At first only **Encrypt**, **Decrypt**, **Sign** and **Verify** are ticked.
+One of the others is worth knowing about: **Sym. Encrypt**. It encrypts with a
+passphrase instead of a key. See
 [Symmetric Crypto](/guides/symmetric-encrypt-decrypt/).
 
 <Aside type="note" title="New in v2.2.3">
@@ -366,7 +408,8 @@ Along the bottom of the window, on the right, three small labels tell you what
 you are working with. Click any of them for more details.
 
 - **Profile**: which setup this window is using. Click it to manage your
-  setups. See [Profiles](/advanced/profiles/).
+  setups. See [Profiles](/advanced/profiles/). In the Mac App Store Lite
+  edition this label only shows the name; clicking it does nothing.
 - **Engine**: the OpenPGP engine and its version, such as `GnuPG 2.4.3`. Hover
   it to see which key database you are in.
 - **Mode**: whether this is an installed copy or a portable one. See

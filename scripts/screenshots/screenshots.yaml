@@ -503,7 +503,7 @@ entries:
   # Phase 3: pages updated for v2.2.3, using scenarios that already exist.
   - id: operations-bar
     doc: src/content/docs/guides/understand-interface.mdx
-    ref: img-4  # "Operations Bar"
+    ref: img-4  # "Toolbars"
     scenario: main-window
     crop: cryptToolBar
     sources: [src/ui/main_window/]
