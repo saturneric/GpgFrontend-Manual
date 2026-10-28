@@ -134,8 +134,8 @@ The setup has three steps:
 
 Exporting a single subkey, and removing the primary key to leave only subkeys,
 works with the **GnuPG engine** only. With the rPGP engine the **Export Subkey**
-button is hidden and shows the tooltip "Exporting subkeys is not supported by the
-current OpenPGP backend." Use a GnuPG-backed key database for this.
+button is not shown on the **Keychain** tab, and **Export** is missing from a
+subkey's right-click menu. Use a GnuPG-backed key database for this.
 
 :::
 

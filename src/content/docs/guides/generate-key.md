@@ -27,6 +27,9 @@ the tabs **Easy Mode**, **Primary Key** and **Subkey**. The choices that were
 on the **Primary Key** and **Subkey** tabs are now under **Expert Mode**. See
 [Choose Everything Yourself](#choose-everything-yourself-expert-mode).
 
+With GnuPG, the key and its subkey are now made in one go, so you type the
+passphrase fewer times.
+
 :::
 
 ## Step 1: Identity
@@ -86,8 +89,9 @@ and how long the key is valid. You can manage profiles in
   then.
 - **Protect the secret key with a passphrase**: on by default. Keep it on.
   You are asked for the passphrase while the key is made. With GnuPG, GnuPG
-  asks in a window of its own. For a post-quantum or hybrid key, it may ask
-  a second time for the subkey.
+  asks in a window of its own. GnuPG usually makes the key and its subkey in
+  one go, so it asks once. For a post-quantum or hybrid key, it may ask a
+  second time for the subkey.
 
 If you turn the passphrase off, a warning reminds you that anyone who gets
 your secret key file can then sign and decrypt as you.
@@ -180,13 +184,13 @@ The algorithms you see depend on the engine, its version, and the key format.
 
 :::note[Some old choices are gone on rPGP]
 
-Since v2.2.2, the rPGP engine will not make weak keys any more, following
-RFC 9580:
+The rPGP engine will not make weak keys any more, following RFC 9580:
 
-- **DSA** cannot be made at all.
-- **RSA below 3072 bits** is no longer offered.
-- **secp256k1** is no longer offered. The current OpenPGP standard does not
-  include this curve.
+- **DSA** cannot be made at all (since v2.2.2).
+- **RSA below 3072 bits** is no longer offered (RSA-1024 since v2.2.2,
+  RSA-2048 since v2.2.3).
+- **secp256k1** is no longer offered (since v2.2.3). The current OpenPGP
+  standard does not include this curve.
 
 This only affects making new keys. Old RSA-1024, RSA-2048, DSA, and secp256k1
 keys still import and still work. The GnuPG engine still offers all of them,

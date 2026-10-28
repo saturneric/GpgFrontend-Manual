@@ -24,8 +24,8 @@ Three parts:
 - **Down the left**: your categories. Click one to show only those keys. See
   [Key Categories](/guides/key-categories/).
 - **In the middle**: your keys, one per row.
-- **Above the list**: buttons for refreshing, ticking keys, choosing columns,
-  and switching key database.
+- **Above the list**: buttons for refreshing, ticking keys, making a key
+  group (**New Key Group**), choosing columns, and switching key database.
 
 ## Find a Key
 
@@ -36,6 +36,7 @@ You can paste a fingerprint with spaces in it and it still matches.
 
 - **Ctrl+F** jumps to the search box.
 - **Escape** clears it.
+- **F5** reads the key list again (**View** > **Refresh Key List**).
 - Click a column heading to sort by it. Click again to reverse it.
 
 ## The Line Along the Bottom
@@ -73,8 +74,12 @@ These are in the **Copy** submenu.
 
 ### Save it to a file
 
+These are in the **Export** submenu.
+
 - **Export Public Key...**: saves the half you can safely give away.
 - **Export Private Key...**: saves the half you must keep.
+- **Export As OpenSSH**: saves one key in the format SSH uses. It is hidden
+  when your engine cannot do it, such as rPGP.
 
 :::caution[Be careful with the private one]
 
@@ -88,13 +93,37 @@ send it anywhere.
 
 ### Change it
 
-- **Set Expiry...**: change when the key runs out, or stop it expiring.
+These are in the **Key Operations** submenu.
+
 - **Certify Key...**: certify (sign) every user ID of a key, to say you have
   checked it is really theirs. See
+  [Trust Chain Management](/guides/openpgp-trust-manage/).
+- **Set Expiry...**: change when the key runs out, or stop it expiring.
+- **New Subkey**: add a subkey to your key. See
+  [Subkeys](/guides/generate-use-subkey/).
+- **Set Owner Trust Level**: say how much you trust the key's owner to check
+  other people's keys. See
   [Trust Chain Management](/guides/openpgp-trust-manage/).
 - **Generate Revocation Certificate...**: make the file that lets you cancel
   this key later. Do this now, not when you need it. See
   [Key Revocation](/advanced/key-revocation/).
+
+You also find these in the **Operations** menu at the top of the window.
+
+### Sort it or delete it
+
+- **Category**: put the key in one of your categories, take it out with
+  **Remove From This Category**, or make a new one with **New Category...**.
+  See [Key Categories](/guides/key-categories/).
+- **Delete Selected Keys**: delete the keys you selected. **Del** does the
+  same. GpgFrontend asks first. To delete the ticked keys instead, use
+  **Key** > **Delete** > **Delete Checked Keys**.
+
+:::caution
+
+Deleting a private key cannot be undone. Make a backup first.
+
+:::
 
 ### Key servers
 
@@ -119,9 +148,9 @@ in full.
 
 <Aside type="note" title="Changed in v2.2.3">
 
-The key server items now come from a module that comes with GpgFrontend. They
-now work on many keys at once. If the module is turned off, these items are
-gone. See [Module Controller](/advanced/module-controller/).
+The key server items now come from a module that comes with GpgFrontend. If the
+module is turned off, these items are gone. See [Module
+Controller](/advanced/module-controller/).
 
 </Aside>
 
@@ -131,7 +160,7 @@ gone. See [Module Controller](/advanced/module-controller/).
 
 1. Tick the box beside each key you want.
 
-2. Open the **Bulk** menu.
+2. Open the **Operations** menu and choose **Bulk**.
 
    ![The Bulk menu under Operations][img-3]
 

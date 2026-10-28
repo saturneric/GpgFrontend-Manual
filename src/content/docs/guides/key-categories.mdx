@@ -42,15 +42,24 @@ Clicking a category shows only the keys in it.
 
 ## The Ready-Made Ones
 
-Some categories are built in. They fill themselves automatically:
+Some categories are built in. They fill themselves automatically.
+
+The **KeyPair Management** window has these:
 
 - **All**: every key.
 - **Has Private Key**: keys you own.
 - **Only Public Key**: other people's keys.
 - **Key Group**: your key groups.
-- **Expiring Soon**: keys that run out in the next 30 days.
+- **Expiring Soon**: keys that run out soon. At first that means the next 30
+  days; you can change it (see the tip below).
 - **Expired**, **Revoked**, **Disabled**, **No Primary Key**: keys with a
   problem.
+
+The **Key ToolBox** has a shorter list, made for picking keys:
+
+- **Default**: every key you can use. Expired, revoked and disabled keys are
+  left out.
+- **Key Group**, **Only Public Key** and **Has Private Key**: as above.
 
 You cannot rename or delete these.
 
@@ -86,10 +95,11 @@ within** to any number of days you like.
 
 </Steps>
 
-You can also make a category and fill it in one go. Select some keys,
-right-click them, open the **Category** submenu (called **Add To Category** in
-the main window) and choose **New Category...**. The window then says how
-many of the selected keys will be added to the new category.
+You can also make a category and fill it in one go. In the **KeyPair
+Management** window, select some keys, right-click them, open the **Category**
+submenu and choose **New Category...**. The window then says how many of the
+selected keys will be added to the new category. In the main window, the
+**Add To Category** submenu does the same for one key at a time.
 
 <Aside type="note" title="Changed in v2.2.4">
 
@@ -113,24 +123,26 @@ separate small windows.
 
 </Steps>
 
-To take a key out again, go to that category, right-click the key, and choose
-**Remove From This Category**.
+To take a key out again, go to that category, right-click the key, open the
+**Category** submenu and choose **Remove From This Category**.
 
 A key can be in as many categories as you like.
 
 ## Rename, Recolour, Reorder
 
-Right-click one of your own categories to find:
+Right-click a category in the **KeyPair Management** window to find:
 
+- **Set Colour...** and **Reset Colour**: change only the colour. These work on
+  the built-in categories too.
 - **Edit Category...**: change its name and colour in the same window as
   above. Click **Save** when you are done. (Before v2.2.4 this was **Rename
-  Category**.)
-- **Set Colour...** and **Reset Colour**: change only the colour.
+  Category**.) Only for your own categories.
 
 To change the order, drag a category up or down the list. The order is
 remembered.
 
-**Delete Category...** removes the label only. Your keys are never touched.
+**Delete Category...**, also only for your own categories, removes the label
+only. Your keys are never touched.
 
 :::note[Where the Favourite tab went]
 

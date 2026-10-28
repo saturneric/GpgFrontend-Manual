@@ -22,11 +22,10 @@ need to type any commands.
 
 :::note[Changed in v2.2.3]
 
-Publishing and refreshing now work on many keys at once, and you can check
-whether a key is published. The old **Sync Public Key** button in the Key
-ToolBox was removed. So was the **Network Ability** option in **Settings**,
-**Network** that checked publish status by itself. Use
-**Refresh Public Key From Key Server** and **Check Publication Status** instead.
+You can now check whether a key is published. The old **Sync Public Key** button
+in the Key ToolBox was removed. So was the **Network Ability** option in
+**Settings**, **Network** that checked publish status by itself. Use **Refresh
+Public Key From Key Server** and **Check Publication Status** instead.
 
 :::
 
@@ -157,9 +156,10 @@ Good to know:
   Nothing fetched is imported. Start it again.
 - GpgFrontend waits up to 15 seconds for each answer from the server.
 
-:::note[New in v2.2.3]
+:::note[Changed in v2.2.3]
 
-Publishing and refreshing many keys at once is new in v2.2.3.
+Publishing and refreshing many keys at once first came in v2.2.2. Since v2.2.3,
+the KeyServerSync module sends the keys as one batch.
 
 :::
 
@@ -206,9 +206,9 @@ window.
 - **Test Selected**: test the selected server again and update its **Status**.
 - **Delete Selected**: remove the selected server from the list.
 
-:::note[Changed in v2.2.3]
+:::note[Changed in v2.2.2]
 
-Before v2.2.3, publishing always used `keys.openpgp.org`. Now it uses the
+Before v2.2.2, publishing always used `keys.openpgp.org`. Now it uses the
 default server you choose here.
 
 :::

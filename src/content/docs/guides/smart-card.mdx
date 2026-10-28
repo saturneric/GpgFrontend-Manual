@@ -26,8 +26,13 @@ Store edition).
 :::note[Needs the GnuPG engine]
 
 Smart cards only work with the GnuPG engine. The rPGP engine cannot talk to a
-card. If the smart card window is empty or missing, switch your key database
-over to GnuPG first.
+card.
+
+- If **Open Smart Card Controller** is missing from the **Advanced** menu,
+  GpgFrontend did not find GnuPG on this computer when it started. Install
+  GnuPG and start GpgFrontend again.
+- If the window opens but cannot use your keys, switch your key database over
+  to GnuPG.
 
 :::
 
@@ -86,8 +91,8 @@ The window has three parts:
 
 The buttons are:
 
-- **Cardholder**: change the name, language, login data, or public key URL
-  stored on the card.
+- **Cardholder**: change the name, language, sex, login data, or public key
+  URL stored on the card.
 - **Access Codes**: choose **Change PIN**, **Change Admin PIN**, or **Change
   Reset Code**.
 - **Generate Card Keys**: make brand new keys on the card itself.
@@ -95,8 +100,12 @@ The buttons are:
 - **Fetch**: read the card again and bring your keyring up to date with it.
 - **Refresh**: reload what is shown on screen.
 
-There is also a **More** button with **Restart All Gpg-Agents**, which
-is worth trying if your card is plugged in but not detected.
+There is also a **More** button with two items:
+
+- **Restart All Gpg-Agents**: worth trying if your card is plugged in but not
+  detected.
+- **Open GnuPG Smart Card HOWTO**: opens the GnuPG guide to smart cards in your
+  web browser.
 
 ## Make New Keys on the Card
 

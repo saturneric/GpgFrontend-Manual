@@ -14,6 +14,13 @@ window and choose **Show Key Details**. Double-clicking a key also opens this wi
 
 ![][img-1]
 
+The window has these tabs: **KeyPair**, **UIDs**, **Keychain** and
+**Operations**. A key with a photo in it also gets a **Photo IDs** tab, which
+shows the photos.
+
+A revoked key shows only the **KeyPair** tab. You can read its details, but
+there is nothing left to do with it.
+
 ## General Info
 
 This part is on the **KeyPair** tab. It helps you manage the key. Here is what
@@ -80,11 +87,11 @@ How much you trust this key's owner to correctly verify and sign other keys, par
 of the web-of-trust model. This field is shown only when the active engine reports
 owner trust (GnuPG); engines that don't support it hide the field.
 
-#### Create Date
+#### Create Date (Local Time)
 
 When the primary key was made, shown in your local time.
 
-#### Expires On
+#### Expires on (Local Time)
 
 When the primary key expires. After that it can't be used for any operation, and
 its subkeys stop working too. You can change the expiration time whenever you like,
@@ -111,7 +118,7 @@ use a GnuPG key database for them. See [Multi-Key Database](/advanced/key-databa
 
 :::
 
-#### Last Update
+#### Last Update (Local Time)
 
 When the key pair's content last changed. Adding a UID or subkey counts as a
 change.
@@ -154,11 +161,11 @@ to replace it. This rule is new in v2.2.3.
 ### Certifications on a UID
 
 The lower part of the window, **Certifications of Selected User ID**, shows the
-signatures (certifications) on the selected UID (the one you clicked, not the
-one ticked). Signatures are how trust is built: when someone
-receives your public key, they can sign your UID with their key to vouch for it,
-then share the signed key on a key server. The more people who do this, the more
-trustworthy the key looks.
+signatures (certifications) on the selected UID (the one you clicked in the list
+above). Signatures are how trust is built: when someone receives your public
+key, they can sign your UID with their key to vouch for it, then share the
+signed key on a key server. The more people who do this, the more trustworthy
+the key looks.
 
 ![][img-7]
 
@@ -167,6 +174,14 @@ UID and choose **Certify User ID...**. To take back a certification you made,
 right-click it in the lower part and choose **Revoke Certification...**. See
 [Trust Chain Management](/guides/openpgp-trust-manage/). A primary UID with
 many valid certifications is generally seen as more trustworthy.
+
+:::note[Needs the GnuPG engine]
+
+Certifications are a GnuPG feature. With the rPGP engine, the
+**Certifications of Selected User ID** part, **Certify User ID...** and
+**Revoke Certification...** are hidden.
+
+:::
 
 Some signatures may not show the signer's UID, as in the image above. To identify
 them, import the matching key from another source, such as a key server. The Key
@@ -223,11 +238,18 @@ want the strongest security.
 
 Right-click a subkey in the list for actions that apply to just that one:
 
+- **Export**: save this subkey to a file. See
+  [Subkeys](/guides/generate-use-subkey/).
+- **Edit Expire Date**: give this subkey its own expiry date.
 - **Change Passphrase**: set a new passphrase for this subkey alone, leaving
   the others as they are. New in v2.2.2.
 - **Move to Card**: move this subkey onto a smart card. See
-  [OpenPGP Smart Cards](/guides/smart-card/).
-- **Edit Expire Date**: give this subkey its own expiry date.
+  [OpenPGP Smart Cards](/guides/smart-card/). This needs the GnuPG engine and
+  a GnuPG smart card service (`scdaemon`) that is new enough.
+- **Revoke**: mark this subkey as no longer to be used.
+- **Delete**: remove this subkey from your key.
+
+Items your engine cannot do are left out of the menu.
 
 :::note[Setting an expiry now works on rPGP too]
 
@@ -252,25 +274,6 @@ These are the actions available for a public key.
 Saves the public key to a file, ready to share with others, upload to a key
 server, or back up.
 
-#### Key Server Operations
-
-A dropdown for working with key servers (a place where public keys are stored and
-shared). It has three choices:
-
-- **Publish Public Key to Key Server**: upload the public key.
-- **Refresh Public Key From Key Server**: get the latest copy of the public key.
-- **Check Publication Status**: ask the key server whether it has this key.
-
-See [Key Server Operations](/guides/key-server-operations/) for details.
-
-:::note[Changed in v2.2.3]
-
-The Key Details window no longer checks the key server by itself, and no longer
-shows a notice that the key is published. Use **Check Publication Status**
-when you want to know.
-
-:::
-
 #### Set Owner Trust Level
 
 Sets how much you trust this key's owner to correctly verify and sign other keys,
@@ -282,6 +285,28 @@ that owner makes.
 Owner trust is a GnuPG concept, available only with the GnuPG engine. With the
 rPGP engine, this button (and the Owner Trust Level field in General Info) is
 hidden.
+
+:::
+
+#### Key Server Operations
+
+A dropdown for working with key servers (a place where public keys are stored and
+shared). It has three choices:
+
+- **Publish Public Key to Key Server**: upload the public key.
+- **Refresh Public Key From Key Server**: get the latest copy of the public key.
+- **Check Publication Status**: ask the key server whether it has this key.
+
+See [Key Server Operations](/guides/key-server-operations/) for details.
+
+This button comes from the KeyServerSync module. If that module is turned off,
+the button is not there. See [Module Controller](/advanced/module-controller/).
+
+:::note[Changed in v2.2.3]
+
+The Key Details window no longer checks the key server by itself, and no longer
+shows a notice that the key is published. Use **Check Publication Status**
+when you want to know.
 
 :::
 
@@ -315,11 +340,6 @@ key's lifecycle and keep it valid for as long as you need.
 Changes the password that protects the private key. Worth doing if you think the
 current one may be exposed, or as part of regular good habits.
 
-#### Key Server Operations
-
-The same key server dropdown as for a public key: publish, refresh, or check
-the public key on the key server.
-
 #### Revoke Certificate Operation
 
 A dropdown with two choices: **Generate Revoke Certificate** creates a
@@ -327,6 +347,11 @@ revocation certificate for the key, and **Import Revoke Certificate** imports an
 existing one. See [Key Revocation](/advanced/key-revocation/). Revoke a key if it is compromised or no longer needed: this marks it invalid
 so it can't be misused. The revocation is usually uploaded to a key server so
 others learn the key is revoked.
+
+#### Key Server Operations
+
+The same key server dropdown as for a public key: publish, refresh, or check
+the public key on the key server.
 
 ## How a Key Shows Up in Results
 

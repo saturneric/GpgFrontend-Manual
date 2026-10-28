@@ -36,7 +36,7 @@ GpgFrontend no longer needs to restart.
 
 <Steps>
 
-1. Click **Settings** in the menu bar. On macOS, open the GpgFrontend menu and
+1. Click **Edit** > **Settings**. On macOS, open the GpgFrontend menu and
    choose **Preferences**.
 
 2. In the list on the left, under **Keys & Engines**, click **Key Databases**.
@@ -46,7 +46,7 @@ GpgFrontend no longer needs to restart.
 The page has two parts:
 
 - At the top, a box called **Built-in Key Database**.
-- Below it, three tabs:
+- Below it, three tabs: **In Profile**, **Recycle Bin** and **Local Only**.
   - **In Profile** and **Local Only** list the key databases you added
     yourself.
   - **Recycle Bin** lists key databases you removed from **In Profile**. Their
@@ -538,8 +538,8 @@ backups, see [How Keys Are Stored](/advanced/key-storage/).
 - Two key databases cannot use **the same folder**. Trying shows **Duplicate
   Key Database Paths**.
 - When the folder you pick cannot be used, you see **Illegal GnuPG Key Database
-  Path**, **Invalid Key Database Path**, **Invalid Key Database Paths**, or
-  **Failed to Create Key Database Directory**. Pick another folder.
+  Path**, **Invalid Key Database Paths**, or **Failed to Create Key Database
+  Directory**. Pick another folder.
 - If GpgFrontend cannot read your saved list of key databases, you see
   **Unreadable Key Database Settings** when you click **OK**. Click **Save** to
   replace it with the list on screen, or **Cancel** to keep it. The old list

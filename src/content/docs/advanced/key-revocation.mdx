@@ -50,8 +50,8 @@ the revocation is recognized by others.
 ## Generating a Key Revocation Certificate
 
 Since v2.2.2 there is a shortcut: right-click the key in the **KeyPair
-Management** window and choose **Generate Revocation Certificate...**. That takes you
-straight to step 3 below.
+Management** window, open **Key Operations** and choose **Generate Revocation
+Certificate...**. That takes you straight to step 3 below.
 
 The longer route through the key's own window still works, and is described
 here in full.
@@ -98,10 +98,12 @@ here in full.
 
    ![][img-3]
 
-5. Publish to a Public Key Server: on the same **Operations** tab, open
-   **Key Server Operations** and choose **Publish Public Key to Key Server**. See
-   [Key Server Operations](/guides/key-server-operations/). You can also do it
-   from the command line:
+5. Publish to a Public Key Server: a revoked key's details window has only the
+   **KeyPair** tab, so use the key list instead. Open the **KeyPair
+   Management** window, click the **Revoked** category, right-click the key
+   and choose **Publish Public Key to Key Server**. See
+   [Key Server Operations](/guides/key-server-operations/). This item comes
+   from the KeyServerSync module. You can also do it from the command line:
     ```shell
     gpg --keyserver hkps://keyserver.ubuntu.com --send-keys <YOUR_KEY_ID>
     ```

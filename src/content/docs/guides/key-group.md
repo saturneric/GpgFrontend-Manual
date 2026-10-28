@@ -40,8 +40,8 @@ group, you pick the group once and you are done.
 
 ## Create a Key Group
 
-1. **Pick the keys.** In the Key ToolBox panel, check the box in the "Select"
-   column next to each public key you want in the group.
+1. **Pick the keys.** In the Key ToolBox panel, tick the box at the start of
+   the row of each public key you want in the group.
 2. **Click the New Key Group button.** It is in the toolbar above the key list.
 3. **Fill in the details.** A window called **New Key Group** opens. Type a
    **Name**. The **Email** and **Comment** are optional. Click **Create**.
@@ -126,9 +126,10 @@ what to expect.
 
 ### Setting trust for the whole group
 
-Right-click a group and set the Owner Trust level. That trust level is then
-applied to every key in the group, including keys in any groups nested inside it.
-This is a fast way to set trust for many people at once.
+Right-click a group in the Key ToolBox and choose **Set Owner Trust Level**.
+That trust level is then applied to every key in the group, including keys in
+any groups nested inside it. This is a fast way to set trust for many people at
+once.
 
 ### Only encryption keys can join
 

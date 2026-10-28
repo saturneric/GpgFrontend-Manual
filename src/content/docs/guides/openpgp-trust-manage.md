@@ -152,6 +152,12 @@ To take back a certification you made, open the key's details and go to the
 **Certifications of Selected User ID** and choose **Revoke Certification...**.
 You need the private key that made the certification.
 
+:::note[New in v2.2.4]
+
+**Revoke Certification...** is new in v2.2.4.
+
+:::
+
 When GpgFrontend was first designed, sending these signatures to key servers was
 not fully planned for.
 
