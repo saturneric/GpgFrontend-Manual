@@ -39,7 +39,7 @@ The clone is only updated when it is on `--ref` and has no uncommitted changes
 to tracked files; otherwise the run stops and says why. The run also stops
 while another GpgFrontend is running, because its writes to the per-user app
 data would fail the footprint check. It stops when the clone lacks the demo
-secret keys or the mock key server's keys (`resource/screenshot/keyserver`),
+secret keys or the mock key server's keys (`resource/shot/keyserver`),
 which the decrypt, sign and key server scenarios need. On Windows it stops
 when the largest selected fixed size, plus the title bar, does not fit the
 primary display's work area at 2x (1280x960 needs about 2592x2016 px, so a
@@ -104,7 +104,7 @@ defaults:
   frame: { radius: 8, shadow: 12, padding: 24 } # logical px, scaled by DPR 2
   diff: { tolerance: 16, threshold: 0.001 }
   preview_platforms: [linux-xvfb]
-global_sources: [src/screenshot/, resource/screenshot/, scripts/screenshot/]
+global_sources: [src/shot/, resource/shot/, scripts/shot/]
 entries:
   - id: main-window
     doc: src/content/docs/guides/understand-interface.mdx
@@ -313,7 +313,7 @@ risk small.
 The tests use temporary git repositories, temporary doc trees, a fake binary
 (`tests/fakegf.py`) and a mock EasyImages server on 127.0.0.1. They never
 contact the network. The environment hash cross-check reads
-`resource/screenshot/env-hash-fixture.json` from the GpgFrontend checkout next
+`resource/shot/env-hash-fixture.json` from the GpgFrontend checkout next
 to this repository; set `GF_SHOTS_GPGFRONTEND` to point elsewhere.
 
 Variables used only by the tests: `GF_SHOTS_NO_XVFB=1` (run without

@@ -62,10 +62,10 @@ _FONTS_KEY = r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
 # What render.py hands the binary from the clone, relative to its root. A
 # directory must hold at least one file.
 DEMO_DATA = (
-    ("resource/screenshot/demo-gnupghome/pubring.kbx", "the demo keyring"),
-    ("resource/screenshot/demo-gnupghome/private-keys-v1.d", "the demo secret keys"),
-    ("resource/screenshot/fixtures", "the demo fixtures"),
-    ("resource/screenshot/keyserver/listing.colons", "the mock key server's keys"),
+    ("resource/shot/demo-gnupghome/pubring.kbx", "the demo keyring"),
+    ("resource/shot/demo-gnupghome/private-keys-v1.d", "the demo secret keys"),
+    ("resource/shot/fixtures", "the demo fixtures"),
+    ("resource/shot/keyserver/listing.colons", "the mock key server's keys"),
 )
 
 CAPTURE_DPR = 2
@@ -246,7 +246,7 @@ def sync_source(path: Path, ref: str, url: str, update: bool) -> str:
         if not update:
             raise ShootError(f"{path} is not a GpgFrontend clone, and --no-update forbids cloning")
         say(f"cloning {url} ({ref}) into {path}")
-        # Demo data must stay byte-identical; resource/screenshot/.gitattributes
+        # Demo data must stay byte-identical; resource/shot/.gitattributes
         # also says so, this keeps the rest of the tree as committed too.
         _git(None, "clone", "--config", "core.autocrlf=false", "--branch", ref, url, str(path))
         return _git(path, "rev-parse", "HEAD")

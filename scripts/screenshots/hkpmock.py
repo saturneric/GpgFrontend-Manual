@@ -3,7 +3,7 @@
 The application is told to reach ``http://keys.example.org`` through an HTTP
 proxy; this is that proxy. It answers the HKP requests GpgFrontend makes
 (``/pks/lookup`` with ``op=index`` and ``op=get``, ``/pks/add``) from the
-demo keys in ``resource/screenshot/keyserver``, and refuses every other host,
+demo keys in ``resource/shot/keyserver``, and refuses every other host,
 so nothing leaves the machine. It listens on the loopback interface only.
 """
 

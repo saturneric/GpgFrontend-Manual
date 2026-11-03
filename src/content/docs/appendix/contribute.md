@@ -324,7 +324,7 @@ mode, take each picture, upload it and put the new link into the page. Its
   `-DGPGFRONTEND_BUILD_TESTS=ON`. It cannot be combined with
   `GPGFRONTEND_BUILD_MODE=release`.
 - **Where the scenes live:** each window state is a scenario in
-  `src/screenshot/`, and the demo data is in `resource/screenshot/`.
+  `src/shot/`, and the demo data is in `resource/shot/`.
 - **Changes are noticed:** each screenshot lists the source files it depends
   on. When you change one of them, the next run marks that screenshot as out
   of date and takes it again.

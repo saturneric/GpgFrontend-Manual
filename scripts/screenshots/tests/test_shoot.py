@@ -143,7 +143,7 @@ class DemoDataTest(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = short_tempdir("gfsd")
         self.addCleanup(shutil.rmtree, self.tmp, True)
-        base = self.tmp / "resource" / "screenshot"
+        base = self.tmp / "resource" / "shot"
         write(base / "demo-gnupghome" / "pubring.kbx", "x")
         write(base / "demo-gnupghome" / "private-keys-v1.d" / "A.key", "x")
         write(base / "fixtures" / "decrypt-verify.asc", "x")

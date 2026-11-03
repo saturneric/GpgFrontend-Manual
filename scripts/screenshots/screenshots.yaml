@@ -17,9 +17,9 @@ defaults:
   preview_platforms: [linux-xvfb]
 
 global_sources:
-  - src/screenshot/
-  - resource/screenshot/
-  - scripts/screenshot/
+  - src/shot/
+  - resource/shot/
+  - scripts/shot/
 
 entries:
   - id: main-window

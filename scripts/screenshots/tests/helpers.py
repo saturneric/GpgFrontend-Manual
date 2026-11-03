@@ -51,7 +51,7 @@ defaults:
   size: 160x100
   fonts: ["Noto Sans"]
   frame: {radius: 4, shadow: 4, padding: 8}
-global_sources: [src/screenshot/, resource/screenshot/]
+global_sources: [src/shot/, resource/shot/]
 entries:
   - id: a-main
     doc: src/content/docs/guides/a.md
@@ -93,8 +93,8 @@ def write(path: Path, text: str, newline_exact: bool = True) -> Path:
 def make_gf_repo(root: Path) -> Path:
     root.mkdir(parents=True)
     git(root, "init", "-q", "-b", "main")
-    for rel in ("src/screenshot/Mode.cpp", "resource/screenshot/demo-gnupghome/pubring.kbx",
-                "resource/screenshot/fixtures/decrypt-verify.asc", "src/ui/main/MainWindow.cpp",
+    for rel in ("src/shot/Mode.cpp", "resource/shot/demo-gnupghome/pubring.kbx",
+                "resource/shot/fixtures/decrypt-verify.asc", "src/ui/main/MainWindow.cpp",
                 "src/ui/dialog/Dialog.cpp", "src/ui/other/Other.cpp", "README"):
         write(root / rel, f"// {rel}\n")
     git(root, "add", "-A")

@@ -51,7 +51,7 @@ class BaselineStatusTest(CheckBaseline):
 
     def test_outdated_from_global_sources(self) -> None:
         self.write_record("b-main", self.head())
-        commit_change(self.gf, "resource/screenshot/fixtures/decrypt-verify.asc")
+        commit_change(self.gf, "resource/shot/fixtures/decrypt-verify.asc")
         self.assertIn("outdated", self.check_rows()["b-main"])
 
     def test_unrelated_change_is_not_outdated(self) -> None:
@@ -85,7 +85,7 @@ class BaselineStatusTest(CheckBaseline):
         rows = self.check_rows()
         self.assertIn("dirty-sources", rows["a-main"])
         self.assertNotIn("dirty-sources", rows["b-main"])
-        write(self.gf / "src/screenshot/New.cpp", "untracked global source\n")
+        write(self.gf / "src/shot/New.cpp", "untracked global source\n")
         self.assertIn("dirty-sources", self.check_rows()["b-main"])
 
 

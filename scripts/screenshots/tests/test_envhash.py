@@ -13,7 +13,7 @@ import envhash
 # The fixture is owned by the C++ side; its own test checks the same values.
 GPGFRONTEND = Path(os.environ.get("GF_SHOTS_GPGFRONTEND",
                                   str(helpers.PIPELINE_DIR.parents[2] / "GpgFrontend")))
-CROSS_CHECK_FIXTURE = GPGFRONTEND / "resource" / "screenshot" / "env-hash-fixture.json"
+CROSS_CHECK_FIXTURE = GPGFRONTEND / "resource" / "shot" / "env-hash-fixture.json"
 
 
 def sample_env() -> dict:

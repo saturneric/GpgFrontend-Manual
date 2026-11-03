@@ -206,10 +206,10 @@ class Renderer:
     # Paths -----------------------------------------------------------------
 
     def demo_gnupghome(self) -> Path:
-        return Path(self.cfg.gpgfrontend) / "resource" / "screenshot" / "demo-gnupghome"
+        return Path(self.cfg.gpgfrontend) / "resource" / "shot" / "demo-gnupghome"
 
     def fixtures(self) -> Path:
-        return Path(self.cfg.gpgfrontend) / "resource" / "screenshot" / "fixtures"
+        return Path(self.cfg.gpgfrontend) / "resource" / "shot" / "fixtures"
 
     def _prepare_root(self) -> None:
         root = self.work_root
