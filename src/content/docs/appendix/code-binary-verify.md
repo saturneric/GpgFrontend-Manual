@@ -161,6 +161,6 @@ else's build.
 [img-1]: https://image.cdn.bktus.com/i/2025/06/25/2eb0e5a1ff970b6d97ed38f18b45476c9aad6ee7.webp
 [img-2]: https://image.cdn.bktus.com/i/2025/06/24/cbc3a2ec86515bf5882d1249179e5e06053ada5f.webp
 [img-3]: https://image.cdn.bktus.com/i/2025/06/24/690c6b534ab54130dfa100f85a8cc299a0223ff5.webp
-[img-4]: https://image.cdn.bktus.com/i/2026/10/25/487907fee2268560ac9795ea97cd820242cdf768-0.webp
+[img-4]: https://image.cdn.bktus.com/i/2026/10/29/633ad6c3f31555b317e20d990090bb27d3aef7fb.webp
 [bktus-openpgp]: https://bktus.com/openpgp/
 [cosign-install]: https://docs.sigstore.dev/cosign/system_config/installation/

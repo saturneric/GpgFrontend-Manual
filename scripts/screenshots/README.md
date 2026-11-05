@@ -18,14 +18,19 @@ runs `run.py`:
 
 ```powershell
 cd scripts\screenshots
-py -3 shoot.py --binary <path>\GpgFrontend.exe --install-fonts   # dry run
-py -3 shoot.py --binary <path>\GpgFrontend.exe --upload          # render, upload, rewrite docs
+py -3 shoot.py --install-fonts   # dry run
+py -3 shoot.py --upload          # render, upload, rewrite docs
 ```
+
+By default the clone is `GpgFrontend` next to this repository, and the
+screenshot-mode binary is `bin\GpgFrontend.exe` inside the extracted portable
+bundle `GpgFrontend Portable` next to it. `--binary` also accepts that bundle
+folder.
 
 | Option                                                 | Meaning                                                                                                                                 |
 | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `--binary`                                             | screenshot-mode binary (else `GF_SCREENSHOT_BINARY`)                                                                                    |
-| `--gpgfrontend`                                        | GpgFrontend clone (else `GF_SHOTS_GPGFRONTEND`, else `GpgFrontend-Src` next to this repository); cloned when missing                    |
+| `--binary`                                             | screenshot-mode binary or portable bundle folder (else `GF_SCREENSHOT_BINARY`, else `GpgFrontend Portable` next to this repository)     |
+| `--gpgfrontend`                                        | GpgFrontend clone (else `GF_SHOTS_GPGFRONTEND`, else `GpgFrontend` next to this repository); cloned when missing                        |
 | `--ref`                                                | branch to clone and fast-forward, default `main`                                                                                        |
 | `--no-update`                                          | use the clone as it is                                                                                                                  |
 | `--install-fonts`                                      | Windows: download the pinned Noto Sans 2.015 and Noto Sans CJK SC 2.004 releases, check their sha256, install them for the current user |
@@ -70,7 +75,8 @@ You also need `git` on PATH. On Linux you need `xvfb-run` and `fc-match`.
 `inputs_hash`; otherwise `none` is recorded.
 
 You need a GpgFrontend binary built with `GPGFRONTEND_BUILD_SCREENSHOT_MODE=ON`.
-Pass it with `--binary`, or set `GF_SCREENSHOT_BINARY`.
+Pass it with `--binary`, set `GF_SCREENSHOT_BINARY`, or extract the portable
+bundle to `GpgFrontend Portable` next to this repository.
 
 ## Files
 
@@ -286,15 +292,15 @@ risk small.
 ## Windows 11 checklist (reference renders)
 
 1. Dispatch `build.yml` with `screenshot: true`, then download the
-   `screenshot-windows-2022-portable` artifact. Extract the portable zip in
-   the same folder as its `BUILD-INFO.json`, so the freshness check finds the
-   commit. CI only builds this binary and checks nothing: the steps below,
+   `screenshot-windows-2022-portable` artifact. Extract the portable zip to
+   `GpgFrontend Portable` next to this repository, together with its
+   `BUILD-INFO.json`, so the freshness check finds the commit. CI only builds this binary and checks nothing: the steps below,
    on this machine, are the first time it runs.
 2. Close any running GpgFrontend. Run a dry run; `--install-fonts` installs
    Noto Sans and Noto Sans CJK SC if they are missing:
 
    ```powershell
-   py -3 shoot.py --binary <path>\GpgFrontend.exe --install-fonts --force --repeat 2
+   py -3 shoot.py --install-fonts --force --repeat 2
    ```
 
    Any gate failure is reported by name.

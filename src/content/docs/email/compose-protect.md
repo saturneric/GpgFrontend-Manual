@@ -270,4 +270,4 @@ You can skip this section.
 
 [rfc4880]: https://www.rfc-editor.org/rfc/rfc4880
 [rfc3156]: https://www.rfc-editor.org/rfc/rfc3156
-[img-1]: TODO
+[img-1]: https://image.cdn.bktus.com/i/2026/10/29/140538d6102b4420aa0188398965adc4271afdfc.webp

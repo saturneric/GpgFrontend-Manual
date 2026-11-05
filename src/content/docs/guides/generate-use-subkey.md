@@ -315,13 +315,13 @@ Keep these points in mind before you share a key made with the rPGP engine:
   **Kyber-768 + Curve25519** and **Kyber-1024 + X448**. Other pairings may need
   GnuPG 2.5+ or may not be available.
 
-[img-1]: https://image.cdn.bktus.com/i/2026/10/25/3d80f37afdcba716f159e71845e4061579fd1f42-0.webp
-[img-2]: https://image.cdn.bktus.com/i/2026/10/25/78a292d6564af52d3d3eea1cb075ec1049cd3594-0.webp
-[img-3]: https://image.cdn.bktus.com/i/2026/10/25/b81c094eeb21ab2960363edfc0e3d0a0d59cade2-0.webp
-[img-4]: https://image.cdn.bktus.com/i/2026/10/25/1fa8f6a2ad0da9c2a71ca2863f240989e3ef73d7-0.webp
-[img-5]: https://image.cdn.bktus.com/i/2026/10/25/b6f773ca4059abe8a98eff10277dd7b3efd93490-0.webp
-[img-6]: https://image.cdn.bktus.com/i/2026/10/25/f22c7532447bd6871215688ad6fa0cbda92434cb-0.webp
-[img-7]: https://image.cdn.bktus.com/i/2026/10/25/b82131ba65e55baf29d58c15870d2763a34a165d-0.webp
-[img-8]: https://image.cdn.bktus.com/i/2026/10/25/33d147efb4b19d95e25b9affae748fbd9638a20b-0.webp
-[img-9]: https://image.cdn.bktus.com/i/2026/10/25/95c95c3b8efcf06171c881bcea380b96aa977b44-0.webp
-[img-10]: TODO
+[img-1]: https://image.cdn.bktus.com/i/2026/10/29/4e64224bcb749319f269da127d6e882978176729.webp
+[img-2]: https://image.cdn.bktus.com/i/2026/10/29/ff1f3a604f67c9ff86b13397e5430417e2c5103c.webp
+[img-3]: https://image.cdn.bktus.com/i/2026/10/29/4372fa1c1c4a228099930f9cffc053ff81f17542.webp
+[img-4]: https://image.cdn.bktus.com/i/2026/10/29/553544ec585f2f800d3de2ff65ecc6124e03aec3.webp
+[img-5]: https://image.cdn.bktus.com/i/2026/10/29/f7c5fe17a01e82198f3f0af12b4690447dc0cbc1.webp
+[img-6]: https://image.cdn.bktus.com/i/2026/10/29/0c88080bec787c683a9bbc96066e42eae714b588.webp
+[img-7]: https://image.cdn.bktus.com/i/2026/10/29/0e6cc94d3cf7ec81c37c521a466333832acaa2e8.webp
+[img-8]: https://image.cdn.bktus.com/i/2026/10/29/5e76df1798336477e6c80f69cebb329638c0975d.webp
+[img-9]: https://image.cdn.bktus.com/i/2026/10/29/b292cd04448c8bc9a39f883b5324d7d836423c26.webp
+[img-10]: https://image.cdn.bktus.com/i/2026/10/29/2bc8251d01811b8931984fa3dee25e00b579d94c.webp

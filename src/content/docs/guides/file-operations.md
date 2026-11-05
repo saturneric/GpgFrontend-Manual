@@ -412,11 +412,11 @@ If a file with the output name already exists, GpgFrontend asks before it
 continues. The old file is only replaced after the operation succeeds. See
 [Encryption Safety](/guides/encryption-safety/).
 
-[img-1]: https://image.cdn.bktus.com/i/2026/10/25/dbe957857a3deba76219c35e5df0703d3d655458-0.webp
-[img-2]: https://image.cdn.bktus.com/i/2026/10/25/00aa8bd8c452747249b6a647fb0a95411b17118e-0.webp
-[img-3]: https://image.cdn.bktus.com/i/2026/10/25/5b9c8ba233cbbf836845fb2b0b6c7f8950bebd3a-0.webp
-[img-4]: https://image.cdn.bktus.com/i/2026/10/25/05813038e56a044e36679ebedd094131602b1a1e-0.webp
+[img-1]: https://image.cdn.bktus.com/i/2026/10/29/ccec4b1351ea81bf66c53658a0c6a22b921ad271.webp
+[img-2]: https://image.cdn.bktus.com/i/2026/10/29/49aedaa898733c25e3c65ed5920093cf0ca55ea9.webp
+[img-3]: https://image.cdn.bktus.com/i/2026/10/29/16074973fa6f0f4de56f81a8a6e47b4bc8e33307.webp
+[img-4]: https://image.cdn.bktus.com/i/2026/10/29/4f25fbcd3ead4b2441915d222880df2fd54692f3.webp
 [img-5]: https://image.cdn.bktus.com/i/2026/10/25/6baa1c0859e26072af0a57125c3731d54e1305e4-0.webp
-[img-6]: https://image.cdn.bktus.com/i/2026/10/25/2a0d57c2c691db36488fd9d514d608f48a027c6b-0.webp
-[img-7]: https://image.cdn.bktus.com/i/2026/10/25/3c97cca799d7c4af4c93a8dd47442cb851a71472-0.webp
+[img-6]: https://image.cdn.bktus.com/i/2026/10/29/b5c17550ea622d15e2b4e8f8e6e81006e4c1b972.webp
+[img-7]: https://image.cdn.bktus.com/i/2026/10/29/6f70391c3516fb17fb789cc81c60095719f87b47.webp
 [img-8]: https://image.cdn.bktus.com/i/2026/10/25/313b19d12f97356c3f5471c544dafa0f0588ce17-0.webp
