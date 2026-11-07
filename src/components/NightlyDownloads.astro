@@ -165,15 +165,7 @@ const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
       (a) => a.os === v.os && a.flavor === "installed",
     );
     if (v.os === "macos") {
-      // Without client hints, assume Apple silicon (every Mac sold since
-      // 2023) and the oldest macOS, which also runs on newer ones.
-      const arch = v.arch === "x86" ? "x86_64" : "arm64";
-      const fits = installed
-        .filter((a) => a.arch === arch)
-        .filter((a) => v.macos === null || macMajor(a) <= v.macos)
-        .sort((x, y) => macMajor(x) - macMajor(y));
-      if (!fits.length) return null;
-      return v.macos === null ? fits[0] : fits[fits.length - 1];
+      return pickMac(artifacts, v, v.arch === "x86" ? "x86_64" : "arm64");
     }
     const want =
       v.os === "android"
@@ -182,6 +174,24 @@ const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
           ? v.arch === "arm" ? "aarch64" : "x86_64"
           : "x86_64";
     return installed.find((a) => a.arch === want) ?? null;
+  }
+
+  // The disk image for one Mac chip: built for the newest macOS this Mac
+  // runs when the browser says which; otherwise the oldest, which also runs
+  // on newer ones.
+  function pickMac(
+    artifacts: Artifact[],
+    v: Visitor,
+    arch: string,
+  ): Artifact | null {
+    const fits = artifacts
+      .filter(
+        (a) => a.os === "macos" && a.flavor === "installed" && a.arch === arch,
+      )
+      .filter((a) => v.macos === null || macMajor(a) <= v.macos)
+      .sort((x, y) => macMajor(x) - macMajor(y));
+    if (!fits.length) return null;
+    return v.macos === null ? fits[0] : fits[fits.length - 1];
   }
 
   function el<K extends keyof HTMLElementTagNameMap>(
@@ -220,6 +230,13 @@ const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
     return `${(bytes / 1048576).toFixed(bytes < 10485760 ? 1 : 0)} MB`;
   }
 
+  function howTo(): HTMLAnchorElement {
+    return link(
+      "/appendix/code-binary-verify/#checking-a-nightly-build",
+      "How to check a download",
+    );
+  }
+
   function systemName(os: string): string {
     return SYSTEMS.find(([id]) => id === os)?.[1] ?? os;
   }
@@ -251,41 +268,51 @@ const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
 
     const artifacts: Artifact[] = Array.isArray(d.artifacts) ? d.artifacts : [];
 
-    // The one file most visitors need.
-    const best = pick(artifacts, v);
-    const bestUrl = best && buildUrl(best.path);
+    // The one file most visitors need. Macs get one button per chip, as
+    // browsers rarely say which chip a Mac has.
     const hero = el("div", "nightly-hero");
-    if (best && bestUrl) {
-      const button = el("a", "nightly-button");
-      button.href = bestUrl;
-      button.title = best.name;
-      button.append(
-        icon(ICON_DOWNLOAD),
-        `Download for ${systemName(best.os)}`,
-      );
-      hero.append(button);
+    const choices: [Artifact, string][] = [];
+    if (v.os === "macos") {
+      const chips: [string, string][] = [
+        ["arm64", "Apple silicon"],
+        ["x86_64", "Intel"],
+      ];
+      if (v.arch === "x86") chips.reverse();
+      for (const [arch, label] of chips) {
+        const a = pickMac(artifacts, v, arch);
+        if (a) choices.push([a, label]);
+      }
+    } else {
+      const best = pick(artifacts, v);
+      if (best) choices.push([best, systemName(best.os)]);
+    }
 
-      const meta = `${variant(best)} · ${details(best)}`;
-      const links = el("div", "nightly-links", el("span", "nightly-meta", meta));
-      const sig = buildUrl(best.sig);
-      if (sig) links.append(link(sig, "Signature"));
-      links.append(
-        link(
-          "/appendix/code-binary-verify/#checking-a-nightly-build",
-          "How to check it",
-        ),
-      );
-      hero.append(links);
-
-      if (best.os === "macos" && v.macos === null) {
-        hero.append(
-          el(
-            "p",
-            "nightly-hint",
-            "This file is for Macs with Apple silicon (M1 or newer). " +
-              "For a Mac with an Intel chip, open Other files below.",
-          ),
+    const shown = choices.filter(([a]) => buildUrl(a.path));
+    if (shown.length) {
+      const row = el("div", "nightly-choices");
+      shown.forEach(([a, label], i) => {
+        const button = el(
+          "a",
+          i === 0 ? "nightly-button" : "nightly-button secondary",
         );
+        button.href = buildUrl(a.path)!;
+        button.title = a.name;
+        button.append(icon(ICON_DOWNLOAD), `Download for ${label}`);
+        const meta =
+          a.os === "macos"
+            ? `macOS ${macMajor(a)} or newer · ${details(a)}`
+            : `${variant(a)} · ${details(a)}`;
+        const links = el("div", "nightly-links");
+        const sig = buildUrl(a.sig);
+        if (sig) links.append(link(sig, "Signature"));
+        if (shown.length === 1) links.append(howTo());
+        row.append(
+          el("div", "nightly-choice", button, el("div", "nightly-meta", meta), links),
+        );
+      });
+      hero.append(row);
+      if (shown.length > 1) {
+        hero.append(el("div", "nightly-links", howTo()));
       }
     } else {
       hero.append(
@@ -476,6 +503,25 @@ const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
   .nightly-downloads a.nightly-button:hover {
     color: var(--sl-color-black);
   }
+  /* Starlight's secondary LinkButton. */
+  .nightly-downloads a.nightly-button.secondary {
+    background: transparent;
+    border-color: var(--sl-color-gray-4);
+    color: var(--sl-color-white);
+  }
+  .nightly-downloads a.nightly-button.secondary:hover {
+    border-color: var(--sl-color-white);
+    color: var(--sl-color-white);
+  }
+  .nightly-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+  }
+  .nightly-choice {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
   .nightly-button .nightly-icon {
     width: 1.25em;
     height: 1.25em;
@@ -502,8 +548,12 @@ const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
     font-size: var(--sl-text-sm);
   }
   .nightly-meta {
-    flex-basis: 100%;
+    margin-top: 0.6rem;
+    font-size: var(--sl-text-sm);
     color: var(--sl-color-gray-3);
+  }
+  .nightly-choice .nightly-links {
+    margin-top: 0.15rem;
   }
   .nightly-hint {
     margin: 0.85rem 0 0;
