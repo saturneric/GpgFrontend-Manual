@@ -40,14 +40,17 @@ Pick your operating system to see the recommended steps. For other methods
   <TabItem label="Windows">
     ### Installer (Recommended)
     <Steps>
-    1. **Download** the `.msix` installer from [GitHub Releases][github-latest].
-    2. **Launch** the file and follow the on-screen prompts.
-    3. **Open** GpgFrontend from your Start Menu.
+    1. **Download** the `.msi` installer from the [Downloads](/overview/downloads/) page.
+    2. **Launch** the file. Accept the license, then click **Next** until it
+       is installed.
+    3. **Open** GpgFrontend from the new shortcut on your desktop.
     </Steps>
 
     ### Portable Version
     <Steps>
-    1. **Download** the `windows-x86_64-portable.zip`.
+    1. **Download** the `windows-x86_64-portable.zip` from the
+       [Downloads](/overview/downloads/) page. In the download box, open
+       **More download options** to find it.
     2. **Extract** the ZIP to your preferred folder.
     3. **Run** `GpgFrontend.exe` located in the `bin` directory.
     </Steps>
@@ -57,7 +60,7 @@ Pick your operating system to see the recommended steps. For other methods
 <TabItem label="macOS">
   <Steps>
     1. **Install GnuPG** via Homebrew: `brew install gnupg`.
-    2. **Download** the `.dmg` file from [GitHub Releases][github-latest].
+    2. **Download** the `.dmg` file from the [Downloads](/overview/downloads/) page.
     3. **Mount** the DMG and drag **GpgFrontend** to your **Applications** folder.
      ![Drag to Applications][img-1]
 
@@ -69,8 +72,7 @@ Pick your operating system to see the recommended steps. For other methods
   <Steps>
     1. **Verify GnuPG**: Ensure `gpg` is installed (`sudo apt install gpg` or
     `sudo dnf install gnupg`).
-    2. **Download** the `.AppImage` from [GitHub
-    Releases][github-latest].
+    2. **Download** the `.AppImage` from the [Downloads](/overview/downloads/) page.
     3. **Set Permissions**: Run `chmod u+x ./GpgFrontend-xxx.AppImage`.
     4. **Launch**: Double-click the file or run it via terminal.
 
@@ -139,6 +141,5 @@ If you need more than one setup on the same computer, that is what
 Need to understand the layout? Check the [Interface Understanding](/guides/understand-interface/) guide to familiarize yourself with the workspace.
 :::
 
-[github-latest]: https://github.com/saturneric/GpgFrontend/releases/latest
 [img-1]: https://image.cdn.bktus.com/i/2025/06/24/03df3c64a965b9da96c82ddb38c35b74b1796ee0.webp
 [github-gpgfrontend]: https://github.com/saturneric/GpgFrontend
