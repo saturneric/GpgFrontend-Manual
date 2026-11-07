@@ -18,6 +18,11 @@ service. It takes the source code straight from the public repository,
 compiles it, and publishes the result. No person builds release files on their
 own computer and uploads them.
 
+Nightly builds take one more step. After GitHub Actions builds them, a
+separate signing computer checks the files and signs them. The signed files
+are then stored on Cloudflare R2, a file storage service, and you download
+them from `builds.bktus.com`.
+
 The build recipe is public too, in the repository file
 `.github/workflows/build.yml`. So anyone can see exactly how each release
 was made, and anyone can repeat it.
@@ -58,18 +63,45 @@ signature and sandbox systems on top.
 
 ## Checking a Nightly Build
 
-Nightly builds are not signed with the maintainer's key, so they have no
-`.sig` files. Each nightly comes with two other files instead:
+Nightly builds are not signed with the maintainer's OpenPGP key, so they have
+no `.sig` files. Instead, every file comes with a `.minisig` file. This is a
+signature made with [minisign][minisign], a small and simple signing tool.
 
-- `SHA256SUMS.txt` lists every file of the build with its checksum. A checksum
-  is a short fingerprint of a file. If the file changes, the checksum changes.
-- `SHA256SUMS.txt.sigstore.json` proves that GitHub Actions made
-  `SHA256SUMS.txt` for this project.
+The nightly signing key is:
 
-There is also a `build-records.json` file. It records which build job made
-each file.
+```
+RWSxNasy+OIaiWWGzwNYu223e0UNDwrsb+4S/ttGO8knO/URmtMtDpse
+```
 
-### Step 1: Check the Checksum
+The same key is listed in the [security policy][security-md] of the
+repository, so you can compare the two.
+
+Get the files from the list on the
+[Downloads page](/overview/downloads/#about-nightly-builds).
+
+### Step 1: Check the Signature
+
+1. Install [minisign][minisign].
+2. Put your download and its `.minisig` file in the same folder.
+3. Open a terminal in that folder and run this command. Replace `FILE` with
+   the name of your download:
+
+   ```sh
+   minisign -Vm FILE -P RWSxNasy+OIaiWWGzwNYu223e0UNDwrsb+4S/ttGO8knO/URmtMtDpse
+   ```
+
+4. You should see `Signature and comment signature verified`. The line below
+   it shows the file name and version that were signed. They must match your
+   download.
+
+Any other result means the file is not the one that was published. Do not use
+it.
+
+### Step 2: Check the Checksum (Optional)
+
+A checksum is a short fingerprint of a file. If the file changes, the checksum
+changes. The file `SHA256SUMS.txt` lists the checksum of every file in the
+build.
 
 Put your download in the same folder as `SHA256SUMS.txt`. Open a terminal in
 that folder and run the command for your system.
@@ -88,13 +120,14 @@ shasum -a 256 -c --ignore-missing SHA256SUMS.txt
 
 On Windows, run the Linux command in Git Bash or WSL.
 
-Your file should be listed with `OK`. Any other result means the file is not
-the one that was built. Do not use it.
+Your file should be listed with `OK`.
 
-### Step 2: Check Who Built It (Optional)
+### Step 3: Check Who Built It (Optional)
 
-This step needs the [cosign][cosign-install] tool. Put
-`SHA256SUMS.txt.sigstore.json` in the same folder and run:
+This step shows that GitHub Actions built the files for this project. It needs
+the [cosign][cosign-install] tool. Put `SHA256SUMS.txt` and
+`SHA256SUMS.txt.sigstore.json` (also linked on the Downloads page) in the same
+folder and run:
 
 ```sh
 cosign verify-blob SHA256SUMS.txt --bundle SHA256SUMS.txt.sigstore.json \
@@ -104,7 +137,7 @@ cosign verify-blob SHA256SUMS.txt --bundle SHA256SUMS.txt.sigstore.json \
 
 If it prints `Verified OK`, the checksum list was signed by this project's
 build on GitHub, from the `main` branch. The signature is also written to
-Rekor, a public log that anyone can search. Because Step 1 checked your file
+Rekor, a public log that anyone can search. Because Step 2 checked your file
 against that list, your file is covered too.
 
 ## Check Inside the App
@@ -164,3 +197,5 @@ else's build.
 [img-4]: https://image.cdn.bktus.com/i/2026/10/29/633ad6c3f31555b317e20d990090bb27d3aef7fb.webp
 [bktus-openpgp]: https://bktus.com/openpgp/
 [cosign-install]: https://docs.sigstore.dev/cosign/system_config/installation/
+[minisign]: https://jedisct1.github.io/minisign/
+[security-md]: https://github.com/saturneric/GpgFrontend/blob/main/SECURITY.md

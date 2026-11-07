@@ -1,0 +1,619 @@
+---
+// Shows the newest nightly build, read live from the signed update index.
+// Without JavaScript, or if a request fails, only the fallback text shows.
+const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
+---
+
+<div class="nightly-downloads not-content" data-index={INDEX_URL}>
+  <p class="nightly-status" data-fallback>
+    The newest nightly build is listed in the{" "}
+    <a href={INDEX_URL}>nightly build index</a>. Its <code>nightly</code> entry
+    names the current version.
+  </p>
+  <div class="nightly-result" hidden></div>
+</div>
+
+<script>
+  const BUILDS_BASE = "https://builds.bktus.com/gpgfrontend/";
+
+  const SYSTEMS = [
+    ["windows", "Windows"],
+    ["macos", "macOS"],
+    ["linux", "Linux"],
+    ["android", "Android"],
+  ];
+
+  type Artifact = {
+    name: string;
+    path: string;
+    sig: string;
+    os: string;
+    arch: string;
+    kind: string;
+    flavor: string;
+    min_os: { macos?: string } | null;
+    size?: number;
+  };
+
+  // Only files inside the nightly folder of the build storage (Cloudflare R2).
+  function buildUrl(path: unknown): string | null {
+    if (typeof path !== "string" || !path.startsWith("nightly/")) return null;
+    if (path.includes("..") || path.includes("//")) return null;
+    const url = new URL(path, BUILDS_BASE);
+    return url.href.startsWith(BUILDS_BASE) ? url.href : null;
+  }
+
+  async function sha256Hex(data: ArrayBuffer): Promise<string> {
+    const digest = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(digest))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+  }
+
+  function describe(a: Artifact): string {
+    const parts: string[] = [];
+    if (a.os === "macos") {
+      const major = a.min_os?.macos?.split(".")[0];
+      if (major) parts.push(`macOS ${major} or newer`);
+      parts.push(a.arch === "x86_64" ? "Intel" : "Apple silicon");
+    } else if (a.os === "android") {
+      parts.push(
+        a.arch === "arm64-v8a" ? "Phones and tablets (arm64-v8a)" : a.arch,
+      );
+    } else {
+      parts.push(a.arch === "aarch64" ? "ARM (aarch64)" : a.arch);
+    }
+    return parts.join(", ");
+  }
+
+  function fileLabel(a: Artifact): string {
+    const portable = a.flavor === "portable";
+    switch (a.kind) {
+      case "msi":
+        return "Installer (.msi)";
+      case "zip":
+        return "Portable (.zip)";
+      case "dmg":
+        return "Disk image (.dmg)";
+      case "apk":
+        return "App (.apk)";
+      case "appimage":
+        return portable ? "Portable AppImage" : "AppImage";
+      default:
+        return portable ? "Portable" : "Download";
+    }
+  }
+
+  type Visitor = {
+    os: string | null;
+    arch: string | null; // "arm" or "x86" when known
+    macos: number | null; // major macOS version when known
+  };
+
+  // Best guess of the visitor's system. Chromium browsers report the real
+  // CPU and macOS version through client hints; others only through the
+  // user agent, which on macOS hides both.
+  async function detect(): Promise<Visitor> {
+    const ua = navigator.userAgent;
+    const v: Visitor = { os: null, arch: null, macos: null };
+    if (/Android/i.test(ua)) v.os = "android";
+    else if (/iPhone|iPad|iPod/i.test(ua)) v.os = null;
+    else if (/Windows/i.test(ua)) v.os = "windows";
+    else if (/Macintosh|Mac OS X/i.test(ua)) v.os = "macos";
+    else if (/Linux|X11/i.test(ua)) v.os = "linux";
+    if (/aarch64|arm64/i.test(ua)) v.arch = "arm";
+    else if (/x86_64|x64|amd64|Win64/i.test(ua)) v.arch = "x86";
+
+    const uad = (navigator as any).userAgentData;
+    if (uad?.getHighEntropyValues) {
+      try {
+        const h = await uad.getHighEntropyValues([
+          "architecture",
+          "platformVersion",
+        ]);
+        if (h.architecture === "arm") v.arch = "arm";
+        else if (h.architecture === "x86") v.arch = "x86";
+        if (v.os === "macos" && h.platformVersion) {
+          const major = parseInt(h.platformVersion, 10);
+          if (major > 10) v.macos = major;
+        }
+      } catch {
+        /* keep what the user agent said */
+      }
+    }
+    return v;
+  }
+
+  function macMajor(a: Artifact): number {
+    return parseInt(a.min_os?.macos ?? "0", 10) || 0;
+  }
+
+  // The installed build for this system, as the app's own updater picks it.
+  function pick(artifacts: Artifact[], v: Visitor): Artifact | null {
+    const installed = artifacts.filter(
+      (a) => a.os === v.os && a.flavor === "installed",
+    );
+    if (v.os === "macos") {
+      // Without client hints, assume Apple silicon (every Mac sold since
+      // 2023) and the oldest macOS, which also runs on newer ones.
+      const arch = v.arch === "x86" ? "x86_64" : "arm64";
+      const fits = installed
+        .filter((a) => a.arch === arch)
+        .filter((a) => v.macos === null || macMajor(a) <= v.macos)
+        .sort((x, y) => macMajor(x) - macMajor(y));
+      if (!fits.length) return null;
+      return v.macos === null ? fits[0] : fits[fits.length - 1];
+    }
+    const want =
+      v.os === "android"
+        ? v.arch === "x86" ? "x86_64" : "arm64-v8a"
+        : v.os === "linux"
+          ? v.arch === "arm" ? "aarch64" : "x86_64"
+          : "x86_64";
+    return installed.find((a) => a.arch === want) ?? null;
+  }
+
+  function el<K extends keyof HTMLElementTagNameMap>(
+    tag: K,
+    cls?: string,
+    ...kids: (Node | string)[]
+  ): HTMLElementTagNameMap[K] {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    e.append(...kids);
+    return e;
+  }
+
+  function link(href: string, text: string, cls?: string): HTMLAnchorElement {
+    const a = el("a", cls, text);
+    a.href = href;
+    return a;
+  }
+
+  const SVG = "http://www.w3.org/2000/svg";
+  function icon(d: string, cls = "nightly-icon"): SVGSVGElement {
+    const svg = document.createElementNS(SVG, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("class", cls);
+    const path = document.createElementNS(SVG, "path");
+    path.setAttribute("d", d);
+    svg.append(path);
+    return svg;
+  }
+  const ICON_DOWNLOAD = "M12 3v12m0 0-5-5m5 5 5-5M4 19h16";
+  const ICON_SHIELD = "M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Zm-3 9 2 2 4-4";
+
+  function size(bytes: unknown): string {
+    if (typeof bytes !== "number" || bytes <= 0) return "";
+    return `${(bytes / 1048576).toFixed(bytes < 10485760 ? 1 : 0)} MB`;
+  }
+
+  function systemName(os: string): string {
+    return SYSTEMS.find(([id]) => id === os)?.[1] ?? os;
+  }
+
+  function render(root: HTMLElement, version: string, d: any, v: Visitor) {
+    const out = root.querySelector<HTMLElement>(".nightly-result")!;
+    out.replaceChildren();
+
+    // Header: what this is, which version, when it was built.
+    const header = el("div", "nightly-header");
+    const title = el("div", "nightly-title");
+    title.append(
+      el("span", "nightly-eyebrow", "Nightly build"),
+      el("code", "nightly-version", version),
+    );
+    header.append(title);
+    const built = new Date(d.built_at);
+    if (!Number.isNaN(built.getTime())) {
+      const date = built.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+      const time = el("time", "nightly-date", `Built ${date}`);
+      time.dateTime = built.toISOString();
+      header.append(time);
+    }
+    out.append(header);
+
+    const artifacts: Artifact[] = Array.isArray(d.artifacts) ? d.artifacts : [];
+
+    // The one file most visitors need.
+    const best = pick(artifacts, v);
+    const bestUrl = best && buildUrl(best.path);
+    const hero = el("div", "nightly-hero");
+    if (best && bestUrl) {
+      const button = el("a", "nightly-button");
+      button.href = bestUrl;
+      button.title = best.name;
+      button.append(
+        icon(ICON_DOWNLOAD),
+        `Download for ${systemName(best.os)}`,
+      );
+      hero.append(button);
+
+      const meta = [describe(best), fileLabel(best), size(best.size)]
+        .filter(Boolean)
+        .join(" · ");
+      const links = el("div", "nightly-links", el("span", "nightly-meta", meta));
+      const sig = buildUrl(best.sig);
+      if (sig) links.append(link(sig, "Signature"));
+      links.append(
+        link(
+          "/appendix/code-binary-verify/#checking-a-nightly-build",
+          "How to check it",
+        ),
+      );
+      hero.append(links);
+
+      if (best.os === "macos" && v.macos === null) {
+        hero.append(
+          el(
+            "p",
+            "nightly-hint",
+            "This file is for Macs with Apple silicon (M1 or newer). " +
+              "For a Mac with an Intel chip, open Other files below.",
+          ),
+        );
+      }
+    } else {
+      hero.append(
+        el(
+          "p",
+          "nightly-hint",
+          "There is no nightly build for this device. " +
+            "Open Other files below to pick one for another system.",
+        ),
+      );
+    }
+    out.append(hero);
+
+    // Every file, folded away.
+    const more = el("details", "nightly-more");
+    const summary = el("summary", undefined, "Other files");
+    more.append(summary);
+    let rows = 0;
+    for (const [os, label] of SYSTEMS) {
+      const list = artifacts
+        .filter((a) => a.os === os)
+        .sort((x, y) =>
+          (describe(x) + fileLabel(x)).localeCompare(describe(y) + fileLabel(y)),
+        );
+      const items: HTMLElement[] = [];
+      for (const a of list) {
+        const file = buildUrl(a.path);
+        if (!file || typeof a.name !== "string") continue;
+        const sig = buildUrl(a.sig);
+        const row = el("li", "nightly-row");
+        const info = el(
+          "div",
+          "nightly-row-info",
+          el("span", "nightly-row-name", describe(a)),
+          el(
+            "span",
+            "nightly-row-meta",
+            [fileLabel(a), size(a.size)].filter(Boolean).join(" · "),
+          ),
+        );
+        const actions = el("div", "nightly-row-actions");
+        const dl = el("a", "nightly-row-download");
+        dl.href = file;
+        dl.title = a.name;
+        dl.setAttribute("aria-label", `Download ${a.name}`);
+        dl.append(icon(ICON_DOWNLOAD), el("span", "nightly-row-label", "Download"));
+        actions.append(dl);
+        if (sig) {
+          const s = link(sig, "", "nightly-row-sig");
+          s.title = "Signature (.minisig)";
+          s.setAttribute("aria-label", `Signature for ${a.name}`);
+          s.append(icon(ICON_SHIELD));
+          actions.append(s);
+        }
+        row.append(info, actions);
+        items.push(row);
+        rows++;
+      }
+      if (items.length) {
+        const group = el("section", "nightly-group");
+        group.append(el("h4", "nightly-group-title", label), el("ul", undefined, ...items));
+        more.append(group);
+      }
+    }
+    if (rows === 0) throw new Error("no files");
+
+    const sums = buildUrl(d.sums);
+    if (sums) {
+      const foot = el("p", "nightly-foot");
+      foot.append("For checking: ", link(sums, "SHA256SUMS.txt"));
+      const sumsSig = buildUrl(d.sums_sig);
+      if (sumsSig) foot.append(" · ", link(sumsSig, "its signature"));
+      const bundle = buildUrl(d.build?.bundle);
+      if (bundle) {
+        foot.append(" · ", link(bundle, "SHA256SUMS.txt.sigstore.json"));
+      }
+      more.append(foot);
+    }
+    out.append(more);
+
+    root.querySelector<HTMLElement>("[data-fallback]")!.hidden = true;
+    out.hidden = false;
+  }
+
+  async function load(root: HTMLElement) {
+    const indexUrl = root.dataset.index!;
+    const index = await (await fetch(indexUrl, { cache: "no-cache" })).json();
+    const nightly = index?.nightly;
+    const status = root.querySelector<HTMLElement>("[data-fallback]")!;
+    if (!nightly) {
+      status.textContent = "There is no nightly build right now.";
+      return;
+    }
+    const descUrl = buildUrl(nightly.descriptor);
+    if (!descUrl) throw new Error("bad descriptor path");
+    const res = await fetch(descUrl);
+    if (!res.ok) throw new Error(`descriptor: ${res.status}`);
+    const raw = await res.arrayBuffer();
+    // The index names the descriptor's hash; anything else is not shown.
+    if ((await sha256Hex(raw)) !== nightly.sha256) {
+      throw new Error("descriptor hash does not match the index");
+    }
+    render(
+      root,
+      String(nightly.version),
+      JSON.parse(new TextDecoder().decode(raw)),
+      await detect(),
+    );
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>(
+    ".nightly-downloads",
+  )) {
+    load(root).catch((e) => console.warn("Nightly list unavailable:", e));
+  }
+</script>
+
+<style is:global>
+  .nightly-downloads {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    box-shadow: var(--sl-shadow-sm);
+    font-size: var(--sl-text-base);
+    line-height: 1.5;
+    color: var(--sl-color-gray-2);
+  }
+  .nightly-downloads a {
+    color: var(--sl-color-text-accent);
+  }
+  .nightly-downloads a:hover {
+    color: var(--sl-color-white);
+  }
+  .nightly-status {
+    margin: 0;
+  }
+
+  .nightly-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+  }
+  .nightly-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    min-width: 0;
+  }
+  .nightly-eyebrow {
+    font-size: var(--sl-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sl-color-text-accent);
+  }
+  .nightly-version {
+    font-family: var(--__sl-font-mono, monospace);
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-white);
+    overflow-wrap: anywhere;
+  }
+  .nightly-date {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+    white-space: nowrap;
+  }
+
+  .nightly-hero {
+    margin-top: 1rem;
+  }
+  /* Same look as Starlight's primary LinkButton. */
+  .nightly-downloads a.nightly-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.4375rem 1.125rem;
+    border: 1px solid var(--sl-color-text-accent);
+    border-radius: 999rem;
+    background: var(--sl-color-text-accent);
+    color: var(--sl-color-black);
+    font-size: var(--sl-text-sm);
+    line-height: 1.1875;
+    text-decoration: none;
+    outline-offset: 0.25rem;
+  }
+  .nightly-downloads a.nightly-button:hover {
+    color: var(--sl-color-black);
+  }
+  .nightly-button .nightly-icon {
+    width: 1.25em;
+    height: 1.25em;
+    flex: none;
+  }
+  @media (min-width: 50rem) {
+    .nightly-downloads a.nightly-button {
+      padding: 0.9375rem 1.25rem;
+      font-size: var(--sl-text-base);
+    }
+  }
+  .nightly-icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .nightly-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin-top: 0.75rem;
+    font-size: var(--sl-text-sm);
+  }
+  .nightly-meta {
+    flex-basis: 100%;
+    color: var(--sl-color-gray-3);
+  }
+  .nightly-hint {
+    margin: 0.85rem 0 0;
+    padding: 0.5rem 0.75rem;
+    border-inline-start: 0.25rem solid var(--sl-color-asides-border, var(--sl-color-blue));
+    background: var(--sl-color-asides-bg-accent, var(--sl-color-blue-low));
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-white);
+  }
+
+  .nightly-more {
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+    padding-top: 0.75rem;
+  }
+  .nightly-more summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    list-style: none;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .nightly-more summary::-webkit-details-marker {
+    display: none;
+  }
+  .nightly-more summary::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.15s;
+  }
+  .nightly-more[open] summary::before {
+    transform: rotate(45deg);
+  }
+  .nightly-group {
+    margin-top: 1rem;
+  }
+  .nightly-group-title {
+    margin: 0 0 0.35rem;
+    font-size: var(--sl-text-sm);
+    font-weight: 700;
+    color: var(--sl-color-gray-2);
+  }
+  .nightly-group ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  .nightly-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.55rem 0.75rem;
+  }
+  .nightly-row + .nightly-row {
+    border-top: 1px solid var(--sl-color-gray-5);
+  }
+  .nightly-row-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .nightly-row-name {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-white);
+  }
+  .nightly-row-meta {
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+  .nightly-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: none;
+  }
+  .nightly-downloads a.nightly-row-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 999rem;
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-sm);
+    text-decoration: none;
+  }
+  .nightly-downloads a.nightly-row-download:hover {
+    border-color: var(--sl-color-text-accent);
+    color: var(--sl-color-text-accent);
+  }
+  .nightly-downloads a.nightly-row-sig {
+    display: inline-flex;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    color: var(--sl-color-gray-3);
+  }
+  .nightly-downloads a.nightly-row-sig:hover {
+    color: var(--sl-color-text-accent);
+  }
+  .nightly-row .nightly-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .nightly-foot {
+    margin: 1rem 0 0;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 30rem) {
+    .nightly-row-label {
+      display: none;
+    }
+    .nightly-downloads a.nightly-row-download {
+      padding: 0.4rem;
+    }
+    .nightly-row .nightly-icon {
+      width: 1.15rem;
+      height: 1.15rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nightly-downloads * {
+      transition: none !important;
+    }
+  }
+</style>
