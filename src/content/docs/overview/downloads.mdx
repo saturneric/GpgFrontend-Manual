@@ -5,75 +5,19 @@ sidebar:
   order: 3
 ---
 
-GpgFrontend is ready to install. Pick the option that works best for you below.
-For step-by-step setup help, see the [Getting Started Guide](/overview/getting-started/).
-
 import { LinkCard, CardGrid } from "@astrojs/starlight/components";
 import { Tabs, TabItem, Aside } from "@astrojs/starlight/components";
-import NightlyDownloads from "../../../components/NightlyDownloads.astro";
+import BuildDownloads from "../../../components/BuildDownloads.astro";
 
-## Direct Downloads
+Click the button to download GpgFrontend. It's free. The box picks the right
+file for your computer and shows what to do once the download is done.
 
-**Not sure which to pick? Choose the Stable Release.** It's the right choice for
-almost everyone.
+<BuildDownloads channel="stable" />
 
-<LinkCard
-  title="⭐ Stable Release (Recommended)"
-  href="https://github.com/saturneric/GpgFrontend/releases/latest"
-  description="The latest version for everyday use. This is the one most people want."
-/>
+## Prefer an App Store?
 
-Other options, for special cases only:
-
-- [**Older Version (v2.1.x)**][github-v2-1-x]: only if you specifically need the GnuPG-only build, or a Qt5 build for an older system such as Windows 7.
-- [**Nightly Builds**](#about-nightly-builds): early test builds for testers and contributors, not for everyday use.
-- [**Mirror Site**][ftp-gpgfrontend]: the same files from another source, with no tracking or sign-in.
-
-### Installed or Portable?
-
-Most downloads come in two versions, and you need to pick one:
-
-- **Installed**: the normal choice. Your settings and keys are stored in your
-  user folder.
-- **Portable**: everything stays in the program's own folder, so you can run it
-  from a USB drive and leave nothing behind.
-
-The two versions do not share any data. If you switch from one to the other,
-you start with empty settings and no keys. So pick the one you want before
-you start. See [Portable Mode](/advanced/portable-mode/).
-
-For macOS there is only an installed version.
-
-### Understanding the File Names
-
-Use this table to find the right file for your system.
-
-| Filename Pattern               | What It's For                                                    |
-| ------------------------------ | ---------------------------------------------------------------- |
-| `-windows-x86_64.msix`         | Modern MSIX installer for Windows (Recommended).                 |
-| `-windows-x86_64.msi`          | Standard MSI installer; made for enterprise setups.              |
-| `-macos-<ver>.dmg`             | macOS disk image; `<ver>` shows the lowest macOS version needed. |
-| `-linux-<arch>.AppImage`       | Standalone Linux app. Make it executable, then run it.           |
-| `-portable`                    | Marks the portable version of a build.                           |
-| `*.sig`                        | Signature file. Always use it to check the download is genuine.  |
-
-<Aside type="note" title="Changed in v2.2.3">
-  There are no Qt5 (`-qt5-`) builds of v2.2.x any more. Qt5 builds exist only
-  for the older v2.1.x line. If your system needs one, for example Windows 7,
-  download a [v2.1.x release][github-v2-1-x].
-</Aside>
-
-### About Nightly Builds
-
-Nightly builds are made automatically from the newest code. They are less
-tested, so do not use them for anything you cannot afford to lose.
-
-<NightlyDownloads />
-
-## Package Managers and App Stores
-
-Install GpgFrontend through trusted package managers and official app stores.
-Pick your platform below:
+You can also install GpgFrontend from an app store or a package manager.
+Updates then install by themselves. Pick your system:
 
 <Tabs>
   <TabItem label="Windows">
@@ -109,7 +53,7 @@ Pick your platform below:
       GnuPG and uses only the memory-safe **rPGP engine** for a smooth Mac App
       Store experience. If you want the full experience, including GnuPG support
       and advanced hardware token support, install the standard Desktop Edition
-      via Homebrew or GitHub.
+      via Homebrew or the download button above.
 
       **Back up your keys right away.** Lite stores your keys inside an Apple
       sandbox, so removing the app or resetting your system can erase them, and
@@ -128,5 +72,69 @@ Pick your platform below:
   </TabItem>
 </Tabs>
 
+## Other Downloads
+
+Most people never need this part. It is for special cases.
+
+### Portable Version
+
+The download button gives you the normal version. It keeps your settings and
+keys in your user folder.
+
+The portable version keeps everything in the program's own folder instead.
+You can run it from a USB drive and leave nothing behind on the computer. To
+get it, open **More download options** in the box above. There is no portable
+version for macOS.
+
+The two versions do not share any data. If you switch from one to the other,
+you start with empty settings and no keys. So pick the one you want before
+you start. See [Portable Mode](/advanced/portable-mode/).
+
+### Older Versions and Backup Sites
+
+- [**Older version (v2.1.x)**][github-v2-1-x]: only if you need the
+  GnuPG-only build, or a Qt5 build for an older system such as Windows 7.
+- [**GitHub Releases**][github-releases]: every version, with release notes.
+  Use it if the download button does not work.
+- [**Mirror site**][ftp-gpgfrontend]: the same files from another source, with
+  no tracking or sign-in.
+
+<Aside type="note" title="Changed in v2.2.3">
+  There are no Qt5 (`-qt5-`) builds of v2.2.x any more. Qt5 builds exist only
+  for the older v2.1.x line. If your system needs one, for example Windows 7,
+  download a [v2.1.x release][github-v2-1-x].
+</Aside>
+
+### Find the Right File by Name
+
+On GitHub and the mirror site you pick the file yourself. Its name tells you
+what it is for:
+
+| Name ends with                 | What it is for                                                   |
+| ------------------------------ | ---------------------------------------------------------------- |
+| `-windows-x86_64.msi`          | Installer for Windows (recommended).                             |
+| `-windows-x86_64.msix`         | MSIX installer for Windows.                                      |
+| `-macos-<ver>.dmg`             | Mac with Apple chip. `<ver>` is the lowest macOS version needed. |
+| `-macos-<ver>-intel.dmg`       | Mac with Intel chip. `<ver>` is the lowest macOS version needed. |
+| `-linux-<arch>.AppImage`       | Linux app. Make it executable, then run it.                      |
+| `-android-<arch>.apk`          | Android app. Only in test builds for now.                        |
+| `-portable`                    | Marks the portable version of a build.                           |
+| `.sig`                         | Signature file, to check the download is genuine.                |
+| `.minisig`                     | Signature file of a test build.                                  |
+
+### Test Builds
+
+Test builds (also called nightly builds) are made automatically from the
+newest code. They are less tested, so do not use them for anything you cannot
+afford to lose.
+
+<details>
+<summary>Show test builds (for testers only)</summary>
+
+<BuildDownloads channel="nightly" />
+
+</details>
+
 [github-v2-1-x]: https://github.com/saturneric/GpgFrontend/releases/tag/v2.1.13
 [ftp-gpgfrontend]: https://ftp.bktus.com/GpgFrontend/
+[github-releases]: https://github.com/saturneric/GpgFrontend/releases

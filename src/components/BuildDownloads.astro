@@ -1,0 +1,1113 @@
+---
+// Shows the newest stable release or nightly build, read live from the
+// signed update index. Without JavaScript, or if a request fails, only the
+// fallback text shows. While the data loads, a placeholder shows instead.
+interface Props {
+  channel: "stable" | "nightly";
+}
+const { channel } = Astro.props;
+const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
+const GITHUB_LATEST = "https://github.com/saturneric/GpgFrontend/releases/latest";
+const MIRROR = "https://ftp.bktus.com/GpgFrontend/";
+const stable = channel === "stable";
+---
+
+<div class="dl-downloads not-content" data-index={INDEX_URL} data-channel={channel}>
+  <div class="dl-loading" hidden>
+    <span class="dl-skel dl-skel-button"></span>
+    <span class="dl-skel dl-skel-line"></span>
+    <span class="dl-skel dl-skel-line dl-skel-short"></span>
+    <p class="dl-loading-text" role="status">
+      {stable ? "Finding the right download for your computer…" : "Loading test builds…"}
+    </p>
+  </div>
+  {
+    stable ? (
+      <p class="dl-status" data-fallback>
+        <span data-slow hidden>Taking long? </span>
+        Download the latest version from <a href={GITHUB_LATEST}>GitHub</a>,
+        or get the same files from the <a href={MIRROR}>mirror site</a>.
+      </p>
+    ) : (
+      <p class="dl-status" data-fallback>
+        The list of test builds can't be shown here. You can find them in the{" "}
+        <a href={INDEX_URL}>nightly build index</a>.
+      </p>
+    )
+  }
+  <div class="dl-result" hidden></div>
+</div>
+
+<script>
+  const BUILDS_BASE = "https://builds.bktus.com/gpgfrontend/";
+  const GETTING_STARTED = "/overview/getting-started/";
+
+  const SYSTEMS = [
+    ["windows", "Windows"],
+    ["macos", "macOS"],
+    ["linux", "Linux"],
+    ["android", "Android"],
+  ];
+
+  type Artifact = {
+    name: string;
+    path: string;
+    sig: string;
+    os: string;
+    arch: string;
+    kind: string;
+    flavor: string;
+    min_os: { macos?: string } | null;
+    size?: number;
+  };
+
+  type Channel = "stable" | "nightly";
+
+  type Visitor = {
+    os: string | null; // "ios" for iPhone and iPad
+    arch: string | null; // "arm" or "x86" when known
+    macos: number | null; // major macOS version when known
+  };
+
+  // Everything the box needs to draw itself again for another system.
+  type Ctx = {
+    root: HTMLElement;
+    channel: Channel;
+    version: string;
+    d: any;
+    artifacts: Artifact[];
+    url: (path: unknown) => string | null;
+    hero: HTMLElement;
+  };
+
+  // Folder of each channel in the build storage (Cloudflare R2).
+  const FOLDER: Record<Channel, string> = {
+    stable: "releases/",
+    nightly: "nightly/",
+  };
+
+  // The same release files are also kept on GitHub and on the mirror site.
+  const GITHUB_TAG = "https://github.com/saturneric/GpgFrontend/releases/tag/v";
+  const MIRROR_BASE = "https://ftp.bktus.com/GpgFrontend/v";
+
+  // Only files inside the channel's folder of the build storage.
+  function buildUrl(path: unknown, channel: Channel): string | null {
+    if (typeof path !== "string" || !path.startsWith(FOLDER[channel])) {
+      return null;
+    }
+    if (path.includes("..") || path.includes("//")) return null;
+    const url = new URL(path, BUILDS_BASE);
+    return url.href.startsWith(BUILDS_BASE) ? url.href : null;
+  }
+
+  async function sha256Hex(data: ArrayBuffer): Promise<string> {
+    const digest = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(digest))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+  }
+
+  const MAC_CHIP: Record<string, string> = {
+    arm64: "Mac with Apple chip",
+    x86_64: "Mac with Intel chip",
+  };
+
+  // Who a file is for, in plain words, for the full file list.
+  function variant(a: Artifact): string {
+    const portable = a.flavor === "portable";
+    switch (a.os) {
+      case "windows":
+        if (portable) return "Portable";
+        return a.kind === "msix" ? "MSIX installer" : "Installer";
+      case "macos": {
+        const chip = MAC_CHIP[a.arch] ?? a.arch;
+        const major = a.min_os?.macos?.split(".")[0];
+        return major ? `${chip}, macOS ${major} or newer` : chip;
+      }
+      case "linux": {
+        const base =
+          a.arch === "aarch64" ? "ARM computers" : "Intel or AMD computers";
+        return portable ? `${base}, portable` : base;
+      }
+      case "android":
+        return a.arch === "arm64-v8a"
+          ? "Most phones and tablets"
+          : a.arch === "x86_64"
+            ? "Emulators and x86 devices"
+            : a.arch;
+      default:
+        return a.arch;
+    }
+  }
+
+  const KIND_LABEL: Record<string, string> = {
+    msi: ".msi",
+    msix: ".msix",
+    zip: ".zip",
+    dmg: ".dmg",
+    apk: ".apk",
+    appimage: "AppImage",
+  };
+
+  function details(a: Artifact): string {
+    const parts = [KIND_LABEL[a.kind] ?? a.kind];
+    if (a.os === "linux" || a.os === "android") parts.push(a.arch);
+    parts.push(size(a.size));
+    return parts.filter(Boolean).join(" · ");
+  }
+
+  // On Windows the MSI installer is the recommended one.
+  function kindRank(a: Artifact): number {
+    return a.kind === "msi" ? 0 : a.kind === "msix" ? 1 : 2;
+  }
+
+  // Most common choice first: installed before portable, the usual chip
+  // before the rare one, MSI before MSIX, older macOS (wider reach) before
+  // newer.
+  const COMMON_ARCH: Record<string, string> = {
+    windows: "x86_64",
+    macos: "arm64",
+    linux: "x86_64",
+    android: "arm64-v8a",
+  };
+  function order(x: Artifact, y: Artifact): number {
+    const rank = (a: Artifact) => [
+      COMMON_ARCH[a.os] === a.arch ? 0 : 1,
+      a.flavor === "portable" ? 1 : 0,
+      kindRank(a),
+      macMajor(a),
+    ];
+    const rx = rank(x);
+    const ry = rank(y);
+    for (let i = 0; i < rx.length; i++) {
+      if (rx[i] !== ry[i]) return rx[i] - ry[i];
+    }
+    return 0;
+  }
+
+  // Best guess of the visitor's system. Chromium browsers report the real
+  // CPU and macOS version through client hints; others only through the
+  // user agent, which on macOS hides both. iPads ask for the Mac site, so
+  // a "Mac" with a touch screen is an iPad.
+  async function detect(): Promise<Visitor> {
+    const ua = navigator.userAgent;
+    const v: Visitor = { os: null, arch: null, macos: null };
+    const touchMac =
+      /Macintosh/i.test(ua) && (navigator.maxTouchPoints ?? 0) > 1;
+    if (/Android/i.test(ua)) v.os = "android";
+    else if (/iPhone|iPad|iPod/i.test(ua) || touchMac) v.os = "ios";
+    else if (/Windows/i.test(ua)) v.os = "windows";
+    else if (/Macintosh|Mac OS X/i.test(ua)) v.os = "macos";
+    else if (/Linux|X11/i.test(ua)) v.os = "linux";
+    if (/aarch64|arm64/i.test(ua)) v.arch = "arm";
+    else if (/x86_64|x64|amd64|Win64/i.test(ua)) v.arch = "x86";
+
+    const uad = (navigator as any).userAgentData;
+    if (uad?.getHighEntropyValues) {
+      try {
+        const h = await uad.getHighEntropyValues([
+          "architecture",
+          "platformVersion",
+        ]);
+        if (h.architecture === "arm") v.arch = "arm";
+        else if (h.architecture === "x86") v.arch = "x86";
+        if (v.os === "macos" && h.platformVersion) {
+          const major = parseInt(h.platformVersion, 10);
+          if (major > 10) v.macos = major;
+        }
+      } catch {
+        /* keep what the user agent said */
+      }
+    }
+    return v;
+  }
+
+  function macMajor(a: Artifact): number {
+    return parseInt(a.min_os?.macos ?? "0", 10) || 0;
+  }
+
+  // The installed build for this system, as the app's own updater picks it.
+  function pick(artifacts: Artifact[], v: Visitor): Artifact | null {
+    const want =
+      v.os === "android"
+        ? v.arch === "x86" ? "x86_64" : "arm64-v8a"
+        : v.os === "linux"
+          ? v.arch === "arm" ? "aarch64" : "x86_64"
+          : "x86_64";
+    return (
+      artifacts
+        .filter(
+          (a) => a.os === v.os && a.flavor === "installed" && a.arch === want,
+        )
+        .sort((x, y) => kindRank(x) - kindRank(y))[0] ?? null
+    );
+  }
+
+  // The disk image for one Mac chip: built for the newest macOS this Mac
+  // runs when the browser says which; otherwise the oldest, which also runs
+  // on newer ones.
+  function pickMac(
+    artifacts: Artifact[],
+    v: Visitor,
+    arch: string,
+  ): Artifact | null {
+    const fits = artifacts
+      .filter(
+        (a) => a.os === "macos" && a.flavor === "installed" && a.arch === arch,
+      )
+      .filter((a) => v.macos === null || macMajor(a) <= v.macos)
+      .sort((x, y) => macMajor(x) - macMajor(y));
+    if (!fits.length) return null;
+    return v.macos === null ? fits[0] : fits[fits.length - 1];
+  }
+
+  function el<K extends keyof HTMLElementTagNameMap>(
+    tag: K,
+    cls?: string,
+    ...kids: (Node | string)[]
+  ): HTMLElementTagNameMap[K] {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    e.append(...kids);
+    return e;
+  }
+
+  function link(href: string, text: string, cls?: string): HTMLAnchorElement {
+    const a = el("a", cls, text);
+    a.href = href;
+    return a;
+  }
+
+  const SVG = "http://www.w3.org/2000/svg";
+  function icon(d: string, cls = "dl-icon"): SVGSVGElement {
+    const svg = document.createElementNS(SVG, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("class", cls);
+    const path = document.createElementNS(SVG, "path");
+    path.setAttribute("d", d);
+    svg.append(path);
+    return svg;
+  }
+  const ICON_DOWNLOAD = "M12 3v12m0 0-5-5m5 5 5-5M4 19h16";
+  const ICON_SHIELD = "M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Zm-3 9 2 2 4-4";
+
+  function size(bytes: unknown): string {
+    if (typeof bytes !== "number" || bytes <= 0) return "";
+    return `${(bytes / 1048576).toFixed(bytes < 10485760 ? 1 : 0)} MB`;
+  }
+
+  const HOW_TO: Record<Channel, string> = {
+    stable: "/appendix/code-binary-verify/#every-package-is-signed",
+    nightly: "/appendix/code-binary-verify/#checking-a-nightly-build",
+  };
+  const NAME: Record<Channel, string> = {
+    stable: "Latest version",
+    nightly: "Test build",
+  };
+
+  // What to do once the file is on the computer, in three short steps.
+  const STEPS: Record<string, string[]> = {
+    windows: [
+      "Open the file you downloaded.",
+      "Accept the license, then click Next until it is installed.",
+      "Open GpgFrontend from the new shortcut on your desktop.",
+    ],
+    macos: [
+      "Open the file you downloaded.",
+      "Drag GpgFrontend into the Applications folder.",
+      "Open GpgFrontend from your Applications folder.",
+    ],
+    linux: [
+      "Right-click the file you downloaded and open Properties.",
+      "Under Permissions, allow the file to run as a program.",
+      "Double-click the file to start GpgFrontend.",
+    ],
+  };
+
+  // Links to the same release files on GitHub and on the mirror site, for
+  // when the main download is slow or blocked.
+  function backups(version: string): HTMLElement | null {
+    if (!/^\d+\.\d+\.\d+$/.test(version)) return null;
+    const p = el("p", "dl-foot");
+    p.append(
+      "Download slow or blocked? Get the same files from ",
+      link(GITHUB_TAG + version, "GitHub"),
+      " or the ",
+      link(`${MIRROR_BASE}${version}/`, "mirror site"),
+      ".",
+    );
+    return p;
+  }
+
+  function systemName(os: string): string {
+    return SYSTEMS.find(([id]) => id === os)?.[1] ?? os;
+  }
+
+  // The buttons for this visitor: one, or one per Mac chip when the
+  // browser does not say which chip the Mac has.
+  function choicesFor(ctx: Ctx, v: Visitor): [Artifact, string][] {
+    const out: [Artifact, string][] = [];
+    if (v.os === "macos") {
+      const chips =
+        v.arch === "arm" ? ["arm64"] : v.arch === "x86" ? ["x86_64"] : ["arm64", "x86_64"];
+      for (const arch of chips) {
+        const a = pickMac(ctx.artifacts, v, arch);
+        if (a) out.push([a, chips.length > 1 ? MAC_CHIP[arch] : "Mac"]);
+      }
+    } else if (v.os) {
+      const best = pick(ctx.artifacts, v);
+      if (best) out.push([best, systemName(best.os)]);
+    }
+    return out.filter(([a]) => ctx.url(a.path));
+  }
+
+  // Why there is no button, and what to do instead.
+  function noChoiceMessage(ctx: Ctx, v: Visitor): string {
+    const pickOther = "Pick the computer you want it on:";
+    const has = (os: string) => ctx.artifacts.some((a) => a.os === os);
+    switch (v.os) {
+      case "ios":
+        return `GpgFrontend does not run on iPhone or iPad. ${pickOther}`;
+      case "android":
+        if (!has("android")) {
+          return ctx.channel === "stable"
+            ? `There is no Android version for everyday use yet. ${pickOther}`
+            : `There is no test build for Android right now. ${pickOther}`;
+        }
+        break;
+      case "macos": {
+        const mins = ctx.artifacts
+          .filter((a) => a.os === "macos")
+          .map(macMajor)
+          .filter((m) => m > 0);
+        if (mins.length && v.macos !== null) {
+          return `Your Mac needs macOS ${Math.min(...mins)} or newer for this version.`;
+        }
+        break;
+      }
+      case null:
+        return pickOther;
+    }
+    return `There is no download for ${systemName(v.os ?? "")} here right now. Pick another system:`;
+  }
+
+  // The top of the box: the button, what to do next, and a way to switch
+  // to another system. Drawn again when the visitor picks another system.
+  function renderHero(ctx: Ctx, v: Visitor) {
+    const stable = ctx.channel === "stable";
+    const hero = ctx.hero;
+    hero.replaceChildren();
+
+    if (!stable) {
+      hero.append(
+        el(
+          "p",
+          "dl-caution",
+          "Test build. It may have bugs. For everyday use, take the " +
+            "download at the top of this page.",
+        ),
+      );
+    }
+
+    const choices = choicesFor(ctx, v);
+    if (choices.length) {
+      const row = el("div", "dl-choices");
+      choices.forEach(([a, target], i) => {
+        const cls =
+          stable && i === 0 ? "dl-button" : "dl-button secondary";
+        const button = el("a", cls);
+        button.href = ctx.url(a.path)!;
+        button.title = a.name;
+        const text = stable
+          ? choices.length > 1
+            ? `Download for ${target}`
+            : `Download GpgFrontend for ${target}`
+          : `Download test build for ${target}`;
+        button.append(icon(ICON_DOWNLOAD), text);
+        const meta = [
+          "Free",
+          size(a.size),
+          a.os === "macos" && macMajor(a)
+            ? `needs macOS ${macMajor(a)} or newer`
+            : "",
+        ]
+          .filter(Boolean)
+          .join(" · ");
+        row.append(el("div", "dl-choice", button, el("div", "dl-meta", meta)));
+      });
+      hero.append(row);
+
+      if (choices.length > 1 && v.os === "macos") {
+        hero.append(
+          el(
+            "p",
+            "dl-help",
+            "Not sure which Mac you have? Open the Apple menu and choose " +
+              "About This Mac. If it shows “Chip: Apple”, take the " +
+              "first button. If it shows “Intel”, take the second.",
+          ),
+        );
+      } else if (v.os === "macos") {
+        // The browser named the chip; still offer the other one, in case
+        // it guessed wrong.
+        const otherArch = choices[0][0].arch === "arm64" ? "x86_64" : "arm64";
+        const other = pickMac(ctx.artifacts, v, otherArch);
+        const href = other && ctx.url(other.path);
+        if (href) {
+          const p = el("p", "dl-help");
+          p.append(
+            `Have a ${MAC_CHIP[otherArch]}? `,
+            link(href, "Download that version instead"),
+            ".",
+          );
+          hero.append(p);
+        }
+      }
+
+      const steps = STEPS[v.os ?? ""];
+      if (stable && steps) {
+        const help = el("p", "dl-next-help");
+        help.append("Need more help? See ", link(GETTING_STARTED, "Getting Started"), ".");
+        hero.append(
+          el(
+            "div",
+            "dl-next",
+            el("p", "dl-next-title", "After it downloads:"),
+            el("ol", undefined, ...steps.map((s) => el("li", undefined, s))),
+            help,
+          ),
+        );
+      }
+    } else {
+      hero.append(el("p", "dl-hint", noChoiceMessage(ctx, v)));
+    }
+
+    // Other systems this channel has files for.
+    const others = SYSTEMS.filter(
+      ([os]) =>
+        !(choices.length && os === v.os) &&
+        ctx.artifacts.some((a) => a.os === os && ctx.url(a.path)),
+    );
+    if (others.length) {
+      const sw = el("div", "dl-switch");
+      if (choices.length && v.os) {
+        sw.append(el("span", undefined, `Not using ${systemName(v.os)}?`));
+      }
+      for (const [os, label] of others) {
+        const b = el("button", "dl-switch-button", label);
+        b.type = "button";
+        b.addEventListener("click", () => {
+          renderHero(ctx, { os, arch: null, macos: null });
+          hero.querySelector<HTMLElement>(".dl-button, .dl-switch-button")?.focus();
+        });
+        sw.append(b);
+      }
+      hero.append(sw);
+    }
+  }
+
+  // Every file, folded away, for people who know what they want.
+  function renderMore(ctx: Ctx): HTMLElement {
+    const stable = ctx.channel === "stable";
+    const more = el("details", "dl-more");
+    more.append(el("summary", undefined, "More download options"));
+    more.append(
+      el(
+        "p",
+        "dl-more-intro",
+        "Portable versions, other computer types, and signature files.",
+      ),
+    );
+    let rows = 0;
+    for (const [os, label] of SYSTEMS) {
+      const items: HTMLElement[] = [];
+      for (const a of ctx.artifacts.filter((a) => a.os === os).sort(order)) {
+        const file = ctx.url(a.path);
+        if (!file || typeof a.name !== "string") continue;
+        const sig = ctx.url(a.sig);
+        const row = el("li", "dl-row");
+        const info = el(
+          "div",
+          "dl-row-info",
+          el("span", "dl-row-name", variant(a)),
+          el("span", "dl-row-meta", details(a)),
+        );
+        const actions = el("div", "dl-row-actions");
+        const dl = el("a", "dl-row-download");
+        dl.href = file;
+        dl.title = a.name;
+        dl.setAttribute("aria-label", `Download ${a.name}`);
+        dl.append(icon(ICON_DOWNLOAD), el("span", "dl-row-label", "Download"));
+        actions.append(dl);
+        if (sig) {
+          const s = link(sig, "", "dl-row-sig");
+          s.title = stable ? "Signature (.sig)" : "Signature (.minisig)";
+          s.setAttribute("aria-label", `Signature for ${a.name}`);
+          s.append(icon(ICON_SHIELD));
+          actions.append(s);
+        }
+        row.append(info, actions);
+        items.push(row);
+        rows++;
+      }
+      if (items.length) {
+        const group = el("section", "dl-group");
+        group.append(
+          el("h4", "dl-group-title", label),
+          el("ul", undefined, ...items),
+        );
+        more.append(group);
+      }
+    }
+    if (rows === 0) throw new Error("no files");
+
+    const check = el("p", "dl-foot");
+    check.append(
+      "The shield icon is the file's signature. ",
+      link(HOW_TO[ctx.channel], "How to check a download"),
+      ".",
+    );
+    more.append(check);
+
+    if (stable) {
+      const backup = backups(ctx.version);
+      if (backup) more.append(backup);
+    }
+
+    const sums = ctx.url(ctx.d.sums);
+    if (sums) {
+      const foot = el("p", "dl-foot");
+      foot.append("For checking: ", link(sums, "SHA256SUMS.txt"));
+      const sumsSig = ctx.url(ctx.d.sums_sig);
+      if (sumsSig) foot.append(" · ", link(sumsSig, "its signature"));
+      const bundle = ctx.url(ctx.d.build?.bundle);
+      if (bundle) {
+        foot.append(" · ", link(bundle, "SHA256SUMS.txt.sigstore.json"));
+      }
+      more.append(foot);
+    }
+    return more;
+  }
+
+  function render(
+    root: HTMLElement,
+    channel: Channel,
+    version: string,
+    d: any,
+    v: Visitor,
+  ) {
+    const out = root.querySelector<HTMLElement>(".dl-result")!;
+    out.replaceChildren();
+    const stable = channel === "stable";
+
+    // Header: what this is, which version, when it was made.
+    const header = el("div", "dl-header");
+    const title = el("div", "dl-title");
+    title.append(
+      el("span", "dl-eyebrow", NAME[channel]),
+      el("code", "dl-version", version),
+    );
+    header.append(title);
+    const built = new Date(stable ? d.released_at : d.built_at);
+    if (!Number.isNaN(built.getTime())) {
+      const date = built.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+      const time = el("time", "dl-date", `${stable ? "Released" : "Built"} ${date}`);
+      time.dateTime = built.toISOString();
+      header.append(time);
+    }
+
+    const ctx: Ctx = {
+      root,
+      channel,
+      version,
+      d,
+      artifacts: Array.isArray(d.artifacts) ? d.artifacts : [],
+      url: (path: unknown) => buildUrl(path, channel),
+      hero: el("div", "dl-hero"),
+    };
+    const more = renderMore(ctx);
+    renderHero(ctx, v);
+    out.append(header, ctx.hero, more);
+  }
+
+  type State = "loading" | "slow" | "done" | "failed";
+
+  // Which part of the box shows: the placeholder, the fallback links, or
+  // the finished list.
+  function setState(root: HTMLElement, state: State) {
+    const loading = root.querySelector<HTMLElement>(".dl-loading")!;
+    const fallback = root.querySelector<HTMLElement>("[data-fallback]")!;
+    const slow = fallback.querySelector<HTMLElement>("[data-slow]");
+    const result = root.querySelector<HTMLElement>(".dl-result")!;
+    loading.hidden = state !== "loading" && state !== "slow";
+    fallback.hidden = state === "loading" || state === "done" || (state === "slow" && !slow);
+    if (slow) slow.hidden = state !== "slow";
+    result.hidden = state !== "done";
+    root.setAttribute("aria-busy", String(state === "loading" || state === "slow"));
+  }
+
+  // One index request, shared by every list on the page.
+  let indexPromise: Promise<any> | null = null;
+  function getIndex(url: string): Promise<any> {
+    indexPromise ??= fetch(url, { cache: "no-cache" }).then((r) => {
+      if (!r.ok) throw new Error(`index: ${r.status}`);
+      return r.json();
+    });
+    return indexPromise;
+  }
+
+  // The index entry for a channel: the release the stable channel names,
+  // or the current nightly build.
+  function entryFor(index: any, channel: Channel) {
+    if (channel === "stable") {
+      const version = index?.channels?.stable;
+      const release = index?.releases?.[version];
+      return release ? { ...release, version } : null;
+    }
+    return index?.nightly ?? null;
+  }
+
+  async function load(root: HTMLElement, channel: Channel) {
+    const index = await getIndex(root.dataset.index!);
+    const entry = entryFor(index, channel);
+    if (!entry) {
+      // Stable keeps its fallback links; nightly says there is none.
+      if (channel === "nightly") {
+        root.querySelector<HTMLElement>("[data-fallback]")!.textContent =
+          "There is no test build right now.";
+      }
+      throw new Error("no entry in the index");
+    }
+    const descUrl = buildUrl(entry.descriptor, channel);
+    if (!descUrl) throw new Error("bad descriptor path");
+    const res = await fetch(descUrl);
+    if (!res.ok) throw new Error(`descriptor: ${res.status}`);
+    const raw = await res.arrayBuffer();
+    // The index names the descriptor's hash; anything else is not shown.
+    if ((await sha256Hex(raw)) !== entry.sha256) {
+      throw new Error("descriptor hash does not match the index");
+    }
+    render(
+      root,
+      channel,
+      String(entry.version),
+      JSON.parse(new TextDecoder().decode(raw)),
+      await detect(),
+    );
+  }
+
+  // After this long, also offer the fallback links, but keep waiting.
+  const SLOW_MS = 8000;
+
+  for (const root of document.querySelectorAll<HTMLElement>(
+    ".dl-downloads",
+  )) {
+    const channel: Channel =
+      root.dataset.channel === "stable" ? "stable" : "nightly";
+    setState(root, "loading");
+    let settled = false;
+    const timer = setTimeout(() => {
+      if (!settled) setState(root, "slow");
+    }, SLOW_MS);
+    load(root, channel)
+      .then(() => setState(root, "done"))
+      .catch((e) => {
+        setState(root, "failed");
+        console.warn(`${channel} download list unavailable:`, e);
+      })
+      .finally(() => {
+        settled = true;
+        clearTimeout(timer);
+      });
+  }
+</script>
+
+<style is:global>
+  .dl-downloads {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    box-shadow: var(--sl-shadow-sm);
+    font-size: var(--sl-text-base);
+    line-height: 1.5;
+    color: var(--sl-color-gray-2);
+  }
+  .dl-downloads a {
+    color: var(--sl-color-text-accent);
+  }
+  .dl-downloads a:hover {
+    color: var(--sl-color-white);
+  }
+  .dl-status {
+    margin: 0;
+  }
+  .dl-loading:not([hidden]) + .dl-status {
+    margin-top: 1rem;
+  }
+
+  /* Placeholder while the data loads, about the size of the result. */
+  .dl-loading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .dl-loading[hidden] {
+    display: none;
+  }
+  .dl-skel {
+    display: block;
+    border-radius: 999rem;
+    background: var(--sl-color-gray-6);
+  }
+  .dl-skel-button {
+    width: min(20rem, 100%);
+    height: 3.2rem;
+    margin-top: 1.9rem;
+  }
+  .dl-skel-line {
+    width: min(14rem, 80%);
+    height: 0.8rem;
+  }
+  .dl-skel-short {
+    width: min(9rem, 55%);
+  }
+  .dl-loading-text {
+    margin: 0.4rem 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .dl-skel {
+      background: linear-gradient(
+        90deg,
+        var(--sl-color-gray-6) 25%,
+        var(--sl-color-gray-5) 50%,
+        var(--sl-color-gray-6) 75%
+      );
+      background-size: 200% 100%;
+      animation: dl-shimmer 1.4s ease-in-out infinite;
+    }
+  }
+  @keyframes dl-shimmer {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: -100% 0;
+    }
+  }
+
+  .dl-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+  }
+  .dl-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    min-width: 0;
+  }
+  .dl-eyebrow {
+    font-size: var(--sl-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sl-color-text-accent);
+  }
+  .dl-version {
+    font-family: var(--__sl-font-mono, monospace);
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-white);
+    overflow-wrap: anywhere;
+  }
+  .dl-date {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+    white-space: nowrap;
+  }
+
+  .dl-hero {
+    margin-top: 1rem;
+  }
+  .dl-caution {
+    margin: 0 0 1rem;
+    padding: 0.5rem 0.75rem;
+    border-inline-start: 0.25rem solid var(--sl-color-orange);
+    background: var(--sl-color-orange-low);
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-white);
+  }
+  /* Same look as Starlight's primary LinkButton. */
+  .dl-downloads a.dl-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.4375rem 1.125rem;
+    border: 1px solid var(--sl-color-text-accent);
+    border-radius: 999rem;
+    background: var(--sl-color-text-accent);
+    color: var(--sl-color-black);
+    font-size: var(--sl-text-sm);
+    line-height: 1.1875;
+    text-decoration: none;
+    outline-offset: 0.25rem;
+  }
+  .dl-downloads a.dl-button:hover {
+    color: var(--sl-color-black);
+  }
+  /* Starlight's secondary LinkButton. */
+  .dl-downloads a.dl-button.secondary {
+    background: transparent;
+    border-color: var(--sl-color-gray-4);
+    color: var(--sl-color-white);
+  }
+  .dl-downloads a.dl-button.secondary:hover {
+    border-color: var(--sl-color-white);
+    color: var(--sl-color-white);
+  }
+  .dl-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+  }
+  .dl-choice {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .dl-button .dl-icon {
+    width: 1.25em;
+    height: 1.25em;
+    flex: none;
+  }
+  @media (min-width: 50rem) {
+    .dl-downloads a.dl-button {
+      padding: 0.9375rem 1.25rem;
+      font-size: var(--sl-text-base);
+    }
+  }
+  .dl-icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .dl-meta {
+    margin-top: 0.6rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .dl-help {
+    margin: 0.85rem 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .dl-hint {
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    border-inline-start: 0.25rem solid var(--sl-color-asides-border, var(--sl-color-blue));
+    background: var(--sl-color-asides-bg-accent, var(--sl-color-blue-low));
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-white);
+  }
+
+  .dl-next {
+    margin-top: 1.25rem;
+    font-size: var(--sl-text-sm);
+  }
+  .dl-next-title {
+    margin: 0;
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .dl-next ol {
+    margin: 0.35rem 0 0;
+    padding-inline-start: 1.4rem;
+    list-style: decimal;
+  }
+  .dl-next li + li {
+    margin-top: 0.15rem;
+  }
+  .dl-next-help {
+    margin: 0.5rem 0 0;
+    color: var(--sl-color-gray-3);
+  }
+
+  .dl-switch {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .dl-switch-button {
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 999rem;
+    background: transparent;
+    color: var(--sl-color-white);
+    font: inherit;
+    cursor: pointer;
+  }
+  .dl-switch-button:hover {
+    border-color: var(--sl-color-text-accent);
+    color: var(--sl-color-text-accent);
+  }
+
+  .dl-more {
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+    padding-top: 0.75rem;
+  }
+  .dl-more summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    list-style: none;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .dl-more summary::-webkit-details-marker {
+    display: none;
+  }
+  .dl-more summary::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.15s;
+  }
+  .dl-more[open] summary::before {
+    transform: rotate(45deg);
+  }
+  .dl-more-intro {
+    margin: 0.5rem 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .dl-group {
+    margin-top: 1rem;
+  }
+  .dl-group-title {
+    margin: 0 0 0.35rem;
+    font-size: var(--sl-text-sm);
+    font-weight: 700;
+    color: var(--sl-color-gray-2);
+  }
+  .dl-group ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  .dl-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.55rem 0.75rem;
+  }
+  .dl-row + .dl-row {
+    border-top: 1px solid var(--sl-color-gray-5);
+  }
+  .dl-row-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .dl-row-name {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-white);
+  }
+  .dl-row-meta {
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+  .dl-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: none;
+  }
+  .dl-downloads a.dl-row-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 999rem;
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-sm);
+    text-decoration: none;
+  }
+  .dl-downloads a.dl-row-download:hover {
+    border-color: var(--sl-color-text-accent);
+    color: var(--sl-color-text-accent);
+  }
+  .dl-downloads a.dl-row-sig {
+    display: inline-flex;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    color: var(--sl-color-gray-3);
+  }
+  .dl-downloads a.dl-row-sig:hover {
+    color: var(--sl-color-text-accent);
+  }
+  .dl-row .dl-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .dl-foot {
+    margin: 1rem 0 0;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+    overflow-wrap: anywhere;
+  }
+  .dl-foot + .dl-foot {
+    margin-top: 0.35rem;
+  }
+
+  @media (max-width: 30rem) {
+    .dl-choice,
+    .dl-downloads a.dl-button {
+      width: 100%;
+    }
+    .dl-downloads a.dl-button {
+      justify-content: center;
+    }
+    .dl-row-label {
+      display: none;
+    }
+    .dl-downloads a.dl-row-download {
+      padding: 0.4rem;
+    }
+    .dl-row .dl-icon {
+      width: 1.15rem;
+      height: 1.15rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dl-downloads * {
+      transition: none !important;
+    }
+  }
+</style>

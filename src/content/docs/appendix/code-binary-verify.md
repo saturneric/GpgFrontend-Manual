@@ -76,8 +76,8 @@ RWSxNasy+OIaiWWGzwNYu223e0UNDwrsb+4S/ttGO8knO/URmtMtDpse
 The same key is listed in the [security policy][security-md] of the
 repository, so you can compare the two.
 
-Get the files from the list on the
-[Downloads page](/overview/downloads/#about-nightly-builds).
+Get the files from the test build list on the
+[Downloads page](/overview/downloads/#test-builds).
 
 ### Step 1: Check the Signature
 
