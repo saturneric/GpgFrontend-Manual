@@ -50,38 +50,69 @@ const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
       .join("");
   }
 
-  function describe(a: Artifact): string {
-    const parts: string[] = [];
-    if (a.os === "macos") {
-      const major = a.min_os?.macos?.split(".")[0];
-      if (major) parts.push(`macOS ${major} or newer`);
-      parts.push(a.arch === "x86_64" ? "Intel" : "Apple silicon");
-    } else if (a.os === "android") {
-      parts.push(
-        a.arch === "arm64-v8a" ? "Phones and tablets (arm64-v8a)" : a.arch,
-      );
-    } else {
-      parts.push(a.arch === "aarch64" ? "ARM (aarch64)" : a.arch);
+  // Who a file is for, in plain words. The chip name only appears where
+  // it is the real choice (Linux, Android), and then in the details line.
+  function variant(a: Artifact): string {
+    const portable = a.flavor === "portable";
+    switch (a.os) {
+      case "windows":
+        return portable ? "Portable" : "Installer";
+      case "macos": {
+        const chip = a.arch === "x86_64" ? "Intel" : "Apple silicon";
+        const major = a.min_os?.macos?.split(".")[0];
+        return major ? `${chip}, macOS ${major} or newer` : chip;
+      }
+      case "linux": {
+        const base =
+          a.arch === "aarch64" ? "ARM computers" : "Intel or AMD computers";
+        return portable ? `${base}, portable` : base;
+      }
+      case "android":
+        return a.arch === "arm64-v8a"
+          ? "Most phones and tablets"
+          : a.arch === "x86_64"
+            ? "Emulators and x86 devices"
+            : a.arch;
+      default:
+        return a.arch;
     }
-    return parts.join(", ");
   }
 
-  function fileLabel(a: Artifact): string {
-    const portable = a.flavor === "portable";
-    switch (a.kind) {
-      case "msi":
-        return "Installer (.msi)";
-      case "zip":
-        return "Portable (.zip)";
-      case "dmg":
-        return "Disk image (.dmg)";
-      case "apk":
-        return "App (.apk)";
-      case "appimage":
-        return portable ? "Portable AppImage" : "AppImage";
-      default:
-        return portable ? "Portable" : "Download";
+  const KIND_LABEL: Record<string, string> = {
+    msi: ".msi",
+    zip: ".zip",
+    dmg: ".dmg",
+    apk: ".apk",
+    appimage: "AppImage",
+  };
+
+  function details(a: Artifact): string {
+    const parts = [KIND_LABEL[a.kind] ?? a.kind];
+    if (a.os === "linux" || a.os === "android") parts.push(a.arch);
+    parts.push(size(a.size));
+    return parts.filter(Boolean).join(" · ");
+  }
+
+  // Most common choice first: installed before portable, the usual chip
+  // before the rare one, older macOS (wider reach) before newer.
+  const COMMON_ARCH: Record<string, string> = {
+    windows: "x86_64",
+    macos: "arm64",
+    linux: "x86_64",
+    android: "arm64-v8a",
+  };
+  function order(x: Artifact, y: Artifact): number {
+    const rank = (a: Artifact) => [
+      COMMON_ARCH[a.os] === a.arch ? 0 : 1,
+      a.flavor === "portable" ? 1 : 0,
+      macMajor(a),
+    ];
+    const rx = rank(x);
+    const ry = rank(y);
+    for (let i = 0; i < rx.length; i++) {
+      if (rx[i] !== ry[i]) return rx[i] - ry[i];
     }
+    return 0;
   }
 
   type Visitor = {
@@ -234,9 +265,7 @@ const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
       );
       hero.append(button);
 
-      const meta = [describe(best), fileLabel(best), size(best.size)]
-        .filter(Boolean)
-        .join(" · ");
+      const meta = `${variant(best)} · ${details(best)}`;
       const links = el("div", "nightly-links", el("span", "nightly-meta", meta));
       const sig = buildUrl(best.sig);
       if (sig) links.append(link(sig, "Signature"));
@@ -278,9 +307,7 @@ const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
     for (const [os, label] of SYSTEMS) {
       const list = artifacts
         .filter((a) => a.os === os)
-        .sort((x, y) =>
-          (describe(x) + fileLabel(x)).localeCompare(describe(y) + fileLabel(y)),
-        );
+        .sort(order);
       const items: HTMLElement[] = [];
       for (const a of list) {
         const file = buildUrl(a.path);
@@ -290,11 +317,11 @@ const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
         const info = el(
           "div",
           "nightly-row-info",
-          el("span", "nightly-row-name", describe(a)),
+          el("span", "nightly-row-name", variant(a)),
           el(
             "span",
             "nightly-row-meta",
-            [fileLabel(a), size(a.size)].filter(Boolean).join(" · "),
+            details(a),
           ),
         );
         const actions = el("div", "nightly-row-actions");
