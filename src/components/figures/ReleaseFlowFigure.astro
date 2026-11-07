@@ -1,0 +1,200 @@
+---
+// How a new GpgFrontend version travels from the source code to the user.
+// Used by src/content/docs/appendix/release-updates.mdx.
+---
+
+<figure class="release-flow">
+  <svg
+    viewBox="0 0 520 600"
+    role="img"
+    aria-labelledby="release-flow-title release-flow-desc"
+  >
+    <title id="release-flow-title">Release flow</title>
+    <desc id="release-flow-desc">
+      GitHub Actions builds from the public repository and stages a release
+      candidate in a private staging bucket. A stable release goes to the
+      maintainer's machine for OpenPGP and Authenticode signing, then to the
+      signing host, which verifies it again. A nightly goes straight to the
+      signing host, which verifies and minisigns it. The signing host
+      publishes to the release store, and the client verifies the signatures
+      and the update index.
+    </desc>
+    <defs>
+      <marker
+        id="release-flow-arrow"
+        viewBox="0 0 10 10"
+        refX="9"
+        refY="5"
+        markerWidth="7"
+        markerHeight="7"
+        orient="auto-start-reverse"
+      >
+        <path d="M0,0 L10,5 L0,10 z" class="arrow-head"></path>
+      </marker>
+    </defs>
+
+    <!-- Arrows -->
+    <g class="arrow">
+      <line x1="260" y1="66" x2="260" y2="98"></line>
+      <line x1="260" y1="156" x2="260" y2="188"></line>
+      <path d="M200,246 L120,298"></path>
+      <path d="M320,246 L400,298"></path>
+      <line x1="230" y1="345" x2="288" y2="345"></line>
+      <path d="M400,384 L320,428"></path>
+      <line x1="260" y1="486" x2="260" y2="518"></line>
+    </g>
+    <text class="arrow-label" x="150" y="268" text-anchor="end">
+      stable
+    </text>
+    <text class="arrow-label" x="370" y="268" text-anchor="start">
+      nightly
+    </text>
+
+    <!-- 1. Source code -->
+    <rect class="box" x="110" y="10" width="300" height="56" rx="10"></rect>
+    <text class="name" x="260" y="34" text-anchor="middle">Public repository</text>
+    <text class="note" x="260" y="55" text-anchor="middle">
+      code, recipe, policy, keys
+    </text>
+
+    <!-- 2. Build service -->
+    <rect class="box" x="110" y="100" width="300" height="56" rx="10"></rect>
+    <text class="name" x="260" y="124" text-anchor="middle">
+      GitHub Actions
+    </text>
+    <text class="note" x="260" y="145" text-anchor="middle">
+      builds, signs provenance
+    </text>
+
+    <!-- 3. Waiting room -->
+    <rect class="box dashed" x="110" y="190" width="300" height="56" rx="10">
+    </rect>
+    <text class="name" x="260" y="214" text-anchor="middle">
+      Staging bucket
+    </text>
+    <text class="note" x="260" y="235" text-anchor="middle">
+      private, never served
+    </text>
+
+    <!-- 4a. Maintainer's computer -->
+    <rect class="box sealed" x="10" y="300" width="220" height="90" rx="10">
+    </rect>
+    <text class="name" x="120" y="326" text-anchor="middle">
+      Maintainer's machine
+    </text>
+    <text class="note" x="120" y="348" text-anchor="middle">
+      stable stage: OpenPGP,
+    </text>
+    <text class="note" x="120" y="368" text-anchor="middle">Authenticode</text>
+
+    <!-- 4b. Signing computer -->
+    <rect class="box sealed" x="290" y="300" width="220" height="90" rx="10">
+    </rect>
+    <text class="name" x="400" y="326" text-anchor="middle">
+      Signing host
+    </text>
+    <text class="note" x="400" y="348" text-anchor="middle">
+      verifies, minisigns
+    </text>
+    <text class="note" x="400" y="368" text-anchor="middle">
+      nightlies and index
+    </text>
+
+    <!-- Seal badges -->
+    <g class="seal">
+      <circle cx="218" cy="302" r="13"></circle>
+      <path d="M212,302 l4,4 l8,-8"></path>
+      <circle cx="498" cy="302" r="13"></circle>
+      <path d="M492,302 l4,4 l8,-8"></path>
+    </g>
+
+    <!-- 5. Download storage -->
+    <rect class="box" x="110" y="430" width="300" height="56" rx="10"></rect>
+    <text class="name" x="260" y="454" text-anchor="middle">
+      Release store
+    </text>
+    <text class="note" x="260" y="475" text-anchor="middle">
+      immutable files, holds no keys
+    </text>
+
+    <!-- 6. You -->
+    <rect class="box you" x="110" y="520" width="300" height="70" rx="10">
+    </rect>
+    <text class="name" x="260" y="544" text-anchor="middle">Client</text>
+    <text class="note" x="260" y="565" text-anchor="middle">
+      verifies signatures
+    </text>
+    <text class="note" x="260" y="583" text-anchor="middle">
+      and the update index
+    </text>
+  </svg>
+  <figcaption>
+    Release flow. Components with a check mark hold signing keys. The dashed
+    box is not publicly served.
+  </figcaption>
+</figure>
+
+<style>
+  .release-flow {
+    margin: 1.5rem auto;
+    max-width: 34rem;
+  }
+  .release-flow svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .box {
+    fill: var(--sl-color-gray-6);
+    stroke: var(--sl-color-gray-4);
+    stroke-width: 1.5;
+  }
+  .box.dashed {
+    stroke-dasharray: 6 5;
+  }
+  .box.sealed,
+  .box.you {
+    stroke: var(--sl-color-accent);
+    stroke-width: 2;
+  }
+  .name {
+    fill: var(--sl-color-white);
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .note {
+    fill: var(--sl-color-gray-2);
+    font-size: 14px;
+  }
+  .arrow line,
+  .arrow path {
+    stroke: var(--sl-color-gray-3);
+    stroke-width: 2;
+    fill: none;
+    marker-end: url(#release-flow-arrow);
+  }
+  .arrow-head {
+    fill: var(--sl-color-gray-3);
+  }
+  .arrow-label {
+    fill: var(--sl-color-gray-2);
+    font-size: 14px;
+    font-style: italic;
+  }
+  .seal circle {
+    fill: var(--sl-color-accent);
+  }
+  .seal path {
+    stroke: var(--sl-color-black);
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .release-flow figcaption {
+    margin-top: 0.5rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+    text-align: center;
+  }
+</style>

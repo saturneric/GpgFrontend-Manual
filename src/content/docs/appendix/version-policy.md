@@ -142,5 +142,8 @@ series**. It will not move you to a different one on its own. Moving to a new
 series is something you choose to do yourself, by downloading it from the
 [Downloads](/overview/downloads/) page.
 
+To learn how the update check works and how to turn it off, see
+[How Releases and Updates Work](/appendix/release-updates/).
+
 [github-releases]: https://github.com/saturneric/GpgFrontend/releases
 [blog-history]: https://blog.bktus.com/en/archives/u8hywl/

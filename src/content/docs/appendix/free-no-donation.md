@@ -3,7 +3,7 @@ title: Free of Charge, No Donations
 description: "GpgFrontend is free for everyone, forever. The project also takes no donations. This page explains why, in plain words."
 sidebar:
   label: Free & No Donations
-  order: 7
+  order: 8
 ---
 
 GpgFrontend is free. You pay nothing. Not now, not later.
