@@ -493,13 +493,6 @@ entries:
     highlight: publishKey
     sources: [src/ui/dialog/keypair_details/]
 
-  - id: build-information
-    doc: src/content/docs/appendix/code-binary-verify.md
-    ref: img-4  # About > Build Information; changes with every build
-    scenario: about-build-info
-    size: auto
-    sources: [src/ui/dialog/help/]
-
   # Phase 3: pages updated for v2.2.3, using scenarios that already exist.
   - id: operations-bar
     doc: src/content/docs/guides/understand-interface.mdx

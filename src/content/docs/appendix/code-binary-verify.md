@@ -9,39 +9,66 @@ When you download software, one question matters: is this really the app the
 developer made, or did someone change it on the way to you?
 
 For a security tool, that question matters twice. This page shows how
-GpgFrontend lets you check, and how deep you can go.
+GpgFrontend lets you check, and how deep you can go. To learn how releases
+are built, signed and published, see
+[How Releases and Updates Work](/appendix/release-updates/#build-and-release-pipeline).
 
-## Nobody Builds the App by Hand
+## Which Check Do I Need?
 
-Every official release is built by **GitHub Actions**, an automatic build
-service. It takes the source code straight from the public repository,
-compiles it, and publishes the result. No person builds release files on their
-own computer and uploads them.
+Find the kind of download you have:
 
-Nightly builds take one more step. After GitHub Actions builds them, a
-separate signing computer checks the files and signs them. The signed files
-are then stored on Cloudflare R2, a file storage service, and you download
-them from `builds.bktus.com`.
+| You have                                    | How to check it                                   |
+| :------------------------------------------ | :------------------------------------------------ |
+| A stable release with a `.sig` file         | [Check a Stable Release](#check-a-stable-release) |
+| A test or beta build with a `.minisig` file | [Check a Test Build](#check-a-test-build)         |
+| The Windows installer                       | Windows checks it too. See [Windows](#windows).   |
+| The macOS app                               | macOS checks it for you. See [macOS](#macos).     |
+| Flatpak, an app store or a package manager  | The store or package manager checks it for you.   |
 
-The build recipe is public too, in the repository file
-`.github/workflows/build.yml`. So anyone can see exactly how each release
-was made, and anyone can repeat it.
+## Check a Stable Release
 
-## Every Package Is Signed
-
-Since version 1.0.5, every stable release package is signed with the maintainer's
+Since version 1.0.5, every stable release file is signed with the maintainer's
 OpenPGP key. Next to each download there is a small `.sig` file. With standard
-GPG tools, you can use it to check that the package is genuine and was not
+GPG tools, you can use it to check that the file is genuine and was not
 changed by anyone.
 
-Each system also adds its own check on top:
+### Step 1: Get the Maintainer's Key
+
+1. Download the maintainer's public key from
+   [bktus.com/openpgp][bktus-openpgp].
+2. Import it into GnuPG. You can also do this in GpgFrontend itself.
+3. Check that the key's fingerprint is exactly:
+
+   ```
+   12F7E8858CF15BEC9975FF3C5CA3DA246843FD03
+   ```
+
+The same fingerprint is listed in the [security policy][security-md] of the
+repository, so you can compare the two.
+
+### Step 2: Check the Signature
+
+Put your download and its `.sig` file in the same folder. Open a terminal in
+that folder and run this command. Replace `FILE` with the name of your
+download:
+
+```sh
+gpg --verify FILE.sig FILE
+```
+
+GnuPG should say `Good signature`, made by the key with the fingerprint above.
+Any other result means the file is not the one that was published. Do not use
+it.
+
+## Checks Your System Does for You
+
+Each system also adds its own check on top of the signature.
 
 ### Windows
 
-All programs and installers are signed with a
-[Certum][certum] code signing certificate.
-Windows checks this itself. You can also look at it yourself: right-click the
-file, open Properties, and look at Digital Signatures.
+The stable installers are signed with a [Certum][certum] code signing
+certificate. Windows checks this itself. You can also look at it yourself:
+right-click the file, open Properties, and look at Digital Signatures.
 
 ![][img-1]
 
@@ -56,18 +83,20 @@ the app. If the app had been changed, macOS would refuse to start it.
 ### Linux
 
 The AppImage comes with a `.sig` file, like the other packages. Check it with
-GPG before you run the app. Flatpak and other formats bring their own
-signature and sandbox systems on top.
+GPG before you run the app, as shown in
+[Check a Stable Release](#check-a-stable-release). Flatpak and other formats
+bring their own signature and sandbox systems on top.
 
 ![][img-3]
 
-## Checking a Nightly Build
+## Check a Test Build
 
-Nightly builds are not signed with the maintainer's OpenPGP key, so they have
-no `.sig` files. Instead, every file comes with a `.minisig` file. This is a
-signature made with [minisign][minisign], a small and simple signing tool.
+Test builds (nightly builds) and beta versions are not signed with the
+maintainer's OpenPGP key, so they have no `.sig` files. Instead, every file
+comes with a `.minisig` file. This is a signature made with
+[minisign][minisign], a small and simple signing tool.
 
-The nightly signing key is:
+The test build signing key is:
 
 ```
 RWSxNasy+OIaiWWGzwNYu223e0UNDwrsb+4S/ttGO8knO/URmtMtDpse
@@ -140,25 +169,6 @@ build on GitHub, from the `main` branch. The signature is also written to
 Rekor, a public log that anyone can search. Because Step 2 checked your file
 against that list, your file is covered too.
 
-## Check Inside the App
-
-Open **Help** > **About**, then the **Build Information** tab. It shows the
-version, the libraries GpgFrontend was built with, and the exact **Git
-Branch:** and **Git Commit:** of the source code. That lets you match your
-running app to a specific point in the public code history.
-
-To copy these details, for example into a bug report, click **Copy Build
-Information**.
-
-![][img-4]
-
-## The Signing Key
-
-All commits and release packages are signed with the maintainer's OpenPGP key.
-The key and its fingerprint are published at
-[bktus.com/openpgp][bktus-openpgp]. Get the key there, check the
-fingerprint, and use it to verify the `.sig` file that comes with each release.
-
 ## When the Stakes Are Very High
 
 The checks above are enough for everyday use. But if your safety, your freedom
@@ -186,15 +196,13 @@ If you are in that situation, this is the path:
 
 Build instructions are in the
 [contributing guide](/appendix/contribute/#set-up-your-environment). This path
-costs
-real time and skill. That is the honest price of not having to trust anyone
-else's build.
+costs real time and skill. That is the honest price of not having to trust
+anyone else's build.
 
 [certum]: https://www.certum.eu/en/certum-by-asseco/
 [img-1]: https://image.cdn.bktus.com/i/2025/06/25/2eb0e5a1ff970b6d97ed38f18b45476c9aad6ee7.webp
 [img-2]: https://image.cdn.bktus.com/i/2025/06/24/cbc3a2ec86515bf5882d1249179e5e06053ada5f.webp
 [img-3]: https://image.cdn.bktus.com/i/2025/06/24/690c6b534ab54130dfa100f85a8cc299a0223ff5.webp
-[img-4]: https://image.cdn.bktus.com/i/2026/10/29/633ad6c3f31555b317e20d990090bb27d3aef7fb.webp
 [bktus-openpgp]: https://bktus.com/openpgp/
 [cosign-install]: https://docs.sigstore.dev/cosign/system_config/installation/
 [minisign]: https://jedisct1.github.io/minisign/
