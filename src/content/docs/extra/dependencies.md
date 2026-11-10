@@ -8,19 +8,21 @@ sidebar:
 
 ## Libraries
 
-GpgFrontend incorporates various libraries and binaries, each with their own
-license terms. For more information or to obtain the source code, please visit
-the respective project homepages.
+GpgFrontend uses the libraries and tools below. Each has its own license. For
+details, or to get the source code, visit the homepage of each project. To see
+what your computer needs to run the app, see
+[System Requirement](/appendix/system-requirement/).
 
-Note: As of v2.1.9, GpgFrontend no longer uses the QtAES library. All
-cryptographic operations (mainly used for the Application itself) are now
-performed using OpenSSL, with AES-GCM as the default and only mode.
+Two changes over time are worth knowing:
 
-Note: Starting with v2.2.0, the internal cryptographic helpers have been
-migrated again from OpenSSL to **libsodium**. This includes application-level
-helpers such as hashing, HMAC, random generation, password hashing, and key
-derivation. OpenSSL is still used by the email module, for its secure (TLS)
-connections to mail servers. Qt may also use it for other secure connections.
+- Since v2.1.9, GpgFrontend no longer uses the QtAES library. The app's own
+  internal cryptography (not your OpenPGP messages) moved to OpenSSL, with
+  AES-GCM as the only mode.
+- Since v2.2.0, this internal cryptography uses **libsodium** instead of
+  OpenSSL. This covers hashing, HMAC, random numbers, password hashing and
+  key derivation. OpenSSL is still used by the email module, for its secure
+  (TLS) connections to mail servers. Qt may also use it for other secure
+  connections.
 
 ### Common
 
@@ -75,10 +77,9 @@ and the Status Panel. The font is licensed under the SIL Open Font License 1.1
 
 ## Icons
 
-The icons utilized in this software are sourced from [Alibaba
-Iconfont][iconfont]. This vector icon library is free of use,
-isn't registered as a trademark, has no copyright issues, and can be
-commercially utilized.
+The icons in this software come from [Alibaba Iconfont][iconfont]. This
+vector icon library is free to use. It is not a registered trademark, has no
+copyright issues, and may be used commercially.
 
 [qt]: https://www.qt.io
 [gnupg]: https://gnupg.org

@@ -5,12 +5,13 @@ sidebar:
   order: 1
 ---
 
-These are the recommended requirements for running GpgFrontend. They are not
-strict; the app may run fine on weaker machines too.
+This page lists what you need to run GpgFrontend. For the libraries the app is
+built with, see [Dependencies](/extra/dependencies/).
 
 ## Hardware
 
-For smooth operation, we recommend:
+These values are recommendations, not strict limits. The app may run fine on
+weaker machines too.
 
 - RAM: 2 GB or more
 - Disk: 200 MB free for the app itself, plus space for GnuPG and your data
@@ -18,10 +19,13 @@ For smooth operation, we recommend:
 
 ## OS
 
-- Windows 10 or later. Windows 7 can only run the older v2.1.x line, which
-  still has Qt5 builds. It is not recommended.
+These are the oldest systems the official builds run on:
+
+- Windows 10 (version 1809) or later. Windows 7 can only run the older v2.1.x
+  line, which still has Qt5 builds. It is not recommended.
 - macOS 15 or later, on both Intel and Apple Silicon
-- Linux on x86_64: Ubuntu 22.04 or later, or a comparable distribution
+- Linux on x86_64: Ubuntu 22.04 or later, or a comparable distribution (glibc
+  2.35 or newer)
 - Linux on arm64: Ubuntu 24.04 or later, or a comparable distribution
 
 > Note: Only 64-bit machines are supported.
@@ -35,17 +39,15 @@ release. See [Downloads](/overview/downloads/).
 
 ## GnuPG
 
-- Minimum 2.2.0. Some features need newer versions than 2.2.0.
-- GnuPG older than 2.1.0 is not used at all. GpgFrontend still starts, but it
-  uses the built-in rPGP engine instead.
+- Minimum: 2.2.0. Some features need a newer version.
 - Recommended: 2.4.0 or later.
 - On Windows, the official packages already include a recent GnuPG, so there
   is nothing extra to install.
 
-Since v2.2, the app also ships a second, built-in engine (rPGP). If GnuPG is
-missing or too old, the app still starts and works through rPGP, but the
-features that depend on GnuPG, such as smart cards, stay unavailable until a
-working GnuPG is found.
+Since v2.2, the app also has a second, built-in engine (rPGP). If GnuPG is
+missing, or older than 2.1.0, GpgFrontend does not use it. The app still
+starts and works through rPGP. But the features that depend on GnuPG, such as
+smart cards, stay unavailable until a working GnuPG is found.
 
 ## Optional on Linux
 
@@ -56,8 +58,8 @@ library:
 - Debian and Ubuntu: `libsecret-1-0`
 - Fedora: `libsecret`
 
-Without these, that option is greyed out in the settings. Everything else works
-as normal. See [Application Secure Key](/advanced/app-secure-key/).
+Without them, that option is greyed out in the settings. Everything else
+works as normal. See [Application Secure Key](/advanced/app-secure-key/).
 
 ## Network
 

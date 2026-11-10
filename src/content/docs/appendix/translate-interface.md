@@ -22,26 +22,28 @@ edited with [Qt Linguist][qt-linguist], a graphical tool. The basics:
 - You do not have to finish everything at once; partial work is fine.
 - Keep placeholders such as `%1`, `%2`, `%n`, and HTML-like tags as they are.
 
-## About Translation Files
+## Find and Edit the Translation Files
 
-1. Download or clone the source code from
-   [GitHub][github-gpgfrontend].
-2. The application's translation files are located in
-   [`resource/lfs/locale/ts`][locale-ts-dir],
-   named `GpgFrontend.<locale>.ts` (for example `GpgFrontend.de_DE.ts`).
-   Integrated modules keep their own translation files under
-   `modules/src/<module>/ts/`, for example
-   `modules/src/m_email/ts/ModuleEMail.de_DE.ts`. The application and every
-   module always share the same set of languages.
-3. Many features now come from modules: email, instant messaging, key
-   servers, update checking and more. If you cannot find a string in
-   `GpgFrontend.<locale>.ts`, look in the module's own file.
-4. To update an existing language, edit the corresponding `.ts` file. This is
-   the most common contribution.
+1. Download or clone the source code from [GitHub][github-gpgfrontend]. Clone
+   with `git clone --recursive`, so you also get the modules.
+2. Find the `.ts` file for your language:
+   - The application's files are in
+     [`resource/lfs/locale/ts`][locale-ts-dir], named
+     `GpgFrontend.<locale>.ts` (for example `GpgFrontend.de_DE.ts`).
+   - Each integrated module keeps its own files under
+     `modules/src/<module>/ts/`, for example
+     `modules/src/m_email/ts/ModuleEMail.de_DE.ts`.
+3. Open the file in Qt Linguist, translate, and save. Updating an existing
+   language this way is the most common contribution.
+
+Many features now come from modules: email, instant messaging, key servers,
+update checking and more. If you cannot find a string in
+`GpgFrontend.<locale>.ts`, look in the module's own file. The application and
+every module always share the same set of languages.
 
 ### How the `.ts` Files Are Generated
 
-The `.ts` files are no longer hand-created. The set of supported languages is
+The `.ts` files are not created by hand. The set of supported languages is
 defined in one place, `GPGFRONTEND_SUPPORTED_LOCALES` in
 [`cmake/Translations.cmake`][github-translations-cmake],
 and both the application and the modules derive their `.ts` file set from it.
@@ -70,8 +72,9 @@ strings that are not translated yet. Before a release, the maintainer may fill
 those gaps with AI translation tools, in languages the maintainer cannot check
 personally, so every language stays reasonably complete.
 
-Those AI translations are only a stopgap. They can be clumsy, too literal, or
-inconsistent with the usual terms. A human translation is always better,
+Those AI translations are only a temporary fix. They can be clumsy, too
+literal, or not in line with the usual terms. A human translation is always
+better,
 especially for security terms, OpenPGP concepts, and interface wording.
 
 So if you see an awkward or wrong translation in your language, that is your
@@ -92,9 +95,9 @@ changes:
   `type="unfinished"` marker once a string is translated). Do not modify source
   string entries or `<location>` line numbers by hand.
 - If you ran `scripts/update_translations.sh` locally, only commit the `.ts`
-  files for the language(s) you actually worked on. Avoid committing unrelated
-  churn from regenerating every locale and module, as that makes the pull
-  request harder to review.
+  files for the languages you actually worked on. The script touches every
+  language and module. Leave those other changes out, because they make the
+  pull request harder to review.
 - Adding a new language touches `cmake/Translations.cmake` as well; mention this
   in the pull request description so the build change is easy to spot.
 

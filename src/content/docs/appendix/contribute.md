@@ -6,7 +6,7 @@ sidebar:
 ---
 
 Thank you for wanting to contribute! GpgFrontend is maintained by one person,
-so every contribution counts, no matter how small. This guide walks the whole
+so every contribution counts, no matter how small. This guide covers the whole
 path: set up a development environment, build and test the project, and send
 in your changes, either as a GitHub pull request or as a git patch by email.
 
@@ -125,10 +125,10 @@ sudo apt-get install -y build-essential git cmake ninja-build \
 ```
 
 If the `libgtest-dev` package on your distribution is too old, build GoogleTest
-from source instead (CI uses v1.15.2):
+from source instead. The CodeQL job in CI builds v1.15.0 this way:
 
 ```bash
-git clone --branch v1.15.2 --depth 1 https://github.com/google/googletest.git
+git clone --branch v1.15.0 --depth 1 https://github.com/google/googletest.git
 cmake -S googletest -B googletest/build -DBUILD_SHARED_LIBS=ON
 cmake --build googletest/build && sudo cmake --install googletest/build
 ```
@@ -176,8 +176,8 @@ may work but are not officially verified.
 
 Qt 6.5 or later is required; CI currently builds against Qt 6.11.3 (set in
 `.github/actions/install-qt6/action.yml`). The required
-modules are Core, Widgets, PrintSupport, Network, LinguistTools, Xml, and Sql,
-plus Concurrent for the modules sub-project.
+modules are Core, Gui, Widgets, PrintSupport, Network, LinguistTools, Xml, and
+Sql, plus Concurrent for the modules sub-project.
 
 - On Linux, use the [Qt online installer][qt-installer]
   or your package manager (on Ubuntu: `qt6-base-dev qt6-tools-dev` and related
@@ -208,9 +208,11 @@ cmake --build build
 Notes:
 
 - `GPGFRONTEND_LINK_GPGME_INTO_CORE=ON` builds gpgme, libassuan, and
-  libgpg-error from the bundled submodules and links them statically. Every CI
-  job uses this option, because GpgFrontend is meant to run on gpgme 2.0 or
-  newer and most package managers do not ship it yet. This is why the autotools
+  libgpg-error from the bundled submodules and links them statically. The
+  Linux, Windows and macOS builds in CI use this option, because GpgFrontend is
+  meant to run on gpgme 2.0 or newer and most package managers do not ship it
+  yet. The Mac App Store and Android builds do not use GnuPG, so they leave it
+  off. This is why the autotools
   packages (autoconf, automake, gettext, texinfo) are in the dependency lists
   above.
 - Adjust the build type (`Release`, `RelWithDebInfo`, etc.) as needed; it
@@ -242,10 +244,11 @@ Modules you build outside the tree always need a binding. See
 
 ## Run the Tests
 
-The test suite is compiled into the main binary, but only when you configured
-with `-DGPGFRONTEND_BUILD_TESTS=ON`. Without it, the script stops and tells
-you to reconfigure. Run the tests through the helper script, which builds the
-project if needed and parses the test results:
+The tests live in two programs: `gf_core_tests` for the core, and the main
+binary, which runs its tests with `gpgfrontend -t`. Both are only built when
+you configured with `-DGPGFRONTEND_BUILD_TESTS=ON`. Without it, the script
+stops and tells you to reconfigure. Run the tests through the helper script,
+which builds the project if needed and reads the test results:
 
 ```bash
 QT_QPA_PLATFORM=offscreen ./scripts/run_tests.sh
@@ -331,11 +334,12 @@ mode, take each picture, upload it and put the new link into the page. Its
 
 ## Make Your Changes
 
-Development happens on `main`, and releases are tagged from it. The
-`release/2.1` branch keeps the older v2.1.x line (including its Qt5 builds)
-alive. Create a new branch from `main` for your work,
-implement your changes while following the technical requirements above, and
-run the tests before submitting.
+Development happens on `main`, which becomes the next series. Each released
+series has its own branch, `release/X.Y`, that only gets fixes: `release/2.2`
+for v2.2.x, and `release/2.1` for the older v2.1.x line (including its Qt5
+builds). Create a new branch from `main` for your work, implement your changes
+while following the technical requirements above, and run the tests before
+submitting.
 
 Commit messages follow the [Conventional
 Commits][conventionalcommits] style used throughout the

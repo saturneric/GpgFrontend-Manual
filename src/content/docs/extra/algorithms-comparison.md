@@ -63,7 +63,8 @@ The exact choices you see depend on the engine, its version, and the key format.
 ### RSA (Rivest-Shamir-Adleman)
 
 - **What it is**: one of the most widely used public key algorithms. Introduced in
-  1977, it relies on the difficulty of factoring large prime numbers.
+  1977, it relies on how hard it is to factor the product of two large prime
+  numbers.
   ([more][wiki-rsa])
 - **Key sizes**: usually 2048 bits or larger; 4096 bits for higher security.
 - **Used for**: both encryption and signing. The standard for SSL/TLS certificates
@@ -171,14 +172,14 @@ identifiers and formats for modern curves like **Ed25519**, **Ed448**, **X25519*
 and **X448**. These are encoded differently from the older 25519 keys that GnuPG
 usually makes (EdDSA over Ed25519 and ECDH over Curve25519).
 
-The rPGP engine always makes 25519 keys in the modern Ed25519 / X25519 encoding,
-even when you choose the v4 format. It never makes the legacy GnuPG encoding. In
-practice:
+The rPGP engine always makes Ed25519 signing keys in the modern encoding, even
+when you choose the v4 format. For encryption, a v4 key still uses the older
+Curve25519 encoding, and a v6 key uses the modern X25519 encoding. In practice:
 
 - **rPGP can import and use GnuPG's 25519 keys**, including older
   Curve25519/Ed25519 keys.
 - **rPGP-made 25519 keys can't be imported into GnuPG yet**, in either v4 or v6
-  format, because of the modern encoding. Treat them as rPGP-only.
+  format, because of the modern Ed25519 encoding. Treat them as rPGP-only.
 - For compatibility with GnuPG users or older tools, make 25519 keys with the
   **GnuPG engine**.
 - To test modern Ed25519/X25519 or OpenPGP v6 keys, use the **rPGP engine**, but

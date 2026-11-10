@@ -8,8 +8,9 @@ sidebar:
 When you download software, one question matters: is this really the app the
 developer made, or did someone change it on the way to you?
 
-For a security tool, that question matters twice. This page shows how
-GpgFrontend lets you check, and how deep you can go. To learn how releases
+For a security tool, that question matters even more. This page shows how
+you can check your copy of GpgFrontend, and how far you can go. To learn how
+releases
 are built, signed and published, see
 [How Releases and Updates Work](/appendix/release-updates/#build-and-release-pipeline).
 
@@ -28,9 +29,12 @@ Find the kind of download you have:
 ## Check a Stable Release
 
 Since version 1.0.5, every stable release file is signed with the maintainer's
-OpenPGP key. Next to each download there is a small `.sig` file. With standard
-GPG tools, you can use it to check that the file is genuine and was not
-changed by anyone.
+OpenPGP key. Next to each download there is a small `.sig` file. With GnuPG
+(the `gpg` command), you can use it to check that the file is genuine and was
+not changed by anyone.
+
+The key shown below signs every release from v2.1.5 on. Older releases were
+signed with earlier keys, so this fingerprint does not match them.
 
 ### Step 1: Get the Maintainer's Key
 
@@ -60,6 +64,14 @@ GnuPG should say `Good signature`, made by the key with the fingerprint above.
 Any other result means the file is not the one that was published. Do not use
 it.
 
+:::note[New in v2.3.0]
+The release server also adds a `.minisig` file to every stable release file,
+after it has checked the `.sig`. The app uses it for its own update check. The
+Downloads page only links the `.sig`, which is the maintainer's own signature.
+If you have the `.minisig`, you can check it as shown in
+[Check a Test Build](#check-a-test-build).
+:::
+
 ## Checks Your System Does for You
 
 Each system also adds its own check on top of the signature.
@@ -67,7 +79,7 @@ Each system also adds its own check on top of the signature.
 ### Windows
 
 The stable installers are signed with a [Certum][certum] code signing
-certificate. Windows checks this itself. You can also look at it yourself:
+certificate. Windows checks this signature itself. You can also look at it:
 right-click the file, open Properties, and look at Digital Signatures.
 
 ![][img-1]
@@ -83,18 +95,19 @@ the app. If the app had been changed, macOS would refuse to start it.
 ### Linux
 
 The AppImage comes with a `.sig` file, like the other packages. Check it with
-GPG before you run the app, as shown in
-[Check a Stable Release](#check-a-stable-release). Flatpak and other formats
-bring their own signature and sandbox systems on top.
+GnuPG before you run the app, as shown in
+[Check a Stable Release](#check-a-stable-release). Flatpak and distribution
+packages are checked by their own tools when you install them.
 
 ![][img-3]
 
 ## Check a Test Build
 
-Test builds (nightly builds) and beta versions are not signed with the
-maintainer's OpenPGP key, so they have no `.sig` files. Instead, every file
-comes with a `.minisig` file. This is a signature made with
-[minisign][minisign], a small and simple signing tool.
+There are two kinds of test build. A nightly build is made from the newest
+code. A beta is a test build of the next fix release of one series. Neither
+is signed with the maintainer's OpenPGP key, so they have no `.sig` files.
+Instead, every file comes with a `.minisig` file. This is a signature made
+with [minisign][minisign], a small and simple signing tool.
 
 The test build signing key is:
 
@@ -105,7 +118,7 @@ RWSxNasy+OIaiWWGzwNYu223e0UNDwrsb+4S/ttGO8knO/URmtMtDpse
 The same key is listed in the [security policy][security-md] of the
 repository, so you can compare the two.
 
-Get the files from the test build list on the
+Get the nightly files from the test build list on the
 [Downloads page](/overview/downloads/#test-builds).
 
 ### Step 1: Check the Signature
@@ -169,6 +182,10 @@ build on GitHub, from the `main` branch. The signature is also written to
 Rekor, a public log that anyone can search. Because Step 2 checked your file
 against that list, your file is covered too.
 
+The command above is for a nightly build. A beta is built from a release
+branch, not from `main`. For a beta of series 2.2, for example, replace
+`refs/heads/main` with `refs/heads/release/2.2`.
+
 ## When the Stakes Are Very High
 
 The checks above are enough for everyday use. But if your safety, your freedom
@@ -182,8 +199,10 @@ you can remove it: build the app yourself, from source code you have checked.
 If you are in that situation, this is the path:
 
 1. **Get the source, not a binary.** Clone the repository and check out an
-   official release tag. Verify the tag's GPG signature with the maintainer's
-   key from [bktus.com/openpgp][bktus-openpgp].
+   official release tag. Release tags made by the current release process
+   (v2.3.0 and later) are signed. Verify the signature with `git verify-tag`
+   and the maintainer's key from [bktus.com/openpgp][bktus-openpgp]. The tags
+   of v2.2.4 and older releases are not signed.
 2. **Read before you build.** Review the code yourself, or have someone you
    trust review it. Pay attention to the build scripts too, not only the app
    code.

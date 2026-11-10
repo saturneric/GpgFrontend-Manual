@@ -115,27 +115,33 @@ That is a deliberate choice, described in the maintainer's article
 Not every build is meant for everyday use:
 
 - **Stable** is a normal release, like `v2.2.3`. This is the one you want.
-- **Beta** has extra text on the end, like `v2.2.0-beta.1`. It is an early look at
-  a new series, for people who want to help test it.
-- **Nightly** is an automatic test build, made from the newest code. It can be
-  broken.
+- **Beta** is a test build of the next fix release of one series. It has extra
+  text on the end, like `2.2.5-alpha.3`. It is for people who want to help test
+  fixes before they are released.
+- **Nightly** is an automatic test build, made from the newest code. It is an
+  early look at the next series, and it can be broken. Its version looks like
+  `2.3.0-alpha.120`.
 
-Nightly builds run under the name **GpgFrontend Testing** and keep their own
-separate data, so they leave your everyday keys and settings alone.
+Nightly and beta builds both run under the name **GpgFrontend Testing**. They
+keep their own separate data, so they leave your everyday keys and settings
+alone.
 
-:::caution[A beta is a normal install]
-A beta is not kept separate. It uses the same keys and settings as your usual
-copy. Back up your keys before you try one.
+To be told about betas, open **Help** > **Check for Updates** in a stable
+release and tick **Also offer beta versions**. It is off unless you tick it.
+
+:::note[Changed in v2.3.0]
+A beta used to be a tagged early version of a new series, like
+`v2.2.0-beta.1`. Now a beta is an untagged test build of the next fix release.
 :::
 
-See [Downloads](/overview/downloads/) for where to get each one, and the
-[FAQ](/overview/faq/) for more about nightly builds.
+See [Downloads](/overview/downloads/) for where to get stable and nightly
+builds, and the [FAQ](/overview/faq/) for more about nightly builds.
 
 ## Older Versions
 
 When a new series begins, the previous one does not stop right away. It keeps
-getting bug fixes and security updates for a while, but no new features. The
-`2.1.x` series is in that state now.
+getting security fixes for a while, but no new features. The `2.1.x` series is
+in that state until the end of 2027.
 
 The app's built-in update check only offers you newer versions **from your own
 series**. It will not move you to a different one on its own. Moving to a new
@@ -143,7 +149,7 @@ series is something you choose to do yourself, by downloading it from the
 [Downloads](/overview/downloads/) page.
 
 To learn how the update check works and how to turn it off, see
-[How Releases and Updates Work](/appendix/release-updates/).
+[How Releases and Updates Work](/appendix/release-updates/#update-checking).
 
 [github-releases]: https://github.com/saturneric/GpgFrontend/releases
 [blog-history]: https://blog.bktus.com/en/archives/u8hywl/
