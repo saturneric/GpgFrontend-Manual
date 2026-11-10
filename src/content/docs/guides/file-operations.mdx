@@ -5,6 +5,8 @@ sidebar:
   order: 5
 ---
 
+import { Aside, Steps } from "@astrojs/starlight/components";
+
 Working on files is much like
 [working on text](/guides/text-operations/). You can **encrypt**, **decrypt**,
 **sign**, and **verify** them. The difference is where the result goes. For
@@ -17,6 +19,8 @@ There are two ways to open the File Panel.
 
 **Using the Open button:**
 
+<Steps>
+
 1. In the main window toolbar, click **Open**. Or open the **File** menu and
    choose **Open**.
 2. Choose **File...** to pick one file, or **Directory...** to pick a folder.
@@ -24,14 +28,20 @@ There are two ways to open the File Panel.
 4. The File Panel opens. If you picked a file, it is highlighted and ready. If
    you picked a folder, you see its contents and can choose files inside.
 
+</Steps>
+
 ![][img-1]
 
 **Using the Workspace button:**
 
+<Steps>
+
 1. In the main window toolbar, click **Workspace**. Or open the **File** menu
    and choose **Workspace**.
-2. Choose **New File Panel**. The shortcut is **Ctrl+B**.
+2. Choose **New File Panel**. The shortcut is <kbd>Ctrl</kbd>+<kbd>B</kbd>.
 3. A new **File Panel** tab opens. Click the file you want.
+
+</Steps>
 
 The new panel opens at the folder set in **Settings**, **General**, **File
 Panel Opens At:**. You can pick **Profile Workspace**, **Home Folder** or
@@ -50,13 +60,13 @@ time. Click any step to jump straight to it. There is a **Home** step at the
 start.
 
 To type a path instead, click the edit button at the end of the path bar, or
-press **Ctrl+L**. You can use `~` for your home folder.
+press <kbd>Ctrl</kbd>+<kbd>L</kbd>. You can use `~` for your home folder.
 
 The small buttons next to the path bar have icons only. Point at one to see
 its tooltip:
 
 - **Go to the parent folder (Backspace)**: go to the folder above. The
-  **Backspace** key does the same.
+  <kbd>Backspace</kbd> key does the same.
 - **Read this folder from disk again**: refresh the list.
 - **Go to a mounted volume or removable drive**: jump to a USB drive, another
   disk, or your **Profile Workspace**.
@@ -78,18 +88,19 @@ Along the bottom you can see how many items are in the folder, how many you
 have selected, and how much space is left on the disk.
 
 To delete a file or folder, right-click it and choose **Move to Trash**, or
-press **Delete**. GpgFrontend asks you to confirm first.
+press <kbd>Delete</kbd>. GpgFrontend asks you to confirm first.
 
 ## Right-Click a File or Folder
 
 Right-click an item in the File Panel to see what you can do with it:
 
-- **Open**: open the file in a GpgFrontend tab. **Enter** does the same.
+- **Open**: open the file in a GpgFrontend tab. <kbd>Enter</kbd> does the
+  same.
 - **Open with Default Application**: open the item in the app your system uses
   for it.
 - **New**: make an **Empty File** or a **Folder**. See
   [Make or Rename Files and Folders](#make-or-rename-files-and-folders).
-- **Rename**: give the item a new name. **F2** does the same.
+- **Rename**: give the item a new name. <kbd>F2</kbd> does the same.
 - **Move to Trash**: move the item to your system's Trash, where you can still
   get it back.
 - **Copy Path**: copy the full path of the item to the clipboard.
@@ -102,6 +113,8 @@ Right-click an item in the File Panel to see what you can do with it:
 
 ### Make a new folder or file
 
+<Steps>
+
 1. Click the options button (**Create items and choose what the list
    shows**), then **New Folder** or **New Empty File**. Or right-click in the
    list and choose **New**, then **Folder** or **Empty File**.
@@ -110,12 +123,19 @@ Right-click an item in the File Panel to see what you can do with it:
 3. Type the name in **Name:**.
 4. Click **Create**.
 
+</Steps>
+
 ### Rename a file or folder
 
-1. Click the item, then press **F2**. Or right-click it and choose **Rename**.
+<Steps>
+
+1. Click the item, then press <kbd>F2</kbd>. Or right-click it and choose
+   **Rename**.
 2. A window called **Rename File** or **Rename Folder** opens.
 3. Type the new name in **Name:**.
 4. Click **Rename**.
+
+</Steps>
 
 ### If the name is not accepted
 
@@ -135,12 +155,12 @@ because you are not allowed to write to that folder, a message says so. Its
 title is **Unable to Create Folder**, **Unable to Create File** or **Unable to
 Rename**.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 Making and renaming files and folders now uses one clear window that checks
 the name before you click.
 
-:::
+</Aside>
 
 ## Encrypt, Decrypt, Sign, or Verify a File
 
@@ -171,6 +191,8 @@ replaces that file. See
 
 You need the **recipient's public key**.
 
+<Steps>
+
 1. **Select the file.** In the File Panel, click the file once so it is
    highlighted.
 2. **Pick the recipient.** In the **Key ToolBox** on the right, tick the box in
@@ -183,19 +205,23 @@ You need the **recipient's public key**.
    `report.pdf.gpg`. The **Status Panel** shows whether it worked.
 6. **Send the new file**, not the original.
 
+</Steps>
+
 ![][img-3]
 
-:::caution
+<Aside type="caution" title="No key ticked?">
 
 If you tick **no key**, **Encrypt** is greyed out. To encrypt the file with a
 password instead, use **Operations** > **Sym. Encrypt**
 ([symmetric encryption](/guides/symmetric-encrypt-decrypt/)).
 
-:::
+</Aside>
 
 ### Decrypt a File
 
 You need **your private key**.
+
+<Steps>
 
 1. **Select the encrypted file** in the File Panel, for example
    `report.pdf.gpg`.
@@ -205,6 +231,8 @@ You need **your private key**.
 4. **Find the new file.** It appears in the same folder, with `.gpg`, `.pgp`
    or `.asc` taken off the end: `report.pdf`. If the name has no such ending,
    GpgFrontend adds `.out` instead.
+
+</Steps>
 
 If the file was also signed, use **Decrypt & Verify** from the **Operations**
 menu to check the signature at the same time. If you added it to the toolbar,
@@ -216,6 +244,8 @@ it is also in the **Decrypt** button's list.
 
 Signing makes a small, separate signature file. The original file stays as it
 is. You send both files together. You need **your private key**.
+
+<Steps>
 
 1. **Select the file** in the File Panel.
 2. **Pick your key.** In the **Key ToolBox**, tick the box in front of **your
@@ -231,17 +261,21 @@ is. You send both files together. You need **your private key**.
 7. **Send both files**: `report.pdf` and `report.pdf.sig`. Keep their names as
    they are.
 
-:::caution
+</Steps>
+
+<Aside type="caution" title="Do not change the original">
 
 After signing, do not change the original file, not even by saving it again
 without edits. If it changes, the signature no longer matches.
 
-:::
+</Aside>
 
 ### Verify a File
 
 You need **the sender's public key**, and both files: the original and its
 signature.
+
+<Steps>
 
 1. **Put both files in the same folder**, with their names unchanged, for
    example `report.pdf` and `report.pdf.sig`.
@@ -251,6 +285,8 @@ signature.
 4. **Read the result** in the **Status Panel**. Green means the file is
    unchanged and was signed by the key shown. Red means the file was changed,
    or the signature does not match.
+
+</Steps>
 
 GpgFrontend finds the original by taking `.sig` or `.asc` off the signature's
 name. If it cannot find that file, a window called **File to be Verified**
@@ -316,13 +352,17 @@ items. The status bar says how many items were copied or moved.
 By default the File Panel works on one file at a time. Turn on **Batch Mode**
 to work on several files at once.
 
+<Steps>
+
 1. Click the batch mode button, the segmented icon at the top-right of the
    File Panel toolbar. Its tooltip says **Enable batch mode to select multiple
    files.** Once it is on, the tooltip says **Batch mode is enabled. Multiple
    files can be selected.**
-2. Select several files with **Ctrl+Click** or **Shift+Click**.
+2. Select several files with <kbd>Ctrl</kbd>+Click or <kbd>Shift</kbd>+Click.
 3. Click **Encrypt**, **Decrypt**, **Sign**, or **Verify**. GpgFrontend does
    the task on every selected file.
+
+</Steps>
 
 ![][img-5]
 
@@ -379,18 +419,26 @@ a file that holds only normal text, for example to paste into an email.
 
 **Change it in Settings:**
 
+<Steps>
+
 1. Open **Settings** and go to the **General** section.
 2. Find the option **Use Binary Mode for File Operations**.
 3. Check it for binary (`.gpg` / `.sig`), or uncheck it for ASCII (`.asc`).
+
+</Steps>
 
 ![][img-7]
 
 **Or change it for one File Panel:**
 
+<Steps>
+
 1. In the File Panel toolbar, click the options button. Its tooltip says
    **Create items and choose what the list shows**.
 2. Tick **Use ASCII Armor**. You then get `.asc` files instead of `.gpg` or
    `.sig`.
+
+</Steps>
 
 This is faster than opening **Settings**. It changes only the File Panel tab
 you are in, and it is not saved. A new File Panel tab starts with the choice

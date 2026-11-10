@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-import { Aside } from "@astrojs/starlight/components";
+import { Aside, Steps } from "@astrojs/starlight/components";
 
 This page is a tour of the GpgFrontend window. It shows you where each part
 is and what it does.
@@ -87,8 +87,9 @@ In the Text Editor you type new text or open a text file. For the steps, see
 
 - **Toolbar buttons**: the buttons at the top of the window encrypt, decrypt,
   sign, and verify the text in the tab.
-- **Standard shortcuts**: the usual keys work, such as **Ctrl+C** to copy,
-  **Ctrl+V** to paste, and **Ctrl+S** to save.
+- **Standard shortcuts**: the usual keys work, such as
+  <kbd>Ctrl</kbd>+<kbd>C</kbd> to copy, <kbd>Ctrl</kbd>+<kbd>V</kbd> to paste,
+  and <kbd>Ctrl</kbd>+<kbd>S</kbd> to save.
 - **Plain text only**: text is saved as UTF-8 with no formatting, for clarity
   and compatibility. Rich text editing may come later.
 - **Built-in font**: by default the editor uses JetBrains Mono NL, a font that
@@ -235,10 +236,10 @@ keys, and key groups.
 Main features:
 
 - **Selection**: tick the boxes to pick keys for a task. With the keyboard,
-  move to a key and press **Space** to tick or untick it.
+  move to a key and press <kbd>Space</kbd> to tick or untick it.
 - **Type / Usage / Email**: see at a glance what each key is for.
 - **Search**: the box at the top finds keys by name, email, key ID, or
-  fingerprint. Press **Escape** to clear it.
+  fingerprint. Press <kbd>Escape</kbd> to clear it.
 - **Categories**: the thin coloured strip beside the list filters your keys.
   See [Key Categories](/guides/key-categories/).
 
@@ -376,6 +377,8 @@ share one button, and all the buttons have the same width.
 
 You can hide buttons you don't use, or add ones you use often:
 
+<Steps>
+
 1. Open **Settings** and go to **Appearance**.
 2. Under **Toolbar**, tick what you want in the **Actions** list. The list is
    arranged by button: the Encrypt row, then the Decrypt row, then Sign and
@@ -383,6 +386,8 @@ You can hide buttons you don't use, or add ones you use often:
 3. If you ticked more than one action in the Encrypt or Decrypt row, an
    **On click** choice appears for that row. Pick the action you want a plain
    click to run. The other ticked actions stay in the right-click list.
+
+</Steps>
 
 **On click** only lists the actions you ticked. It does not show at all when a
 row has only one action ticked.

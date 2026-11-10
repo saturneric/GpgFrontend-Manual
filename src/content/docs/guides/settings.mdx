@@ -6,18 +6,38 @@ sidebar:
   order: 19
 ---
 
-To open the settings window, click **Edit** > **Settings**. On macOS the
-window is called **Preferences**, and you find it under the GpgFrontend menu.
+import { Aside, Card, CardGrid, TabItem, Tabs } from "@astrojs/starlight/components";
+
+How you open the settings window depends on your system:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Click **Edit** > **Settings**.
+
+</TabItem>
+<TabItem label="macOS">
+
+The window is called **Preferences**. You find it under the GpgFrontend
+menu.
+
+</TabItem>
+<TabItem label="Linux">
+
+Click **Edit** > **Settings**.
+
+</TabItem>
+</Tabs>
 
 The window has a search box at the top and a list of pages down the left
 side.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 On macOS the window is now called **Preferences**, as is usual for macOS
 apps.
 
-:::
+</Aside>
 
 ## Just Search
 
@@ -33,13 +53,30 @@ way.
 
 If you would rather browse, the pages are sorted into four groups:
 
-- **Application**: how the program looks and behaves.
-- **Keys & Engines**: where your keys are kept, and which engine works with
-  them. An engine is the program that does the encryption work, such as
-  GnuPG.
-- **Features**: extras that come from modules. A module is an add-on that
-  gives GpgFrontend one more feature.
-- **System**: the technical settings, plus logging.
+<CardGrid>
+<Card title="Application" icon="setting">
+
+How the program looks and behaves.
+
+</Card>
+<Card title="Keys & Engines" icon="seti:lock">
+
+Where your keys are kept, and which engine works with them. An engine is the
+program that does the encryption work, such as GnuPG.
+
+</Card>
+<Card title="Features" icon="puzzle">
+
+Extras that come from modules. A module is an add-on that gives GpgFrontend
+one more feature.
+
+</Card>
+<Card title="System" icon="seti:config">
+
+The technical settings, plus logging.
+
+</Card>
+</CardGrid>
 
 ## What Is on Each Page
 
@@ -71,12 +108,12 @@ Some pages only show up when they apply to you:
   switched on. You can check that in
   [Module Controller](/advanced/module-controller/).
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 The **Updates** and **Mail Accounts** pages are new. The **Network** page now
 holds only the proxy settings.
 
-:::
+</Aside>
 
 ## The General Page
 
@@ -127,13 +164,13 @@ open a File Panel.
 For more about the two recipient checks and about undo, see
 [Encryption Safety](/guides/encryption-safety/).
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 Undo after an operation is now off by default. **Module Discovery** replaces the
 old module loading setting. The default engine moved from this page to the **Key
 Databases** page.
 
-:::
+</Aside>
 
 ### Language
 
@@ -168,11 +205,11 @@ For the details, see [Key Database](/advanced/key-database/).
 This page decides what [making a new key](/guides/generate-key/) starts with.
 It has two tabs.
 
-:::note[New in v2.2.4]
+<Aside type="note" title="New in v2.2.4">
 
 This page is new.
 
-:::
+</Aside>
 
 ### The Quick Generate Tab
 
@@ -256,12 +293,12 @@ to check once. The window then tells you one of these things:
 
 The check only asks GitHub Releases.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 The **Updates** page and the background check are new, and the **Check for
 Updates** window was redesigned.
 
-:::
+</Aside>
 
 ## The Advanced Page
 
@@ -279,26 +316,26 @@ writes the most. It adds detail from modules that **Debug** leaves out.
 You can also set the level for one run when you start GpgFrontend from a
 terminal:
 
-```bash
+```sh
 gpgfrontend --log-level trace
 ```
 
 The short form is `-l`. The values are `trace`, `debug`, `info`, `warn` and
 `error`.
 
-:::caution[Trace logs can hold private details]
+<Aside type="caution" title="Trace logs can hold private details">
 
 Logs at **Trace** or **Debug** level can contain details about your keys,
 files and messages. Read a log before you share it, and switch back to a lower
 level when you are done.
 
-:::
+</Aside>
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 **Trace** is a new log level.
 
-:::
+</Aside>
 
 ## When a Restart Is Needed
 
@@ -328,13 +365,13 @@ These changes restart the program:
 
 A module's settings page may also ask for a restart.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 Key database changes and the engine choice no longer need a restart.
 
-:::
+</Aside>
 
-:::caution[Cancel throws away everything]
+<Aside type="caution" title="Cancel throws away everything">
 
 Cancel does not just undo the page you are looking at. It undoes every change
 you made anywhere in the settings window during that visit.
@@ -342,7 +379,7 @@ you made anywhere in the settings window during that visit.
 On macOS, choosing **Cancel** in the **Restart Required** message also throws
 away every change you made, and the window closes.
 
-:::
+</Aside>
 
 One exception: the buttons in the **Maintenance** part of the **GnuPG** page.
 See [If GnuPG Stops Responding](#if-gnupg-stops-responding).
@@ -393,9 +430,9 @@ The other tabs of the About window are also useful:
 - **Build Information** lists the versions GpgFrontend was built with. Click
   **Copy Build Information** to copy them.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 The **Status** tab was rebuilt, and the **About** and **Build Information**
 tabs were redesigned.
 
-:::
+</Aside>

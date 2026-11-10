@@ -6,7 +6,7 @@ sidebar:
   label: Symmetric Crypto
 ---
 
-import { Aside } from "@astrojs/starlight/components";
+import { Aside, Steps } from "@astrojs/starlight/components";
 
 ## What Is Symmetric Encryption?
 
@@ -23,8 +23,12 @@ Symmetric encryption is:
 - Good for large files, or for sharing something once.
 - Only safe when both people can share the password safely.
 
-> Anyone who learns the password can read the data. So always use a strong
-> password that you use nowhere else, and share it in a safe way.
+<Aside type="caution" title="Guard the password">
+
+Anyone who learns the password can read the data. So always use a strong
+password that you use nowhere else, and share it in a safe way.
+
+</Aside>
 
 ## How It Works
 
@@ -32,8 +36,12 @@ Symmetric encryption is:
 2. GpgFrontend uses that password to **encrypt** the data.
 3. Anyone with the **same password** can **decrypt** it.
 
-> The safety of the data depends fully on the password: how strong it is, and
-> how well you keep it secret.
+<Aside type="note" title="The password is everything">
+
+The safety of the data depends fully on the password: how strong it is, and
+how well you keep it secret.
+
+</Aside>
 
 ## Encrypting Data Symmetrically
 
@@ -42,13 +50,18 @@ GpgFrontend can do this since v2.1.9. The action is called **Sym. Encrypt**.
 ### Find Sym. Encrypt
 
 The easiest way: open the **Operations** menu and choose **Sym. Encrypt**, or
-press Ctrl+Alt+E (Cmd+Option+E on macOS). You can only use it while no key is
-ticked in the Key ToolBox.
+press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd>
+(<kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>E</kbd> on macOS). You can only use it
+while no key is ticked in the Key ToolBox.
 
 You can also put it on the toolbar:
 
+<Steps>
+
 1. Open **Settings** and choose **Appearance**.
 2. Under **Toolbar**, in the **Actions** list, tick **Sym. Encrypt**.
+
+</Steps>
 
 ![][img-1]
 
@@ -74,6 +87,8 @@ Before v2.2.3, **Sym. Encrypt** had its own toolbar button. Now it is in the
 
 ### Symmetric Encryption
 
+<Steps>
+
 1. Make sure no key is ticked in the Key ToolBox.
 2. Choose **Sym. Encrypt** from the **Operations** menu, or from the
    **Encrypt** button's list.
@@ -81,13 +96,21 @@ Before v2.2.3, **Sym. Encrypt** had its own toolbar button. Now it is in the
 4. GpgFrontend encrypts the text or file with that password.
 5. Save the result, or send it to the other person.
 
+</Steps>
+
 ![][img-3]
 
-> The other person needs **exactly the same password** to decrypt the message.
+<Aside type="note" title="Same password">
+
+The other person needs **exactly the same password** to decrypt the message.
+
+</Aside>
 
 ## Decrypting Symmetric Encrypted Data
 
 To decrypt text that was encrypted with a password:
+
+<Steps>
 
 1. Paste the encrypted message into a Text Editor tab. It starts with
    `-----BEGIN PGP MESSAGE-----` and ends with `-----END PGP MESSAGE-----`.
@@ -95,21 +118,34 @@ To decrypt text that was encrypted with a password:
 3. When asked, type the **same password** that was used to encrypt.
 4. If the password is right, the readable text appears in the tab.
 
+</Steps>
+
 To decrypt a file, select it in the File Panel and click **Decrypt**. See
 [Decrypt a File](/guides/file-operations/#decrypt-a-file).
 
-> If the password is wrong or mistyped, decryption fails.
+<Aside type="note" title="Wrong password?">
+
+If the password is wrong or mistyped, decryption fails.
+
+</Aside>
 
 ## Technical Details: GnuPG vs rPGP
 
 This part is for readers who want the technical details. You do not need it
 to use **Sym. Encrypt**.
 
+<details>
+<summary>How a password becomes a key</summary>
+
 Symmetric encryption makes an OpenPGP message that is protected by a
 passphrase (another word for password) instead of a public key. The
 passphrase goes through an OpenPGP **String-to-Key (S2K)** function, which
 turns it into the real encryption key. The data is then encrypted with a
-symmetric cipher. How this is done depends on the engine in use. It also
+symmetric cipher.
+
+</details>
+
+How this is done depends on the engine in use. It also
 decides which tools can decrypt the result.
 
 | Aspect            | GnuPG engine                                            | rPGP engine                                      |
@@ -151,12 +187,16 @@ Argon2 needs memory to turn your password into a key. The same amount is
 needed again to decrypt, on every computer that opens the message. You can
 choose the amount:
 
+<Steps>
+
 1. Open **Settings** and choose **rPGP** (under **Keys & Engines**).
 2. Find the **Passphrase Encryption** box.
 3. In **Argon2 Parameters:**, pick one option:
    - **High memory, 2 GiB**: the default and the strongest choice.
    - **Low memory, 64 MiB**: pick this if your computer, or the computer of the
      person who will open the message, cannot spare 2 GiB of memory.
+
+</Steps>
 
 The choice applies only to messages you encrypt from now on.
 

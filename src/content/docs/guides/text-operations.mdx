@@ -5,6 +5,8 @@ sidebar:
   order: 4
 ---
 
+import { Aside, Steps } from "@astrojs/starlight/components";
+
 GpgFrontend lets you do four things with text: **encrypt** it (hide it),
 **decrypt** it (read it), **sign** it (prove it came from you), and **verify** a
 signature (check it really did). This page walks through each one.
@@ -32,15 +34,15 @@ menu, or a keyboard shortcut. They all do the same thing:
 
 | Task                         | Toolbar button | **Operations** menu  | Shortcut     |
 | ---------------------------- | -------------- | -------------------- | ------------ |
-| Encrypt                      | **Encrypt**    | **Encrypt**          | Ctrl+E       |
-| Encrypt and sign             | (not at first) | **Encrypt & Sign**   | Ctrl+Shift+E |
-| Encrypt with a password only | (not at first) | **Sym. Encrypt**     | Ctrl+Alt+E   |
-| Decrypt                      | **Decrypt**    | **Decrypt**          | Ctrl+D       |
-| Decrypt and verify           | (not at first) | **Decrypt & Verify** | Ctrl+Shift+D |
-| Sign                         | **Sign**       | **Sign**             | Ctrl+Shift+I |
-| Verify                       | **Verify**     | **Verify**           | Ctrl+Shift+V |
+| Encrypt                      | **Encrypt**    | **Encrypt**          | <kbd>Ctrl</kbd>+<kbd>E</kbd>       |
+| Encrypt and sign             | (not at first) | **Encrypt & Sign**   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd> |
+| Encrypt with a password only | (not at first) | **Sym. Encrypt**     | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd>   |
+| Decrypt                      | **Decrypt**    | **Decrypt**          | <kbd>Ctrl</kbd>+<kbd>D</kbd>       |
+| Decrypt and verify           | (not at first) | **Decrypt & Verify** | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> |
+| Sign                         | **Sign**       | **Sign**             | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd> |
+| Verify                       | **Verify**     | **Verify**           | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> |
 
-On macOS, press Cmd instead of Ctrl.
+On macOS, press <kbd>Cmd</kbd> instead of <kbd>Ctrl</kbd>.
 
 **Encrypt & Sign**, **Decrypt & Verify** and **Sym. Encrypt** have no toolbar
 button at first. You can add them in **Settings** > **Appearance**. They then
@@ -55,12 +57,15 @@ key list on the right side of the main window.
 Encrypting hides a message so that only the person you write to can read it.
 You need **their public key** in your key list.
 
+<Steps>
+
 1. **Open a text tab.** Click **File**, then **Workspace**, then
-   **New Text Editor** (or press Ctrl+N). A new, empty tab opens.
+   **New Text Editor** (or press <kbd>Ctrl</kbd>+<kbd>N</kbd>). A new, empty
+   tab opens.
 2. **Write your message.** Type it, or paste it in.
 3. **Pick the recipient.** In the **Key ToolBox**, tick the box in front of the
    person's public key. To send to several people, tick each of their keys.
-4. **Click Encrypt.** Or press Ctrl+E.
+4. **Click Encrypt.** Or press <kbd>Ctrl</kbd>+<kbd>E</kbd>.
 5. **Answer any questions.** GpgFrontend may stop to check your recipients,
    for example when a key has expired. See
    [Checks Before Encrypting](#checks-before-encrypting).
@@ -71,23 +76,25 @@ You need **their public key** in your key list.
    and paste it into your email or chat. Or save it with **File** >
    **Save File**.
 
+</Steps>
+
 ![][img-2]
 
-:::caution
+<Aside type="caution" title="No key ticked?">
 
 If you tick **no key at all**, **Encrypt** is greyed out. To encrypt with a
 password instead of a key, use **Operations** > **Sym. Encrypt**. This is
 called [symmetric encryption](/guides/symmetric-encrypt-decrypt/). You can
 only use **Sym. Encrypt** while no key is ticked.
 
-:::
+</Aside>
 
-:::tip
+<Aside type="tip" title="Read it later yourself">
 
 Tick your **own** key too if you want to be able to read the message later.
 Without it, only the recipient can open it, not you.
 
-:::
+</Aside>
 
 The encrypted message does not show who sent it. If you also want to prove that
 it came from you, use [Encrypt and Sign](#encrypt-and-sign-at-once).
@@ -102,10 +109,14 @@ Some people have more than one encryption subkey on their key. When that
 happens, GpgFrontend opens a window called **Select Encryption Key(s)** and
 asks which one to use.
 
+<Steps>
+
 1. Expand a key to see its subkeys.
 2. Tick the key or the subkey to use. **Confirm** stays greyed out until you
    tick something.
 3. Click **Confirm**.
+
+</Steps>
 
 This window does not appear when each key has only one usable encryption
 subkey.
@@ -131,16 +142,20 @@ more than one person. See [Encryption Safety](/guides/encryption-safety/).
 Decrypting turns an encrypted message sent to you back into readable text. You
 need **your private key**, the one that matches the public key the sender used.
 
+<Steps>
+
 1. **Open a text tab.** Click **File**, then **Workspace**, then
-   **New Text Editor** (or press Ctrl+N).
+   **New Text Editor** (or press <kbd>Ctrl</kbd>+<kbd>N</kbd>).
 2. **Paste the message.** Paste the whole block, including the
    `-----BEGIN PGP MESSAGE-----` and `-----END PGP MESSAGE-----` lines.
-3. **Click Decrypt.** Or press Ctrl+D. You do **not** need to tick any key.
-   GpgFrontend finds the right private key by itself.
+3. **Click Decrypt.** Or press <kbd>Ctrl</kbd>+<kbd>D</kbd>. You do **not**
+   need to tick any key. GpgFrontend finds the right private key by itself.
 4. **Enter your passphrase.** A window asks for the passphrase that protects
    your private key. Type it and confirm.
 5. **Read the message.** The block in the tab is replaced by the readable text.
    The **Status Panel** shows whether it worked.
+
+</Steps>
 
 ![][img-3]
 
@@ -154,12 +169,12 @@ reasons:
 - **The message was changed on the way.** GpgFrontend will not show text it
   cannot trust. See [Encryption Safety](/guides/encryption-safety/).
 
-:::note
+<Aside type="note" title="Signed messages">
 
 If the message was also signed, the plain **Decrypt** does not check the
 signature. Use [Decrypt and Verify](#decrypt-and-verify-at-once) instead.
 
-:::
+</Aside>
 
 ## Sign Text
 
@@ -167,10 +182,12 @@ Signing proves that a message came from you and that nobody changed it. It does
 **not** hide the message: anyone can still read it. You need **your private
 key**.
 
+<Steps>
+
 1. **Open a text tab** and write your message.
 2. **Pick your key.** In the **Key ToolBox**, tick the box in front of **your
    own** key. Pick a key that can sign: its **Usage** column shows an `S`.
-3. **Click Sign.** Or press Ctrl+Shift+I.
+3. **Click Sign.** Or press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd>.
 4. **Choose a subkey, if asked.** If your key has more than one signing subkey
    that still works (not revoked or expired), a window called
    **Select Signing Key(s)** opens. Tick the key or subkey to use and click
@@ -183,22 +200,24 @@ key**.
 7. **Send it.** Copy everything, from the first `-----BEGIN` line to the last
    `-----END` line, and send it.
 
+</Steps>
+
 ![][img-4]
 
-:::note[Sign is greyed out?]
+<Aside type="note" title="Sign is greyed out?">
 
 **Sign** only works when every ticked key can sign. If you ticked no key, or
 one of the ticked keys has no `S` in its **Usage** column, **Sign** is greyed
 out. Untick the keys that can't sign, and tick your own key.
 
-:::
+</Aside>
 
-:::caution
+<Aside type="caution" title="Do not edit signed text">
 
 After signing, do not change anything in the text, not even a space or an empty
 line. Any change, however small, makes the signature fail.
 
-:::
+</Aside>
 
 ## Verify a Signature
 
@@ -206,11 +225,14 @@ Verifying checks that a signed message really came from the person it claims,
 and that nobody changed it. You need **the sender's public key** in your key
 list.
 
+<Steps>
+
 1. **Open a text tab.** Click **File**, then **Workspace**, then
-   **New Text Editor** (or press Ctrl+N).
+   **New Text Editor** (or press <kbd>Ctrl</kbd>+<kbd>N</kbd>).
 2. **Paste the signed message.** Paste all of it, from
    `-----BEGIN PGP SIGNED MESSAGE-----` down to `-----END PGP SIGNATURE-----`.
-3. **Click Verify.** Or press Ctrl+Shift+V. You do not need to tick any key.
+3. **Click Verify.** Or press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>.
+   You do not need to tick any key.
 4. **Read the result in the Status Panel.**
    - **Green**: the signature is good. The message is unchanged and was signed
      by the key shown.
@@ -218,6 +240,8 @@ list.
      example a key you have not marked as trusted.
    - **Red**: the signature is bad. The message was changed, or it was not
      signed by that key. Do not trust it.
+
+</Steps>
 
 The text in the tab is not changed when you verify.
 
@@ -237,30 +261,34 @@ window does not appear.
 - Click **No** to stop. You can
   [import the key](/guides/import-export-key-pair/) yourself and verify again.
 
-:::tip
+<Aside type="tip" title="Check who signed">
 
 Check the name and fingerprint shown in the result against what you know about
 the sender. A good signature only proves the message matches **that** key. It
 does not prove the key belongs to the person you think.
 
-:::
+</Aside>
 
 ## Encrypt and Sign at Once
 
 This makes a message that is both **secret** and **proven to be from you**. It
 is the best choice for private messages.
 
+<Steps>
+
 1. **Open a text tab** and write your message.
 2. **Pick the recipient.** Tick the box in front of the recipient's public key
    in the **Key ToolBox**.
 3. **Start it.** Open the **Operations** menu and choose **Encrypt & Sign**, or
-   press Ctrl+Shift+E. If you added it to the toolbar, it is in the
-   **Encrypt** button's list.
+   press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>. If you added it to the
+   toolbar, it is in the **Encrypt** button's list.
 4. **Choose your signing key.** The **Select Signing Key(s)** window always
    opens here. Tick **your own** key and click **Confirm**.
 5. **Enter your passphrase.**
 6. **See the result.** The text becomes a `-----BEGIN PGP MESSAGE-----` block,
    just like normal encryption. The signature is hidden inside it.
+
+</Steps>
 
 Like plain **Encrypt**, this needs at least one ticked recipient key.
 
@@ -268,14 +296,18 @@ Like plain **Encrypt**, this needs at least one ticked recipient key.
 
 Use this when you receive a message that was encrypted **and** signed.
 
+<Steps>
+
 1. **Paste the message** into a text tab.
 2. **Start it.** Open the **Operations** menu and choose **Decrypt & Verify**,
-   or press Ctrl+Shift+D. If you added it to the toolbar, it is in the
-   **Decrypt** button's list.
+   or press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>. If you added it to
+   the toolbar, it is in the **Decrypt** button's list.
 3. **Enter your passphrase.**
 4. **Read the result.** The readable text appears in the tab. The **Status
    Panel** shows both results: whether decryption worked, and whether the
    signature is good.
+
+</Steps>
 
 If the sender's public key is missing, the same **Missing Keys** window opens as
 when you [verify](#if-the-senders-key-is-missing).
@@ -287,21 +319,23 @@ endings, and it does not swap special spaces for normal ones. This matters for
 signatures. A signature is only good if the text is exactly the same,
 character for character.
 
-Pressing **Shift+Enter** starts a normal new line, the same as **Enter**.
+Pressing <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a normal new line, the same
+as <kbd>Enter</kbd>.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 Earlier versions sometimes changed line endings and special spaces before an
 operation. v2.2.3 keeps the text exactly. So a signature may now give a
 different result than it did in v2.2.2. If a signature made with an older
 version fails to verify, ask the sender to sign the text again.
 
-:::
+</Aside>
 
 ## Undo After an Operation
 
-By default, you cannot undo an encrypt or decrypt with Ctrl+Z. This stops your
-readable text from staying in memory. You can turn undo on in **Settings**. See
+By default, you cannot undo an encrypt or decrypt with
+<kbd>Ctrl</kbd>+<kbd>Z</kbd>. This stops your readable text from staying in
+memory. You can turn undo on in **Settings**. See
 [Memory Security](/advanced/memory-security/#undo-after-an-operation).
 
 ## Safety Tips

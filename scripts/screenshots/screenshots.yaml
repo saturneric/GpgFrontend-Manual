@@ -42,7 +42,7 @@ entries:
       - src/core/model/GpgKeyGenerateInfo.cpp
 
   - id: text-decrypt-verify-result
-    doc: src/content/docs/guides/text-operations.md
+    doc: src/content/docs/guides/text-operations.mdx
     ref: img-1  # page header image; img-3/img-5 are animated GIFs
     scenario: text-decrypt-verify-result
     size: 1280x960
@@ -268,28 +268,28 @@ entries:
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: text-encrypt
-    doc: src/content/docs/guides/text-operations.md
+    doc: src/content/docs/guides/text-operations.mdx
     ref: img-2  # "Encrypt Text"
     scenario: text-encrypt-ready
     highlight: [checkColumn, encryptButton]
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: text-decrypt
-    doc: src/content/docs/guides/text-operations.md
+    doc: src/content/docs/guides/text-operations.mdx
     ref: img-3  # "Decrypt Text"
     scenario: text-decrypt-result
     highlight: InfoBoardWidget
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: text-sign
-    doc: src/content/docs/guides/text-operations.md
+    doc: src/content/docs/guides/text-operations.mdx
     ref: img-4  # "Sign Text"
     scenario: text-sign-result
     highlight: InfoBoardWidget
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: text-verify
-    doc: src/content/docs/guides/text-operations.md
+    doc: src/content/docs/guides/text-operations.mdx
     ref: img-5  # "Verify a Signature"
     scenario: text-verify-result
     highlight: InfoBoardWidget
@@ -311,35 +311,35 @@ entries:
     sources: [src/ui/main_window/]
 
   - id: file-panel-open
-    doc: src/content/docs/guides/file-operations.md
+    doc: src/content/docs/guides/file-operations.mdx
     ref: img-1  # a file picked in the File Panel
     scenario: file-panel
     highlight: [openButton, fileTree]
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: file-panel-workspace-menu
-    doc: src/content/docs/guides/file-operations.md
+    doc: src/content/docs/guides/file-operations.mdx
     ref: img-2  # Workspace > New File Panel
     scenario: workspace-menu
     highlight: newFilePanel
     sources: [src/ui/main_window/]
 
   - id: file-encrypt
-    doc: src/content/docs/guides/file-operations.md
+    doc: src/content/docs/guides/file-operations.mdx
     ref: img-3  # encrypting a file
     scenario: file-panel
     highlight: [checkColumn, encryptButton]
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: file-decrypt-verify
-    doc: src/content/docs/guides/file-operations.md
+    doc: src/content/docs/guides/file-operations.mdx
     ref: img-4  # decrypting and verifying a file
     scenario: file-decrypt-verify-result
     highlight: InfoBoardWidget
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: file-batch-mode-button
-    doc: src/content/docs/guides/file-operations.md
+    doc: src/content/docs/guides/file-operations.mdx
     ref: img-5  # the batch mode button
     scenario: file-batch
     crop: fileToolRow
@@ -347,14 +347,14 @@ entries:
     sources: [src/ui/widgets/]
 
   - id: file-batch-mode
-    doc: src/content/docs/guides/file-operations.md
+    doc: src/content/docs/guides/file-operations.mdx
     ref: img-6  # several files at once
     scenario: file-batch
     highlight: [fileTree, encryptButton]
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: settings-binary-mode
-    doc: src/content/docs/guides/file-operations.md
+    doc: src/content/docs/guides/file-operations.mdx
     ref: img-7  # Settings > General > Use Binary Mode
     scenario: settings-binary-mode
     size: 900x660
@@ -362,7 +362,7 @@ entries:
     sources: [src/ui/dialog/settings/]
 
   - id: file-options-ascii-armor
-    doc: src/content/docs/guides/file-operations.md
+    doc: src/content/docs/guides/file-operations.mdx
     ref: img-8  # options menu > Use ASCII Armor
     scenario: file-options-menu
     crop: optionsArea
