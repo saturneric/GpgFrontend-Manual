@@ -6,17 +6,19 @@ sidebar:
   order: 1
 ---
 
+import { Aside, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
 GpgFrontend has its own email tools. With them you can write a message, sign
 it, encrypt it, and send it. You can also read messages from your mail server
 and check them.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 GpgFrontend can now send email and read it from your mail server. Before, it
 could only work with email files, and your normal email app had to do the
 sending and receiving.
 
-:::
+</Aside>
 
 ## What You Can Do
 
@@ -50,7 +52,7 @@ the same kind of tab as a new message.
 Before you can send or read mail from a server, you need to add your mail
 account. See [Mail Accounts and Sending](/email/accounts-sending/).
 
-:::note[Don't see Open IMAP Controller?]
+<Aside type="note" title="Don't see Open IMAP Controller?">
 
 The **Advanced** menu is hidden in the Mac App Store edition. In that build,
 **Open IMAP Controller** is not available.
@@ -58,7 +60,7 @@ The **Advanced** menu is hidden in the Mac App Store edition. In that build,
 If no account has receiving turned on, the app tells you to set one up in
 Settings first.
 
-:::
+</Aside>
 
 ## The Status Panel in Mail Tabs
 
@@ -69,11 +71,27 @@ you sign or verify a message.
 
 ## Which Page Do I Need?
 
-- **I want to write, sign or encrypt a message.** Read
-  [Write and Protect a Message](/email/compose-protect/).
-- **I got a message and want to know if I can trust it.** Read
-  [Verify and Inspect a Message](/email/verify-inspect/).
-- **I want to set up my mail account, or send a message.** Read
-  [Mail Accounts and Sending](/email/accounts-sending/).
-- **I want to read messages from my mail server, or work with attachments.**
-  Read [Read Mail from Your Server](/email/reading-imap/).
+Pick the card that matches what you want to do.
+
+<CardGrid>
+  <LinkCard
+    title="Write and Protect a Message"
+    description="I want to write, sign or encrypt a message."
+    href="/email/compose-protect/"
+  />
+  <LinkCard
+    title="Verify and Inspect a Message"
+    description="I got a message and want to know if I can trust it."
+    href="/email/verify-inspect/"
+  />
+  <LinkCard
+    title="Mail Accounts and Sending"
+    description="I want to set up my mail account, or send a message."
+    href="/email/accounts-sending/"
+  />
+  <LinkCard
+    title="Read Mail from Your Server"
+    description="I want to read messages from my mail server, or work with attachments."
+    href="/email/reading-imap/"
+  />
+</CardGrid>

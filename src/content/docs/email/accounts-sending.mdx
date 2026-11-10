@@ -6,18 +6,20 @@ sidebar:
   order: 4
 ---
 
+import { Aside, Steps } from "@astrojs/starlight/components";
+
 To send email, or to read it from your mail server, GpgFrontend needs to know
 your mail account. This page shows how to add one and how to send a message.
 
 You only need an account to send and fetch mail. Everything else in GpgFrontend
 works without one.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 Mail accounts and sending are new. Before, you had to send messages with a
 separate email app.
 
-:::
+</Aside>
 
 ## Two Words You Will See
 
@@ -32,8 +34,12 @@ look like `imap.example.com` and `smtp.example.com`.
 
 ## Open the Mail Accounts Page
 
+<Steps>
+
 1. Click **Edit** > **Settings**.
 2. In the **Features** group, click **Mail Accounts**.
+
+</Steps>
 
 ![The Mail Accounts page in Settings][img-1]
 
@@ -43,6 +49,8 @@ If you have no account yet, the page says **No mail accounts yet**. Click
 **Add an Account**. If you already have one, click **Add Account...** under
 the list. The **Add Mail Account** window opens. It has four steps:
 **Account**, **Servers**, **Check** and **Review**.
+
+<Steps>
 
 1. **Your Account**: type **Your name** (as people will see it), your **Email
    address**, and your **Password**. Click **Continue**.
@@ -65,19 +73,25 @@ the list. The **Add Mail Account** window opens. It has four steps:
    list.
 6. Click **OK** at the bottom of the Settings window to save.
 
+</Steps>
+
 Nothing is saved until you click **OK**. If you click **Cancel**, your changes
 are thrown away.
 
-On a Mac, the Settings window is called **Preferences** and has no **OK**
-button. There, your changes are saved when you close the window.
+<Aside type="note" title="On a Mac">
 
-:::note[Changed in v2.2.4]
+The Settings window is called **Preferences** and has no **OK** button.
+There, your changes are saved when you close the window.
+
+</Aside>
+
+<Aside type="note" title="Changed in v2.2.4">
 
 Adding an account is now a guided window that finds your servers for you.
 Before, you clicked **Add** and filled in the **Identity**, **Receiving
 (IMAP)** and **Sending (SMTP)** sections yourself.
 
-:::
+</Aside>
 
 ### How GpgFrontend Finds Your Servers
 
@@ -167,6 +181,8 @@ without changing your main password.
 
 ## Test the Connection
 
+<Steps>
+
 1. Click **Test Connection** in the **Servers** part. It tests every server the
    account uses, one after the other.
 2. Wait. It shows **Testing...**. Click **Stop** if it takes too long.
@@ -174,6 +190,8 @@ without changing your main password.
    - **Connected successfully.** means it works.
    - Otherwise, you see what went wrong and a hint. For example, **Check the
      user name and password.** or **Check the server address for a typo.**
+
+</Steps>
 
 The test uses what is on screen right now, even before you click **OK**.
 
@@ -213,11 +231,11 @@ Right-click an account in the list:
 
 As always on this page, the change takes effect when you click **OK**.
 
-:::note[New in v2.2.4]
+<Aside type="note" title="New in v2.2.4">
 
 You can now disable an account without removing it.
 
-:::
+</Aside>
 
 GpgFrontend checks your accounts before it saves them. It tells you if, for
 example, an email address is missing, a server is not filled in, or two
@@ -234,11 +252,16 @@ key with your system's keychain or a PIN.
 
 ## Send a Message
 
+<Steps>
+
 1. Write your message. See
    [Write and Protect a Message](/email/compose-protect/).
 2. Sign or encrypt it if you like.
-3. Click **Send...** (or press Ctrl+Enter; Cmd+Enter on a Mac). The **Send
-   message** window opens. Nothing is sent yet.
+3. Click **Send...** (or press <kbd>Ctrl</kbd>+<kbd>Enter</kbd>;
+   <kbd>Cmd</kbd>+<kbd>Enter</kbd> on a Mac). The **Send message** window
+   opens. Nothing is sent yet.
+
+</Steps>
 
 If **Send...** is grayed out, hover over it to see what is missing.
 

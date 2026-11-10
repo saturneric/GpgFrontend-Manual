@@ -6,6 +6,8 @@ sidebar:
   order: 3
 ---
 
+import { Aside, Steps } from "@astrojs/starlight/components";
+
 When you get a message, you want to know two things:
 
 - **Can I trust it?** Did it really come from the sender, and was it changed on
@@ -14,7 +16,11 @@ When you get a message, you want to know two things:
 
 This page shows where GpgFrontend answers these questions.
 
-On a Mac, press Cmd where this page says Ctrl.
+<Aside type="tip" title="On a Mac">
+
+Press <kbd>Cmd</kbd> where this page says <kbd>Ctrl</kbd>.
+
+</Aside>
 
 ## Open the Message
 
@@ -52,8 +58,12 @@ menu.
 
 A signature is not checked by itself when you open a message. To check it:
 
+<Steps>
+
 1. Click the badge.
 2. Click **Verify Signature**.
+
+</Steps>
 
 For an encrypted and signed message, click **Decrypt and Verify** instead.
 
@@ -84,7 +94,8 @@ The **Message Details** window shows everything GpgFrontend knows about a
 message. To open it, do one of these:
 
 - Click **More** > **Details...**.
-- Press Ctrl+Shift+D, or Alt+3.
+- Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>, or
+  <kbd>Alt</kbd>+<kbd>3</kbd>.
 - Click the badge, then a details item, such as **Signature Details...** or
   **Encryption Details...**.
 
@@ -183,7 +194,7 @@ You decide what to do:
 - Click **Save** to save the file anyway.
 - Click **Cancel** to go back and fix the message.
 
-**Cancel** is the default, so pressing Enter does not save by accident.
+**Cancel** is the default, so pressing <kbd>Enter</kbd> does not save by accident.
 
 ## HTML Messages Open as Source
 
@@ -229,11 +240,11 @@ message, it is shown as source again.
 If the button says **Restart to Show Preview**, the preview was just
 installed. Restart GpgFrontend to use it.
 
-:::note[New in v2.2.4]
+<Aside type="note" title="New in v2.2.4">
 
 HTML messages can now be previewed.
 
-:::
+</Aside>
 
 ## Messages Are Checked Again When Your Keys Change
 
@@ -246,12 +257,12 @@ messages again when:
 For example, a message that said **Signed by an unknown key** can turn into
 **Signature verified** right after you import the sender's key.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 Open messages are now checked again by themselves after your key databases are
 reloaded.
 
-:::
+</Aside>
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/29/32ed1b86a24e9dc7be25eda5803a9d8e1c027b97.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/29/e67688b060714c05a88097631841df4da6ac3227.webp

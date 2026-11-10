@@ -690,14 +690,14 @@ entries:
     sources: [src/ui/dialog/profile/]
 
   - id: email-accounts-page
-    doc: src/content/docs/email/accounts-sending.md
+    doc: src/content/docs/email/accounts-sending.mdx
     ref: img-1  # "Open the Mail Accounts Page"
     scenario: email-accounts-page
     size: 900x660
     sources: [modules/src/m_email/]
 
   - id: email-security-menu
-    doc: src/content/docs/email/compose-protect.md
+    doc: src/content/docs/email/compose-protect.mdx
     ref: img-1  # "Sign or Encrypt the Message": the Security menu
     scenario: email-security-menu
     size: 1280x960
@@ -705,7 +705,7 @@ entries:
     highlight: {name: sign, style: arrow}
 
   - id: email-verified
-    doc: src/content/docs/email/verify-inspect.md
+    doc: src/content/docs/email/verify-inspect.mdx
     ref: img-1  # "Check the Signature": the badge after Verify
     scenario: email-verified
     size: 1280x960
@@ -713,14 +713,14 @@ entries:
     highlight: securityBadge
 
   - id: email-signature-details
-    doc: src/content/docs/email/verify-inspect.md
+    doc: src/content/docs/email/verify-inspect.mdx
     ref: img-2  # "The Message Details Window": Security tab
     scenario: email-signature-details
     size: auto
     sources: [modules/src/m_email/]
 
   - id: email-html-notice
-    doc: src/content/docs/email/verify-inspect.md
+    doc: src/content/docs/email/verify-inspect.mdx
     ref: img-3  # "HTML Messages Open as Source"
     scenario: email-html-notice
     size: 1280x960

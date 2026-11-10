@@ -6,17 +6,19 @@ sidebar:
   order: 5
 ---
 
+import { Aside, Steps } from "@astrojs/starlight/components";
+
 GpgFrontend can fetch messages from your mail server, so you can check and
 decrypt them right away. It does this with the **IMAP Controller**.
 
 **IMAP** is the way email apps talk to the server that keeps your mailbox.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 The IMAP Controller is new. Before, you had to save each message as a file in
 another email app first.
 
-:::
+</Aside>
 
 ## Before You Start
 
@@ -30,14 +32,22 @@ Disabled accounts are not listed in the IMAP Controller.
 
 ## Open the IMAP Controller
 
+<Steps>
+
 1. Click **Advanced** > **Open IMAP Controller**.
 2. The **IMAP Controller** window opens and connects to your account.
+
+</Steps>
 
 If you have no account with receiving turned on, a **No mail account** message
 appears instead. It asks you to set one up in Settings first.
 
+<Aside type="note" title="Mac App Store edition">
+
 The **Advanced** menu is hidden in the Mac App Store edition. There, the IMAP
 Controller is not available.
+
+</Aside>
 
 ## It Only Reads
 
@@ -77,8 +87,12 @@ list from the server.
 
 ## Open a Message
 
+<Steps>
+
 1. Select a message in the list.
 2. Click **Open**.
+
+</Steps>
 
 The message is downloaded and opens in a **new tab**. The window says **Opened
 in a new tab.**
@@ -141,8 +155,12 @@ Only the right-click menu has:
 With **Save All...**, a file never replaces one that is already in the folder.
 If a name is taken, GpgFrontend saves the file under a new name and tells you.
 
+<Aside type="danger" title="Cannot be undone">
+
 Removing an attachment from a message you received cannot be undone. Save it
 first if you might need it.
+
+</Aside>
 
 ### Which Files It Will Open
 

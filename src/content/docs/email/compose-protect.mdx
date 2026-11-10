@@ -6,6 +6,8 @@ sidebar:
   order: 2
 ---
 
+import { Aside, Steps } from "@astrojs/starlight/components";
+
 This page shows how to write an email in GpgFrontend and how to protect it.
 
 - **Signing** proves the message came from you and was not changed on the way.
@@ -13,12 +15,21 @@ This page shows how to write an email in GpgFrontend and how to protect it.
 
 You can do one, the other, or both. Everything happens on your own computer.
 
-On a Mac, press Cmd where this page says Ctrl, and Option where it says Alt.
+<Aside type="tip" title="On a Mac">
+
+Press <kbd>Cmd</kbd> where this page says <kbd>Ctrl</kbd>, and
+<kbd>Option</kbd> where it says <kbd>Alt</kbd>.
+
+</Aside>
 
 ## Start a New Message
 
+<Steps>
+
 1. Click **File** > **Workspace** > **Mail Editor**.
 2. A new tab opens with an empty message.
+
+</Steps>
 
 Each message is an `.eml` file. You can save it with **File** > **Save File** or
 **File** > **Save As...**, like any other file.
@@ -33,8 +44,13 @@ The header fields sit at the top of the message:
 
 To add more people:
 
-1. Click **Cc/Bcc** at the end of the **To:** row (or press Ctrl+Shift+C).
+<Steps>
+
+1. Click **Cc/Bcc** at the end of the **To:** row (or press
+   <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd>).
 2. Two more rows appear: **Cc:** and **Bcc:**.
+
+</Steps>
 
 What these mean:
 
@@ -70,12 +86,12 @@ GpgFrontend still uses these addresses in two ways:
 
 The Bcc addresses are not saved in the `.eml` file.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 The header fields are now part of the message tab. The old pop-up window that
 asked for From, To and Subject is gone.
 
-:::
+</Aside>
 
 ## Write the Body
 
@@ -84,8 +100,13 @@ Click in the large area below the header fields and type your message. It shows
 
 ## Attach Files
 
-1. Click **Attach File...** (or press Ctrl+Shift+A).
+<Steps>
+
+1. Click **Attach File...** (or press
+   <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>).
 2. Pick one or more files and confirm.
+
+</Steps>
 
 You can also drag files from your computer and drop them onto the message.
 
@@ -99,10 +120,10 @@ Your attachments are listed under the message. To learn more about the list, see
 
 When you open a message you received, the action row shows three buttons:
 
-- **Reply** (Ctrl+R): write back to the sender.
-- **Reply All** (Ctrl+Shift+R): write back to the sender and everyone else who
+- **Reply** (<kbd>Ctrl</kbd>+<kbd>R</kbd>): write back to the sender.
+- **Reply All** (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>): write back to the sender and everyone else who
   was addressed. People in Bcc are not included.
-- **Forward** (Ctrl+L): pass the message on to someone else, with its
+- **Forward** (<kbd>Ctrl</kbd>+<kbd>L</kbd>): pass the message on to someone else, with its
   attachments.
 
 Each one opens a **new tab** with a new message. The original message is not
@@ -122,10 +143,14 @@ Above the body you can switch between two views:
 
 The raw source is read-only at first. To change it by hand:
 
+<Steps>
+
 1. Switch to **Raw Source**.
 2. Click **Edit Raw Source**.
 3. Make your changes. What you type here is the message itself.
 4. Click **Stop Editing** when you are done.
+
+</Steps>
 
 Most people never need the raw source. It is there for checking or fixing a
 message by hand.
@@ -142,6 +167,8 @@ First pick your keys in the
 Then use the **Security menu**. This is the menu that opens from the status
 button:
 
+<Steps>
+
 1. Find the status button at the right end of the action row. The action row
    is the row of buttons above the message body. On a new message the status
    button says **Not signed or encrypted**.
@@ -153,6 +180,8 @@ button:
      private message.
 
    ![The Security menu of a new message][img-1]
+
+</Steps>
 
 The result shows in the **Status Panel**. The status button changes to tell you
 what the message is now, for example **Encrypted**.
@@ -191,8 +220,12 @@ If you try to change a signed message anyway, a **Message Is Signed** window
 asks: "Remove the signature and make it an ordinary message?" Click **Yes** to
 remove the signature, or **Cancel** to keep it.
 
+<Aside type="danger" title="Cannot be undone">
+
 Removing a signature cannot be undone. The text of the message is kept as it
 is.
+
+</Aside>
 
 ### Lock a Message Yourself
 
@@ -200,8 +233,12 @@ You can also lock a message you received, so nobody changes it by accident.
 This is only offered for a message that is not signed or encrypted. Signed and
 encrypted messages are locked already.
 
+<Steps>
+
 1. Click **More**.
 2. Click **Read-only**.
+
+</Steps>
 
 A **Read-only** label appears. **Reply** and **Forward** still work, and they
 make new messages. To unlock, click **More** > **Read-only** again.
@@ -210,7 +247,7 @@ make new messages. To unlock, click **More** > **Read-only** again.
 
 You have two choices:
 
-- **Send it from GpgFrontend.** Click **Send...** (or press Ctrl+Enter). You
+- **Send it from GpgFrontend.** Click **Send...** (or press <kbd>Ctrl</kbd>+<kbd>Enter</kbd>). You
   need a mail account for this. See
   [Send a Message](/email/accounts-sending/#send-a-message).
 - **Send it with another email app.** Save the message as an `.eml` file with
@@ -260,6 +297,9 @@ result as a set of cards:
 
 You can skip this section.
 
+<details>
+<summary>Show the technical details</summary>
+
 - GpgFrontend follows the OpenPGP standards ([RFC 4880][rfc4880] and
   [RFC 3156][rfc3156]). The messages work with Thunderbird and other OpenPGP
   email apps.
@@ -268,6 +308,8 @@ You can skip this section.
   encrypted part. This keeps the body, attachments and formatting intact.
 - `.eml` files work almost everywhere. You can always move a message to or from
   another email app.
+
+</details>
 
 [rfc4880]: https://www.rfc-editor.org/rfc/rfc4880
 [rfc3156]: https://www.rfc-editor.org/rfc/rfc3156
