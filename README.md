@@ -78,28 +78,43 @@ Your page content starts here, written in Markdown.
 ## Add a new page
 
 1. Create a file in the right folder, for example
-   `src/content/docs/guides/my-topic.md`.
+   `src/content/docs/guides/my-topic.mdx`.
 2. Add the frontmatter block shown above, at least a `title`.
 3. Write your content below it.
 4. Save. The page appears in the sidebar on its own.
 
 Use clear, simple file names with words joined by hyphens, such as
-`generate-key.md`. The file name becomes part of the page address.
+`generate-key.mdx`. The file name becomes part of the page address.
 
 ## Markdown and MDX
 
-Most pages use plain Markdown (`.md`). Some pages need extra building blocks like
-tabs or cards, and those use MDX (`.mdx`). MDX is Markdown plus components you
-import at the top of the file:
+Most pages use MDX (`.mdx`), so they can use Starlight's building blocks such
+as steps, tabs and cards. A page with no components can stay plain Markdown
+(`.md`). MDX is Markdown plus components you import at the top of the file:
 
 ```mdx
 import { Tabs, TabItem, Aside } from "@astrojs/starlight/components";
 
-<Tabs>
+<Tabs syncKey="os">
   <TabItem label="Windows">Windows steps here.</TabItem>
   <TabItem label="macOS">macOS steps here.</TabItem>
 </Tabs>
 ```
+
+Use the building blocks the same way on every page:
+
+- `<Steps>` around every numbered list of things to do.
+- `<Tabs syncKey="os">` with the labels `Windows`, `macOS`, `Linux` when the
+  steps differ by system, and `<Tabs syncKey="engine">` with `GnuPG`, `rPGP`
+  when they differ by engine. The same key keeps the reader's choice on every
+  page.
+- `<CardGrid>` with `<LinkCard>` for lists of related pages, `<Card>` for two
+  to four choices side by side.
+- `<Badge>` for short labels in tables, such as `GnuPG only`. Never put a
+  badge in a heading: it changes the link to that heading.
+- `<FileTree>` for folder layouts, and `<kbd>Ctrl</kbd>+<kbd>F</kbd>` for
+  keyboard shortcuts.
+- `<Aside type="danger">` for anything that cannot be undone.
 
 A few tips that save trouble:
 
