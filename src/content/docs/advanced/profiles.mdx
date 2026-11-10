@@ -15,12 +15,12 @@ inside the program.
 You already have one, and it works. If one setup is enough for you, you can
 skip this page.
 
-:::note[New in v2.2.2]
+<Aside type="note" title="New in v2.2.2">
 
 Profiles were added in GpgFrontend v2.2.2. Before that, the program had one
 setup and one only.
 
-:::
+</Aside>
 
 ## Why You Might Want a Second One
 
@@ -59,12 +59,12 @@ Profiles you make yourself live in a `profiles` folder inside that one. You do
 not have to go looking for them: in **Manage Profiles**, pick a profile and
 choose **Show in Folder** from the **⋯** button or the right-click menu.
 
-:::tip[Nightly builds stay out of your way]
+<Aside type="tip" title="Nightly builds stay out of your way">
 
 Test builds keep their files in a separate folder of their own. Trying a
 nightly version never touches the setup your installed version uses.
 
-:::
+</Aside>
 
 ## The Profiles Menu
 
@@ -190,13 +190,13 @@ keyring**.
 
 </Aside>
 
-:::note[One window per profile]
+<Aside type="note" title="One window per profile">
 
 The same profile cannot be open in two windows at once. If you try, the
 program tells you it is already open somewhere else. This is on purpose:
 two windows writing to one profile would damage it.
 
-:::
+</Aside>
 
 ## Save a Profile to a File
 
@@ -280,14 +280,13 @@ The list ends with a line that says what never goes in: **Never included:
 logs, modules, and keys kept elsewhere.**
 
 "Keys kept elsewhere" is the surprising one. Keys live outside the profile
-when the profile uses the system GnuPG keyring, or when a key database is
-kept on this computer only. Those keys stay where they are. When the profile
-is opened on another computer, the program says such a database **is
-unavailable** until you point it at a folder there.
+when the profile uses **This computer's built-in key database**, or when a
+key database is on the **Local Only** tab. Those keys stay where they are.
+When the profile is imported on another computer, the program says such a
+database **is unavailable** until you point it at a folder there.
 
-Key databases in the [Recycle Bin](/advanced/key-database/#restore-or-delete-a-removed-database)
-also stay behind. Your choice of default key database goes in, as long as the
-database it names goes in too.
+For the full list of which key databases go into the file, see
+[What Travels in a Profile Package](/advanced/key-database/#what-travels-in-a-profile-package).
 
 Settings that only make sense on this computer also stay behind. For example,
 the place where a custom GnuPG is installed, the workspace folder, and how this
@@ -307,14 +306,14 @@ the profile file. See also [Key Databases](/advanced/key-database/).
 
 <Aside type="caution" title="Changed in v2.2.3">
 
-Profile files now use a new format. A file saved by v2.2.3 **cannot be
-opened by v2.2.2**. Update GpgFrontend on the other computer first.
+Profile files now use a new format. A file saved by v2.2.3 or later **cannot
+be opened by v2.2.2**. Update GpgFrontend on the other computer first.
 
-Files saved by v2.2.2 still open in v2.2.3.
+Files saved by v2.2.2 still open in v2.2.3 and later.
 
 </Aside>
 
-Two new messages can appear when a file will not open:
+Two messages can appear when a file will not open:
 
 - **This Profile File Is Too Large**: the file is bigger than this version can
   open. This only happens with files from older versions, which had to be
@@ -408,12 +407,12 @@ Then **Protect This Profile File** appears:
 Whatever you type here becomes the file's passphrase. A different passphrase
 replaces the old one, and the old one will no longer open the file.
 
-:::caution[Do not just close and walk away]
+<Aside type="caution" title="Do not just close and walk away">
 
 If you choose **Discard**, everything you did in that session is gone. The
 copy the program was running from is deleted when the window closes.
 
-:::
+</Aside>
 
 ### Where the Open File Is Kept
 

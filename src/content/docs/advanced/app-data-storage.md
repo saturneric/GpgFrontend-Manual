@@ -10,19 +10,27 @@ Besides your keys, GpgFrontend saves a few things of its own: key server
 entries, key generation profiles, window positions, and so on. The sensitive
 parts are encrypted with the program's own key.
 
-This also holds the copy of your unsaved text editor tabs, when **Cache text
-editor contents.** is on. It is on by default. See
+The saved data also includes a copy of your unsaved text editor tabs, when
+**Cache text editor contents.** is on. It is on by default. See
 [Unsaved Editor Tabs](/advanced/memory-security/#unsaved-editor-tabs).
 
 All of this happens automatically. There is nothing to set up and nothing to
 maintain. This page is here for people who want to know what is going on.
 
-To clear this saved data (window positions, the key server list and similar),
-open **Settings** > **General** and click **Clear All Data Objects** in the
-**Data** box. Your keys are not touched. Sandboxed builds hide this button.
-
 For the key that does the protecting, and the choices you have about it, see
 [Application Secure Key](/advanced/app-secure-key/).
+
+## Clear the Saved Data
+
+1. Open **Settings** and go to **General**.
+2. In the **Data** box, click the button that starts with **Clear All Data
+   Objects**. The button also shows the total size of the saved data.
+3. A **Confirm** window asks if you are sure. Click **Yes**.
+
+This removes window positions, the key server list and similar saved data.
+Your keys are not touched.
+
+Sandboxed builds (Flatpak and Mac App Store) hide the **Data** box.
 
 ## How It Works
 
@@ -43,23 +51,25 @@ The files live inside your profile, in a folder called `data_objs`. Each file
 is named after a scrambled version of what it holds, so the file names give
 nothing away.
 
-Below **Maximum**, every [Secure Level](/advanced/memory-security/) uses the
-same key, so you can move between them freely. **Maximum** uses keys that
-change every week (see below). If you lower the level from **Maximum**, data
-saved with those weekly keys can no longer be opened.
-
-GpgFrontend clears out files whose key is gone. It waits a few days first
-(3 days at **Strong** or **Maximum**, 7 days below that), then moves them
-aside, and deletes them later.
-
 ## Key Changes
 
-At the **Maximum** Secure Level, the program's key is replaced every week. Old
-files stay readable because each one records which key it was written with, so
-GpgFrontend can still open them. A file moves to the new key the next time
-GpgFrontend saves it.
+Below the **Maximum** [Secure Level](/advanced/memory-security/), the program
+uses one key all the time. You can move between those levels freely.
 
+At **Maximum**, GpgFrontend makes a new key every week and saves new data
+with it. Old files stay readable, because each file records which key it was
+written with. A file moves to the new key the next time GpgFrontend saves it.
 You never see this happen.
+
+If you lower the level from **Maximum**, data saved with those weekly keys can
+no longer be opened. GpgFrontend warns you first. See
+[Application Secure Key](/advanced/app-secure-key/#secure-level).
+
+## Files Whose Key Is Gone
+
+GpgFrontend clears out saved files whose key is gone. It waits a few days
+first (3 days at **Strong** or **Maximum**, 7 days below that). Then it moves
+the files aside, and deletes them later.
 
 :::note[Changed in v2.2.0]
 

@@ -20,14 +20,17 @@ Use it when you want to:
 
 Portable is not a setting inside the program. It is a separate download.
 
-On the [Downloads](/overview/downloads/) page you will find two kinds of file
-for each system:
+There are two kinds of download:
 
 - **Installed**: the normal choice. Settings and keys go in your user folder.
 - **Portable**: everything stays in the program's own folder.
 
-Pick the portable one and unpack it wherever you want it, such as onto a USB
-drive. That is all you need to do.
+The portable version is made for Windows and Linux. There is no portable
+version for macOS.
+
+To get it, go to the [Downloads](/overview/downloads/) page and open **More
+download options**. Put the portable download wherever you want it, such as on
+a USB drive. On Windows it is a `.zip` file, so unpack it first.
 
 :::note[Changed in v2.2.2]
 
@@ -54,8 +57,8 @@ A portable copy stores its settings, keys, logs and modules in the folder it
 was unpacked into. On Linux, an AppImage uses the folder that holds the
 `.AppImage` file.
 
-That means whoever holds the drive holds your keys. Keep it somewhere safe,
-and use a strong passphrase on your private keys.
+So whoever holds the drive holds your keys. Keep the drive somewhere safe, and
+use a strong passphrase on your private keys.
 
 ## What a Portable Copy Cannot Do
 
@@ -63,7 +66,8 @@ A portable copy cannot use your computer's password store to protect its own
 key. That store belongs to one computer, and a portable copy has to work on
 any computer you plug it into.
 
-That option is greyed out for you, so there is nothing you need to do. See
+The **System keychain** choice is greyed out in a portable copy, so there is
+nothing you need to do. See
 [Application Secure Key](/advanced/app-secure-key/) if you want the details.
 
 ## Tip: Moving Between Computers
@@ -73,10 +77,10 @@ folder, so they move with it. You do not need to do anything for them.
 
 If you also use key databases on the **Local Only** tab, tick **Convert to
 Relative Path** when you add or edit each one. In a portable copy this box is
-ticked for you. GpgFrontend then remembers the folder in relation to the
-program, not as a full path. The path keeps working even when the drive gets a
-different letter or mount point on the next computer. Keep those folders on
-the same drive as GpgFrontend.
+ticked for you. GpgFrontend then remembers where the folder is in relation to
+the program, not as a full path. The path keeps working even when the drive
+gets a different letter or mount point on the next computer. Keep those
+folders on the same drive as GpgFrontend.
 
 See [Multi-Key Database](/advanced/key-database/) for how to add and edit key
 databases.

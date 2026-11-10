@@ -19,11 +19,12 @@ want more protection than the default.
 ## Your Three Choices
 
 Open **Settings**, go to **Advanced**, and look at **Application Key
-Protection**.
+Protection:**. It is a list with three choices.
 
 ### No extra protection
 
-The default. The key sits in a file that only your user account can read.
+The default. In the list it reads **No extra protection (default)**. The key
+sits in a file that only your user account can read.
 
 This is fine for a computer only you use. Anyone who can read your files
 could also read the key, but someone with that much access could read most
@@ -39,12 +40,12 @@ passwords:
 - **Linux**: your password service, such as GNOME Keyring or KWallet
 
 Nothing changes for you day to day. The program never asks you for anything.
-It just means the key file on its own is useless to someone who copies it.
+But the key file on its own is now useless to someone who copies it.
 
 This choice is greyed out when it cannot work:
 
-- On a **portable** copy, because the store belongs to one computer and a
-  portable copy has to run on any of them.
+- On a **portable** copy, because the password store belongs to one computer
+  and a portable copy has to run on any computer.
 - On a profile you **opened from a file**, for the same reason. That file is
   already protected by its own passphrase.
 - On Linux, when **no password service is set up**. Install one and switch it
@@ -116,7 +117,7 @@ need the current PIN to do it.
 ## Secure Level
 
 On the same settings page, just above the key protection choices, you will
-find **Secure Level**. It has four settings:
+find **Secure Level:**. It has four levels:
 
 - **Standard**: no extra hardening. The default.
 - **Enhanced**: wipes memory as soon as it is finished with it.
@@ -126,9 +127,13 @@ find **Secure Level**. It has four settings:
 The first three are about memory, and are explained on
 [Memory Security](/advanced/memory-security/).
 
-**Maximum** is the only one that affects this page. It replaces the key with
-a new one every week. So if someone steals an old copy of your saved data, it
-soon becomes useless to them.
+**Maximum** is the only level that changes how the key is used. Every week,
+GpgFrontend makes a new key from the program's key, and saves new data with
+it.
+
+Weekly keys help little while the program's key has **No extra protection**.
+The settings page says so when you pick both, and suggests **System keychain**
+or **PIN at startup**.
 
 :::caution[Turning Maximum back off]
 
@@ -142,8 +147,8 @@ Click **Yes** to go ahead, or **No** to keep Maximum.
 
 :::
 
-Changes on this page only take effect after GpgFrontend restarts. It offers to
-restart for you.
+Changes on the **Advanced** settings page only take effect after GpgFrontend
+restarts. GpgFrontend offers to restart for you.
 
 ## Where the Key Is Kept
 

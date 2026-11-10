@@ -6,118 +6,125 @@ sidebar:
   order: 7
 ---
 
-import { Steps } from "@astrojs/starlight/components";
-import { Aside } from '@astrojs/starlight/components';
+import { Steps, Aside } from "@astrojs/starlight/components";
 
-Public key cryptography relies on the long-term security and trustworthiness of
-private keys. However, situations may arise where a key can no longer be
-trusted, such as when it is lost, compromised, or no longer needed. In these
-cases, it is essential to inform others that the key should no longer be used.
+Sometimes a key can no longer be trusted. It may be lost, stolen, or just no
+longer in use. Then you need a way to tell other people to stop using it.
 
-A key revocation certificate serves this purpose. It allows the owner (or anyone
-with the certificate) to mark a public key as revoked which means the key is no
-longer valid for signing or encryption. Publishing a revocation certificate
-ensures that anyone retrieving the key from a public server or receiving it
-directly will know that the key is no longer trustworthy.
+A **revocation certificate** does this. It is a small file that marks one key
+as revoked. A revoked key is no longer valid. Anyone who gets the revoked key,
+from you or from a key server, can see that they should not use it any more.
 
-## When to Use Key Revocation
+Anyone who holds the certificate can revoke the key with it, so keep the file
+safe.
 
-1. Key compromise: If you suspect your private key has been stolen or copied by
-   an unauthorized party.
-2. Key loss: If you permanently lose access to your private key and can no
-   longer control its use.
-3. Change of ownership or retirement: If you no longer wish to use the key for
-   any reason (e.g., moving to a new key).
-4. Administrative/security policy: To comply with organization or security
-   policies requiring regular key turnover.
+## When to Revoke a Key
 
-By preparing a revocation certificate in advance, you can quickly react to these
-situations and help prevent unauthorized or accidental use of outdated or
-compromised keys.
+- **The key was stolen or copied.** Someone else may have your private key.
+- **The key is lost.** You cannot get at your private key any more.
+- **You stopped using the key.** For example, you moved to a new key.
+- **A rule asks for it.** Your organization may require you to replace keys
+  from time to time.
 
-<Aside type="caution" title="Revocation Has No Effect If Not Published">
+Make the certificate ahead of time, while you still have the private key.
+Then you can act quickly when one of these things happens.
 
-Merely generating or importing a revocation certificate is not enough. If you do
-not publish the revoked key to a public key server or actively notify your
-contacts, others will still see your key as valid and may continue to use it.
+<Aside type="caution" title="A revocation only counts once others can see it">
 
-Always publish your revoked key and inform peers as soon as possible to ensure
-the revocation is recognized by others.
+Making or importing a revocation certificate changes the key on your computer
+only. Other people still see your key as valid, and may keep using it.
+
+After you revoke a key, publish it to a key server or send the revoked public
+key to your contacts.
 
 </Aside>
 
+## Make a Revocation Certificate
 
-## Generating a Key Revocation Certificate
+You need the private key to do this.
 
-Since v2.2.2 there is a shortcut: right-click the key in the **KeyPair
-Management** window, open **Key Operations** and choose **Generate Revocation
-Certificate...**. That takes you straight to step 3 below.
+There is a shortcut: right-click the key in the **KeyPair Management** window,
+open **Key Operations** and choose **Generate Revocation Certificate...**.
+That takes you straight to step 3 below.
 
-The longer route through the key's own window still works, and is described
-here in full.
+<Aside type="note" title="New in v2.2.2">
 
-<Steps>
+The **Generate Revocation Certificate...** shortcut was added in v2.2.2.
 
-1. Open the Key Details Window: open Key Details Dialog, then switch to the
-   Operations tab.
+</Aside>
 
-   ![][img-1]
-
-2. Select **Generate Revoke Certificate**: At the bottom dropdown labeled
-   **Revoke Certificate Operation**, choose **Generate Revoke Certificate**.
-
-3. Specify the Revocation Reason: Choose one reason code from the dropdown.
-    Optionally provide free-form text for a more detailed explanation (e.g., lost,
-    compromised).
-
-    ![][img-2]
-
-4. Confirm and Save: Click OK, then in the file-save dialog, you can choose a
-   secure local or private location to store the .rev file.
-
-5. Backup and Store: Backup: Keep the .rev file in a secure offline or encrypted
-   location.
-
-</Steps>
-
-
-## Importing a Key Revocation Certificate
+The longer way goes through the key's own window:
 
 <Steps>
 
-1. Open the Key Details Dialog: Navigate again to `Key Details → Operations`.
+1. Open the key's **Key Details** window and click the **Operations** tab. See
+   [View Key Pair Details](/guides/view-keypair-info/) for how to open the
+   window.
 
-2. Select **Import Revoke Certificate**: From the **Revoke Certificate
-   Operation** dropdown, choose **Import Revoke Certificate**.
+   ![The Revoke Certificate Operation button on the Operations tab][img-1]
 
-3. Import the `.rev` File: In the file-selection dialog, locate and open the
-   previously saved `.rev` file.
+2. Click **Revoke Certificate Operation**, then choose **Generate Revoke
+   Certificate** from the menu. The button is only there for a key whose
+   private primary key you have.
 
-4. Verify Revocation: After import, the local key interface will mark the key as
-   revoked. It can no longer be used for signing or decryption.
+3. The **Revocation Options** window opens. Pick a reason under **Revocation
+   Reason (Code)**. If you like, type more details under **Revocation Reason
+   (Text)**. Click **OK**.
 
-   ![][img-3]
+   ![The Revocation Options window][img-2]
 
-5. Publish to a Public Key Server: a revoked key's details window has only the
-   **KeyPair** tab, so use the key list instead. Open the **KeyPair
-   Management** window, click the **Revoked** category, right-click the key
-   and choose **Publish Public Key to Key Server**. See
-   [Key Server Operations](/guides/key-server-operations/). This item comes
-   from the KeyServerSync module. You can also do it from the command line:
-    ```shell
-    gpg --keyserver hkps://keyserver.ubuntu.com --send-keys <YOUR_KEY_ID>
-    ```
+4. Choose where to save the file. Its name ends in `.rev`.
+
+5. Keep the `.rev` file somewhere safe, such as an offline or encrypted
+   drive.
 
 </Steps>
 
-## Best Practices
+## Revoke a Key With a Certificate
 
-- Prepare in Advance: Generate and back up the revocation certificate before any
-  key may be lost or compromised.
-- Secure Storage: Keep the revocation `.rev` file offline or in encrypted media
-  to prevent unauthorized revocation.
-- Notify & Synchronize: After publishing revocation, inform peers or document
-  the change so everyone refreshes the key status promptly.
+This step cannot be undone. Once the certificate is imported, the key stays
+revoked.
+
+<Steps>
+
+1. Open the key's **Key Details** window and click the **Operations** tab.
+
+2. Click **Revoke Certificate Operation**, then choose **Import Revoke
+   Certificate**.
+
+3. A window called **Import Key Revocation Certificate** asks if you really
+   want to do this. Click **OK**.
+
+4. Pick the `.rev` file you saved earlier and open it.
+
+5. The key is now marked as revoked on this computer.
+
+   ![The Key Details window of a revoked key][img-3]
+
+6. Publish the revoked key to a key server. A revoked key's details window has
+   only the **KeyPair** tab, so use the key list instead. Open the **KeyPair
+   Management** window and click the **Revoked** category. Then right-click
+   the key and choose **Publish Public Key to Key Server**.
+
+   This menu item comes from the key server module. See
+   [Key Server Operations](/guides/key-server-operations/).
+
+   You can also publish from the command line:
+
+   ```shell
+   gpg --keyserver hkps://keyserver.ubuntu.com --send-keys <YOUR_KEY_ID>
+   ```
+
+</Steps>
+
+## Good Habits
+
+- **Prepare early.** Make the revocation certificate and back it up before
+  anything goes wrong.
+- **Store it safely.** Keep the `.rev` file offline or on an encrypted drive,
+  so nobody else can revoke your key.
+- **Tell people.** After you publish the revocation, ask your contacts to
+  refresh your key.
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/29/eac9a1e5ae807b34b5665b95c5213bc8d217ddfb.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/25/bd1636252e4729fc80adad6349819590eec5d970-0.webp

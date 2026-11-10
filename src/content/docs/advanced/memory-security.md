@@ -15,7 +15,7 @@ would not want recovered from a memory dump or a swap file.
 
 ## Change It
 
-Open **Settings**, go to **Advanced**, and set **Secure Level**.
+Open **Settings**, go to **Advanced**, and set **Secure Level:**.
 
 The change takes effect after GpgFrontend restarts. It offers to restart for
 you.
@@ -29,7 +29,7 @@ file next to the program. That file is no longer read. Use the settings page.
 
 ## The Levels
 
-The old version numbers are in brackets, in case you are used to them.
+The old level numbers are in brackets, in case you are used to them.
 
 ### Standard (0)
 
@@ -61,17 +61,17 @@ something sensitive.
 
 Everything from Strong. It adds no further memory protection.
 
-Instead, it makes GpgFrontend replace its own internal key every week. That
-is about the data the program saves, not about memory, and it has a catch
-worth reading before you turn it on. See
-[Application Secure Key](/advanced/app-secure-key/).
+Instead, it makes GpgFrontend use a new key for its saved data every week.
+That is about the data the program saves, not about memory. It has a catch,
+so read [Application Secure Key](/advanced/app-secure-key/#secure-level)
+before you turn it on.
 
 ## Undo After an Operation
 
 When you encrypt or decrypt text, the result replaces what was in the editor
-tab. If undo were allowed there, pressing Ctrl+Z after encrypting would bring
-your plain text back. To allow that, the program would have to keep the plain
-text in memory.
+tab. If undo were allowed there, undoing after you encrypt would bring your
+plain text back. To allow that, the program would have to keep the plain text
+in memory.
 
 So by default, you **cannot** undo an encrypt, decrypt or other operation in
 the text editor. The old text is gone once the result appears.
@@ -83,9 +83,9 @@ If you want undo back:
    operations in the text editor.**
 3. Click **OK**. On macOS, close the window instead.
 
-Leave it off if you handle sensitive text. As the setting's tip says, undo
-keeps the previous text in memory, and after encrypting that is the
-plaintext.
+Leave it off if you handle sensitive text. As the setting's tooltip says,
+undo keeps the previous text in memory, and after encrypting that is the plain
+text.
 
 :::note[Changed in v2.2.3]
 

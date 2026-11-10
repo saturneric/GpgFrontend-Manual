@@ -579,8 +579,9 @@ with a [KeyPackage](/advanced/key-package/).
 
 ## Sandbox Builds (Flatpak and Mac App Store)
 
-Sandboxed builds can only keep key databases inside the profile. So in the
-Flatpak and Mac App Store builds:
+A sandbox is a closed-off space the system gives the app. Sandboxed builds can
+only keep key databases inside the profile. So in the Flatpak and Mac App
+Store builds:
 
 - the **Local Only** tab is hidden;
 - **Choose Folder…** and **Convert to Relative Path** are not shown;
@@ -592,26 +593,20 @@ The **Recycle Bin** tab works the same as in other builds.
 
 ## Back Up Your Key Databases
 
-Back up each database according to its engine:
-
-- **GnuPG database**: back up the folder it uses, plus your revocation
-  certificates.
-- **rPGP database**: back up the whole folder, including `gf_keydb.sqlite`.
-  This file can contain private keys.
+Back up the whole folder of each key database. A backup holds your private
+keys, so keep it in a safe, encrypted place. For what is in the folder with
+each engine, see [How Keys Are Stored](/advanced/key-storage/).
 
 To find a folder, right-click the database and choose **Open** or **Copy Folder
 Path**. For the built-in database, use **Copy** next to **Location:**.
-
-Keep backups in a safe, encrypted place.
 
 ## Tips
 
 - **Name databases by purpose**: `Personal`, `Work`, `Project Alpha`,
   `rPGP Test`.
-- **Check the key database button first**: make sure you are in the right
-  database before you make, import, encrypt, or sign.
 - **Keep experiments apart**: do daily work in a GnuPG database. Use a separate
   rPGP database for trying new features.
+
 [img-1]: https://image.cdn.bktus.com/i/2026/10/29/a9397ad0e7372f52f5c26b0ee963cded51b480e4.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/29/125d52b6f4300258e3df3516804d2a3a7a030e77.webp
 [img-3]: https://image.cdn.bktus.com/i/2026/10/29/e0543f5ccc9d3dab5aab6ce69dd17e266dcb0e6b.webp

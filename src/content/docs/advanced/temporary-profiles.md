@@ -8,8 +8,8 @@ sidebar:
 
 A **temporary profile** is a [profile](/advanced/profiles/) that only lasts as
 long as its window. It starts empty: no keys, no saved state. When you close
-its window, everything in it is destroyed: its keys, its settings and its
-files.
+its window, everything in it is destroyed. That means its keys, its settings
+and its files.
 
 :::note[New in v2.2.3]
 
@@ -62,14 +62,11 @@ open temporary profiles.
 - **Keys**: none. The temporary profile has its own empty keyring. Import or
   make the keys you need inside it.
 - **Settings**: when you start it from the menu or from **Manage Profiles**,
-  it copies the settings of the window you started it from. These are the same
-  groups the [New Profile](/advanced/profiles/#pick-which-settings-to-copy)
-  window offers: engine and GnuPG, rPGP passphrase handling, everyday
-  behaviour, language and appearance, and diagnostics. When you start it from a
-  terminal, it starts with the normal default settings.
-
-Keys, key databases, the workspace folder, key protection and proxy
-credentials are never copied.
+  it copies the settings of the window you started it from. It copies the same
+  groups of settings that the **New Profile** window offers, and leaves out
+  the same things. See
+  [Pick Which Settings to Copy](/advanced/profiles/#pick-which-settings-to-copy).
+  When you start it from a terminal, it starts with the default settings.
 
 To check that you are in a temporary profile, point at the profile name in the
 status bar at the bottom right of the window. It says the profile is not kept
@@ -105,8 +102,8 @@ Later you can open or import that file like any other profile file.
 
 Some settings only take effect after GpgFrontend restarts. A restart starts a
 new copy of the program, and that would destroy the temporary profile. So the
-program refuses: it shows **Restart Not Possible**, and lists the settings
-pages with changes that need a restart.
+program refuses to save such a change. It shows **Restart Not Possible**, and
+lists the settings pages with changes that need a restart.
 
 - On Windows and Linux, the settings window stays open. Undo those changes, or
   click **Cancel** to throw away everything you changed in the settings window.

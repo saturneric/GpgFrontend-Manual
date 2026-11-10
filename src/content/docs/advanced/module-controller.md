@@ -44,26 +44,28 @@ in the module list, what the module does, and where its features appear.
 - **PGPInspect**: a window that shows what is inside OpenPGP data. Adds **Open
   OpenPGP Structure Inspector** to the **Advanced** menu and to the editor's
   right-click menu. See [OpenPGP Structure Inspector](/advanced/pgp-inspector/).
-- **KeyServerSync**: finds, publishes and refreshes keys on key servers. Adds
-  **Key Server** to **Keys**, **Import Key**, the **Key Server Operations**
-  button in key details, **Publish Public Key to Key Server** and **Refresh
-  Public Key From Key Server** to the key lists' right-click menus and to the
-  **Operations** menu of the KeyPair Management window, and the **Key
-  Servers** settings page under **Keys & Engines**. It also offers to fetch
-  missing keys when you verify a signature. See
-  [Key Server Operations](/guides/key-server-operations/).
+- **KeyServerSync**: finds, publishes and refreshes keys on key servers. See
+  [Key Server Operations](/guides/key-server-operations/). It adds:
+  - **Key Server** to the **Keys** > **Import Key** menu;
+  - the **Key Server Operations** button in the Key Details window;
+  - **Publish Public Key to Key Server** and **Refresh Public Key From Key
+    Server** to the key lists' right-click menus, and to the **Operations**
+    menu of the KeyPair Management window;
+  - the **Key Servers** settings page under **Keys & Engines**.
+
+  It also offers to fetch missing keys when you verify a signature.
 - **VersionChecking**: checks for a newer GpgFrontend. Adds **Check for
   Updates** to the **Help** menu, and the **Updates** settings page under
   **Application**.
 - **GatherGnupgInfo**: shows details about your GnuPG installation. Adds
   **GnuPG** to the **Help** menu.
-- **Email**: writes, reads and protects email. Adds **Mail Editor** to **File**,
-  **Workspace**, adds **Open IMAP Controller** to the **Advanced** menu, and
-  adds the **Mail Accounts** settings page under **Features**.
+- **Email**: writes, reads and protects email. Adds **Mail Editor** to the
+  **File** > **Workspace** menu, **Open IMAP Controller** to the **Advanced**
+  menu, and the **Mail Accounts** settings page under **Features**.
 
-One more module, **WebEngine**, is optional. It shows HTML email formatted on
-Linux. It is only there in builds made with it; the official downloads leave it
-out. See [Verify and Inspect](/email/verify-inspect/).
+One more module, **WebEngine**, is optional. On Linux, it shows HTML email
+with its formatting. Only builds made with this module have it. The official
+downloads leave it out. See [Verify and Inspect](/email/verify-inspect/).
 
 Some versions leave modules out:
 
@@ -209,8 +211,8 @@ still work.
 ### Old Modules From v2.2.2
 
 Modules made for v2.2.2 were single files ending in `.so`, `.dll` or `.dylib`.
-GpgFrontend v2.2.3 no longer loads them, and they do not appear in the list. Ask
-the module's author for a new, signed version.
+GpgFrontend v2.2.3 and later do not load them, and they do not appear in the
+list. Ask the module's author for a new, signed version.
 
 ## Tabs for Developers
 

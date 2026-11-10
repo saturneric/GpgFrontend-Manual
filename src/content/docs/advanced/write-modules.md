@@ -119,7 +119,7 @@ returns its failure value and logs one line that names the missing capability.
 
 `html.view` and `html.provider` are new in v2.2.4. With `html.view`, call
 `gf::ui::HtmlViewAvailability()` and, when it returns `kOK`, create a
-`gf::ui::HtmlView` (see `GFModuleHtmlView.h`). The Host owns the safety
+`gf::ui::HtmlView` (see `GFModuleHtmlView.h`). GpgFrontend owns the safety
 rules: no network, no scripts, and a prompt before any link opens. Without a
 renderer every call answers Unavailable, so keep a plain-text fallback. The
 email module uses this for its HTML preview.
@@ -203,15 +203,11 @@ users trust is the publisher key.
 
 ### How Users Load Your Module
 
-Tell your users to:
-
-1. set **Settings**, **General**, **Module Discovery:** to **Also Look For
-   Modules I've Added**;
-2. copy your `<key>` folder into the folder that **Show Modules Folder** opens
-   in the Module Controller, then restart GpgFrontend;
-3. select your module, check the **Publisher key** fingerprint against the one
-   you published, and click **Trust This Publisher Key...**;
-4. click **Enable This Module**, then restart GpgFrontend.
+Give your users the whole `<key>` folder and your publisher key fingerprint.
+Then point them to
+[Add a Module From Someone Else](/advanced/module-controller/#add-a-module-from-someone-else).
+It walks them through copying the folder, trusting your key and enabling the
+module.
 
 Users of the Flatpak and Mac App Store builds cannot load modules you publish.
 Those builds hide **Module Discovery** and the Module Controller.
