@@ -170,8 +170,6 @@ class DocEditTest(TxnWorld):
             text = path.read_text(encoding="utf-8")
             self.assertNotIn("/del/", text, path)
             self.assertNotIn('"del"', text, path)
-        # It is kept in the ignored transaction cache.
-        self.assertIn("/del/secret", (self.txn_dirs()[0] / "txn.json").read_text(encoding="utf-8"))
 
     def test_conflict_stops_remaining_transactions(self) -> None:
         import apply
@@ -191,4 +189,4 @@ class DocEditTest(TxnWorld):
         self.assertEqual(st["a-main"], "conflict")
         self.assertEqual(st["a-dialog"], "failed:stopped-after-conflict")
         self.assertEqual(len(self.cdn_server.requests), 1)
-        self.assertIn("del: https://img.example.org/del/secret1", out)
+        self.assertIn("url: https://img.example.org/i/up1.webp", out)

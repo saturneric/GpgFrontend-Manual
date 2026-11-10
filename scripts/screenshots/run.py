@@ -62,7 +62,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--repeat", type=int, default=None, help="render N times and require identical bytes")
     p.add_argument("--recover", action="store_true", help="complete pending transactions only")
     p.add_argument("--resolve", metavar="TXN_ID", help="with --recover: decide an upload-unknown transaction")
-    p.add_argument("--url", help="with --resolve: the URL found in the EasyImages admin")
+    p.add_argument("--url", help="with --resolve: the URL found in the ImgBed admin")
     p.add_argument("--retry-upload", action="store_true", help="with --resolve: upload again (may duplicate)")
     p.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     p.add_argument("--lock", type=Path, default=DEFAULT_LOCK)

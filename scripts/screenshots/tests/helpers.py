@@ -1,5 +1,5 @@
 """Shared fixtures: a temp GpgFrontend git repo, a temp manual tree, a fake
-binary and a localhost EasyImages mock. Nothing here touches the network
+binary and a localhost ImgBed mock. Nothing here touches the network
 beyond 127.0.0.1."""
 
 from __future__ import annotations
@@ -122,7 +122,7 @@ def make_fake_binary(directory: Path) -> Path:
 
 
 class MockCdn:
-    """EasyImages-like endpoint on 127.0.0.1. Modes: success, error, http500, drop."""
+    """ImgBed-like endpoint on 127.0.0.1. Modes: success, error, http500, drop."""
 
     def __init__(self) -> None:
         self.mode = "success"
@@ -138,8 +138,9 @@ class MockCdn:
                 body = self.rfile.read(length)
                 n = len(outer.requests) + 1
                 outer.requests.append({
-                    "has_image": b'name="image"' in body and b"RIFF" in body,
-                    "has_token": b'name="token"\r\n\r\nsecret-token' in body,
+                    "path": self.path,
+                    "has_image": b'name="file"' in body and b"RIFF" in body,
+                    "has_token": self.headers.get("Authorization", "") == "Bearer secret-token",
                     "content_type": self.headers.get("Content-Type", ""),
                 })
                 if outer.mode == "drop":
@@ -151,13 +152,11 @@ class MockCdn:
                     self.end_headers()
                     self.wfile.write(b"internal error")
                     return
+                payload: Any
                 if outer.mode == "error":
-                    payload = {"result": "failed", "code": 202, "message": "token invalid"}
+                    payload = {"success": False, "error": "token invalid"}
                 else:
-                    payload = {"result": "success", "code": 200,
-                               "url": f"https://img.example.org/i/up{n}.webp", "srcName": "x.webp",
-                               "thumb": f"https://img.example.org/thumb/up{n}.webp",
-                               "del": f"https://img.example.org/del/secret{n}"}
+                    payload = [{"src": f"https://img.example.org/i/up{n}.webp"}]
                 data = json.dumps(payload).encode()
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
@@ -171,7 +170,7 @@ class MockCdn:
 
     @property
     def url(self) -> str:
-        return f"http://127.0.0.1:{self.server.server_address[1]}/api/index.php"
+        return f"http://127.0.0.1:{self.server.server_address[1]}"
 
     def close(self) -> None:
         self.server.shutdown()
@@ -211,8 +210,8 @@ class World(unittest.TestCase):
             "FAKEGF_CONFIG": str(self.fake_config_path),
             "GF_SHOTS_NO_XVFB": "1",
             "GF_SHOTS_APPDATA_ROOTS": str(self.appdata),
-            "GF_MANUAL_CDN_API": "",
-            "GF_MANUAL_CDN_TOKEN": "",
+            "IMGBED_URL": "",
+            "IMGBED_TOKEN": "",
             "GF_SCREENSHOT_BINARY": "",
         }
         patcher = mock.patch.dict(os.environ, env)
@@ -227,8 +226,8 @@ class World(unittest.TestCase):
     def start_cdn(self) -> MockCdn:
         self.cdn = MockCdn()
         self.addCleanup(self.cdn.close)
-        os.environ["GF_MANUAL_CDN_API"] = self.cdn.url
-        os.environ["GF_MANUAL_CDN_TOKEN"] = "secret-token"
+        os.environ["IMGBED_URL"] = self.cdn.url
+        os.environ["IMGBED_TOKEN"] = "secret-token"
         return self.cdn
 
     def common_args(self, binary: bool = True) -> list[str]:

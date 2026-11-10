@@ -59,7 +59,7 @@ REPO_URL = "https://github.com/saturneric/GpgFrontend.git"
 DEFAULT_REF = "main"
 SOURCE_ENV = "GF_SHOTS_GPGFRONTEND"
 BINARY_ENV = "GF_SCREENSHOT_BINARY"
-CDN_ENVS = ("GF_MANUAL_CDN_API", "GF_MANUAL_CDN_TOKEN")
+CDN_ENVS = ("IMGBED_URL", "IMGBED_TOKEN")
 SOURCE_DIR_NAME = "GpgFrontend"
 PORTABLE_DIR_NAME = "GpgFrontend Portable"
 

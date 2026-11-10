@@ -271,7 +271,7 @@ class MainTest(unittest.TestCase):
         with mock.patch.object(shoot, "in_venv", return_value=True), \
                 mock.patch.dict("os.environ", env), mock.patch("sys.stderr", err):
             self.assertEqual(shoot.main(["--binary", str(binary), "--upload"]), 2)
-        self.assertIn("GF_MANUAL_CDN_API", err.getvalue())
+        self.assertIn("IMGBED_URL", err.getvalue())
 
 
 if __name__ == "__main__":

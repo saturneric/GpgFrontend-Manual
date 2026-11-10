@@ -91,7 +91,7 @@ bundle to `GpgFrontend Portable` next to this repository.
 | `render.py`                                                                      | runs the binary in a throwaway environment (also a debug CLI) |
 | `postprocess.py`                                                                 | frame, shadow, padding, highlights, PNG and lossless WebP     |
 | `diff.py`                                                                        | compares with the local baseline                              |
-| `upload.py`                                                                      | EasyImages upload                                             |
+| `upload.py`                                                                      | ImgBed upload                                                 |
 | `txn.py`                                                                         | the durable upload/apply transaction                          |
 | `apply.py`                                                                       | doc definition and lock writes                                |
 | `manifest.py`, `docrefs.py`, `envhash.py`, `fonts.py`, `gitutil.py`, `common.py` | shared pieces                                                 |
@@ -211,12 +211,13 @@ Previews are in `.screenshots-cache/preview/<id>.{png,webp,json}`.
 
 ### CDN credentials
 
-`--upload` reads `GF_MANUAL_CDN_API` (an https URL) and `GF_MANUAL_CDN_TOKEN`.
-The token is never written anywhere. The response's `del` link is kept only in
-the ignored transaction cache, never in the lock, the docs or `last-run.json`.
-Nothing on the CDN is deleted automatically. When a run replaces an image that
-an earlier run uploaded, or hits a conflict, the summary prints the `del` link
-so you can remove the old upload in the admin panel.
+Images are uploaded to a CloudFlare-ImgBed instance. `--upload` reads
+`IMGBED_URL` (the instance's https base URL, such as `https://img.bktus.com`)
+and `IMGBED_TOKEN` (an API token with upload rights). Each file is sent to
+`$IMGBED_URL/upload` on the `s3` channel with short random names. The token is
+never written anywhere. ImgBed returns no per-upload delete link, so nothing on
+the CDN is deleted automatically. Remove replaced uploads in the ImgBed admin
+panel if you want them gone.
 
 ## Transactions and the failure window
 
@@ -235,12 +236,12 @@ state moves `prepared`, `uploading`, `uploaded`, `doc-applied`,
 
 **The failure window.** If the process dies, or the connection drops, after
 the server stored the upload but before `uploaded` was saved, the local side
-cannot know whether the upload happened. EasyImages has no idempotency key and
+cannot know whether the upload happened. ImgBed has no idempotency key and
 no lookup by hash, so this cannot be made duplicate-free. Such a transaction is
 `upload-unknown` and is never retried on its own. Decide with:
 
 - `run.py --recover --resolve <txn_id> --url <url>` if you found the image in the
-  EasyImages admin. The `del` link stays unknown.
+  ImgBed admin.
 - `run.py --recover --resolve <txn_id> --retry-upload` to upload the same file
   again. This may leave a duplicate on the CDN, which is harmless and can be
   deleted in the admin panel.
@@ -317,7 +318,7 @@ risk small.
 ```
 
 The tests use temporary git repositories, temporary doc trees, a fake binary
-(`tests/fakegf.py`) and a mock EasyImages server on 127.0.0.1. They never
+(`tests/fakegf.py`) and a mock ImgBed server on 127.0.0.1. They never
 contact the network. The environment hash cross-check reads
 `resource/shot/env-hash-fixture.json` from the GpgFrontend checkout next
 to this repository; set `GF_SHOTS_GPGFRONTEND` to point elsewhere.

@@ -132,7 +132,7 @@ for the full list.
 Page images are hosted on an external CDN and linked by full address:
 
 ```markdown
-![](https://image.cdn.bktus.com/i/path/to/image.webp)
+![](https://img.bktus.com/xxxxxxxx.webp)
 ```
 
 This keeps the repository small. Upload your image to the CDN first, then paste

@@ -202,6 +202,8 @@ class UploadOutcomeTest(RunWorld):
         req = cdn.requests[0]
         self.assertTrue(req["has_image"] and req["has_token"])
         self.assertTrue(req["content_type"].startswith("multipart/form-data"))
+        self.assertTrue(req["path"].startswith("/upload?"), req["path"])
+        self.assertIn("returnFormat=full", req["path"])
         self.assertIn("https://img.example.org/i/up1.webp", self.doc("a.md").decode())
 
     def _expect_failed(self, mode: str) -> None:

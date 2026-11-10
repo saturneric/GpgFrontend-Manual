@@ -220,20 +220,27 @@ class CheckGeometryTest(unittest.TestCase):
 
 class UploadParseTest(unittest.TestCase):
     def test_response_validation(self) -> None:
-        ok = upload.parse_response('{"result":"success","code":200,"url":"https://i.example/x.webp","del":"https://i/d"}')
-        self.assertEqual((ok.url, ok.del_url), ("https://i.example/x.webp", "https://i/d"))
-        for raw in ('{"result":"success","url":"http://i.example/x.webp"}', '{"result":"failed"}', "<html>"):
+        ok = upload.parse_response('[{"src":"https://i.example/x.webp"}]')
+        self.assertEqual((ok.url, ok.del_url), ("https://i.example/x.webp", None))
+        self.assertEqual(upload.parse_response('{"publicUrl":"https://i.example/y.webp"}').url,
+                         "https://i.example/y.webp")
+        self.assertEqual(upload.parse_response('[{"src":"/file/z.webp"}]', "https://i.example").url,
+                         "https://i.example/file/z.webp")
+        for raw in ('[{"src":"http://i.example/x.webp"}]', '{"success":false,"error":"denied"}', "[]",
+                    '[{"src":"/file/z.webp"}]', "<html>"):
             with self.assertRaises(upload.UploadFailed):
                 upload.parse_response(raw)
 
     def test_credentials_require_https_except_loopback(self) -> None:
         import os
         from unittest import mock
-        with mock.patch.dict(os.environ, {"GF_MANUAL_CDN_API": "http://cdn.example.org/api", "GF_MANUAL_CDN_TOKEN": "t"}):
+        with mock.patch.dict(os.environ, {"IMGBED_URL": "http://cdn.example.org", "IMGBED_TOKEN": "t"}):
             with self.assertRaises(UsageError):
                 upload.credentials_from_env()
-        with mock.patch.dict(os.environ, {"GF_MANUAL_CDN_API": "http://127.0.0.1:9/api", "GF_MANUAL_CDN_TOKEN": "t"}):
-            self.assertEqual(upload.credentials_from_env().host, "127.0.0.1")
+        with mock.patch.dict(os.environ, {"IMGBED_URL": "http://127.0.0.1:9/", "IMGBED_TOKEN": "t"}):
+            creds = upload.credentials_from_env()
+            self.assertEqual(creds.host, "127.0.0.1")
+            self.assertTrue(creds.upload_url.startswith("http://127.0.0.1:9/upload?"))
 
 
 class FontLookupTest(unittest.TestCase):
