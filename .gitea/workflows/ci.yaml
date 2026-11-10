@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: "22"
           cache: "npm"
+      - run: curl -s https://api64.ipify.org; echo; curl -s -4 https://api.ipify.org
       - run: npm ci
       - run: npm run build
       - name: Deploy to Cloudflare Workers
