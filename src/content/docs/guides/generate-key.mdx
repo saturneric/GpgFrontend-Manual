@@ -5,6 +5,8 @@ sidebar:
   order: 3
 ---
 
+import { Aside, Badge, Steps } from "@astrojs/starlight/components";
+
 A **key pair** is your public key and your private key together. This page
 shows how to make one. **If you're new, click New Keypair, type your name, and
 click Continue until you reach Generate.** GpgFrontend fills in safe defaults
@@ -12,17 +14,21 @@ for everything else.
 
 ## Open the Key Generation Window
 
-In the main window, click **New Keypair** in the toolbar. You can also open
-the **Keys** menu and choose **New Keypair**. The **Generate Key** window
-opens.
+<Steps>
 
-![][img-1]
+1. In the main window, click **New Keypair** in the toolbar. You can also open
+   the **Keys** menu and choose **New Keypair**.
+2. The **Generate Key** window opens.
+
+   ![][img-1]
+
+</Steps>
 
 The window walks you through four steps: **Identity**, **Key Type**,
 **Validity & Protection** and **Review**. Click **Continue** to go to the next
 step, or **Back** to change something.
 
-:::note[Changed in v2.2.4]
+<Aside type="note" title="Changed in v2.2.4">
 
 You now make a key in a window that guides you step by step. It used to be
 one window with the tabs **Easy Mode**, **Primary Key** and **Subkey**. The
@@ -33,7 +39,7 @@ choices that were on the **Primary Key** and **Subkey** tabs are now under
 With GnuPG, the key and its subkey are now made in one go, so you type the
 passphrase fewer times.
 
-:::
+</Aside>
 
 ## Step 1: Identity
 
@@ -107,6 +113,8 @@ your secret key file can then sign and decrypt as you.
 
 ## Step 4: Review and Generate
 
+<Steps>
+
 1. Check the summary: your user ID, the key type, when it expires, and whether
    it has a passphrase.
 2. Click **Generate**.
@@ -115,6 +123,8 @@ your secret key file can then sign and decrypt as you.
 
 3. If asked, type a strong **passphrase**, and type it again to confirm.
 4. A **Key Generated** message shows your new key's fingerprint. Click **OK**.
+
+</Steps>
 
 ## Make a Key in One Click
 
@@ -132,11 +142,11 @@ Generate** there.
 If the default profile or the made-up identity from Settings cannot be used,
 GpgFrontend asks if you want to make the key step by step instead.
 
-:::note[New in v2.2.4]
+<Aside type="note" title="New in v2.2.4">
 
 **Quick Generate** and the **Key Generation** settings page are new.
 
-:::
+</Aside>
 
 ---
 
@@ -152,8 +162,8 @@ or 2. Step 2 then becomes **Key Details**, where you choose:
 - **Primary key**: the **Algorithm**, **Key length**, **Usage** (**Encrypt**,
   **Sign**, **Authenticate**) and when it **Expires**. For hybrid algorithms,
   **Paired with** and **Its key length** also appear.
-- **Key format**: **v4 (Compatible)** or **v6 (Modern)**. This is only shown
-  with the rPGP engine. Post-quantum algorithms always use v6.
+- **Key format** <Badge text="rPGP only" variant="caution" />: **v4
+  (Compatible)** or **v6 (Modern)**. This is only shown with the rPGP engine. Post-quantum algorithms always use v6.
 - **Add a subkey**: tick it to add a second key under the primary one, usually
   for encryption. It gets the same choices as the primary key.
 
@@ -183,19 +193,19 @@ The algorithms you see depend on the engine, its version, and the key format.
 In the table, "Cert" means certify, "Auth" means authenticate (log in), and
 "PQC" means post-quantum.
 
-| Algorithm group                 | Purpose                      | Engine                          |
-| ------------------------------- | ---------------------------- | ------------------------------- |
-| RSA                             | Sign / Encrypt / Auth / Cert | GnuPG, rPGP (3072 bits or more) |
-| DSA                             | Sign / Auth / Cert           | GnuPG only                      |
-| Ed25519                         | Sign / Auth / Cert           | GnuPG, rPGP                     |
-| Ed448                           | Sign / Auth / Cert           | GnuPG 2.3+, rPGP                |
-| NIST P-256 / P-384 / P-521      | Sign / Auth / Cert           | GnuPG, rPGP                     |
-| Brainpool P-256 / P-384 / P-512 | Sign / Auth / Cert           | GnuPG 2.3+                      |
-| secp256k1                       | Sign / Auth / Cert           | GnuPG 2.3+                      |
-| SLH-DSA-SHAKE variants          | PQC Sign / Auth              | rPGP only                       |
-| ML-DSA hybrid variants          | Hybrid PQC Sign / Auth       | rPGP only                       |
+| Algorithm group                 | Purpose                      | Engine |
+| ------------------------------- | ---------------------------- | ------ |
+| RSA                             | Sign / Encrypt / Auth / Cert | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" /> (3072 bits or more) |
+| DSA                             | Sign / Auth / Cert           | <Badge text="GnuPG only" variant="note" /> |
+| Ed25519                         | Sign / Auth / Cert           | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" /> |
+| Ed448                           | Sign / Auth / Cert           | <Badge text="GnuPG 2.3+" variant="note" /> <Badge text="rPGP" variant="tip" /> |
+| NIST P-256 / P-384 / P-521      | Sign / Auth / Cert           | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" /> |
+| Brainpool P-256 / P-384 / P-512 | Sign / Auth / Cert           | <Badge text="GnuPG 2.3+" variant="note" /> |
+| secp256k1                       | Sign / Auth / Cert           | <Badge text="GnuPG 2.3+" variant="note" /> |
+| SLH-DSA-SHAKE variants          | PQC Sign / Auth              | <Badge text="rPGP only" variant="tip" /> |
+| ML-DSA hybrid variants          | Hybrid PQC Sign / Auth       | <Badge text="rPGP only" variant="tip" /> |
 
-:::note[Some old choices are gone on rPGP]
+<Aside type="note" title="Some old choices are gone on rPGP">
 
 The rPGP engine no longer makes weak keys. It follows the current OpenPGP
 standard (RFC 9580):
@@ -210,15 +220,15 @@ This only affects new keys. You can still import and use old RSA-1024,
 RSA-2048, DSA, and secp256k1 keys. The GnuPG engine still offers all of them,
 so you can work with older setups.
 
-:::
+</Aside>
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 The RSA-2048 and secp256k1 changes in the note above came with v2.2.3. Since
 this version, GpgFrontend also refuses to delete the last UID of a v4 key. See
 [UID Info](/guides/view-keypair-info/#uid-info).
 
-:::
+</Aside>
 
 ### Compatibility Notes
 
@@ -243,12 +253,12 @@ mind before you share a key:
   will not let you delete the last UID of a v4 key. Add a new UID first if you
   want to replace it. v6 keys do not have this limit.
 
-:::caution[Check the format before sharing widely]
+<Aside type="caution" title="Check the format before sharing widely">
 
 If you need your key to work with as many tools as possible, check what format
 your engine and version actually produce before you share the key.
 
-:::
+</Aside>
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/29/9d186964d2978929afb87bb0035c02918c7d1111.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/29/4ec97307a4b89bef18dd6e5df2ee0935a9b6e042.webp

@@ -5,6 +5,8 @@ sidebar:
   order: 9
 ---
 
+import { Aside, Badge, Card, CardGrid, Steps } from "@astrojs/starlight/components";
+
 GpgFrontend gives you several ways to **import** keys (bring them in) and
 **export** keys (save or share them). You'll usually do this for two reasons: to
 **share your public key** with someone, or to **back up** your own keys. This
@@ -12,19 +14,24 @@ page covers each method.
 
 ## Import a Key
 
-You can import a public or private key in a few ways. There are two places to
-start:
+You can import a public or private key in a few ways.
 
-- In the main window, click the **Import** button in the toolbar, or open
-  **Keys** > **Import Key**.
-- In the **KeyPair Management** window, click the **Import Key** button in the
-  toolbar, or open **Key** > **Import Key**.
+<Steps>
 
-Then choose where the key comes from. The choices are explained below.
+1. Start in one of two places:
 
-![][img-1]
+   - In the main window, click the **Import** button in the toolbar, or open
+     **Keys** > **Import Key**.
+   - In the **KeyPair Management** window, click the **Import Key** button in
+     the toolbar, or open **Key** > **Import Key**.
 
-![][img-2]
+2. Choose where the key comes from. The choices are explained below.
+
+   ![][img-1]
+
+   ![][img-2]
+
+</Steps>
 
 ### From a File
 
@@ -35,9 +42,13 @@ with any extension.
 
 This choice is in the main window only.
 
+<Steps>
+
 1. Paste the key into a text editor tab.
 2. Open **Keys** > **Import Key** (or click the **Import** toolbar button) and
    choose **Editor**. GpgFrontend imports the key from the text in that tab.
+
+</Steps>
 
 ### From the Clipboard
 
@@ -79,10 +90,14 @@ Your public key is safe to give to anyone. There are a few ways to export it.
 
 #### The Quick Way
 
+<Steps>
+
 1. In the main window, click **Manage Keys**. The **KeyPair Management**
    window opens.
 2. Right-click the key, open **Export** and choose **Export Public Key...**.
 3. Pick where to save the file.
+
+</Steps>
 
 This menu item is new in v2.2.2.
 
@@ -98,19 +113,29 @@ from there.
 
 #### Save to a File
 
-Open the key's **Key Details** window and go to the **Operations** tab. Click
-**Export Public Key**, then pick where to save the file. See
-[Key Pair Details](/guides/view-keypair-info/#operations).
+<Steps>
 
-![][img-3]
+1. Open the key's **Key Details** window and go to the **Operations** tab. See
+   [Key Pair Details](/guides/view-keypair-info/#operations).
+2. Click **Export Public Key**.
+
+   ![][img-3]
+
+3. Pick where to save the file.
+
+</Steps>
 
 #### Export Several at Once
 
 To export the public keys of several key pairs together:
 
+<Steps>
+
 1. In the **KeyPair Management** window, tick the box beside each key.
 2. Open **Key** > **Export Key** and choose **Export To Clipboard**. The
    **Export Key** button in the toolbar has the same menu.
+
+</Steps>
 
 The public keys are now on your clipboard. Paste them into any app or file.
 
@@ -126,8 +151,10 @@ OpenPGP key. You need a key that can do **Authentication** (it has `A` in its
 usage).
 
 In the **KeyPair Management** window, right-click the key, open **Export** and
-choose **Export As OpenSSH**. It is also under **Key** > **Export Key**. This
-needs the GnuPG engine. With rPGP the item is hidden.
+choose **Export As OpenSSH**. It is also under **Key** > **Export Key**.
+
+<Badge text="GnuPG only" variant="note" /> This needs the GnuPG engine. With
+rPGP the item is hidden.
 
 ### Export a Private Key
 
@@ -135,41 +162,59 @@ The quickest way is to right-click the key in the **KeyPair Management**
 window, open **Export** and choose **Export Private Key...**. This menu item
 is new in v2.2.2.
 
-You can also export from the key's **Key Details** window. Go to the
-**Operations** tab, click **Export Private Key**, pick one of the two choices
-below, and choose where to save the file.
+You can also export from the key's **Key Details** window:
 
-![][img-5]
+<Steps>
 
-:::caution[Never share your private key]
+1. Go to the **Operations** tab.
+2. Click **Export Private Key** and pick one of the two choices below.
+
+   ![][img-5]
+
+3. Choose where to save the file.
+
+</Steps>
+
+<Aside type="caution" title="Never share your private key">
 
 The private key file must stay secret. If someone else gets it, they can read
 every message encrypted to that key. Share only your public key.
 
-:::
+</Aside>
 
 An exported private key file also holds the matching public key. A private key
 is of no use without it.
 
 The **Export Private Key** button offers two choices:
 
-- **Export Full Secret Key**: includes all key data, plus the user IDs and their
-  signatures.
-- **Export Shortest Secret Key**: includes only the key data, without the extra
-  user ID signatures.
+<CardGrid>
+  <Card title="Export Full Secret Key" icon="document">
+    Includes all key data, plus the user IDs and their signatures.
+  </Card>
+  <Card title="Export Shortest Secret Key" icon="list-format">
+    Includes only the key data, without the extra user ID signatures.
+  </Card>
+</CardGrid>
 
 ## Back Up Everything at Once
 
 Exporting keys one at a time is fine for sharing, but it is a poor way to make
 a backup. It is too easy to miss one.
 
-Since v2.2.2 you can save them all in one go. In the **KeyPair Management**
-window, open **Operations** > **Bulk** and choose **Back Up All Private
-Keys...**. This puts every private key in the key database into one protected
-file, called a [KeyPackage](/advanced/key-package/). The same three-step
-window opens as for any KeyPackage, with all private keys already included.
+Since v2.2.2 you can save them all in one go:
 
-:::tip[Back up your keys]
+<Steps>
+
+1. In the **KeyPair Management** window, open **Operations** > **Bulk** and
+   choose **Back Up All Private Keys...**. This puts every private key in the
+   key database into one protected file, called a
+   [KeyPackage](/advanced/key-package/).
+2. The same three-step window opens as for any KeyPackage, with all private
+   keys already included.
+
+</Steps>
+
+<Aside type="tip" title="Back up your keys">
 
 Make that backup and keep it somewhere safe and offline, such as an encrypted
 drive. If you ever lose your keys, it is the only way to get them back.
@@ -177,7 +222,7 @@ drive. If you ever lose your keys, it is the only way to get them back.
 Back up your revocation certificates in the same place. See
 [Key Revocation](/advanced/key-revocation/).
 
-:::
+</Aside>
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/29/9d4152c4ce0d86a1bcf78f2bfc19532c77bfdd96.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/29/dbe61f11fc0dcd61814947ff40c46012f4a2235e.webp

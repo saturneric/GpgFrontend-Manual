@@ -6,7 +6,7 @@ sidebar:
   order: 12
 ---
 
-import { Steps, Aside } from "@astrojs/starlight/components";
+import { Aside, Badge, Steps } from "@astrojs/starlight/components";
 
 The **KeyPair Management** window is where you look after your keys. To open
 it, click the **Manage Keys** button in the toolbar of the main window.
@@ -37,9 +37,9 @@ address, the key ID, and the fingerprint. Any of those will find the key.
 
 You can paste a fingerprint with spaces in it. It still matches.
 
-- **Ctrl+F** jumps to the search box.
-- **Escape** clears it.
-- **F5** reads the key list again (**View** > **Refresh Key List**).
+- <kbd>Ctrl</kbd>+<kbd>F</kbd> jumps to the search box.
+- <kbd>Escape</kbd> clears it.
+- <kbd>F5</kbd> reads the key list again (**View** > **Refresh Key List**).
 - Click a column heading to sort by it. Click again to reverse it.
 
 ## The Line Along the Bottom
@@ -86,7 +86,7 @@ These are in the **Export** submenu.
   away.
 - **Export Private Key...**: saves the private key, which you must keep to
   yourself.
-- **Export As OpenSSH**: saves one key in the format SSH uses (SSH is a way
+- **Export As OpenSSH** <Badge text="GnuPG only" variant="note" />: saves one key in the format SSH uses (SSH is a way
   to log in to another computer). It is hidden when your OpenPGP engine
   cannot do it, such as rPGP.
 
@@ -128,12 +128,12 @@ under the **Key Operations** button in the toolbar.
 - **Category**: put the key in one of your categories, take it out with
   **Remove From This Category**, or make a new one with **New Category...**.
   See [Key Categories](/guides/key-categories/).
-- **Delete Selected Keys**: delete the keys you selected. The **Delete** key
-  on your keyboard does the same. GpgFrontend asks you to confirm first. To
+- **Delete Selected Keys**: delete the keys you selected. The <kbd>Delete</kbd>
+  key on your keyboard does the same. GpgFrontend asks you to confirm first. To
   delete the ticked keys instead, use **Key** > **Delete** > **Delete Checked
   Keys**.
 
-<Aside type="caution">
+<Aside type="danger" title="Deleting is permanent">
 
 Deleting a private key cannot be undone. Make a backup first.
 

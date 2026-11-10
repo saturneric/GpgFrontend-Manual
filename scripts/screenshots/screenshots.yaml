@@ -33,7 +33,7 @@ entries:
       - src/core/utils/GpgUtils.cpp
 
   - id: key-generate-dialog
-    doc: src/content/docs/guides/generate-key.md
+    doc: src/content/docs/guides/generate-key.mdx
     ref: img-1  # "Open the Key Generation Window": the Identity step
     scenario: key-generate-dialog
     size: auto  # natural dialog size
@@ -62,14 +62,14 @@ entries:
 
   # Phase 2, batch 1: Key Details, owner trust and revocation.
   - id: key-details-overview
-    doc: src/content/docs/guides/view-keypair-info.md
+    doc: src/content/docs/guides/view-keypair-info.mdx
     ref: img-1  # the Key Details window
     scenario: key-details-keypair
     size: auto
     sources: [src/ui/dialog/keypair_details/]
 
   - id: key-details-owner
-    doc: src/content/docs/guides/view-keypair-info.md
+    doc: src/content/docs/guides/view-keypair-info.mdx
     ref: img-2  # "Owner"
     scenario: key-details-keypair
     size: auto
@@ -77,7 +77,7 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: key-details-primary-key
-    doc: src/content/docs/guides/view-keypair-info.md
+    doc: src/content/docs/guides/view-keypair-info.mdx
     ref: img-3  # "Primary Key"
     scenario: key-details-keypair
     size: auto
@@ -85,7 +85,7 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: key-details-algorithm-detail
-    doc: src/content/docs/guides/view-keypair-info.md
+    doc: src/content/docs/guides/view-keypair-info.mdx
     ref: img-4  # "Algorithm Detail"
     scenario: key-details-keypair
     size: auto
@@ -94,7 +94,7 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: key-details-fingerprint
-    doc: src/content/docs/guides/view-keypair-info.md
+    doc: src/content/docs/guides/view-keypair-info.mdx
     ref: img-5  # "Fingerprint"
     scenario: key-details-keypair
     size: auto
@@ -102,14 +102,14 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: key-details-uids
-    doc: src/content/docs/guides/view-keypair-info.md
+    doc: src/content/docs/guides/view-keypair-info.mdx
     ref: img-6  # "UID Info"
     scenario: key-details-uids
     size: auto
     sources: [src/ui/dialog/keypair_details/]
 
   - id: key-details-uid-signatures
-    doc: src/content/docs/guides/view-keypair-info.md
+    doc: src/content/docs/guides/view-keypair-info.mdx
     ref: img-7  # "Signatures on a UID"
     scenario: key-details-uids
     size: auto
@@ -117,21 +117,21 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: key-details-keychain
-    doc: src/content/docs/guides/view-keypair-info.md
+    doc: src/content/docs/guides/view-keypair-info.mdx
     ref: img-8  # "Subkey Info"
     scenario: key-details-keychain
     size: auto
     sources: [src/ui/dialog/keypair_details/]
 
   - id: key-details-operations-public
-    doc: src/content/docs/guides/view-keypair-info.md
+    doc: src/content/docs/guides/view-keypair-info.mdx
     ref: img-9  # "On a Public Key"
     scenario: key-details-operations-public
     size: auto
     sources: [src/ui/dialog/keypair_details/]
 
   - id: key-details-operations-private
-    doc: src/content/docs/guides/view-keypair-info.md
+    doc: src/content/docs/guides/view-keypair-info.mdx
     ref: img-10  # "On a Private Key"
     scenario: key-details-operations
     size: auto
@@ -199,14 +199,14 @@ entries:
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: import-key-toolbar
-    doc: src/content/docs/guides/import-export-key-pair.md
+    doc: src/content/docs/guides/import-export-key-pair.mdx
     ref: img-1  # Import on the main toolbar
     scenario: main-window
     highlight: importKeyButton
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: import-key-key-management
-    doc: src/content/docs/guides/import-export-key-pair.md
+    doc: src/content/docs/guides/import-export-key-pair.mdx
     ref: img-2  # Import Key in KeyPair Management
     scenario: key-management-window
     size: 1200x760
@@ -214,7 +214,7 @@ entries:
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: export-public-key
-    doc: src/content/docs/guides/import-export-key-pair.md
+    doc: src/content/docs/guides/import-export-key-pair.mdx
     ref: img-3  # "Save to a File"
     scenario: key-details-operations
     size: auto
@@ -222,7 +222,7 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: export-checked-keys
-    doc: src/content/docs/guides/import-export-key-pair.md
+    doc: src/content/docs/guides/import-export-key-pair.mdx
     ref: img-4  # "Export Several at Once"
     scenario: key-management-checked
     size: 1200x760
@@ -230,7 +230,7 @@ entries:
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: export-private-key
-    doc: src/content/docs/guides/import-export-key-pair.md
+    doc: src/content/docs/guides/import-export-key-pair.mdx
     ref: img-5  # "Export a Private Key"
     scenario: key-details-operations
     size: auto
@@ -238,21 +238,21 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: key-group-checked-keys
-    doc: src/content/docs/guides/key-group.md
+    doc: src/content/docs/guides/key-group.mdx
     ref: img-1  # tick the keys, then the new-group button
     scenario: main-window-checked-keys
     highlight: [checkColumn, keyGroupButton]
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: key-group-create
-    doc: src/content/docs/guides/key-group.md
+    doc: src/content/docs/guides/key-group.mdx
     ref: img-2  # the New Key Group dialog
     scenario: key-group-create-dialog
     size: auto
     sources: [src/ui/dialog/KeyGroupCreationDialog.cpp, src/ui/widgets/KeyList.cpp]
 
   - id: key-group-manage
-    doc: src/content/docs/guides/key-group.md
+    doc: src/content/docs/guides/key-group.mdx
     ref: img-3  # "Edit a group"
     scenario: key-group-manage-dialog
     size: auto
@@ -380,7 +380,7 @@ entries:
   # The key server is render.py's local mock (hkpmock.py), reached through a
   # proxy as http://keys.example.org; nothing leaves the machine.
   - id: subkey-new-subkey
-    doc: src/content/docs/guides/generate-use-subkey.md
+    doc: src/content/docs/guides/generate-use-subkey.mdx
     ref: img-1  # Keychain tab > New Subkey
     scenario: key-details-keychain
     size: auto
@@ -388,14 +388,14 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: subkey-generate
-    doc: src/content/docs/guides/generate-use-subkey.md
+    doc: src/content/docs/guides/generate-use-subkey.mdx
     ref: img-2  # the Add Subkey window
     scenario: subkey-generate-dialog
     size: auto
     sources: [src/ui/dialog/key_generate/]
 
   - id: subkey-export
-    doc: src/content/docs/guides/generate-use-subkey.md
+    doc: src/content/docs/guides/generate-use-subkey.mdx
     ref: img-3  # "Export a Subkey"
     scenario: keychain-subkey
     size: auto
@@ -403,35 +403,35 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: subkey-switch-database
-    doc: src/content/docs/guides/generate-use-subkey.md
+    doc: src/content/docs/guides/generate-use-subkey.mdx
     ref: img-4  # "Switch Key Database"
     scenario: key-database-menu
     highlight: keyDatabaseWork
     sources: [src/ui/widgets/]
 
   - id: subkey-import-file
-    doc: src/content/docs/guides/generate-use-subkey.md
+    doc: src/content/docs/guides/generate-use-subkey.mdx
     ref: img-5  # "Import the Subkey"
     scenario: import-menu
     highlight: importFromFile
     sources: [src/ui/main_window/]
 
   - id: subkey-imported
-    doc: src/content/docs/guides/generate-use-subkey.md
+    doc: src/content/docs/guides/generate-use-subkey.mdx
     ref: img-6  # "Verify Imported Subkey"
     scenario: work-keychain-subkey
     size: auto
     sources: [src/ui/dialog/keypair_details/]
 
   - id: subkey-hash-symbol
-    doc: src/content/docs/guides/generate-use-subkey.md
+    doc: src/content/docs/guides/generate-use-subkey.mdx
     ref: img-7  # "Meaning of '#' Symbol"
     scenario: work-key-list
     highlight: aliceType
     sources: [src/ui/widgets/, src/core/model/GpgKeyTableModel.cpp]
 
   - id: subkey-primary-not-exists
-    doc: src/content/docs/guides/generate-use-subkey.md
+    doc: src/content/docs/guides/generate-use-subkey.mdx
     ref: img-8  # "Primary Key Not Exists"
     scenario: work-keypair
     size: auto
@@ -439,7 +439,7 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: subkey-encrypt
-    doc: src/content/docs/guides/generate-use-subkey.md
+    doc: src/content/docs/guides/generate-use-subkey.mdx
     ref: img-9  # "Use Subkey to Encrypt"
     scenario: work-encrypt-ready
     highlight: encryptButton
@@ -539,7 +539,7 @@ entries:
     sources: [src/ui/main_window/, src/ui/widgets/]
 
   - id: key-group-in-toolbox
-    doc: src/content/docs/guides/key-group.md
+    doc: src/content/docs/guides/key-group.mdx
     ref: img-4  # the new group listed in the Key ToolBox
     scenario: main-window-key-groups
     highlight: key_group
@@ -549,21 +549,21 @@ entries:
   # windows, and the email module. Email uses committed .eml fixtures and
   # seeded accounts; nothing connects to a mail server.
   - id: key-generate-type
-    doc: src/content/docs/guides/generate-key.md
+    doc: src/content/docs/guides/generate-key.mdx
     ref: img-2  # "Step 2: Key Type"
     scenario: key-generate-type
     size: auto
     sources: [src/ui/dialog/key_generate/, src/core/model/GpgKeyGenerateInfo.cpp]
 
   - id: key-generate-protection
-    doc: src/content/docs/guides/generate-key.md
+    doc: src/content/docs/guides/generate-key.mdx
     ref: img-3  # "Step 3: Validity & Protection"
     scenario: key-generate-protection
     size: auto
     sources: [src/ui/dialog/key_generate/, src/core/model/GpgKeyGenerateInfo.cpp]
 
   - id: key-generate-review
-    doc: src/content/docs/guides/generate-key.md
+    doc: src/content/docs/guides/generate-key.mdx
     ref: img-4  # "Step 4: Review and Generate"
     scenario: key-generate-review
     size: auto
@@ -571,7 +571,7 @@ entries:
     highlight: forwardButton
 
   - id: quick-generate-menu
-    doc: src/content/docs/guides/generate-key.md
+    doc: src/content/docs/guides/generate-key.mdx
     ref: img-5  # "Make a Key in One Click"
     scenario: quick-generate-menu
     size: 1280x960
@@ -579,7 +579,7 @@ entries:
     highlight: {name: quickGenerate, style: arrow}
 
   - id: key-generate-expert
-    doc: src/content/docs/guides/generate-key.md
+    doc: src/content/docs/guides/generate-key.mdx
     ref: img-6  # "Choose Everything Yourself (Expert Mode)"
     scenario: key-generate-expert
     size: 520x620
@@ -587,7 +587,7 @@ entries:
     highlight: expertSwitch
 
   - id: subkey-generate-expert
-    doc: src/content/docs/guides/generate-use-subkey.md
+    doc: src/content/docs/guides/generate-use-subkey.mdx
     ref: img-10  # Add Subkey with Expert Mode on
     scenario: subkey-generate-expert
     size: auto

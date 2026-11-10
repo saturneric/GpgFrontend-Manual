@@ -5,6 +5,8 @@ sidebar:
   order: 11
 ---
 
+import { Aside, Badge, Steps } from "@astrojs/starlight/components";
+
 A **subkey** is an extra key attached to your main key (the **primary key**).
 Subkeys do the everyday jobs, like encryption, signing, and login. The primary
 key proves who you are and manages your subkeys, so you can keep it somewhere
@@ -19,12 +21,16 @@ them.
 You can only add a subkey to one of your own key pairs, and only when its
 private primary key is in the key database.
 
+<Steps>
+
 1. Double-click the key pair in the **Key ToolBox** list. The **Key Details**
    window opens.
 2. Open the **Keychain** tab.
 3. Click **New Subkey**. The **Add Subkey** window opens.
 
-![][img-1]
+   ![][img-1]
+
+</Steps>
 
 ### Step 1: Choose What the Subkey Is For
 
@@ -54,24 +60,26 @@ ones, **Paired with** and **Its key length** also appear. You can also tick
 Post-quantum subkeys are only offered for keys in the v6 format. For a key in
 the older v4 format, a note in the window says so.
 
-:::note[Changed in v2.2.4]
+<Aside type="note" title="Changed in v2.2.4">
 
 The window used to be called **Generate New Subkey** and showed every option
 at once (**Usage**, **Algorithm**, **Key Length**, **Expire Date**, **Non
 Expired**). Now you pick what the subkey is for, and the detailed choices are
 under **Expert Mode**.
 
-:::
+</Aside>
 
-:::tip[Plan ahead]
+<Aside type="tip" title="Plan ahead">
 
 When you set up a key, make one subkey for each job you need (signing,
 encryption, login). That way you have what you need later, even if you keep
 your primary key offline.
 
-:::
+</Aside>
 
 ### Step 2: Generate
+
+<Steps>
 
 1. Click **Generate**.
 2. When asked, type your key's **passphrase**. With GnuPG, the new subkey is
@@ -79,11 +87,13 @@ your primary key offline.
 3. A **Subkey Added** message appears. The new subkey is now in the list on
    the **Keychain** tab.
 
-![][img-2]
+   ![][img-2]
+
+</Steps>
 
 That's all you need to add a subkey.
 
-:::tip[Change one subkey's passphrase on its own]
+<Aside type="tip" title="Change one subkey's passphrase on its own">
 
 Since v2.2.2 you can give a single subkey a new passphrase without touching the
 others. On the **Keychain** tab, right-click the subkey and choose **Change
@@ -92,7 +102,7 @@ Passphrase**.
 GpgFrontend asks for the current passphrase first. Only after you enter it
 correctly does it ask you to pick a new one.
 
-:::
+</Aside>
 
 ## Why Subkeys Help
 
@@ -137,16 +147,18 @@ The setup has three steps:
 2. Import that file into another key database.
 3. Remove the primary key, and use the subkeys on their own.
 
-:::note[Needs the GnuPG engine]
+<Aside type="note" title="Needs the GnuPG engine">
 
 Exporting a single subkey, and removing the primary key to leave only subkeys,
 works with the **GnuPG engine** only. With the rPGP engine the **Export Subkey**
 button is not shown on the **Keychain** tab, and **Export** is missing from a
 subkey's right-click menu. Use a GnuPG-backed key database for this.
 
-:::
+</Aside>
 
 ### Step 1: Export a Subkey
+
+<Steps>
 
 1. **Open Key Details**: double-click the key in the **Key ToolBox**. The
    **Key Details** window opens.
@@ -161,15 +173,19 @@ subkey's right-click menu. Use a GnuPG-backed key database for this.
 5. **Save the file**: choose a safe folder and save the subkey as its own
    file.
 
-![][img-3]
+   ![][img-3]
+
+</Steps>
 
 ### Step 2: Import the Subkey into Another Database
+
+<Steps>
 
 1. **Pick the key database**: in the **Key ToolBox**, switch to the key
    database that should hold the subkey. See
    [Key Database](/advanced/key-database/).
 
-![Switch Key Database][img-4]
+   ![Switch Key Database][img-4]
 
 2. **Import the file**: click **Import** in the top toolbar and choose
    **File**. Browse to the exported subkey file.
@@ -182,6 +198,8 @@ subkey's right-click menu. Use a GnuPG-backed key database for this.
    open its **Key Details**.
 
    ![Verify Imported Subkey][img-6]
+
+</Steps>
 
 ### Step 3: Use a Key Without Its Primary Key
 
@@ -225,14 +243,14 @@ Additional Decryption Subkey. It attaches another key's encryption subkey to
 your key. Messages encrypted to you can then also be read by the owner of that
 other key (for example, your organization's backup key).
 
-:::note[Needs the GnuPG engine]
+<Aside type="note" title="Needs the GnuPG engine">
 
 ADSK needs the **GnuPG engine** (GnuPG 2.4.1 or later). The button is only
 shown for your own key pair, when its private primary key is present. It is
 hidden when the key database uses an engine or a GnuPG version that doesn't
 support ADSK.
 
-:::
+</Aside>
 
 ## Common Questions About Subkeys
 
@@ -258,13 +276,13 @@ public key (the certificate). Only some private parts are in it:
 - The file has to include the primary key's public part. A subkey is only
   trusted because the primary key certified it.
 
-:::tip[Analogy]
+<Aside type="tip" title="Analogy">
 
 Exporting a subkey is like sending the contents of a letter but still including
 the envelope, address, and signature. The recipient (the app) needs all of these
 to know who sent it and to trust it.
 
-:::
+</Aside>
 
 Without the primary key's public part and its signatures, other OpenPGP tools
 would not trust the subkey.
@@ -296,21 +314,21 @@ table, "Auth" means authenticate (log in) and "PQC" means post-quantum. For
 more detail, see
 [Comparison of Cryptographic Algorithms](/extra/algorithms-comparison).
 
-| Algorithm                       | Purpose                | Engine                          |
-| ------------------------------- | ---------------------- | ------------------------------- |
-| RSA                             | Encrypt / Sign / Auth  | GnuPG, rPGP (3072 bits or more) |
-| DSA                             | Sign / Auth            | GnuPG only                      |
-| ElGamal (`ELG-E`)               | Encrypt                | GnuPG                           |
-| Ed25519                         | Sign / Auth            | GnuPG, rPGP                     |
-| Ed448                           | Sign / Auth            | rPGP only                       |
-| Curve25519 / CV25519            | Encrypt                | GnuPG, rPGP                     |
-| X448                            | Encrypt                | GnuPG 2.3+, rPGP                |
-| NIST P-256 / P-384 / P-521      | Encrypt / Sign / Auth  | GnuPG, rPGP                     |
-| Brainpool P-256 / P-384 / P-512 | Encrypt / Sign / Auth  | GnuPG 2.3+                      |
-| secp256k1                       | Encrypt                | GnuPG 2.3+                      |
-| Kyber / ML-KEM hybrid variants  | Hybrid PQC Encrypt     | GnuPG 2.5+, rPGP                |
-| SLH-DSA-SHAKE variants          | PQC Sign / Auth        | rPGP only                       |
-| ML-DSA hybrid variants          | Hybrid PQC Sign / Auth | rPGP only                       |
+| Algorithm                       | Purpose                | Engine |
+| ------------------------------- | ---------------------- | ------ |
+| RSA                             | Encrypt / Sign / Auth  | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" /> (3072 bits or more) |
+| DSA                             | Sign / Auth            | <Badge text="GnuPG only" variant="note" /> |
+| ElGamal (`ELG-E`)               | Encrypt                | <Badge text="GnuPG" variant="note" /> |
+| Ed25519                         | Sign / Auth            | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" /> |
+| Ed448                           | Sign / Auth            | <Badge text="rPGP only" variant="tip" /> |
+| Curve25519 / CV25519            | Encrypt                | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" /> |
+| X448                            | Encrypt                | <Badge text="GnuPG 2.3+" variant="note" /> <Badge text="rPGP" variant="tip" /> |
+| NIST P-256 / P-384 / P-521      | Encrypt / Sign / Auth  | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" /> |
+| Brainpool P-256 / P-384 / P-512 | Encrypt / Sign / Auth  | <Badge text="GnuPG 2.3+" variant="note" /> |
+| secp256k1                       | Encrypt                | <Badge text="GnuPG 2.3+" variant="note" /> |
+| Kyber / ML-KEM hybrid variants  | Hybrid PQC Encrypt     | <Badge text="GnuPG 2.5+" variant="note" /> <Badge text="rPGP" variant="tip" /> |
+| SLH-DSA-SHAKE variants          | PQC Sign / Auth        | <Badge text="rPGP only" variant="tip" /> |
+| ML-DSA hybrid variants          | Hybrid PQC Sign / Auth | <Badge text="rPGP only" variant="tip" /> |
 
 ### Compatibility Notes
 

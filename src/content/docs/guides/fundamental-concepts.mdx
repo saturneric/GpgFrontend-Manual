@@ -6,6 +6,8 @@ sidebar:
   order: 1
 ---
 
+import { Aside, Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
 Every day you trust other people with private things: emails, files, backups, ID
 documents, and passwords. OpenPGP lets you protect those things yourself, so only
 the people you choose can read them. It works offline and needs no account.
@@ -13,12 +15,12 @@ the people you choose can read them. It works offline and needs no account.
 New to **OpenPGP**, **GPG**, or **PGP**? This guide starts with the few ideas you
 really need. Extra detail is at the end, for when you want it.
 
-:::tip[The whole idea in two sentences]
+<Aside type="tip" title="The whole idea in two sentences">
 
 You have a **private key** that you keep secret, and a **public key** that you
 share with others. Everything else in OpenPGP builds on these two keys.
 
-:::
+</Aside>
 
 ## What OpenPGP Does
 
@@ -36,10 +38,16 @@ checking that downloaded software is genuine.
 
 You have two keys that work as a pair:
 
-- **Public key**: You give this out. Others use it to lock messages for you and to
-  check your signatures.
-- **Private key**: You keep this secret. You use it to unlock messages sent to
-  you and to sign things.
+<CardGrid>
+  <Card title="Public key" icon="external">
+    You give this out. Others use it to lock messages for you and to check
+    your signatures.
+  </Card>
+  <Card title="Private key" icon="seti:lock">
+    You keep this secret. You use it to unlock messages sent to you and to
+    sign things.
+  </Card>
+</CardGrid>
 
 Think of a mailbox. Your **public key** is the slot anyone can drop mail into.
 Your **private key** is the only key that opens it.
@@ -96,14 +104,35 @@ app's own storage. Always export and back them up after you create or import the
 
 ## Where to Go Next
 
-You now know enough to begin. A good first path is:
+You now know enough to begin. A good first path, in this order:
 
-1. [Install GpgFrontend](/overview/getting-started/) for your platform.
-2. [Generate your first key pair](/guides/generate-key/), then back it up safely.
-3. [Encrypt your first file](/guides/file-operations/) or
-   [text message](/guides/text-operations/).
-4. [Import and export keys](/guides/import-export-key-pair/) so you can exchange
-   public keys with others.
+<CardGrid>
+  <LinkCard
+    title="1. Install GpgFrontend"
+    href="/overview/getting-started/"
+    description="Install GpgFrontend for your platform."
+  />
+  <LinkCard
+    title="2. Generate your first key pair"
+    href="/guides/generate-key/"
+    description="Make your key pair, then back it up safely."
+  />
+  <LinkCard
+    title="3. Encrypt your first file"
+    href="/guides/file-operations/"
+    description="Lock a file so only the right person can open it."
+  />
+  <LinkCard
+    title="3. Or encrypt a text message"
+    href="/guides/text-operations/"
+    description="Lock a text message instead of a file."
+  />
+  <LinkCard
+    title="4. Import and export keys"
+    href="/guides/import-export-key-pair/"
+    description="Exchange public keys with others."
+  />
+</CardGrid>
 
 If you ever feel stuck, the [FAQ](/overview/faq/) answers the most common
 questions from new users.
@@ -175,10 +204,16 @@ older tools.
 An **engine** is the program that does the actual encryption work for
 GpgFrontend. GpgFrontend supports more than one engine:
 
-- **GnuPG**: the default, recommended engine for daily use. It works with the
-  widest range of other tools.
-- **rPGP**: an experimental engine for trying newer OpenPGP features, including
-  OpenPGP v6 and some post-quantum algorithms.
+<CardGrid>
+  <Card title="GnuPG" icon="approve-check">
+    The default, recommended engine for daily use. It works with the widest
+    range of other tools.
+  </Card>
+  <Card title="rPGP" icon="rocket">
+    An experimental engine for trying newer OpenPGP features, including
+    OpenPGP v6 and some post-quantum algorithms.
+  </Card>
+</CardGrid>
 
 If you're new, use the **GnuPG engine** unless you want to try the newer
 features.

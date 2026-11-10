@@ -6,18 +6,20 @@ sidebar:
   order: 13
 ---
 
+import { Aside, Steps } from "@astrojs/starlight/components";
+
 A key group bundles several public keys together, so you can use them as one
 key. This makes it easy to send an encrypted message or file to several people
 at the same time.
 
-:::note[Not the same as a key category]
+<Aside type="note" title="Not the same as a key category">
 
 A key group is something you can **encrypt to**. It behaves like a key.
 
 A [key category](/guides/key-categories/) only tidies up your key list. You
 cannot encrypt to one.
 
-:::
+</Aside>
 
 ## What is a Key Group?
 
@@ -40,20 +42,26 @@ group, you pick the group once and you are done.
 
 ## Create a Key Group
 
+<Steps>
+
 1. **Pick the keys.** In the Key ToolBox, tick the box at the start of the
    row of each public key you want in the group.
 2. **Click the New Key Group button.** It is in the row of buttons above the
    key list.
+
+   ![][img-1]
+
 3. **Fill in the details.** A window called **New Key Group** opens. Type a
    **Name**. The **Email** and **Comment** are optional. Click **Create**.
+
+   ![][img-2]
+
 4. **Done.** Your new group shows up in the key list. Its **Type** is
    `group`. You can now use it just like a single public key.
 
-![][img-1]
+   ![A key group in the Key ToolBox][img-4]
 
-![][img-2]
-
-![A key group in the Key ToolBox][img-4]
+</Steps>
 
 ## Edit a group
 
@@ -62,12 +70,12 @@ list to open the **Key Group Management** window.
 
 ![][img-3]
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 The **Key Group Management** window has a new layout. It also shows groups
 inside groups as a tree.
 
-:::
+</Aside>
 
 The window has three parts:
 
@@ -81,15 +89,24 @@ The window has three parts:
 
 ### Add keys to the group
 
+<Steps>
+
 1. In **Available Keys**, tick the box next to each key or group you want.
-   To find a key quickly, press **Ctrl+F** and type in the search box above
-   **Available Keys**.
-2. Click **Add**, or press **Alt+Left**.
+   To find a key quickly, press <kbd>Ctrl</kbd>+<kbd>F</kbd> and type in the
+   search box above **Available Keys**.
+2. Click **Add**, or press <kbd>Alt</kbd>+<kbd>Left</kbd>.
+
+</Steps>
 
 ### Remove keys from the group
 
+<Steps>
+
 1. In **Members**, tick the box next to each key you want to take out.
-2. Click **Remove**, or press **Alt+Right**. You can also press **Delete**.
+2. Click **Remove**, or press <kbd>Alt</kbd>+<kbd>Right</kbd>. You can also
+   press <kbd>Delete</kbd>.
+
+</Steps>
 
 ### Right-click a member
 
@@ -103,10 +120,14 @@ Right-click a key or group in **Members** for these choices:
 
 ### Change the name, email, or comment
 
+<Steps>
+
 1. Click **Edit…** at the top of the window.
 2. The **Edit Key Group** window opens. Change the **Name**, **Email**, or
    **Comment**.
 3. Click **Save**.
+
+</Steps>
 
 These details only name the group. Changing them does not change which keys are
 in it.
