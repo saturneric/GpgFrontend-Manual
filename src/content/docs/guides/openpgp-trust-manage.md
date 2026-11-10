@@ -15,9 +15,16 @@ who to trust. This is called the Web of Trust.
 This page shows how GpgFrontend helps you build that trust, and what it can and
 cannot do today.
 
+Two words come up often on this page:
+
+- A **UID** (user ID) is the name and email address on a key.
+- To **certify** a UID means to sign it with your own key. Your signature says
+  "I checked this, and it is really them." Older versions of GpgFrontend
+  called this "signing a UID". This page uses both words for the same thing.
+
 :::note[Needs the GnuPG engine]
 
-The trust features on this page (setting Owner Trust and signing the UIDs of
+The trust features on this page (setting Owner Trust and certifying the UIDs of
 other keys) come from GnuPG. They only work when GnuPG is the active engine. The
 rPGP engine does not support them, so the related menus and dialogs are hidden
 when rPGP is on. Switch to GnuPG to manage your trust.
@@ -27,15 +34,15 @@ when rPGP is on. Switch to GnuPG to manage your trust.
 ## Owner Trust
 
 Owner Trust is your answer to one question: **how much do I trust this person to
-vouch for other people's keys?**
+vouch for other people's keys?** To vouch for a key means to confirm that it
+belongs to the right person.
 
 First you check that a key really belongs to the right person, usually by
-comparing its fingerprint. Then you give the key an Owner Trust level. That level
-says how much you trust the owner to correctly sign other people's keys.
+comparing its fingerprint. Then you give the key an Owner Trust level.
 
-Owner Trust is **not** about whether the key itself is real. It is about how much
-you trust the owner to vouch for others. This is what lets you build your own Web
-of Trust without depending on a central authority.
+Owner Trust is **not** about whether the key itself is real. It only says how
+much you rely on the owner's checks of other keys. This lets you build your own
+Web of Trust without a central authority.
 
 ![][img-1]
 
@@ -53,23 +60,25 @@ constant updates from key servers.
 
 ### How to set Owner Trust
 
-1. **Find the key.** Locate the public key (or key group) in the Key ToolBox
-   table.
-2. **Right-click it.** This opens the context menu.
-3. **Choose "Set Owner Trust Level".**
-
-A window opens where you pick the level (Undefined, Never, Marginal, Full, or
-Ultimate).
+1. Find the public key (or key group) in the Key ToolBox, the key list on the
+   right side of the main window.
+2. Right-click the key. A menu opens.
+3. Choose **Set Owner Trust Level**. The **Modify Owner Trust Level** window
+   opens.
+4. Pick a level from the list (**Undefined**, **Never**, **Marginal**,
+   **Full** or **Ultimate**) and click **OK**.
 
 ![][img-2]
 
+You can also open the key's details, go to the **Operations** tab, and click
+**Set Owner Trust Level** there.
+
 :::tip[Several keys at once]
 
-Since v2.2.2 you can set several at once. In the **KeyPair Management** window,
-tick the keys you want, then open the **Operations** menu and choose **Bulk**, then **Set Owner Trust for Checked
-Keys...**.
-They all get the same level. See
-[Manage Your Keys](/guides/key-management/).
+Since v2.2.2 you can set the level of several keys at once. In the **KeyPair
+Management** window, tick the keys you want. Then open the **Operations** menu
+and choose **Bulk**, then **Set Owner Trust for Checked Keys...**. They all
+get the same level. See [Manage Your Keys](/guides/key-management/).
 
 :::
 
@@ -77,37 +86,37 @@ They all get the same level. See
 
 Owner Trust and signing a UID answer two different questions:
 
-- **Signing a UID** says: "Is this key really this person?" This is about the
-  key's **validity**.
-- **Owner Trust** says: "How much do I trust this person to vouch for other
-  people's keys?" This is about trusting the owner as a **referee**.
+- **Signing a UID** answers: "Does this key really belong to this person?"
+  This is about the key's **validity**.
+- **Owner Trust** answers: "How much do I trust this person to vouch for other
+  people's keys?" This is about the **owner**, not the key.
 
-The two connect like this. GnuPG treats a key as valid for you when either:
+The two connect like this. GnuPG treats a key as valid for you in two cases:
 
-- You signed its UID yourself (your own key has Ultimate trust, so your signature
-  counts fully), or
-- It was signed by people you gave Owner Trust to. By default, one **Full**-trust
-  signer is enough, or three **Marginal**-trust signers.
+- You signed its UID yourself. Your own key has Ultimate trust, so your
+  signature counts fully.
+- People you gave Owner Trust to signed it. By default, one signer with
+  **Full** trust is enough, or three signers with **Marginal** trust.
 
-So Owner Trust is the dial that decides **how much other people's signatures
-count** toward making a key valid in your eyes. Signing is the act of vouching;
-Owner Trust is how much you let other people's vouching influence you.
+So Owner Trust decides **how much other people's signatures count** when GnuPG
+works out whether a key is valid for you.
 
 This is also why we suggest Owner Trust over signing for everyday use. It gives
-you the same result without pushing signatures onto public key servers.
+you the same result, and no signatures need to go to public key servers.
 
 ## Signing UIDs (not recommended)
 
-You can sign the UID (the name and email) on someone else's public key to say "I
-checked this, and it is really them."
+You can sign (certify) the UID on someone else's public key to say "I checked
+this, and it is really them."
 
 :::caution[We no longer recommend this]
 
-A normal UID signature is meant to be shared on key servers, and that causes the
-problems below (server rules and key bloat). For your own trust decisions, you
-usually do not need that. Set **Owner Trust** to control how much you rely on
-someone, and only sign a UID when you truly need to certify that a key belongs to
-a person.
+A normal UID signature is meant to be shared on key servers. That causes the
+problems described under
+[Why uploads are not automatic](#why-uploads-are-not-automatic). For your own
+trust decisions, you usually do not need it. Set **Owner Trust** to control how
+much you rely on someone. Only sign a UID when you truly need to confirm to
+others that a key belongs to a person.
 
 :::
 
@@ -135,8 +144,7 @@ the owner first, in person or over a channel you trust. Then:
    Complete** message confirms it.
 
 You can also certify one of your own keys with another of your own keys.
-**Certify Key...** is only greyed out when you have no private key to certify
-with. Certifying needs the GnuPG engine.
+**Certify Key...** is greyed out when you have no private key to certify with.
 
 :::note[Changed in v2.2.4]
 
@@ -147,9 +155,14 @@ tick.
 
 :::
 
-To take back a certification you made, open the key's details and go to the
-**UIDs** tab. Click the user ID, then right-click the certification in
-**Certifications of Selected User ID** and choose **Revoke Certification...**.
+### Take back a certification
+
+1. Open the key's details and go to the **UIDs** tab.
+2. Click the user ID you certified.
+3. Under **Certifications of Selected User ID**, right-click your
+   certification and choose **Revoke Certification...**.
+4. Click **Yes** to confirm. This cannot be undone.
+
 You need the private key that made the certification.
 
 :::note[New in v2.2.4]
@@ -158,18 +171,20 @@ You need the private key that made the certification.
 
 :::
 
-When GpgFrontend was first designed, sending these signatures to key servers was
-not fully planned for.
-
 ![][img-3]
 
 ### What happens now
+
+GpgFrontend was not designed to send these signatures to key servers for you.
 
 - GpgFrontend does not upload your signed UIDs to key servers on its own.
 - If you do upload one, whether it is accepted depends on each key server's
   rules.
 
 ### Why uploads are not automatic
+
+A third-party signature is a signature on a key that someone other than the
+key's owner made. Your certification of another person's key is one.
 
 **Key servers behave differently.**
 
@@ -180,22 +195,23 @@ not fully planned for.
 **Keys would get bigger.**
 
 - Every extra signature makes the public key larger.
-- Uploading lots of third-party signatures would bloat keys and slow down syncing.
+- Many third-party signatures would make keys very large and slow to sync.
 
 **Most people do not need it.**
 
 - Most users check fingerprints by hand and rely on Owner Trust.
-- Uploading every third-party signature to public servers is usually not needed.
 
 ## For organizations
 
 In a big company, plain Owner Trust is often not enough. Larger groups usually
-use a Certificate Authority (CA) instead:
+use a Certificate Authority (CA) instead. A CA is one trusted office that signs
+everyone's key.
 
 - A trusted internal CA signs each member's key.
-- Members only need to trust the CA, not check every coworker's key one by one.
-- This works like the X.509 certificate system and is usually done with gpgsm
-  (an S/MIME setup).
+- Members only need to trust the CA. They do not check every coworker's key one
+  by one.
+- This works like the X.509 certificate system. It is usually done with gpgsm,
+  the GnuPG tool for S/MIME.
 
 GpgFrontend does not support gpgsm or CA management yet. It may be added later if
 users want it.
@@ -204,7 +220,7 @@ users want it.
 
 - An optional prompt after you sign a UID, asking if you want to upload the
   updated key.
-- A clear warning about key bloat when uploading third-party signatures.
+- A clear warning that keys get larger when you upload third-party signatures.
 - Support for organization trust models, such as CA-based signing and
   certificates.
 

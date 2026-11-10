@@ -23,9 +23,10 @@ need to type any commands.
 :::note[Changed in v2.2.3]
 
 You can now check whether a key is published. The old **Sync Public Key** button
-in the Key ToolBox was removed. So was the **Network Ability** option in
-**Settings**, **Network** that checked publish status by itself. Use **Refresh
-Public Key From Key Server** and **Check Publication Status** instead.
+in the Key ToolBox was removed. The **Network Ability** option in **Settings**,
+**Network** was removed too. That option checked on its own whether your keys
+were published. Use **Refresh Public Key From Key Server** and **Check
+Publication Status** instead.
 
 :::
 
@@ -37,18 +38,24 @@ Public Key From Key Server** and **Check Publication Status** instead.
 
    ![][img-1]
 
-2. A search window opens. Under **Key Server**, choose a server from the list.
+2. The **Search Keys** window opens. Under **Key Server**, choose a server from
+   the list.
 3. Under **Search Type**, choose **By Key ID**, **By Email** or **By
    Fingerprint**.
 4. Type what you are looking for in the **Search Value** box.
-5. Click **Search**, or press Enter.
+5. Click **Search**, or press Enter. The keys that match appear in the table.
 6. Double-click a result to import that key.
 
 ![][img-2]
 
-Type the full value. A key ID has 8 or 16 characters. A fingerprint has 16, 40
-or 64 characters. Some servers, such as `keys.openpgp.org`, only find a key when
-you type the exact email address or the full fingerprint.
+Type the full value, not a part of it:
+
+- A key ID has 8 or 16 characters.
+- A fingerprint has 16, 40 or 64 characters.
+- An email address must be complete, such as `alice@example.com`.
+
+Some servers, such as `keys.openpgp.org`, only find a key when you type the
+exact email address or the full fingerprint.
 
 ### After You Import
 
@@ -65,18 +72,18 @@ You can then check the key in the key list:
 
 ## Work With One Key
 
-Each key has its own key server buttons.
+Each key has its own key server menu. All three items in it use your default
+key server. To pick that server, see
+[Choose Your Key Servers](#choose-your-key-servers).
 
 1. Open the key's details, for example by double-clicking the key in the key
    list.
 2. Go to the **Operations** tab.
 3. Click **Key Server Operations**. A small menu opens with three items:
-   - **Publish Public Key to Key Server**: upload this public key to your
-     default key server.
+   - **Publish Public Key to Key Server**: upload this public key.
    - **Refresh Public Key From Key Server**: download the newest copy of this
-     key from your default key server.
-   - **Check Publication Status**: ask your default key server whether it has
-     this key.
+     key.
+   - **Check Publication Status**: ask the server whether it has this key.
 
 ![][img-4]
 
@@ -90,15 +97,18 @@ Publishing lets other people find your public key.
 - Once a key is on a key server, it can spread to other servers. It may be
   impossible to remove it.
 
-What happens next depends on your default key server:
+Key servers accept keys in one of two ways. They are called **VKS** and
+**HKP**. What happens next depends on which one your default key server
+supports:
 
-- If the server supports **VKS** (a kind of key server that checks email
-  addresses, such as `keys.openpgp.org`), GpgFrontend uploads the key and shows
-  each email address with its status. The server then sends you an email. Click
-  the link in it, or other people cannot find your key by its email address.
-- If the server only supports **HKP** (the older kind), GpgFrontend first asks
-  **Publish Without Verification?**. The server does not confirm your email
-  address, and the upload cannot be undone. Click **OK** only if you are sure.
+- **VKS** is the newer way. The server checks that each email address on the
+  key is really yours. `keys.openpgp.org` works like this. GpgFrontend uploads
+  the key and shows each email address with its status. The server then sends
+  you an email. Click the link in that email. If you do not, other people
+  cannot find your key by its email address.
+- **HKP** is the older way. The server does not check your email address, and
+  the upload cannot be undone. So GpgFrontend first asks **Publish Without
+  Verification?** Click **OK** only if you are sure.
 
 ### Refresh a Key
 
@@ -118,8 +128,8 @@ one of these:
 - the key is not published on the server;
 - GpgFrontend could not ask the server, with the reason.
 
-GpgFrontend never checks this by itself. Asking tells the server which key you
-are interested in, so it only asks when you click.
+GpgFrontend never checks this by itself. Each check tells the server which key
+you are interested in. So GpgFrontend only asks the server when you click.
 
 :::note[New in v2.2.3]
 
@@ -129,10 +139,11 @@ are interested in, so it only asks when you click.
 
 ## Work With Many Keys at Once
 
-You can publish or refresh many keys in one go.
+You can publish or refresh many keys in one go. A set of keys handled together
+like this is called a batch.
 
-1. In a key list, tick the keys you want. If you tick nothing, GpgFrontend uses
-   the keys you selected (clicked) instead.
+1. In a key list, tick the box next to each key you want. If you tick nothing,
+   GpgFrontend uses the keys you selected (clicked) instead.
 2. Choose one of these:
    - Right-click the keys, then choose **Publish Public Key to Key Server** or
      **Refresh Public Key From Key Server**.
@@ -142,18 +153,18 @@ You can publish or refresh many keys in one go.
 These items are greyed out when your choice includes a key group. A key group is
 not a key, so a key server cannot hold it.
 
-When the work is done, a message such as **Key Publishing Finished** or **Key
-Refresh Finished** sums it up, for example "3 of 4 keys were published to the
-key server keys.openpgp.org." A **Failed:** list follows, with one line per key
-that did not work.
+When the work is done, a **Key Publishing Finished** or **Key Refresh
+Finished** message sums it up. For example: "3 of 4 keys were published to the
+key server keys.openpgp.org." If some keys did not work, a **Failed:** list
+follows, with one line for each of them.
 
 Good to know:
 
 - Only one batch runs at a time. If you start another, GpgFrontend says "A key
   server operation is already running. Try again when it has finished."
-- If your key databases change while a batch runs, the batch stops, and a **Key
-  Refresh Stopped** or **Key Publishing Stopped** message says how far it got.
-  Nothing fetched is imported. Start it again.
+- If your key databases change while a batch runs, the batch stops. A **Key
+  Refresh Stopped** or **Key Publishing Stopped** message appears. None of the
+  fetched keys are imported. Start the batch again.
 - GpgFrontend waits up to 15 seconds for each answer from the server.
 
 :::note[Changed in v2.2.3]
@@ -186,8 +197,10 @@ GpgFrontend starts with two servers:
 
 GpgFrontend tests the new server right away. If the server does not answer like
 a key server, GpgFrontend still adds it, marks it **Unverified**, and tells you.
+
 If the address starts with `http://` instead of `https://`, GpgFrontend warns
-you first, because anyone on the network could see and change what you send.
+you first. With `http://`, anyone on the network could see and change what you
+send.
 
 ### Change the Default Server
 
@@ -195,11 +208,12 @@ Select a server, then click **Set As Default**.
 
 The default server matters. Publishing, refreshing and **Check Publication
 Status** always use it. They use VKS when the server offers it, and HKP
-otherwise. If a tested server has no VKS, GpgFrontend warns you with **No
-Verified Publishing** before it makes the change.
+otherwise. (See [Publish Your Key](#publish-your-key) for what these two
+mean.) If a tested server has no VKS, GpgFrontend warns you with **No Verified
+Publishing** before it makes the change.
 
-Searching uses HKP, and you can pick any server from the list in the search
-window.
+Searching is different. It uses HKP, and you can pick any server from the list
+in the search window.
 
 ### Test or Delete a Server
 
@@ -222,11 +236,13 @@ the **Key Servers** settings page, the module is turned off. See
 
 ## Final Reminders
 
-- Public keys you upload can spread around the world and may never be deleted.
-- Always check a key before you trust it. Compare its fingerprint with its
-  owner.
-- Revoke your key and publish the change if your private key is stolen.
-- Never upload a private key to any server.
+- Think before you publish. A published key may never be deleted. See
+  [Publish Your Key](#publish-your-key).
+- Always check a key before you trust it. Ask its owner for the fingerprint
+  and compare it with the one you see.
+- If your private key is stolen, revoke the key and publish it again, so
+  others learn that it is revoked.
+- Never upload a private key to any server yourself.
 
 [img-1]:
   https://image.cdn.bktus.com/i/2026/10/29/75eb6f44dcf26a2a8628f99382e41b4788b577b0.webp

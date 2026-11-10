@@ -6,10 +6,9 @@ sidebar:
   label: Post-Quantum Keys
 ---
 
-GpgFrontend is one of the first desktop apps that lets you make and use
-**post-quantum keys** with a few clicks, no command line needed. This page explains
-in plain words what that means, why it might matter to you, and how to make your
-first one.
+GpgFrontend lets you make and use **post-quantum keys** with a few clicks. You
+do not need the command line. This page explains in plain words what that
+means, why it might matter to you, and how to make your first one.
 
 ## Why You Might Need This
 
@@ -29,8 +28,9 @@ This is called **"harvest now, decrypt later."** So the real question isn't "can
 anyone read this today?" It's "does this need to stay secret for many years?"
 
 If the answer is yes, it makes sense to start using new, **quantum-proof**
-encryption now, before quantum computers catch up. This is why the experts at NIST
-created a new set of these algorithms, and why OpenPGP is starting to use them.
+encryption now, before quantum computers catch up. This kind of encryption is
+called **post-quantum**. NIST, the standards office of the United States, has
+approved a new set of post-quantum algorithms. OpenPGP is starting to use them.
 
 :::note[Changed in v2.2.3]
 
@@ -52,32 +52,37 @@ The rPGP engine now follows the finished standard for post-quantum OpenPGP
 
 ## What You Can Make
 
-GpgFrontend offers the new NIST-approved post-quantum algorithms. They come in two
-jobs, just like normal keys: some are for **encryption** (locking messages) and
-some are for **signing** (proving a message is really from you).
+GpgFrontend offers the new NIST-approved post-quantum algorithms. Like normal
+keys, they do one of two jobs. Some are for **encryption** (locking messages).
+Some are for **signing** (proving a message is really from you).
 
 A quick plain-words guide:
 
 - **ML-KEM** (once called Kyber): for **encryption**. GpgFrontend always pairs it
-  with a classic key, so your protection is never weaker than today's, even if one
-  part is later found to have a flaw.
+  with a classic algorithm. A pair like this is called a **hybrid**. Your
+  protection is then never weaker than today's, even if one of the two is later
+  found to have a flaw.
 - **ML-DSA** (once called Dilithium): for **signing**, also paired with a classic
-  key.
-- **SLH-DSA** (SPHINCS+): also for **signing**. It is built on a very simple,
-  well-trusted idea (hashing), which makes it the most cautious, safe-bet choice.
+  algorithm.
+- **SLH-DSA** (once called SPHINCS+): also for **signing**. It is built on a
+  very simple, well-trusted idea (hashing). This makes it the most cautious
+  choice.
 
-These all need the newer **version 6 (v6)** key format. The table below lists the
-exact options for reference:
+All of them need the newer **version 6 (v6)** key format. GpgFrontend picks v6
+for you when you choose a post-quantum option.
 
-| Algorithm                  | OpenPGP Type | Purpose    | Engine support          |
-| -------------------------- | ------------ | ---------- | ----------------------- |
-| ML-KEM (Kyber768 + X25519) | Hybrid KEM   | Encryption | GnuPG 2.5.0, rPGP 0.1.2 |
-| ML-KEM (Kyber1024 + X448)  | Hybrid KEM   | Encryption | GnuPG 2.5.0, rPGP 0.1.2 |
-| ML-DSA-65 (+ Ed25519)      | Hybrid sign  | Signing    | rPGP 0.1.2              |
-| ML-DSA-87 (+ Ed448)        | Hybrid sign  | Signing    | rPGP 0.1.2              |
-| SLH-DSA-SHAKE-128S         | Hash-based   | Signing    | rPGP 0.1.2              |
-| SLH-DSA-SHAKE-128F         | Hash-based   | Signing    | rPGP 0.1.2              |
-| SLH-DSA-SHAKE-256S         | Hash-based   | Signing    | rPGP 0.1.2              |
+The table below lists the exact options for reference. The last column shows
+the oldest engine version that can make each one.
+
+| Algorithm              | OpenPGP Type | Purpose    | Engine support          |
+| ---------------------- | ------------ | ---------- | ----------------------- |
+| ML-KEM-768 + X25519    | Hybrid KEM   | Encryption | GnuPG 2.5.0, rPGP 0.1.2 |
+| ML-KEM-1024 + X448     | Hybrid KEM   | Encryption | GnuPG 2.5.0, rPGP 0.1.2 |
+| ML-DSA-65 + Ed25519    | Hybrid sign  | Signing    | rPGP 0.1.2              |
+| ML-DSA-87 + Ed448      | Hybrid sign  | Signing    | rPGP 0.1.2              |
+| SLH-DSA-SHAKE-128S     | Hash-based   | Signing    | rPGP 0.1.2              |
+| SLH-DSA-SHAKE-128F     | Hash-based   | Signing    | rPGP 0.1.2              |
+| SLH-DSA-SHAKE-256S     | Hash-based   | Signing    | rPGP 0.1.2              |
 
 ## Make a Post-Quantum Key
 
@@ -91,17 +96,21 @@ exact options for reference:
    - Or open **Advanced options**, then **Other profile**, and pick a profile
      under the **Post-Quantum** heading. The **Full PQC Hybrid** profiles also
      use ML-DSA for signing.
-   - Or turn on **Expert Mode** and pick an **Algorithm** under the
-     **Post-Quantum** heading. For encryption, choose an **ML-KEM (Kyber)**
-     option for the subkey. For signing, choose **ML-DSA** or **SLH-DSA**.
-4. Make sure the active engine supports your choice. Choices it cannot make
-   are not shown. Most of these options come from the **rPGP** engine.
-5. Choose how long the key is **Valid for**, then click **Continue** and
-   **Generate**.
+   - Or turn on **Expert Mode**. The step is then called **Key Details**. Pick
+     an **Algorithm** under the **Post-Quantum** heading. For encryption,
+     choose **ML-KEM** for the subkey. For signing, choose **ML-DSA** or an
+     **SLH-DSA** option for the primary key.
 
-These algorithms need the **v6** key format. GpgFrontend picks v6 for you
-when you choose a post-quantum option. In **Expert Mode**, the **Key format**
-choice is then locked to v6.
+   If you do not see a choice, the active engine cannot make it. Most of these
+   options need the **rPGP** engine.
+4. Click **Continue**. On the **Validity & Protection** step, choose how long
+   the key is **Valid for**, then click **Continue** again. (In **Expert
+   Mode**, you set **Expires** for each key on the **Key Details** step
+   instead.)
+5. On the **Review** step, check the details and click **Generate**.
+
+In **Expert Mode**, the **Key format** choice is locked to v6 while a
+post-quantum algorithm is selected.
 
 That's it. You now hold a post-quantum OpenPGP key.
 
@@ -111,9 +120,10 @@ You may pick some recipients with post-quantum keys and some with classic keys
 in the same message. GpgFrontend then shows a warning called **Mixed Recipient
 Types**.
 
-Here is why. The message is locked once, and that lock is shared with every
-recipient. If someone can break a classic recipient's key, they can read the
-whole message. So the post-quantum protection does not hold for it.
+Here is why. The message is locked once, and every recipient gets a copy of
+the same lock. If someone can break a classic recipient's key, they can read
+the whole message. So the post-quantum protection does not hold for that
+message.
 
 - Click **Cancel** to go back. Then encrypt one message for the post-quantum
   recipients and a separate one for the others.
@@ -130,10 +140,9 @@ The **Mixed Recipient Types** warning is new.
 Post-quantum OpenPGP now has a finished standard, but support for it is still
 **new**, both here and in other apps.
 
-- These keys **don't work with classic PGP tools yet**, and most of these options
-  are only in the **rPGP** engine.
-- Treat them as a way to **try out and prepare for** the quantum-safe future, not
-  as a replacement for protecting critical secrets today.
+- These keys **don't work with classic PGP tools yet**.
+- Treat them as a way to **try out and prepare for** the quantum-safe future.
+  Do not rely on them alone to protect critical secrets today.
 
 For long-term signing and identity that must work everywhere, keep using a classic
 key (such as Ed25519) alongside your post-quantum experiments.
