@@ -5,6 +5,8 @@ sidebar:
   order: 4
 ---
 
+import { Aside, Tabs, TabItem } from "@astrojs/starlight/components";
+
 Thank you for wanting to contribute! GpgFrontend is maintained by one person,
 so every contribution counts, no matter how small. This guide covers the whole
 path: set up a development environment, build and test the project, and send
@@ -73,22 +75,31 @@ local build behaves the same way as the official builds.
 
 ### Clone the Repository
 
-GitHub:
+<Tabs>
+<TabItem label="GitHub">
 
-```bash
+```sh
 git clone https://github.com/saturneric/GpgFrontend.git
 cd GpgFrontend
 ```
 
-[BKTUS][bktus]:
+</TabItem>
+<TabItem label="BKTUS">
 
-```bash
+```sh
 git clone https://git.bktus.com/GpgFrontend/GpgFrontend.git
 cd GpgFrontend
 ```
 
-> Note: BKTUS is the main development repository. Changes usually land there
-> first for testing, then get merged into the GitHub repository.
+</TabItem>
+</Tabs>
+
+<Aside type="note" title="Main development repository">
+
+[BKTUS][bktus] is the main development repository. Changes usually land there
+first for testing, then get merged into the GitHub repository.
+
+</Aside>
 
 After entering the project directory, initialize and update the submodules.
 This step is required: the submodules provide gpgme, libassuan, libgpg-error,
@@ -96,7 +107,7 @@ Corrosion, Lua (`third_party/lua`, used by the module UI scripts), the Qt
 translations, and the modules sub-project. If you skip it, the build will
 fail.
 
-```bash
+```sh
 git submodule update --init --recursive
 ```
 
@@ -104,7 +115,7 @@ git submodule update --init --recursive
 
 This keeps line endings the same on every operating system.
 
-```bash
+```sh
 git config --global core.autocrlf false
 git config --global core.eol lf
 ```
@@ -115,43 +126,13 @@ Besides Qt, the build needs libarchive, libsodium, OpenSSL, and GoogleTest,
 plus the autotools packages used to build gpgme from the bundled submodule.
 OpenSSL is used by the email module for TLS connections.
 
-- **On Ubuntu 22.04 or later:**
+<Tabs syncKey="os">
+<TabItem label="Windows">
 
-```bash
-sudo apt-get update
-sudo apt-get install -y build-essential git cmake ninja-build \
-  autoconf automake gettext texinfo \
-  libarchive-dev libssl-dev libsodium-dev libgtest-dev
-```
+Set up MSYS2 according to [its documentation][msys2], open the MINGW64 shell,
+and install the necessary packages:
 
-If the `libgtest-dev` package on your distribution is too old, build GoogleTest
-from source instead. The CodeQL job in CI builds v1.15.0 this way:
-
-```bash
-git clone --branch v1.15.0 --depth 1 https://github.com/google/googletest.git
-cmake -S googletest -B googletest/build -DBUILD_SHARED_LIBS=ON
-cmake --build googletest/build && sudo cmake --install googletest/build
-```
-
-- **On macOS 15 or later:**
-
-```bash
-brew install cmake ninja automake texinfo libarchive googletest libsodium openssl@3
-```
-
-Homebrew's `openssl@3` is not on the default search path, and the LibreSSL
-headers that come with macOS do not work. Point CMake at it when you
-configure:
-
-```bash
--DOPENSSL_ROOT_DIR="$(brew --prefix openssl@3)"
-```
-
-- **For Windows (via MSYS2):** Set up MSYS2 according to [its
-  documentation][msys2], open the MINGW64 shell, and install
-  the necessary packages:
-
-```bash
+```sh
 pacman -Syu
 pacman -S git msys2-devel base-devel msys2-runtime-devel \
   mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-cmake \
@@ -162,7 +143,7 @@ pacman -S git msys2-devel base-devel msys2-runtime-devel \
   mingw-w64-x86_64-rust mingw-w64-x86_64-ccache mingw-w64-x86_64-openssl
 ```
 
-:::caution[Windows build environment]
+<Aside type="caution" title="Windows build environment">
 
 On Windows, GpgFrontend can only be built within a Unix-like build environment,
 namely MSYS2, MinGW, or Cygwin. A native MSVC/Visual Studio toolchain is not
@@ -170,7 +151,48 @@ supported and is rejected at configure time. **MSYS2 is the only environment
 that is regularly tested, and it is the recommended choice;** MinGW and Cygwin
 may work but are not officially verified.
 
-:::
+</Aside>
+
+</TabItem>
+<TabItem label="macOS">
+
+On macOS 15 or later:
+
+```sh
+brew install cmake ninja automake texinfo libarchive googletest libsodium openssl@3
+```
+
+Homebrew's `openssl@3` is not on the default search path, and the LibreSSL
+headers that come with macOS do not work. Point CMake at it when you
+configure:
+
+```sh
+-DOPENSSL_ROOT_DIR="$(brew --prefix openssl@3)"
+```
+
+</TabItem>
+<TabItem label="Linux">
+
+On Ubuntu 22.04 or later:
+
+```sh
+sudo apt-get update
+sudo apt-get install -y build-essential git cmake ninja-build \
+  autoconf automake gettext texinfo \
+  libarchive-dev libssl-dev libsodium-dev libgtest-dev
+```
+
+If the `libgtest-dev` package on your distribution is too old, build GoogleTest
+from source instead. The CodeQL job in CI builds v1.15.0 this way:
+
+```sh
+git clone --branch v1.15.0 --depth 1 https://github.com/google/googletest.git
+cmake -S googletest -B googletest/build -DBUILD_SHARED_LIBS=ON
+cmake --build googletest/build && sudo cmake --install googletest/build
+```
+
+</TabItem>
+</Tabs>
 
 ### Install Qt 6
 
@@ -179,27 +201,40 @@ Qt 6.5 or later is required; CI currently builds against Qt 6.11.3 (set in
 modules are Core, Gui, Widgets, PrintSupport, Network, LinguistTools, Xml, and
 Sql, plus Concurrent for the modules sub-project.
 
-- On Linux, use the [Qt online installer][qt-installer]
-  or your package manager (on Ubuntu: `qt6-base-dev qt6-tools-dev` and related
-  packages). The packaged Qt of Ubuntu 22.04 (6.2) and 24.04 (6.4) is too
-  old; use the online installer there, or a newer distribution such as
-  Debian 13.
-- On macOS, use the Qt online installer or `brew install qt`.
-- On Windows with MSYS2, Qt is already covered by the `mingw-w64-x86_64-qt6-*`
-  packages above.
+<Tabs syncKey="os">
+<TabItem label="Windows">
 
-:::note[Qt5]
+With MSYS2, Qt is already covered by the `mingw-w64-x86_64-qt6-*` packages
+in [Install Dependencies](#install-dependencies).
+
+</TabItem>
+<TabItem label="macOS">
+
+Use the Qt online installer or `brew install qt`.
+
+</TabItem>
+<TabItem label="Linux">
+
+Use the [Qt online installer][qt-installer] or your package manager (on
+Ubuntu: `qt6-base-dev qt6-tools-dev` and related packages). The packaged Qt of
+Ubuntu 22.04 (6.2) and 24.04 (6.4) is too old; use the online installer there,
+or a newer distribution such as Debian 13.
+
+</TabItem>
+</Tabs>
+
+<Aside type="note" title="Qt5">
 
 The `main` branch builds with Qt 6 only. Qt5 builds are made only from the
 `release/2.1` branch, for the v2.1.x line.
 
-:::
+</Aside>
 
 ## Build the Project
 
 Configure and build from the project root:
 
-```bash
+```sh
 cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug \
   -DGPGFRONTEND_LINK_GPGME_INTO_CORE=ON
 cmake --build build
@@ -250,7 +285,7 @@ you configured with `-DGPGFRONTEND_BUILD_TESTS=ON`. Without it, the script
 stops and tells you to reconfigure. Run the tests through the helper script,
 which builds the project if needed and reads the test results:
 
-```bash
+```sh
 QT_QPA_PLATFORM=offscreen ./scripts/run_tests.sh
 ```
 
@@ -285,12 +320,12 @@ The module tests only exist if you configured with
 
 The old separate ASan scripts are gone. Use `--asan` and `--asan-gui` instead.
 
-:::caution[`--asan-gui` uses your real data]
+<Aside type="caution" title="--asan-gui uses your real data">
 
 `--asan-gui` starts the app with your real GpgFrontend settings and keys, so
 you can repeat your own steps. Keep that in mind before you try anything risky.
 
-:::
+</Aside>
 
 ## Python Helper Scripts
 
@@ -298,7 +333,7 @@ The Python scripts in `scripts/` need Python 3.14 or newer. Their dependencies
 are listed in `scripts/pyproject.toml` and locked in `scripts/uv.lock`, and
 they are managed with [uv][uv]. There is no `requirements.txt` any more.
 
-```bash
+```sh
 uv sync --project scripts
 uv run --project scripts python scripts/copyright_checking.py
 ```

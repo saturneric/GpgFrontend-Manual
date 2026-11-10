@@ -5,6 +5,8 @@ sidebar:
   order: 1
 ---
 
+import { Aside, Tabs, TabItem } from "@astrojs/starlight/components";
+
 This page lists what you need to run GpgFrontend. For the libraries the app is
 built with, see [Dependencies](/extra/dependencies/).
 
@@ -19,23 +21,36 @@ weaker machines too.
 
 ## OS
 
-These are the oldest systems the official builds run on:
+These are the oldest systems the official builds run on. Only 64-bit
+machines are supported.
 
-- Windows 10 (version 1809) or later. Windows 7 can only run the older v2.1.x
-  line, which still has Qt5 builds. It is not recommended.
-- macOS 15 or later, on both Intel and Apple Silicon
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Windows 10 (version 1809) or later. Windows 7 can only run the older v2.1.x
+line, which still has Qt5 builds. It is not recommended.
+
+</TabItem>
+<TabItem label="macOS">
+
+macOS 15 or later, on both Intel and Apple Silicon.
+
+</TabItem>
+<TabItem label="Linux">
+
 - Linux on x86_64: Ubuntu 22.04 or later, or a comparable distribution (glibc
   2.35 or newer)
 - Linux on arm64: Ubuntu 24.04 or later, or a comparable distribution
 
-> Note: Only 64-bit machines are supported.
+</TabItem>
+</Tabs>
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 There are no Qt5 builds of v2.2.x. If your system needs Qt5, use a v2.1.x
 release. See [Downloads](/overview/downloads/).
 
-:::
+</Aside>
 
 ## GnuPG
 

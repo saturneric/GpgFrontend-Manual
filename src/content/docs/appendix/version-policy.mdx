@@ -6,6 +6,8 @@ sidebar:
   order: 5
 ---
 
+import { Aside, Card, CardGrid } from "@astrojs/starlight/components";
+
 Every copy of GpgFrontend has a version number, like `v2.2.3`. That number does
 not tell you how big a release was or how much work went into it.
 
@@ -42,11 +44,12 @@ Instant Messaging tokens, a new key list, and a rebuilt settings window.
 `v2.2.3` was just as big. It added sending and reading email, signed modules,
 temporary profiles, and key databases that change without a restart.
 
-:::note[How to tell how big a release is]
+<Aside type="note" title="How to tell how big a release is">
+
 Do not judge it by the number. Read the release notes on the
-[releases page][github-releases]. They say what
-actually changed.
-:::
+[releases page][github-releases]. They say what actually changed.
+
+</Aside>
 
 ## Why Not Semantic Versioning
 
@@ -114,13 +117,26 @@ That is a deliberate choice, described in the maintainer's article
 
 Not every build is meant for everyday use:
 
-- **Stable** is a normal release, like `v2.2.3`. This is the one you want.
-- **Beta** is a test build of the next fix release of one series. It has extra
-  text on the end, like `2.2.5-alpha.3`. It is for people who want to help test
-  fixes before they are released.
-- **Nightly** is an automatic test build, made from the newest code. It is an
-  early look at the next series, and it can be broken. Its version looks like
-  `2.3.0-alpha.120`.
+<CardGrid>
+<Card title="Stable" icon="approve-check-circle">
+
+A normal release, like `v2.2.3`. This is the one you want.
+
+</Card>
+<Card title="Beta" icon="magnifier">
+
+A test build of the next fix release of one series. It has extra text on the
+end, like `2.2.5-alpha.3`. It is for people who want to help test fixes
+before they are released.
+
+</Card>
+<Card title="Nightly" icon="warning">
+
+An automatic test build, made from the newest code. It is an early look at the
+next series, and it can be broken. Its version looks like `2.3.0-alpha.120`.
+
+</Card>
+</CardGrid>
 
 Nightly and beta builds both run under the name **GpgFrontend Testing**. They
 keep their own separate data, so they leave your everyday keys and settings
@@ -129,10 +145,12 @@ alone.
 To be told about betas, open **Help** > **Check for Updates** in a stable
 release and tick **Also offer beta versions**. It is off unless you tick it.
 
-:::note[Changed in v2.3.0]
+<Aside type="note" title="Changed in v2.3.0">
+
 A beta used to be a tagged early version of a new series, like
 `v2.2.0-beta.1`. Now a beta is an untagged test build of the next fix release.
-:::
+
+</Aside>
 
 See [Downloads](/overview/downloads/) for where to get stable and nightly
 builds, and the [FAQ](/overview/faq/) for more about nightly builds.

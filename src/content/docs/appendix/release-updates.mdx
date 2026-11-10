@@ -6,7 +6,7 @@ sidebar:
   order: 6
 ---
 
-import { Aside } from "@astrojs/starlight/components";
+import { Aside, Steps } from "@astrojs/starlight/components";
 import ReleaseFlowFigure from "../../../components/figures/ReleaseFlowFigure.astro";
 
 <Aside type="note" title="New in v2.3.0">
@@ -130,6 +130,8 @@ app, **GpgFrontend Testing**, with its own settings and keys:
 CI only stages a tag build. A stable release reaches users only through
 `gfrelease stable`, which the maintainer runs by hand:
 
+<Steps>
+
 1. **Fetch** the staged build of tag `vX.Y.Z`.
 2. **Verify** before signing: the Sigstore bundle names this workflow at that
    tag and commit, every file matches the signed list, the tag is signed by a
@@ -140,6 +142,8 @@ CI only stages a tag build. A stable release reaches users only through
 4. **OpenPGP:** write a detached binary `.sig` for every final file, a final
    `SHA256SUMS.txt` with its own `.sig`, and signed release notes.
 5. **Upload** everything to `releases/<version>/`.
+
+</Steps>
 
 On its next round, the signing host checks every signature again. Only then
 does it add its own minisign signature (`.minisig`) to every file and list the

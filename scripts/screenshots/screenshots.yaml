@@ -728,15 +728,15 @@ entries:
 
   # Made by hand: windows the screenshot mode cannot render.
   - id: windows-signature
-    doc: src/content/docs/appendix/code-binary-verify.md
+    doc: src/content/docs/appendix/code-binary-verify.mdx
     ref: img-1
     status: manual-only
   - id: macos-notarization
-    doc: src/content/docs/appendix/code-binary-verify.md
+    doc: src/content/docs/appendix/code-binary-verify.mdx
     ref: img-2
     status: manual-only
   - id: linux-signature
-    doc: src/content/docs/appendix/code-binary-verify.md
+    doc: src/content/docs/appendix/code-binary-verify.mdx
     ref: img-3
     status: manual-only
   - id: drag-to-applications

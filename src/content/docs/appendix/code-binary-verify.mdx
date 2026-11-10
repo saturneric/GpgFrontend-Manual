@@ -5,6 +5,8 @@ sidebar:
   order: 2
 ---
 
+import { Aside, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
+
 When you download software, one question matters: is this really the app the
 developer made, or did someone change it on the way to you?
 
@@ -38,39 +40,51 @@ signed with earlier keys, so this fingerprint does not match them.
 
 ### Step 1: Get the Maintainer's Key
 
+<Steps>
+
 1. Download the maintainer's public key from
    [bktus.com/openpgp][bktus-openpgp].
 2. Import it into GnuPG. You can also do this in GpgFrontend itself.
 3. Check that the key's fingerprint is exactly:
 
-   ```
+   ```text
    12F7E8858CF15BEC9975FF3C5CA3DA246843FD03
    ```
+
+</Steps>
 
 The same fingerprint is listed in the [security policy][security-md] of the
 repository, so you can compare the two.
 
 ### Step 2: Check the Signature
 
-Put your download and its `.sig` file in the same folder. Open a terminal in
-that folder and run this command. Replace `FILE` with the name of your
-download:
+<Steps>
 
-```sh
-gpg --verify FILE.sig FILE
-```
+1. Put your download and its `.sig` file in the same folder.
+2. Open a terminal in that folder and run this command. Replace `FILE` with
+   the name of your download:
 
-GnuPG should say `Good signature`, made by the key with the fingerprint above.
+   ```sh
+   gpg --verify FILE.sig FILE
+   ```
+
+3. GnuPG should say `Good signature`, made by the key with the fingerprint
+   above.
+
+</Steps>
+
 Any other result means the file is not the one that was published. Do not use
 it.
 
-:::note[New in v2.3.0]
+<Aside type="note" title="New in v2.3.0">
+
 The release server also adds a `.minisig` file to every stable release file,
 after it has checked the `.sig`. The app uses it for its own update check. The
 Downloads page only links the `.sig`, which is the maintainer's own signature.
 If you have the `.minisig`, you can check it as shown in
 [Check a Test Build](#check-a-test-build).
-:::
+
+</Aside>
 
 ## Checks Your System Does for You
 
@@ -111,7 +125,7 @@ with [minisign][minisign], a small and simple signing tool.
 
 The test build signing key is:
 
-```
+```text
 RWSxNasy+OIaiWWGzwNYu223e0UNDwrsb+4S/ttGO8knO/URmtMtDpse
 ```
 
@@ -122,6 +136,8 @@ Get the nightly files from the test build list on the
 [Downloads page](/overview/downloads/#test-builds).
 
 ### Step 1: Check the Signature
+
+<Steps>
 
 1. Install [minisign][minisign].
 2. Put your download and its `.minisig` file in the same folder.
@@ -136,6 +152,8 @@ Get the nightly files from the test build list on the
    it shows the file name and version that were signed. They must match your
    download.
 
+</Steps>
+
 Any other result means the file is not the one that was published. Do not use
 it.
 
@@ -148,19 +166,31 @@ build.
 Put your download in the same folder as `SHA256SUMS.txt`. Open a terminal in
 that folder and run the command for your system.
 
-On Linux:
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Run the Linux command in Git Bash or WSL:
 
 ```sh
 sha256sum -c --ignore-missing SHA256SUMS.txt
 ```
 
-On macOS:
+</TabItem>
+<TabItem label="macOS">
 
 ```sh
 shasum -a 256 -c --ignore-missing SHA256SUMS.txt
 ```
 
-On Windows, run the Linux command in Git Bash or WSL.
+</TabItem>
+<TabItem label="Linux">
+
+```sh
+sha256sum -c --ignore-missing SHA256SUMS.txt
+```
+
+</TabItem>
+</Tabs>
 
 Your file should be listed with `OK`.
 
@@ -198,6 +228,8 @@ you can remove it: build the app yourself, from source code you have checked.
 
 If you are in that situation, this is the path:
 
+<Steps>
+
 1. **Get the source, not a binary.** Clone the repository and check out an
    official release tag. Release tags made by the current release process
    (v2.3.0 and later) are signed. Verify the signature with `git verify-tag`
@@ -212,6 +244,8 @@ If you are in that situation, this is the path:
    everything is downloaded, if you can.
 4. **Keep your own record.** Note the commit hash you built and the checksums
    of what you produced, so you can tell later whether anything changed.
+
+</Steps>
 
 Build instructions are in the
 [contributing guide](/appendix/contribute/#set-up-your-environment). This path

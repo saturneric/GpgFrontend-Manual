@@ -6,6 +6,8 @@ sidebar:
   order: 1
 ---
 
+import { Aside, Badge, Card, CardGrid } from "@astrojs/starlight/components";
+
 GpgFrontend supports many algorithms across two engines: the mature **GnuPG**
 backend and the experimental **rPGP** backend. When you pick one, it helps to
 weigh four things: how strong it is, which engine supports it, the OpenPGP version
@@ -18,13 +20,26 @@ each algorithm in detail.
 
 Most people don't need to think hard about this. If you're not sure:
 
-- **Just use the default.** GpgFrontend picks **Ed25519 / Curve25519** (a modern
-  elliptic-curve key) with the GnuPG engine. It is fast, strong, and works with
-  most tools.
-- **Need to work with old systems?** Use **RSA 3072**. It has the broadest support
-  across legacy clients and protocols.
-- **Want to try post-quantum or OpenPGP v6?** Switch to the **rPGP engine**. These
-  options are experimental and may not work with other tools yet.
+<CardGrid>
+<Card title="Just use the default" icon="approve-check-circle">
+
+GpgFrontend picks **Ed25519 / Curve25519** (a modern elliptic-curve key) with
+the GnuPG engine. It is fast, strong, and works with most tools.
+
+</Card>
+<Card title="Need to work with old systems?" icon="laptop">
+
+Use **RSA 3072**. It has the broadest support across legacy clients and
+protocols.
+
+</Card>
+<Card title="Want to try post-quantum or OpenPGP v6?" icon="rocket">
+
+Switch to the **rPGP engine**. These options are experimental and may not work
+with other tools yet.
+
+</Card>
+</CardGrid>
 
 ### A Good Balance: RSA + Curve25519
 
@@ -35,19 +50,19 @@ older systems, while Curve25519 stays fast for everyday work.
 
 ## At a Glance
 
-| Algorithm                | Group        | Used for       | Engines          | Notes                          |
-| ------------------------ | ------------ | -------------- | ---------------- | ------------------------------ |
-| RSA                      | Classical    | Sign + Encrypt | GnuPG, rPGP      | Best compatibility; slower     |
-| DSA                      | Classical    | Sign           | GnuPG            | Legacy; avoid for new keys     |
-| ElGamal (ELG-E)          | Classical    | Encrypt only   | GnuPG            | Rarely needed today            |
-| ECDSA (NIST curves)      | Elliptic     | Sign           | GnuPG, rPGP      | Standardized by NIST           |
-| EdDSA (Ed25519 / Ed448)  | Elliptic     | Sign           | GnuPG, rPGP      | Modern default for signing     |
-| ECDH (Curve25519 / X448) | Elliptic     | Encrypt        | GnuPG, rPGP      | Modern default for encryption  |
-| Brainpool curves         | Elliptic     | Sign + Encrypt | GnuPG 2.3+       | Non-NIST alternative           |
-| secp256k1                | Elliptic     | Sign + Encrypt | GnuPG 2.3+       | Used in blockchain             |
-| ML-DSA                   | Post-Quantum | Sign           | rPGP only        | Experimental, OpenPGP v6       |
-| SLH-DSA                  | Post-Quantum | Sign           | rPGP only        | Experimental; large signatures |
-| Kyber / ML-KEM           | Post-Quantum | Encrypt        | GnuPG 2.5+, rPGP | Experimental; always hybrid    |
+| Algorithm                | Group        | Used for       | Engines                                                                        | Notes                          |
+| ------------------------ | ------------ | -------------- | ------------------------------------------------------------------------------ | ------------------------------ |
+| RSA                      | Classical    | Sign + Encrypt | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" />      | Best compatibility; slower     |
+| DSA                      | Classical    | Sign           | <Badge text="GnuPG" variant="note" />                                          | Legacy; avoid for new keys     |
+| ElGamal (ELG-E)          | Classical    | Encrypt only   | <Badge text="GnuPG" variant="note" />                                          | Rarely needed today            |
+| ECDSA (NIST curves)      | Elliptic     | Sign           | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" />      | Standardized by NIST           |
+| EdDSA (Ed25519 / Ed448)  | Elliptic     | Sign           | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" />      | Modern default for signing     |
+| ECDH (Curve25519 / X448) | Elliptic     | Encrypt        | <Badge text="GnuPG" variant="note" /> <Badge text="rPGP" variant="tip" />      | Modern default for encryption  |
+| Brainpool curves         | Elliptic     | Sign + Encrypt | <Badge text="GnuPG 2.3+" variant="note" />                                     | Non-NIST alternative           |
+| secp256k1                | Elliptic     | Sign + Encrypt | <Badge text="GnuPG 2.3+" variant="note" />                                     | Used in blockchain             |
+| ML-DSA                   | Post-Quantum | Sign           | <Badge text="rPGP only" variant="caution" />                                   | Experimental, OpenPGP v6       |
+| SLH-DSA                  | Post-Quantum | Sign           | <Badge text="rPGP only" variant="caution" />                                   | Experimental; large signatures |
+| Kyber / ML-KEM           | Post-Quantum | Encrypt        | <Badge text="GnuPG 2.5+" variant="note" /> <Badge text="rPGP" variant="tip" /> | Experimental; always hybrid    |
 
 Some rows have exceptions:
 
@@ -73,19 +88,19 @@ The exact choices you see depend on the engine, its version, and the key format.
   and decryption, because of its larger key sizes. As computers get faster, larger
   keys are needed to stay secure.
 
-:::note[RSA below 3072 bits cannot be generated on rPGP]
+<Aside type="note" title="RSA below 3072 bits cannot be generated on rPGP">
 
 The rPGP engine follows RFC 9580 and will not make an RSA key smaller than 3072
 bits. Older small keys still import and still work. The GnuPG engine still
 offers the smaller sizes.
 
-:::
+</Aside>
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 The smallest new RSA key on rPGP went up from 2048 to 3072 bits.
 
-:::
+</Aside>
 
 ### DSA (Digital Signature Algorithm)
 

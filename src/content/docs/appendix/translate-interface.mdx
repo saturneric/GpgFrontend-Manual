@@ -6,6 +6,8 @@ sidebar:
   label: Translate
 ---
 
+import { Steps } from "@astrojs/starlight/components";
+
 GpgFrontend speaks many languages, and the translations come from the
 community.
 
@@ -24,6 +26,8 @@ edited with [Qt Linguist][qt-linguist], a graphical tool. The basics:
 
 ## Find and Edit the Translation Files
 
+<Steps>
+
 1. Download or clone the source code from [GitHub][github-gpgfrontend]. Clone
    with `git clone --recursive`, so you also get the modules.
 2. Find the `.ts` file for your language:
@@ -35,6 +39,8 @@ edited with [Qt Linguist][qt-linguist], a graphical tool. The basics:
      `modules/src/m_email/ts/ModuleEMail.de_DE.ts`.
 3. Open the file in Qt Linguist, translate, and save. Updating an existing
    language this way is the most common contribution.
+
+</Steps>
 
 Many features now come from modules: email, instant messaging, key servers,
 update checking and more. If you cannot find a string in
