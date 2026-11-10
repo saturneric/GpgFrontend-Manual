@@ -21,17 +21,20 @@ another email app first.
 ## Before You Start
 
 You need a mail account with receiving turned on. See
-[Mail Accounts and Sending](/email/accounts-sending/). In short: add the
-account with **Send and receive** or **Receive only**, or check **Use this
-account to receive** on an existing one. Disabled accounts are not listed.
+[Mail Accounts and Sending](/email/accounts-sending/). In short:
+
+- For a new account, choose **Send and receive** or **Receive only**.
+- For an account you already have, turn on **Use this account to receive**.
+
+Disabled accounts are not listed in the IMAP Controller.
 
 ## Open the IMAP Controller
 
 1. Click **Advanced** > **Open IMAP Controller**.
 2. The **IMAP Controller** window opens and connects to your account.
 
-If you have no account with receiving turned on, GpgFrontend says **No mail
-account** and asks you to set one up in Settings first.
+If you have no account with receiving turned on, a **No mail account** message
+appears instead. It asks you to set one up in Settings first.
 
 The **Advanced** menu is hidden in the Mac App Store edition. There, the IMAP
 Controller is not available.
@@ -63,14 +66,14 @@ pages. The bottom of the window shows where you are, for example **Page 1 of
 4**.
 
 If a search finds very many messages, only the first ones are shown. Type more
-words to narrow it down.
+words to get fewer results.
 
 ### Remembered Folder Lists
 
 When you open an account again, GpgFrontend first shows the list from your
-last visit, so you do not stare at an empty window. It says **Shown from the
-previous visit to this account; refreshing.** while it gets the newest list
-from the server.
+last visit, so the window is not empty while you wait. It says **Shown from
+the previous visit to this account; refreshing.** while it gets the newest
+list from the server.
 
 ## Open a Message
 
@@ -87,8 +90,8 @@ an `.eml` file.
 Right-click a message for more: **Open**, **Copy Subject**, **Copy Sender** and
 **Copy Message-ID**.
 
-While something is loading, the **Close** button turns into **Stop**. Click it
-to stop.
+While something is loading, the **Close** button turns into **Stop**. Click
+**Stop** to cancel the loading.
 
 ### Very Large Messages
 
@@ -97,6 +100,9 @@ say: "This message is too large for this application to open, so it cannot be
 imported." Use your usual email app for such a message.
 
 ## Work With Attachments
+
+This part applies to every mail tab: a message you opened from your server, an
+`.eml` file, or a message you are writing.
 
 Attachments are listed under the message, with their **Name**, **Type**,
 **Size**, and whether they are **Signed**. Click **Expand** to see every file,
@@ -116,7 +122,8 @@ signature:
 Click **Attachments** on the action row, or right-click a file in the list.
 Both menus have these:
 
-- **Open**: open the file with the app your computer uses for it.
+- **Open**: open the file with the app your computer uses for it. You can also
+  double-click the file.
 - **Save...**: save the selected files to a folder.
 - **Remove**: take the selected files out of the message. This only works on a
   message you can edit.
@@ -149,14 +156,17 @@ GpgFrontend opens only files that are safe to look at:
   (`.vcf`) files, and other emails (`.eml`).
 
 Everything else is refused, for example programs, scripts, shortcuts,
-installers, archives such as ZIP, and SVG images. A file from a stranger that
-"opens" might really **run**, and that could harm your computer. An archive is
-refused because you cannot tell what is inside until it is unpacked.
+installers, archives such as ZIP, and SVG images. Here is why:
+
+- A file from a stranger may look like a document but really be a program.
+  Opening it would **run** it, and that could harm your computer.
+- An archive is refused because you cannot tell what is inside until it is
+  unpacked.
 
 When a file is refused, GpgFrontend explains why. You can still click
 **Save...**, then open the file yourself if you are sure where it came from.
 
 ### Size Limit When Attaching
 
-When you add a file to your own message with **Attach File...**, each file can
-be up to 48 MiB. Bigger files are refused with a message that names them.
+When you add files to your own message, each file can be up to 48 MiB. See
+[Attach Files](/email/compose-protect/#attach-files).

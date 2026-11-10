@@ -47,23 +47,29 @@ the list. The **Add Mail Account** window opens. It has four steps:
 1. **Your Account**: type **Your name** (as people will see it), your **Email
    address**, and your **Password**. Click **Continue**.
 2. **Servers**: GpgFrontend fills in the servers for you, from your address.
-   Choose what the account is for: **Send and receive**, **Receive only** or
-   **Send only**. Check the servers under **Server settings**. If they are
-   wrong, click **Edit**, change them, and click **Done**. If your provider
-   wants a login name that is not your email address, open **Login
-   usernames** while editing and fill in **Incoming (IMAP)** and **Outgoing
-   (SMTP)**. Click **Continue**.
+   - Choose what the account is for: **Send and receive**, **Receive only** or
+     **Send only**.
+   - Check the servers under **Server settings**. If they are wrong, click
+     **Edit**, change them, and click **Done**.
+   - Some providers want a login name that is not your email address. If
+     yours does, click **Edit**, open **Login usernames**, and fill in
+     **Incoming (IMAP)** and **Outgoing (SMTP)**.
+   - Click **Continue**.
 3. **Connection Check**: GpgFrontend signs in to each server, without sending
-   or changing anything. It runs by itself. When everything works, click
-   **Continue**.
+   or changing anything. The check starts by itself. When everything works,
+   click **Continue**.
 4. **Review**: check the details. Turn on **Use as the default account** if you
    want this account to be offered first when you send. Your first account
    always becomes the default.
-5. Click **Add Account**.
+5. Click **Add Account**. The window closes, and the account appears in the
+   list.
 6. Click **OK** at the bottom of the Settings window to save.
 
 Nothing is saved until you click **OK**. If you click **Cancel**, your changes
 are thrown away.
+
+On a Mac, the Settings window is called **Preferences** and has no **OK**
+button. There, your changes are saved when you close the window.
 
 :::note[Changed in v2.2.4]
 
@@ -122,10 +128,10 @@ cannot be used.
 
 ### Connection Choices
 
-The **Connection** list (called **Security** in the **Add Mail Account**
-window) decides how your password and mail are protected on
-the way to the server. Both choices use **TLS**, which is the standard way to
-encrypt the connection between your computer and the server.
+The **Connection** list decides how your password and mail are protected on
+the way to the server. In the **Add Mail Account** window, the same list is
+called **Security**. The first two choices use **TLS**. TLS is the standard
+way to encrypt the connection between your computer and the server.
 
 | Choice                       | When to use it                                                   | Port it uses       |
 | ---------------------------- | ---------------------------------------------------------------- | ------------------ |
@@ -228,9 +234,11 @@ key with your system's keychain or a PIN.
 
 ## Send a Message
 
-1. Write your message. See [Write and Protect a Message](/email/compose-protect/).
+1. Write your message. See
+   [Write and Protect a Message](/email/compose-protect/).
 2. Sign or encrypt it if you like.
-3. Click **Send...** (or press Ctrl+Enter; Cmd+Enter on a Mac).
+3. Click **Send...** (or press Ctrl+Enter; Cmd+Enter on a Mac). The **Send
+   message** window opens. Nothing is sent yet.
 
 If **Send...** is grayed out, hover over it to see what is missing.
 
@@ -261,17 +269,19 @@ The **Result** section then shows two lines:
   - If it failed, this line shows the reason, and the top of the window says
     **Not sent.**
 - **Copy in Sent**: was a copy put in your Sent folder?
-  - **Yes, saved to ...** names the folder.
-  - Many mail servers do not keep a copy of what you send. So GpgFrontend puts
-    one in your Sent folder itself, using the account's incoming (IMAP) server.
+  - **Yes, saved to ...** names the folder. Many mail servers do not keep a
+    copy of what you send. So GpgFrontend puts one in your Sent folder itself,
+    using the account's incoming (IMAP) server.
+  - **Yes, your mail server had already filed it in ...** means the server
+    kept a copy by itself, so GpgFrontend did not add a second one.
   - If the account only sends, there is no mailbox, so no copy is kept. The
     message was still sent.
 
 Click **Details** to see more, or **Copy details** to copy them.
 
-When all went well, the window closes by itself after a few seconds. The
+When all went well, the window closes by itself after three seconds. The
 **Close** button counts down. Click anywhere in the window to stop the
-countdown.
+countdown and keep the window open.
 
 ### When the Result Is Unknown
 
@@ -288,9 +298,9 @@ If you send it again without checking, they may get it twice.
 
 ### Closing While Sending
 
-If you close the window while a message is still being sent, GpgFrontend asks
-**Still sending**. The server may already have the message. If you close now,
-you will not find out if it was delivered.
+If you close the window while a message is still being sent, a **Still
+sending** window appears. The server may already have the message. If you
+close now, you will not find out if it was sent.
 
 - Click **Keep Waiting** to stay and see the result. This is the safe choice.
 - Click **Close Anyway** to close the window.

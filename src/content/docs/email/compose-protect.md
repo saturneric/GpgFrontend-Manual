@@ -39,8 +39,8 @@ To add more people:
 What these mean:
 
 - **Cc** (carbon copy) sends a copy to someone. Everyone can see who was in Cc.
-- **Bcc** (blind carbon copy) sends a copy in secret. The other people do not
-  see this name.
+- **Bcc** (blind carbon copy) sends a copy in secret. The other readers do not
+  see who was in Bcc.
 
 To add several people in one field, put a semicolon (`;`) between the
 addresses. For example: `alice@example.com; bob@example.com`.
@@ -59,16 +59,16 @@ As you type an address, GpgFrontend suggests matching addresses:
 
 ### About Bcc
 
-Names in **Bcc:** are never written into the message itself. If they were,
+Addresses in **Bcc:** are never written into the message itself. If they were,
 every reader could see who got a secret copy.
 
-GpgFrontend still uses them in two ways:
+GpgFrontend still uses these addresses in two ways:
 
 - When you encrypt, it can use them to pick the keys to encrypt to.
-- When you send, it gives them to your mail server, so they still get the
-  message.
+- When you send, it gives them to your mail server, so the Bcc people still
+  get the message.
 
-They are not saved in the `.eml` file.
+The Bcc addresses are not saved in the `.eml` file.
 
 :::note[New in v2.2.3]
 
@@ -100,11 +100,10 @@ Your attachments are listed under the message. To learn more about the list, see
 When you open a message you received, the action row shows three buttons:
 
 - **Reply** (Ctrl+R): write back to the sender.
-- **Reply All** (Ctrl+Shift+R): write back to
-  the sender and everyone else who was addressed. People in Bcc are not
-  included.
-- **Forward** (Ctrl+L): pass the message on to someone
-  else, with its attachments.
+- **Reply All** (Ctrl+Shift+R): write back to the sender and everyone else who
+  was addressed. People in Bcc are not included.
+- **Forward** (Ctrl+L): pass the message on to someone else, with its
+  attachments.
 
 Each one opens a **new tab** with a new message. The original message is not
 changed.
@@ -133,18 +132,20 @@ message by hand.
 
 ## Sign or Encrypt the Message
 
-First pick your keys in the [Key Toolbox](/guides/understand-interface/#key-toolbox)
-on the right:
+First pick your keys in the
+[Key ToolBox](/guides/understand-interface/#key-toolbox) on the right:
 
 - **To sign:** check your own private key.
 - **To encrypt:** check the public key of each person who should read the
   message. Check your own key too if you want to read it later.
 
-Then use the **Security menu**:
+Then use the **Security menu**. This is the menu that opens from the status
+button:
 
-1. Find the status button at the right end of the action row. On a new message
-   it says **Not signed or encrypted**.
-2. Click it. A menu opens.
+1. Find the status button at the right end of the action row. The action row
+   is the row of buttons above the message body. On a new message the status
+   button says **Not signed or encrypted**.
+2. Click the status button. The Security menu opens.
 3. Choose one:
    - **Sign...**: sign the message.
    - **Encrypt...**: encrypt the message.
@@ -186,9 +187,9 @@ body tells you why:
 - **Encrypted:** decrypt it first.
 - **Encrypted and signed:** decrypt it, then remove the signature.
 
-If you try to change a signed message anyway, GpgFrontend asks: **Remove the
-signature and make it an ordinary message?** Click **Yes** to remove it, or
-**Cancel** to keep it.
+If you try to change a signed message anyway, a **Message Is Signed** window
+asks: "Remove the signature and make it an ordinary message?" Click **Yes** to
+remove the signature, or **Cancel** to keep it.
 
 Removing a signature cannot be undone. The text of the message is kept as it
 is.
@@ -196,8 +197,8 @@ is.
 ### Lock a Message Yourself
 
 You can also lock a message you received, so nobody changes it by accident.
-This is only offered for a message that is not signed or encrypted; those are
-locked already.
+This is only offered for a message that is not signed or encrypted. Signed and
+encrypted messages are locked already.
 
 1. Click **More**.
 2. Click **Read-only**.
@@ -209,12 +210,12 @@ make new messages. To unlock, click **More** > **Read-only** again.
 
 You have two choices:
 
-- **Send it from GpgFrontend.** Click **Send...** (or press
-  Ctrl+Enter). You need a mail account for this. See
-  [Mail Accounts and Sending](/email/accounts-sending/).
+- **Send it from GpgFrontend.** Click **Send...** (or press Ctrl+Enter). You
+  need a mail account for this. See
+  [Send a Message](/email/accounts-sending/#send-a-message).
 - **Send it with another email app.** Save the message as an `.eml` file with
-  **File** > **Save As...**. Then open or import that file in your usual email app
-  and send it from there.
+  **File** > **Save As...**. Then open or import that file in your usual email
+  app and send it from there.
 
 Before the file is saved, GpgFrontend takes a last look at the message. If
 something looks risky, it shows a **Check before exporting** window. See
@@ -243,8 +244,8 @@ result as a set of cards:
 
 ## Tips and Troubleshooting
 
-- **Send... is grayed out.** Hover over it. It tells you what is missing, for
-  example a subject or a recipient.
+- **Send... is grayed out.** Hover over the button. A tip tells you what is
+  missing, for example a subject, a recipient or a mail account.
 - **A signature shows as bad, but the text looks fine.** A signature covers the
   exact bytes of the message. Some programs change line endings or re-encode a
   message when they save or forward it. When you can, save the original `.eml`

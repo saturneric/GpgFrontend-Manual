@@ -27,9 +27,10 @@ Open the message in a mail tab. You can:
 
 ## Read the Security Badge
 
-At the right end of the action row there is a status button. We call it the
-**badge**. It tells you, in a few words, what kind of message this is. Click it
-to open the Security menu.
+The action row is the row of buttons above the message body. At its right end
+there is a status button. We call it the **badge**. It tells you, in a few
+words, what kind of message this is. Click the badge to open the Security
+menu.
 
 | Badge                                | What it means                                                                                                         |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
@@ -72,10 +73,10 @@ signed**). Below it, GpgFrontend tells you what it knows:
   key for alice@example.com, so this message can be opened here."
 - If you do not: "This message is encrypted to keys you do not hold the private
   half of, so it cannot be opened on this computer."
-- Sometimes it cannot tell. Some senders hide who the message is for. Then the
-  only way to know is to try.
+- Sometimes GpgFrontend cannot tell. Some senders hide who the message is
+  for. Then the only way to know is to try.
 
-To open it, click **Decrypt** on the panel.
+To open the message, click **Decrypt** on the panel.
 
 ## The Message Details Window
 
@@ -138,8 +139,8 @@ Right-click a header to **Copy Value** or **Copy Whole Field**.
 These are the warnings you may see, in plain words:
 
 - **Signed part no longer in canonical form**: a program changed the message
-  after it was signed, usually the line endings. The signature may fail even
-  though nobody meant harm.
+  after it was signed. Usually only the line endings changed. The signature
+  may fail even though nobody meant harm.
 - **Duplicate ... header**: a header that should appear once appears more than
   once. Different email apps may show different values.
 - **Address may be disguised**: an address uses letters that can look like a
@@ -174,8 +175,8 @@ It can warn you about:
 - **Recipient may be disguised**: an address uses letters that can look like a
   different address. Check it before sending.
 
-Smaller notes, such as **Some parts are not signed** or **No recipients**, are
-under the details button in the same window.
+The same window also has a details button. Click it to see smaller notes, such
+as **Some parts are not signed** or **No recipients**.
 
 You decide what to do:
 
@@ -186,10 +187,13 @@ You decide what to do:
 
 ## HTML Messages Open as Source
 
-Some messages are written in HTML, the language of web pages. GpgFrontend
-first shows the HTML code as plain text, with this notice: "This message was
-written in HTML. It is shown as its source rather than rendered: nothing here
-loads images or follows links."
+Some messages are written in HTML, the language of web pages. If such a
+message also has a plain-text version, GpgFrontend shows the plain text.
+
+If there is no plain-text version, GpgFrontend first shows the HTML code as
+plain text. This is called the source. A notice says: "This message was written
+in HTML. It is shown as its source rather than rendered: nothing here loads
+images or follows links."
 
 This is safer:
 
@@ -198,9 +202,6 @@ This is safer:
 - **No surprise links.** Nothing opens a website on its own.
 - **What you see is what is there.** HTML can hide text, or make one link look
   like another. As plain text, nothing is hidden.
-
-This only happens when a message has no plain-text version. If it has one,
-GpgFrontend shows that instead.
 
 ![An HTML message shown as its source][img-3]
 
@@ -216,8 +217,8 @@ notice. The message is then shown formatted, still safely:
   **Open** to open it in your browser. Links that are not web or mail links
   are never opened.
 
-Click **Show Source** to go back to the HTML code. Each message opens as
-source again the next time.
+Click **Show Source** to go back to the HTML code. The next time you open the
+message, it is shown as source again.
 
 **Show Preview** is only there when your system can show HTML:
 
