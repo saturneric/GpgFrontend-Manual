@@ -13,8 +13,10 @@
   "engines": {
     "node": ">=22.12.0"
   },
+  "devDependencies": {
+    "wrangler": "4.16.0"
+  },
   "dependencies": {
-    "@astrojs/netlify": "^8.2.12",
     "@astrojs/sitemap": "^3.7.4",
     "@astrojs/starlight": "^0.42.10",
     "astro": "^7.4.7",

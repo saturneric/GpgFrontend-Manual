@@ -1,19 +1,26 @@
 name: CI
 
-# For all pushes to the main branch run the tests and push the image to the
-# GitHub registry under an edge tag so we can use it for the nightly
-# integration tests
 on:
   push:
     branches: ["main"]
 
+concurrency:
+  group: deploy-manual
+  cancel-in-progress: false
+
 jobs:
-  docker:
-    runs-on: ubuntu-latest-server
-    uses: Pub/workflows/.gitea/workflows/docker-build.yaml@v0.0.4
-    with:
-      image: gpgfrontend/manual
-      registry: git.stdv.de
-    secrets:
-      REGISTRY_USER: ${{ secrets.DOCKER_USERNAME }}
-      REGISTRY_PASS: ${{ secrets.DOCKER_PASSWORD }}
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build
+      - name: Deploy to Cloudflare Workers
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

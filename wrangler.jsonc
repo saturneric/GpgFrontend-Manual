@@ -1,0 +1,14 @@
+{
+  "name": "gpgfrontend-manual",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "gpgfrontend.bktus.com", "custom_domain": true }
+  ]
+}

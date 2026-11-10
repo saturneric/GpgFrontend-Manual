@@ -1,15 +1,8 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-import netlify from "@astrojs/netlify";
 import starlightThemeNova from "starlight-theme-nova";
 import sitemap from "@astrojs/sitemap";
 import starlightLinksValidator from "starlight-links-validator";
-
-// The Netlify adapter is only needed for the build, where it writes the
-// redirects as Netlify rules. Under `astro dev` it starts Netlify's local
-// runtime emulation, including a Deno edge-functions server this static site
-// never uses, and that server often misses its 3 s start-up window on Windows.
-const isDev = process.argv.slice(2).includes("dev");
 
 // https://astro.build/config
 export default defineConfig({
@@ -127,10 +120,4 @@ export default defineConfig({
     sitemap(),
   ],
   output: "static",
-  adapter: isDev ? undefined : netlify({ imageCDN: false }),
-  redirects: {
-    "/appendix/setup-dev-env/": "/appendix/contribute/",
-    "/advanced/sync-public-keys/": "/guides/key-server-operations/",
-    "/guides/email-operations/": "/email/compose-protect/",
-  },
 });
