@@ -7,12 +7,12 @@ sidebar:
 
 import { Aside } from "@astrojs/starlight/components";
 
-This page gives you a tour of the GpgFrontend window, so you can find your way
-around and do your tasks with ease.
+This page is a tour of the GpgFrontend window. It shows you where each part
+is and what it does.
 
 When GpgFrontend starts, a small **Starting GpgFrontend** window may appear
-first. It shows a progress bar and a line that says what is being loaded, such
-as your key databases or modules. The main window opens when it is done.
+first. It shows a progress bar and a line that says what is loading, such as
+your key databases or modules. The main window opens when loading is done.
 
 ![The GpgFrontend main window][img-1]
 
@@ -34,25 +34,24 @@ The window has five main parts:
 - **Workspaces** (center): tabs where you work on files, text, or email.
 - **Key ToolBox** (right): the list of your keys.
 - **Status Panel** (below the workspace): shows the result of each task.
-- **Status Bar** (bottom): tells you which setup and which engine you are
-  using.
+- **Status Bar** (bottom): tells you which profile and which engine you are
+  using. A profile is one set of settings and keys. An engine is the program
+  that does the encryption work, such as GnuPG.
 
-The rest of this page looks at each part in turn.
+The rest of this page explains each part.
 
 ## Workspaces
 
-GpgFrontend splits your work into tabs called workspaces, so you can work on
-files, plain text, and email at the same time.
-
-There are three kinds of workspace, each shown as a tab:
+A workspace is a tab in the middle of the window. You do your work in it.
+There are three kinds:
 
 - **File Panel**: work on files and folders.
 - **Text Editor**: write, encrypt, and decrypt plain text.
 - **Mail Editor**: work with email messages.
 
-You can open many tabs of each kind and switch between them whenever you like.
+You can open many tabs of each kind and switch between them at any time.
 
-Right-click a tab's title for three more choices:
+Right-click a tab's title for three choices:
 
 - **Close**: close the tab.
 - **Copy Path**: copy the path of the tab's file or folder.
@@ -64,44 +63,48 @@ not saved to a file yet.
 
 ### File Panel
 
-The File Panel handles tasks on files and folders. You can:
+Use the File Panel to work on files and folders. You can:
 
-- Browse and select files or folders from your system.
-- Encrypt, decrypt, sign, or verify one file or many at once.
-- Choose between text (ASCII) and binary output.
+- Browse your folders and select files.
+- Encrypt, decrypt, sign, or verify a file.
 - Turn on Batch Mode to work on many files at once.
-- Automatically pack and encrypt whole folders (see the File Operations guide for
-  details).
+- Choose between text (ASCII) and binary output.
+- Encrypt a whole folder as one file.
 
-Along the top is a **path bar** showing the folder you are in, one step at a
+Along the top is a **path bar**. It shows the folder you are in, one step at a
 time. Click any step to jump straight there.
 
 Files and folders you open always appear in a File Panel tab.
 
+For the steps, see [File Operations](/guides/file-operations/).
+
 ### Text Editor
 
-The Text Editor lets you type new text or open existing files.
+In the Text Editor you type new text or open a text file. For the steps, see
+[Text Operations](/guides/text-operations/).
 
 #### Main Features
 
-- **Toolbar buttons**: at the top, with buttons to encrypt, decrypt, sign, and
-  verify text.
-- **Standard Shortcuts**: supports basic shortcuts like **Ctrl+C**, **Ctrl+V**,
-  and **Ctrl+S** for copy, paste, and save.
-- **Plain Text Only**: text is saved as UTF-8 with no formatting, for clarity and
-  compatibility. Rich text editing may come later.
+- **Toolbar buttons**: the buttons at the top of the window encrypt, decrypt,
+  sign, and verify the text in the tab.
+- **Standard shortcuts**: the usual keys work, such as **Ctrl+C** to copy,
+  **Ctrl+V** to paste, and **Ctrl+S** to save.
+- **Plain text only**: text is saved as UTF-8 with no formatting, for clarity
+  and compatibility. Rich text editing may come later.
 - **Built-in font**: by default the editor uses JetBrains Mono NL, a font that
   comes with GpgFrontend. It covers Latin, Greek and Cyrillic letters. Other
   scripts, such as Arabic or Chinese, use a font from your system. To pick
   another font, open **Settings** > **Appearance**.
-- Files larger than **4 MB** do not open in the Text Editor. To encrypt or
-  sign a bigger file, select it in the File Panel instead.
-- While a large file loads, editing is paused until it finishes.
+- **File size limit**: files larger than **4 MB** do not open in the Text
+  Editor. To encrypt or sign a bigger file, select it in the File Panel
+  instead.
+- **Large files**: while a large file loads, you cannot edit it. Editing
+  works again when loading is done.
 
 #### Text Direction
 
 Some languages, such as Arabic and Hebrew, are written from right to left. To
-change which way the text runs, click **View** > **Text Direction**, or
+change the direction of the text, click **View** > **Text Direction**. Or
 right-click in the editor and choose **Text Direction**. There are three
 choices:
 
@@ -121,19 +124,19 @@ starts with **Automatic**.
 
 ### Mail Editor
 
-The Mail Editor is made for email messages in EML format.
+The Mail Editor works on email messages saved as .eml files. EML is a
+standard file format for one email message, and most email apps can read it.
 
-- **Open and edit EML files**: load .eml files (a standard email format) to view
-  and edit them.
-- **Write and secure email**: to start a new message, click **File** >
-  **Workspace** > **Mail Editor**. Write or change the message, then encrypt,
-  sign, or verify it.
+- **Open an email file**: open an .eml file to view and edit the message.
+- **Write and protect email**: to start a new message, click **File** >
+  **Workspace** > **Mail Editor**. Write the message, then encrypt or sign it.
+  You can also verify a signed message.
 - **Two views**: at the top of an email tab, click **Message** to see the
-  message as you would read it, or **Raw Source** to see the raw text of the
-  file.
+  message as you would read it. Click **Raw Source** to see the raw text of
+  the file.
 
 In an email tab, the Status Panel starts as a thin bar, so the message has more
-room. It opens again when a new result arrives.
+room. See [Making the Panel Smaller](#making-the-panel-smaller).
 
 For everything you can do with email, see the
 [Email overview](/email/overview/).
@@ -142,18 +145,11 @@ The Mail Editor comes from the **Email** module. If that module is turned off,
 **Mail Editor** is not in the **Workspace** menu. See
 [Module Controller](/advanced/module-controller/).
 
-:::caution[Note]
-
-The Mail Editor works best with .eml files. This keeps things compatible with
-normal email apps and keeps the formatting and details intact during your tasks.
-
-:::
-
 ## Status Panel
 
-The **Status Panel** shows what happened after each task (encrypt, decrypt,
-sign) and whether it worked. It also shows useful details like the time, key IDs,
-and algorithms used.
+After each task, such as encrypting or verifying, the **Status Panel** shows
+what happened and whether the task worked. It also shows details such as the
+time, the key IDs, and the algorithms used.
 
 ### Color Coding for Status
 
@@ -164,28 +160,29 @@ and algorithms used.
 
 ### Switching Views
 
-The panel has two views. Use the switch at the top to change them:
+The panel has two views. Use the switch at the top of the panel to change
+between them:
 
 - **Status**: a short, easy-to-read summary of the task.
 - **Details**: the full, raw text straight from the engine.
 
-Your choice is remembered, so the panel keeps showing the view you like.
+GpgFrontend remembers your choice.
 
 ### Making the Panel Smaller
 
-You can shrink the panel to a thin bar when you need more room:
+When you need more room, you can shrink the panel:
 
-- Click **Collapse** to shrink it to a thin bar. The bar still shows a
+- Click **Collapse** to shrink the panel to a thin bar. The bar still shows a
   coloured dot and the result of the last task.
-- Click **Expand**, or double-click the bar, to open it again.
+- Click **Expand**, or double-click the bar, to open the panel again.
 - Click the **X** on the bar to close the panel. To bring it back, click
   **View** > **Status Panel**.
 
 When a new result arrives, the panel opens again by itself, even if you
 collapsed or closed it.
 
-Email tabs shrink the panel to a bar on their own. A panel you dragged out into
-its own window (a floating panel) is never shrunk this way.
+Email tabs shrink the panel to a bar on their own. If you dragged the panel
+out into its own window (a floating panel), it is never shrunk this way.
 
 <Aside type="note" title="New in v2.2.3">
 
@@ -195,15 +192,15 @@ The Status Panel can now collapse to a thin bar.
 
 ### Reading the Report
 
-In the **Status** view, each result is drawn as a small report page with the
-heading **SECURITY OPERATION REPORT**. It has short cards for each file or
-piece of text, with the important facts lined up.
+In the **Status** view, each result is shown as a small report page with the
+heading **SECURITY OPERATION REPORT**. The report has one short card for each
+file or piece of text. Each card lists the important facts.
 
 ![A report in the Status Panel][img-6]
 
 The report also has a round stamp with a check mark, a cross, or an
-exclamation mark. It shows the result at a glance, in the same colours as
-above.
+exclamation mark. The stamp shows the result at a glance. It uses the same
+colours as in [Color Coding for Status](#color-coding-for-status).
 
 <Aside type="caution">
 
@@ -223,11 +220,11 @@ clear card, never an empty one.
 ### Panel Actions
 
 - **Copy**: copies the status text to the clipboard.
-- **Save**: what it saves depends on the view.
-  - In the **Status** view, it saves the report as a picture (a PNG file).
-  - In the **Details** view, it saves the text as a plain text file.
-- **Magnify**: opens the summary in a bigger view. Available only when the
-  **Status** view is showing a summary.
+- **Save**: saves what the panel shows. What you get depends on the view.
+  - In the **Status** view, you get the report as a picture (a PNG file).
+  - In the **Details** view, you get the text as a plain text file.
+- **Magnify**: opens the report in a bigger view. You can only use it while
+  the **Status** view shows a report.
 - **Clear**: empties the panel, ready for the next task.
 
 ## Key ToolBox
@@ -245,9 +242,10 @@ Main features:
 - **Categories**: the thin coloured strip beside the list filters your keys.
   See [Key Categories](/guides/key-categories/).
 
-Keys that are expired, revoked, or unavailable are hidden by default. You can find
-them in the **Manage Keys** window, which is also where you look after your keys
-rather than just pick them. See [Manage Your Keys](/guides/key-management/).
+Keys that are expired, revoked, or unavailable are hidden by default. You can
+find them in the **Manage Keys** window. That window is also where you look
+after your keys. The Key ToolBox is only for picking them. See
+[Manage Your Keys](/guides/key-management/).
 
 ### The Small Buttons Above the List
 
@@ -260,13 +258,13 @@ rather than just pick them. See [Manage Your Keys](/guides/key-management/).
 - **Key database button**: switch between key databases. The button shows the
   name of the one you are in. See [Key Database](/advanced/key-database/).
 
-:::tip[Keep your ticks between sessions]
+<Aside type="tip" title="Keep your ticks between sessions">
 
 Open **Settings**, go to **General**, and tick **Remember which keys are
-checked in the key list between restarts**. GpgFrontend then brings back your
-usual recipients each time it opens.
+checked in the key list between restarts.** GpgFrontend then ticks the same
+keys again each time it starts.
 
-:::
+</Aside>
 
 ### Right-Click a Key
 
@@ -290,13 +288,14 @@ The KeyServerSync module adds **Publish Public Key to Key Server** and
 
 ### Reading the Key ToolBox Table
 
-Each key has some columns and short codes (in the Type and Usage columns) that
-aren't obvious at first. Here is what they mean.
+The **Type**, **Usage** and **Status** columns use short codes. Here is what
+they mean.
 
 - **Type**:
   - `pub`: a public key (for encryption or verification).
   - `pub/sec`: a key pair with both a public and a private key.
-  - `pub/sec#`: a key pair whose primary key is missing.
+  - `pub/sec#`: a key pair whose primary private key is not on this
+    computer.
   - `pub/sec^`: a key pair stored on a smart card.
   - `group`: a key group (several public keys used together as one recipient).
 - **Usage** (what the key can do):
@@ -313,25 +312,25 @@ Rows are tinted to match the Status column, so a problem key stands out at a
 glance.
 
 Use the **Columns** button to show or hide columns such as **Expire Date** and
-**Status**. Each key list remembers its own choice, so you can keep the Key
-ToolBox short and the Manage Keys window detailed.
+**Status**. Each key list remembers its own columns. So the Key ToolBox can
+show a few columns while the Manage Keys window shows many.
 
 ## Toolbars
 
-The toolbars at the top give you one-click access to the main features. There
-are three of them: **File**, **Operations** and **Keys**. Here are their
-buttons, from left to right:
+The toolbars at the top hold buttons for the main tasks. There are three
+toolbars: **File**, **Operations** and **Keys**. Here are their buttons, from
+left to right:
 
 1. **Open**: open a file or folder in the File Panel.
 2. **Workspace**: open a new tab (File Panel, Text Editor or Mail Editor).
 3. **Save File**: save the file in the current tab.
 4. **Encrypt**: lock the selected files or text for the chosen recipients.
-5. **Decrypt**: unlock the selected files or text. You don't need to pick a key;
-   GPG finds the right private key for you.
+5. **Decrypt**: unlock the selected files or text. You don't need to pick a
+   key. GpgFrontend finds the right private key for you.
 6. **Sign**: sign the selected files or text with your private key.
 7. **Verify**: check the signature on the selected files or text.
-8. **New Keypair**: make a new key pair. Hold it down or right-click it for
-   **Quick Generate**, which makes a key in one click.
+8. **New Keypair**: make a new key pair. Press and hold the button, or
+   right-click it, for **Quick Generate**. That makes a key in one click.
 9. **Import**: add existing public or private keys.
 10. **Manage Keys**: open the key management window.
 
@@ -347,7 +346,7 @@ them to the toolbar (see [Customization](#customization)).
 
 ### Buttons With More Than One Action
 
-When you add more actions to the toolbar, close cousins share one button:
+When you add more actions to the toolbar, related actions share one button:
 
 - The **Encrypt** button can hold **Encrypt**, **Encrypt & Sign** and
   **Sym. Encrypt**.
@@ -358,8 +357,8 @@ Here is how to use such a button:
 - **Click it** to run the action shown on the button.
 - **Right-click it, or press and hold it,** to see all its actions. Then pick
   the one you want.
-- If the action on the button can't be used right now, a click opens the list
-  instead. So you can still reach the other actions.
+- If the action shown on the button can't be used right now, a click opens
+  the list instead. So you can still reach the other actions.
 
 ![The list of actions on the Encrypt button][img-5]
 
@@ -389,8 +388,9 @@ You can hide buttons you don't use, or add ones you use often:
 row has only one action ticked.
 
 At first only **Encrypt**, **Decrypt**, **Sign** and **Verify** are ticked.
-One of the others is worth knowing about: **Sym. Encrypt**. It encrypts with a
-passphrase instead of a key. See
+
+One of the other actions is **Sym. Encrypt**. It encrypts with a password
+instead of a key. See
 [Symmetric Crypto](/guides/symmetric-encrypt-decrypt/).
 
 <Aside type="note" title="New in v2.2.3">
@@ -405,15 +405,19 @@ Instant messaging has no toolbar buttons. Its actions are in the
 ## Status Bar
 
 Along the bottom of the window, on the right, three small labels tell you what
-you are working with. Click any of them for more details.
+you are working with.
 
-- **Profile**: which setup this window is using. Click it to manage your
-  setups. See [Profiles](/advanced/profiles/). In the Mac App Store Lite
-  edition this label only shows the name; clicking it does nothing.
-- **Engine**: the OpenPGP engine and its version, such as `GnuPG 2.4.3`. Hover
-  it to see which key database you are in.
-- **Mode**: whether this is an installed copy or a portable one. See
+- **Profile**: the name of the profile this window is using. A profile is one
+  set of settings and keys. Click the label to manage your profiles. See
+  [Profiles](/advanced/profiles/). In the Mac App Store Lite edition this
+  label only shows the name. Clicking it does nothing.
+- The engine label: the OpenPGP engine and its version, such as `GnuPG 2.4.3`.
+  Point at the label to see which key database you are in.
+- The mode label: **Installed Mode** or **Portable Mode**. See
   [Portable Mode](/advanced/portable-mode/).
+
+Click the engine label or the mode label to open the **Status** tab of the
+About window. It shows these details in full.
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/29/d4b36dcb5f54f90639b01029b5244ad8a3867e1e.webp
 [img-4]: https://image.cdn.bktus.com/i/2026/10/25/001e0f26a7c53b45674daac4d2d59e0a009b03be-0.webp

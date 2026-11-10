@@ -9,18 +9,19 @@ sidebar:
 import { Steps, Aside } from "@astrojs/starlight/components";
 
 Normal encrypted text is a big block that starts with
-`-----BEGIN PGP MESSAGE-----`. It is obvious at a glance, it is long, and chat
-apps often break it by adding line breaks or turning parts of it into links.
+`-----BEGIN PGP MESSAGE-----`. Anyone can see at a glance what it is. It is
+also long, and chat apps often break it. They add line breaks, or turn parts
+of it into links.
 
-**Instant messaging** solves that. It turns your encrypted message into a single
-line of letters and numbers. The line pastes cleanly into any chat app, and it
-does not show what it is.
+**Instant messaging** solves that. It turns your encrypted message into a
+single line of letters and numbers. You can paste the line into any chat app,
+and the line does not show what it is.
 
-:::note[New in v2.2.2]
+<Aside type="note" title="New in v2.2.2">
 
 Instant messaging was added in GpgFrontend v2.2.2.
 
-:::
+</Aside>
 
 <Aside type="note" title="Changed in v2.2.3">
 
@@ -38,7 +39,7 @@ Encrypt** now also works with a password when no key is ticked.
    email tab.
 
 2. Choose who can read it:
-   - To encrypt for a person, tick their key in the Key Toolbox.
+   - To encrypt for a person, tick their key in the Key ToolBox.
    - To lock the message with a password instead, leave every key unticked.
      GpgFrontend asks you for a password.
 
@@ -47,15 +48,16 @@ Encrypt** now also works with a password when no key is ticked.
 
 </Steps>
 
-Your text is replaced by one long line. Copy it and paste it into your chat app.
+Your text is replaced by one long line. Copy the line and paste it into your
+chat app.
 
 If you also want the other person to know the message really came from you,
-choose **IM Encrypt & Sign** instead. The shortcut is **Ctrl+Shift+M**. This one
-always needs at least one ticked key, because a password cannot sign.
+choose **IM Encrypt & Sign** instead. The shortcut is **Ctrl+Shift+M**. This
+action always needs at least one ticked key, because a password cannot sign.
 
-When an item is greyed out, the current tab is not a normal text tab, or
-GpgFrontend cannot encrypt right now (for example, **IM Encrypt & Sign** with no
-key ticked).
+A menu item is greyed out in two cases: the current tab is not a normal text
+tab, or GpgFrontend cannot encrypt right now (for example, **IM Encrypt &
+Sign** with no key ticked).
 
 ### What the Status Panel Shows
 
@@ -81,21 +83,22 @@ After encrypting, the Status Panel shows the usual encryption result, plus an
 
 </Steps>
 
-GpgFrontend recognises an instant message by itself. There is no separate button
-for reading one. If the sender signed it, use **Decrypt & Verify** to check the
-signature too.
+GpgFrontend recognises an instant message by itself. There is no separate
+button for reading one. If the sender signed the message, use **Decrypt &
+Verify** to check the signature too.
 
-If GpgFrontend sees an instant message but cannot unpack it, it shows "The
-message could not be decoded." The most common cause is that you and the sender
-do not use the same secret phrase. See below.
+If GpgFrontend sees an instant message but cannot unpack it, it shows **The
+message could not be decoded.** The most common cause is that you and the
+sender do not use the same secret phrase. See
+[Share a Secret Phrase](#share-a-secret-phrase).
 
 ## Share a Secret Phrase
 
-Out of the box, your messages do not stand out to most people. But anyone who
-knows GpgFrontend can recognise them for what they are.
+Without any setup, your messages do not stand out to most people. But anyone
+who knows GpgFrontend can still tell what they are.
 
 To stop that, you and the person you write to can share a **secret phrase**.
-Once you both have the same one, your messages look like plain random text to
+Once you both have the same phrase, your messages look like random text to
 everyone else.
 
 <Steps>
@@ -126,12 +129,12 @@ The **Message Book Phrase** box has these buttons:
 - **Paste**: replace the phrase with the one you copied.
 - **Clear**: remove the phrase and go back to the built-in default.
 
-:::caution[You must both use exactly the same phrase]
+<Aside type="caution" title="You must both use exactly the same phrase">
 
 If the phrases do not match, your friend cannot read your messages at all. The
-fingerprint check exists so you catch this straight away.
+fingerprint check is there so you notice this straight away.
 
-:::
+</Aside>
 
 If you set a phrase in v2.2.2, you do not need to set it again. GpgFrontend
 moves it over by itself.
@@ -145,11 +148,11 @@ The only thing you lose is the disguise. Without a shared phrase, GpgFrontend
 uses a built-in one that every copy of the program has. So anyone who knows the
 program can tell your message is an encrypted GpgFrontend message.
 
-When you use IM Encrypt without a phrase, GpgFrontend tells you so in a window
-called **No Message Book Phrase Set**. You can choose:
+When you use **IM Encrypt** without a phrase, GpgFrontend tells you so in a
+window called **No Message Book Phrase Set**. You can choose:
 
-- **Open Settings...**: go to the settings page and set a phrase. Then run IM
-  Encrypt again.
+- **Open Settings...**: go to the settings page and set a phrase. Then run
+  **IM Encrypt** again.
 - **Continue with Default**: encrypt anyway, this time.
 - **Continue, Don't Ask Again**: encrypt anyway, and stop asking.
 
@@ -176,6 +179,6 @@ messages. To turn it back on, see
   with or without a phrase.
 - The phrase is stored in GpgFrontend's encrypted storage, never in the plain
   settings file.
-- GpgFrontend keeps one phrase at a time, and it is used for everyone you write
+- GpgFrontend keeps one phrase at a time, and uses it for everyone you write
   to. If you want a different phrase for each person, you have to change the
-  phrase in settings when you switch conversations.
+  phrase in **Settings** each time you write to someone else.

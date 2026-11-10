@@ -5,14 +5,15 @@ sidebar:
   order: 5
 ---
 
-Working on files is much like [working on text](/guides/text-operations/): you can
-**encrypt**, **decrypt**, **sign**, and **verify** them. The difference is that
-files are handled as binary input and output. You do all of this in the **File
-Panel**.
+Working on files is much like
+[working on text](/guides/text-operations/). You can **encrypt**, **decrypt**,
+**sign**, and **verify** them. The difference is where the result goes. For
+text, the result replaces the text in the tab. For a file, the result is saved
+as a new file. You do all of this in the **File Panel**.
 
 ## Open Files in the File Panel
 
-The File Panel is where you work on files. There are two ways to open it.
+There are two ways to open the File Panel.
 
 **Using the Open button:**
 
@@ -36,9 +37,9 @@ The new panel opens at the folder set in **Settings**, **General**, **File
 Panel Opens At:**. You can pick **Profile Workspace**, **Home Folder** or
 **Working Directory** there.
 
-The Flatpak and Mac App Store builds hide that setting. There, a window called
-**Select Default Path** asks you to pick a folder each time you open a new
-File Panel.
+The Flatpak and Mac App Store builds hide that setting. In those builds, a
+window called **Select Default Path** asks you to pick a folder each time you
+open a new File Panel.
 
 ![][img-2]
 
@@ -76,8 +77,8 @@ text you type.
 Along the bottom you can see how many items are in the folder, how many you
 have selected, and how much space is left on the disk.
 
-To delete something, right-click it and choose **Move to Trash**, or press
-**Del**. GpgFrontend asks first.
+To delete a file or folder, right-click it and choose **Move to Trash**, or
+press **Delete**. GpgFrontend asks you to confirm first.
 
 ## Right-Click a File or Folder
 
@@ -162,9 +163,9 @@ next to it, in the same folder. The new file's name tells you what it is:
 If you turned on ASCII output, encrypting and signing make `.asc` files
 instead. See [Choose ASCII or Binary Output](#choose-ascii-or-binary-output).
 
-If a file with the new name is already there, GpgFrontend asks first. It only
-replaces the old file after the task has worked. If the task fails, no new file
-is left behind.
+If a file with the new name is already there, GpgFrontend asks before it
+replaces that file. See
+[If an Operation Is Interrupted](#if-an-operation-is-interrupted).
 
 ### Encrypt a File
 
@@ -247,9 +248,9 @@ signature.
 2. **Select the signature file** (`report.pdf.sig` or `report.pdf.asc`) in the
    File Panel. Select the signature, not the original.
 3. **Click Verify.** You do not need to tick a key.
-4. **Read the result** in the **Status Panel**: green means the file is
-   unchanged and signed by the key shown; red means it was changed or the
-   signature does not match.
+4. **Read the result** in the **Status Panel**. Green means the file is
+   unchanged and was signed by the key shown. Red means the file was changed,
+   or the signature does not match.
 
 GpgFrontend finds the original by taking `.sig` or `.asc` off the signature's
 name. If it cannot find that file, a window called **File to be Verified**
@@ -267,8 +268,9 @@ If the sender's public key is missing, the **Missing Keys** window opens. See
 
 ## Drag and Drop Files
 
-The File Panel supports drag-and-drop, an easy way to bring files into your
-working folder or move them around without using the system file dialog.
+You can drag files with the mouse and drop them in the File Panel. This is a
+quick way to copy files into the folder you are working in, or to move them
+to another folder.
 
 ### Where Items Are Dropped
 
@@ -284,10 +286,9 @@ writable.**
 
 ### Copy Files Into the Panel
 
-Drag one or more files or folders from your system's file manager (Finder, Windows
-Explorer, or your Linux file manager) and drop them onto the File Panel. The items
-are **copied** in, leaving the originals in place. This is a quick way to gather
-the files you want to work on.
+Drag one or more files or folders from your system's file manager (Finder,
+Windows Explorer, or your Linux file manager) and drop them onto the File
+Panel. The items are **copied**. The originals stay where they were.
 
 ### Move Files Within the Panel
 
@@ -296,9 +297,9 @@ different folder in the same panel. The items are **moved** to that folder.
 
 ### Confirmation and Safeguards
 
-Before it moves or copies anything, GpgFrontend asks you to confirm, showing the
-item name (or count) and the destination folder. A few safeguards prevent common
-mistakes:
+Before it moves or copies anything, GpgFrontend asks you to confirm. The
+question shows the name of the item (or how many items there are) and the
+target folder. A few checks stop common mistakes:
 
 - Dropping items back into their own folder does nothing. The status bar says
   **The source and target folder are the same.**
@@ -307,23 +308,21 @@ mistakes:
 - If an item with the same name already exists in the target folder, a **Copy
   Failed** or **Move Failed** message tells you, and nothing is replaced.
 
-After a successful drop, the panel refreshes, selects the new or moved items, and
-shows how many items were handled.
+After the drop, the panel reads the folder again and selects the new or moved
+items. The status bar says how many items were copied or moved.
 
 ## Work on Many Files at Once (Batch Mode)
 
-By default the File Panel works on one file at a time. Turn on **Batch Mode** to
-handle several at once.
+By default the File Panel works on one file at a time. Turn on **Batch Mode**
+to work on several files at once.
 
 1. Click the batch mode button, the segmented icon at the top-right of the
    File Panel toolbar. Its tooltip says **Enable batch mode to select multiple
    files.** Once it is on, the tooltip says **Batch mode is enabled. Multiple
    files can be selected.**
 2. Select several files with **Ctrl+Click** or **Shift+Click**.
-3. Click **Encrypt**, **Decrypt**, **Sign**, or **Verify**. The action applies to
-   every selected file.
-
-Batch Mode is handy when you have many files to process at once.
+3. Click **Encrypt**, **Decrypt**, **Sign**, or **Verify**. GpgFrontend does
+   the task on every selected file.
 
 ![][img-5]
 
@@ -331,28 +330,32 @@ Batch Mode is handy when you have many files to process at once.
 
 ## Encrypt or Decrypt a Whole Folder
 
-GpgFrontend can encrypt and decrypt an entire folder, keeping its structure
-intact.
+GpgFrontend can encrypt a whole folder into one file, and turn that file back
+into the folder later. The files and subfolders inside keep their names and
+places.
 
 ### Encrypt a Folder
 
-When you encrypt a folder, GpgFrontend:
+Select the folder in the File Panel instead of a file, then encrypt it the
+same way as a file. GpgFrontend does two things:
 
-1. Packs it into a single `.tar` archive, combining all files and subfolders.
-   GpgFrontend does this itself; you don't need a separate tar program.
-2. Encrypts that archive, giving you a `.tar.gpg` (binary) or `.tar.asc` (ASCII)
-   file, depending on your output mode.
+1. It packs the folder into one archive (a `.tar` file) that holds all its
+   files and subfolders. GpgFrontend does this itself. You don't need a
+   separate tar program.
+2. It encrypts that archive. You get a `.tar.gpg` file (binary) or a
+   `.tar.asc` file (ASCII), depending on your output format.
 
-This works like the `gpg-zip` tool: packing and encrypting in one step. The result
-is one file that holds the whole folder, ready to store or send.
+The result is one file that holds the whole folder, ready to store or send.
+If you know the `gpg-zip` tool, this works the same way.
 
 ### Decrypt a Folder Archive
 
-When you decrypt a `.tar.gpg` or `.tar.asc` file, GpgFrontend:
+Select the `.tar.gpg` or `.tar.asc` file and decrypt it the same way as any
+other file. GpgFrontend does two things:
 
-1. Decrypts it back into the `.tar` archive.
-2. Unpacks that archive into a folder in the current directory, restoring the
-   original structure.
+1. It decrypts the file back into the `.tar` archive.
+2. It unpacks that archive into a folder next to the encrypted file, with the
+   same files and subfolders as the original.
 
 You don't need to unpack anything by hand.
 
@@ -360,19 +363,19 @@ You don't need to unpack anything by hand.
 
 ### File Extensions
 
-Knowing the file extensions helps you keep track of encrypted and signed files:
+The ending of a file name tells you what kind of file it is:
 
-- **.asc**: ASCII-armored. A text-friendly format that can hold encrypted data or
-  signatures.
-- **.gpg**: Binary. Encrypted files, or combined encrypted and signed files.
-  Smaller than ASCII.
-- **.sig**: Binary signature file, used for signatures only.
+- **.asc**: ASCII output, also called ASCII-armored. The file holds only
+  normal text characters. It can be encrypted data or a signature.
+- **.gpg**: binary output. The file is encrypted, or encrypted and signed.
+  It is smaller than an ASCII file.
+- **.sig**: a binary signature file. It holds a signature only.
 
 ### Choose ASCII or Binary Output
 
 GpgFrontend saves files in **binary** by default (since version 2.0.4; older
 versions used ASCII). Binary files are smaller. Choose **ASCII** when you need
-text-friendly output, for example to paste into an email.
+a file that holds only normal text, for example to paste into an email.
 
 **Change it in Settings:**
 
@@ -382,35 +385,35 @@ text-friendly output, for example to paste into an email.
 
 ![][img-7]
 
-**Or toggle it from the File Panel:**
+**Or change it for one File Panel:**
 
 1. In the File Panel toolbar, click the options button. Its tooltip says
    **Create items and choose what the list shows**.
 2. Tick **Use ASCII Armor**. You then get `.asc` files instead of `.gpg` or
    `.sig`.
 
-This is a faster way to switch output modes without opening the main settings.
+This is faster than opening **Settings**. It changes only the File Panel tab
+you are in, and it is not saved. A new File Panel tab starts with the choice
+from **Settings**.
 
 ![][img-8]
 
 ## Large Files
 
 You can encrypt and decrypt large files with either engine. The rPGP engine
-works through a file piece by piece, so the whole file never has to fit in
-memory at once.
+reads a file piece by piece. So the whole file never has to fit in memory at
+once.
 
 ## If an Operation Is Interrupted
 
-Since v2.2.2, GpgFrontend writes its result to a temporary file first and
-only puts it in place once it is complete.
+Since v2.2.2, GpgFrontend writes its result to a temporary file first. It
+only moves the result to its final place once the whole task has worked.
 
-If an operation fails or is interrupted, you get no output file at all, rather
-than a half-written one sitting next to your original. Your input file is never
-touched either way.
-
-If a file with the output name already exists, GpgFrontend asks before it
-continues. The old file is only replaced after the operation succeeds. See
-[Encryption Safety](/guides/encryption-safety/).
+- If a task fails or is interrupted, you get **no** new file. You never get a
+  half-written one next to your original.
+- If a file with the new name already exists, GpgFrontend asks before it
+  continues. The old file is only replaced after the task has worked.
+- Your original file is never changed.
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/29/ccec4b1351ea81bf66c53658a0c6a22b921ad271.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/29/49aedaa898733c25e3c65ed5920093cf0ca55ea9.webp

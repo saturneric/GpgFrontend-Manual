@@ -15,19 +15,20 @@ signature (check it really did). This page walks through each one.
 
 These tasks use a pair of keys:
 
-- **Public key**: used to **encrypt** a message for someone, or to **verify** their
-  signature.
-- **Private key**: used to **decrypt** a message sent to you, or to **sign** your
-  own.
+- **Public key**: used to **encrypt** a message for someone, or to **verify**
+  their signature.
+- **Private key**: used to **decrypt** a message sent to you, or to **sign**
+  your own.
 
-So before you begin, [make your own key pair](/guides/generate-key/) and swap
-public keys with the people you write to. You encrypt with their public key; they
-decrypt with their private key.
+So before you begin, [make your own key pair](/guides/generate-key/). Then
+swap public keys with the people you write to. You encrypt with their public
+key. They decrypt with their private key.
 
 ## Find the Buttons
 
 Every task on this page works on the text in the current **Text Editor** tab.
-You can start each task in three ways. They all do the same thing:
+You can start each task in three ways: a toolbar button, the **Operations**
+menu, or a keyboard shortcut. They all do the same thing:
 
 | Task                         | Toolbar button | **Operations** menu  | Shortcut     |
 | ---------------------------- | -------------- | -------------------- | ------------ |
@@ -46,8 +47,8 @@ button at first. You can add them in **Settings** > **Appearance**. They then
 share a button with **Encrypt** or **Decrypt**. See
 [Buttons With More Than One Action](/guides/understand-interface/#buttons-with-more-than-one-action).
 
-To pick a key, tick the box in front of it in the **Key ToolBox**, the key list
-on the right side of the main window.
+To pick a key, tick the box in front of it in the **Key ToolBox**. That is the
+key list on the right side of the main window.
 
 ## Encrypt Text
 
@@ -60,8 +61,9 @@ You need **their public key** in your key list.
 3. **Pick the recipient.** In the **Key ToolBox**, tick the box in front of the
    person's public key. To send to several people, tick each of their keys.
 4. **Click Encrypt.** Or press Ctrl+E.
-5. **Answer any questions.** GpgFrontend may stop to check your recipients, for
-   example when a key has expired. See [Checks Before Encrypting](#checks-before-encrypting).
+5. **Answer any questions.** GpgFrontend may stop to check your recipients,
+   for example when a key has expired. See
+   [Checks Before Encrypting](#checks-before-encrypting).
 6. **See the result.** The text in the tab is replaced by a block that starts
    with `-----BEGIN PGP MESSAGE-----`. The **Status Panel** at the bottom shows
    whether it worked.
@@ -75,8 +77,8 @@ You need **their public key** in your key list.
 
 If you tick **no key at all**, **Encrypt** is greyed out. To encrypt with a
 password instead of a key, use **Operations** > **Sym. Encrypt**. This is
-called [symmetric encryption](/guides/symmetric-encrypt-decrypt/). It is only
-offered while no key is ticked.
+called [symmetric encryption](/guides/symmetric-encrypt-decrypt/). You can
+only use **Sym. Encrypt** while no key is ticked.
 
 :::
 
@@ -92,21 +94,30 @@ it came from you, use [Encrypt and Sign](#encrypt-and-sign-at-once).
 
 ### If You Are Asked to Pick a Subkey
 
-This only happens when your key database uses the rPGP engine. With GnuPG,
-GnuPG picks the subkey by itself.
+A key can hold several subkeys. A subkey is a smaller key inside a key that
+does one job, such as encrypting. See
+[Generate and Use Subkey(s)](/guides/generate-use-subkey/).
 
 Some people have more than one encryption subkey on their key. When that
-happens, GpgFrontend opens **Select Encryption Key(s)** and asks which one to
-use. Expand a key to see its subkeys.
+happens, GpgFrontend opens a window called **Select Encryption Key(s)** and
+asks which one to use.
 
-If you have no reason to prefer one, just confirm the selection GpgFrontend
-offers. This dialog does not appear when there is only one sensible choice.
+1. Expand a key to see its subkeys.
+2. Tick the key or the subkey to use. **Confirm** stays greyed out until you
+   tick something.
+3. Click **Confirm**.
+
+This window does not appear when each key has only one usable encryption
+subkey.
+
+It also only appears when your key database uses the rPGP engine. The GnuPG
+engine picks the subkey by itself.
 
 ### Sending to a Chat App
 
 A normal encrypted message is a large block of text, and chat apps often break
-it. GpgFrontend has a second kind of encryption made for exactly that case. You
-find it in the **Operations** menu. See
+it. For chat apps, GpgFrontend can make the encrypted message one short line
+instead. You find this in the **Operations** menu. See
 [Instant Messaging](/guides/instant-messaging/).
 
 ### Checks Before Encrypting
@@ -216,8 +227,11 @@ The text in the tab is not changed when you verify.
 
 If you don't have the sender's public key, a window called **Missing Keys**
 opens. It lists the fingerprints of the missing keys and asks whether to fetch
-them from the key server. This window comes from the KeyServerSync module. If
-that module is turned off, the window does not appear.
+them from the key server. A fingerprint is a long code that identifies one
+key.
+
+This window needs the KeyServerSync module. If that module is turned off, the
+window does not appear.
 
 - Click **Yes** to search the key server for the key.
 - Click **No** to stop. You can
@@ -233,8 +247,8 @@ does not prove the key belongs to the person you think.
 
 ## Encrypt and Sign at Once
 
-This makes a message that is both **secret** and **proven to be from you**. It is
-the best choice for private messages.
+This makes a message that is both **secret** and **proven to be from you**. It
+is the best choice for private messages.
 
 1. **Open a text tab** and write your message.
 2. **Pick the recipient.** Tick the box in front of the recipient's public key
@@ -270,24 +284,24 @@ when you [verify](#if-the-senders-key-is-missing).
 
 GpgFrontend works on the exact text in the editor tab. It does not change line
 endings, and it does not swap special spaces for normal ones. This matters for
-signatures: a signature only checks out if the text is exactly the same,
+signatures. A signature is only good if the text is exactly the same,
 character for character.
 
-Pressing **Shift+Enter** now starts a normal new line, the same as **Enter**.
+Pressing **Shift+Enter** starts a normal new line, the same as **Enter**.
 
 :::note[Changed in v2.2.3]
 
 Earlier versions sometimes changed line endings and special spaces before an
-operation. Because v2.2.3 keeps the text exactly, a signature may now check
-differently than it did in v2.2.2. If a signature made with an older version
-fails to verify, ask the sender to sign the text again.
+operation. v2.2.3 keeps the text exactly. So a signature may now give a
+different result than it did in v2.2.2. If a signature made with an older
+version fails to verify, ask the sender to sign the text again.
 
 :::
 
 ## Undo After an Operation
 
-By default, you cannot undo an encrypt or decrypt with Ctrl+Z. This keeps your
-plain text from staying in memory. You can turn undo on in **Settings**. See
+By default, you cannot undo an encrypt or decrypt with Ctrl+Z. This stops your
+readable text from staying in memory. You can turn undo on in **Settings**. See
 [Memory Security](/advanced/memory-security/#undo-after-an-operation).
 
 ## Safety Tips

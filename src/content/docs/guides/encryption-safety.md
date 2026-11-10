@@ -7,11 +7,11 @@ sidebar:
 ---
 
 GpgFrontend has several checks that stop common mistakes. Some are always on.
-Some you can turn on in **Settings**. This page explains each one: when it
-appears, what it means, and what to do.
+Some you can turn on in **Settings**. This page explains each check: when you
+see it, what it means, and what to do.
 
 You do not need to set anything up. The defaults are safe. Read on if a
-message surprised you, or if you want extra checks.
+warning surprised you, or if you want extra checks.
 
 :::note[New in v2.2.3]
 
@@ -31,26 +31,29 @@ different people and want to be sure each message goes to the right one.
 
 ### Allow only one checked key in the key list
 
-With **Allow only one checked key in the key list.** ticked, checking a key in
-the key list unchecks all the others. So a recipient from your last message
-is not added to the next one by mistake.
+With **Allow only one checked key in the key list.** ticked, only one key can
+be ticked at a time. When you tick a key in the key list, all the others are
+unticked. So a recipient from your last message is not added to the next one
+by mistake.
 
 While this is on, the **Check All** button is hidden.
 
 ### Ask before encrypting to more than one recipient
 
 With **Ask before encrypting to more than one recipient.** ticked, GpgFrontend
-stops when two or more keys are checked and shows **Confirm Recipients**.
+stops when two or more keys are ticked. It shows a window called **Confirm
+Recipients**.
 
-- It asks **Encrypt to 2 recipients?** (or however many there are), and lists
-  each name, email and key ID. A key group shows how many keys it holds.
-- It reminds you that each recipient will be able to see the key IDs of all
-  the others.
+- The window asks **Encrypt to 2 recipients?** (or however many there are).
+  It lists each name, email and key ID. A key group shows how many keys it
+  holds.
+- The window reminds you that each recipient will be able to see the key IDs
+  of all the others.
 - Click **Encrypt** to go ahead, or **Cancel** to stop and change your choice.
 
 ## When Encryption Is Not Possible
 
-Some keys cannot be used to encrypt. When one of the checked keys is like
+Some keys cannot be used to encrypt. When one of the ticked keys is like
 that, the **Encrypt** and **Encrypt & Sign** buttons are greyed out.
 
 To find out why, point at the greyed-out button. Its tooltip names the key
@@ -80,9 +83,9 @@ Some new keys use **post-quantum** encryption. This is built to stay safe even
 against future quantum computers. Older keys use **classical** encryption. See
 [Post-Quantum Cryptography](/guides/post-quantum/).
 
-If you encrypt one message to both kinds of key at once, GpgFrontend shows
-**Mixed Recipient Types**. It warns that some recipients use post-quantum
-encryption and others do not.
+If you encrypt one message to both kinds of key at once, GpgFrontend shows a
+window called **Mixed Recipient Types**. It warns that some recipients use
+post-quantum encryption and others do not.
 
 Why it matters: one message is locked so that every recipient can open it.
 Anyone who can break the classical recipients' encryption can read the whole
@@ -100,16 +103,16 @@ keys that those rules call too weak:
 - **DSA** keys.
 - **RSA** keys shorter than **2048 bits**.
 
-If only some of the checked keys are like that, GpgFrontend skips them and
-encrypts to the rest. The result says **Encrypted with warnings. Some
-recipients could not be added. Please review the invalid recipient list.**
-The details list each skipped key under **Invalid Recipients**, with its
-fingerprint and the reason.
+If only some of the ticked keys are like that, GpgFrontend skips them and
+encrypts to the rest. The result in the Status Panel says **Encrypted with
+warnings. Some recipients could not be added. Please review the invalid
+recipient list.** The details list each skipped key under **Invalid
+Recipients**, with its fingerprint and the reason.
 
 The people whose keys were skipped **cannot** read the message. Ask them for a
 newer, stronger key.
 
-If none of the checked keys can be used, nothing is encrypted.
+If none of the ticked keys can be used, nothing is encrypted.
 
 ## Messages With No Tamper Check
 
@@ -132,8 +135,8 @@ because there is no way to know if someone changed it.
 ## Signed by a Key You Do Not Have
 
 When you decrypt or verify a signed message, you need the signer's public key
-to check the signature. If you do not have it, GpgFrontend now treats this as
-a **warning**, not a failure:
+to check the signature. If you do not have that key, GpgFrontend treats this
+as a **warning**, not a failure:
 
 - You still get the decrypted text or file.
 - The result says **Verification incomplete. The signing key is not in your
@@ -150,18 +153,10 @@ A missing signer key used to count as a failure, and the output was not kept.
 
 ## Files Are Only Written When the Operation Works
 
-When you encrypt, decrypt or sign a file, GpgFrontend writes the result to a
-temporary file first. It only puts the result in place once the whole
-operation has worked.
-
-- If the operation fails, you get **no** output file. You never get a
-  half-written or damaged one.
-- If a file with the same name already exists, GpgFrontend asks first. It
-  explains that the old file will only be replaced after the operation
-  succeeds.
-- Your input file is never changed.
-
-See [File Operations](/guides/file-operations/).
+When you encrypt, decrypt or sign a file, you only get a new file if the
+whole operation worked. You never get a half-written or damaged file, and
+your original file is never changed. See
+[If an Operation Is Interrupted](/guides/file-operations/#if-an-operation-is-interrupted).
 
 ## Results Go Back to Their Own Tab
 
@@ -175,8 +170,8 @@ written into a different tab.
 ## Undo After an Operation
 
 By default, you cannot undo an encrypt, decrypt or other operation in the text
-editor. This is on purpose: to allow undo, the program has to keep the old
-text in memory, and after encrypting, that old text is your plain text.
+editor. This is on purpose. To allow undo, the program has to keep the old
+text in memory. After you encrypt, that old text is your readable message.
 
 To turn undo on, tick **Allow undoing encrypt, decrypt and other operations in
 the text editor.** in **Settings**, **General**, **Operation**. See

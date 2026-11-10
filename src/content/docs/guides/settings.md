@@ -6,34 +6,39 @@ sidebar:
   order: 19
 ---
 
-The settings window has a search box at the top and a list of pages down the
-left side.
+To open the settings window, click **Edit** > **Settings**. On macOS the
+window is called **Preferences**, and you find it under the GpgFrontend menu.
 
-To open it, click **Edit** > **Settings**. On macOS the window is called
-**Preferences**, and you find it under the GpgFrontend menu.
+The window has a search box at the top and a list of pages down the left
+side.
 
 :::note[Changed in v2.2.3]
 
-On macOS the window is now called **Preferences**, as macOS apps usually do.
+On macOS the window is now called **Preferences**, as is usual for macOS
+apps.
 
 :::
 
 ## Just Search
 
-The fastest way to find anything is the search box at the top. It looks at
-page names and at the things on each page, so you do not have to guess which
-page a setting is on.
+The fastest way to find a setting is the search box at the top. It searches
+the page names and the settings on each page. So you do not have to guess
+which page a setting is on.
 
-Type `pin` and it takes you to the page with the PIN setting. Type `proxy`,
-`theme`, or `update` and the same thing happens.
+For example, type `pin`. The list then shows only the page with the PIN
+setting, and that page opens. `proxy`, `theme`, and `update` work the same
+way.
 
 ## The Four Groups
 
 If you would rather browse, the pages are sorted into four groups:
 
 - **Application**: how the program looks and behaves.
-- **Keys & Engines**: where your keys live and which engine handles them.
-- **Features**: extras that come from modules.
+- **Keys & Engines**: where your keys are kept, and which engine works with
+  them. An engine is the program that does the encryption work, such as
+  GnuPG.
+- **Features**: extras that come from modules. A module is an add-on that
+  gives GpgFrontend one more feature.
 - **System**: the technical settings, plus logging.
 
 ## What Is on Each Page
@@ -46,7 +51,7 @@ If you would rather browse, the pages are sorted into four groups:
 | **Updates**           | Application    | Whether GpgFrontend checks for a new version when it starts                            |
 | **Key Databases**     | Keys & Engines | Your key databases, which one is the default, and the built-in database's engine       |
 | **Key Generation**    | Keys & Engines | The default key type, the made-up identity for Quick Generate, and your key profiles   |
-| **GnuPG**             | Keys & Engines | Point at your own GnuPG, and fix GnuPG when it stops responding                        |
+| **GnuPG**             | Keys & Engines | Use your own copy of GnuPG, and fix GnuPG when it stops responding                      |
 | **rPGP**              | Keys & Engines | How long the rPGP engine remembers a passphrase, and passphrase encryption strength    |
 | **Key Servers**       | Keys & Engines | The list of key servers, and which one is the default                                  |
 | **Instant Messaging** | Features       | Your phrase for [instant messaging](/guides/instant-messaging/)                        |
@@ -55,7 +60,8 @@ If you would rather browse, the pages are sorted into four groups:
 
 Some pages only show up when they apply to you:
 
-- **GnuPG** and **rPGP** appear only if your copy has that engine.
+- **GnuPG** and **rPGP** appear only if your copy of GpgFrontend has that
+  engine.
 - **Network** does not appear in sandboxed builds, such as Flatpak or the Mac
   App Store edition.
 - **Updates** is not in the Flatpak or Mac App Store builds, which get their
@@ -80,7 +86,8 @@ The **General** page has these parts.
 
 **Module Discovery:** decides which modules GpgFrontend looks for when it
 starts. The choices are **Only Integrated Modules**, **Also Look For Modules
-I've Added** and **Disable**. Looking for a module never runs it. See
+I've Added** and **Disable**. The default is **Only Integrated Modules**.
+Looking for a module never runs it. See
 [Module Controller](/advanced/module-controller/) for the rest. A change here
 takes effect the next time you start GpgFrontend.
 
@@ -90,27 +97,35 @@ Sandboxed builds hide the whole **Base** box.
 
 - **Default Workspace As:** choose whether GpgFrontend starts with the
   **File Panel** or the **Text Editor**. The default is **File Panel**.
-- **File Panel Opens At:** the folder the File Panel shows first. Sandboxed
-  builds hide this and **Default Workspace As:**. They always start with the
-  **Text Editor**, and ask for a folder each time you open a File Panel.
+- **File Panel Opens At:** the folder a new File Panel shows first. The
+  choices are **Profile Workspace**, **Home Folder** and **Working
+  Directory**. **Profile Workspace** is only listed when your profile has a
+  workspace folder.
 - **Cache text editor contents.** keeps your open text tabs, including ones you
   have not saved, so they come back the next time you start GpgFrontend. They
   are stored encrypted. This is **on** by default.
-- **Allow only one checked key in the key list.** When you check a key, the
-  others are unchecked. This stops a key from an earlier message from being
-  added to the next one by mistake.
+- **Import files dropped on the Key List without confirmation.**
+- **Remember which keys are checked in the key list between restarts.** This
+  is **off** by default.
+- **Allow only one checked key in the key list.** When you tick a key, the
+  others are unticked. This stops a key from an earlier message from being
+  added to the next one by mistake. This is **off** by default.
 - **Ask before encrypting to more than one recipient.** GpgFrontend shows you
-  the list of recipients and asks you to confirm.
+  the list of recipients and asks you to confirm. This is **off** by default.
 - **Allow undoing encrypt, decrypt and other operations in the text editor.**
   This is **off** by default. When it is on, the old text stays in memory so
-  you can undo. After you encrypt, that old text is your plaintext.
+  you can undo. After you encrypt, that old text is your readable message.
+- **Use Binary Mode for File Operations**: this is **on** by default. See
+  [Choose ASCII or Binary Output](/guides/file-operations/#choose-ascii-or-binary-output).
+- **Warn about keys expiring within:** how many days before its end date a
+  key is marked **Expiring Soon**. The default is 30 days.
 
-For more about these choices, see
-[Encrypting Safely](/guides/encryption-safety/).
+Sandboxed builds hide **Default Workspace As:** and **File Panel Opens At:**.
+They always start with the **Text Editor**, and ask for a folder each time you
+open a File Panel.
 
-The same box also has options to import dropped files without asking, to
-remember checked keys, to use binary mode for files, and to warn about keys
-that expire soon.
+For more about the two recipient checks and about undo, see
+[Encryption Safety](/guides/encryption-safety/).
 
 :::note[Changed in v2.2.3]
 
@@ -146,8 +161,7 @@ Default**.
 The **Built-in Key Database** box has a **Key engine:** choice. It applies only
 to the built-in database. Other databases always open with their own engine.
 
-This page is still changing. For the details, see
-[Key Database](/advanced/key-database/).
+For the details, see [Key Database](/advanced/key-database/).
 
 ## The Key Generation Page
 
@@ -172,10 +186,10 @@ This page is new.
   **Preview:** shows an example. Click the refresh button next to it for
   another one.
 
-A pattern is normal text with placeholders in curly braces. For example, the
-default name pattern `anon-{token}` gives `anon-` followed by 8 random letters
-and digits.
-Click **Placeholders** to see them all. Some useful ones:
+A pattern is normal text with placeholders in curly braces. GpgFrontend
+replaces each placeholder with a value. For example, the default name pattern
+`anon-{token}` gives `anon-` followed by 8 random letters and digits. Click
+**Placeholders** to see them all. Some useful ones:
 
 - `{token}`: 8 random letters and digits, the same in every field.
 - `{domain}` and `{tld}`: a made-up domain. `{tld}` gives `test`, `example` or
@@ -204,20 +218,16 @@ if you deleted any. Your own profiles and your changes are kept.
 
 ## The rPGP Page
 
-The **rPGP** page sets how long the rPGP engine remembers a passphrase and how
-long its passphrase prompt waits.
+The **rPGP** page has three boxes:
 
-Under **Passphrase Encryption** there is **Argon2 Parameters:**. It decides how
-much memory it takes to turn a passphrase into a key when you encrypt with a
-passphrase only:
-
-- **High memory, 2 GiB**: the default. It makes a stolen message much harder
-  to crack.
-- **Low memory, 64 MiB**: choose this if your computer, or the computer of the
-  person who opens the message, cannot spare 2 GiB.
-
-The choice applies only to messages you encrypt from now on. See
-[Symmetric Encryption](/guides/symmetric-encrypt-decrypt/).
+- **Password Cache**: how long the rPGP engine remembers a passphrase you
+  typed.
+- **Passphrase Prompt**: how long the passphrase window waits for you before
+  it closes.
+- **Passphrase Encryption**: the **Argon2 Parameters:** choice, **High memory,
+  2 GiB** (the default) or **Low memory, 64 MiB**. It is used when you
+  encrypt with a password only. See
+  [Choose How Much Memory Argon2 Uses](/guides/symmetric-encrypt-decrypt/#choose-how-much-memory-argon2-uses).
 
 ## The Updates Page
 
@@ -261,7 +271,8 @@ The **Advanced** page has two parts:
   [App Secure Key](/advanced/app-secure-key/).
 - **Diagnostics**: **Log Level:** and **Log Ring Buffer:**.
 
-**Log Level:** decides how much GpgFrontend writes to its log. The choices are
+**Log Level:** decides how much GpgFrontend writes to its log. The log is a
+record of what the program did, and it helps to find problems. The choices are
 **Trace**, **Debug**, **Info**, **Warning**, **Error** and **Fatal**. **Trace**
 writes the most. It adds detail from modules that **Debug** leaves out.
 
@@ -333,28 +344,29 @@ away every change you made, and the window closes.
 
 :::
 
-One exception: the buttons in the **Maintenance** part of the GnuPG page act
-straight away. Cancel does not undo those.
+One exception: the buttons in the **Maintenance** part of the **GnuPG** page.
+See [If GnuPG Stops Responding](#if-gnupg-stops-responding).
 
 ## If GnuPG Stops Responding
 
-The **GnuPG** page has a **Maintenance** section with three buttons. They are
-the first thing to try when GnuPG hangs, forgets your passphrase at the wrong
-moment, or stops seeing your smart card. Sandboxed builds, such as Flatpak,
-hide this section and the **Clear password cache on exit** option.
+The **GnuPG** page has a **Maintenance** section with three buttons. Try them
+first when GnuPG hangs, forgets your passphrase at the wrong moment, or stops
+seeing your smart card. Sandboxed builds, such as Flatpak, hide this section
+and the **Clear password cache on exit** option.
 
-- **Clear Password Cache**: make GnuPG forget every passphrase it is holding.
-- **Reload Components**: have GnuPG re-read its settings.
+- **Clear Password Cache**: make GnuPG forget every passphrase it remembers.
+- **Reload Components**: make GnuPG read its settings again.
 - **Restart Components**: stop and restart GnuPG's background programs.
+  GpgFrontend asks you to confirm first.
 
-These act the moment you click them, and are not undone by Cancel. Restarting
-interrupts anything GnuPG is in the middle of, so do not use it during a large
-file operation.
+These buttons act the moment you click them. Cancel does not undo them.
+Restarting interrupts anything GnuPG is doing, so do not use it during a
+large file operation.
 
 ## Checking What Is Actually in Use
 
-When something looks wrong, it helps to see what GpgFrontend thinks it is
-running. Click **Help** > **About**, then open the **Status** tab.
+When something looks wrong, it helps to see what GpgFrontend is using right
+now. Click **Help** > **About**, then open the **Status** tab.
 
 The tab shows:
 

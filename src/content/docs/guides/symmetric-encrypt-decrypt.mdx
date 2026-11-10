@@ -10,99 +10,107 @@ import { Aside } from "@astrojs/starlight/components";
 
 ## What Is Symmetric Encryption?
 
-**Symmetric encryption** is a method of securing data where the **same
-password** is used to both encrypt and decrypt information.
+**Symmetric encryption** locks data with a **password**. The same password
+unlocks it again. You do not need a key pair.
 
-Unlike **asymmetric encryption**, which uses a public/private key pair,
-symmetric encryption relies on a single shared secret (the password). This
-approach is:
+Normal OpenPGP encryption is different. It uses a public key to encrypt and a
+private key to decrypt. That is called asymmetric encryption. See
+[Text Operations](/guides/text-operations/).
 
-- Fast and efficient
-- Ideal for large files or quick one-time sharing
-- Best used when both parties can safely share the password
+Symmetric encryption is:
 
-> If someone intercepts the password, the encrypted data is no longer secure.
-> Therefore, please always use strong, unique passwords and share them securely. 
+- Fast.
+- Good for large files, or for sharing something once.
+- Only safe when both people can share the password safely.
+
+> Anyone who learns the password can read the data. So always use a strong
+> password that you use nowhere else, and share it in a safe way.
 
 ## How It Works
 
 1. You choose a **strong password**.
-2. That password is used to **encrypt** the data.
+2. GpgFrontend uses that password to **encrypt** the data.
 3. Anyone with the **same password** can **decrypt** it.
-4. No key pair is required, but only the shared password.
 
-> Encryption security depends entirely on the strength and secrecy of the
-> password used.
+> The safety of the data depends fully on the password: how strong it is, and
+> how well you keep it secret.
 
 ## Encrypting Data Symmetrically
 
-To encrypt text using symmetric encryption in GpgFrontend (v2.1.9 and later):
+GpgFrontend can do this since v2.1.9. The action is called **Sym. Encrypt**.
 
 ### Find Sym. Encrypt
 
 The easiest way: open the **Operations** menu and choose **Sym. Encrypt**, or
-press Ctrl+Alt+E (Cmd+Option+E on macOS). It is only offered while no key is
-ticked.
+press Ctrl+Alt+E (Cmd+Option+E on macOS). You can only use it while no key is
+ticked in the Key ToolBox.
 
 You can also put it on the toolbar:
 
 1. Open **Settings** and choose **Appearance**.
-2. Under **Toolbar**, in the **Actions** list, tick `Sym. Encrypt`.
+2. Under **Toolbar**, in the **Actions** list, tick **Sym. Encrypt**.
 
 ![][img-1]
 
-`Sym. Encrypt` does not get a button of its own. It joins the **Encrypt**
+**Sym. Encrypt** does not get a button of its own. It joins the **Encrypt**
 button. To use it, right-click the **Encrypt** button (or press and hold it),
-then choose `Sym. Encrypt` from the list. If no key is checked, a plain click
-on **Encrypt** also opens this list.
+then choose **Sym. Encrypt** from the list. If no key is ticked, a plain click
+on **Encrypt** also opens this list. For more about such buttons, see
+[Buttons With More Than One Action](/guides/understand-interface/#buttons-with-more-than-one-action).
 
 ![][img-2]
 
 <Aside type="note" title="Changed in v2.2.3">
 
-Before v2.2.3, `Sym. Encrypt` had its own toolbar button. Now it is in the
+Before v2.2.3, **Sym. Encrypt** had its own toolbar button. Now it is in the
 **Encrypt** button's list.
 
 </Aside>
 
 ### Enter the Text or Select a File
 
-- Input the plaintext you wish to protect in the text editor.
-- Select a file to encrypt using the file panel.
+- For text: type or paste the text into a Text Editor tab.
+- For a file: select the file in the File Panel.
 
 ### Symmetric Encryption
 
-1. Without checking any public key, choose `Sym. Encrypt` from the
-   **Operations** menu, or from the **Encrypt** button's list.
-2. When prompted, enter a strong, unique password.
-3. This password becomes your encryption key.
-4. The text or file will be encrypted into ciphertext.
-5. You can save or share the encrypted result.
+1. Make sure no key is ticked in the Key ToolBox.
+2. Choose **Sym. Encrypt** from the **Operations** menu, or from the
+   **Encrypt** button's list.
+3. When asked, type a strong password that you use nowhere else.
+4. GpgFrontend encrypts the text or file with that password.
+5. Save the result, or send it to the other person.
 
 ![][img-3]
 
-> The recipient will need the **exact same password** to decrypt the message.
+> The other person needs **exactly the same password** to decrypt the message.
 
 ## Decrypting Symmetric Encrypted Data
 
-To decrypt content that was encrypted symmetrically:
+To decrypt text that was encrypted with a password:
 
-1. Paste the Ciphertext: The message should begin with `-----BEGIN PGP
-   MESSAGE-----` and end with `-----END PGP MESSAGE-----`.
-2. Initiate Decryption: Choose to decrypt the message.
-3. Enter the Password: Input the **same password** that was used for encryption.
-4. View the Plaintext: If the password is correct, the original message will be
-   revealed.
+1. Paste the encrypted message into a Text Editor tab. It starts with
+   `-----BEGIN PGP MESSAGE-----` and ends with `-----END PGP MESSAGE-----`.
+2. Click **Decrypt**.
+3. When asked, type the **same password** that was used to encrypt.
+4. If the password is right, the readable text appears in the tab.
 
-> If the password is incorrect or mistyped, decryption will fail.
+To decrypt a file, select it in the File Panel and click **Decrypt**. See
+[Decrypt a File](/guides/file-operations/#decrypt-a-file).
+
+> If the password is wrong or mistyped, decryption fails.
 
 ## Technical Details: GnuPG vs rPGP
 
-Symmetric encryption produces an OpenPGP message protected by a passphrase
-instead of a public key. The passphrase is run through an OpenPGP
-**String-to-Key (S2K)** function to derive the actual symmetric key, and the
-data is then encrypted with a symmetric cipher. How this is done depends on the
-active engine, and it directly affects which tools can decrypt the result.
+This part is for readers who want the technical details. You do not need it
+to use **Sym. Encrypt**.
+
+Symmetric encryption makes an OpenPGP message that is protected by a
+passphrase (another word for password) instead of a public key. The
+passphrase goes through an OpenPGP **String-to-Key (S2K)** function, which
+turns it into the real encryption key. The data is then encrypted with a
+symmetric cipher. How this is done depends on the engine in use. It also
+decides which tools can decrypt the result.
 
 | Aspect            | GnuPG engine                                            | rPGP engine                                      |
 | ----------------- | ------------------------------------------------------- | ------------------------------------------------ |
@@ -114,21 +122,21 @@ active engine, and it directly affects which tools can decrypt the result.
 
 ### GnuPG Engine
 
-With the GnuPG engine, GpgFrontend asks GnuPG to perform the symmetric
-encryption, so the cipher, S2K function, and packet format follow your GnuPG
-version and configuration (for example, `s2k-cipher-algo`, `s2k-digest-algo`,
-and `s2k-count` in `gpg.conf`). Current GnuPG defaults to AES-256 with an
-iterated-and-salted S2K, which is widely understood by other OpenPGP
-implementations. Newer GnuPG versions may use AEAD (OCB) when configured.
+With the GnuPG engine, GpgFrontend asks GnuPG to do the symmetric encryption.
+So the cipher, the S2K function, and the packet format follow your GnuPG
+version and settings (for example, `s2k-cipher-algo`, `s2k-digest-algo`, and
+`s2k-count` in `gpg.conf`). Current GnuPG defaults to AES-256 with an
+iterated-and-salted S2K. Most other OpenPGP tools can read that. Newer GnuPG
+versions may use AEAD (OCB) when set up to do so.
 
 ### rPGP Engine
 
 With the rPGP engine, the message is an **SEIPD v2** packet encrypted with
 **AES-256** in **OCB** mode. SEIPD v2 is the newer message format from the
 current OpenPGP standard, and it checks the data for changes as it reads it.
-The passphrase is stretched into the symmetric key using an **Argon2id** S2K.
-Argon2 is a memory-hard function, which makes brute-forcing a weak passphrase
-considerably more expensive than the classic iterated-and-salted S2K.
+The passphrase is turned into the symmetric key with an **Argon2id** S2K.
+Argon2 needs a lot of memory on purpose. This makes guessing a weak passphrase
+much more costly than with the classic iterated-and-salted S2K.
 
 <Aside type="note" title="Changed in v2.2.3">
 
@@ -158,40 +166,40 @@ The **Argon2 Parameters:** setting is new. Before, rPGP always used 2 GiB.
 
 </Aside>
 
-:::caution[rPGP symmetric output needs a modern tool]
+<Aside type="caution" title="rPGP symmetric output needs a modern tool">
 
-Argon2 S2K and SEIPD v2 are part of the modern OpenPGP standard (RFC 9580). A
-message that rPGP encrypts symmetrically can only be decrypted by an RFC 9580
-tool, such as GpgFrontend with rPGP. GnuPG does not read SEIPD v2, so it cannot
-decrypt it. If you need the widest compatibility, encrypt symmetrically with
-the GnuPG engine instead.
+Argon2 S2K and SEIPD v2 are part of the current OpenPGP standard (RFC 9580).
+A message that rPGP encrypts with a passphrase can only be decrypted by a tool
+that follows RFC 9580, such as GpgFrontend with rPGP. GnuPG does not read
+SEIPD v2, so it cannot decrypt the message. If the message must open in as
+many tools as possible, encrypt it with the GnuPG engine instead.
 
-:::
+</Aside>
 
-When encrypting symmetrically with rPGP, GpgFrontend always prompts for the
-passphrase fresh (the passphrase cache is bypassed) and asks you to confirm it,
-to avoid accidentally encrypting with a mistyped password.
+When you encrypt symmetrically with rPGP, GpgFrontend always asks for the
+passphrase again. It does not use a remembered one. It also asks you to type
+the passphrase a second time, so you do not encrypt with a mistyped one.
 
 ## When to Use Symmetric Encryption?
 
-Symmetric encryption is a great choice when:
+Symmetric encryption is a good choice when:
 
-- You're encrypting something **for yourself** (e.g. storing private notes or
-  backup files).
-- You're sharing data over a **secure channel**, and can **safely provide the
-  password**.
-- You don't want to manage public/private key infrastructure.
+- You encrypt something **for yourself**, such as private notes or backup
+  files.
+- You can **give the password to the other person safely**, for example in
+  person.
+- You do not want to make and manage key pairs.
 
-However, it is **not ideal** for public communication where secure password
-exchange is difficult.
+It is **not a good choice** when you cannot share the password safely. Then
+use normal encryption with keys instead.
 
 ## Tips for Better Security
 
-- Always use a **strong, complex password** (longer is better).
-- Never send passwords through insecure channels (e.g., unencrypted email).
-- Consider using symmetric encryption as a supplement to public-key encryption
-  e.g., encrypt a file symmetrically, then encrypt the password with the
-  recipient's public key.
+- Always use a **strong password**. Longer is better.
+- Never send a password over an unsafe channel, such as an email that is not
+  encrypted.
+- You can combine both kinds of encryption. For example, encrypt a file with
+  a password, then encrypt the password with the other person's public key.
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/29/656cb6940509af0d0f2fb8bcb5aad1758dace5d1.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/29/bdd24695fb7f6bacacfc47b159a68fc62ca34105.webp
