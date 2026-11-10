@@ -7,15 +7,20 @@ sidebar:
 
 A **subkey** is an extra key attached to your main key (the **primary key**).
 Subkeys do the everyday jobs, like encryption, signing, and login. The primary
-key proves who you are and manages your keys, so you can keep it tucked away
-somewhere safe.
+key proves who you are and manages your subkeys, so you can keep it somewhere
+safe.
 
-Making a subkey takes only a few clicks. This guide shows that first. The "why"
-and the more advanced setups come later, so you can skip them until you need them.
+Making a subkey takes only a few clicks. This guide shows that first. The
+reasons and the advanced setups come later. You can skip them until you need
+them.
 
 ## Make a Subkey
 
-1. Double-click the key pair in the **Key ToolBox** list.
+You can only add a subkey to one of your own key pairs, and only when its
+private primary key is in the key database.
+
+1. Double-click the key pair in the **Key ToolBox** list. The **Key Details**
+   window opens.
 2. Open the **Keychain** tab.
 3. Click **New Subkey**. The **Add Subkey** window opens.
 
@@ -31,8 +36,9 @@ Under **What is the subkey for?**, click one choice:
 - **Authentication**: for logging in, for example over SSH. Skip it unless you
   need it.
 
-Each choice shows the algorithm it will use, matched to your primary key. A
-choice that does not fit your key says **Not available for this key.**
+Each choice shows the algorithm it will use. GpgFrontend picks one that
+matches your primary key. A choice that does not fit your key says **Not
+available for this key.**
 
 Then pick when the subkey **Expires**. The default is **2 years**. You can
 pick another period, **Never**, or **Custom date**.
@@ -41,12 +47,12 @@ To choose everything yourself, turn on the **Expert Mode** switch. You then
 pick the **Algorithm**, **Key length** and **Usage** (**Encrypt**, **Sign**,
 **Authenticate**). For hybrid algorithms, such as the post-quantum ML-KEM
 ones, **Paired with** and **Its key length** also appear. You can also tick
-**Without a passphrase**, if the engine allows it.
+**Without a passphrase**, if your OpenPGP engine allows it.
 
 ![The Add Subkey window with Expert Mode on][img-10]
 
-Post-quantum subkeys are only offered for keys in the v6 format. For a v4 key,
-the window tells you so.
+Post-quantum subkeys are only offered for keys in the v6 format. For a key in
+the older v4 format, a note in the window says so.
 
 :::note[Changed in v2.2.4]
 
@@ -59,19 +65,19 @@ under **Expert Mode**.
 
 :::tip[Plan ahead]
 
-When you set up a key, it helps to make a few subkeys at once, one for each job
-(signing, encryption, login). That way you have what you need later, even if you
-keep your primary key offline.
+When you set up a key, make one subkey for each job you need (signing,
+encryption, login). That way you have what you need later, even if you keep
+your primary key offline.
 
 :::
 
 ### Step 2: Generate
 
-- Click **Generate**.
-- When asked, enter your key's **passphrase** to confirm. With GnuPG, the new
-  subkey is protected by the same passphrase as the key pair.
-- A **Subkey Added** message confirms it. The new subkey appears under the
-  **Keychain** tab.
+1. Click **Generate**.
+2. When asked, type your key's **passphrase**. With GnuPG, the new subkey is
+   protected by the same passphrase as the key pair.
+3. A **Subkey Added** message appears. The new subkey is now in the list on
+   the **Keychain** tab.
 
 ![][img-2]
 
@@ -80,8 +86,8 @@ That's all you need to add a subkey.
 :::tip[Change one subkey's passphrase on its own]
 
 Since v2.2.2 you can give a single subkey a new passphrase without touching the
-others. Open the key's details, go to the **Keychain** tab, right-click the
-subkey, and choose **Change Passphrase**.
+others. On the **Keychain** tab, right-click the subkey and choose **Change
+Passphrase**.
 
 GpgFrontend asks for the current passphrase first. Only after you enter it
 correctly does it ask you to pick a new one.
@@ -90,39 +96,40 @@ correctly does it ask you to pick a new one.
 
 ## Why Subkeys Help
 
-A key pair is one **primary key** plus one or more **subkeys**. Splitting the work
-between them keeps you safer:
+A key pair is one **primary key** plus one or more **subkeys**. Splitting the
+work between them keeps you safer:
 
-- **The primary key is your identity.** It signs (certifies) your subkeys and
+- **The primary key is your identity.** It certifies (signs) your subkeys and
   other people's keys. You rarely need it day to day.
 - **Subkeys do the daily work.** Each one handles a single job, like signing or
   encryption.
 
 Because the jobs are split, you get:
 
-- **Better security**: use subkeys day to day. If one is exposed, revoke just that
+- **Better security**: if a subkey is stolen, you revoke (cancel) just that
   subkey and keep the rest.
-- **Flexibility**: give each job its own subkey, and renew or revoke them on their
-  own.
-- **Easy rotation**: swap signing or encryption subkeys when you like, without
-  rebuilding the trust tied to your primary key.
+- **Flexibility**: each job has its own subkey. You can renew or revoke each
+  one on its own.
+- **Easy replacement**: you can swap a signing or encryption subkey for a new
+  one. The trust other people put in your primary key stays.
 
-Advanced users go one step further and keep the primary key offline entirely. The
-rest of this page shows how, along with some reference notes. You can stop here and
+Advanced users go one step further and keep the primary key offline. The rest
+of this page shows how, and adds some reference notes. You can stop here and
 come back when you need it.
 
 ---
 
 ## Keep Your Primary Key Offline (Optional)
 
-Everything below is optional. It covers a more secure setup: moving your subkeys
-into a separate key database and keeping your primary key safe and offline.
+Everything below is optional. It covers a more secure setup: you move your
+subkeys into a separate key database and keep your primary key safe and
+offline.
 
-Why bother? If your subkeys and primary key always travel together, every
-signature or decryption puts the primary key at risk. Keeping the primary key
-offline (or in a hardware security module) means a stolen laptop only exposes the
-subkeys, which you can revoke and replace. Losing the primary key, though, puts
-your whole identity at risk, so **back it up safely first**.
+Why do this? If your primary key sits on the same computer as your subkeys, a
+thief who gets the computer gets the primary key too. If the primary key is
+kept offline (or on a hardware device), a stolen laptop only exposes the
+subkeys. You can revoke and replace those. But if you lose the primary key,
+you lose control of your whole identity, so **back it up safely first**.
 
 The setup has three steps:
 
@@ -141,21 +148,26 @@ subkey's right-click menu. Use a GnuPG-backed key database for this.
 
 ### Step 1: Export a Subkey
 
-1. **Open Key Details**: in the key database section, select the key to open the
-   **Key Details** view.
-2. **Open the Keychain tab**: here you see the primary key (first row) and all its
-   subkeys.
-3. **Select a subkey**: click the subkey you want. Its details (Key ID, Algorithm,
-   Key Size, Usage) appear in the lower half of the window.
-4. **Export it**: click **Export Subkey** on the right. (If the selected row is the
-   primary key, the button is labeled **Export Primary Key** instead.)
-5. **Save the file**: choose a secure folder and save the subkey as its own file.
+1. **Open Key Details**: double-click the key in the **Key ToolBox**. The
+   **Key Details** window opens.
+2. **Open the Keychain tab**: here you see the primary key (first row) and all
+   its subkeys.
+3. **Select a subkey**: click the subkey you want. Its details (such as **Key
+   ID**, **Algorithm**, **Key Size** and **Usage**) appear in the lower half
+   of the window.
+4. **Export it**: click **Export Subkey** on the right. (If the selected row
+   is the primary key, the button says **Export Primary Key** and is greyed
+   out.) GpgFrontend asks you to confirm. Click **Yes**.
+5. **Save the file**: choose a safe folder and save the subkey as its own
+   file.
 
 ![][img-3]
 
 ### Step 2: Import the Subkey into Another Database
 
-1. **Pick the key database**: choose the right key database in the **Key ToolBox**.
+1. **Pick the key database**: in the **Key ToolBox**, switch to the key
+   database that should hold the subkey. See
+   [Key Database](/advanced/key-database/).
 
 ![Switch Key Database][img-4]
 
@@ -164,27 +176,28 @@ subkey's right-click menu. Use a GnuPG-backed key database for this.
 
    ![Import the Subkey][img-5]
 
-3. **Select the file**: pick the subkey file and click **Open** to import it into
-   the chosen key database.
-4. **Check it**: find the subkey in the **Key ToolBox**, then click it to open its
-   **Key Details** (Key ID, Algorithm, Key Size, Usage).
+3. **Select the file**: pick the subkey file and click **Open**. The subkey is
+   imported into the key database you chose.
+4. **Check it**: find the key in the **Key ToolBox**, then double-click it to
+   open its **Key Details**.
 
    ![Verify Imported Subkey][img-6]
 
 ### Step 3: Use a Key Without Its Primary Key
 
-Once the subkey is in its own database, you can move your primary key somewhere
-safe and delete it from GpgFrontend. The key still works for everyday tasks, with
-a few limits.
+Once the subkey is in its own database, you can store your primary key
+somewhere safe and delete it from GpgFrontend. The key still works for
+everyday tasks, with a few limits.
 
-In the **Key ToolBox**, a `#` next to the **Type** (for example, **pub/sec#**)
-means the primary key isn't in this key database. This is expected when you have
-removed the primary key on purpose and kept the subkeys for daily use.
+In the **Key ToolBox**, a `#` at the end of the **Type** (for example,
+`pub/sec#`) means the private primary key isn't in this key database. This is
+expected when you have removed the primary key on purpose and kept the subkeys
+for daily use.
 
 ![Meaning of '#' Symbol][img-7]
 
-To confirm, open the subkey's **Key Details**. The **Primary Key Existence**
-section should say **Not Exists**.
+To confirm, open the key's **Key Details**. On the **KeyPair** tab, the
+**Primary Key Existence** field should say **Not Exists**.
 
 ![Primary Key Not Exists][img-8]
 
@@ -192,7 +205,7 @@ section should say **Not Exists**.
 
 - You can still **encrypt and decrypt** (for example, emails or files).
 - You can **sign**, but only if you kept a signing subkey. So make a signing
-  subkey when you first create the key, if you'll need one later.
+  subkey before you remove the primary key, if you'll need one later.
 
 ![Use Subkey to Encrypt][img-9]
 
@@ -203,21 +216,21 @@ section should say **Not Exists**.
 - **Certify other keys** (sign them as trusted).
 - **Make a revocation certificate** for the subkey or primary key.
 
-This setup is great when exposing the primary key would be a risk. Keep the primary
-key away and use only subkeys, and you balance everyday use with security.
+All of these tasks need the private primary key.
 
 ## Add a Decryption Subkey (ADSK)
 
-The **Keychain** tab also has an **Add ADSK(s)** button. An Additional Decryption
-Subkey lets you attach another key's encryption subkey to your key, so messages
-encrypted to you can also be read by the ADSK holder (for example, an
-organization's escrow or backup key).
+The **Keychain** tab also has an **Add ADSK(s)** button. ADSK is short for
+Additional Decryption Subkey. It attaches another key's encryption subkey to
+your key. Messages encrypted to you can then also be read by the owner of that
+other key (for example, your organization's backup key).
 
-:::note[Requires the GnuPG engine]
+:::note[Needs the GnuPG engine]
 
-ADSK needs the **GnuPG engine** (GnuPG 2.4.1 or later). The button shows only for
-a primary key whose secret part is available, and it is hidden when the active key
-database uses an engine or GnuPG version that doesn't support ADSK.
+ADSK needs the **GnuPG engine** (GnuPG 2.4.1 or later). The button is only
+shown for your own key pair, when its private primary key is present. It is
+hidden when the key database uses an engine or a GnuPG version that doesn't
+support ADSK.
 
 :::
 
@@ -225,25 +238,25 @@ database uses an engine or GnuPG version that doesn't support ADSK.
 
 When you export only a subkey and import it elsewhere, you may notice that:
 
-- The listing still shows the **primary key's ID** as the main identifier.
-- The keyring still shows the original structure (the primary key and any other
-  subkeys), even though only the exported subkey can actually be used.
-- The usage flags (such as CESA: Certify, Encrypt, Sign, Authenticate) can change
-  under certain conditions.
+- The key list still shows the **primary key's ID** for the key.
+- The key still shows its full structure (the primary key and any other
+  subkeys), even though only the exported subkey can be used.
+- The usage letters (C, E, S, A for Certify, Encrypt, Sign, Authenticate) can
+  differ from the original key.
 
-This is not a bug. It is just how OpenPGP and GnuPG represent keys.
+This is not a bug. It is how OpenPGP and GnuPG describe keys.
 
 ### Why does the full key structure show up?
 
-Even when you export only a subkey's secret part, you are really exporting a full
-public key (a certificate) with only some private parts:
+When you export only one subkey's private part, the file still holds the full
+public key (the certificate). Only some private parts are in it:
 
-- The public key block still holds the primary key's info, all user IDs, and all
-  subkey definitions.
-- The primary key's secret part is missing, so you can't certify, revoke, or make
-  more subkeys.
-- The file has to include the primary key's public info, because the subkey's
-  trust depends on the primary key having certified it.
+- The public part still holds the primary key's details, all user IDs, and all
+  subkeys.
+- The primary key's private part is missing, so you can't certify, revoke, or
+  make more subkeys.
+- The file has to include the primary key's public part. A subkey is only
+  trusted because the primary key certified it.
 
 :::tip[Analogy]
 
@@ -253,16 +266,15 @@ to know who sent it and to trust it.
 
 :::
 
-The primary key is the anchor for the whole structure. Subkeys are trusted because
-the primary key certified them. Without the primary key's public info and
-signatures, other OpenPGP tools wouldn't see the subkey as trustworthy.
+Without the primary key's public part and its signatures, other OpenPGP tools
+would not trust the subkey.
 
 ### Why is the Key ID still the primary key's?
 
-OpenPGP tools (GpgFrontend, Thunderbird, and others) identify the whole structure
-by the primary key ID. This keeps things consistent across tools. You can't make a
-"standalone" subkey with its own identity: a subkey only has value through its link
-to the primary key.
+OpenPGP tools (GpgFrontend, Thunderbird, and others) name the whole key by the
+primary key's ID. This keeps things the same across tools. You can't make a
+subkey that stands alone with its own identity. A subkey only has value
+through its link to the primary key.
 
 ### Can I use only a subkey for everything?
 
@@ -272,48 +284,46 @@ primary key.
 
 ## Subkey Algorithms
 
-Subkeys offer more algorithm choices than primary keys, because they are made for
-specific jobs. A primary key mainly proves identity and certifies, so it needs a
-signing-capable algorithm. Subkeys can also use encryption-only algorithms (such
-as ECDH types like Curve25519, X448, NIST, or Brainpool curves), which is why
-those appear as subkey options.
+Subkeys offer more algorithms than primary keys. A primary key must use an
+algorithm that can sign. A subkey can also use an algorithm that can only
+encrypt (such as Curve25519, X448, or ElGamal). For the primary key list, see
+[Generate Key Pair](/guides/generate-key/#supported-algorithms-for-the-primary-key).
 
 The algorithms you see depend on the engine, its version, and the key format.
-GnuPG is the recommended default for the widest compatibility, while rPGP adds
-experimental support for OpenPGP v6 and some post-quantum algorithms. For more
-detail, see [Comparison of Cryptographic Algorithms](/extra/algorithms-comparison).
+GnuPG is the recommended engine for the widest compatibility. rPGP adds
+experimental support for OpenPGP v6 and some post-quantum algorithms. In the
+table, "Auth" means authenticate (log in) and "PQC" means post-quantum. For
+more detail, see
+[Comparison of Cryptographic Algorithms](/extra/algorithms-comparison).
 
-| Algorithm                       | Purpose                | Engine           |
-| ------------------------------- | ---------------------- | ---------------- |
-| RSA                             | Encrypt / Sign / Auth  | GnuPG, rPGP      |
-| DSA                             | Sign / Auth            | GnuPG only       |
-| ElGamal (`ELG-E`)               | Encrypt                | GnuPG            |
-| Ed25519                         | Sign / Auth            | GnuPG, rPGP      |
-| Ed448                           | Sign / Auth            | rPGP only        |
-| Curve25519 / CV25519            | Encrypt                | GnuPG, rPGP      |
-| X448                            | Encrypt                | GnuPG 2.3+, rPGP |
-| NIST P-256 / P-384 / P-521      | Encrypt / Sign / Auth  | GnuPG, rPGP      |
-| Brainpool P-256 / P-384 / P-512 | Encrypt / Sign / Auth  | GnuPG 2.3+       |
-| secp256k1                       | Encrypt                | GnuPG 2.3+       |
-| Kyber / ML-KEM hybrid variants  | Hybrid PQC Encrypt     | GnuPG 2.5+, rPGP |
-| SLH-DSA-SHAKE variants          | PQC Sign / Auth        | rPGP only        |
-| ML-DSA hybrid variants          | Hybrid PQC Sign / Auth | rPGP only        |
+| Algorithm                       | Purpose                | Engine                          |
+| ------------------------------- | ---------------------- | ------------------------------- |
+| RSA                             | Encrypt / Sign / Auth  | GnuPG, rPGP (3072 bits or more) |
+| DSA                             | Sign / Auth            | GnuPG only                      |
+| ElGamal (`ELG-E`)               | Encrypt                | GnuPG                           |
+| Ed25519                         | Sign / Auth            | GnuPG, rPGP                     |
+| Ed448                           | Sign / Auth            | rPGP only                       |
+| Curve25519 / CV25519            | Encrypt                | GnuPG, rPGP                     |
+| X448                            | Encrypt                | GnuPG 2.3+, rPGP                |
+| NIST P-256 / P-384 / P-521      | Encrypt / Sign / Auth  | GnuPG, rPGP                     |
+| Brainpool P-256 / P-384 / P-512 | Encrypt / Sign / Auth  | GnuPG 2.3+                      |
+| secp256k1                       | Encrypt                | GnuPG 2.3+                      |
+| Kyber / ML-KEM hybrid variants  | Hybrid PQC Encrypt     | GnuPG 2.5+, rPGP                |
+| SLH-DSA-SHAKE variants          | PQC Sign / Auth        | rPGP only                       |
+| ML-DSA hybrid variants          | Hybrid PQC Sign / Auth | rPGP only                       |
 
 ### Compatibility Notes
 
-Keep these points in mind before you share a key made with the rPGP engine:
+Some keys made with the rPGP engine can't be used with GnuPG. This is true for
+25519 keys and for most post-quantum keys. For the full list, see the
+[Compatibility Notes for key pairs](/guides/generate-key/#compatibility-notes).
 
-- **rPGP 25519 keys are rPGP-only.** rPGP can import 25519 keys made by GnuPG, but
-  not the other way around. rPGP-made 25519 keys use the OpenPGP v6 format, which
-  GnuPG can't import yet.
-- **rPGP post-quantum keys are rPGP-only.** ML-DSA, SLH-DSA, and hybrid KEM keys
-  made by rPGP use the OpenPGP v6 format. They are meant for testing and
-  rPGP-based work, not for use with GnuPG.
-- **Kyber / ML-KEM hybrid encryption isn't rPGP-only.** It may also work with
-  GnuPG 2.5+, depending on the key database engine, its version, and the OpenPGP
-  version. The current rPGP engine supports only some hybrid pairings, such as
-  **Kyber-768 + Curve25519** and **Kyber-1024 + X448**. Other pairings may need
-  GnuPG 2.5+ or may not be available.
+One point is special to subkeys:
+
+- **Kyber / ML-KEM hybrid encryption isn't rPGP-only.** GnuPG 2.5 and later
+  can make these subkeys too. The rPGP engine supports only two pairings:
+  **Kyber-768 + Curve25519** and **Kyber-1024 + X448**. The other pairings
+  need GnuPG 2.5 or later.
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/29/4e64224bcb749319f269da127d6e882978176729.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/29/ff1f3a604f67c9ff86b13397e5430417e2c5103c.webp

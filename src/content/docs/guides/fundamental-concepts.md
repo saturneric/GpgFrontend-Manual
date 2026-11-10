@@ -11,12 +11,12 @@ documents, and passwords. OpenPGP lets you protect those things yourself, so onl
 the people you choose can read them. It works offline and needs no account.
 
 New to **OpenPGP**, **GPG**, or **PGP**? This guide starts with the few ideas you
-really need. Extra detail waits at the end, for when you want it.
+really need. Extra detail is at the end, for when you want it.
 
 :::tip[The whole idea in two sentences]
 
 You have a **private key** that you keep secret, and a **public key** that you
-share with others. That's the core of OpenPGP. Everything else builds on it.
+share with others. Everything else in OpenPGP builds on these two keys.
 
 :::
 
@@ -25,7 +25,7 @@ share with others. That's the core of OpenPGP. Everything else builds on it.
 OpenPGP lets you do two things:
 
 - **Encrypt (lock)** messages and files, so only the right person can read them.
-- **Sign** messages and files, so others can prove they came from you and weren't
+- **Sign** messages and files, so others can check they came from you and weren't
   changed.
 
 People use it for secure email, protecting files and backups, locking files
@@ -45,7 +45,7 @@ Think of a mailbox. Your **public key** is the slot anyone can drop mail into.
 Your **private key** is the only key that opens it.
 
 Keep your private key safe. If you lose it, you can't unlock your data. If someone
-steals it, they can read your messages.
+steals it, they can read your messages and sign things as you.
 
 ## Encrypting and Signing
 
@@ -55,19 +55,21 @@ key. Only their private key can unlock it.
 **Signing (for proof):** You sign a message with your private key. Anyone can use
 your public key to check that it really came from you and wasn't changed.
 
-You can do both at once: lock a message and sign it, so it's private and proven.
+You can do both at once: lock a message and sign it. Then it is private, and
+the reader can check who sent it.
 
 ## Making Your First Key
 
-When you make a key, GpgFrontend asks you to choose a few things: an algorithm
-(the math it uses), a key size, your name and email, an expiration date, and a
-passphrase.
+When you make a key, GpgFrontend asks for a few things: your name (an email
+address is optional), what kind of key you want, how long the key is valid,
+and a passphrase.
 
 **If you're new, just accept the defaults GpgFrontend suggests.** They are a safe
 choice.
 
-Pick a strong **passphrase**. It is your last line of defense: if someone copies
-your private key file, the passphrase stops them from using it.
+Pick a strong **passphrase** (a long password for your key). It is your last
+line of defense. If someone copies your private key file, the passphrase stops
+them from using it.
 
 ## Checking That a Key Is Real
 
@@ -80,10 +82,12 @@ person.
 
 ## A Few Safety Rules
 
-- **Back up your private key** (and its revocation certificate) somewhere safe and
-  offline. Lose it, and your encrypted data may be gone for good.
+- **Back up your private key** somewhere safe and offline. Back up its
+  revocation certificate too (a file that lets you cancel the key). If you
+  lose the private key, your encrypted data may be gone for good.
 - **Use a strong passphrase.**
-- **Revoke a key right away** if it is lost or stolen, and tell your contacts.
+- **Revoke (cancel) a key right away** if it is lost or stolen, and tell your
+  contacts.
 - **Check signatures** when you download software, to be sure the files weren't
   changed.
 
@@ -115,22 +119,22 @@ when you're curious or need it.
 
 These names get mixed up a lot:
 
-- **PGP** was the first paid program that started this style of encryption.
+- **PGP** is the original program that started this style of encryption.
 - **OpenPGP** is the open standard based on PGP.
 - **GnuPG**, often called **GPG**, is the most widely used free program that
   follows OpenPGP.
 - **rPGP** is a newer program (written in Rust) that GpgFrontend uses to try out
   newer features like OpenPGP v6.
 
-For everyday use, most people use **GnuPG/GPG** because it works with the widest
-range of other tools.
+GpgFrontend can work with GnuPG or with rPGP. See
+[Engines and Compatibility](#engines-and-compatibility) below.
 
 ### Inside a Full Key: Primary Key and Subkeys
 
 A full OpenPGP key is made of a few parts:
 
 - A **primary key** that stands for your identity. It ties your name and email to
-  the key and creates and manages the subkeys.
+  the key. It also creates and manages the subkeys.
 - One or more **subkeys** that do the daily jobs:
   - **Encryption subkey**: unlocks messages and files sent to you.
   - **Signing subkey**: signs your messages, files, or text.
@@ -142,35 +146,42 @@ A full OpenPGP key is made of a few parts:
 
 This keeps your identity separate from everyday tasks. Using subkeys for daily
 work lowers the risk to your primary key. Advanced users keep the primary key
-offline and use only subkeys on their everyday devices.
+offline and use only subkeys on their everyday devices. See
+[Generate and Use Subkeys](/guides/generate-use-subkey/).
 
 ### What's in a Certificate
 
-When you share your public key, you usually share an OpenPGP **certificate**. It
-can include your public key, your user IDs, the extra details above, signatures
-that link the user IDs and subkeys to the primary key, and optional
-certifications from other people.
+When you share your public key, you usually share an OpenPGP **certificate**.
+It can include:
 
-Remember: trust is not automatic. A valid signature only proves the signature
-matches the key. You still have to decide whether the key really belongs to the
-right person.
+- your public key and your user IDs;
+- the extra details above;
+- signatures that link the user IDs and subkeys to the primary key;
+- certifications from other people (signatures that say they checked your
+  key), if there are any.
+
+Remember: trust is not automatic. A valid signature only proves that the
+signature matches the key. You still have to decide whether the key really
+belongs to the right person.
 
 ### Engines and Compatibility
 
 OpenPGP is a standard, not one single app. GnuPG, rPGP, Sequoia PGP, RNP, and
-others are different programs that follow it. They can usually work together when
-they use matching formats and algorithms, but it isn't guaranteed. Newer features
-like OpenPGP v6 and post-quantum algorithms may not work with older tools.
+others are different programs that follow it. They can usually work together
+when they use the same formats and algorithms, but this is not guaranteed.
+Newer features like OpenPGP v6 and post-quantum algorithms may not work with
+older tools.
 
-GpgFrontend supports more than one engine:
+An **engine** is the program that does the actual encryption work for
+GpgFrontend. GpgFrontend supports more than one engine:
 
-- **GnuPG**: the default, recommended engine for daily use and the best
-  compatibility.
+- **GnuPG**: the default, recommended engine for daily use. It works with the
+  widest range of other tools.
 - **rPGP**: an experimental engine for trying newer OpenPGP features, including
   OpenPGP v6 and some post-quantum algorithms.
 
-If you're new, use the **GnuPG engine** unless you specifically want to try the
-newer features.
+If you're new, use the **GnuPG engine** unless you want to try the newer
+features.
 
 Each key database opens with its own engine. You choose the engine of the
 built-in key database in **Settings** > **Key Databases**. See

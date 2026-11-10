@@ -5,14 +5,16 @@ sidebar:
   order: 3
 ---
 
-GpgFrontend makes it easy to create OpenPGP key pairs that work with GnuPG. **If
-you're new, click New Keypair, type your name, and click Continue until you
-reach Generate.** GpgFrontend fills in safe defaults for everything else.
+A **key pair** is your public key and your private key together. This page
+shows how to make one. **If you're new, click New Keypair, type your name, and
+click Continue until you reach Generate.** GpgFrontend fills in safe defaults
+for everything else.
 
 ## Open the Key Generation Window
 
-In the **Main Window**, click **New Keypair**. You can also open the **Keys**
-menu and choose **New Keypair**. The **Generate Key** window opens.
+In the main window, click **New Keypair** in the toolbar. You can also open
+the **Keys** menu and choose **New Keypair**. The **Generate Key** window
+opens.
 
 ![][img-1]
 
@@ -22,9 +24,10 @@ step, or **Back** to change something.
 
 :::note[Changed in v2.2.4]
 
-Making a key is now a guided window with steps. It used to be one window with
-the tabs **Easy Mode**, **Primary Key** and **Subkey**. The choices that were
-on the **Primary Key** and **Subkey** tabs are now under **Expert Mode**. See
+You now make a key in a window that guides you step by step. It used to be
+one window with the tabs **Easy Mode**, **Primary Key** and **Subkey**. The
+choices that were on the **Primary Key** and **Subkey** tabs are now under
+**Expert Mode**. See
 [Choose Everything Yourself](#choose-everything-yourself-expert-mode).
 
 With GnuPG, the key and its subkey are now made in one go, so you type the
@@ -42,9 +45,9 @@ your key.
 - **Comment**: Optional. Helps tell this key apart from others, for example
   `Work`.
 
-**Fill In Anonymously** makes up a name and an address that reach nobody. This
-is handy for throwaway or test keys, when you don't want to link the key to a
-real name or address. How the made-up identity looks is set in
+The **Fill In Anonymously** button makes up a name and an address that reach
+nobody. Use it for test keys, or when you don't want to link the key to a real
+name or address. You can change how the made-up name and address look in
 [Settings](/guides/settings/#the-key-generation-page).
 
 A few rules apply to what you can type here:
@@ -53,8 +56,8 @@ A few rules apply to what you can type here:
 - The name and comment cannot contain `(`, `)`, `<`, `>` or control
   characters.
 - A name shorter than five characters is allowed, but GpgFrontend asks you to
-  confirm it first. Short names are usually a typo, and they make your key
-  harder for other people to recognise.
+  confirm it when you click **Continue**. Short names are often a typo, and
+  they make your key harder for other people to recognise.
 
 At the bottom, the window says which key database the key will be saved in.
 To use another one, close the window, switch to that
@@ -70,8 +73,9 @@ Choose what kind of key to make. If you are unsure, keep the one marked
 - **Compatibility**: an RSA key, for older systems and software that only
   accept RSA. Larger and slower to use.
 - **Hybrid encryption**: messages sent to you are also protected against
-  future quantum computers. Only recent software can encrypt to this key. This
-  choice only shows up when your engine supports it. See
+  future quantum computers. Only recent software can encrypt to this key. You
+  only see this choice when your OpenPGP engine (the program that does the
+  encryption work, such as GnuPG) supports it. See
   [Post-Quantum Cryptography](/guides/post-quantum/).
 
 ![The Key Type step][img-2]
@@ -83,17 +87,20 @@ and how long the key is valid. You can manage profiles in
 
 ## Step 3: Validity & Protection
 
-- **Valid for**: how long the key can be used. The default is **2 years**. You
-  can pick a period, **Never**, or **Custom date**. A key that expires stops
-  being usable on its own if you lose it. You can extend it at any time before
-  then.
-- **Protect the secret key with a passphrase**: on by default. Keep it on.
-  You are asked for the passphrase while the key is made. With GnuPG, GnuPG
-  asks in a window of its own. GnuPG usually makes the key and its subkey in
-  one go, so it asks once. For a post-quantum or hybrid key, it may ask a
-  second time for the subkey.
+This step has two choices:
 
-If you turn the passphrase off, a warning reminds you that anyone who gets
+- **Valid for**: how long the key can be used. The default is **2 years**. You
+  can pick another period, **Never**, or **Custom date**. An expiry date is a
+  safety net. If you lose the key, it stops working by itself on that date.
+  You can extend the date at any time before then.
+- **Protect the secret key with a passphrase**: ticked by default. Keep it
+  ticked. GpgFrontend asks you for the passphrase while it makes the key.
+
+With GnuPG, the passphrase question comes in a separate window from GnuPG.
+GnuPG usually makes the key and its subkey in one go, so it asks once. For a
+post-quantum or hybrid key, it may ask a second time for the subkey.
+
+If you untick the passphrase box, a warning reminds you that anyone who gets
 your secret key file can then sign and decrypt as you.
 
 ![The Validity & Protection step][img-3]
@@ -112,16 +119,17 @@ your secret key file can then sign and decrypt as you.
 ## Make a Key in One Click
 
 **Quick Generate** makes a key straight away, with no questions. It uses the
-default profile and a made-up identity, both from
+default profile and a made-up name and address, both from
 [Settings](/guides/settings/#the-key-generation-page). This is handy for test
 keys.
 
 To use it, open the **Keys** menu and choose **Quick Generate**. You can also
-hold down or right-click the **New Keypair** button and choose it there.
+hold down or right-click the **New Keypair** button and choose **Quick
+Generate** there.
 
 ![Quick Generate under the New Keypair button][img-5]
 
-If the default profile or the identity pattern in Settings cannot be used,
+If the default profile or the made-up identity from Settings cannot be used,
 GpgFrontend asks if you want to make the key step by step instead.
 
 :::note[New in v2.2.4]
@@ -159,23 +167,28 @@ name. GpgFrontend remembers whether Expert Mode was on for next time.
 
 ## Advanced Options
 
-You can skip this section unless you need fine control. It covers the full list of
-algorithms and some compatibility notes.
+You can skip this section unless you need fine control. It lists the
+algorithms for the primary key and some compatibility notes.
 
 ### Supported Algorithms for the Primary Key
 
-A primary key stands for your identity and certifies your user IDs, so it must be
-able to sign or certify. That's why the primary key list only shows
-signing-capable algorithms. Encryption-only algorithms (such as ECDH, X448,
-Curve25519, ElGamal, or Kyber/ML-KEM) are used for subkeys instead.
+A primary key stands for your identity. It certifies (signs) your user IDs, so
+it must use an algorithm that can sign. That's why the primary key list only
+shows algorithms that can sign. Algorithms that can only encrypt (such as
+ECDH, X448, Curve25519, ElGamal, or Kyber/ML-KEM) are used for subkeys
+instead. See
+[Subkey Algorithms](/guides/generate-use-subkey/#subkey-algorithms).
 
 The algorithms you see depend on the engine, its version, and the key format.
+In the table, "Cert" means certify, "Auth" means authenticate (log in), and
+"PQC" means post-quantum.
 
 | Algorithm group                 | Purpose                      | Engine                          |
 | ------------------------------- | ---------------------------- | ------------------------------- |
 | RSA                             | Sign / Encrypt / Auth / Cert | GnuPG, rPGP (3072 bits or more) |
 | DSA                             | Sign / Auth / Cert           | GnuPG only                      |
-| Ed25519 / Ed448                 | Sign / Auth / Cert           | GnuPG, rPGP                     |
+| Ed25519                         | Sign / Auth / Cert           | GnuPG, rPGP                     |
+| Ed448                           | Sign / Auth / Cert           | GnuPG 2.3+, rPGP                |
 | NIST P-256 / P-384 / P-521      | Sign / Auth / Cert           | GnuPG, rPGP                     |
 | Brainpool P-256 / P-384 / P-512 | Sign / Auth / Cert           | GnuPG 2.3+                      |
 | secp256k1                       | Sign / Auth / Cert           | GnuPG 2.3+                      |
@@ -184,7 +197,8 @@ The algorithms you see depend on the engine, its version, and the key format.
 
 :::note[Some old choices are gone on rPGP]
 
-The rPGP engine will not make weak keys any more, following RFC 9580:
+The rPGP engine no longer makes weak keys. It follows the current OpenPGP
+standard (RFC 9580):
 
 - **DSA** cannot be made at all (since v2.2.2).
 - **RSA below 3072 bits** is no longer offered (RSA-1024 since v2.2.2,
@@ -192,17 +206,17 @@ The rPGP engine will not make weak keys any more, following RFC 9580:
 - **secp256k1** is no longer offered (since v2.2.3). The current OpenPGP
   standard does not include this curve.
 
-This only affects making new keys. Old RSA-1024, RSA-2048, DSA, and secp256k1
-keys still import and still work. The GnuPG engine still offers all of them,
-for compatibility with older setups.
+This only affects new keys. You can still import and use old RSA-1024,
+RSA-2048, DSA, and secp256k1 keys. The GnuPG engine still offers all of them,
+so you can work with older setups.
 
 :::
 
 :::note[Changed in v2.2.3]
 
-On rPGP, the smallest RSA key for a new key went up from 2048 to 3072 bits. New
-secp256k1 keys can now only be made with GnuPG. GpgFrontend also no longer
-deletes the last UID of a v4 key.
+The RSA-2048 and secp256k1 changes in the note above came with v2.2.3. Since
+this version, GpgFrontend also refuses to delete the last UID of a v4 key. See
+[UID Info](/guides/view-keypair-info/#uid-info).
 
 :::
 
@@ -211,25 +225,23 @@ deletes the last UID of a v4 key.
 Some keys made by one engine can't be used by the other. Keep these points in
 mind before you share a key:
 
-- **rPGP 25519 keys are rPGP-only.** rPGP can import 25519 keys made by GnuPG, but
-  not the other way around. When rPGP makes an Ed25519 or Curve25519 key, it uses
-  the modern RFC 9580 encoding, not the older encoding GnuPG uses, so GnuPG can't
-  read it, even if you pick the v4 format.
+- **rPGP 25519 keys are rPGP-only.** rPGP can import 25519 keys made by GnuPG,
+  but not the other way around. When rPGP makes an Ed25519 key, it uses the
+  newer RFC 9580 encoding, not the older encoding GnuPG uses. So GnuPG can't
+  read the key, even if you pick the v4 format.
 - **rPGP post-quantum keys are rPGP-only too.** ML-DSA, SLH-DSA, and hybrid KEM
   keys made by rPGP always use the OpenPGP v6 format. They are meant for testing
   and rPGP-based work, not for use with GnuPG.
-- **GnuPG chooses its own key format.** When you use the GnuPG engine, GnuPG picks
-  the format based on its version and settings. GpgFrontend doesn't set it, so
-  the **Key format** choice is not shown. Current releases make **v4** keys, but
-  newer versions (such as the 2.5.x line) may make **v5** keys.
+- **GnuPG chooses its own key format.** With the GnuPG engine, GnuPG picks the
+  format based on its version and settings. GpgFrontend doesn't set it, so the
+  **Key format** choice is not shown. Current releases make **v4** keys, but
+  newer versions (such as the 2.5.x line) may make **v5** keys. A v5 key does
+  not work with the rPGP engine or with many other OpenPGP tools. See
+  [Key Format Version](/guides/view-keypair-info/#key-format-version).
 - **A v4 key always keeps at least one UID.** A v4 key stores its usage and
   expiry with its UIDs (User IDs, the name and email on the key). So GpgFrontend
   will not let you delete the last UID of a v4 key. Add a new UID first if you
   want to replace it. v6 keys do not have this limit.
-- **v5 keys are LibrePGP, not RFC 9580.** LibrePGP is a separate standard that
-  split off from OpenPGP. A v5 key works with GnuPG and other LibrePGP tools,
-  but the rPGP engine cannot read one, and neither can many other OpenPGP
-  tools. Keep v5 keys in a GnuPG key database.
 
 :::caution[Check the format before sharing widely]
 
