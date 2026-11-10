@@ -6,63 +6,74 @@ sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Tabs, TabItem, Aside } from "@astrojs/starlight/components";
 import { Steps } from "@astrojs/starlight/components";
 
-Welcome to your new encryption workspace. **GpgFrontend** is built to make
-OpenPGP/LibrePGP encryption reliable, simple, and easy to use on any system.
-This guide walks you through the first setup of your machine, so your environment
-is secure and ready to use.
+This page takes you from nothing to a running GpgFrontend. You pick an
+engine, install the app, and open it for the first time. It takes a few
+minutes.
 
 ## Step 1: Choose Your Engine
 
-GpgFrontend uses a backend engine to do the actual encryption work. Find your
-system in the table below to see which engine is best for you:
+GpgFrontend is the window you click in. The encryption work itself is done by
+a part called the **engine**. There are two engines:
 
-| Platform         | Recommended Engine  | Notes                                                      |
-| :--------------- | :------------------ | :--------------------------------------------------------- |
-| **Windows**      | **GnuPG** (Bundled) | No separate installation required.                         |
-| **macOS**        | **GnuPG**           | Install via Homebrew: `brew install gnupg`.                |
-| **macOS (Lite)** | **rPGP** (Built-in) | App Store version; runs in a sandbox.                      |
-| **Linux**        | **GnuPG**           | Pre-installed in most distros. Check with `gpg --version`. |
-| **BSD**          | **GnuPG**           | Must be installed manually via ports/pkg.                  |
+- **GnuPG**: a well-known encryption program. On some systems you install it
+  yourself.
+- **rPGP**: a newer engine that is built into GpgFrontend.
 
-> **Note:** GpgFrontend needs GnuPG 2.2.0 or newer for full support. If GnuPG is
-> missing, or older than 2.1.0, GpgFrontend does not use it. It switches to the
-> built-in **rPGP** engine instead, so the basics keep working.
+Find your system in the table to see which engine to use:
+
+| System           | Recommended Engine  | What you need to do                                          |
+| :--------------- | :------------------ | :----------------------------------------------------------- |
+| **Windows**      | **GnuPG** (bundled) | Nothing. GnuPG comes with GpgFrontend.                       |
+| **macOS**        | **GnuPG**           | Install GnuPG with Homebrew: `brew install gnupg`.           |
+| **macOS (Lite)** | **rPGP** (built-in) | Nothing. This is the Mac App Store version. It has no GnuPG. |
+| **Linux**        | **GnuPG**           | Usually nothing. To check, run `gpg --version`.              |
+| **BSD**          | **GnuPG**           | Install GnuPG yourself with ports or pkg.                    |
+
+<Aside type="note" title="Which GnuPG version?">
+  GpgFrontend needs GnuPG 2.2.0 or newer for full support. If GnuPG is
+  missing, or older than 2.1.0, GpgFrontend does not use it. It uses the
+  built-in **rPGP** engine instead, so the basics keep working.
+</Aside>
 
 ## Step 2: Install GpgFrontend
 
-Pick your operating system to see the recommended steps. For other methods
-(WinGet, Flatpak), visit our [Downloads](/overview/downloads) page.
+Pick your system below. The steps use the direct download. To install from an
+app store or a package manager instead (for example WinGet or Flatpak), see
+the [Downloads](/overview/downloads/) page.
 
 <Tabs>
   <TabItem label="Windows">
     ### Installer (Recommended)
     <Steps>
     1. **Download** the `.msi` installer from the [Downloads](/overview/downloads/) page.
-    2. **Launch** the file. Accept the license, then click **Next** until it
+    2. **Open** the file. Accept the license, then click **Next** until it
        is installed.
-    3. **Open** GpgFrontend from the new shortcut on your desktop.
+    3. **Start** GpgFrontend from the new shortcut on your desktop.
     </Steps>
 
     ### Portable Version
     <Steps>
-    1. **Download** the `windows-x86_64-portable.zip` from the
-       [Downloads](/overview/downloads/) page. In the download box, open
-       **More download options** to find it.
-    2. **Extract** the ZIP to your preferred folder.
-    3. **Run** `GpgFrontend.exe` located in the `bin` directory.
+    1. **Download** the `windows-x86_64-portable.zip` file from the
+       [Downloads](/overview/downloads/) page. To find it, open
+       **More download options** in the download box.
+    2. **Unpack** the ZIP file into any folder you like.
+    3. **Open** the `bin` folder inside it and run `GpgFrontend.exe`.
     </Steps>
 
   </TabItem>
 
 <TabItem label="macOS">
   <Steps>
-    1. **Install GnuPG** via Homebrew: `brew install gnupg`.
+    1. **Install GnuPG** with Homebrew: open the Terminal app and run
+    `brew install gnupg`.
     2. **Download** the `.dmg` file from the [Downloads](/overview/downloads/) page.
-    3. **Mount** the DMG and drag **GpgFrontend** to your **Applications** folder.
+    3. **Open** the `.dmg` file and drag **GpgFrontend** into your
+    **Applications** folder.
      ![Drag to Applications][img-1]
+    4. **Start** GpgFrontend from your **Applications** folder.
 
   </Steps>
   
@@ -70,19 +81,33 @@ Pick your operating system to see the recommended steps. For other methods
 
 <TabItem label="Linux">
   <Steps>
-    1. **Verify GnuPG**: Ensure `gpg` is installed (`sudo apt install gpg` or
+    1. **Check GnuPG**: open a terminal and run `gpg --version`. If the
+    command is not found, install GnuPG (`sudo apt install gpg` or
     `sudo dnf install gnupg`).
-    2. **Download** the `.AppImage` from the [Downloads](/overview/downloads/) page.
-    3. **Set Permissions**: Run `chmod u+x ./GpgFrontend-xxx.AppImage`.
-    4. **Launch**: Double-click the file or run it via terminal.
+    2. **Download** the `.AppImage` file from the [Downloads](/overview/downloads/) page.
+    3. **Allow it to run**: in the folder with the download, run
+    `chmod u+x ./GpgFrontend-xxx.AppImage`. Replace `GpgFrontend-xxx.AppImage`
+    with the real file name.
+    4. **Start** it: double-click the file, or run it from the terminal.
 
   </Steps>
 </TabItem>
 
   <TabItem label="BSD">
-    Currently, GpgFrontend must be **compiled from source** on BSD systems. Please refer to our [Build Instructions][github-gpgfrontend] on GitHub for a step-by-step guide.
+    There is no ready-made download for BSD yet. You have to **build
+    GpgFrontend from source**. The build instructions are in the
+    [GpgFrontend repository][github-gpgfrontend] on GitHub.
   </TabItem>
 </Tabs>
+
+<Aside type="note" title="Installed or portable?">
+  Most downloads come in two versions. The **installed** version is the normal
+  choice. The **portable** version keeps everything in its own folder, so you
+  can run it from a USB drive. The two do not share settings or keys, so pick
+  one before you start. See
+  [Portable Version](/overview/downloads/#portable-version) on the Downloads
+  page.
+</Aside>
 
 ## Step 3: The First Time You Open It
 
@@ -90,29 +115,36 @@ When GpgFrontend starts, a small **Starting GpgFrontend** window may appear. It
 shows a progress bar while your keys and modules load. Wait for it to finish.
 The main window then opens.
 
-A short **Welcome to GpgFrontend** window appears the first time GpgFrontend
-runs.
+The first time GpgFrontend runs, a short **Welcome to GpgFrontend** window
+also appears. It has three pages:
 
-1. The first page has a **Language:** setting. Pick yours there and the window
-   switches to it straight away, so you do not have to read the rest in
-   English.
-2. The next page offers links to the basics.
-3. The last page, **Ready to use**, has a **Check for updates on startup**
-   checkbox. It is off unless you tick it. If you tick it, GpgFrontend quietly
-   checks for a new version at most once a day. See
-   [Settings](/guides/settings/#the-updates-page). Sandboxed builds, such as
-   Flatpak, do not show this checkbox. The same page has **Don't show this
-   setup wizard again**, which is ticked. Finish the window with it ticked,
-   and it does not come back. If you untick it, or close the window early, it
-   opens again at the next start.
+1. **Welcome to GpgFrontend**. This page has a **Language:** list. Pick your
+   language there. The window switches to it straight away, so you do not have
+   to read the rest in English.
+2. **Choose a guide**. This page has links to guides for the basics. You can
+   skip it.
+3. **Ready to use**. This page has two checkboxes:
+   - **Check for updates on startup**. It is off unless you tick it. If you
+     tick it, GpgFrontend quietly checks for a new version at most once a
+     day. See [Settings](/guides/settings/#the-updates-page). Sandboxed
+     builds, such as Flatpak, do not show this checkbox.
+   - **Don't show this setup wizard again**. It is already ticked. If you
+     finish the window with it ticked, the window does not come back. If you
+     untick it, or close the window early, the window opens again at the
+     next start.
 
-Nothing in it is permanent. You can close it at any point, and everything it
-sets can be changed later in **Settings**. To see it again, click **Help** >
-**Open Wizard**.
+Nothing in this window is permanent. You can close it at any point, and you
+can change everything it sets later in **Settings**. To see the window again,
+click **Help** > **Open Wizard**.
 
 ## Step 4: Next Steps
 
-If you are new to PGP, we strongly recommend reading our [Fundamental Concepts](/guides/fundamental-concepts/) guide first.
+If you are new to OpenPGP, read
+[Fundamental Concepts](/guides/fundamental-concepts/) first. It explains what
+a key is and how encryption works, in plain words.
+
+To learn where things are in the main window, see
+[Interface Understanding](/guides/understand-interface/).
 
 ### Quick Links
 
@@ -122,24 +154,8 @@ If you are new to PGP, we strongly recommend reading our [Fundamental Concepts](
 - [Import/Export Keys](/guides/import-export-key-pair/)
 - [Using Smart Cards (YubiKey, etc.)](/guides/smart-card/)
 
-:::note[Installed or portable?]
-
-Most downloads come in two versions. The **installed** one keeps your
-settings and keys in your user folder. Choose it unless you have a special
-reason not to. The **portable** one keeps everything next to the program, so
-you can run it from a USB drive.
-
-They do not share data, so pick one before you start setting things up. See
-[Portable Mode](/advanced/portable-mode/).
-
-If you need more than one setup on the same computer, that is what
-[Profiles](/advanced/profiles/) are for.
-
-:::
-
-:::tip[Pro Tip]
-Need to understand the layout? Check the [Interface Understanding](/guides/understand-interface/) guide to familiarize yourself with the workspace.
-:::
+If you need more than one setup on the same computer, for example one for
+work and one for home, use [Profiles](/advanced/profiles/).
 
 [img-1]: https://image.cdn.bktus.com/i/2025/06/24/03df3c64a965b9da96c82ddb38c35b74b1796ee0.webp
 [github-gpgfrontend]: https://github.com/saturneric/GpgFrontend

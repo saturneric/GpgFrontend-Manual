@@ -20,9 +20,9 @@ For my OpenPGP public key, reply times, and other details, see
 
 ## Bugs and Feature Requests
 
-For anything about the software itself, an issue on the
-[GitHub repository][github-issues] is often
-faster than email, since it keeps the discussion in one place.
+For anything about the software itself, open an issue on the
+[GitHub repository][github-issues]. This is often faster than email, and it
+keeps the discussion in one place.
 
 [eric]: mailto:eric@bktus.com
 [bktus-contact]: https://bktus.com/contact/

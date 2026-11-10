@@ -10,54 +10,65 @@ sidebar:
 > "In a world of constant surveillance, everyone deserves a private machine that
 > just works."
 
-GpgFrontend is a free, open-source OpenPGP tool for encryption, signing, and key
-management. It turns the power of command-line OpenPGP into a clean desktop app,
-and it is the only one with a **dual-engine core**: switch freely between the
-proven **GnuPG** and a modern, memory-safe Rust **rPGP** backend. Everything runs
+GpgFrontend is a free, open-source app for OpenPGP encryption, signing, and
+key management. OpenPGP is a widely used standard for locking files and
+messages, so that only the right people can read them. GpgFrontend puts the
+power of the command-line tools into a clean desktop app.
+
+It has a **dual-engine core**. The engine is the part that does the
+encryption work. You can use the proven **GnuPG** engine or the modern,
+memory-safe **rPGP** engine, which is written in Rust. Everything runs
 **locally** on your device, with no accounts, no cloud, and no tracking.
 
 ## Features
 
 - **Easy**: encrypt and sign your text, files, and more in just a few clicks.
-- **Cross-platform**: native support for Windows, macOS, and Linux.
-- **Portable**: run straight from a USB drive and carry your keys with you.
+- **Cross-platform**: runs on Windows, macOS, and Linux.
+- **Portable**: run it straight from a USB drive and carry your keys with you.
+  See [Portable Mode](/advanced/portable-mode/).
 - **Email**: write, sign, encrypt and send email, and read it from your mail
-  server.
-- **Flexible**: keep keys apart in multiple, separate key databases.
-- **Dual-engine**: switch freely between the mature GnuPG and the Rust rPGP
-  backend.
+  server. See [Email Overview](/email/overview/).
+- **Key databases**: keep keys apart in several separate key databases. See
+  [Key Databases](/advanced/key-database/).
+- **Dual-engine**: use the mature GnuPG engine or the Rust rPGP engine.
 - **Profiles**: keep separate sets of keys and settings, and switch between
-  them.
-- **Future-proof**: explore OpenPGP v6 (RFC 9580) and post-quantum algorithms.
-- **Memory-safe**: sensitive data is guarded in secure memory while in use.
+  them. See [Profiles](/advanced/profiles/).
+- **Future-proof**: try the newest version of the OpenPGP standard (v6,
+  RFC 9580) and post-quantum algorithms. These are designed to stay safe even
+  against future quantum computers. See
+  [Post-Quantum Keys](/guides/post-quantum/).
+- **Protected memory**: sensitive data is guarded in secure memory while in
+  use. See [Memory Security](/advanced/memory-security/).
 - **Private**: everything runs locally, with no telemetry or tracking.
-- **Modules**: extra features come as modules. 
+- **Modules**: extra features come as modules. See
+  [Module Controller](/advanced/module-controller/).
 
-> If you like GpgFrontend, you can give it a ⭐ on [GitHub][github-gpgfrontend] as a donation. :)
+> If you like GpgFrontend, give it a ⭐ on [GitHub][github-gpgfrontend]. A star
+> helps more people find the project.
 
 ## Where It Came From
 
-GpgFrontend is inspired by, and shares the core ideas of, the stable, portable,
-cross-platform **[gpg4usb][git-gpg4usb]** project.
-Keeping that spirit of true portability, it builds on that foundation to add
-advanced features, modern cryptographic standards, and a clean, easy-to-use
-experience.
+GpgFrontend is inspired by **[gpg4usb][git-gpg4usb]**, a stable, portable,
+cross-platform project, and shares its core ideas. GpgFrontend keeps the same
+focus on portability. On top of that, it adds advanced features, modern
+cryptographic standards, and a clean, easy-to-use interface.
 
-As told in the article _["The Past and Present of GpgFrontend: My Journey with an
-Open-Source Encryption Tool"][blog-history]_, the
-project grew from a simple wish:
+The article _["The Past and Present of GpgFrontend: My Journey with an
+Open-Source Encryption Tool"][blog-history]_ tells the story. The project grew
+from a simple wish:
 
 > "What if everyone could have a small, reliable, and secure 'crypto machine'?"
 
-That is the heart of the mission: to make OpenPGP encryption truly easy by turning
-it into a sturdy, simple, handy "digital machine" for everyone, on any major
+That is the heart of the mission: to make OpenPGP encryption truly easy. The
+goal is a sturdy, simple, handy "digital machine" for everyone, on any major
 operating system.
 
 ## Open Source and Free
 
-GpgFrontend is licensed under **GPL-3.0** and built by a worldwide community. Every
-line of code is open to inspect, and contributions, from issue reports to code
-patches, are warmly welcome.
+GpgFrontend is licensed under **GPL-3.0** and built by a worldwide community.
+Every line of code is open to inspect. Contributions are warmly welcome, from
+issue reports to code patches. GpgFrontend is free, and the project does not
+take donations. See [Free & No Donations](/appendix/free-no-donation/).
 
 - [Application source code][github-gpgfrontend]
 - [User manual source code][github-gpgfrontend-manual]
