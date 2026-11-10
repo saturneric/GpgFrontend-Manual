@@ -6,8 +6,6 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
   },
-  // workers_dev enables the <name>.<account>.workers.dev staging URL.
-  // Set to false once gpgfrontend.bktus.com is confirmed working.
-  "workers_dev": true,
+  "workers_dev": false,
   "preview_urls": false
 }
