@@ -6,16 +6,18 @@ sidebar:
   order: 2
 ---
 
+import { Aside, Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+
 A **temporary profile** is a [profile](/advanced/profiles/) that only lasts as
 long as its window. It starts empty: no keys, no saved state. When you close
 its window, everything in it is destroyed. That means its keys, its settings
 and its files.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 Temporary profiles were added in GpgFrontend v2.2.3.
 
-:::
+</Aside>
 
 ## When to Use One
 
@@ -36,26 +38,36 @@ profile.
 
 ### From the menu
 
+<Steps>
+
 1. Open **Profiles** in the menu bar.
+
 2. Choose **New Temporary Profile**.
+
+</Steps>
 
 ### From Manage Profiles
 
+<Steps>
+
 1. Open **Profiles**, then **Manage Profiles...**.
+
 2. Click **New**, then **New Temporary Profile**.
+
+</Steps>
 
 ### From a terminal
 
-```bash
+```sh
 gpgfrontend --temp-profile
 ```
 
-:::note[Not in the Mac App Store Lite edition]
+<Aside type="note" title="Not in the Mac App Store Lite edition">
 
 The Lite edition from the Mac App Store has no **Profiles** menu, so it cannot
 open temporary profiles.
 
-:::
+</Aside>
 
 ## What It Starts With
 
@@ -82,17 +94,28 @@ files.
 - Click **Destroy and Close** to throw it all away and close the window.
 - Click **Cancel** to go back to the window.
 
+<Aside type="danger" title="There is no way back">
+
 There is no way to get a temporary profile back once it is destroyed.
+
+</Aside>
 
 ### Keep It Instead
 
 If you decide you want to keep what you made, save it first:
 
+<Steps>
+
 1. In the **Destroy Temporary Profile?** message, click **Cancel**.
+
 2. Open **Profiles**, then **Export This Profile...**.
+
 3. Save it to a file, as described in
    [Save a Profile to a File](/advanced/profiles/#save-a-profile-to-a-file).
+
 4. Close the window again and click **Destroy and Close**.
+
+</Steps>
 
 Later you can open or import that file like any other profile file.
 
@@ -105,10 +128,28 @@ new copy of the program, and that would destroy the temporary profile. So the
 program refuses to save such a change. It shows **Restart Not Possible**, and
 lists the settings pages with changes that need a restart.
 
-- On Windows and Linux, the settings window stays open. Undo those changes, or
-  click **Cancel** to throw away everything you changed in the settings window.
-- On macOS, the settings window closes and all the changes you made in it are
-  thrown away.
+What happens next depends on your system:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+
+The settings window stays open. Undo those changes, or click **Cancel** to
+throw away everything you changed in the settings window.
+
+  </TabItem>
+  <TabItem label="macOS">
+
+The settings window closes and all the changes you made in it are thrown
+away.
+
+  </TabItem>
+  <TabItem label="Linux">
+
+The settings window stays open. Undo those changes, or click **Cancel** to
+throw away everything you changed in the settings window.
+
+  </TabItem>
+</Tabs>
 
 ### No key protection
 

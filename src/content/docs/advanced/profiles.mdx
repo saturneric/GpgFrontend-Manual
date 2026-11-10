@@ -6,7 +6,7 @@ sidebar:
   order: 1
 ---
 
-import { Steps, Aside } from "@astrojs/starlight/components";
+import { Aside, Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 
 A **profile** is one complete GpgFrontend setup: its own keys, its own
 settings, and its own saved state. Think of it like a separate user account
@@ -49,11 +49,23 @@ The program shows a short type next to each profile:
 
 The **Default** profile is stored here:
 
-| System  | Folder                                             |
-| ------- | -------------------------------------------------- |
-| Windows | `C:\Users\<you>\AppData\Local\BKTUS\GpgFrontend\`  |
-| macOS   | `~/Library/Application Support/BKTUS/GpgFrontend/` |
-| Linux   | `~/.local/share/BKTUS/GpgFrontend/`                |
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+
+`C:\Users\<you>\AppData\Local\BKTUS\GpgFrontend\`
+
+  </TabItem>
+  <TabItem label="macOS">
+
+`~/Library/Application Support/BKTUS/GpgFrontend/`
+
+  </TabItem>
+  <TabItem label="Linux">
+
+`~/.local/share/BKTUS/GpgFrontend/`
+
+  </TabItem>
+</Tabs>
 
 Profiles you make yourself live in a `profiles` folder inside that one. You do
 not have to go looking for them: in **Manage Profiles**, pick a profile and
@@ -153,6 +165,10 @@ this page needs the full edition.
 Opening a profile always opens a **second window**. The window you were in
 stays exactly as it was.
 
+The same profile cannot be open in two windows at once. If you try, the
+program tells you it is already open somewhere else. This is on purpose:
+two windows writing to one profile would damage it.
+
 ### Pick Which Settings to Copy
 
 The **Settings** step lets the new profile start with the settings of the
@@ -190,14 +206,6 @@ keyring**.
 
 </Aside>
 
-<Aside type="note" title="One window per profile">
-
-The same profile cannot be open in two windows at once. If you try, the
-program tells you it is already open somewhere else. This is on purpose:
-two windows writing to one profile would damage it.
-
-</Aside>
-
 ## Save a Profile to a File
 
 A profile file has the ending `.gfp`. It holds the whole setup, keys included,
@@ -225,6 +233,14 @@ in one file you can copy anywhere.
    The program makes one, shows it, and copies it to the clipboard. Write it
    down somewhere safe right away. Click **Continue**.
 
+   <Aside type="caution" title="The passphrase cannot be recovered">
+
+   The file cannot be opened without this passphrase. If you forget it,
+   nobody can open the file again, including you. Write it down and keep it
+   somewhere safe.
+
+   </Aside>
+
    ![The Protection step of Export Profile][img-4]
 
 5. **Save**: check the summary. Next to **Save to**, click **Browse...** and
@@ -237,14 +253,6 @@ in one file you can copy anywhere.
    Click **Show in Folder** to see the file, or **Done** to close it.
 
 </Steps>
-
-<Aside type="caution" title="The passphrase cannot be recovered">
-
-The file cannot be opened without this passphrase. If you forget it, nobody
-can open the file again, including you. Write it down and keep it somewhere
-safe.
-
-</Aside>
 
 <Aside type="note" title="Changed in v2.2.4">
 
@@ -348,11 +356,15 @@ more.
 
 ### Work straight out of the file
 
-Choose **Profiles**, then **Open Profile File...**, and pick the file. Or just
-double-click the `.gfp` file in your system's file manager.
+<Steps>
 
-A new window starts and asks for the passphrase in **Open a Profile File**.
-Type it and click **Open**.
+1. Choose **Profiles**, then **Open Profile File...**, and pick the file. Or
+   just double-click the `.gfp` file in your system's file manager.
+
+2. A new window starts and asks for the passphrase in **Open a Profile File**.
+   Type it and click **Open**.
+
+</Steps>
 
 Nothing is added to this computer. When you close the window, the program asks
 whether to write your changes back into the same file. This is the one to use
@@ -399,10 +411,16 @@ deleted. Choose:
 Sometimes the program has to ask for the passphrase again before it can save.
 Then **Protect This Profile File** appears:
 
+<Steps>
+
 1. Type the passphrase in **Passphrase**, and again in **Repeat**.
+
 2. Tick **Show passphrase** if you want to check what you typed. The
    **Strength** bar shows how hard it is to guess.
+
 3. Click **Save**.
+
+</Steps>
 
 Whatever you type here becomes the file's passphrase. A different passphrase
 replaces the old one, and the old one will no longer open the file.
@@ -448,13 +466,22 @@ and damage its saved data.
 
 ## Delete a Profile
 
-Choose **Profiles**, then **Manage Profiles...**. Pick the profile, then
-choose **Delete...** from the **⋯** button or the right-click menu. You can
-also press Del.
+<Steps>
+
+1. Choose **Profiles**, then **Manage Profiles...**.
+
+2. Pick the profile, then choose **Delete...** from the **⋯** button or the
+   right-click menu. You can also press <kbd>Del</kbd>.
+
+</Steps>
+
+<Aside type="danger" title="There is no undo">
 
 The program asks twice, because there is no undo. Its keys, settings and
 saved state are removed from this computer for good. Export it to a file
 first if you might want it back.
+
+</Aside>
 
 You cannot delete the profile you are currently using, or one that is open in
 another window.
@@ -463,7 +490,7 @@ another window.
 
 You can pick a profile when starting the program from a terminal:
 
-```bash
+```sh
 # open a profile you made, using its folder name
 gpgfrontend --profile a3f19c
 
@@ -490,7 +517,7 @@ You can also name a profile in the `GF_PROFILE` environment variable, using
 its folder name. This is handy for scripts. `--profile` and a profile file on
 the command line win over it.
 
-```bash
+```sh
 GF_PROFILE=a3f19c gpgfrontend
 ```
 

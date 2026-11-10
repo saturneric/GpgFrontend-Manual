@@ -6,6 +6,8 @@ sidebar:
   order: 9
 ---
 
+import { Aside, FileTree, Steps } from "@astrojs/starlight/components";
+
 Besides your keys, GpgFrontend saves a few things of its own: key server
 entries, key generation profiles, window positions, and so on. The sensitive
 parts are encrypted with the program's own key.
@@ -22,13 +24,23 @@ For the key that does the protecting, and the choices you have about it, see
 
 ## Clear the Saved Data
 
+<Steps>
+
 1. Open **Settings** and go to **General**.
+
 2. In the **Data** box, click the button that starts with **Clear All Data
    Objects**. The button also shows the total size of the saved data.
+
 3. A **Confirm** window asks if you are sure. Click **Yes**.
+
+</Steps>
+
+<Aside type="danger" title="This cannot be undone">
 
 This removes window positions, the key server list and similar saved data.
 Your keys are not touched.
+
+</Aside>
 
 Sandboxed builds (Flatpak and Mac App Store) hide the **Data** box.
 
@@ -51,6 +63,14 @@ The files live inside your profile, in a folder called `data_objs`. Each file
 is named after a scrambled version of what it holds, so the file names give
 nothing away.
 
+<FileTree>
+
+- @profile/ your profile folder
+  - data_objs/
+    - … one file for each saved item
+
+</FileTree>
+
 ## Key Changes
 
 Below the **Maximum** [Secure Level](/advanced/memory-security/), the program
@@ -71,7 +91,7 @@ GpgFrontend clears out saved files whose key is gone. It waits a few days
 first (3 days at **Strong** or **Maximum**, 7 days below that). Then it moves
 the files aside, and deletes them later.
 
-:::note[Changed in v2.2.0]
+<Aside type="note" title="Changed in v2.2.0">
 
 The way this data is protected changed in v2.2.0. Some data saved by v2.1.x or
 earlier may not be readable any more.
@@ -79,4 +99,4 @@ earlier may not be readable any more.
 This has never affected your OpenPGP keys, your messages, or your files. Only
 GpgFrontend's own saved settings.
 
-:::
+</Aside>

@@ -6,7 +6,7 @@ sidebar:
   order: 6
 ---
 
-import { Steps, Aside } from "@astrojs/starlight/components";
+import { Aside, Card, CardGrid, Steps } from "@astrojs/starlight/components";
 
 A **KeyPackage** is an encrypted file that holds a set of your OpenPGP keys.
 Use it to move your keys safely from one computer to another, for example when
@@ -31,12 +31,20 @@ use a profile file. If you only want your keys, use a KeyPackage.
 When you create a KeyPackage, GpgFrontend produces **two files**, and you set
 **one PIN**. You need all three to import the keys later:
 
-1. The **KeyPackage file** (`.gfpack`): Holds your keys, encrypted.
-2. The **key file** (`.key`): Holds the encryption key for the KeyPackage,
-   itself protected by your PIN. It is saved next to the KeyPackage file,
-   unless you choose another place, such as a separate drive.
-3. Your **PIN**: You choose it during creation. Without it, the KeyPackage
-   cannot be opened.
+<CardGrid>
+  <Card title="KeyPackage file (.gfpack)" icon="document">
+    Holds your keys, encrypted.
+  </Card>
+  <Card title="Key file (.key)" icon="seti:lock">
+    Holds the encryption key for the KeyPackage, itself protected by your PIN.
+    It is saved next to the KeyPackage file, unless you choose another place,
+    such as a separate drive.
+  </Card>
+  <Card title="PIN" icon="pencil">
+    You choose it during creation. Without it, the KeyPackage cannot be
+    opened.
+  </Card>
+</CardGrid>
 
 Keep this in mind before you start: if you lose any one of the three, the
 KeyPackage is useless. That is by design. Someone who steals just the
@@ -190,7 +198,7 @@ The KeyPackage format has changed between GpgFrontend versions. Create and
 import KeyPackages with the **same major version** of GpgFrontend whenever
 possible.
 
-<Aside type="caution">
+<Aside type="caution" title="Old KeyPackages">
 
 - KeyPackages created with **v2.1.9 or later** cannot be imported by versions
   older than v2.1.9.

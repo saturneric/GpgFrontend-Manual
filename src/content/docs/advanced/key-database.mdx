@@ -6,7 +6,7 @@ sidebar:
   order: 4
 ---
 
-import { Steps, Aside } from "@astrojs/starlight/components";
+import { Aside, Card, CardGrid, Steps } from "@astrojs/starlight/components";
 
 A **key database** is a folder where GpgFrontend keeps your keys. Every key you
 make or import goes into one key database.
@@ -386,7 +386,7 @@ You may see one of these messages:
 
 ### Delete a Database for Good
 
-<Aside type="caution">
+<Aside type="danger" title="This cannot be undone">
 
 This deletes the folder and every key in it, private keys included. It happens
 at once. It cannot be undone, and clicking **Cancel** in the settings window
@@ -491,7 +491,7 @@ are:
 - the list of databases when you move a key to a smart card;
 - the engine part of the status bar.
 
-<Aside type="tip">
+<Aside type="tip" title="Check before you add a key">
 
 Before you make or import a key, look at the key database button. It is the
 easiest way to avoid putting a key in the wrong place.
@@ -502,11 +502,17 @@ easiest way to avoid putting a key in the wrong place.
 
 Each key database uses exactly one engine:
 
-- **GnuPG**: the standard engine. Recommended for daily use. Keys are kept in a
-  GnuPG keyring, and the `gpg` command line can see them.
-- **rPGP**: a newer engine, built into GpgFrontend. Useful for newer OpenPGP
-  features, such as OpenPGP v6 or some post-quantum algorithms. Keys are kept
-  in a file named `gf_keydb.sqlite`.
+<CardGrid>
+  <Card title="GnuPG" icon="approve-check-circle">
+    The standard engine. Recommended for daily use. Keys are kept in a GnuPG
+    keyring, and the `gpg` command line can see them.
+  </Card>
+  <Card title="rPGP" icon="rocket">
+    A newer engine, built into GpgFrontend. Useful for newer OpenPGP features,
+    such as OpenPGP v6 or some post-quantum algorithms. Keys are kept in a file
+    named `gf_keydb.sqlite`.
+  </Card>
+</CardGrid>
 
 How the engine is chosen:
 

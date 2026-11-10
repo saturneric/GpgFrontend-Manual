@@ -6,6 +6,8 @@ sidebar:
   order: 12
 ---
 
+import { Aside, FileTree, Steps } from "@astrojs/starlight/components";
+
 This page is for people who want to build a module for GpgFrontend. It gives an
 overview of the parts and the rules. The full reference lives in two files in
 the source code:
@@ -18,13 +20,13 @@ the source code:
 If you only want to use a module someone else made, see
 [Module Controller](/advanced/module-controller/).
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 Modules are now signed `.gfmodule` packages with a `module.json` identity, a
 capability list and a Lua UI script. Loose `.so`, `.dll` or `.dylib` modules
 built for v2.2.2 no longer load.
 
-:::
+</Aside>
 
 ## How a Module Is Built
 
@@ -35,15 +37,22 @@ and Qt all come from the main project's CMake build. Modules are built when
 
 Each module folder holds:
 
-- `module.json`: the module's identity (see below);
-- `CMakeLists.txt`: one call to `gf_add_module()`;
-- the C++ sources;
-- `ui/main.lua`: the UI script, if the module has a user interface;
-- `ts/`: translation files.
+<FileTree>
+
+- modules/src/
+  - &lt;your-module&gt;/
+    - module.json the module's identity (see below)
+    - CMakeLists.txt one call to `gf_add_module()`
+    - … the C++ sources
+    - ui/
+      - main.lua the UI script, if the module has a user interface
+    - ts/ translation files
+
+</FileTree>
 
 A small `CMakeLists.txt` looks like this:
 
-```cmake
+```cmake title="CMakeLists.txt"
 gf_add_module(
   NAME   my_module
   QT     Core Widgets
@@ -64,7 +73,7 @@ and needs Qt 6.5 or later.
 This file is the one source of truth for the module's identity. The signed
 package manifest is made from it.
 
-```json
+```json title="module.json"
 {
   "schema_version": 1,
   "id": "com.example.my_module",
@@ -138,10 +147,14 @@ Every module ships as a signed `.gfmodule` package: a manifest and its Ed25519
 signature. An external module's package also carries the publisher public key
 that made the signature. Next to the package sits the native library it names:
 
-```text
-<key>/module.gfmodule
-<key>/native/<library>
-```
+<FileTree>
+
+- &lt;key&gt;/
+  - module.gfmodule
+  - native/
+    - &lt;library&gt;
+
+</FileTree>
 
 `<key>` is a folder name derived from the module `id`. GpgFrontend derives it
 again from the signed manifest and refuses a package in the wrong folder.
@@ -158,11 +171,13 @@ your module as part of a GpgFrontend build, then turn its package into one
 signed with your own publisher key. The tool for this is
 `gf_module_externalize`, built with GpgFrontend.
 
+<Steps>
+
 1. **Create a publisher key, once.** It is your lasting identity. Keep the
    secret file safe. Publish the `.pub` file, or its fingerprint, where your
    users can trust it.
 
-   ```bash
+   ```sh
    gf_module_externalize new-key --out publisher.key
    gf_module_externalize fingerprint --key publisher.key.pub
    ```
@@ -175,13 +190,13 @@ signed with your own publisher key. The tool for this is
    of the native library. Finish every step that rewrites the library (strip,
    `patchelf`, deploy tools) before you externalize.
 
-   ```bash
+   ```sh
    cmake -B build -DGPGFRONTEND_INTEGRATED_MODULE_NATIVE_BINDING=REQUIRED
    ```
 
 3. **Externalize the module's folder.**
 
-   ```bash
+   ```sh
    gf_module_externalize \
      --input build/artifacts/modules/<key> \
      --publisher-key publisher.key \
@@ -197,6 +212,8 @@ signed with your own publisher key. The tool for this is
    there is no way to reseal it without your secret key. The one exception is
    Authenticode signing of a Windows library, which the binding ignores by
    design.
+
+</Steps>
 
 The publisher name and URL are only claims. GpgFrontend shows them as such. What
 users trust is the publisher key.
@@ -227,7 +244,7 @@ A module's user interface has two parts:
 
 Here is the script of the bundled OpenPGP Structure Inspector:
 
-```lua
+```lua title="ui/main.lua"
 local open = commands.get("com.bktus.gpgfrontend.module.pgp_inspect.open_inspector")
 
 ui.mount {

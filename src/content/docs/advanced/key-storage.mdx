@@ -6,6 +6,8 @@ sidebar:
   order: 5
 ---
 
+import { Aside, CardGrid, FileTree, LinkCard } from "@astrojs/starlight/components";
+
 GpgFrontend can use two OpenPGP engines: **GnuPG** and **rPGP**. An engine is
 the part that does the actual OpenPGP work. The two engines store your keys in
 very different ways. That matters for three practical questions:
@@ -18,7 +20,7 @@ This page answers those questions for each engine. To learn how to set up
 databases and pick an engine for each one, see
 [Multi-Key Database](/advanced/key-database/).
 
-:::note[Keys can also live inside a profile]
+<Aside type="note" title="Keys can also live inside a profile">
 
 Since v2.2.2, a [profile](/advanced/profiles/) can hold its own keys instead of
 sharing the ones on your computer. When it does, the key database sits inside
@@ -26,7 +28,7 @@ the profile folder and travels with it.
 
 Everything on this page still applies. Only the location changes.
 
-:::
+</Aside>
 
 ## Where the Key Database Folders Are
 
@@ -43,17 +45,25 @@ key database:
   the database renames this folder.
 - **A key database on the Local Only tab**: the folder you chose yourself.
 
+<FileTree>
+
+- @profile/ your profile folder
+  - dbs/
+    - &lt;Name&gt;/ a key database on the In Profile tab
+
+</FileTree>
+
 Whichever engine a key database uses, its keys are in that folder. With the
 rPGP engine, look for the `gf_keydb.sqlite` file there.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 The **Automatic** and **Manual** choices are gone. What used to be
 **Automatic** is now the **In Profile** tab, and the folder is still
 `@profile/dbs/<Name>`. What used to be **Manual** is now the **Local Only**
 tab. See [Multi-Key Database](/advanced/key-database/).
 
-:::
+</Aside>
 
 ## Quick Comparison
 
@@ -72,6 +82,15 @@ With the GnuPG engine, GpgFrontend does not store your keys at all. It asks
 GnuPG to do the work (through the GPGME library), and GnuPG owns the keys.
 
 **Where the keys live:**
+
+<FileTree>
+
+- &lt;database-folder&gt;/ the GnuPG home directory of the database
+  - pubring.kbx public keys
+  - private-keys-v1.d/ secret keys, held by `gpg-agent`
+  - gf_keydb.sqlite made by GpgFrontend, holds no keys with GnuPG
+
+</FileTree>
 
 - **Public keys** are in the GnuPG keyring file (`pubring.kbx`) inside the
   GnuPG home directory of that database.
@@ -97,6 +116,15 @@ and `gpg-agent` are not involved at all.
 
 **Where the keys live:**
 
+<FileTree>
+
+- &lt;database-folder&gt;/
+  - gf_keydb.sqlite all keys and key details
+  - gf_keydb.sqlite-wal belongs to the database
+  - gf_keydb.sqlite-shm belongs to the database
+
+</FileTree>
+
 - Everything is in one SQLite database file, `gf_keydb.sqlite`, inside the
   database folder. Next to it you may see helper files whose names end in
   `-wal` and `-shm`. They belong to the database too.
@@ -114,14 +142,14 @@ The database file itself is **not encrypted**. Two things protect your keys:
 2. **The key's own passphrase**: A secret key with a passphrase is stored
    encrypted inside the database, just like in a normal OpenPGP key file.
 
-:::caution[Always set a passphrase for rPGP secret keys]
+<Aside type="caution" title="Always set a passphrase for rPGP secret keys">
 
 A secret key created **without** a passphrase sits in the database with no
 encryption of its own. File permissions are then its only protection. For any
 key you care about, set a passphrase, so the secret key stays encrypted even
 if someone gets a copy of the database file.
 
-:::
+</Aside>
 
 **What to back up:** The whole database folder that contains
 `gf_keydb.sqlite`. Remember that this backup contains your secret keys, so
@@ -143,6 +171,20 @@ features.
 
 ## Related Topics
 
-- [Multi-Key Database](/advanced/key-database/)
-- [Application Data Storage](/advanced/app-data-storage/)
-- [Memory Security](/advanced/memory-security/)
+<CardGrid>
+  <LinkCard
+    title="Multi-Key Database"
+    href="/advanced/key-database/"
+    description="Add key databases and pick an engine for each one."
+  />
+  <LinkCard
+    title="Application Data Storage"
+    href="/advanced/app-data-storage/"
+    description="How GpgFrontend protects the data it saves for you."
+  />
+  <LinkCard
+    title="Memory Security"
+    href="/advanced/memory-security/"
+    description="Keep passphrases and decrypted text out of memory."
+  />
+</CardGrid>

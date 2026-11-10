@@ -6,6 +6,8 @@ sidebar:
   order: 3
 ---
 
+import { Aside, Badge, Card, CardGrid, Steps } from "@astrojs/starlight/components";
+
 A **portable** copy of GpgFrontend keeps everything in its own folder, right
 next to the program. Nothing is written to the computer's user folders, so
 nothing of yours is left behind.
@@ -22,25 +24,41 @@ Portable is not a setting inside the program. It is a separate download.
 
 There are two kinds of download:
 
-- **Installed**: the normal choice. Settings and keys go in your user folder.
-- **Portable**: everything stays in the program's own folder.
+<CardGrid>
+  <Card title="Installed" icon="laptop">
+    The normal choice. Settings and keys go in your user folder.
+  </Card>
+  <Card title="Portable" icon="seti:folder">
+    Everything stays in the program's own folder.
+    <Badge text="Windows and Linux" variant="note" />
+  </Card>
+</CardGrid>
 
 The portable version is made for Windows and Linux. There is no portable
 version for macOS.
 
-To get it, go to the [Downloads](/overview/downloads/) page and open **More
-download options**. Put the portable download wherever you want it, such as on
-a USB drive. On Windows it is a `.zip` file, so unpack it first.
+To get it:
 
-:::note[Changed in v2.2.2]
+<Steps>
+
+1. Go to the [Downloads](/overview/downloads/) page and open **More download
+   options**.
+
+2. Put the portable download wherever you want it, such as on a USB drive.
+
+3. On Windows it is a `.zip` file, so unpack it first.
+
+</Steps>
+
+<Aside type="note" title="Changed in v2.2.2">
 
 Older versions had a `PortableMode=true` switch in an `ENV.ini` file, and
 before that a `PORTABLE.txt` file. Both are gone and no longer do anything.
 If you were using one, download the portable build instead.
 
-:::
+</Aside>
 
-:::caution[The two do not share anything]
+<Aside type="caution" title="The two do not share anything">
 
 An installed copy and a portable copy keep completely separate data. If you
 move from one to the other, you start with empty settings and no keys.
@@ -49,7 +67,7 @@ Nothing is carried over on its own.
 To bring a setup across, see [Profiles](/advanced/profiles/). You can save your
 whole setup to one file and open it in the other copy.
 
-:::
+</Aside>
 
 ## Where Things Are Kept
 

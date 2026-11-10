@@ -6,6 +6,8 @@ sidebar:
   order: 8
 ---
 
+import { Aside, Badge, FileTree, Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+
 GpgFrontend keeps one key of its own. This key locks the data the program
 saves for you: settings, cached details, key server entries, and so on.
 
@@ -35,9 +37,23 @@ of your other things anyway.
 GpgFrontend stores its key in the place where your computer already keeps
 passwords:
 
-- **Windows**: Credential Manager
-- **macOS**: your login keychain
-- **Linux**: your password service, such as GNOME Keyring or KWallet
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+
+Credential Manager.
+
+  </TabItem>
+  <TabItem label="macOS">
+
+Your login keychain.
+
+  </TabItem>
+  <TabItem label="Linux">
+
+Your password service, such as GNOME Keyring or KWallet.
+
+  </TabItem>
+</Tabs>
 
 Nothing changes for you day to day. The program never asks you for anything.
 But the key file on its own is now useless to someone who copies it.
@@ -59,9 +75,14 @@ On Linux, your password service may still be locked when GpgFrontend starts,
 for example right after you log in. GpgFrontend then asks the system to
 unlock it.
 
+<Steps>
+
 1. Your system shows its own unlock window. If you do not see it, look behind
    the GpgFrontend window and other open windows.
+
 2. Type the password for your keyring. This is often your login password.
+
+</Steps>
 
 If the keychain stays locked, GpgFrontend shows **Secure Key Unavailable**.
 Click **Show Details...** to see the reason your system gave. Then:
@@ -74,12 +95,12 @@ Click **Show Details...** to see the reason your system gave. Then:
   the first and **Yes** in the second. **Go Back** or **Cancel** stops the
   reset.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 On Linux, GpgFrontend now asks the system to unlock a locked keychain, and
 shows the system's reason when it cannot read it.
 
-:::
+</Aside>
 
 ### PIN at startup
 
@@ -89,7 +110,7 @@ saved can be read until you type it.
 This is the strongest of the three. It is also the only one where you can
 lose data.
 
-:::caution[A forgotten PIN cannot be recovered]
+<Aside type="danger" title="A forgotten PIN cannot be recovered">
 
 There is no reset that keeps your data. If you cannot remember the PIN, the
 only way to start the program again is to delete the key. Everything the key
@@ -100,7 +121,7 @@ warns you twice before doing it.
 
 Your OpenPGP keys are not affected. Only the program's own saved data is.
 
-:::
+</Aside>
 
 Use **Change PIN…** on the same settings page to pick a new one later. You
 need the current PIN to do it.
@@ -119,10 +140,12 @@ need the current PIN to do it.
 On the same settings page, just above the key protection choices, you will
 find **Secure Level:**. It has four levels:
 
-- **Standard**: no extra hardening. The default.
-- **Enhanced**: wipes memory as soon as it is finished with it.
-- **Strong**: also keeps sensitive memory out of the swap file.
-- **Maximum**: also changes the program's internal key every week.
+| Level        | What it does                                         |
+| ------------ | ---------------------------------------------------- |
+| **Standard** | No extra hardening. <Badge text="Default" />         |
+| **Enhanced** | Wipes memory as soon as it is finished with it.      |
+| **Strong**   | Also keeps sensitive memory out of the swap file.    |
+| **Maximum**  | Also changes the program's internal key every week.  |
 
 The first three are about memory, and are explained on
 [Memory Security](/advanced/memory-security/).
@@ -135,7 +158,7 @@ Weekly keys help little while the program's key has **No extra protection**.
 The settings page says so when you pick both, and suggests **System keychain**
 or **PIN at startup**.
 
-:::caution[Turning Maximum back off]
+<Aside type="danger" title="Turning Maximum back off">
 
 While Maximum is on, your data is saved with keys that keep changing. If you
 lower the level, the program stops loading those keys, and anything saved
@@ -145,7 +168,7 @@ GpgFrontend asks you to confirm this before it happens. The message is called
 **Turn Off Weekly Key Rotation?** and ends with **Lower the level anyway?**.
 Click **Yes** to go ahead, or **No** to keep Maximum.
 
-:::
+</Aside>
 
 Changes on the **Advanced** settings page only take effect after GpgFrontend
 restarts. GpgFrontend offers to restart for you.
@@ -156,7 +179,7 @@ The key lives inside the profile you are using, in a folder called `secure`.
 If you use several [profiles](/advanced/profiles/), each has its own key, and
 each can have its own protection setting.
 
-:::note[Changed in v2.2.2]
+<Aside type="note" title="Changed in v2.2.2">
 
 Earlier versions tied the PIN to Secure Level 3 and set the level in an
 `ENV.ini` file. Both are gone. Secure Level and key protection are now two
@@ -166,9 +189,17 @@ The way the key protects your saved data also changed in v2.2.0. Some data
 saved by much older versions may not be readable. This never affected your
 OpenPGP keys, messages or files.
 
-:::
+</Aside>
 
 ### If the Key File Is Missing
+
+<FileTree>
+
+- @profile/ your profile folder
+  - secure/
+    - app.key the program's key
+
+</FileTree>
 
 The key is kept in a file called `app.key` in the `secure` folder. If that file
 is gone, but the profile still holds data locked with it, GpgFrontend shows

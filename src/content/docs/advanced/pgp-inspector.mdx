@@ -6,17 +6,19 @@ sidebar:
   order: 13
 ---
 
+import { Aside, Steps } from "@astrojs/starlight/components";
+
 An encrypted message, a signature or a key looks like a block of random letters.
 The **OpenPGP Structure Inspector** shows what that block is made of. It opens a
 window that lists the parts one by one, in plain labels.
 
 It only reads. It never decrypts anything, and it never asks for your password.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 The OpenPGP Structure Inspector was added in GpgFrontend v2.2.3.
 
-:::
+</Aside>
 
 ## Why You Might Use It
 
@@ -34,39 +36,45 @@ It is also a good way to learn how OpenPGP works.
 
 ## Open the Inspector
 
+<Steps>
+
 1. Put the OpenPGP data in a tab of the Text Editor. For example, paste an
    encrypted message, or open a key file.
+
 2. Choose one of these:
+
    - Click **Advanced** in the menu bar, then **Open OpenPGP Structure
      Inspector**.
    - Right-click inside the text, then choose **Open OpenPGP Structure
      Inspector**.
 
-The **OpenPGP Structure** window opens and shows the current tab.
+   The **OpenPGP Structure** window opens and shows the current tab.
+
+</Steps>
 
 The menu item is greyed out when the current tab holds no OpenPGP data. It is
 also greyed out when the tab holds more than 16 MiB, because the inspector does
 not read data that large.
 
-:::note[Mac App Store Lite]
+<Aside type="note" title="Mac App Store Lite">
 
 This version hides the **Advanced** menu. Use the right-click menu in the Text
 Editor instead.
 
-:::
+</Aside>
 
 ## Read the Window
 
 The window has a search box at the top, a list of parts on the left, details
 on the right, and a summary line at the bottom.
 
-:::note[Changed in v2.2.4]
+<Aside type="note" title="Changed in v2.2.4">
 
 The window was redesigned. It used to show everything in one tree with a
 **Structure** and a **Value** column. Now the left side lists the parts, and
 the details of the part you click appear in tabs on the right.
 
-:::
+</Aside>
 
 ### The List on the Left
 

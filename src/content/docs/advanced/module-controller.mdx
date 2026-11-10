@@ -6,6 +6,8 @@ sidebar:
   order: 11
 ---
 
+import { Aside, Badge, Steps } from "@astrojs/starlight/components";
+
 A **module** is an optional part of GpgFrontend that adds a feature. Several
 come with the program, such as the one for key servers and the one for email.
 You can also add a module that someone else made.
@@ -20,7 +22,7 @@ already on.
 
 Click **Advanced** in the menu bar, then **Open Module Controller**.
 
-:::note[Flatpak and Mac App Store Lite]
+<Aside type="note" title="Flatpak and Mac App Store Lite">
 
 These versions run in a sandbox (a closed-off space the system gives the app).
 The Module Controller is not available there, and the **Module Discovery**
@@ -30,7 +32,7 @@ The Flatpak version shows the **Advanced** menu, with the items that modules
 add to it, but without **Open Module Controller**. The Mac App Store Lite
 version hides the whole menu.
 
-:::
+</Aside>
 
 ## Modules That Come With GpgFrontend
 
@@ -74,13 +76,13 @@ Some versions leave modules out:
 - The Flatpak version does not include **VersionChecking**, because Flathub
   delivers its updates.
 
-:::caution[Features leave with their module]
+<Aside type="caution" title="Features leave with their module">
 
 When you turn a module off, its menu items, buttons and settings pages
 disappear. For example, turn off **KeyServerSync** and the **Key Servers**
 settings page is gone, along with key server search and publishing.
 
-:::
+</Aside>
 
 ## The Module List
 
@@ -89,13 +91,17 @@ line counts them, for example "6 module(s) · 6 active".
 
 Each module has small labels under its name:
 
-- **Integrated**: comes with GpgFrontend.
-- **External**: a module you added.
-- **Signed**: an external module whose package signature was checked.
-- **Unsigned**: an external module with no checked signature.
-- **Auto**: starts by itself when GpgFrontend opens.
-- **Needs Approval**: an external module that waits for you to allow it.
-- **Refused**: GpgFrontend would not load this module.
+- <Badge text="Integrated" />: comes with GpgFrontend.
+- <Badge text="External" />: a module you added.
+- <Badge text="Signed" variant="success" />: an external module whose package
+  signature was checked.
+- <Badge text="Unsigned" variant="caution" />: an external module with no
+  checked signature.
+- <Badge text="Auto" />: starts by itself when GpgFrontend opens.
+- <Badge text="Needs Approval" variant="caution" />: an external module that
+  waits for you to allow it.
+- <Badge text="Refused" variant="danger" />: GpgFrontend would not load this
+  module.
 
 To find a module, type in the search box (**Search modules...**). To show only
 some modules, use the drop-down beside it: **All**, **Active**, **Inactive**,
@@ -115,10 +121,16 @@ Click a module to see its details on the right. They come in two parts:
 
 ## Turn a Module On or Off
 
+<Steps>
+
 1. Click the module in the list.
+
 2. Click **Activate** or **Deactivate**. This works straight away.
+
 3. To choose what happens the next time GpgFrontend starts, tick or untick
    **Activate on Start**.
+
+</Steps>
 
 ## Choose Which Modules GpgFrontend Looks For
 
@@ -138,51 +150,66 @@ A change takes effect after GpgFrontend restarts.
 Finding a module never runs it. A module you added only runs after you allow it,
 as the next section shows.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 This setting used to be called **Module Loading Policy**. Its new name is
 **Module Discovery**. The old **All Modules** choice is now
 **Also Look For Modules I've Added**, and it only looks. It does not run
 anything by itself.
 
-:::
+</Aside>
 
 ## Add a Module From Someone Else
 
+<Aside type="caution" title="Only add modules you trust">
+
 Only add a module from a person or project you trust. A module runs inside
 GpgFrontend and can do anything GpgFrontend can do.
+
+</Aside>
 
 The module's author gives you a folder. It holds a file named `module.gfmodule`
 and a folder named `native`. The author should also tell you the **publisher key
 fingerprint**: a long code that identifies them. Get it from a place you trust,
 such as their website.
 
+<Steps>
+
 1. In **Settings**, **General**, set **Module Discovery:** to **Also Look For
    Modules I've Added**. You do not need to restart yet.
+
 2. Open the Module Controller and click **Show Modules Folder**. Your modules
    folder opens.
+
 3. Copy the author's folder into it, as it is. Do not change or rename anything
    inside.
+
 4. Restart GpgFrontend and open the Module Controller again. The new module
    shows the label **Needs Approval**.
+
 5. Click the module. Compare the **Publisher key** shown in its details with the
    fingerprint the author gave you. They must match exactly.
+
 6. Click **Trust This Publisher Key...**. Read the message, then click **Yes**.
    The button changes to **Publisher Key Trusted**.
+
 7. Click **Enable This Module**. A message says "This module will be loaded the
    next time GpgFrontend starts."
+
 8. Restart GpgFrontend. The module now loads.
+
+</Steps>
 
 Trusting a publisher key does not turn anything on by itself. It only lets you
 enable modules signed with that key, one at a time. A module signed with a
 different key asks you again.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 Modules you add are now signed packages. You must trust the publisher key and
 enable each module before it runs.
 
-:::
+</Aside>
 
 ### Why a Module Is Not Loaded
 
@@ -221,8 +248,10 @@ You can ignore these tabs unless you build modules.
 - **Global Register Table**: values that modules and the program share, such as
   the GnuPG paths found on your computer. Use the search box, **Expand All** and
   **Collapse All** to look around. This tab is in every version.
-- **Events**, **Module Status** and **Commands**: tools for testing modules.
-  They only appear in nightly and debug builds, not in normal releases.
+- **Events**, **Module Status** and **Commands**
+  <Badge text="Nightly and debug builds" variant="note" />: tools for testing
+  modules. They only appear in nightly and debug builds, not in normal
+  releases.
 
 To get a report about your modules without opening the window, start GpgFrontend
 from a terminal with `--module-status FILE`. It loads the modules, writes a JSON

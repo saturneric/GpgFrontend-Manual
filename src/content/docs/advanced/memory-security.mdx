@@ -6,6 +6,8 @@ sidebar:
   order: 10
 ---
 
+import { Aside, Steps } from "@astrojs/starlight/components";
+
 While GpgFrontend works, your passphrases and your decrypted text have to sit
 in the computer's memory. **Secure Level** decides how much effort the program
 puts into clearing them out again afterwards.
@@ -15,17 +17,25 @@ would not want recovered from a memory dump or a swap file.
 
 ## Change It
 
-Open **Settings**, go to **Advanced**, and set **Secure Level:**.
+<Steps>
+
+1. Open **Settings**.
+
+2. Go to **Advanced**.
+
+3. Set **Secure Level:**.
+
+</Steps>
 
 The change takes effect after GpgFrontend restarts. It offers to restart for
 you.
 
-:::note[Changed in v2.2.2]
+<Aside type="note" title="Changed in v2.2.2">
 
 Older versions set this by putting a line like `SecureLevel=1` in an `ENV.ini`
 file next to the program. That file is no longer read. Use the settings page.
 
-:::
+</Aside>
 
 ## The Levels
 
@@ -78,20 +88,26 @@ the text editor. The old text is gone once the result appears.
 
 If you want undo back:
 
+<Steps>
+
 1. Open **Settings** and go to **General**.
+
 2. Under **Operation**, tick **Allow undoing encrypt, decrypt and other
    operations in the text editor.**
+
 3. Click **OK**. On macOS, close the window instead.
+
+</Steps>
 
 Leave it off if you handle sensitive text. As the setting's tooltip says,
 undo keeps the previous text in memory, and after encrypting that is the plain
 text.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 Undo after an operation is now off by default, and has its own setting.
 
-:::
+</Aside>
 
 ## Unsaved Editor Tabs
 
@@ -114,9 +130,15 @@ close those tabs or turn the cache off.
 
 If you would rather nothing is kept:
 
+<Steps>
+
 1. Open **Settings** and go to **General**.
+
 2. Under **Operation**, untick **Cache text editor contents.**
+
 3. Click **OK**. On macOS, close the window instead.
+
+</Steps>
 
 With the cache off, quitting asks whether to save your unsaved tabs, and
 any cached tabs are cleared the next time the program starts.

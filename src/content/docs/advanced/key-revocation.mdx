@@ -82,8 +82,11 @@ The longer way goes through the key's own window:
 
 ## Revoke a Key With a Certificate
 
-This step cannot be undone. Once the certificate is imported, the key stays
-revoked.
+<Aside type="danger" title="This cannot be undone">
+
+Once the certificate is imported, the key stays revoked.
+
+</Aside>
 
 <Steps>
 
@@ -111,7 +114,7 @@ revoked.
 
    You can also publish from the command line:
 
-   ```shell
+   ```sh
    gpg --keyserver hkps://keyserver.ubuntu.com --send-keys <YOUR_KEY_ID>
    ```
 
