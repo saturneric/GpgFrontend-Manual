@@ -6,7 +6,7 @@ sidebar:
   order: 4
 ---
 
-import { Aside } from "@astrojs/starlight/components";
+import { Aside, Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 
 Questions are grouped by topic. Click any question to open its answer.
 
@@ -35,9 +35,23 @@ from source. For the exact versions, see
 
 Get the newest version from the [Downloads](/overview/downloads/) page. Then:
 
-- **Windows**: run the new installer.
-- **macOS**: replace the old app with the new one.
-- **Linux**: replace the old AppImage file with the new one.
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Run the new installer.
+
+</TabItem>
+<TabItem label="macOS">
+
+Replace the old app with the new one.
+
+</TabItem>
+<TabItem label="Linux">
+
+Replace the old AppImage file with the new one.
+
+</TabItem>
+</Tabs>
 
 Your settings and keys are kept, unless the release notes say otherwise. If
 you installed from an app store or a package manager, update there instead.
@@ -361,20 +375,38 @@ features.
 To use the GnuPG engine, the keys you already have in GnuPG, smart cards, or
 other GnuPG-only features, install GnuPG:
 
-- **macOS:** Install GnuPG using Homebrew with `brew install gnupg`.
-- **Linux:** Install GnuPG via your package manager, for example
-  `sudo apt install gpg` or `sudo dnf install gnupg`.
-- **Windows:** Recent regular desktop builds include GnuPG. If needed, you can
-  also download GnuPG from the [official GnuPG website][gnupg-download].
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Recent regular desktop builds include GnuPG. If needed, you can also
+download GnuPG from the [official GnuPG website][gnupg-download].
+
+</TabItem>
+<TabItem label="macOS">
+
+Install GnuPG using Homebrew with `brew install gnupg`.
+
+</TabItem>
+<TabItem label="Linux">
+
+Install GnuPG via your package manager, for example `sudo apt install gpg`
+or `sudo dnf install gnupg`.
+
+</TabItem>
+</Tabs>
 
 </details>
 
 <details>
 <summary>How do I import or export keys in GpgFrontend?</summary>
 
+<Steps>
+
 1. In the main window, click **Keys** > **Manage Keys**. The **KeyPair
    Management** window opens.
 2. Open its **Key** menu. It has **Import Key** and **Export Key**.
+
+</Steps>
 
 You can also drag key files and drop them onto the **Key ToolBox**, the key
 list in the main window. See
@@ -427,19 +459,6 @@ language under **Language**. Want to help translate? See the
 </details>
 
 <details>
-<summary>I cannot find a setting. Where did the tabs go?</summary>
-
-The settings window was rebuilt in v2.2.2. The row of tabs across the top is
-gone. In its place there is a search box and a list of pages down the left
-side.
-
-Type what you are looking for into the search box. It matches page names and
-the settings on them, so you do not have to guess. See [Finding Your
-Settings](/guides/settings/).
-
-</details>
-
-<details>
 <summary>What is a profile?</summary>
 
 A profile is one complete GpgFrontend setup: its own keys, its own settings,
@@ -482,6 +501,48 @@ usual. See [Instant Messaging](/guides/instant-messaging/).
 </details>
 
 <details>
+<summary>What are Nightly versions?</summary>
+
+Nightly versions are test builds. They are made automatically from the
+newest code, with new features and fixes that are still being tested. They
+are less stable than official releases and may change in ways that break
+things. Do not use them for important work. Get them from the
+[Downloads page](/overview/downloads/#test-builds).
+
+Nightly files are not signed with the maintainer's OpenPGP key. Instead, each
+nightly file comes with a `.minisig` signature file. Always use it to check
+your download. You can also check that GitHub built the files for this
+project. See
+[Check a Test Build](/appendix/code-binary-verify/#check-a-test-build).
+
+Nightly downloads are larger than official ones, because they include
+information for finding bugs. The app runs just as fast. Please report
+problems and feedback on GitHub.
+
+For how stable, beta and nightly builds relate, see [Stable, Beta, and
+Nightly](/appendix/version-policy/#stable-beta-and-nightly) in the Version
+Numbering Policy.
+
+</details>
+
+## Changes in Recent Versions
+
+Looking for something that moved or went away after an update? Start here.
+
+<details>
+<summary>I cannot find a setting. Where did the tabs go?</summary>
+
+The settings window was rebuilt in v2.2.2. The row of tabs across the top is
+gone. In its place there is a search box and a list of pages down the left
+side.
+
+Type what you are looking for into the search box. It matches page names and
+the settings on them, so you do not have to guess. See [Finding Your
+Settings](/guides/settings/).
+
+</details>
+
+<details>
 <summary>Where did my favourite keys go?</summary>
 
 The **Favourite** tab was replaced by key categories in v2.2.2. Categories do
@@ -514,31 +575,6 @@ while starting.
 It is still a good idea to check that your download is genuine. The best time
 to do that is before you install. See [Code & Binary
 Verify](/appendix/code-binary-verify/).
-
-</details>
-
-<details>
-<summary>What are Nightly versions?</summary>
-
-Nightly versions are test builds. They are made automatically from the
-newest code, with new features and fixes that are still being tested. They
-are less stable than official releases and may change in ways that break
-things. Do not use them for important work. Get them from the
-[Downloads page](/overview/downloads/#test-builds).
-
-Nightly files are not signed with the maintainer's OpenPGP key. Instead, each
-nightly file comes with a `.minisig` signature file. Always use it to check
-your download. You can also check that GitHub built the files for this
-project. See
-[Check a Test Build](/appendix/code-binary-verify/#check-a-test-build).
-
-Nightly downloads are larger than official ones, because they include
-information for finding bugs. The app runs just as fast. Please report
-problems and feedback on GitHub.
-
-For how stable, beta and nightly builds relate, see [Stable, Beta, and
-Nightly](/appendix/version-policy/#stable-beta-and-nightly) in the Version
-Numbering Policy.
 
 </details>
 

@@ -5,8 +5,13 @@ sidebar:
   order: 3
 ---
 
-import { LinkCard, CardGrid } from "@astrojs/starlight/components";
-import { Tabs, TabItem, Aside } from "@astrojs/starlight/components";
+import {
+  Aside,
+  CardGrid,
+  LinkCard,
+  TabItem,
+  Tabs,
+} from "@astrojs/starlight/components";
 import BuildDownloads from "../../../components/BuildDownloads.astro";
 
 Click the button to download GpgFrontend. It's free. The box picks the right
@@ -21,7 +26,7 @@ You can also install GpgFrontend from an app store or a package manager (a
 tool that installs and updates programs for you). Updates then come through
 the store or the package manager. Pick your system:
 
-<Tabs>
+<Tabs syncKey="os">
   <TabItem label="Windows">
     <CardGrid>
       <LinkCard

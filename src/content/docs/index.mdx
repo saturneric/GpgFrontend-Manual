@@ -27,7 +27,7 @@ hero:
         rel: noopener
 ---
 
-import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+import { Card, CardGrid, LinkCard, Steps } from "@astrojs/starlight/components";
 
 ## Why GpgFrontend
 
@@ -82,10 +82,14 @@ day.
 
 Never used encryption before? You can be up and running in a few minutes:
 
+<Steps>
+
 1. [Install GpgFrontend](/overview/getting-started/) for your system.
 2. [Make your first key](/guides/generate-key/), then back it up somewhere safe.
 3. [Encrypt a file](/guides/file-operations/) or
    [some text](/guides/text-operations/).
+
+</Steps>
 
 Not sure what a "key" is? Start with
 [Fundamental Concepts](/guides/fundamental-concepts/). It explains everything in

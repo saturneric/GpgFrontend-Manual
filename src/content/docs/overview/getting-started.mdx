@@ -6,8 +6,14 @@ sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem, Aside } from "@astrojs/starlight/components";
-import { Steps } from "@astrojs/starlight/components";
+import {
+  Aside,
+  CardGrid,
+  LinkCard,
+  Steps,
+  TabItem,
+  Tabs,
+} from "@astrojs/starlight/components";
 
 This page takes you from nothing to a running GpgFrontend. You pick an
 engine, install the app, and open it for the first time. It takes a few
@@ -44,60 +50,76 @@ Pick your system below. The steps use the direct download. To install from an
 app store or a package manager instead (for example WinGet or Flatpak), see
 the [Downloads](/overview/downloads/) page.
 
-<Tabs>
-  <TabItem label="Windows">
-    ### Installer (Recommended)
-    <Steps>
-    1. **Download** the `.msi` installer from the [Downloads](/overview/downloads/) page.
-    2. **Open** the file. Accept the license, then click **Next** until it
-       is installed.
-    3. **Start** GpgFrontend from the new shortcut on your desktop.
-    </Steps>
+<Tabs syncKey="os">
+<TabItem label="Windows">
 
-    ### Portable Version
-    <Steps>
-    1. **Download** the `windows-x86_64-portable.zip` file from the
-       [Downloads](/overview/downloads/) page. To find it, open
-       **More download options** in the download box.
-    2. **Unpack** the ZIP file into any folder you like.
-    3. **Open** the `bin` folder inside it and run `GpgFrontend.exe`.
-    </Steps>
+### Installer (Recommended)
 
-  </TabItem>
+<Steps>
 
+1. **Download** the `.msi` installer from the
+   [Downloads](/overview/downloads/) page.
+2. **Open** the file. Accept the license, then click **Next** until it is
+   installed.
+3. **Start** GpgFrontend from the new shortcut on your desktop.
+
+</Steps>
+
+### Portable Version
+
+<Steps>
+
+1. **Download** the `windows-x86_64-portable.zip` file from the
+   [Downloads](/overview/downloads/) page. To find it, open
+   **More download options** in the download box.
+2. **Unpack** the ZIP file into any folder you like.
+3. **Open** the `bin` folder inside it and run `GpgFrontend.exe`.
+
+</Steps>
+
+</TabItem>
 <TabItem label="macOS">
-  <Steps>
-    1. **Install GnuPG** with Homebrew: open the Terminal app and run
-    `brew install gnupg`.
-    2. **Download** the `.dmg` file from the [Downloads](/overview/downloads/) page.
-    3. **Open** the `.dmg` file and drag **GpgFrontend** into your
-    **Applications** folder.
-     ![Drag to Applications][img-1]
-    4. **Start** GpgFrontend from your **Applications** folder.
 
-  </Steps>
-  
+<Steps>
+
+1. **Install GnuPG** with Homebrew: open the Terminal app and run
+   `brew install gnupg`.
+2. **Download** the `.dmg` file from the [Downloads](/overview/downloads/)
+   page.
+3. **Open** the `.dmg` file and drag **GpgFrontend** into your
+   **Applications** folder.
+
+   ![Drag to Applications][img-1]
+
+4. **Start** GpgFrontend from your **Applications** folder.
+
+</Steps>
+
 </TabItem>
-
 <TabItem label="Linux">
-  <Steps>
-    1. **Check GnuPG**: open a terminal and run `gpg --version`. If the
-    command is not found, install GnuPG (`sudo apt install gpg` or
-    `sudo dnf install gnupg`).
-    2. **Download** the `.AppImage` file from the [Downloads](/overview/downloads/) page.
-    3. **Allow it to run**: in the folder with the download, run
-    `chmod u+x ./GpgFrontend-xxx.AppImage`. Replace `GpgFrontend-xxx.AppImage`
-    with the real file name.
-    4. **Start** it: double-click the file, or run it from the terminal.
 
-  </Steps>
+<Steps>
+
+1. **Check GnuPG**: open a terminal and run `gpg --version`. If the command
+   is not found, install GnuPG (`sudo apt install gpg` or
+   `sudo dnf install gnupg`).
+2. **Download** the `.AppImage` file from the
+   [Downloads](/overview/downloads/) page.
+3. **Allow it to run**: in the folder with the download, run
+   `chmod u+x ./GpgFrontend-xxx.AppImage`. Replace `GpgFrontend-xxx.AppImage`
+   with the real file name.
+4. **Start** it: double-click the file, or run it from the terminal.
+
+</Steps>
+
 </TabItem>
+<TabItem label="BSD">
 
-  <TabItem label="BSD">
-    There is no ready-made download for BSD yet. You have to **build
-    GpgFrontend from source**. The build instructions are in the
-    [GpgFrontend repository][github-gpgfrontend] on GitHub.
-  </TabItem>
+There is no ready-made download for BSD yet. You have to **build GpgFrontend
+from source**. The build instructions are in the
+[GpgFrontend repository][github-gpgfrontend] on GitHub.
+
+</TabItem>
 </Tabs>
 
 <Aside type="note" title="Installed or portable?">
@@ -148,11 +170,33 @@ To learn where things are in the main window, see
 
 ### Quick Links
 
-- [Generate Your First Key Pair](/guides/generate-key/)
-- [Encrypting Files](/guides/file-operations/)
-- [Encrypting Text Messages](/guides/text-operations/)
-- [Import/Export Keys](/guides/import-export-key-pair/)
-- [Using Smart Cards (YubiKey, etc.)](/guides/smart-card/)
+<CardGrid>
+  <LinkCard
+    title="Generate Your First Key Pair"
+    description="Make the key you need to encrypt and sign."
+    href="/guides/generate-key/"
+  />
+  <LinkCard
+    title="Encrypting Files"
+    description="Encrypt, decrypt, sign and check files and folders."
+    href="/guides/file-operations/"
+  />
+  <LinkCard
+    title="Encrypting Text Messages"
+    description="Encrypt, decrypt, sign and check text."
+    href="/guides/text-operations/"
+  />
+  <LinkCard
+    title="Import/Export Keys"
+    description="Share your public key, and back up your keys."
+    href="/guides/import-export-key-pair/"
+  />
+  <LinkCard
+    title="Using Smart Cards (YubiKey, etc.)"
+    description="Keep your private key on a hardware card."
+    href="/guides/smart-card/"
+  />
+</CardGrid>
 
 If you need more than one setup on the same computer, for example one for
 work and one for home, use [Profiles](/advanced/profiles/).
