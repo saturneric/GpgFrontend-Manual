@@ -134,3 +134,24 @@ html.lightbox-open {
     transition: none;
   }
 }
+/* Keyboard keys: <kbd>Ctrl</kbd>+<kbd>F</kbd> */
+.sl-markdown-content kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 0.05em 0.4em;
+  border: 1px solid var(--sl-color-gray-4);
+  border-bottom-width: 2px;
+  border-radius: 0.3rem;
+  background: var(--sl-color-gray-6);
+  color: var(--sl-color-white);
+  font-family: var(--sl-font-system-mono);
+  font-size: 0.85em;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Keep a badge such as "GnuPG 2.3+" on one line inside table cells. */
+.sl-markdown-content td .sl-badge {
+  white-space: nowrap;
+}
