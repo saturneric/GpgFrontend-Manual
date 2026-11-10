@@ -413,6 +413,7 @@ const stable = channel === "stable";
     const choices = choicesFor(ctx, v);
     if (choices.length) {
       const row = el("div", "dl-choices");
+      let hasSig = false;
       choices.forEach(([a, target], i) => {
         const cls =
           stable && i === 0 ? "dl-button" : "dl-button secondary";
@@ -434,7 +435,17 @@ const stable = channel === "stable";
         ]
           .filter(Boolean)
           .join(" · ");
-        row.append(el("div", "dl-choice", button, el("div", "dl-meta", meta)));
+        const metaEl = el("div", "dl-meta", meta);
+        // Stable files are signed with the maintainer's OpenPGP key.
+        const sig = stable ? ctx.url(a.sig) : null;
+        if (sig) {
+          const s = link(sig, "OpenPGP signature");
+          s.title = "Signature (.sig)";
+          s.setAttribute("aria-label", `OpenPGP signature for ${a.name}`);
+          metaEl.append(" · ", s);
+          hasSig = true;
+        }
+        row.append(el("div", "dl-choice", button, metaEl));
       });
       hero.append(row);
 
@@ -465,19 +476,31 @@ const stable = channel === "stable";
         }
       }
 
-      const steps = STEPS[v.os ?? ""];
-      if (stable && steps) {
+      // What to do next, and how to check the file, folded away so the
+      // button stays the main thing in the box.
+      const steps = stable ? STEPS[v.os ?? ""] : undefined;
+      if (steps || hasSig) {
+        const next = el("details", "dl-next");
+        next.append(el("summary", undefined, "What to do after it downloads"));
+        if (steps) {
+          next.append(
+            el("ol", undefined, ...steps.map((s) => el("li", undefined, s))),
+          );
+        }
+        if (hasSig) {
+          const check = el("p", "dl-next-help");
+          check.append(
+            "To make sure the file is genuine, also download its OpenPGP " +
+              "signature. See ",
+            link(HOW_TO.stable, "How to check a download"),
+            ".",
+          );
+          next.append(check);
+        }
         const help = el("p", "dl-next-help");
         help.append("Need more help? See ", link(GETTING_STARTED, "Getting Started"), ".");
-        hero.append(
-          el(
-            "div",
-            "dl-next",
-            el("p", "dl-next-title", "After it downloads:"),
-            el("ol", undefined, ...steps.map((s) => el("li", undefined, s))),
-            help,
-          ),
-        );
+        next.append(help);
+        hero.append(next);
       }
     } else {
       hero.append(el("p", "dl-hint", noChoiceMessage(ctx, v)));
@@ -925,13 +948,8 @@ const stable = channel === "stable";
     margin-top: 1.25rem;
     font-size: var(--sl-text-sm);
   }
-  .dl-next-title {
-    margin: 0;
-    font-weight: 600;
-    color: var(--sl-color-white);
-  }
   .dl-next ol {
-    margin: 0.35rem 0 0;
+    margin: 0.5rem 0 0;
     padding-inline-start: 1.4rem;
     list-style: decimal;
   }
@@ -971,6 +989,7 @@ const stable = channel === "stable";
     border-top: 1px solid var(--sl-color-gray-5);
     padding-top: 0.75rem;
   }
+  .dl-next summary,
   .dl-more summary {
     display: inline-flex;
     align-items: center;
@@ -981,9 +1000,11 @@ const stable = channel === "stable";
     font-weight: 600;
     color: var(--sl-color-white);
   }
+  .dl-next summary::-webkit-details-marker,
   .dl-more summary::-webkit-details-marker {
     display: none;
   }
+  .dl-next summary::before,
   .dl-more summary::before {
     content: "";
     width: 0.45rem;
@@ -993,6 +1014,7 @@ const stable = channel === "stable";
     transform: rotate(-45deg);
     transition: transform 0.15s;
   }
+  .dl-next[open] summary::before,
   .dl-more[open] summary::before {
     transform: rotate(45deg);
   }
