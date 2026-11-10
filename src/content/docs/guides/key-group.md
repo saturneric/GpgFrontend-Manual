@@ -6,9 +6,9 @@ sidebar:
   order: 13
 ---
 
-A Key Group lets you bundle many public keys together and use them as one key.
-This makes it easy to send an encrypted message or file to several people at the
-same time.
+A key group bundles several public keys together, so you can use them as one
+key. This makes it easy to send an encrypted message or file to several people
+at the same time.
 
 :::note[Not the same as a key category]
 
@@ -21,7 +21,7 @@ cannot encrypt to one.
 
 ## What is a Key Group?
 
-Think of a Key Group as a mailing list for encryption. You give the group a name
+Think of a key group as a mailing list for encryption. You give the group a name
 and put public keys inside it. When you encrypt to the group, every person whose
 key is in the group can open the message.
 
@@ -40,13 +40,14 @@ group, you pick the group once and you are done.
 
 ## Create a Key Group
 
-1. **Pick the keys.** In the Key ToolBox panel, tick the box at the start of
-   the row of each public key you want in the group.
-2. **Click the New Key Group button.** It is in the toolbar above the key list.
+1. **Pick the keys.** In the Key ToolBox, tick the box at the start of the
+   row of each public key you want in the group.
+2. **Click the New Key Group button.** It is in the row of buttons above the
+   key list.
 3. **Fill in the details.** A window called **New Key Group** opens. Type a
    **Name**. The **Email** and **Comment** are optional. Click **Create**.
-4. **Done.** Your new group shows up in the key list with the Type set to
-   "group". You can now use it just like a single public key.
+4. **Done.** Your new group shows up in the key list. Its **Type** is
+   `group`. You can now use it just like a single public key.
 
 ![][img-1]
 
@@ -56,8 +57,8 @@ group, you pick the group once and you are done.
 
 ## Edit a group
 
-You can change a group whenever you want. Double-click the group in the list to
-open the **Key Group Management** window.
+You can change a group whenever you want. Double-click the group in the key
+list to open the **Key Group Management** window.
 
 ![][img-3]
 
@@ -80,14 +81,14 @@ The window has three parts:
 
 ### Add keys to the group
 
-1. In **Available Keys**, check the box next to each key or group you want.
+1. In **Available Keys**, tick the box next to each key or group you want.
+   To find a key quickly, press **Ctrl+F** and type in the search box above
+   **Available Keys**.
 2. Click **Add**, or press **Alt+Left**.
-
-Press **Ctrl+F** to jump to the search box above **Available Keys**.
 
 ### Remove keys from the group
 
-1. In **Members**, check the box next to each key you want to take out.
+1. In **Members**, tick the box next to each key you want to take out.
 2. Click **Remove**, or press **Alt+Right**. You can also press **Delete**.
 
 ### Right-click a member
@@ -121,7 +122,7 @@ in it.
 
 ## Things to keep in mind
 
-Key Groups are easy to use, but they follow a few rules. Read these so you know
+Key groups are easy to use, but they follow a few rules. Read these so you know
 what to expect.
 
 ### Setting trust for the whole group
@@ -133,8 +134,8 @@ once.
 
 ### Only encryption keys can join
 
-You can only add a key that can encrypt (it has the E flag). If a key cannot
-encrypt, you cannot add it to a group.
+You can only add a key that can encrypt (it has an `E` in its **Usage**
+column). A key that cannot encrypt is not listed under **Available Keys**.
 
 ### Broken groups turn off by themselves
 
@@ -142,18 +143,18 @@ When you start GpgFrontend, it checks each group. If a key in a group is gone or
 can no longer encrypt, the group is turned off.
 
 - A turned-off group does not show in the Key ToolBox.
-- You can still see and fix it in the Key Management screen, where it is shown in
-  red so you know something is wrong.
+- You can still see and fix it in the **KeyPair Management** window. It is
+  shown in red there, so you know something is wrong.
 - If a group inside another group breaks, the outer group is turned off too.
 
 ### What groups can and cannot do
 
-A Key Group is only for encryption. You cannot use a group to sign, to decrypt,
+A key group is only for encryption. You cannot use a group to sign, to decrypt,
 or to certify.
 
 ### Groups stay inside GpgFrontend
 
-Key Groups live only inside GpgFrontend. They are not the same as GnuPG's
+Key groups live only inside GpgFrontend. They are not the same as GnuPG's
 "keygroup" feature and they are not saved in the `gpg.conf` file. Other OpenPGP
 tools will not see your groups.
 

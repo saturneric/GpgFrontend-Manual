@@ -9,8 +9,9 @@ sidebar:
 The **Key Details** window shows everything about a key: who it belongs to, its
 primary key and subkeys, the signatures on it, and the actions you can take.
 
-To open it, right-click a key in the **Key ToolBox** or the **KeyPair Management**
-window and choose **Show Key Details**. Double-clicking a key also opens this window.
+To open it, right-click a key in the **Key ToolBox** or the **KeyPair
+Management** window and choose **Show Key Details**. You can also double-click
+the key.
 
 ![][img-1]
 
@@ -28,74 +29,50 @@ each piece means.
 
 ### Owner
 
-Who the key belongs to. This isn't fixed: you can change it by creating a new UID
-in the UID section and setting it as the primary UID. OpenPGP splits this into
-**Name**, **Email**, and **Comment**.
+Who the key belongs to. The box shows the **Name**, **Email Address** and
+**Comment** of the key's primary UID (User ID).
+
+You can change the owner. On the **UIDs** tab, click **New UID** to add a new
+UID. Then right-click the new UID and choose **Set As Primary**. See
+[UID Info](#uid-info).
 
 ![][img-2]
 
 ### Primary Key
 
-The primary key is the heart of the key pair. Without its private part you can't do
-management tasks like adding or revoking subkeys, much like not being able to open
-the keyring. To learn more, see [Fundamental Concepts](/guides/fundamental-concepts).
+The primary key is the main key of the key pair. You need its private part to
+manage the key pair, for example to add or revoke subkeys. To learn more, see
+[Fundamental Concepts](/guides/fundamental-concepts).
 
-A "missing" primary key means the _private part_ of the primary key is absent, not
-that the whole key is gone. Remember: the primary key and every subkey is itself a
-pair of a public and a private key.
+A "missing" primary key means that only the _private part_ of the primary key
+is not there. The whole key is not gone. Remember: the primary key and every
+subkey each have a public part and a private part.
 
 ![][img-3]
 
 #### Key ID
 
-A short, unique ID for the key, fixed when the key is made. This is the primary
-key's ID. It is shorter and easier to read than the fingerprint.
+A short ID for the key. It is set when the key is made and never changes.
+This is the primary key's ID. It is shorter and easier to read than the
+fingerprint.
 
 Click the Key ID to copy it. A small note, **Copied to clipboard**, confirms
 it.
 
 #### Algorithm
 
-The algorithm the primary key was made with. It decides what the key can do. For
-example, RSA can encrypt and sign, while DSA can only sign. Modern elliptic-curve
-algorithms like ECDH (for key exchange) and ECDSA (for signatures) give strong
-security with shorter keys.
+The algorithm (the math) the primary key was made with. It decides what the
+key can do. For example, RSA can encrypt and sign, while DSA can only sign.
+Newer elliptic-curve algorithms, such as ECDH (for encryption) and ECDSA (for
+signatures), are just as strong with much shorter keys.
 
 #### Algorithm Detail
 
-Shows the key type and length together, and is sometimes more exact than the
-Algorithm field, naming the specific method such as ED25519 or NISTP256.
+Shows the key type and length together. It is sometimes more exact than the
+**Algorithm** field. For example, it names the curve, such as ED25519 or
+NISTP256.
 
 ![][img-4]
-
-#### Key Size
-
-The length of the primary key. Longer keys are harder to break but slower to use.
-For RSA, 2048 bits is generally safe enough.
-
-#### Usage
-
-What the key pair can do, combining the abilities of the primary key and all
-subkeys. The possible abilities are **Certificate** (it can sign other keys and
-its own subkeys), **Encrypt**, **Sign**, and **Auth** (it can prove who you are,
-for example to log in). For example, if any subkey can sign, **Sign** is listed
-here.
-
-#### Owner Trust Level
-
-How much you trust this key's owner to correctly verify and sign other keys, part
-of the web-of-trust model. This field is shown only when the active engine reports
-owner trust (GnuPG); engines that don't support it hide the field.
-
-#### Create Date (Local Time)
-
-When the primary key was made, shown in your local time.
-
-#### Expires on (Local Time)
-
-When the primary key expires. After that it can't be used for any operation, and
-its subkeys stop working too. You can change the expiration time whenever you like,
-or set it to never expire, as long as the primary key's private part exists.
 
 #### Key Format Version
 
@@ -118,6 +95,40 @@ use a GnuPG key database for them. See [Multi-Key Database](/advanced/key-databa
 
 :::
 
+#### Key Size
+
+The length of the primary key, in bits. Longer keys are harder to break but
+slower to use. For a new RSA key, use 3072 bits or more. Older 2048-bit RSA
+keys still work.
+
+#### Usage
+
+What the key pair can do. This combines what the primary key and all subkeys
+can do. For example, if any subkey can sign, **Sign** is listed here. The
+possible values are:
+
+- **Certificate**: it can certify (sign) other keys and its own subkeys.
+- **Encrypt**
+- **Sign**
+- **Auth**: it can prove who you are, for example to log in.
+
+#### Owner Trust Level
+
+How much you trust this key's owner to check and certify other people's keys.
+See [Trust Chain Management](/guides/openpgp-trust-manage/). This field is
+only shown with the GnuPG engine. The rPGP engine has no owner trust, so the
+field is hidden.
+
+#### Create Date (Local Time)
+
+When the primary key was made, shown in your local time.
+
+#### Expires on (Local Time)
+
+When the primary key expires. After that date the key can't be used, and its
+subkeys stop working too. You can change the date whenever you like, or set
+the key to never expire, as long as you have the primary key's private part.
+
 #### Last Update (Local Time)
 
 When the key pair's content last changed. Adding a UID or subkey counts as a
@@ -125,34 +136,41 @@ change.
 
 #### Primary Key Existence
 
-Whether the primary key's actual content is present, shown as **Exists** or **Not
-Exists**. If it is missing but the key pair still has usable subkeys, you can keep
-using the key for normal tasks. You just can't change its content (no adding UIDs
-or subkeys) or use it to sign other keys.
+Whether the primary key's private part is in this key database, shown as
+**Exists** or **Not Exists**. If it is missing but the key pair still has
+usable subkeys, you can keep using the key for normal tasks. You just can't
+change the key pair (for example, add UIDs or subkeys) or certify other keys
+with it. See
+[Keep Your Primary Key Offline](/guides/generate-use-subkey/#keep-your-primary-key-offline-optional).
 
 ### Fingerprint
 
 ![][img-5]
 
-The fingerprint is a unique code people use to quickly check that a key is the one
-they expect. It is unique for every key in the world. (You can also compare the
-Key ID above.) This is the primary key's fingerprint.
+The fingerprint is a long code that is different for every key. People
+compare it to check that a key is the one they expect. This is the primary
+key's fingerprint.
 
 Click the fingerprint to copy it. The copy has no spaces, even though the
 window shows the fingerprint in groups.
 
 ## UID Info
 
-This part is on the **UIDs** tab. A User ID (UID) is the label that says who a key belongs to, like a name tag on a
-keyring. It gives you a rough idea whether a key is the one you expect, but for
-sure identification you should compare fingerprints or key IDs. A key can have
-several UIDs, but only one **primary UID**, which is always shown first.
+This part is on the **UIDs** tab. A User ID (UID) is the label that says who
+a key belongs to, like a name tag. It gives you a rough idea whether a key is
+the one you expect. To be sure, compare fingerprints. A key can have several
+UIDs, but only one **primary UID**, which is always shown first.
 
 ![View Key Pair Details UID][img-6]
 
-Each UID has three parts: **Name**, **Email**, and **Comment**. The name should be
-at least five characters and the email must be a valid format; comments are
-flexible.
+Each UID has three parts: **Name**, **Email**, and **Comment**. To add one,
+click **New UID**. These rules apply:
+
+- The name is required. If it is shorter than five characters, GpgFrontend
+  asks you to confirm it.
+- The email is optional. If you fill it in, it must be a valid email address.
+- The comment is optional.
+- The name and comment cannot contain `(`, `)`, `<` or `>`.
 
 You cannot delete the primary UID. On a v4 key you also cannot delete the last
 UID, because the key needs it to keep working. Add a new UID first if you want
@@ -160,20 +178,24 @@ to replace it. This rule is new in v2.2.3.
 
 ### Certifications on a UID
 
-The lower part of the window, **Certifications of Selected User ID**, shows the
-signatures (certifications) on the selected UID (the one you clicked in the list
-above). Signatures are how trust is built: when someone receives your public
-key, they can sign your UID with their key to vouch for it, then share the
-signed key on a key server. The more people who do this, the more trustworthy
-the key looks.
+The lower part of the window, **Certifications of Selected User ID**, shows
+the certifications on the UID you clicked in the list above. A certification
+is a signature that another key put on the UID.
+
+Certifications are how trust is built. When someone gets your public key, they
+can certify your UID with their key to say they checked it. Then they can
+share the certified key with others. The more people who do this, the more
+trustworthy the key looks. Uploading certifications to a public key server
+has drawbacks, so read
+[Signing UIDs](/guides/openpgp-trust-manage/#signing-uids-not-recommended)
+first.
 
 ![][img-7]
 
-You can also certify a UID with one of your own private keys: right-click the
+You can also certify a UID with one of your own private keys. Right-click the
 UID and choose **Certify User ID...**. To take back a certification you made,
 right-click it in the lower part and choose **Revoke Certification...**. See
-[Trust Chain Management](/guides/openpgp-trust-manage/). A primary UID with
-many valid certifications is generally seen as more trustworthy.
+[Trust Chain Management](/guides/openpgp-trust-manage/).
 
 :::note[Needs the GnuPG engine]
 
@@ -183,28 +205,24 @@ Certifications are a GnuPG feature. With the rPGP engine, the
 
 :::
 
-Some signatures may not show the signer's UID, as in the image above. To identify
-them, import the matching key from another source, such as a key server. The Key
-ID is shown, which helps you find and import the right key.
+Some certifications do not show the signer's name, as in the image above.
+This happens when you don't have the signer's key. The signer's **Key ID** is
+still shown. Use it to find and import that key, for example from a key
+server.
 
 ## Subkey Info
 
-Subkeys are a core GnuPG feature that improves both security and flexibility. They
-can feel complex at first, so here are the basics:
+A key pair has one primary key and any number of subkeys. The primary key
+stands for your identity. The subkeys do the daily work, such as signing and
+encryption. For why this helps and how to add a subkey, see
+[Generate and Use Subkeys](/guides/generate-use-subkey/).
 
-- **Keyring model**: think of your key pair as a keyring, with one primary key and
-  zero or more subkeys.
-- **Primary key vs subkeys**: the primary key is the root of trust. It certifies
-  subkeys and is kept for critical actions like signing other keys or adding UIDs.
-- **Daily work**: subkeys handle tasks like signing and encryption, even when the
-  primary key is absent or unavailable.
+Two more things to know:
+
 - **Overlap**: if more than one subkey can sign, GpgFrontend asks which one to
   use when you sign text or a file.
-- **More algorithms**: subkeys can use more algorithms than the primary key, but
-  for daily use the effect is the same.
-- **Security isolation**: if a subkey is compromised, you revoke just that one and
-  the trust anchored by the primary key stays intact. But if the primary key is
-  compromised, the whole key structure is at risk.
+- **More algorithms**: subkeys can use more algorithms than the primary key.
+  For daily use this makes no difference.
 
 The **Keychain** tab lists the primary key and all subkeys. For each one, the
 list shows its **Key ID**, **Key Type**, **Algorithm** and **Usage**. If there
@@ -220,17 +238,17 @@ fingerprint. Here, too, you can click the Key ID or the fingerprint to copy it.
 The **Key in Smart Card** field shows **Yes** if a (sub)key's private part has
 been moved to a hardware smart card, and **No** if not.
 
-- When a key is moved to a smart card, its private part is physically transferred
-  to the card and removed from your local key database.
-- This can't be undone. The private key now lives only on the card and can't be
-  pulled back.
-- It is strong protection against malware and key theft: using that key to sign or
-  decrypt now needs the card present and unlocked.
+- When you move a key to a smart card, its private part goes onto the card
+  and is removed from your key database.
+- This can't be undone. The private key now lives only on the card. You can't
+  copy it back.
+- This protects the key well against malware and theft. To sign or decrypt
+  with that key, the card must be plugged in and unlocked.
 
 :::tip
 
-Moving your encryption or signing subkey to a smart card is a great choice if you
-want the strongest security.
+For the strongest protection, move your encryption or signing subkey to a
+smart card. See [OpenPGP Smart Cards](/guides/smart-card/).
 
 :::
 
@@ -241,15 +259,16 @@ Right-click a subkey in the list for actions that apply to just that one:
 - **Export**: save this subkey to a file. See
   [Subkeys](/guides/generate-use-subkey/).
 - **Edit Expire Date**: give this subkey its own expiry date.
-- **Change Passphrase**: set a new passphrase for this subkey alone, leaving
-  the others as they are. New in v2.2.2.
+- **Change Passphrase**: set a new passphrase for this subkey alone. The
+  others keep theirs. New in v2.2.2.
 - **Move to Card**: move this subkey onto a smart card. See
   [OpenPGP Smart Cards](/guides/smart-card/). This needs the GnuPG engine and
   a GnuPG smart card service (`scdaemon`) that is new enough.
 - **Revoke**: mark this subkey as no longer to be used.
 - **Delete**: remove this subkey from your key.
 
-Items your engine cannot do are left out of the menu.
+Items your OpenPGP engine cannot do are left out of the menu. Items that do
+not fit the row you clicked are greyed out.
 
 :::note[Setting an expiry now works on rPGP too]
 
@@ -260,8 +279,8 @@ can now do it as well, for both primary keys and subkeys.
 
 ## Operations
 
-These actions are on the **Operations** tab. What you can do here depends on whether the key pair has only a public key, or a
-private key too.
+These actions are on the **Operations** tab. What you can do here depends on
+whether you have only the public key, or the private key too.
 
 ### On a Public Key
 
@@ -276,22 +295,21 @@ server, or back up.
 
 #### Set Owner Trust Level
 
-Sets how much you trust this key's owner to correctly verify and sign other keys,
-part of the web-of-trust model. This affects how your system judges the signatures
-that owner makes.
+Sets how much you trust this key's owner to check and certify other people's
+keys. This changes how much weight GnuPG gives to the certifications that
+owner makes. See [Trust Chain Management](/guides/openpgp-trust-manage/).
 
 :::note
 
-Owner trust is a GnuPG concept, available only with the GnuPG engine. With the
-rPGP engine, this button (and the Owner Trust Level field in General Info) is
-hidden.
+Owner trust only exists with the GnuPG engine. With the rPGP engine, this
+button is hidden, and so is the **Owner Trust Level** field in General Info.
 
 :::
 
 #### Key Server Operations
 
-A dropdown for working with key servers (a place where public keys are stored and
-shared). It has three choices:
+A button with a menu for working with key servers (websites where public keys
+are stored and shared). It has three choices:
 
 - **Publish Public Key to Key Server**: upload the public key.
 - **Refresh Public Key From Key Server**: get the latest copy of the public key.
@@ -312,46 +330,52 @@ when you want to know.
 
 ### On a Private Key
 
-When the key pair includes a private key, you get more actions, covering both the
-public and private parts.
+When the key pair includes a private key, you get more actions.
+
+The last three buttons below (**Modify Expiration Datetime (Primary Key)**,
+**Modify Password** and **Revoke Certificate Operation**) are only shown when
+the private part of the primary key is present.
 
 ![][img-10]
 
 #### Export Public Key
 
-Saves the public key to a file, for sharing, uploading to a key server, or backup.
+The same as for a public key. See above.
 
 #### Export Private Key
 
-Exports the private key. There are two choices:
-
-- **Export Full Secret Key**: the entire private key with all its information.
-  Use this for a full backup or to move the key to another system.
-- **Export Shortest Secret Key**: only the essential parts, with less data.
-  Useful for more secure transfers or environments with strict requirements.
+A button with a menu. It has two choices: **Export Full Secret Key** and
+**Export Shortest Secret Key**. For what each one includes, see
+[Export a Private Key](/guides/import-export-key-pair/#export-a-private-key).
 
 #### Modify Expiration Datetime (Primary Key)
 
-Changes the expiration date and time of the primary key. This helps you manage the
-key's lifecycle and keep it valid for as long as you need.
+Changes the date and time when the primary key expires. Use it to keep the key
+valid for as long as you need.
 
 #### Modify Password
 
-Changes the password that protects the private key. Worth doing if you think the
-current one may be exposed, or as part of regular good habits.
+Changes the passphrase that protects the private key. Do this if you think
+someone may know the current one.
 
 #### Revoke Certificate Operation
 
-A dropdown with two choices: **Generate Revoke Certificate** creates a
-revocation certificate for the key, and **Import Revoke Certificate** imports an
-existing one. See [Key Revocation](/advanced/key-revocation/). Revoke a key if it is compromised or no longer needed: this marks it invalid
-so it can't be misused. The revocation is usually uploaded to a key server so
-others learn the key is revoked.
+A button with a menu. It has two choices:
+
+- **Generate Revoke Certificate**: makes a revocation certificate for the key.
+  This is a file that lets you cancel the key later.
+- **Import Revoke Certificate**: imports a revocation certificate. This
+  revokes the key, and it cannot be undone.
+
+Revoke a key if it is lost, stolen, or no longer needed. A revoked key is
+marked as invalid, so nobody should use it any more. People usually upload the
+revoked key to a key server, so others learn about it. See
+[Key Revocation](/advanced/key-revocation/).
 
 #### Key Server Operations
 
-The same key server dropdown as for a public key: publish, refresh, or check
-the public key on the key server.
+The same key server menu as for a public key: publish, refresh, or check the
+public key on the key server.
 
 ## How a Key Shows Up in Results
 
@@ -359,7 +383,7 @@ After you verify a signature or decrypt a message, the result panel says what
 happened. Some lines there come from the key's details on this page.
 
 - **Valid**: the signature is correct. With the rPGP engine you see **Valid**,
-  not **Fully Valid**. rPGP has no owner trust, so it does not say how much you
+  not **Fully Valid**. rPGP has no owner trust, so it cannot say how much you
   trust the signer. Check the fingerprint to be sure who signed.
 - **Signing Key Not Authorized**: the signature is correct, but the key that
   made it does not have **Sign** in its usage. The signature is not accepted.

@@ -8,33 +8,34 @@ sidebar:
 
 import { Steps, Aside } from "@astrojs/starlight/components";
 
-Once you have a lot of keys, finding the right one takes longer than it should.
-A **category** is a label you put on keys to tidy them up, such as `Work`,
+When you have a lot of keys, it takes longer to find the right one. A
+**category** is a label you put on keys to tidy them up, such as `Work`,
 `Family`, or `Servers`.
 
 A category changes nothing about the keys themselves. It only changes what you
 see.
 
-:::note[Not the same as a key group]
+<Aside type="note" title="Not the same as a key group">
 
-A **key group** is a shortcut for encrypting to several people at once, and it
-shows up in the key list as something you can pick as a recipient.
+A **key group** is a shortcut for encrypting to several people at once. It
+shows up in the key list, and you can pick it as a recipient.
 
-A **category** never does that. It is only a way of sorting the list. See
-[Key Group](/guides/key-group/) if that is what you are after.
+A **category** never does that. It is only a way of sorting the list. If you
+want to encrypt to several people at once, see
+[Key Group](/guides/key-group/).
 
-:::
+</Aside>
 
 ## Where to Find Them
 
 Categories appear in two places:
 
-- **KeyPair Management window**: a list down the left side. This is where you
-  create and change them.
+- **KeyPair Management** window: a list down the left side. This is where you
+  create and change categories.
 - **Key ToolBox** in the main window: a thin coloured strip. You can switch
   between categories here, but not edit them.
 
-Clicking a category shows only the keys in it.
+Click a category to show only the keys in it.
 
 ![KeyPair Management window with categories][img-1]
 
@@ -42,33 +43,35 @@ Clicking a category shows only the keys in it.
 
 ## The Ready-Made Ones
 
-Some categories are built in. They fill themselves automatically.
+Some categories are built in. GpgFrontend fills them for you.
 
 The **KeyPair Management** window has these:
 
 - **All**: every key.
-- **Has Private Key**: keys you own.
-- **Only Public Key**: other people's keys.
 - **Key Group**: your key groups.
-- **Expiring Soon**: keys that run out soon. At first that means the next 30
-  days; you can change it (see the tip below).
-- **Expired**, **Revoked**, **Disabled**, **No Primary Key**: keys with a
+- **Only Public Key**: keys you have no private key for. These are other
+  people's keys.
+- **Has Private Key**: keys you own.
+- **Expiring Soon**: keys that expire soon. At first that means within the
+  next 30 days. You can change the number of days (see the tip below).
+- **No Primary Key**, **Revoked**, **Expired**, **Disabled**: keys with a
   problem.
 
 The **Key ToolBox** has a shorter list, made for picking keys:
 
 - **Default**: every key you can use. Expired, revoked and disabled keys are
   left out.
-- **Key Group**, **Only Public Key** and **Has Private Key**: as above.
+- **Key Group**, **Only Public Key** and **Has Private Key**: as above, but
+  again without expired, revoked and disabled keys.
 
-You cannot rename or delete these.
+You cannot rename or delete the built-in categories.
 
-:::tip[Change what "soon" means]
+<Aside type="tip" title='Change what "soon" means'>
 
 Open **Settings**, go to **General**, and set **Warn about keys expiring
-within** to any number of days you like.
+within** to the number of days you want.
 
-:::
+</Aside>
 
 ## Make Your Own
 
@@ -95,11 +98,15 @@ within** to any number of days you like.
 
 </Steps>
 
-You can also make a category and fill it in one go. In the **KeyPair
-Management** window, select some keys, right-click them, open the **Category**
-submenu and choose **New Category...**. The window then says how many of the
-selected keys will be added to the new category. In the main window, the
-**Add To Category** submenu does the same for one key at a time.
+You can also make a category and put keys in it in one go:
+
+- In the **KeyPair Management** window, select some keys and right-click
+  them. Open the **Category** submenu and choose **New Category...**. The
+  window then says how many of the selected keys will be added to the new
+  category.
+- In the main window, right-click a key in the Key ToolBox. Open the **Add To
+  Category** submenu and choose **New Category...**. This works for one key
+  at a time.
 
 <Aside type="note" title="Changed in v2.2.4">
 
@@ -113,18 +120,23 @@ separate small windows.
 
 <Steps>
 
-1. Find the key in the key list. Select several at once if you like.
+1. Find the key in the key list of the **KeyPair Management** window. You
+   can select several keys at once.
 
-2. Right-click it and open the **Category** submenu.
+2. Right-click the key and open the **Category** submenu.
 
    ![The Category submenu of a key's right-click menu][img-4]
 
-3. Tick the category you want.
+3. Click the category you want. A tick appears beside it.
 
 </Steps>
 
-To take a key out again, go to that category, right-click the key, open the
-**Category** submenu and choose **Remove From This Category**.
+In the Key ToolBox of the main window, the submenu is called **Add To
+Category**. It works the same way, for one key at a time.
+
+To take a key out again, open the submenu and click the ticked category once
+more. Or click that category in the category list, right-click the key, open
+the same submenu and choose **Remove From This Category**.
 
 A key can be in as many categories as you like.
 
@@ -134,29 +146,29 @@ Right-click a category in the **KeyPair Management** window to find:
 
 - **Set Colour...** and **Reset Colour**: change only the colour. These work on
   the built-in categories too.
-- **Edit Category...**: change its name and colour in the same window as
+- **Edit Category...**: change the name and colour in the same window as
   above. Click **Save** when you are done. (Before v2.2.4 this was **Rename
   Category**.) Only for your own categories.
+- **Delete Category...**: remove the category. Only the label goes. Your keys
+  are never touched. Only for your own categories.
 
-To change the order, drag a category up or down the list. The order is
-remembered.
+To change the order, drag a category up or down the list. GpgFrontend
+remembers the order.
 
-**Delete Category...**, also only for your own categories, removes the label
-only. Your keys are never touched.
-
-:::note[Where the Favourite tab went]
+<Aside type="note" title="Where the Favourite tab went">
 
 GpgFrontend v2.2.2 replaced the old **Favourite** tab with categories. Old
-favourites are not carried over, so make a category and put those keys back in
+favourites are not carried over. Make a category and put those keys back in
 it.
 
-:::
+</Aside>
 
 ## Good to Know
 
-- Categories belong to one key database. If you use more than one, each has
-  its own set. See [Multi-Key Database](/advanced/key-database/).
-- The search box searches inside the category you are looking at.
+- Categories belong to one key database. If you use more than one key
+  database, each has its own set of categories. See
+  [Multi-Key Database](/advanced/key-database/).
+- The search box only searches the category you are looking at.
 
 [img-1]: https://image.cdn.bktus.com/i/2026/10/29/ca771e64a923d5f961e9ce909ed99889274c81b5.webp
 [img-2]: https://image.cdn.bktus.com/i/2026/10/29/9a698297f4658de16025fd12dbc07cda8fc2c845.webp

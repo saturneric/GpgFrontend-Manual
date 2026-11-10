@@ -12,8 +12,15 @@ page covers each method.
 
 ## Import a Key
 
-You can import a public or private key in a few ways. Find them on the toolbar, or
-open the action menu in the key management section for more options.
+You can import a public or private key in a few ways. There are two places to
+start:
+
+- In the main window, click the **Import** button in the toolbar, or open
+  **Keys** > **Import Key**.
+- In the **KeyPair Management** window, click the **Import Key** button in the
+  toolbar, or open **Key** > **Import Key**.
+
+Then choose where the key comes from. The choices are explained below.
 
 ![][img-1]
 
@@ -21,44 +28,50 @@ open the action menu in the key management section for more options.
 
 ### From a File
 
-Choose a public or private key file to import. The file can be text with any
-extension.
+Choose **File**, then pick a public or private key file. The file can be text
+with any extension.
 
 ### By Pasting Into the Editor
 
-Paste the key into a Text Editor tab. Then open **Keys** > **Import Key** (or
-the **Import** toolbar button) and choose **Editor**. GpgFrontend imports the
-key from the text in that tab.
+This choice is in the main window only.
+
+1. Paste the key into a text editor tab.
+2. Open **Keys** > **Import Key** (or click the **Import** toolbar button) and
+   choose **Editor**. GpgFrontend imports the key from the text in that tab.
 
 ### From the Clipboard
 
-Copy a key's contents to your system clipboard, then choose this option to import
-it.
+Copy the key's text to your clipboard, then choose **Clipboard**.
+
+### From a Key Package
+
+This choice is in the **KeyPair Management** window only. Choose **Key
+Package** to import keys from a protected backup file. See
+[KeyPackage](/advanced/key-package/).
 
 ### From a Key Server (public keys only)
 
-Open the **Import Key** menu and choose **Key Server**. Enter the email or ID you are
-looking for, pick a key server, and click search. GpgFrontend shows the matching
-public keys. Double-click a row to import that key. To import more, double-click
-each one in turn. This method imports **public keys only**.
+A key server is a website that stores public keys. Choose **Key Server**,
+search for the person, and double-click a result to import that key. This
+method imports **public keys only**. For the full steps, see
+[Key Server Operations](/guides/key-server-operations/).
 
-**Key Server** comes from the KeyServerSync module. If that module is turned
-off, it is not in the menu.
-
-For the full steps, see [Key Server Operations](/guides/key-server-operations/).
+**Key Server** comes from the KeyServerSync module, which comes with
+GpgFrontend. If that module is turned off, **Key Server** is not in the menu.
+See [Module Controller](/advanced/module-controller/).
 
 ### By Drag and Drop
 
-Drag a key file straight onto the Key ToolBox, then follow the prompts to import
-it.
+Drag a key file onto the Key ToolBox. If GpgFrontend asks whether to import
+the key, click **OK**.
 
 ## Export a Key
 
-Exporting saves a key so you can back it up or share it. GpgFrontend always exports
-in ASCII text, so the file works across different computers.
+Exporting saves a key so you can back it up or share it. GpgFrontend always
+exports in ASCII text, so the file works across different computers.
 
 You can export your **public key** (safe to share) or your **private key** (keep
-this secret). The export options work much like the import ones.
+this secret).
 
 ### Export a Public Key
 
@@ -66,86 +79,95 @@ Your public key is safe to give to anyone. There are a few ways to export it.
 
 #### The Quick Way
 
-Click **Manage Keys** to open the **KeyPair Management** window. Right-click the
-key there, open **Export** and choose **Export Public Key...**. Pick where to
-save it, and you are done. New in v2.2.2.
+1. In the main window, click **Manage Keys**. The **KeyPair Management**
+   window opens.
+2. Right-click the key, open **Export** and choose **Export Public Key...**.
+3. Pick where to save the file.
 
-If you only want to paste it somewhere rather than save a file, open **Copy**
-in the same menu and choose **Copy Public Key Block**. See
+This menu item is new in v2.2.2.
+
+To paste the key somewhere instead of saving a file, open **Copy** in the
+same right-click menu and choose **Copy Public Key Block**. See
 [Manage Your Keys](/guides/key-management/).
 
 #### Append to the Editor
 
 Right-click a key in the Key ToolBox and choose **Append Public Key to Editor**.
-This adds the public key to the end of the editor page, where you can copy it
-wherever you need.
+This adds the public key to the end of the text in the editor. You can copy it
+from there.
 
 #### Save to a File
 
-Use the key pair's **Operations** tab to save the public key to a file, as shown
-below. Pick a folder for the file first.
+Open the key's **Key Details** window and go to the **Operations** tab. Click
+**Export Public Key**, then pick where to save the file. See
+[Key Pair Details](/guides/view-keypair-info/#operations).
 
 ![][img-3]
 
 #### Export Several at Once
 
-To export the public keys of several key pairs together, tick them in the
-**KeyPair Management** window. Then open **Key** > **Export Key** and choose
-**Export To Clipboard**, or use the **Export Key** button on the toolbar. This
-copies the data to your clipboard, ready to paste into any app or file.
+To export the public keys of several key pairs together:
 
-If you tick nothing, it uses the rows you selected instead.
+1. In the **KeyPair Management** window, tick the box beside each key.
+2. Open **Key** > **Export Key** and choose **Export To Clipboard**. The
+   **Export Key** button in the toolbar has the same menu.
+
+The public keys are now on your clipboard. Paste them into any app or file.
+
+If you tick no key, **Export To Clipboard** uses the rows you selected instead.
 
 ![][img-4]
 
 #### Export for SSH
 
-**Export As OpenSSH** saves a single key in the format an SSH server expects,
-so you can use an OpenPGP key to log in to a machine. You need a key that can
-do **Authentication** (the `A` flag).
+SSH is a common way to log in to another computer. **Export As OpenSSH** saves
+one key in the format an SSH server expects, so you can log in with your
+OpenPGP key. You need a key that can do **Authentication** (it has `A` in its
+usage).
 
 In the **KeyPair Management** window, right-click the key, open **Export** and
 choose **Export As OpenSSH**. It is also under **Key** > **Export Key**. This
-needs the GnuPG engine; with rPGP the item is hidden.
+needs the GnuPG engine. With rPGP the item is hidden.
 
 ### Export a Private Key
 
 The quickest way is to right-click the key in the **KeyPair Management**
-window, open **Export** and choose **Export Private Key...**. New in v2.2.2.
+window, open **Export** and choose **Export Private Key...**. This menu item
+is new in v2.2.2.
 
-You can also find private key options on the detail page of a key that holds a
-private part (the primary key or a subkey). Pick a destination, and GpgFrontend
-exports the private key there.
+You can also export from the key's **Key Details** window. Go to the
+**Operations** tab, click **Export Private Key**, pick one of the two choices
+below, and choose where to save the file.
 
 ![][img-5]
 
 :::caution[Never share your private key]
 
-The private key file must stay secret. If it leaks, anyone can read every message
-encrypted to that key. Share only your public key.
+The private key file must stay secret. If someone else gets it, they can read
+every message encrypted to that key. Share only your public key.
 
 :::
 
-Exporting a private key also includes the matching public key, because a private
-key is meaningless on its own. So the two are bundled together in the export.
+An exported private key file also holds the matching public key. A private key
+is of no use without it.
 
-You can export your private key in two ways:
+The **Export Private Key** button offers two choices:
 
-1. **Export Full Secret Key**: includes all key data, plus the user IDs and their
-   signatures.
-2. **Export Shortest Secret Key**: includes only the key data, without the extra
-   user ID signatures.
+- **Export Full Secret Key**: includes all key data, plus the user IDs and their
+  signatures.
+- **Export Shortest Secret Key**: includes only the key data, without the extra
+  user ID signatures.
 
 ## Back Up Everything at Once
 
-Exporting keys one at a time is fine for sharing, but a poor way to make a
-backup. It is too easy to miss one.
+Exporting keys one at a time is fine for sharing, but it is a poor way to make
+a backup. It is too easy to miss one.
 
 Since v2.2.2 you can save them all in one go. In the **KeyPair Management**
 window, open **Operations** > **Bulk** and choose **Back Up All Private
-Keys...**. That writes every private key in the keyring into a single protected
-[KeyPackage](/advanced/key-package/). The same three-step window opens as for
-any KeyPackage, with all private keys already included.
+Keys...**. This puts every private key in the key database into one protected
+file, called a [KeyPackage](/advanced/key-package/). The same three-step
+window opens as for any KeyPackage, with all private keys already included.
 
 :::tip[Back up your keys]
 
