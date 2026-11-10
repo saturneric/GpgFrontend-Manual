@@ -6,6 +6,8 @@ sidebar:
   label: Trust Chain Management
 ---
 
+import { Aside, Badge, Card, CardGrid, Steps } from "@astrojs/starlight/components";
+
 ## What trust means here
 
 When you get someone's public key, how do you know it really belongs to them? In
@@ -22,14 +24,14 @@ Two words come up often on this page:
   "I checked this, and it is really them." Older versions of GpgFrontend
   called this "signing a UID". This page uses both words for the same thing.
 
-:::note[Needs the GnuPG engine]
+<Aside type="note" title="Needs the GnuPG engine">
 
 The trust features on this page (setting Owner Trust and certifying the UIDs of
 other keys) come from GnuPG. They only work when GnuPG is the active engine. The
 rPGP engine does not support them, so the related menus and dialogs are hidden
 when rPGP is on. Switch to GnuPG to manage your trust.
 
-:::
+</Aside>
 
 ## Owner Trust
 
@@ -60,6 +62,8 @@ constant updates from key servers.
 
 ### How to set Owner Trust
 
+<Steps>
+
 1. Find the public key (or key group) in the Key ToolBox, the key list on the
    right side of the main window.
 2. Right-click the key. A menu opens.
@@ -68,28 +72,36 @@ constant updates from key servers.
 4. Pick a level from the list (**Undefined**, **Never**, **Marginal**,
    **Full** or **Ultimate**) and click **OK**.
 
-![][img-2]
+   ![][img-2]
+
+</Steps>
 
 You can also open the key's details, go to the **Operations** tab, and click
 **Set Owner Trust Level** there.
 
-:::tip[Several keys at once]
+<Aside type="tip" title="Several keys at once">
 
 Since v2.2.2 you can set the level of several keys at once. In the **KeyPair
 Management** window, tick the keys you want. Then open the **Operations** menu
 and choose **Bulk**, then **Set Owner Trust for Checked Keys...**. They all
 get the same level. See [Manage Your Keys](/guides/key-management/).
 
-:::
+</Aside>
 
 ## How Owner Trust and signing work together
 
 Owner Trust and signing a UID answer two different questions:
 
-- **Signing a UID** answers: "Does this key really belong to this person?"
-  This is about the key's **validity**.
-- **Owner Trust** answers: "How much do I trust this person to vouch for other
-  people's keys?" This is about the **owner**, not the key.
+<CardGrid>
+  <Card title="Signing a UID" icon="pencil">
+    Answers: "Does this key really belong to this person?" This is about the
+    key's **validity**.
+  </Card>
+  <Card title="Owner Trust" icon="approve-check-circle">
+    Answers: "How much do I trust this person to vouch for other people's
+    keys?" This is about the **owner**, not the key.
+  </Card>
+</CardGrid>
 
 The two connect like this. GnuPG treats a key as valid for you in two cases:
 
@@ -109,7 +121,7 @@ you the same result, and no signatures need to go to public key servers.
 You can sign (certify) the UID on someone else's public key to say "I checked
 this, and it is really them."
 
-:::caution[We no longer recommend this]
+<Aside type="caution" title="We no longer recommend this">
 
 A normal UID signature is meant to be shared on key servers. That causes the
 problems described under
@@ -118,12 +130,15 @@ trust decisions, you usually do not need it. Set **Owner Trust** to control how
 much you rely on someone. Only sign a UID when you truly need to confirm to
 others that a key belongs to a person.
 
-:::
+</Aside>
 
 If you do need to certify (sign) someone's key, compare its fingerprint with
 the owner first, in person or over a channel you trust. Then:
 
+<Steps>
+
 1. Start the certification in one of two ways:
+
    - To certify **every** user ID of a key, right-click the key in the
      **KeyPair Management** window, open **Key Operations** and choose
      **Certify Key...**.
@@ -143,33 +158,40 @@ the owner first, in person or over a channel you trust. Then:
 5. Click **Certify**, and type your passphrase when asked. A **Certification
    Complete** message confirms it.
 
+</Steps>
+
 You can also certify one of your own keys with another of your own keys.
 **Certify Key...** is greyed out when you have no private key to certify with.
 
-:::note[Changed in v2.2.4]
+<Aside type="note" title="Changed in v2.2.4">
 
 The certify window was redesigned. It used to be called **Sign For Key's
 UID(s)**, with a **Sign** button. On the **UIDs** tab, **Sign UID** is now
 **Certify User ID...**. GpgFrontend now always certifies with the key you
 tick.
 
-:::
+</Aside>
 
 ### Take back a certification
+
+<Steps>
 
 1. Open the key's details and go to the **UIDs** tab.
 2. Click the user ID you certified.
 3. Under **Certifications of Selected User ID**, right-click your
    certification and choose **Revoke Certification...**.
 4. Click **Yes** to confirm. This cannot be undone.
+   <Badge text="Irreversible" variant="danger" />
+
+</Steps>
 
 You need the private key that made the certification.
 
-:::note[New in v2.2.4]
+<Aside type="note" title="New in v2.2.4">
 
 **Revoke Certification...** is new in v2.2.4.
 
-:::
+</Aside>
 
 ![][img-3]
 

@@ -52,7 +52,7 @@ entries:
     highlight: InfoBoardWidget
 
   - id: main-window-menu-popup
-    doc: src/content/docs/guides/key-server-operations.md
+    doc: src/content/docs/guides/key-server-operations.mdx
     ref: img-1  # "click Keys in the menu bar, then Import Key"
     scenario: main-window-menu-popup
     size: 1280x960
@@ -138,7 +138,7 @@ entries:
     sources: [src/ui/dialog/keypair_details/]
 
   - id: owner-trust-column
-    doc: src/content/docs/guides/openpgp-trust-manage.md
+    doc: src/content/docs/guides/openpgp-trust-manage.mdx
     ref: img-1  # "Owner Trust": the Trust column in KeyPair Management
     scenario: key-management-window
     size: 1200x760
@@ -146,14 +146,14 @@ entries:
     sources: [src/ui/main_window/, src/core/model/GpgKeyTableModel.cpp]
 
   - id: owner-trust-context-menu
-    doc: src/content/docs/guides/openpgp-trust-manage.md
+    doc: src/content/docs/guides/openpgp-trust-manage.mdx
     ref: img-2  # "How to set Owner Trust"
     scenario: key-context-menu
     highlight: {name: setOwnerTrustLevel, style: arrow}
     sources: [src/ui/main_window/]
 
   - id: uid-signatures-highlighted
-    doc: src/content/docs/guides/openpgp-trust-manage.md
+    doc: src/content/docs/guides/openpgp-trust-manage.mdx
     ref: img-3  # "Signing UIDs"
     scenario: key-details-uids
     size: auto
@@ -471,7 +471,7 @@ entries:
     sources: [src/ui/main_window/]
 
   - id: key-server-search
-    doc: src/content/docs/guides/key-server-operations.md
+    doc: src/content/docs/guides/key-server-operations.mdx
     ref: img-2  # search results
     scenario: key-server-search
     size: 820x600
@@ -479,14 +479,14 @@ entries:
     sources: [src/ui/main_window/]
 
   - id: key-server-import
-    doc: src/content/docs/guides/key-server-operations.md
+    doc: src/content/docs/guides/key-server-operations.mdx
     ref: img-3  # "After You Import"
     scenario: key-server-import
     size: auto
     sources: [src/ui/dialog/import_export/KeyImportDetailDialog.cpp]
 
   - id: key-server-operations
-    doc: src/content/docs/guides/key-server-operations.md
+    doc: src/content/docs/guides/key-server-operations.mdx
     ref: img-4  # "Work With One Key"
     scenario: key-server-operations
     size: auto
@@ -595,7 +595,7 @@ entries:
     highlight: expertSwitch
 
   - id: key-popup-certify
-    doc: src/content/docs/guides/openpgp-trust-manage.md
+    doc: src/content/docs/guides/openpgp-trust-manage.mdx
     ref: img-4  # certify step 1: Key Operations > Certify Key...
     scenario: key-popup-certify
     size: 1200x760
@@ -603,7 +603,7 @@ entries:
     highlight: {name: certifyKey, style: arrow}
 
   - id: certify-dialog
-    doc: src/content/docs/guides/openpgp-trust-manage.md
+    doc: src/content/docs/guides/openpgp-trust-manage.mdx
     ref: img-5  # certify step 3: the Certify Key window
     scenario: certify-dialog
     size: auto

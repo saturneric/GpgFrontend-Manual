@@ -6,6 +6,8 @@ sidebar:
   label: Post-Quantum Keys
 ---
 
+import { Aside, Badge, Card, CardGrid, Steps } from "@astrojs/starlight/components";
+
 GpgFrontend lets you make and use **post-quantum keys** with a few clicks. You
 do not need the command line. This page explains in plain words what that
 means, why it might matter to you, and how to make your first one.
@@ -32,14 +34,14 @@ encryption now, before quantum computers catch up. This kind of encryption is
 called **post-quantum**. NIST, the standards office of the United States, has
 approved a new set of post-quantum algorithms. OpenPGP is starting to use them.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 The rPGP engine now follows the finished standard for post-quantum OpenPGP
 (RFC 9980). In v2.2.2 it followed an earlier draft of that standard.
 
-:::
+</Aside>
 
-:::tip[Do you actually need this?]
+<Aside type="tip" title="Do you actually need this?">
 
 - **Probably not yet, for everyday use.** If your secrets only matter for a short
   while, today's normal keys are perfectly safe.
@@ -48,7 +50,7 @@ The rPGP engine now follows the finished standard for post-quantum OpenPGP
 - **Still experimental.** See the warning at the bottom of this page before you
   rely on these keys.
 
-:::
+</Aside>
 
 ## What You Can Make
 
@@ -58,15 +60,22 @@ Some are for **signing** (proving a message is really from you).
 
 A quick plain-words guide:
 
-- **ML-KEM** (once called Kyber): for **encryption**. GpgFrontend always pairs it
-  with a classic algorithm. A pair like this is called a **hybrid**. Your
-  protection is then never weaker than today's, even if one of the two is later
-  found to have a flaw.
-- **ML-DSA** (once called Dilithium): for **signing**, also paired with a classic
-  algorithm.
-- **SLH-DSA** (once called SPHINCS+): also for **signing**. It is built on a
-  very simple, well-trusted idea (hashing). This makes it the most cautious
-  choice.
+<CardGrid>
+  <Card title="ML-KEM" icon="seti:lock">
+    Once called Kyber. For **encryption**. GpgFrontend always pairs it with a
+    classic algorithm. A pair like this is called a **hybrid**. Your
+    protection is then never weaker than today's, even if one of the two is
+    later found to have a flaw.
+  </Card>
+  <Card title="ML-DSA" icon="pencil">
+    Once called Dilithium. For **signing**, also paired with a classic
+    algorithm.
+  </Card>
+  <Card title="SLH-DSA" icon="pencil">
+    Once called SPHINCS+. Also for **signing**. It is built on a very simple,
+    well-trusted idea (hashing). This makes it the most cautious choice.
+  </Card>
+</CardGrid>
 
 All of them need the newer **version 6 (v6)** key format. GpgFrontend picks v6
 for you when you choose a post-quantum option.
@@ -74,17 +83,19 @@ for you when you choose a post-quantum option.
 The table below lists the exact options for reference. The last column shows
 the oldest engine version that can make each one.
 
-| Algorithm              | OpenPGP Type | Purpose    | Engine support          |
-| ---------------------- | ------------ | ---------- | ----------------------- |
-| ML-KEM-768 + X25519    | Hybrid KEM   | Encryption | GnuPG 2.5.0, rPGP 0.1.2 |
-| ML-KEM-1024 + X448     | Hybrid KEM   | Encryption | GnuPG 2.5.0, rPGP 0.1.2 |
-| ML-DSA-65 + Ed25519    | Hybrid sign  | Signing    | rPGP 0.1.2              |
-| ML-DSA-87 + Ed448      | Hybrid sign  | Signing    | rPGP 0.1.2              |
-| SLH-DSA-SHAKE-128S     | Hash-based   | Signing    | rPGP 0.1.2              |
-| SLH-DSA-SHAKE-128F     | Hash-based   | Signing    | rPGP 0.1.2              |
-| SLH-DSA-SHAKE-256S     | Hash-based   | Signing    | rPGP 0.1.2              |
+| Algorithm              | OpenPGP Type | Purpose    | Engine support |
+| ---------------------- | ------------ | ---------- | -------------- |
+| ML-KEM-768 + X25519    | Hybrid KEM   | Encryption | <Badge text="GnuPG 2.5.0" variant="note" /> <Badge text="rPGP 0.1.2" variant="tip" /> |
+| ML-KEM-1024 + X448     | Hybrid KEM   | Encryption | <Badge text="GnuPG 2.5.0" variant="note" /> <Badge text="rPGP 0.1.2" variant="tip" /> |
+| ML-DSA-65 + Ed25519    | Hybrid sign  | Signing    | <Badge text="rPGP 0.1.2" variant="tip" /> |
+| ML-DSA-87 + Ed448      | Hybrid sign  | Signing    | <Badge text="rPGP 0.1.2" variant="tip" /> |
+| SLH-DSA-SHAKE-128S     | Hash-based   | Signing    | <Badge text="rPGP 0.1.2" variant="tip" /> |
+| SLH-DSA-SHAKE-128F     | Hash-based   | Signing    | <Badge text="rPGP 0.1.2" variant="tip" /> |
+| SLH-DSA-SHAKE-256S     | Hash-based   | Signing    | <Badge text="rPGP 0.1.2" variant="tip" /> |
 
 ## Make a Post-Quantum Key
+
+<Steps>
 
 1. Open the **KeyPair Management** window and click **New Keypair**. The
    **Generate Key** window opens.
@@ -109,6 +120,8 @@ the oldest engine version that can make each one.
    instead.)
 5. On the **Review** step, check the details and click **Generate**.
 
+</Steps>
+
 In **Expert Mode**, the **Key format** choice is locked to v6 while a
 post-quantum algorithm is selected.
 
@@ -129,13 +142,13 @@ message.
   recipients and a separate one for the others.
 - Click **Encrypt Anyway** if that risk is fine for you.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 The **Mixed Recipient Types** warning is new.
 
-:::
+</Aside>
 
-:::caution[Experimental, by design]
+<Aside type="caution" title="Experimental, by design">
 
 Post-quantum OpenPGP now has a finished standard, but support for it is still
 **new**, both here and in other apps.
@@ -147,7 +160,7 @@ Post-quantum OpenPGP now has a finished standard, but support for it is still
 For long-term signing and identity that must work everywhere, keep using a classic
 key (such as Ed25519) alongside your post-quantum experiments.
 
-:::
+</Aside>
 
 ## Further Reading
 

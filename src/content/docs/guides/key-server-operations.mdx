@@ -5,6 +5,8 @@ sidebar:
   order: 15
 ---
 
+import { Aside, Card, CardGrid, Steps } from "@astrojs/starlight/components";
+
 A **key server** is a place on the internet that stores public keys. Think of it
 as a public phone book for keys. You can use it to **find, share and update**
 public keys.
@@ -20,7 +22,7 @@ Key servers are handy when:
 GpgFrontend gives you simple buttons and windows for all of this. You do not
 need to type any commands.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 You can now check whether a key is published. The old **Sync Public Key** button
 in the Key ToolBox was removed. The **Network Ability** option in **Settings**,
@@ -28,9 +30,11 @@ in the Key ToolBox was removed. The **Network Ability** option in **Settings**,
 were published. Use **Refresh Public Key From Key Server** and **Check
 Publication Status** instead.
 
-:::
+</Aside>
 
 ## Find and Import a Key
+
+<Steps>
 
 1. In the main window, click **Keys** in the menu bar, then **Import Key**, then
    **Key Server**. You can also click the **Import** button in the toolbar and
@@ -43,10 +47,13 @@ Publication Status** instead.
 3. Under **Search Type**, choose **By Key ID**, **By Email** or **By
    Fingerprint**.
 4. Type what you are looking for in the **Search Value** box.
-5. Click **Search**, or press Enter. The keys that match appear in the table.
+5. Click **Search**, or press <kbd>Enter</kbd>. The keys that match appear in
+   the table.
 6. Double-click a result to import that key.
 
-![][img-2]
+   ![][img-2]
+
+</Steps>
 
 Type the full value, not a part of it:
 
@@ -76,16 +83,21 @@ Each key has its own key server menu. All three items in it use your default
 key server. To pick that server, see
 [Choose Your Key Servers](#choose-your-key-servers).
 
+<Steps>
+
 1. Open the key's details, for example by double-clicking the key in the key
    list.
 2. Go to the **Operations** tab.
 3. Click **Key Server Operations**. A small menu opens with three items:
+
    - **Publish Public Key to Key Server**: upload this public key.
    - **Refresh Public Key From Key Server**: download the newest copy of this
      key.
    - **Check Publication Status**: ask the server whether it has this key.
 
-![][img-4]
+   ![][img-4]
+
+</Steps>
 
 The **Operations** tab is not shown for a revoked key.
 
@@ -101,14 +113,20 @@ Key servers accept keys in one of two ways. They are called **VKS** and
 **HKP**. What happens next depends on which one your default key server
 supports:
 
-- **VKS** is the newer way. The server checks that each email address on the
-  key is really yours. `keys.openpgp.org` works like this. GpgFrontend uploads
-  the key and shows each email address with its status. The server then sends
-  you an email. Click the link in that email. If you do not, other people
-  cannot find your key by its email address.
-- **HKP** is the older way. The server does not check your email address, and
-  the upload cannot be undone. So GpgFrontend first asks **Publish Without
-  Verification?** Click **OK** only if you are sure.
+<CardGrid>
+  <Card title="VKS" icon="approve-check">
+    The newer way. The server checks that each email address on the key is
+    really yours. `keys.openpgp.org` works like this. GpgFrontend uploads the
+    key and shows each email address with its status. The server then sends
+    you an email. Click the link in that email. If you do not, other people
+    cannot find your key by its email address.
+  </Card>
+  <Card title="HKP" icon="warning">
+    The older way. The server does not check your email address, and the
+    upload cannot be undone. So GpgFrontend first asks **Publish Without
+    Verification?** Click **OK** only if you are sure.
+  </Card>
+</CardGrid>
 
 ### Refresh a Key
 
@@ -131,24 +149,29 @@ one of these:
 GpgFrontend never checks this by itself. Each check tells the server which key
 you are interested in. So GpgFrontend only asks the server when you click.
 
-:::note[New in v2.2.3]
+<Aside type="note" title="New in v2.2.3">
 
 **Check Publication Status** is new in v2.2.3.
 
-:::
+</Aside>
 
 ## Work With Many Keys at Once
 
 You can publish or refresh many keys in one go. A set of keys handled together
 like this is called a batch.
 
+<Steps>
+
 1. In a key list, tick the box next to each key you want. If you tick nothing,
    GpgFrontend uses the keys you selected (clicked) instead.
 2. Choose one of these:
+
    - Right-click the keys, then choose **Publish Public Key to Key Server** or
      **Refresh Public Key From Key Server**.
    - In the **KeyPair Management** window, open the **Operations** menu and
      choose one of the same two items.
+
+</Steps>
 
 These items are greyed out when your choice includes a key group. A key group is
 not a key, so a key server cannot hold it.
@@ -167,19 +190,23 @@ Good to know:
   fetched keys are imported. Start the batch again.
 - GpgFrontend waits up to 15 seconds for each answer from the server.
 
-:::note[Changed in v2.2.3]
+<Aside type="note" title="Changed in v2.2.3">
 
 Publishing and refreshing many keys at once first came in v2.2.2. Since v2.2.3,
 the KeyServerSync module sends the keys as one batch.
 
-:::
+</Aside>
 
 ## Choose Your Key Servers
 
 You decide which key servers GpgFrontend uses.
 
+<Steps>
+
 1. Open **Settings** (on macOS, **Preferences**).
 2. Under **Keys & Engines**, choose **Key Servers**.
+
+</Steps>
 
 The **Key Server List** shows each server with these columns: **Default**,
 **Address**, **HKP**, **VKS**, **Status** and **Last Tested**.
@@ -191,9 +218,13 @@ GpgFrontend starts with two servers:
 
 ### Add a Server
 
+<Steps>
+
 1. Type the address in the box under **Add a Key Server**, for example
    `https://keys.example.org`.
 2. Click **Add**.
+
+</Steps>
 
 GpgFrontend tests the new server right away. If the server does not answer like
 a key server, GpgFrontend still adds it, marks it **Unverified**, and tells you.
@@ -220,12 +251,12 @@ in the search window.
 - **Test Selected**: test the selected server again and update its **Status**.
 - **Delete Selected**: remove the selected server from the list.
 
-:::note[Changed in v2.2.2]
+<Aside type="note" title="Changed in v2.2.2">
 
 Before v2.2.2, publishing always used `keys.openpgp.org`. Now it uses the
 default server you choose here.
 
-:::
+</Aside>
 
 ## If the Key Server Items Are Missing
 
@@ -244,11 +275,7 @@ the **Key Servers** settings page, the module is turned off. See
   others learn that it is revoked.
 - Never upload a private key to any server yourself.
 
-[img-1]:
-  https://image.cdn.bktus.com/i/2026/10/29/75eb6f44dcf26a2a8628f99382e41b4788b577b0.webp
-[img-2]:
-  https://image.cdn.bktus.com/i/2026/10/25/9f2cad47949d7c4f240af7c56b16a39bc835acfe-0.webp
-[img-3]:
-  https://image.cdn.bktus.com/i/2026/10/25/a177f77e64b91ca9b4e70cf220c76cb26ed928cc-0.webp
-[img-4]:
-  https://image.cdn.bktus.com/i/2026/10/29/f864581705dd31fdb544678e9f29f7c84bb2e185.webp
+[img-1]: https://image.cdn.bktus.com/i/2026/10/29/75eb6f44dcf26a2a8628f99382e41b4788b577b0.webp
+[img-2]: https://image.cdn.bktus.com/i/2026/10/25/9f2cad47949d7c4f240af7c56b16a39bc835acfe-0.webp
+[img-3]: https://image.cdn.bktus.com/i/2026/10/25/a177f77e64b91ca9b4e70cf220c76cb26ed928cc-0.webp
+[img-4]: https://image.cdn.bktus.com/i/2026/10/29/f864581705dd31fdb544678e9f29f7c84bb2e185.webp

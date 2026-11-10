@@ -6,7 +6,7 @@ sidebar:
   order: 17
 ---
 
-import { Steps } from "@astrojs/starlight/components";
+import { Aside, Card, CardGrid, Steps } from "@astrojs/starlight/components";
 
 A **smart card** is a small piece of hardware, such as a YubiKey or a
 Nitrokey, that holds your private key and does the signing and decrypting
@@ -19,14 +19,18 @@ the card is plugged in, and only if they know your PIN.
 GpgFrontend can read your card, change its settings, make new keys on it, and
 move an existing key onto it. All of this happens in one window:
 
+<Steps>
+
 1. In the main window, open the **Advanced** menu.
 2. Choose **Open Smart Card Controller**. The **Smart Card Controller** window
    opens.
 
+</Steps>
+
 This window is not available in sandboxed builds (Flatpak and the Mac App
 Store edition).
 
-:::note[Needs the GnuPG engine]
+<Aside type="note" title="Needs the GnuPG engine">
 
 Smart cards only work with the GnuPG engine, and need GnuPG version 2.3.0 or
 later. The rPGP engine cannot talk to a card.
@@ -37,7 +41,7 @@ later. The rPGP engine cannot talk to a card.
 - If the window opens but cannot use your keys, switch your key database over
   to GnuPG.
 
-:::
+</Aside>
 
 ## Before You Start
 
@@ -45,22 +49,28 @@ later. The rPGP engine cannot talk to a card.
 
 Your card has two codes, and they do different jobs.
 
-- **PIN** (also called the User PIN): the everyday one. You type it to sign or
-  decrypt. A new card often comes with a PIN of six digits.
-- **Admin PIN**: the one for changing the card itself, such as making keys or
-  resetting the PIN. A new card often comes with an Admin PIN of eight digits.
+<CardGrid>
+  <Card title="PIN" icon="seti:lock">
+    Also called the User PIN. The everyday one. You type it to sign or
+    decrypt. A new card often comes with a PIN of six digits.
+  </Card>
+  <Card title="Admin PIN" icon="setting">
+    The one for changing the card itself, such as making keys or resetting
+    the PIN. A new card often comes with an Admin PIN of eight digits.
+  </Card>
+</CardGrid>
 
 Change both from their factory values before you start using the card for
 real work. See **Access Codes** under
 [Finding Your Way Around](#finding-your-way-around).
 
-:::caution[Too many wrong tries locks the card]
+<Aside type="caution" title="Too many wrong tries locks the card">
 
 If you type the PIN wrong too often, the card locks. You then need the Admin
 PIN or a reset code to unlock it. If you lose those as well, the only way back
 is a factory reset. A factory reset erases every key on the card.
 
-:::
+</Aside>
 
 ### The card holds private keys only
 
@@ -146,13 +156,13 @@ ones they can replace.
 New in v2.2.2. Use this when you already have a key and want to move it onto
 a card.
 
-:::caution[This moves the key, it does not copy it]
+<Aside type="danger" title="This moves the key, it does not copy it">
 
 The private key is **removed from your computer**. Only a stub is left behind.
 Afterwards the key can only be used with the card in hand, and there is no way
 to undo it.
 
-:::
+</Aside>
 
 <Steps>
 
@@ -193,10 +203,14 @@ documentation.
 
 Try, in this order:
 
+<Steps>
+
 1. **Refresh**.
 2. **More**, then **Restart All Gpg-Agents**.
 3. Unplug the card and plug it back in.
 4. Check that your key database is using the GnuPG engine.
+
+</Steps>
 
 ### Can one device do more than OpenPGP?
 
