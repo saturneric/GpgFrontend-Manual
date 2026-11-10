@@ -16,10 +16,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: "npm"
+          cache: "yarn"
       - run: curl -s https://api64.ipify.org; echo; curl -s -4 https://api.ipify.org
-      - run: npm ci
-      - run: npm run build
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
       - name: Deploy to Cloudflare Workers
         run: npx wrangler deploy
         env:
