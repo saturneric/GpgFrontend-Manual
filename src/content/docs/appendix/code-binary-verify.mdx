@@ -23,7 +23,7 @@ Find the kind of download you have:
 | You have                                    | How to check it                                   |
 | :------------------------------------------ | :------------------------------------------------ |
 | A stable release with a `.sig` file         | [Check a Stable Release](#check-a-stable-release) |
-| A test or beta build with a `.minisig` file | [Check a Test Build](#check-a-test-build)         |
+| A test or beta build (no `.sig` files)      | [Check a Test Build](#check-a-test-build)         |
 | The Windows installer                       | Windows checks it too. See [Windows](#windows).   |
 | The macOS app                               | macOS checks it for you. See [macOS](#macos).     |
 | Flatpak, an app store or a package manager  | The store or package manager checks it for you.   |
@@ -76,16 +76,6 @@ repository, so you can compare the two.
 Any other result means the file is not the one that was published. Do not use
 it.
 
-<Aside type="note" title="New in v2.3.0">
-
-The release server also adds a `.minisig` file to every stable release file,
-after it has checked the `.sig`. The app uses it for its own update check. The
-Downloads page only links the `.sig`, which is the maintainer's own signature.
-If you have the `.minisig`, you can check it as shown in
-[Check a Test Build](#check-a-test-build).
-
-</Aside>
-
 ## Checks Your System Does for You
 
 Each system also adds its own check on top of the signature.
@@ -120,48 +110,48 @@ packages are checked by their own tools when you install them.
 There are two kinds of test build. A nightly build is made from the newest
 code. A beta is a test build of the next fix release of one series. Neither
 is signed with the maintainer's OpenPGP key, so they have no `.sig` files.
-Instead, every file comes with a `.minisig` file. This is a signature made
-with [minisign][minisign], a small and simple signing tool.
+The files are not signed one by one either.
 
-The test build signing key is:
+Instead, the check has two parts:
 
-```text
-RWSxNasy+OIaiWWGzwNYu223e0UNDwrsb+4S/ttGO8knO/URmtMtDpse
+- `SHA256SUMS.txt` is the checksum list. A checksum is a short fingerprint of
+  a file. If the file changes, the checksum changes. This list has the
+  checksum of every file in the build.
+- `SHA256SUMS.txt.sigstore.json` is the signature of that list. The project's
+  build on GitHub makes it with [Sigstore][sigstore], a free signing service
+  for open source projects.
+
+First you check that the list really comes from the project's build. Then you
+check your file against the list.
+
+Get the files from the test build list on the
+[Downloads page](/overview/downloads/#test-builds). Open **More download
+options**. The two checking files are linked at the bottom.
+
+### Step 1: Check the Checksum List
+
+This step needs the [cosign][cosign-install] tool. Put `SHA256SUMS.txt` and
+`SHA256SUMS.txt.sigstore.json` in the same folder. Open a terminal in that
+folder and run:
+
+```sh
+cosign verify-blob SHA256SUMS.txt --bundle SHA256SUMS.txt.sigstore.json \
+  --certificate-identity https://github.com/saturneric/GpgFrontend/.github/workflows/build.yml@refs/heads/main \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
-The same key is listed in the [security policy][security-md] of the
-repository, so you can compare the two.
+If it prints `Verified OK`, the checksum list was signed by this project's
+build on GitHub, from the `main` branch. The signature is also written to
+Rekor, a public log that anyone can search.
 
-Get the nightly files from the test build list on the
-[Downloads page](/overview/downloads/#test-builds).
+Any other result means the list is not the one that was published. Do not
+use the build.
 
-### Step 1: Check the Signature
+The command above is for a nightly build. A beta is built from a release
+branch, not from `main`. For a beta of series 2.2, for example, replace
+`refs/heads/main` with `refs/heads/release/2.2`.
 
-<Steps>
-
-1. Install [minisign][minisign].
-2. Put your download and its `.minisig` file in the same folder.
-3. Open a terminal in that folder and run this command. Replace `FILE` with
-   the name of your download:
-
-   ```sh
-   minisign -Vm FILE -P RWSxNasy+OIaiWWGzwNYu223e0UNDwrsb+4S/ttGO8knO/URmtMtDpse
-   ```
-
-4. You should see `Signature and comment signature verified`. The line below
-   it shows the file name and version that were signed. They must match your
-   download.
-
-</Steps>
-
-Any other result means the file is not the one that was published. Do not use
-it.
-
-### Step 2: Check the Checksum (Optional)
-
-A checksum is a short fingerprint of a file. If the file changes, the checksum
-changes. The file `SHA256SUMS.txt` lists the checksum of every file in the
-build.
+### Step 2: Check Your File
 
 Put your download in the same folder as `SHA256SUMS.txt`. Open a terminal in
 that folder and run the command for your system.
@@ -192,29 +182,9 @@ sha256sum -c --ignore-missing SHA256SUMS.txt
 </TabItem>
 </Tabs>
 
-Your file should be listed with `OK`.
-
-### Step 3: Check Who Built It (Optional)
-
-This step shows that GitHub Actions built the files for this project. It needs
-the [cosign][cosign-install] tool. Put `SHA256SUMS.txt` and
-`SHA256SUMS.txt.sigstore.json` (also linked on the Downloads page) in the same
-folder and run:
-
-```sh
-cosign verify-blob SHA256SUMS.txt --bundle SHA256SUMS.txt.sigstore.json \
-  --certificate-identity https://github.com/saturneric/GpgFrontend/.github/workflows/build.yml@refs/heads/main \
-  --certificate-oidc-issuer https://token.actions.githubusercontent.com
-```
-
-If it prints `Verified OK`, the checksum list was signed by this project's
-build on GitHub, from the `main` branch. The signature is also written to
-Rekor, a public log that anyone can search. Because Step 2 checked your file
-against that list, your file is covered too.
-
-The command above is for a nightly build. A beta is built from a release
-branch, not from `main`. For a beta of series 2.2, for example, replace
-`refs/heads/main` with `refs/heads/release/2.2`.
+Your file should be listed with `OK`. Because Step 1 showed that the list
+comes from the project's build, your file is covered too. If your file is
+missing or shows `FAILED`, do not use it.
 
 ## When the Stakes Are Very High
 
@@ -258,5 +228,5 @@ anyone else's build.
 [img-3]: https://img.bktus.com/YLooWolg.webp
 [bktus-openpgp]: https://bktus.com/openpgp/
 [cosign-install]: https://docs.sigstore.dev/cosign/system_config/installation/
-[minisign]: https://jedisct1.github.io/minisign/
+[sigstore]: https://www.sigstore.dev/
 [security-md]: https://github.com/saturneric/GpgFrontend/blob/main/SECURITY.md

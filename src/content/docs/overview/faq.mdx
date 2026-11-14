@@ -510,9 +510,9 @@ things. Do not use them for important work. Get them from the
 [Downloads page](/overview/downloads/#test-builds).
 
 Nightly files are not signed with the maintainer's OpenPGP key. Instead, each
-nightly file comes with a `.minisig` signature file. Always use it to check
-your download. You can also check that GitHub built the files for this
-project. See
+nightly build comes with a checksum list (`SHA256SUMS.txt`). The project's
+build on GitHub signs that list. Always check the list, then check your
+download against it. See
 [Check a Test Build](/appendix/code-binary-verify/#check-a-test-build).
 
 Nightly downloads are larger than official ones, because they include
