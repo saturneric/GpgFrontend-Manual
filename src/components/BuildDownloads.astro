@@ -52,7 +52,7 @@ const stable = channel === "stable";
   type Artifact = {
     name: string;
     path: string;
-    sig: string;
+    sig?: string; // only stable releases sign each file
     os: string;
     arch: string;
     kind: string;
@@ -539,10 +539,13 @@ const stable = channel === "stable";
       el(
         "p",
         "dl-more-intro",
-        "Portable versions, other computer types, and signature files.",
+        stable
+          ? "Portable versions, other computer types, and signature files."
+          : "Portable versions and other computer types.",
       ),
     );
     let rows = 0;
+    let sigs = 0;
     for (const [os, label] of SYSTEMS) {
       const items: HTMLElement[] = [];
       for (const a of ctx.artifacts.filter((a) => a.os === os).sort(order)) {
@@ -565,10 +568,11 @@ const stable = channel === "stable";
         actions.append(dl);
         if (sig) {
           const s = link(sig, "", "dl-row-sig");
-          s.title = stable ? "Signature (.sig)" : "Signature (.minisig)";
+          s.title = "Signature (.sig)";
           s.setAttribute("aria-label", `Signature for ${a.name}`);
           s.append(icon(ICON_SHIELD));
           actions.append(s);
+          sigs++;
         }
         row.append(info, actions);
         items.push(row);
@@ -585,32 +589,56 @@ const stable = channel === "stable";
     }
     if (rows === 0) throw new Error("no files");
 
-    const check = el("p", "dl-foot");
-    check.append(
-      "The shield icon is the file's signature. ",
-      link(HOW_TO[ctx.channel], "How to check a download"),
-      ".",
-    );
-    more.append(check);
+    if (sigs > 0) {
+      const check = el("p", "dl-foot");
+      check.append(
+        "The shield icon is the file's signature. ",
+        link(HOW_TO[ctx.channel], "How to check a download"),
+        ".",
+      );
+      more.append(check);
+    }
 
     if (stable) {
       const backup = backups(ctx.version);
       if (backup) more.append(backup);
     }
 
+    more.append(...checksums(ctx));
+    return more;
+  }
+
+  // The checksum lists, for checking files by hand. A stable release from
+  // the new pipeline has the maintainer's list with its OpenPGP signature.
+  // Every build also has the list GitHub's build made, signed with
+  // Sigstore; test builds have only that one, and no file signatures.
+  function checksums(ctx: Ctx): HTMLElement[] {
+    const out: HTMLElement[] = [];
     const sums = ctx.url(ctx.d.sums);
     if (sums) {
       const foot = el("p", "dl-foot");
-      foot.append("For checking: ", link(sums, "SHA256SUMS.txt"));
+      foot.append("Checksum list: ", link(sums, "SHA256SUMS.txt"));
       const sumsSig = ctx.url(ctx.d.sums_sig);
       if (sumsSig) foot.append(" · ", link(sumsSig, "its signature"));
-      const bundle = ctx.url(ctx.d.build?.bundle);
-      if (bundle) {
-        foot.append(" · ", link(bundle, "SHA256SUMS.txt.sigstore.json"));
-      }
-      more.append(foot);
+      out.push(foot);
     }
-    return more;
+    const buildSums = ctx.url(ctx.d.build?.sums);
+    const bundle = ctx.url(ctx.d.build?.bundle);
+    if (buildSums && bundle) {
+      const foot = el("p", "dl-foot");
+      const stable = ctx.channel === "stable";
+      foot.append(
+        stable ? "Build checksum list: " : "To check these files: ",
+        link(buildSums, "SHA256SUMS.txt"),
+        " · ",
+        link(bundle, "SHA256SUMS.txt.sigstore.json"),
+      );
+      if (!stable) {
+        foot.append(" · ", link(HOW_TO.nightly, "How to check a test build"));
+      }
+      out.push(foot);
+    }
+    return out;
   }
 
   function render(
