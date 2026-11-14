@@ -17,7 +17,6 @@ jobs:
         with:
           node-version: "22"
           cache: "yarn"
-      - run: curl -s https://api64.ipify.org; echo; curl -s -4 https://api.ipify.org
       - run: yarn install --frozen-lockfile
       - run: yarn build
       - name: Deploy to Cloudflare Workers
