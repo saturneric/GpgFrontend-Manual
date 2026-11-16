@@ -268,12 +268,16 @@ The **rPGP** page has three boxes:
 
 ## The Updates Page
 
-The **Updates** page has one checkbox: **Checking for version updates when the
-application starts.**
+The **Updates** page has one box, **Update Checking**, with two checkboxes:
 
-When it is on, GpgFrontend checks quietly in the background, at most once a
-day. It never opens a window for this. If a newer version exists, a badge
-appears on **Help** > **Check for Updates**.
+- **Check for updates automatically, once a day.** When it is on,
+  GpgFrontend checks quietly in the background, at most once a day. It never
+  opens a window for this. If a newer version exists, a badge appears on
+  **Help** > **Check for Updates**.
+- **Also offer beta versions**. When it is on, the check also offers betas
+  (test builds of the next fix release) and release candidates (early test
+  versions of the next feature release). It is off unless you tick it.
+  Nightly builds do not show it.
 
 GpgFrontend only checks after the first-run setup has asked you whether you
 want this.
@@ -283,15 +287,30 @@ turned the check on, the window does not check by itself. Click **Check now**
 to check once. The window then tells you one of these things:
 
 - **You're up to date**.
-- A new version is available. The window names it, offers a button to
-  download it, and has **Release notes** you can open.
-- **This version isn't listed on GitHub Releases**. This can happen with a
-  pre-release or a withdrawn version.
+- **GpgFrontend … is available**: a new version. Click **Download** to get
+  it.
+- **Updates are available**: more than one version is offered, for example a
+  fix for your series and the current release. Pick one under **Offered**,
+  then click **Download**. See
+  [Which Updates the App Offers](/appendix/version-policy/#which-updates-the-app-offers).
+- **This version has been withdrawn**: move to the version it names.
 - **This build isn't from the official repository**. This is expected if you
   built GpgFrontend yourself.
-- **Couldn't check for updates**, with **Try again**.
+- **Couldn't reach the update server**: try **Check again** later.
+- **Update information couldn't be verified**: the answer from the server
+  did not pass the checks, so it was not used.
 
-The check only asks GitHub Releases.
+Click **Details** to see each check the app made. For how the check works,
+see [How Releases and Updates Work](/appendix/release-updates/#update-checking).
+
+<Aside type="note" title="Changed in v2.2.5">
+
+The check now asks the project's own servers and verifies a signed update
+index, instead of asking GitHub Releases. **Also offer beta versions** moved
+here from the **Check for Updates** window. When more than one version is
+offered, you now pick which one to download.
+
+</Aside>
 
 <Aside type="note" title="New in v2.2.3">
 

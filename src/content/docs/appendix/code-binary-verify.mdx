@@ -23,7 +23,7 @@ Find the kind of download you have:
 | You have                                    | How to check it                                   |
 | :------------------------------------------ | :------------------------------------------------ |
 | A stable release with a `.sig` file         | [Check a Stable Release](#check-a-stable-release) |
-| A test or beta build (no `.sig` files)      | [Check a Test Build](#check-a-test-build)         |
+| A test build, beta or release candidate     | [Check a Test Build](#check-a-test-build)         |
 | The Windows installer                       | Windows checks it too. See [Windows](#windows).   |
 | The macOS app                               | macOS checks it for you. See [macOS](#macos).     |
 | Flatpak, an app store or a package manager  | The store or package manager checks it for you.   |
@@ -107,10 +107,11 @@ packages are checked by their own tools when you install them.
 
 ## Check a Test Build
 
-There are two kinds of test build. A nightly build is made from the newest
-code. A beta is a test build of the next fix release of one series. Neither
-is signed with the maintainer's OpenPGP key, so they have no `.sig` files.
-The files are not signed one by one either.
+There are three kinds of test build. A nightly build is made from the newest
+code. A beta is a test build of the next fix release of one series. A release
+candidate is an early test version of the next feature release, like
+`2.4.0-rc.1`. None of them is signed with the maintainer's OpenPGP key, so
+they have no `.sig` files. The files are not signed one by one either.
 
 Instead, the check has two parts:
 
@@ -124,7 +125,7 @@ Instead, the check has two parts:
 First you check that the list really comes from the project's build. Then you
 check your file against the list.
 
-Get the files from the test build list on the
+Get the files from the test build or release candidate list on the
 [Downloads page](/overview/downloads/#test-builds). Open **More download
 options**. The two checking files are linked at the bottom.
 
@@ -147,9 +148,13 @@ Rekor, a public log that anyone can search.
 Any other result means the list is not the one that was published. Do not
 use the build.
 
-The command above is for a nightly build. A beta is built from a release
-branch, not from `main`. For a beta of series 2.2, for example, replace
-`refs/heads/main` with `refs/heads/release/2.2`.
+The command above is for a nightly build. The other test builds are signed
+from another place, so change the end of the `--certificate-identity` line:
+
+| Build                            | Replace `refs/heads/main` with |
+| :------------------------------- | :----------------------------- |
+| A beta of series 2.2             | `refs/heads/release/2.2`       |
+| The release candidate 2.4.0-rc.1 | `refs/tags/v2.4.0-rc.1`        |
 
 ### Step 2: Check Your File
 

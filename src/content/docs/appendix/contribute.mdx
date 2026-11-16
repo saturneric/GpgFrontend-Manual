@@ -369,12 +369,14 @@ mode, take each picture, upload it and put the new link into the page. Its
 
 ## Make Your Changes
 
-Development happens on `main`, which becomes the next series. Each released
-series has its own branch, `release/X.Y`, that only gets fixes: `release/2.2`
-for v2.2.x, and `release/2.1` for the older v2.1.x line (including its Qt5
-builds). Create a new branch from `main` for your work, implement your changes
-while following the technical requirements above, and run the tests before
-submitting.
+Development happens on `main`, which becomes the next feature release. Each
+released series has its own branch, `release/X.Y`, that gets its fix releases
+(`vX.Y.1`, `vX.Y.2`, …) and, before its first release, its release
+candidates: `release/2.2` for v2.2.x, and `release/2.1` for the older v2.1.x
+line (including its Qt5 builds). A fix release is mostly fixes; new features
+go to `main`. See [Version Policy](/appendix/version-policy/). Create a new
+branch from `main` for your work, implement your changes while following the
+technical requirements above, and run the tests before submitting.
 
 Commit messages follow the [Conventional
 Commits][conventionalcommits] style used throughout the

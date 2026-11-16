@@ -1,6 +1,6 @@
 ---
 title: How Releases and Updates Work
-description: "Technical reference for GpgFrontend's release pipeline: versioning, release lines, CI staging, signing keys, the signed update index and the in-app update check."
+description: "Technical reference for GpgFrontend's release pipeline: versioning, release lines, release candidates, CI staging, signing keys, the trust root, the signed update index and the in-app update check."
 sidebar:
   label: Releases & Updates
   order: 6
@@ -9,7 +9,7 @@ sidebar:
 import { Aside, Steps } from "@astrojs/starlight/components";
 import ReleaseFlowFigure from "../../../components/figures/ReleaseFlowFigure.astro";
 
-<Aside type="note" title="New in v2.3.0">
+<Aside type="note" title="New in v2.2.5">
 
 The release pipeline and the in-app update check were rebuilt. This page is a
 technical reference. Everything in it comes from the public repository,
@@ -27,6 +27,10 @@ mainly `release/`, `scripts/release/`, `.github/workflows/build.yml` and the
   tooltip says **A newer version is available**. Open **Help** > **Check for
   Updates** and click **Download**. This opens the right file for your
   system, or the [Downloads](/overview/downloads/) page.
+- **You choose the version.** The check offers fix releases of your own
+  series. When your series is old, it also recommends the current release,
+  and you pick one. See
+  [Which Updates the App Offers](/appendix/version-policy/#which-updates-the-app-offers).
 - **The update check is your choice.** It only runs by itself if you agreed
   during setup, at most once a day, and sends no name or account. To change
   it, go to **Edit** > **Settings** > **Updates** (on macOS:
@@ -41,89 +45,135 @@ The rest of this page is for experts.
 
 <ReleaseFlowFigure />
 
-| Component            | Role                                                                                                    | Trust boundary                                                         |
-| :------------------- | :------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------- |
-| Public repository    | Source of truth for code, build recipe, release policy and pinned keys.                                 | Tags for stable releases are signed by the maintainer.                 |
-| GitHub Actions       | Builds every platform and records provenance with Sigstore.                                             | No job has `contents: write`. It cannot write to the release store.    |
-| Staging bucket       | Holds release candidates exactly as CI signed them.                                                     | Private. Never served to users.                                        |
-| Signing host         | Verifies candidates. Signs nightlies, betas and the update index. Countersigns stable releases.         | Holds the minisign keys. Never holds the OpenPGP or Authenticode keys. |
-| Maintainer's machine | Runs the offline stable stage: OpenPGP and Authenticode signing, then the upload of the stable release. | Keys are not on any server. Authenticode key is on a hardware token.   |
-| Release store        | Serves published files from `builds.bktus.com`.                                                         | Holds no keys. Objects are immutable once written.                     |
-| Client (the app)     | Checks for updates and verifies the signed index.                                                       | Index keys are compiled in at build time.                              |
+| Component             | Role                                                                                                                     | Trust boundary                                                                    |
+| :-------------------- | :----------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| Public repository     | Source of truth for code, build recipe, release policy and the trust root.                                               | Tags for stable releases are signed by the maintainer.                            |
+| GitHub Actions        | Builds every platform and records provenance with Sigstore.                                                              | No job has `contents: write`. It cannot write to the release store.               |
+| Staging bucket        | Holds builds exactly as CI signed them.                                                                                  | Private. Never served to users.                                                   |
+| Signing host          | Verifies and publishes nightlies, betas and release candidates. Re-checks stable releases before it lists them. Signs the update index. | Holds the index key only. Never holds the OpenPGP, Authenticode or root keys. |
+| Maintainer's machine  | Runs the offline stable stage: OpenPGP and Authenticode signing, then the upload of the stable release.                  | Keys are not on any server. Authenticode key is on a hardware token.              |
+| Root key holders      | Sign the trust root, which says which keys sign what.                                                                    | Kept offline. Two of three root keys must sign.                                   |
+| Release store         | Serves published files from `builds.bktus.com` and the index from `update.bktus.com`.                                    | Holds no keys. Objects are immutable once written.                                |
+| Client (the app)      | Checks for updates and verifies the signed index against the trust root.                                                 | The trust root and key list are built in.                                         |
 
 ## Signing Keys
 
-| What                                   | Signed with                   | Key or identity                                            | Kept on                        |
-| :------------------------------------- | :---------------------------- | :--------------------------------------------------------- | :----------------------------- |
-| Stable files, notes and tags           | OpenPGP, detached `.sig`      | `12F7E8858CF15BEC9975FF3C5CA3DA246843FD03`                 | the maintainer's machine       |
-| Stable Windows installers              | Authenticode                  | `CN=Open Source Developer Yu Hu` (full subject below)      | a hardware token               |
-| Nightly and beta files                 | minisign, `.minisig`          | `RWSxNasy+OIaiWWGzwNYu223e0UNDwrsb+4S/ttGO8knO/URmtMtDpse` | the signing host               |
-| Stable files, a second time            | minisign, `.minisig`          | the same key as nightly and beta files                     | the signing host               |
-| The update index                       | minisign                      | `RWRH9qrcd60tH7et1JqW864oJ5irkSI8iYwVa0n38k/mqJoA8IDS8Q9a` | the signing host               |
-| CI's list of build outputs             | Sigstore (keyless)            | the `build.yml` workflow identity                          | none (short-lived certificate) |
-| macOS app                              | Apple Developer ID, notarized | Apple certificate                                          | a protected CI environment     |
+| What                          | Signed with                   | Key or identity                                                                    | Kept on                        |
+| :---------------------------- | :---------------------------- | :--------------------------------------------------------------------------------- | :----------------------------- |
+| Stable files, notes and tags  | OpenPGP, detached `.sig`      | `12F7E8858CF15BEC9975FF3C5CA3DA246843FD03`                                         | the maintainer's machine       |
+| Stable Windows installers     | Authenticode                  | `CN=Open Source Developer Yu Hu` (full subject below)                              | a hardware token               |
+| Nightly, beta and rc builds   | Sigstore (keyless)            | the `build.yml` workflow identity, on `build/SHA256SUMS.txt.sigstore.json`         | none (short-lived certificate) |
+| The update index              | minisign                      | key ID `1F2DAD77DCAAF647` (`RWRH9qrcd60tH7et1JqW864oJ5irkSI8iYwVa0n38k/mqJoA8IDS8Q9a`) | the signing host               |
+| The index-keys list           | minisign                      | key ID `9B09BDB5C65DAB85`                                                          | offline                        |
+| The trust root                | minisign, 2 of 3 keys         | key IDs `4E179325A34DCF45`, `27458E01B54EAF5D`, `4D875241843652E8`                 | offline                        |
+| macOS app                     | Apple Developer ID, notarized | Apple certificate                                                                  | a protected CI environment     |
 
 The full Authenticode subject is `CN=Open Source Developer Yu Hu,O=Open
 Source Developer,L=Karlsruhe,ST=Baden-Württemberg,C=DE`.
 
-All public keys and the certificate subject are pinned in
-`release/product.json`. When a key is rotated, the old one moves to a
-`retired` list. Files it signed before still verify, but new files must use
-the current key. The [security policy][security-md] also lists the OpenPGP
-fingerprint and the minisign key for files.
+The files of a test build carry no signature of their own. CI signs the list
+of their hashes with Sigstore, and the signed index names that build by its
+hash. The [security policy][security-md] lists the OpenPGP fingerprint and
+the Sigstore identity.
+
+<Aside type="note" title="Changed in v2.2.5">
+
+Nightly and beta files used to carry a minisign `.minisig` each, and stable
+files got a second minisign signature from the signing host. Both are gone:
+the app never checked them, and the signed index already pins every file.
+
+</Aside>
+
+## Trust Root and Index Keys
+
+The keys are not hard-coded one by one. A small chain of signed files says
+which key may sign what:
+
+1. **The trust root** (`release/root/<N>.root.json`) names the root keys,
+   the key that signs the index-keys list (the "G" key), and what the signing
+   host must check before it lists a release: the repository and workflow,
+   the maintainer's OpenPGP fingerprint and the Authenticode subject. At least
+   2 of the 3 root keys must sign it. Each signature is a separate
+   `<N>.root.json.<keyid>.minisig` file.
+2. **The index-keys list** (`release/index-keys/<V>.json`) names the keys that
+   may sign the index. The G key signs it.
+3. **The index** is signed by a key on that list.
+
+Rules:
+
+- A new root `N+1` counts only if a threshold of root `N`'s keys **and** a
+  threshold of its own keys signed it. Roots are walked one version at a
+  time, at most 32 in one check.
+- A new root is valid for 2 years, a new index-keys list for 1 year. The
+  signing host warns when fewer than 60 days (root) or 30 days (list) are
+  left.
+- A retired maintainer key or Authenticode subject still counts when a
+  release that was already listed is checked again. It never counts for a new
+  release.
+- The app builds in the newest root and list of the source it was built
+  from. It takes newer ones from the update store when the index names them,
+  and keeps them.
 
 ## Build and Release Pipeline
 
 ### CI: Build and Stage
 
-- CI signs and stages only three kinds of push: a push to `main` (a nightly),
-  a push to `release/X.Y` (a beta of series X.Y) and a release tag `vX.Y.Z`
-  (a stable release). Pull requests, manual runs and all other tags are built
-  but never signed or staged.
+- CI signs and stages only four kinds of push:
+  - a push to `main` (a nightly);
+  - a push to `release/X.Y` (a beta of series X.Y);
+  - a release candidate tag `vX.Y.0-rc.N` (a prerelease of series X.Y, see
+    [Release Candidates](#release-candidates));
+  - a release tag `vX.Y.Z` (a stable release).
+
+  Pull requests, manual runs and all other tags are built but never signed or
+  staged.
 - The build jobs hold no secrets. Apple signing (Developer ID, notarization,
   stapling) and Android signing run in separate jobs, in protected
   environments.
-- A `provenance` job collects every file into a release candidate and writes
-  `SHA256SUMS.txt`. It signs that list keyless with Sigstore `cosign`. The
-  certificate names the workflow, the ref and the commit, and the signature
-  is logged in Rekor.
-- A `stage` job uploads the candidate to the private staging bucket.
+- A `provenance` job collects every file and writes `SHA256SUMS.txt`. It signs
+  that list keyless with Sigstore `cosign`. The certificate names the
+  workflow, the ref and the commit, and the signature is logged in Rekor.
+- A `stage` job uploads the build to the private staging bucket. A release
+  candidate is staged beside its series' betas.
 - No job publishes downloads. CI cannot create a GitHub release or write to
   the release store. There is one exception, for Android: a separate job
-  uploads nightlies of `main` and stable releases to the internal testing
-  track of Google Play.
+  uploads every build it stages to the internal testing track of Google Play.
+  Stable releases, betas and release candidates go to the app
+  `com.bktus.gpgfrontend`; nightlies go to `com.bktus.gpgfrontend.nightly`.
 
-### Nightly and Beta Promotion on the Signing Host
+### Which Builds Are Separate Apps
 
-The signing host runs `gfrelease promote`. It promotes builds of `main` and
-of `release/X.Y`, and of no other branch. For each branch it only takes the
-newest staged build. Before it signs anything, it checks:
+| Build                   | Built as | App name               | Keys and settings                       |
+| :---------------------- | :------- | :--------------------- | :-------------------------------------- |
+| Stable release          | release  | GpgFrontend            | the normal ones                         |
+| Beta (`release/X.Y`)    | release  | GpgFrontend            | the same as the stable release          |
+| Release candidate       | release  | GpgFrontend            | the same as the stable release          |
+| Nightly (`main`)        | nightly  | GpgFrontend Testing    | its own, kept apart                     |
+
+A nightly is a separate product everywhere. On Windows it has its own
+UpgradeCode, install folder, registry key and shortcut, and installs beside a
+stable release. On Android it is its own app.
+
+### Promotion on the Signing Host
+
+The signing host runs `gfrelease promote`. It promotes builds of `main`, of
+`release/X.Y` and of release candidate tags, and of nothing else. For each
+ref it takes only the newest staged build. Before it publishes anything, it
+checks:
 
 1. The Sigstore bundle names this project's `build.yml`, at exactly the ref
-   and commit the candidate claims.
+   and commit the build claims.
 2. Every file matches the signed `SHA256SUMS.txt`, and no extra file is
    present.
 3. The version is what git says that commit is, not merely what the build
-   claimed.
+   claimed. A final version is refused, and so is a version outside the
+   branch's series.
+4. For a release candidate: the tag points to that commit, the commit is on
+   `release/X.Y`, and the series has no release yet.
 
-It then signs every file and `SHA256SUMS.txt` with the minisign artifact key
-and publishes them to `nightly/<version>/`.
-
-The two kinds of branch feed two channels:
-
-- The newest build of `main` is the **nightly** channel.
-- The newest build of `release/X.Y` is the **beta** of series X.Y. It is only
-  listed while it is newer than the latest release of that series, and only
-  for a series that is `stable` or `mainline` (see
-  [Release Lines](#release-lines)).
-
-Nightlies and betas are both built in nightly mode. They run as a separate
-app, **GpgFrontend Testing**, with its own settings and keys:
-
-- On Windows, it installs as a separate product, with its own UpgradeCode,
-  install folder, registry key and shortcut. It installs beside a stable
-  release, not over it.
-- On Android, it is a separate app too (`com.bktus.gpgfrontend.nightly`).
+It then copies the files, CI's manifest and its Sigstore bundle to
+`nightly/<version>/`, writes the build's descriptor (its list of files) last,
+and a commit marker after it. Nothing is signed at this step.
 
 ### Stable Release: the Offline Stage
 
@@ -141,22 +191,26 @@ CI only stages a tag build. A stable release reaches users only through
    step.
 4. **OpenPGP:** write a detached binary `.sig` for every final file, a final
    `SHA256SUMS.txt` with its own `.sig`, and signed release notes.
-5. **Upload** everything to `releases/<version>/`.
+5. **Upload** everything to `releases/<version>/`, the descriptor last.
 
 </Steps>
 
-On its next round, the signing host checks every signature again. Only then
-does it add its own minisign signature (`.minisig`) to every file and list the
-release in the index. The app relies on that minisign signature alone. The
-`.sig` files are for people who check a download by hand.
+On its next round, the signing host admits the release. It checks again,
+against the keys the trust root pins: the signed tag and its commit, the
+maintainer-signed file list against the descriptor, every file's `.sig`, the
+Sigstore build hashes, the Authenticode signature and its timestamp, and the
+signed notes. Only then does it list the release in the index.
+
+The app relies on the signed index alone. The index names each descriptor by
+its hash, and the descriptor names each file by its hash. The `.sig` files are
+for people who check a download by hand.
 
 ### Imported Releases
 
 `gfrelease import` brought GitHub releases from 2.1.5 onward into the release
-store. Each file keeps its original maintainer `.sig`, byte for byte. The
-maintainer signed nothing again. The signing host verifies each imported file
-against its `.sig`. Then it adds its minisign signature and lists the release,
-as it does for a new stable release. Releases before 2.1.5 were signed with
+store. Each file keeps its original maintainer `.sig`, byte for byte. Nothing
+was signed again. The signing host checks each imported file against its
+`.sig` once, then lists the release. Releases before 2.1.5 were signed with
 keys that are no longer pinned, so they stay on [GitHub][github-releases]
 only.
 
@@ -170,26 +224,50 @@ sorted by the rules of Semantic Versioning 2.0.0. Only the format follows
 those rules. What the numbers mean is a separate matter, explained in
 [Version Policy](/appendix/version-policy/).
 
-| Build                                           | Version                    |
-| :---------------------------------------------- | :------------------------- |
-| On a release tag `vX.Y.Z`                       | `X.Y.Z`                    |
-| N commits after the base tag `vX.Y.0-alpha.0`   | `X.Y.0-alpha.N+g<sha>`     |
-| N commits after `vX.Y.Z`, on `release/X.Y`      | `X.Y.(Z+1)-alpha.N+g<sha>` |
-| N commits after `vX.Y.Z`, on any other branch   | `X.(Y+1).0-alpha.N+g<sha>` |
+| Build                                          | Version                    |
+| :--------------------------------------------- | :------------------------- |
+| On a release tag `vX.Y.Z`                      | `X.Y.Z`                    |
+| On a release candidate tag `vX.Y.0-rc.N`       | `X.Y.0-rc.N`               |
+| N commits after the base tag `vX.Y.0-alpha.0`  | `X.Y.0-alpha.N+g<sha>`     |
+| N commits after `vX.Y.0-rc.K`                  | `X.Y.0-rc.K.dev.N+g<sha>`  |
+| N commits after `vX.Y.Z`, on `release/X.Y`     | `X.Y.(Z+1)-alpha.N+g<sha>` |
+| N commits after `vX.Y.Z`, on any other branch  | `X.(Y+1).0-alpha.N+g<sha>` |
 
-- Only a tag of the form `vX.Y.Z` is a release. There are no beta or RC tags
-  any more. Old tags such as `v2.2.0-beta.1` are still read, so old commits
-  keep their versions.
+- A **feature release** is tagged `vX.Y.0`. A **fix release** is tagged
+  `vX.Y.Z` with Z above 0, on `release/X.Y`.
+- A **release candidate** is tagged `vX.Y.0-rc.N`. It is a prerelease, never
+  a release. Only `X.Y.0` can have one, and only before `vX.Y.0` exists. CI
+  does not publish an rc tag of any other shape, and refuses one for a series
+  that is already released.
+- Old tags such as `v2.2.0-beta.1` are still read, so old commits keep their
+  versions. No new beta tags are made.
 - The base tag is set on `main` by `scripts/release/cut.sh`, when the branch
   for the series before it is cut. From then on, `main` counts from it. A
   base tag only marks a starting point. It is never a release.
-- So nightlies of `main` look like `X.Y.0-alpha.N`, and betas from
-  `release/X.Y` look like `X.Y.Z-alpha.N` with Z above 0.
 
 A version string tells you exactly where a build comes from. The `<sha>` part
 is the commit it was built from. CI refuses a build of `main` that would not
 sort above every release, and a build of `release/X.Y` that would not sort
 above every release of series X.Y.
+
+### Release Candidates
+
+A new series is cut at its first release candidate:
+
+<Steps>
+
+1. The maintainer tags `vX.Y.0-rc.1` on `main`, and edits
+   `release/policy.toml`: X.Y becomes `stable`, X.(Y+1) `mainline`.
+2. `scripts/release/cut.sh X.Y` creates `release/X.Y` at that tag, commits
+   the policy, and sets the base tag `vX.(Y+1).0-alpha.0` on `main`.
+3. Further candidates (`vX.Y.0-rc.2`, …) are tagged on `release/X.Y`. Each is
+   built, staged, promoted and listed like a beta.
+4. When `vX.Y.0` is tagged and released, the series is an ordinary stable
+   series. Its candidates are no longer listed.
+
+</Steps>
+
+A series released without a candidate is cut at `vX.Y.0` instead.
 
 ### Release Lines
 
@@ -197,19 +275,49 @@ above every release of series X.Y.
 The support table in `SECURITY.md`, the update index and the order check in
 CI all read it.
 
-| Status     | Meaning                                                                         |
-| :--------- | :------------------------------------------------------------------------------ |
-| `mainline` | Under development on `main`. Its builds are the nightlies.                      |
-| `stable`   | The newest released series. Fixes go to `release/X.Y`, whose builds are betas.  |
-| `legacy`   | An older series that gets security fixes until its `eol`.                       |
-| `eol`      | No more fixes. Users are pointed at a `successor`.                              |
+| Status     | Meaning                                                                                                                        |
+| :--------- | :----------------------------------------------------------------------------------------------------------------------------- |
+| `mainline` | Under development on `main`. Its builds are the nightlies.                                                                     |
+| `stable`   | A released series that still gets fixes on `release/X.Y`, whose builds are its betas. Several series can be stable at once.  |
+| `legacy`   | An older series that gets security fixes until its `eol` date. Its users are offered the series its successor chain ends at. |
+| `eol`      | No more fixes. Its users are offered only the series its successor chain ends at.                                            |
+
+A stable series is shown as a **prerelease** in the index while it has a
+release candidate and no release yet. Nobody sets this by hand.
 
 At the time of writing: 2.3 is mainline, 2.2 is stable, 2.1 is legacy until
 2027-12-31 (the last series that builds with Qt 5), and 2.0 and 1.x are end of
 life. The file also sets the minimum platform for the mainline and stable
-series (Windows build, macOS version, glibc, Android API). The app uses it
-when it tells users of an old series about the current one: it only names
-the current release if this system can run it.
+series (Windows build, macOS version, glibc, Android API). The app only
+recommends a series that this system can run.
+
+#### Successor Chains
+
+A legacy or end-of-life series names a `successor`. The app follows it, and
+goes on through every successor that is itself legacy or end of life, until
+it reaches a stable series. That series' newest release is the one it
+recommends. A stable series is never sent anywhere, even if it names a
+successor.
+
+`policy.py check` refuses a chain that loops, steps back to an older series,
+or ends anywhere but at a stable series. It warns when a successor is not a
+stable series itself: apps older than v2.2.5 read only one step of the chain.
+So when a series becomes legacy, point every successor at a stable series
+directly.
+
+#### When a Legacy Series Reaches Its End Date
+
+Nothing changes on its own. After the `eol` date, `policy.py check` warns
+that the date has passed. The maintainer then sets the series to `eol`, and
+the next signed index says so. The app never compares the date itself. It
+only reads the status from the index:
+
+- The notice in **Check for Updates** changes from "The X series gets
+  security fixes only, until …" to "The X series no longer gets fixes."
+- Fix releases of that series are no longer offered. Only the current release
+  is, where it runs.
+- The app keeps working. Its keys and settings are not touched, nothing is
+  removed, and published files stay published.
 
 ## Update Checking
 
@@ -226,81 +334,105 @@ the `m_ver_check` module.
 - Until the wizard has run, there are no automatic checks.
 - When the app has started, and then every hour, it looks whether a check is
   due. A check is due when the last good result is older than 24 hours. A
-  failed check is retried about an hour later.
-- **Check now**, **Check again** and **Try again** in the dialog always go
-  online, even with automatic checks off, because the user asked.
-- The dialog has one more choice for release builds: **Also offer beta
-  versions** (unticked by default). Nightly and beta builds do not show it.
-  They follow their own channel.
+  failed check is retried at the next hourly look.
+- **Check now** and **Check again** in the dialog always go online, even with
+  automatic checks off, because the user asked.
+- **Also offer beta versions** (unticked by default) is under **Updates** in
+  Settings, for release builds only. It adds betas and release candidates to
+  the offers. Without it, the dialog only mentions a newer beta: **A newer
+  beta, …, is available**. Nightly builds follow their own channel and do not
+  show it.
 
 ### Endpoints and Data Sent
 
-- Every build asks the project's own servers, not GitHub. It fetches the
-  signed index and its signature. If the index offers a version, the app also
-  fetches that version's descriptor (its list of files) and its release
-  notes.
-- Last, the app asks for `builds.bktus.com/gpgfrontend/commits/<commit>`, to
-  learn whether its own build was published. Your build commit is in that
-  URL. Your version number is not sent.
-- Every request carries a fixed, generic browser User-Agent string. There is
-  one string per system family (Windows, macOS, Linux), set at build time. No
-  user ID or machine ID is sent. Your real OS version, architecture and
-  package type are only used locally, to pick a file.
+- Every build asks the project's own servers, not GitHub. From
+  `https://update.bktus.com/gpgfrontend/v1/` it fetches `index.json` and
+  `index.json.minisig`. When the index names a newer root or index-keys list,
+  it also fetches `root/<N>.root.json` with each root key's
+  `.minisig`, and `index-keys/<V>.json` with its `.minisig`.
+- From `https://builds.bktus.com/gpgfrontend/` it fetches the descriptor and
+  release notes of each version it offers. Last, it asks for
+  `commits/<commit>`, to learn whether its own build was published. Your
+  build commit is in that URL. Your version number is not sent.
+- Every request is a plain GET with a fixed, generic browser User-Agent
+  string. There is one string per system family (Windows, macOS, Linux), set
+  at build time. No user ID or machine ID is sent. Your real OS version,
+  architecture and package type are only used locally, to pick a file.
 - As with any HTTPS request, the server sees your IP address.
 
 ### The Signed Update Index
 
-The index is at `gpgfrontend/v1/index.json`, with `index.json.minisig` next
-to it, under:
+It lists:
 
-- `https://update.bktus.com/`
-- `https://ftp.bktus.com/update/` (mirror)
-
-It lists each series with its status, end-of-life date, successor,
-platforms, latest release and beta. It also lists the `stable`, `beta` and
-`nightly` channels, withdrawn versions, and a hashed descriptor for each
-release. It carries a `serial`, a `generated_at` time and an `expires` time.
+- each series with its status, end-of-life date, successor, platforms,
+  latest release, beta and release candidate;
+- the `stable`, `beta`, `prerelease` and `nightly` channels;
+- withdrawn versions, and a hashed descriptor for each release;
+- the root and index-keys versions it is signed under, a `serial`, a
+  `generated_at` time and an `expires` time.
 
 The client checks:
 
-- The minisign (Ed25519) signature, with libsodium, against the index key.
-  The key is compiled in from `release/product.json` at build time.
-- The signed trusted comment must read `product=gpgfrontend serial=<n>`, and
-  the serial must match the file.
+- The trust root and index-keys list, as described in
+  [Trust Root and Index Keys](#trust-root-and-index-keys). An expired root or
+  list blocks the index.
+- The index's minisign (Ed25519) signature, with libsodium, by a key on the
+  index-keys list. The signed trusted comment must read
+  `product=gpgfrontend serial=<n>`, and the serial must match the file.
 - An index more than one day past `expires` is refused. So is an index that
-  claims to be valid for more than 60 days. The host signs for 14 days and
-  re-signs when fewer than 7 remain.
-- The highest accepted serial is stored, and any lower serial is refused. This
-  stops a stale mirror or an attacker from replaying an old index.
-- A descriptor and release notes must match the hashes the index gives for
-  them.
-- If no mirror gives a valid index, the result is "unknown", never a verdict.
-  The dialog shows **Couldn't check for updates**, or the last known result.
+  claims to be valid for more than 60 days. The signing host signs it for 14
+  days, and signs it again before it runs out.
+- The highest accepted serial is stored for each index key, and any lower
+  serial under that key is refused. This stops a stale copy or an attacker
+  from replaying an old index.
+- Each descriptor and release notes must match the hashes the index gives for
+  them. One that does not costs only that version's download link or notes.
+- If nothing valid comes back, the result is "unknown", never a verdict. The
+  dialog shows **Couldn't reach the update server** or **Update information
+  couldn't be verified**, together with the last known result if there is
+  one.
 
-Every build uses this index: stable releases, betas and nightlies.
+Every build uses this index: stable releases, betas, release candidates and
+nightlies.
 
 ### What Gets Offered
 
-- **A release build** is offered the newest release of its own series (same
-  major and minor), so 2.2.x is only offered 2.2.y. With **Also offer beta
-  versions** ticked, it is also offered the beta of its own series, when that
-  beta is newer.
-- **A release build of a `legacy` or `eol` series** also shows a notice that
-  the series is old. The notice names the current release when this system
-  can run it.
-- **A nightly of `main`** is offered the single version in the index's
-  `nightly` channel, with no series filter.
-- **A beta (a build of `release/X.Y`)** is offered the newer beta of its own
-  series, and never a nightly of `main`. When its series has no beta, it is
-  offered nothing.
+| Build                                        | What it is offered                                                                                     |
+| :------------------------------------------- | :----------------------------------------------------------------------------------------------------- |
+| Release build, series `stable`               | The newest release of its own series. Never another series.                                           |
+| Release build, series `legacy`               | The newest release of its own series, and the newest release of the series its successor chain ends at. |
+| Release build, series `eol`                  | Only the newest release of the series its successor chain ends at.                                    |
+| With **Also offer beta versions**            | Also its own series' beta (not for `eol`), and the release candidate of the newest prerelease series. |
+| Release candidate build                      | Newer candidates of its own series, then its release.                                                 |
+| Nightly of `main`                            | The single version in the `nightly` channel.                                                          |
+| Nightly of `release/X.Y` (a local build)     | Its series' beta. With none, it is offered nothing: **This is a release branch build**.              |
+
+- The successor and the release candidate are offered only where this system
+  meets that series' platform minimum. Otherwise the notice says why.
+- When more than one version is offered, the dialog lets the user choose
+  under **Offered**. The successor is picked by default and marked
+  **(recommended)**. Without one, the series' own release is picked. A beta or
+  release candidate is never picked by default.
 - **Download** opens the exact file for this platform and package type, taken
-  from the verified descriptor. When no file fits, it opens the Downloads
-  page. That is always the case for installs that a package manager or store
-  keeps up to date (distribution packages, MSIX).
-- A background check never opens a window. A found update sets a badge on
+  from the verified descriptor of the chosen version. When no file fits, it
+  opens the Downloads page.
+- Installs that a package manager or store keeps up to date (distribution
+  packages, MSIX) get no **Download** button. They show **Updates for this
+  build come from …**.
+- A background check never opens a window. A new offer sets a badge on
   **Help** > **Check for Updates** and a red dot in the status bar with
-  **A newer version is available**. For nightlies and betas, the badge stays
-  quiet for 24 hours after an update has been seen.
+  **A newer version is available**. Each kind of offer (own series,
+  successor, beta, release candidate) is remembered as seen on its own, so a
+  new one of any kind is announced. For nightlies, the badge stays quiet for
+  24 hours after an update was seen.
+
+<Aside type="note" title="New in v2.2.5">
+
+Older apps offered only their own series' releases, and their beta when
+asked for. A legacy or end-of-life series only showed a notice, which named
+its direct successor.
+
+</Aside>
 
 ### In-Place AppImage Updates
 
@@ -326,18 +458,25 @@ hash.
   the store, and the wizard does not show the option.
 - **Android:** the Android app is built without modules, so there is no
   update check in the app.
+- **Builds without the trust files:** a build made without `release/root` and
+  `release/index-keys` cannot verify anything. The dialog says **Updates
+  aren't available for this build** and does not check.
 
 ## Security Properties
 
 - **Separation of duties.** CI can build but not publish. The signing host
-  can publish but holds no stable signing key. A stable release needs the
-  maintainer's offline stage.
-- **Keys off servers.** The OpenPGP and Authenticode keys for stable releases
-  are never on a server. A compromised CI runner, signing host or release
-  store cannot produce a valid stable signature.
-- **Provenance checked before signing.** Every signer verifies the Sigstore
-  bundle against the exact workflow, ref and commit, and asks git for the
-  version itself.
+  can publish but holds no stable signing key and no root key. A stable
+  release needs the maintainer's offline stage.
+- **Keys off servers.** The OpenPGP, Authenticode and root keys are never on
+  a server. A compromised CI runner, signing host or release store cannot
+  produce a valid stable signature, and cannot make the app trust a new
+  index key.
+- **Threshold-signed trust root.** Changing which keys sign the index needs a
+  new index-keys list from the offline G key. Changing the G key or the root
+  keys needs two of the three root keys.
+- **Provenance checked before publishing.** Every signer verifies the
+  Sigstore bundle against the exact workflow, ref and commit, and asks git
+  for the version itself.
 - **Immutable objects.** Published files are never replaced.
 - **Monotonic versions.** CI refuses builds that would sort below an existing
   release. The Windows installer refuses downgrades.
@@ -349,6 +488,7 @@ hash.
   them.
 - The update check reveals the build commit to the server it asks. The
   commit also tells the server which version is running.
+- Apps older than v2.2.5 follow only one step of a successor chain.
 
 [github-releases]: https://github.com/saturneric/GpgFrontend/releases
 [security-md]: https://github.com/saturneric/GpgFrontend/blob/main/SECURITY.md

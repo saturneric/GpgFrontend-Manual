@@ -11,13 +11,14 @@
   >
     <title id="release-flow-title">Release flow</title>
     <desc id="release-flow-desc">
-      GitHub Actions builds from the public repository and stages a release
-      candidate in a private staging bucket. A stable release goes to the
-      maintainer's machine for OpenPGP and Authenticode signing, then to the
-      signing host, which verifies it again. A nightly goes straight to the
-      signing host, which verifies and minisigns it. The signing host
-      publishes to the release store, and the client verifies the signatures
-      and the update index.
+      GitHub Actions builds from the public repository and stages each build
+      in a private staging bucket. A stable release goes to the maintainer's
+      machine for OpenPGP and Authenticode signing, then to the signing host,
+      which verifies it again. A test build (a nightly, a beta or a release
+      candidate) goes straight to the signing host, which verifies and
+      publishes it. The signing host signs the update index and publishes
+      everything to the release store. The client verifies the signed index,
+      and the release details and notes it pins by hash.
     </desc>
     <defs>
       <marker
@@ -47,7 +48,7 @@
       stable
     </text>
     <text class="arrow-label" x="370" y="268" text-anchor="start">
-      nightly
+      test builds
     </text>
 
     <!-- 1. Source code -->
@@ -94,10 +95,10 @@
       Signing host
     </text>
     <text class="note" x="400" y="348" text-anchor="middle">
-      verifies, minisigns
+      verifies, publishes,
     </text>
     <text class="note" x="400" y="368" text-anchor="middle">
-      nightlies and index
+      signs the index
     </text>
 
     <!-- Seal badges -->
@@ -122,10 +123,10 @@
     </rect>
     <text class="name" x="260" y="544" text-anchor="middle">Client</text>
     <text class="note" x="260" y="565" text-anchor="middle">
-      verifies signatures
+      verifies the signed index,
     </text>
     <text class="note" x="260" y="583" text-anchor="middle">
-      and the update index
+      and what it pins
     </text>
   </svg>
   <figcaption>
