@@ -9,6 +9,9 @@
 // rc and keep the newest beta and release candidate at the top level only;
 // both shapes are read.
 
+import { UAParser } from "ua-parser-js";
+import { isAppleSilicon } from "ua-parser-js/device-detection";
+
 export const BUILDS_BASE = "https://builds.bktus.com/gpgfrontend/";
 
 // stable: the newest release, the main download.
@@ -85,15 +88,10 @@ export function seriesOf(version: string): string {
   return m ? `${m[1]}.${m[2]}` : version;
 }
 
-// Newest series first. "1" (a whole generation) sorts before "1.0".
-function seriesKey(key: string): [number, number] {
-  const [a, b] = key.split(".");
-  return [parseInt(a, 10) || 0, b === undefined ? -1 : parseInt(b, 10) || 0];
-}
+// Newest series first, comparing the numbers as numbers ("2.10" after
+// "2.9").
 function newestFirst(x: string, y: string): number {
-  const [xa, xb] = seriesKey(x);
-  const [ya, yb] = seriesKey(y);
-  return ya - xa || yb - xb;
+  return y.localeCompare(x, undefined, { numeric: true });
 }
 
 function make(
@@ -239,9 +237,14 @@ const KIND_LABEL: Record<string, string> = {
   appimage: "AppImage",
 };
 
+const MB = new Intl.NumberFormat(undefined, {
+  style: "unit",
+  unit: "megabyte",
+  maximumSignificantDigits: 2,
+});
 export function size(bytes: unknown): string {
   if (typeof bytes !== "number" || bytes <= 0) return "";
-  return `${(bytes / 1048576).toFixed(bytes < 10485760 ? 1 : 0)} MB`;
+  return MB.format(bytes / 1048576);
 }
 
 export function details(a: Artifact): string {
@@ -284,38 +287,43 @@ export function order(x: Artifact, y: Artifact): number {
   return 0;
 }
 
-// Best guess of the visitor's system. Chromium browsers report the real
-// CPU and macOS version through client hints; others only through the
-// user agent, which on macOS hides both. iPads ask for the Mac site, so
-// a "Mac" with a touch screen is an iPad.
-export async function detect(): Promise<Visitor> {
-  const ua = navigator.userAgent;
-  const v: Visitor = { os: null, arch: null, macos: null };
-  const touchMac = /Macintosh/i.test(ua) && (navigator.maxTouchPoints ?? 0) > 1;
-  if (/Android/i.test(ua)) v.os = "android";
-  else if (/iPhone|iPad|iPod/i.test(ua) || touchMac) v.os = "ios";
-  else if (/Windows/i.test(ua)) v.os = "windows";
-  else if (/Macintosh|Mac OS X/i.test(ua)) v.os = "macos";
-  else if (/Linux|X11/i.test(ua)) v.os = "linux";
-  if (/aarch64|arm64/i.test(ua)) v.arch = "arm";
-  else if (/x86_64|x64|amd64|Win64/i.test(ua)) v.arch = "x86";
+// ua-parser-js's names for the systems there are downloads for. Linux is
+// reported by distribution ("Ubuntu", "Fedora", "Chrome OS"), so it is
+// whatever else says Linux or X11.
+const OS_ID: Record<string, string> = {
+  Windows: "windows",
+  macOS: "macos",
+  iOS: "ios",
+  Android: "android",
+};
 
-  const uad = (navigator as any).userAgentData;
-  if (uad?.getHighEntropyValues) {
-    try {
-      const h = await uad.getHighEntropyValues([
-        "architecture",
-        "platformVersion",
-      ]);
-      if (h.architecture === "arm") v.arch = "arm";
-      else if (h.architecture === "x86") v.arch = "x86";
-      if (v.os === "macos" && h.platformVersion) {
-        const major = parseInt(h.platformVersion, 10);
-        if (major > 10) v.macos = major;
-      }
-    } catch {
-      /* keep what the user agent said */
-    }
+// Best guess of the visitor's system, by ua-parser-js: the user agent,
+// Chromium's client hints (the real CPU and macOS version), and feature
+// checks (an iPad that asks for the Mac site). Other browsers hide a Mac's
+// chip; isAppleSilicon then reads it from the graphics chip, when shown.
+// Safari's frozen "10.15.7" is no macOS version at all.
+export async function detect(): Promise<Visitor> {
+  let r = new UAParser().getResult();
+  try {
+    r = await r.withClientHints();
+  } catch {
+    /* keep what the user agent said */
+  }
+  r = await r.withFeatureCheck();
+
+  const v: Visitor = { os: null, arch: null, macos: null };
+  v.os =
+    r.device.model === "iPad"
+      ? "ios"
+      : (OS_ID[r.os.name ?? ""] ?? (/Linux|X11/.test(r.ua) ? "linux" : null));
+
+  const arch = r.cpu.architecture ?? "";
+  if (arch.startsWith("arm")) v.arch = "arm";
+  else if (arch === "amd64" || arch === "ia32") v.arch = "x86";
+  if (v.os === "macos") {
+    if (!v.arch && isAppleSilicon(r)) v.arch = "arm";
+    const major = parseInt(r.os.version ?? "", 10);
+    if (major > 10) v.macos = major;
   }
   return v;
 }
