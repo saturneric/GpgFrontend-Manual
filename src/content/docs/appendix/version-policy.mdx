@@ -1,55 +1,67 @@
 ---
 title: Version Numbering Policy
-description: "What GpgFrontend version numbers mean, why they do not follow Semantic Versioning, and what each release series set out to do."
+description: "What GpgFrontend version numbers mean: feature releases, fix releases, release candidates and test builds, and which updates the app offers you."
 sidebar:
   label: Version Policy
   order: 5
 ---
 
-import { Aside, Card, CardGrid } from "@astrojs/starlight/components";
+import { Aside, Card, CardGrid, Steps } from "@astrojs/starlight/components";
 
-Every copy of GpgFrontend has a version number, like `v2.2.3`. That number does
-not tell you how big a release was or how much work went into it.
+Every copy of GpgFrontend has a version number, like `v2.3.1`. The number
+tells you two things: which feature release you have, and how many rounds of
+fixes it has had since.
 
-It tells you which chapter of the project you are holding.
+<Aside type="note" title="Changed in v2.2.5">
+
+Before v2.2.5, the last number counted feature releases. Since v2.2.5, it
+counts only fix releases. New features now raise the middle number. See
+[How It Used to Work](#how-it-used-to-work).
+
+</Aside>
 
 ## What the Numbers Mean
 
-A version number has three parts. Here is `v2.2.3`:
+A version number has three parts. Here is `v2.3.1`:
 
-| Part      | Name       | What it means                                                   |
-| :-------- | :--------- | :-------------------------------------------------------------- |
-| **2**.2.3 | Generation | The app was rebuilt from the ground up. This has happened once. |
-| 2.**2**.3 | Series     | The app took a new direction.                                   |
-| 2.2.**3** | Release    | A new version came out inside that direction.                   |
+| Part      | Name            | What it means                                                         |
+| :-------- | :-------------- | :-------------------------------------------------------------------- |
+| **2**.3.1 | Generation      | The app was rebuilt from the ground up. This has happened once.       |
+| 2.**3**.1 | Feature release | New features. A new one comes out about every two months.             |
+| 2.3.**1** | Fix release     | Fixes for that feature release. It comes out whenever one is needed. |
 
-The first two numbers together are called the **series**. In `v2.2.3`, the series
-is **2.2**. This is the part that matters most, and it is how the project talks
-about its own versions.
+The first two numbers together are called the **series**. In `v2.3.1`, the
+series is **2.3**. The update check and the rest of this manual use that word.
 
-The last number just counts releases inside the series. `v2.2.1` came first, then
-`v2.2.2`, then `v2.2.3`.
+## Feature Releases Bring New Things
 
-## A Big Release Can Still Be a Small Number
+Each feature release raises the middle number: `v2.3.0`, then `v2.4.0`, and
+so on. It brings new features and changes, and it is where bigger work lands.
 
-This surprises people, so it is worth saying clearly.
+Some feature releases also take the app in a new direction. Two real examples:
 
-The last number going up does **not** mean the release was small. It only means
-the app kept going in the same direction.
+- **2.1** moved the app onto a modern toolkit and let you choose which copy of
+  GnuPG to use.
+- **2.2** added a second engine, rPGP, so GnuPG was no longer the only way to do
+  the work. This is why the app is now described as having a "dual-engine core".
 
-For example, `v2.2.1` to `v2.2.2` looks like a tiny step. That release added
-[Profiles](/advanced/profiles/), portable profile files you can carry around,
-Instant Messaging tokens, a new key list, and a rebuilt settings window.
+A change of direction is a decision the project makes first, and usually
+writes down before the code exists. Most feature releases do not change
+direction. They add features along the same road.
 
-`v2.2.3` was just as big. It added sending and reading email, signed modules,
-temporary profiles, and key databases that change without a restart.
+## Fix Releases Keep a Release Stable
 
-<Aside type="note" title="How to tell how big a release is">
+A fix release raises only the last number: `v2.3.0`, then `v2.3.1`, then
+`v2.3.2`.
 
-Do not judge it by the number. Read the release notes on the
-[releases page][github-releases]. They say what actually changed.
+- It is mostly fixes, including urgent ones (hot fixes). It may add a few
+  small features, never large ones. Big features wait for the next feature
+  release.
+- It comes out as soon as it is ready. It does not wait for the next feature
+  release.
+- A feature release can get several fix releases.
 
-</Aside>
+So a fix release is a safe update. Taking it keeps your version stable.
 
 ## Why Not Semantic Versioning
 
@@ -60,27 +72,121 @@ Those rules were written for code libraries: software that other programmers
 build their own programs on top of. The numbers answer one question: _did
 something break for the programmers using this?_
 
-GpgFrontend is an app you use, not a library programmers build on. No other
-program is built on top of it, so that question does not apply.
+GpgFrontend is an app you use, not a library programmers build on. Its
+version numbers look the same, and they sort the same way. But they answer a
+different question: _is this new features, or fixes for what you already
+have?_
 
-So the numbers here answer a different question: _what is this app trying to be
-right now?_
+## Stable, Beta, Release Candidate and Nightly
 
-## What Starts a New Series
+Not every build is meant for everyday use:
 
-A new series starts when the project decides to take the app somewhere new. The
-decision comes first, and it is usually written down before the code exists.
+<CardGrid>
+<Card title="Stable" icon="approve-check-circle">
 
-Two real examples:
+A normal release, like `v2.3.1`. This is the one you want.
 
-- **2.1** moved the app onto a modern toolkit and let you choose which copy of
-  GnuPG to use.
-- **2.2** added a second engine, rPGP, so GnuPG was no longer the only way to do
-  the work. This is why the app is now described as having a "dual-engine core".
+</Card>
+<Card title="Beta" icon="magnifier">
 
-Plenty of things do **not** start a new series, even when they are large. A pile
-of new features, a redesigned screen, or a lot of fixes all ship as a normal
-release. The direction did not change, so the series did not either.
+A test build of the next fix release of one series. Its version looks like
+`2.3.2-alpha.3`. It runs as the normal app and uses the same keys and
+settings as your stable copy, so back up your keys first.
+
+</Card>
+<Card title="Release candidate" icon="rocket">
+
+An early test version of the next feature release, like `2.4.0-rc.1`. It is a
+beta, never a stable release. There is one only while that feature release
+is not out yet. It uses the same keys and settings as your stable copy.
+
+</Card>
+<Card title="Nightly" icon="warning">
+
+An automatic test build, made from the newest code. It can be broken. Its
+version looks like `2.4.0-alpha.120`. It runs as a separate app, **GpgFrontend
+Testing**, with its own keys and settings.
+
+</Card>
+</CardGrid>
+
+To be told about betas and release candidates, open **Edit** > **Settings** >
+**Updates** (on macOS: **Preferences**) in a stable release, and tick **Also
+offer beta versions**. It is off unless you tick it.
+
+<Aside type="note" title="Changed in v2.2.5">
+
+A beta used to be a tagged early version of a new series, like
+`v2.2.0-beta.1`, and it ran as **GpgFrontend Testing**. Now a beta is an
+untagged test build of the next fix release, and it runs as the normal app.
+The early version of a new series is now a release candidate. The beta
+setting used to be in the **Check for Updates** window. It is now under
+**Settings** > **Updates**.
+
+</Aside>
+
+See [Downloads](/overview/downloads/) for where to get each kind of build,
+and the [FAQ](/overview/faq/) for more about nightly builds.
+
+## Which Updates the App Offers
+
+The update check looks at the series you have. What it offers depends on how
+that series is doing:
+
+| Your series    | What it means                         | What the app offers                                     |
+| :------------- | :------------------------------------ | :------------------------------------------------------ |
+| Stable         | It still gets fixes.                  | Fix releases of your series.                            |
+| Legacy         | It gets security fixes only, for now. | Fix releases of your series, and the current release.   |
+| End of life    | It gets nothing any more.             | Only the current release.                               |
+
+The **current release** is the newest release of the series that legacy
+users are meant to move to. The app follows the chain from series to series
+until it finds one that is still stable. It recommends it only if your system
+can run it.
+
+More than one series can be stable at the same time. Then each one gets its
+own fixes, and none of them points you to another series. That only starts
+once a series becomes legacy.
+
+<Aside type="note" title="New in v2.2.5">
+
+When more than one version is offered, you choose which one to download. To
+do so:
+
+<Steps>
+
+1. Open **Help** > **Check for Updates**.
+2. Under **Offered**, pick a version. The current release is marked
+   **(recommended)** and is picked for you. Betas and release candidates are
+   never picked for you.
+3. Click **Download**.
+
+</Steps>
+
+Before v2.2.5, the app offered only fix releases of your own series, and
+showed a notice when your series was old.
+
+</Aside>
+
+The update check never moves you to another series by itself. Nothing
+installs without you. To learn how the check works and how to turn it off,
+see [How Releases and Updates Work](/appendix/release-updates/#update-checking).
+
+## When a Series Gets Old
+
+When a newer series comes out, the older one does not stop right away:
+
+1. For a while it can stay **stable** next to the new one, and keep getting
+   fixes.
+2. Then it becomes **legacy**. It gets security fixes only, up to a set date.
+   The app recommends the current release, next to your fixes.
+3. After that date it reaches **end of life**. It gets no fixes at all. The
+   app only offers the current release.
+
+Your copy keeps working the whole time. Your keys and settings are not
+touched, and nothing is removed. Moving to the newer series is up to you.
+
+The `2.1.x` series is legacy until the end of 2027.
 
 ## The Story So Far
 
@@ -92,6 +198,7 @@ release. The direction did not change, so the series did not either.
 | **2.0** | A rebuilt core. Everything inside was rewritten.                                              |
 | **2.1** | A modern toolkit, more control over GnuPG, and a long run of steady, careful releases.        |
 | **2.2** | Two engines instead of one, plus support for newer OpenPGP standards.                         |
+| **2.3** | The first feature release under the new numbering.                                            |
 
 The 2.0 release notes show that the number was picked on purpose:
 
@@ -99,75 +206,39 @@ The 2.0 release notes show that the number was picked on purpose:
 > from the previous version, **the version number of this version of GpgFrontend
 > starts from v2**."
 
-## Why the Numbers Stay Small
+## How It Used to Work
+
+Up to v2.2.4, the middle number changed only when the app took a new
+direction. The last number counted the releases in that direction, and each
+one could be big.
+
+For example, `v2.2.1` to `v2.2.2` looks like a tiny step. That release added
+[Profiles](/advanced/profiles/), portable profile files you can carry around,
+Instant Messaging tokens, a new key list, and a rebuilt settings window.
+`v2.2.3` was just as big. It added sending and reading email, signed modules,
+temporary profiles, and key databases that change without a restart.
+
+From v2.2.5 on, that is no longer the case. `v2.2.5` and later `2.2.x`
+versions are fix releases, and new features arrive in `v2.3.0`.
+
+<Aside type="note" title="How to tell what changed">
+
+Read the release notes on the [releases page][github-releases]. They say what
+actually changed in each version.
+
+</Aside>
+
+## Why the Generation Number Stays Small
 
 GpgFrontend has been going since 2021, and the first number has changed once.
-
-Many projects raise their version numbers often, because a bigger number looks
-like progress. This project does not. The number moves when the app really
-changes, and stays put when it does not.
+The middle number now moves with every feature release. The first one moves
+only when the app is rebuilt from the ground up.
 
 That is a deliberate choice, described in the maintainer's article
 ["The Past and Present of GpgFrontend"][blog-history]:
 
 > "I firmly believe that **steady progress is more valuable than blind
 > innovation**."
-
-## Stable, Beta, and Nightly
-
-Not every build is meant for everyday use:
-
-<CardGrid>
-<Card title="Stable" icon="approve-check-circle">
-
-A normal release, like `v2.2.3`. This is the one you want.
-
-</Card>
-<Card title="Beta" icon="magnifier">
-
-A test build of the next fix release of one series. It has extra text on the
-end, like `2.2.5-alpha.3`. It is for people who want to help test fixes
-before they are released.
-
-</Card>
-<Card title="Nightly" icon="warning">
-
-An automatic test build, made from the newest code. It is an early look at the
-next series, and it can be broken. Its version looks like `2.3.0-alpha.120`.
-
-</Card>
-</CardGrid>
-
-Nightly and beta builds both run under the name **GpgFrontend Testing**. They
-keep their own separate data, so they leave your everyday keys and settings
-alone.
-
-To be told about betas, open **Help** > **Check for Updates** in a stable
-release and tick **Also offer beta versions**. It is off unless you tick it.
-
-<Aside type="note" title="Changed in v2.3.0">
-
-A beta used to be a tagged early version of a new series, like
-`v2.2.0-beta.1`. Now a beta is an untagged test build of the next fix release.
-
-</Aside>
-
-See [Downloads](/overview/downloads/) for where to get stable and nightly
-builds, and the [FAQ](/overview/faq/) for more about nightly builds.
-
-## Older Versions
-
-When a new series begins, the previous one does not stop right away. It keeps
-getting security fixes for a while, but no new features. The `2.1.x` series is
-in that state until the end of 2027.
-
-The app's built-in update check only offers you newer versions **from your own
-series**. It will not move you to a different one on its own. Moving to a new
-series is something you choose to do yourself, by downloading it from the
-[Downloads](/overview/downloads/) page.
-
-To learn how the update check works and how to turn it off, see
-[How Releases and Updates Work](/appendix/release-updates/#update-checking).
 
 [github-releases]: https://github.com/saturneric/GpgFrontend/releases
 [blog-history]: https://blog.bktus.com/en/archives/u8hywl/
