@@ -74,7 +74,6 @@ const LOADING = {
     type Visitor,
   } from "./downloads/offers";
 
-  const GETTING_STARTED = "/overview/getting-started/";
   // The same release files are also kept on GitHub and on the mirror site.
   const GITHUB_TAG = "https://github.com/saturneric/GpgFrontend/releases/tag/v";
   const MIRROR_BASE = "https://ftp.bktus.com/GpgFrontend/v";
@@ -185,25 +184,6 @@ const LOADING = {
   const ICON_DOWNLOAD = "M12 3v12m0 0-5-5m5 5 5-5M4 19h16";
   const ICON_SHIELD = "M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Zm-3 9 2 2 4-4";
 
-  // What to do once the file is on the computer, in three short steps.
-  const STEPS: Record<string, string[]> = {
-    windows: [
-      "Open the file you downloaded.",
-      "Accept the license, then click Next until it is installed.",
-      "Open GpgFrontend from the new shortcut on your desktop.",
-    ],
-    macos: [
-      "Open the file you downloaded.",
-      "Drag GpgFrontend into the Applications folder.",
-      "Open GpgFrontend from your Applications folder.",
-    ],
-    linux: [
-      "Right-click the file you downloaded and open Properties.",
-      "Under Permissions, allow the file to run as a program.",
-      "Double-click the file to start GpgFrontend.",
-    ],
-  };
-
   function isPlainVersion(version: string): boolean {
     return /^\d+\.\d+\.\d+$/.test(version);
   }
@@ -296,7 +276,6 @@ const LOADING = {
     const choices = choicesFor(ctx, v);
     if (choices.length) {
       const row = el("div", "dl-choices");
-      let hasSig = false;
       choices.forEach(([a, target], i) => {
         const cls =
           o.kind === "stable" && i === 0 ? "dl-button" : "dl-button secondary";
@@ -324,7 +303,6 @@ const LOADING = {
           s.title = "Signature (.sig)";
           s.setAttribute("aria-label", `OpenPGP signature for ${a.name}`);
           metaEl.append(" · ", s);
-          hasSig = true;
         }
         row.append(el("div", "dl-choice", button, metaEl));
       });
@@ -371,33 +349,6 @@ const LOADING = {
           bytes ? ` (${bytes}).` : ".",
         );
         hero.append(p);
-      }
-
-      // What to do next, and how to check the file, folded away so the
-      // button stays the main thing in the box.
-      const steps = release ? STEPS[v.os ?? ""] : undefined;
-      if (steps || hasSig) {
-        const next = el("details", "dl-next");
-        next.append(el("summary", undefined, "What to do after it downloads"));
-        if (steps) {
-          next.append(
-            el("ol", undefined, ...steps.map((s) => el("li", undefined, s))),
-          );
-        }
-        if (hasSig) {
-          const check = el("p", "dl-next-help");
-          check.append(
-            "To make sure the file is genuine, also download its OpenPGP " +
-              "signature. See ",
-            link(HOW_TO_RELEASE, "How to check a download"),
-            ".",
-          );
-          next.append(check);
-        }
-        const help = el("p", "dl-next-help");
-        help.append("Need more help? See ", link(GETTING_STARTED, "Getting Started"), ".");
-        next.append(help);
-        hero.append(next);
       }
     } else {
       hero.append(el("p", "dl-hint", noChoiceMessage(ctx, v)));
@@ -945,23 +896,6 @@ const LOADING = {
     color: var(--sl-color-white);
   }
 
-  .dl-next {
-    margin-top: 1.25rem;
-    font-size: var(--sl-text-sm);
-  }
-  .dl-next ol {
-    margin: 0.5rem 0 0;
-    padding-inline-start: 1.4rem;
-    list-style: decimal;
-  }
-  .dl-next li + li {
-    margin-top: 0.15rem;
-  }
-  .dl-next-help {
-    margin: 0.5rem 0 0;
-    color: var(--sl-color-gray-3);
-  }
-
   .dl-switch {
     display: flex;
     flex-wrap: wrap;
@@ -990,7 +924,6 @@ const LOADING = {
     border-top: 1px solid var(--sl-color-gray-5);
     padding-top: 0.75rem;
   }
-  .dl-next summary,
   .dl-more summary {
     display: inline-flex;
     align-items: center;
@@ -1001,11 +934,9 @@ const LOADING = {
     font-weight: 600;
     color: var(--sl-color-white);
   }
-  .dl-next summary::-webkit-details-marker,
   .dl-more summary::-webkit-details-marker {
     display: none;
   }
-  .dl-next summary::before,
   .dl-more summary::before {
     content: "";
     width: 0.45rem;
@@ -1015,7 +946,6 @@ const LOADING = {
     transform: rotate(-45deg);
     transition: transform 0.15s;
   }
-  .dl-next[open] summary::before,
   .dl-more[open] summary::before {
     transform: rotate(45deg);
   }
