@@ -1,9 +1,10 @@
 ---
-// Shows the newest stable release or nightly build, read live from the
-// signed update index. Without JavaScript, or if a request fails, only the
-// fallback text shows. While the data loads, a placeholder shows instead.
+// Shows the newest stable release, release candidate or nightly build, read
+// live from the signed update index. Without JavaScript, or if a request
+// fails, only the fallback text shows. While the data loads, a placeholder
+// shows instead.
 interface Props {
-  channel: "stable" | "nightly";
+  channel: "stable" | "prerelease" | "nightly";
 }
 const { channel } = Astro.props;
 const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
@@ -27,6 +28,11 @@ const stable = channel === "stable";
         <span data-slow hidden>Taking long? </span>
         Download the latest version from <a href={GITHUB_LATEST}>GitHub</a>,
         or get the same files from the <a href={MIRROR}>mirror site</a>.
+      </p>
+    ) : channel === "prerelease" ? (
+      <p class="dl-status" data-fallback>
+        The release candidate can't be shown here. You can find it in the{" "}
+        <a href={INDEX_URL}>build index</a>.
       </p>
     ) : (
       <p class="dl-status" data-fallback>
@@ -61,7 +67,7 @@ const stable = channel === "stable";
     size?: number;
   };
 
-  type Channel = "stable" | "nightly";
+  type Channel = "stable" | "prerelease" | "nightly";
 
   type Visitor = {
     os: string | null; // "ios" for iPhone and iPad
@@ -81,8 +87,10 @@ const stable = channel === "stable";
   };
 
   // Folder of each channel in the build storage (Cloudflare R2).
+  // A release candidate is a test build too, kept beside the nightlies.
   const FOLDER: Record<Channel, string> = {
     stable: "releases/",
+    prerelease: "nightly/",
     nightly: "nightly/",
   };
 
@@ -299,10 +307,12 @@ const stable = channel === "stable";
 
   const HOW_TO: Record<Channel, string> = {
     stable: "/appendix/code-binary-verify/#check-a-stable-release",
+    prerelease: "/appendix/code-binary-verify/#check-a-test-build",
     nightly: "/appendix/code-binary-verify/#check-a-test-build",
   };
   const NAME: Record<Channel, string> = {
     stable: "Latest version",
+    prerelease: "Release candidate",
     nightly: "Test build",
   };
 
@@ -399,7 +409,18 @@ const stable = channel === "stable";
     const hero = ctx.hero;
     hero.replaceChildren();
 
-    if (!stable) {
+    if (ctx.channel === "prerelease") {
+      // Built as a release: it opens the everyday app's keys and settings.
+      hero.append(
+        el(
+          "p",
+          "dl-caution",
+          "Early test of the next version. It may have bugs. It uses the " +
+            "same keys and settings as your everyday GpgFrontend. For " +
+            "everyday use, take the download at the top of this page.",
+        ),
+      );
+    } else if (!stable) {
       hero.append(
         el(
           "p",
@@ -713,12 +734,19 @@ const stable = channel === "stable";
   }
 
   // The index entry for a channel: the release the stable channel names,
-  // or the current nightly build.
+  // the newest release candidate (only while its series has no release), or
+  // the current nightly build. A candidate is never the stable download.
   function entryFor(index: any, channel: Channel) {
     if (channel === "stable") {
       const version = index?.channels?.stable;
       const release = index?.releases?.[version];
       return release ? { ...release, version } : null;
+    }
+    if (channel === "prerelease") {
+      const rc = index?.prerelease;
+      return /^\d+\.\d+\.0-rc\.\d+$/.test(String(rc?.version ?? ""))
+        ? rc
+        : null;
     }
     return index?.nightly ?? null;
   }
@@ -727,10 +755,12 @@ const stable = channel === "stable";
     const index = await getIndex(root.dataset.index!);
     const entry = entryFor(index, channel);
     if (!entry) {
-      // Stable keeps its fallback links; nightly says there is none.
-      if (channel === "nightly") {
+      // Stable keeps its fallback links; the others say there is none.
+      if (channel !== "stable") {
         root.querySelector<HTMLElement>("[data-fallback]")!.textContent =
-          "There is no test build right now.";
+          channel === "prerelease"
+            ? "There is no release candidate right now."
+            : "There is no test build right now.";
       }
       throw new Error("no entry in the index");
     }
@@ -759,7 +789,11 @@ const stable = channel === "stable";
     ".dl-downloads",
   )) {
     const channel: Channel =
-      root.dataset.channel === "stable" ? "stable" : "nightly";
+      root.dataset.channel === "stable"
+        ? "stable"
+        : root.dataset.channel === "prerelease"
+          ? "prerelease"
+          : "nightly";
     setState(root, "loading");
     let settled = false;
     const timer = setTimeout(() => {

@@ -1,6 +1,6 @@
 ---
 title: Downloads
-description: "Download GpgFrontend for Windows, macOS, and Linux from official channels, including stable and nightly builds and package repositories."
+description: "Download GpgFrontend for Windows, macOS, and Linux from official channels, including stable releases, release candidates, nightly builds and package repositories."
 sidebar:
   order: 3
 ---
@@ -131,6 +131,31 @@ what it is for:
 | `-portable`                    | Marks the portable version (a `.zip` file on Windows).           |
 | `.sig`                         | Signature file of a release, to check the download is genuine.   |
 | `.sigstore.json`               | Signature of a test build's checksum list (`SHA256SUMS.txt`).    |
+
+### Release Candidates
+
+A release candidate is an early test version of the next feature release,
+like `2.4.0-rc.1`. It comes out a short while before that release. There is
+one only while the next release is not out yet.
+
+- It may have bugs. It is not meant for everyday use.
+- It uses the same keys and settings as your everyday GpgFrontend. Back up
+  your keys before you try it.
+- Once the release is out, GpgFrontend offers it to you as a normal update.
+
+<Aside type="note" title="New in v2.2.5">
+  GpgFrontend can tell you about release candidates. Open **Edit** >
+  **Settings** > **Updates** (on macOS: **Preferences**) and tick **Also
+  offer beta versions**. **Help** > **Check for Updates** then lists the
+  release candidate as one more choice. It is never picked for you.
+</Aside>
+
+<details>
+<summary>Show the release candidate (for testers only)</summary>
+
+<BuildDownloads channel="prerelease" />
+
+</details>
 
 ### Test Builds
 
