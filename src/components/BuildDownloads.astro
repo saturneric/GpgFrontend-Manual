@@ -1,43 +1,51 @@
 ---
-// Shows the newest stable release, release candidate or nightly build, read
-// live from the signed update index. Without JavaScript, or if a request
-// fails, only the fallback text shows. While the data loads, a placeholder
-// shows instead.
+// Download boxes, read live from the signed update index:
+//   current  the newest release, with one button for the visitor's system;
+//   older    the newest release of every other series that still gets fixes;
+//   testing  the test versions there are right now (release candidates,
+//            betas, the nightly build), with a picker.
+// What counts as which comes from the index alone (downloads/offers.ts), so
+// no version is written here. Without JavaScript, or if a request fails,
+// only the fallback text shows. While the data loads, a placeholder shows.
 interface Props {
-  channel: "stable" | "prerelease" | "nightly";
+  show: "current" | "older" | "testing";
 }
-const { channel } = Astro.props;
+const { show } = Astro.props;
 const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
-const GITHUB_LATEST = "https://github.com/saturneric/GpgFrontend/releases/latest";
+const GITHUB_RELEASES = "https://github.com/saturneric/GpgFrontend/releases";
+const GITHUB_LATEST = `${GITHUB_RELEASES}/latest`;
 const MIRROR = "https://ftp.bktus.com/GpgFrontend/";
-const stable = channel === "stable";
+const LOADING = {
+  current: "Finding the right download for your computer…",
+  older: "Loading older versions…",
+  testing: "Loading test versions…",
+}[show];
 ---
 
-<div class="dl-downloads not-content" data-index={INDEX_URL} data-channel={channel}>
+<div class="dl-downloads not-content" data-index={INDEX_URL} data-show={show}>
   <div class="dl-loading" hidden>
     <span class="dl-skel dl-skel-button"></span>
     <span class="dl-skel dl-skel-line"></span>
     <span class="dl-skel dl-skel-line dl-skel-short"></span>
-    <p class="dl-loading-text" role="status">
-      {stable ? "Finding the right download for your computer…" : "Loading test builds…"}
-    </p>
+    <p class="dl-loading-text" role="status">{LOADING}</p>
   </div>
   {
-    stable ? (
+    show === "current" ? (
       <p class="dl-status" data-fallback>
         <span data-slow hidden>Taking long? </span>
         Download the latest version from <a href={GITHUB_LATEST}>GitHub</a>,
         or get the same files from the <a href={MIRROR}>mirror site</a>.
       </p>
-    ) : channel === "prerelease" ? (
+    ) : show === "older" ? (
       <p class="dl-status" data-fallback>
-        The release candidate can't be shown here. You can find it in the{" "}
-        <a href={INDEX_URL}>build index</a>.
+        The older versions can't be shown here. You can find them on{" "}
+        <a href={GITHUB_RELEASES}>GitHub</a> or the{" "}
+        <a href={MIRROR}>mirror site</a>.
       </p>
     ) : (
       <p class="dl-status" data-fallback>
-        The list of test builds can't be shown here. You can find them in the{" "}
-        <a href={INDEX_URL}>nightly build index</a>.
+        The test versions can't be shown here. You can find them in the{" "}
+        <a href={INDEX_URL}>build index</a>.
       </p>
     )
   }
@@ -45,8 +53,33 @@ const stable = channel === "stable";
 </div>
 
 <script>
-  const BUILDS_BASE = "https://builds.bktus.com/gpgfrontend/";
+  import {
+    buildUrl,
+    detect,
+    details,
+    isRelease,
+    MAC_CHIP,
+    macMajor,
+    offers,
+    order,
+    pick,
+    pickMac,
+    sha256Hex,
+    size,
+    variant,
+    type Artifact,
+    type Offer,
+    type OfferKind,
+    type Offers,
+    type Visitor,
+  } from "./downloads/offers";
+
   const GETTING_STARTED = "/overview/getting-started/";
+  // The same release files are also kept on GitHub and on the mirror site.
+  const GITHUB_TAG = "https://github.com/saturneric/GpgFrontend/releases/tag/v";
+  const MIRROR_BASE = "https://ftp.bktus.com/GpgFrontend/v";
+  const HOW_TO_RELEASE = "/appendix/code-binary-verify/#check-a-stable-release";
+  const HOW_TO_BUILD = "/appendix/code-binary-verify/#check-a-test-build";
 
   const SYSTEMS = [
     ["windows", "Windows"],
@@ -55,219 +88,71 @@ const stable = channel === "stable";
     ["android", "Android"],
   ];
 
-  type Artifact = {
-    name: string;
-    path: string;
-    sig?: string; // only stable releases sign each file
-    os: string;
-    arch: string;
-    kind: string;
-    flavor: string;
-    min_os: { macos?: string } | null;
-    size?: number;
+  const SAME_KEYS =
+    "It uses the same keys and settings as your everyday GpgFrontend, so " +
+    "back up your keys first.";
+
+  // Everything that differs between the kinds of download, in one place.
+  type KindText = {
+    eyebrow: (o: Offer) => string;
+    // What this one is, for the picker of test versions.
+    pickLabel: (o: Offer) => string;
+    button: (o: Offer, target: string, many: boolean) => string;
+    caution?: (o: Offer) => string;
+    // What there is none of, when a system has no file.
+    noun: string;
   };
-
-  type Channel = "stable" | "prerelease" | "nightly";
-
-  type Visitor = {
-    os: string | null; // "ios" for iPhone and iPad
-    arch: string | null; // "arm" or "x86" when known
-    macos: number | null; // major macOS version when known
+  const KIND: Record<OfferKind, KindText> = {
+    stable: {
+      eyebrow: () => "Latest version",
+      pickLabel: (o) => o.version,
+      button: (_o, t, many) =>
+        many ? `Download for ${t}` : `Download GpgFrontend for ${t}`,
+      noun: "version",
+    },
+    line: {
+      eyebrow: (o) => `Series ${o.series}`,
+      pickLabel: (o) => o.version,
+      button: (o, t) => `Download ${o.version} for ${t}`,
+      noun: "version",
+    },
+    rc: {
+      eyebrow: () => "Release candidate",
+      pickLabel: (o) => `Release candidate ${o.version}`,
+      button: (_o, t) => `Download release candidate for ${t}`,
+      caution: () =>
+        "Early test version of the next feature release. It may have " +
+        `bugs. ${SAME_KEYS}`,
+      noun: "release candidate",
+    },
+    beta: {
+      eyebrow: (o) => `Beta of ${o.series}`,
+      pickLabel: (o) => `Beta of ${o.series}`,
+      button: (_o, t) => `Download beta for ${t}`,
+      caution: (o) =>
+        `Test build of the next fix release of ${o.series}. It may have ` +
+        `bugs. ${SAME_KEYS}`,
+      noun: "beta",
+    },
+    nightly: {
+      eyebrow: () => "Nightly build",
+      pickLabel: () => "Nightly build",
+      button: (_o, t) => `Download nightly build for ${t}`,
+      caution: () =>
+        "Automatic build of the newest code. It can be broken. It runs as " +
+        "a separate app, GpgFrontend Testing, with its own keys and settings.",
+      noun: "nightly build",
+    },
   };
 
   // Everything the box needs to draw itself again for another system.
   type Ctx = {
-    root: HTMLElement;
-    channel: Channel;
-    version: string;
+    offer: Offer;
     d: any;
     artifacts: Artifact[];
     url: (path: unknown) => string | null;
     hero: HTMLElement;
   };
-
-  // Folder of each channel in the build storage (Cloudflare R2).
-  // A release candidate is a test build too, kept beside the nightlies.
-  const FOLDER: Record<Channel, string> = {
-    stable: "releases/",
-    prerelease: "nightly/",
-    nightly: "nightly/",
-  };
-
-  // The same release files are also kept on GitHub and on the mirror site.
-  const GITHUB_TAG = "https://github.com/saturneric/GpgFrontend/releases/tag/v";
-  const MIRROR_BASE = "https://ftp.bktus.com/GpgFrontend/v";
-
-  // Only files inside the channel's folder of the build storage.
-  function buildUrl(path: unknown, channel: Channel): string | null {
-    if (typeof path !== "string" || !path.startsWith(FOLDER[channel])) {
-      return null;
-    }
-    if (path.includes("..") || path.includes("//")) return null;
-    const url = new URL(path, BUILDS_BASE);
-    return url.href.startsWith(BUILDS_BASE) ? url.href : null;
-  }
-
-  async function sha256Hex(data: ArrayBuffer): Promise<string> {
-    const digest = await crypto.subtle.digest("SHA-256", data);
-    return Array.from(new Uint8Array(digest))
-      .map((b) => b.toString(16).padStart(2, "0"))
-      .join("");
-  }
-
-  const MAC_CHIP: Record<string, string> = {
-    arm64: "Mac with Apple chip",
-    x86_64: "Mac with Intel chip",
-  };
-
-  // Who a file is for, in plain words, for the full file list.
-  function variant(a: Artifact): string {
-    const portable = a.flavor === "portable";
-    switch (a.os) {
-      case "windows":
-        if (portable) return "Portable";
-        return a.kind === "msix" ? "MSIX installer" : "Installer";
-      case "macos": {
-        const chip = MAC_CHIP[a.arch] ?? a.arch;
-        const major = a.min_os?.macos?.split(".")[0];
-        return major ? `${chip}, macOS ${major} or newer` : chip;
-      }
-      case "linux": {
-        const base =
-          a.arch === "aarch64" ? "ARM computers" : "Intel or AMD computers";
-        return portable ? `${base}, portable` : base;
-      }
-      case "android":
-        return a.arch === "arm64-v8a"
-          ? "Most phones and tablets"
-          : a.arch === "x86_64"
-            ? "Emulators and x86 devices"
-            : a.arch;
-      default:
-        return a.arch;
-    }
-  }
-
-  const KIND_LABEL: Record<string, string> = {
-    msi: ".msi",
-    msix: ".msix",
-    zip: ".zip",
-    dmg: ".dmg",
-    apk: ".apk",
-    appimage: "AppImage",
-  };
-
-  function details(a: Artifact): string {
-    const parts = [KIND_LABEL[a.kind] ?? a.kind];
-    if (a.os === "linux" || a.os === "android") parts.push(a.arch);
-    parts.push(size(a.size));
-    return parts.filter(Boolean).join(" · ");
-  }
-
-  // On Windows the MSI installer is the recommended one.
-  function kindRank(a: Artifact): number {
-    return a.kind === "msi" ? 0 : a.kind === "msix" ? 1 : 2;
-  }
-
-  // Most common choice first: installed before portable, the usual chip
-  // before the rare one, MSI before MSIX, older macOS (wider reach) before
-  // newer.
-  const COMMON_ARCH: Record<string, string> = {
-    windows: "x86_64",
-    macos: "arm64",
-    linux: "x86_64",
-    android: "arm64-v8a",
-  };
-  function order(x: Artifact, y: Artifact): number {
-    const rank = (a: Artifact) => [
-      COMMON_ARCH[a.os] === a.arch ? 0 : 1,
-      a.flavor === "portable" ? 1 : 0,
-      kindRank(a),
-      macMajor(a),
-    ];
-    const rx = rank(x);
-    const ry = rank(y);
-    for (let i = 0; i < rx.length; i++) {
-      if (rx[i] !== ry[i]) return rx[i] - ry[i];
-    }
-    return 0;
-  }
-
-  // Best guess of the visitor's system. Chromium browsers report the real
-  // CPU and macOS version through client hints; others only through the
-  // user agent, which on macOS hides both. iPads ask for the Mac site, so
-  // a "Mac" with a touch screen is an iPad.
-  async function detect(): Promise<Visitor> {
-    const ua = navigator.userAgent;
-    const v: Visitor = { os: null, arch: null, macos: null };
-    const touchMac =
-      /Macintosh/i.test(ua) && (navigator.maxTouchPoints ?? 0) > 1;
-    if (/Android/i.test(ua)) v.os = "android";
-    else if (/iPhone|iPad|iPod/i.test(ua) || touchMac) v.os = "ios";
-    else if (/Windows/i.test(ua)) v.os = "windows";
-    else if (/Macintosh|Mac OS X/i.test(ua)) v.os = "macos";
-    else if (/Linux|X11/i.test(ua)) v.os = "linux";
-    if (/aarch64|arm64/i.test(ua)) v.arch = "arm";
-    else if (/x86_64|x64|amd64|Win64/i.test(ua)) v.arch = "x86";
-
-    const uad = (navigator as any).userAgentData;
-    if (uad?.getHighEntropyValues) {
-      try {
-        const h = await uad.getHighEntropyValues([
-          "architecture",
-          "platformVersion",
-        ]);
-        if (h.architecture === "arm") v.arch = "arm";
-        else if (h.architecture === "x86") v.arch = "x86";
-        if (v.os === "macos" && h.platformVersion) {
-          const major = parseInt(h.platformVersion, 10);
-          if (major > 10) v.macos = major;
-        }
-      } catch {
-        /* keep what the user agent said */
-      }
-    }
-    return v;
-  }
-
-  function macMajor(a: Artifact): number {
-    return parseInt(a.min_os?.macos ?? "0", 10) || 0;
-  }
-
-  // The installed build for this system, as the app's own updater picks it.
-  function pick(artifacts: Artifact[], v: Visitor): Artifact | null {
-    const want =
-      v.os === "android"
-        ? v.arch === "x86" ? "x86_64" : "arm64-v8a"
-        : v.os === "linux"
-          ? v.arch === "arm" ? "aarch64" : "x86_64"
-          : "x86_64";
-    return (
-      artifacts
-        .filter(
-          (a) => a.os === v.os && a.flavor === "installed" && a.arch === want,
-        )
-        .sort((x, y) => kindRank(x) - kindRank(y))[0] ?? null
-    );
-  }
-
-  // The disk image for one Mac chip: built for the newest macOS this Mac
-  // runs when the browser says which; otherwise the oldest, which also runs
-  // on newer ones.
-  function pickMac(
-    artifacts: Artifact[],
-    v: Visitor,
-    arch: string,
-  ): Artifact | null {
-    const fits = artifacts
-      .filter(
-        (a) => a.os === "macos" && a.flavor === "installed" && a.arch === arch,
-      )
-      .filter((a) => v.macos === null || macMajor(a) <= v.macos)
-      .sort((x, y) => macMajor(x) - macMajor(y));
-    if (!fits.length) return null;
-    return v.macos === null ? fits[0] : fits[fits.length - 1];
-  }
 
   function el<K extends keyof HTMLElementTagNameMap>(
     tag: K,
@@ -300,22 +185,6 @@ const stable = channel === "stable";
   const ICON_DOWNLOAD = "M12 3v12m0 0-5-5m5 5 5-5M4 19h16";
   const ICON_SHIELD = "M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Zm-3 9 2 2 4-4";
 
-  function size(bytes: unknown): string {
-    if (typeof bytes !== "number" || bytes <= 0) return "";
-    return `${(bytes / 1048576).toFixed(bytes < 10485760 ? 1 : 0)} MB`;
-  }
-
-  const HOW_TO: Record<Channel, string> = {
-    stable: "/appendix/code-binary-verify/#check-a-stable-release",
-    prerelease: "/appendix/code-binary-verify/#check-a-test-build",
-    nightly: "/appendix/code-binary-verify/#check-a-test-build",
-  };
-  const NAME: Record<Channel, string> = {
-    stable: "Latest version",
-    prerelease: "Release candidate",
-    nightly: "Test build",
-  };
-
   // What to do once the file is on the computer, in three short steps.
   const STEPS: Record<string, string[]> = {
     windows: [
@@ -335,23 +204,34 @@ const stable = channel === "stable";
     ],
   };
 
-  // Links to the same release files on GitHub and on the mirror site, for
-  // when the main download is slow or blocked.
-  function backups(version: string): HTMLElement | null {
-    if (!/^\d+\.\d+\.\d+$/.test(version)) return null;
-    const p = el("p", "dl-foot");
+  function isPlainVersion(version: string): boolean {
+    return /^\d+\.\d+\.\d+$/.test(version);
+  }
+
+  // The same release on GitHub and on the mirror site, for when the main
+  // download is slow or blocked, or cannot be shown.
+  function backupLinks(p: HTMLElement, version: string) {
     p.append(
-      "Download slow or blocked? Get the same files from ",
       link(GITHUB_TAG + version, "GitHub"),
       " or the ",
       link(`${MIRROR_BASE}${version}/`, "mirror site"),
       ".",
     );
-    return p;
   }
 
   function systemName(os: string): string {
     return SYSTEMS.find(([id]) => id === os)?.[1] ?? os;
+  }
+
+  function formatDate(iso: string, utc = false): string | null {
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) return null;
+    return date.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      ...(utc ? { timeZone: "UTC" } : {}),
+    });
   }
 
   // The buttons for this visitor: one, or one per Mac chip when the
@@ -381,9 +261,9 @@ const stable = channel === "stable";
         return `GpgFrontend does not run on iPhone or iPad. ${pickOther}`;
       case "android":
         if (!has("android")) {
-          return ctx.channel === "stable"
+          return isRelease(ctx.offer.kind)
             ? `There is no Android version for everyday use yet. ${pickOther}`
-            : `There is no test build for Android right now. ${pickOther}`;
+            : `There is no ${KIND[ctx.offer.kind].noun} for Android right now. ${pickOther}`;
         }
         break;
       case "macos": {
@@ -405,31 +285,13 @@ const stable = channel === "stable";
   // The top of the box: the button, what to do next, and a way to switch
   // to another system. Drawn again when the visitor picks another system.
   function renderHero(ctx: Ctx, v: Visitor) {
-    const stable = ctx.channel === "stable";
+    const o = ctx.offer;
+    const text = KIND[o.kind];
+    const release = isRelease(o.kind);
     const hero = ctx.hero;
     hero.replaceChildren();
 
-    if (ctx.channel === "prerelease") {
-      // Built as a release: it opens the everyday app's keys and settings.
-      hero.append(
-        el(
-          "p",
-          "dl-caution",
-          "Early test of the next version. It may have bugs. It uses the " +
-            "same keys and settings as your everyday GpgFrontend. For " +
-            "everyday use, take the download at the top of this page.",
-        ),
-      );
-    } else if (!stable) {
-      hero.append(
-        el(
-          "p",
-          "dl-caution",
-          "Test build. It may have bugs. For everyday use, take the " +
-            "download at the top of this page.",
-        ),
-      );
-    }
+    if (text.caution) hero.append(el("p", "dl-caution", text.caution(o)));
 
     const choices = choicesFor(ctx, v);
     if (choices.length) {
@@ -437,16 +299,14 @@ const stable = channel === "stable";
       let hasSig = false;
       choices.forEach(([a, target], i) => {
         const cls =
-          stable && i === 0 ? "dl-button" : "dl-button secondary";
+          o.kind === "stable" && i === 0 ? "dl-button" : "dl-button secondary";
         const button = el("a", cls);
         button.href = ctx.url(a.path)!;
         button.title = a.name;
-        const text = stable
-          ? choices.length > 1
-            ? `Download for ${target}`
-            : `Download GpgFrontend for ${target}`
-          : `Download test build for ${target}`;
-        button.append(icon(ICON_DOWNLOAD), text);
+        button.append(
+          icon(ICON_DOWNLOAD),
+          text.button(o, target, choices.length > 1),
+        );
         const meta = [
           "Free",
           size(a.size),
@@ -457,8 +317,8 @@ const stable = channel === "stable";
           .filter(Boolean)
           .join(" · ");
         const metaEl = el("div", "dl-meta", meta);
-        // Stable files are signed with the maintainer's OpenPGP key.
-        const sig = stable ? ctx.url(a.sig) : null;
+        // Releases are signed file by file with the maintainer's OpenPGP key.
+        const sig = release ? ctx.url(a.sig) : null;
         if (sig) {
           const s = link(sig, "OpenPGP signature");
           s.title = "Signature (.sig)";
@@ -497,9 +357,25 @@ const stable = channel === "stable";
         }
       }
 
+      // The portable version for the same system, one click away.
+      const portable = pick(ctx.artifacts, v, "portable");
+      const portableHref = portable && ctx.url(portable.path);
+      if (portable && portableHref) {
+        const p = el("p", "dl-help dl-portable");
+        const a = link(portableHref, "Download the portable version");
+        a.title = portable.name;
+        const bytes = size(portable.size);
+        p.append(
+          "Want to run it from a USB drive, without installing it? ",
+          a,
+          bytes ? ` (${bytes}).` : ".",
+        );
+        hero.append(p);
+      }
+
       // What to do next, and how to check the file, folded away so the
       // button stays the main thing in the box.
-      const steps = stable ? STEPS[v.os ?? ""] : undefined;
+      const steps = release ? STEPS[v.os ?? ""] : undefined;
       if (steps || hasSig) {
         const next = el("details", "dl-next");
         next.append(el("summary", undefined, "What to do after it downloads"));
@@ -513,7 +389,7 @@ const stable = channel === "stable";
           check.append(
             "To make sure the file is genuine, also download its OpenPGP " +
               "signature. See ",
-            link(HOW_TO.stable, "How to check a download"),
+            link(HOW_TO_RELEASE, "How to check a download"),
             ".",
           );
           next.append(check);
@@ -527,7 +403,7 @@ const stable = channel === "stable";
       hero.append(el("p", "dl-hint", noChoiceMessage(ctx, v)));
     }
 
-    // Other systems this channel has files for.
+    // Other systems this download has files for.
     const others = SYSTEMS.filter(
       ([os]) =>
         !(choices.length && os === v.os) &&
@@ -553,14 +429,14 @@ const stable = channel === "stable";
 
   // Every file, folded away, for people who know what they want.
   function renderMore(ctx: Ctx): HTMLElement {
-    const stable = ctx.channel === "stable";
+    const release = isRelease(ctx.offer.kind);
     const more = el("details", "dl-more");
     more.append(el("summary", undefined, "More download options"));
     more.append(
       el(
         "p",
         "dl-more-intro",
-        stable
+        release
           ? "Portable versions, other computer types, and signature files."
           : "Portable versions and other computer types.",
       ),
@@ -614,27 +490,30 @@ const stable = channel === "stable";
       const check = el("p", "dl-foot");
       check.append(
         "The shield icon is the file's signature. ",
-        link(HOW_TO[ctx.channel], "How to check a download"),
+        link(release ? HOW_TO_RELEASE : HOW_TO_BUILD, "How to check a download"),
         ".",
       );
       more.append(check);
     }
 
-    if (stable) {
-      const backup = backups(ctx.version);
-      if (backup) more.append(backup);
+    if (release && isPlainVersion(ctx.offer.version)) {
+      const p = el("p", "dl-foot");
+      p.append("Download slow or blocked? Get the same files from ");
+      backupLinks(p, ctx.offer.version);
+      more.append(p);
     }
 
     more.append(...checksums(ctx));
     return more;
   }
 
-  // The checksum lists, for checking files by hand. A stable release from
-  // the new pipeline has the maintainer's list with its OpenPGP signature.
-  // Every build also has the list GitHub's build made, signed with
-  // Sigstore; test builds have only that one, and no file signatures.
+  // The checksum lists, for checking files by hand. A release from the new
+  // pipeline has the maintainer's list with its OpenPGP signature. Every
+  // build also has the list GitHub's build made, signed with Sigstore; test
+  // builds have only that one, and no file signatures.
   function checksums(ctx: Ctx): HTMLElement[] {
     const out: HTMLElement[] = [];
+    const release = isRelease(ctx.offer.kind);
     const sums = ctx.url(ctx.d.sums);
     if (sums) {
       const foot = el("p", "dl-foot");
@@ -647,64 +526,188 @@ const stable = channel === "stable";
     const bundle = ctx.url(ctx.d.build?.bundle);
     if (buildSums && bundle) {
       const foot = el("p", "dl-foot");
-      const stable = ctx.channel === "stable";
       foot.append(
-        stable ? "Build checksum list: " : "To check these files: ",
+        release ? "Build checksum list: " : "To check these files: ",
         link(buildSums, "SHA256SUMS.txt"),
         " · ",
         link(bundle, "SHA256SUMS.txt.sigstore.json"),
       );
-      if (!stable) {
-        foot.append(" · ", link(HOW_TO.nightly, "How to check a test build"));
+      if (!release) {
+        foot.append(" · ", link(HOW_TO_BUILD, "How to check a test build"));
       }
       out.push(foot);
     }
     return out;
   }
 
-  function render(
-    root: HTMLElement,
-    channel: Channel,
-    version: string,
-    d: any,
-    v: Visitor,
-  ) {
-    const out = root.querySelector<HTMLElement>(".dl-result")!;
-    out.replaceChildren();
-    const stable = channel === "stable";
+  // One download, drawn into @p target: what it is, the button, every file.
+  function render(target: HTMLElement, offer: Offer, d: any, v: Visitor) {
+    const release = isRelease(offer.kind);
 
     // Header: what this is, which version, when it was made.
     const header = el("div", "dl-header");
     const title = el("div", "dl-title");
     title.append(
-      el("span", "dl-eyebrow", NAME[channel]),
-      el("code", "dl-version", version),
+      el("span", "dl-eyebrow", KIND[offer.kind].eyebrow(offer)),
+      el("code", "dl-version", offer.version),
     );
     header.append(title);
-    const built = new Date(stable ? d.released_at : d.built_at);
-    if (!Number.isNaN(built.getTime())) {
-      const date = built.toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      });
-      const time = el("time", "dl-date", `${stable ? "Released" : "Built"} ${date}`);
-      time.dateTime = built.toISOString();
+    const iso = release ? d.released_at : d.built_at;
+    const date = typeof iso === "string" ? formatDate(iso) : null;
+    if (date) {
+      const time = el("time", "dl-date", `${release ? "Released" : "Built"} ${date}`);
+      time.dateTime = new Date(iso).toISOString();
       header.append(time);
     }
 
     const ctx: Ctx = {
-      root,
-      channel,
-      version,
+      offer,
       d,
       artifacts: Array.isArray(d.artifacts) ? d.artifacts : [],
-      url: (path: unknown) => buildUrl(path, channel),
+      url: (path: unknown) => buildUrl(path, offer.kind),
       hero: el("div", "dl-hero"),
     };
     const more = renderMore(ctx);
     renderHero(ctx, v);
-    out.append(header, ctx.hero, more);
+    target.replaceChildren(header, ctx.hero, more);
+  }
+
+  // ------------------------------------------------------------- loading
+
+  // One index request and one visitor guess, shared by every box on the
+  // page; each descriptor is fetched once.
+  let indexPromise: Promise<Offers> | null = null;
+  function getOffers(url: string): Promise<Offers> {
+    indexPromise ??= fetch(url, { cache: "no-cache" }).then(async (r) => {
+      if (!r.ok) throw new Error(`index: ${r.status}`);
+      return offers(await r.json());
+    });
+    return indexPromise;
+  }
+  let visitorPromise: Promise<Visitor> | null = null;
+  function visitor(): Promise<Visitor> {
+    visitorPromise ??= detect();
+    return visitorPromise;
+  }
+  const descriptors = new Map<string, Promise<any>>();
+  function descriptor(o: Offer): Promise<any> {
+    let p = descriptors.get(o.descriptor);
+    if (!p) {
+      p = (async () => {
+        const url = buildUrl(o.descriptor, o.kind);
+        if (!url) throw new Error("bad descriptor path");
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`descriptor: ${res.status}`);
+        const raw = await res.arrayBuffer();
+        // The index names the descriptor's hash; anything else is not shown.
+        if ((await sha256Hex(raw)) !== o.sha256) {
+          throw new Error("descriptor hash does not match the index");
+        }
+        return JSON.parse(new TextDecoder().decode(raw));
+      })();
+      p.catch(() => descriptors.delete(o.descriptor));
+      descriptors.set(o.descriptor, p);
+    }
+    return p;
+  }
+
+  // Load and draw one offer into @p target, with a short loading line and,
+  // if it fails, links to where else to find it.
+  async function show(target: HTMLElement, o: Offer) {
+    target.replaceChildren(
+      el("p", "dl-loading-text", "Loading…"),
+    );
+    target.setAttribute("aria-busy", "true");
+    try {
+      render(target, o, await descriptor(o), await visitor());
+    } catch (e) {
+      console.warn(`${o.version} downloads unavailable:`, e);
+      const p = el("p", "dl-hint", "This download can't be shown here. ");
+      if (isRelease(o.kind) && isPlainVersion(o.version)) {
+        p.append("Get it from ");
+        backupLinks(p, o.version);
+      }
+      target.replaceChildren(p);
+    } finally {
+      target.setAttribute("aria-busy", "false");
+    }
+  }
+
+  // What a supported older series still gets, in plain words.
+  function lineStatus(o: Offer): string {
+    if (o.status === "legacy") {
+      const end = o.eol ? formatDate(o.eol, true) : null;
+      return end ? `Security fixes only, until ${end}` : "Security fixes only";
+    }
+    return "Still gets fixes";
+  }
+
+  // One folded row per older series; its files load when it is opened.
+  function renderOlder(out: HTMLElement, list: Offer[]) {
+    if (!list.length) {
+      out.append(
+        el(
+          "p",
+          "dl-hint",
+          "Right now, only the version at the top of this page still gets fixes.",
+        ),
+      );
+      return;
+    }
+    for (const o of list) {
+      const line = el("details", "dl-line");
+      const summary = el(
+        "summary",
+        undefined,
+        el("span", "dl-line-title", `GpgFrontend ${o.version}`),
+        el("span", "dl-line-status", lineStatus(o)),
+      );
+      const body = el("div", "dl-line-body");
+      line.append(summary, body);
+      line.addEventListener("toggle", () => {
+        if (line.open && !body.hasChildNodes()) void show(body, o);
+      });
+      out.append(line);
+    }
+  }
+
+  // A picker over the test versions there are, and the chosen one below.
+  function renderTesting(out: HTMLElement, list: Offer[]) {
+    if (!list.length) {
+      out.append(el("p", "dl-hint", "There is no test version right now."));
+      return;
+    }
+    const body = el("div", "dl-pick-body");
+    const buttons: HTMLButtonElement[] = [];
+    const select = (i: number) => {
+      buttons.forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
+      void show(body, list[i]);
+    };
+    if (list.length > 1) {
+      const picker = el("div", "dl-switch dl-picker");
+      picker.append(el("span", undefined, "Pick one:"));
+      list.forEach((o, i) => {
+        const b = el("button", "dl-switch-button", KIND[o.kind].pickLabel(o));
+        b.type = "button";
+        b.addEventListener("click", () => select(i));
+        buttons.push(b);
+        picker.append(b);
+      });
+      out.append(picker);
+    }
+    out.append(body);
+    select(0);
+  }
+
+  async function load(root: HTMLElement, mode: string) {
+    const all = await getOffers(root.dataset.index!);
+    const out = root.querySelector<HTMLElement>(".dl-result")!;
+    out.replaceChildren();
+    if (mode === "older") return renderOlder(out, all.older);
+    if (mode === "testing") return renderTesting(out, all.testing);
+    // The main download keeps its fallback links when there is none.
+    if (!all.current) throw new Error("no stable release in the index");
+    render(out, all.current, await descriptor(all.current), await visitor());
   }
 
   type State = "loading" | "slow" | "done" | "failed";
@@ -723,87 +726,23 @@ const stable = channel === "stable";
     root.setAttribute("aria-busy", String(state === "loading" || state === "slow"));
   }
 
-  // One index request, shared by every list on the page.
-  let indexPromise: Promise<any> | null = null;
-  function getIndex(url: string): Promise<any> {
-    indexPromise ??= fetch(url, { cache: "no-cache" }).then((r) => {
-      if (!r.ok) throw new Error(`index: ${r.status}`);
-      return r.json();
-    });
-    return indexPromise;
-  }
-
-  // The index entry for a channel: the release the stable channel names,
-  // the newest release candidate (only while its series has no release), or
-  // the current nightly build. A candidate is never the stable download.
-  function entryFor(index: any, channel: Channel) {
-    if (channel === "stable") {
-      const version = index?.channels?.stable;
-      const release = index?.releases?.[version];
-      return release ? { ...release, version } : null;
-    }
-    if (channel === "prerelease") {
-      const rc = index?.prerelease;
-      return /^\d+\.\d+\.0-rc\.\d+$/.test(String(rc?.version ?? ""))
-        ? rc
-        : null;
-    }
-    return index?.nightly ?? null;
-  }
-
-  async function load(root: HTMLElement, channel: Channel) {
-    const index = await getIndex(root.dataset.index!);
-    const entry = entryFor(index, channel);
-    if (!entry) {
-      // Stable keeps its fallback links; the others say there is none.
-      if (channel !== "stable") {
-        root.querySelector<HTMLElement>("[data-fallback]")!.textContent =
-          channel === "prerelease"
-            ? "There is no release candidate right now."
-            : "There is no test build right now.";
-      }
-      throw new Error("no entry in the index");
-    }
-    const descUrl = buildUrl(entry.descriptor, channel);
-    if (!descUrl) throw new Error("bad descriptor path");
-    const res = await fetch(descUrl);
-    if (!res.ok) throw new Error(`descriptor: ${res.status}`);
-    const raw = await res.arrayBuffer();
-    // The index names the descriptor's hash; anything else is not shown.
-    if ((await sha256Hex(raw)) !== entry.sha256) {
-      throw new Error("descriptor hash does not match the index");
-    }
-    render(
-      root,
-      channel,
-      String(entry.version),
-      JSON.parse(new TextDecoder().decode(raw)),
-      await detect(),
-    );
-  }
-
   // After this long, also offer the fallback links, but keep waiting.
   const SLOW_MS = 8000;
 
   for (const root of document.querySelectorAll<HTMLElement>(
     ".dl-downloads",
   )) {
-    const channel: Channel =
-      root.dataset.channel === "stable"
-        ? "stable"
-        : root.dataset.channel === "prerelease"
-          ? "prerelease"
-          : "nightly";
+    const mode = root.dataset.show ?? "current";
     setState(root, "loading");
     let settled = false;
     const timer = setTimeout(() => {
       if (!settled) setState(root, "slow");
     }, SLOW_MS);
-    load(root, channel)
+    load(root, mode)
       .then(() => setState(root, "done"))
       .catch((e) => {
         setState(root, "failed");
-        console.warn(`${channel} download list unavailable:`, e);
+        console.warn(`${mode} download list unavailable:`, e);
       })
       .finally(() => {
         settled = true;
@@ -1187,6 +1126,63 @@ const stable = channel === "stable";
       width: 1.15rem;
       height: 1.15rem;
     }
+  }
+
+  /* Older series: one folded row each. */
+  .dl-line + .dl-line {
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+    padding-top: 0.5rem;
+  }
+  .dl-line > summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.15rem 0.75rem;
+    padding: 0.25rem 0;
+    cursor: pointer;
+    list-style: none;
+  }
+  .dl-line > summary::-webkit-details-marker {
+    display: none;
+  }
+  .dl-line > summary::before {
+    content: "";
+    align-self: center;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.15s;
+  }
+  .dl-line[open] > summary::before {
+    transform: rotate(45deg);
+  }
+  .dl-line-title {
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .dl-line-status {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .dl-line-body {
+    margin-top: 0.75rem;
+  }
+
+  /* Test versions: the picker and the chosen one. */
+  .dl-picker {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+  }
+  .dl-switch-button[aria-pressed="true"] {
+    border-color: var(--sl-color-text-accent);
+    background: var(--sl-color-text-accent);
+    color: var(--sl-color-black);
+  }
+  .dl-switch-button[aria-pressed="true"]:hover {
+    color: var(--sl-color-black);
   }
 
   @media (prefers-reduced-motion: reduce) {

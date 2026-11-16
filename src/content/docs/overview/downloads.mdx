@@ -1,6 +1,6 @@
 ---
 title: Downloads
-description: "Download GpgFrontend for Windows, macOS, and Linux from official channels, including stable releases, release candidates, nightly builds and package repositories."
+description: "Download GpgFrontend for Windows, macOS and Linux: the latest version, the portable version, older versions that still get fixes, and test versions."
 sidebar:
   order: 3
 ---
@@ -18,9 +18,20 @@ Click the button to download GpgFrontend. It's free. The box picks the right
 file for your computer. It also tells you what to do after the download. For
 the full steps, see [Getting Started](/overview/getting-started/).
 
-<BuildDownloads channel="stable" />
+<BuildDownloads show="current" />
 
-## Prefer an App Store?
+Most people only need the button above. The rest of this page is for special
+cases:
+
+| You want to                                   | Go to                                                         |
+| --------------------------------------------- | ------------------------------------------------------------- |
+| Install from an app store or package manager  | [App Stores](#install-from-an-app-store-or-package-manager)   |
+| Run GpgFrontend from a USB drive              | [Portable Version](#portable-version)                         |
+| Stay on an older series, or use Windows 7     | [Older Versions](#older-versions-still-supported)             |
+| Try new features before they are released     | [Test Versions](#test-versions)                               |
+| Get the files when the button does not work   | [Other Download Sites](#if-the-download-does-not-work)        |
+
+## Install From an App Store or Package Manager
 
 You can also install GpgFrontend from an app store or a package manager (a
 tool that installs and updates programs for you). Updates then come through
@@ -81,96 +92,104 @@ the store or the package manager. Pick your system:
   </TabItem>
 </Tabs>
 
-## Other Downloads
-
-Most people never need this part. It is for special cases.
-
-### Portable Version
+## Portable Version
 
 The download button gives you the normal (installed) version. It keeps your
 settings and keys in your user folder.
 
 The portable version keeps everything in the program's own folder instead.
-You can run it from a USB drive and leave nothing behind on the computer. To
-get it, open **More download options** in the box above. There is no portable
-version for macOS.
+You can run it from a USB drive and leave nothing behind on the computer.
+
+To get it, click **Download the portable version** under the download button
+at the top of this page. It is there for Windows and Linux. There is no
+portable version for macOS.
 
 The two versions do not share any data. If you switch from one to the other,
 you start with empty settings and no keys. So pick the one you want before
 you start. See [Portable Mode](/advanced/portable-mode/).
 
-### Older Versions and Backup Sites
+## Older Versions Still Supported
 
-- [**Older version (v2.1.x)**][github-v2-1-x]: only for a system that cannot
-  run v2.2.x, or if you need the older GnuPG-only build. See the note below.
+The **series** is the first two numbers of a version: `2.2.4` belongs to
+series 2.2. A new series comes out about every two months. An older series
+can still get fixes for a while after that.
+
+Take an older series only if you need it. For example, when your system
+cannot run the latest version.
+
+The list below is always up to date. It shows each older series that still
+gets fixes, and until when. Click one to see its downloads.
+
+<BuildDownloads show="older" />
+
+To learn how long a series gets fixes, see
+[When a Series Gets Old](/appendix/version-policy/#when-a-series-gets-old).
+
+<Aside type="note" title="Changed in v2.2.3">
+  Qt is the toolkit GpgFrontend is built with. There are no Qt5 builds of
+  v2.2.x and later. Only the 2.1 series has them, marked **Qt5 build** in its
+  list above. If your system needs one, for example Windows 7, take the 2.1
+  series.
+</Aside>
+
+## Test Versions
+
+Test versions let you try what is coming next, before it is released. They
+may have bugs. Do not use them for anything you cannot afford to lose.
+
+There are three kinds. The box below shows only the ones that exist right
+now.
+
+| Kind              | What it is                                                                                             | Your keys and settings                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Release candidate | An early version of the next feature release, like `2.4.0-rc.1`. There is one only shortly before it. | Shared with your everyday GpgFrontend. Back up your keys first.           |
+| Beta              | A test build of the next fix release of one series.                                                    | Shared with your everyday GpgFrontend. Back up your keys first.           |
+| Nightly build     | An automatic build of the newest code. It can be broken.                                               | Kept apart. It runs as a separate app, **GpgFrontend Testing**.           |
+
+For more, see
+[Stable, Beta, Release Candidate and Nightly](/appendix/version-policy/#stable-beta-release-candidate-and-nightly).
+
+<Aside type="note" title="New in v2.2.5">
+  GpgFrontend can tell you about betas and release candidates. Open
+  **Edit** > **Settings** > **Updates** (on macOS: **Preferences**) and tick
+  **Also offer beta versions**. **Help** > **Check for Updates** then lists them as
+  extra choices. They are never picked for you.
+</Aside>
+
+<details>
+<summary>Show test versions (for testers only)</summary>
+
+<BuildDownloads show="testing" />
+
+</details>
+
+## If the Download Does Not Work
+
+The same files are also on these sites:
+
 - [**GitHub Releases**][github-releases]: every version, with release notes.
-  Use it if the download button does not work.
 - [**Mirror site**][ftp-gpgfrontend]: the same files from another source, with
   no tracking or sign-in.
 
-<Aside type="note" title="Changed in v2.2.3">
-  Qt is the toolkit GpgFrontend is built with. There are no Qt5 (`-qt5-`)
-  builds of v2.2.x any more. Qt5 builds exist only for the older v2.1.x line.
-  If your system needs one, for example Windows 7, download a
-  [v2.1.x release][github-v2-1-x].
-</Aside>
-
 ### Find the Right File by Name
 
-On GitHub and the mirror site you pick the file yourself. Its name tells you
-what it is for:
+On these sites you pick the file yourself. Its name tells you what it is for:
 
-| Name ends with                 | What it is for                                                   |
-| ------------------------------ | ---------------------------------------------------------------- |
-| `-windows-x86_64.msi`          | Installer for Windows (recommended).                             |
-| `-windows-x86_64.msix`         | MSIX installer for Windows.                                      |
-| `-macos-<ver>.dmg`             | Mac with Apple chip. `<ver>` is the lowest macOS version needed. |
-| `-macos-<ver>-intel.dmg`       | Mac with Intel chip. `<ver>` is the lowest macOS version needed. |
-| `-linux-<arch>.AppImage`       | Linux app. Make it executable, then run it.                      |
-| `-android-<arch>.apk`          | Android app. Only in test builds for now.                        |
-| `-portable`                    | Marks the portable version (a `.zip` file on Windows).           |
-| `.sig`                         | Signature file of a release, to check the download is genuine.   |
-| `.sigstore.json`               | Signature of a test build's checksum list (`SHA256SUMS.txt`).    |
+| Name ends with           | What it is for                                                   |
+| ------------------------ | ---------------------------------------------------------------- |
+| `-windows-x86_64.msi`    | Installer for Windows (recommended).                             |
+| `-windows-x86_64.msix`   | MSIX installer for Windows.                                      |
+| `-macos-<ver>.dmg`       | Mac with Apple chip. `<ver>` is the lowest macOS version needed. |
+| `-macos-<ver>-intel.dmg` | Mac with Intel chip. `<ver>` is the lowest macOS version needed. |
+| `-linux-<arch>.AppImage` | Linux app. Make it executable, then run it.                      |
+| `-android-<arch>.apk`    | Android app. Only in test versions for now.                      |
+| `-portable`              | Marks the portable version (a `.zip` file on Windows).           |
+| `-qt5-` (in the name)    | Qt5 build for older systems. Only in the 2.1 series.             |
+| `.sig`                   | Signature file of a release, to check the download is genuine.   |
+| `.sigstore.json`         | Signature of a test version's checksum list (`SHA256SUMS.txt`).  |
 
-### Release Candidates
+To check that a file is genuine, see
+[How to check a download](/appendix/code-binary-verify/).
 
-A release candidate is an early test version of the next feature release,
-like `2.4.0-rc.1`. It comes out a short while before that release. There is
-one only while the next release is not out yet.
-
-- It may have bugs. It is not meant for everyday use.
-- It uses the same keys and settings as your everyday GpgFrontend. Back up
-  your keys before you try it.
-- Once the release is out, GpgFrontend offers it to you as a normal update.
-
-<Aside type="note" title="New in v2.2.5">
-  GpgFrontend can tell you about release candidates. Open **Edit** >
-  **Settings** > **Updates** (on macOS: **Preferences**) and tick **Also
-  offer beta versions**. **Help** > **Check for Updates** then lists the
-  release candidate as one more choice. It is never picked for you.
-</Aside>
-
-<details>
-<summary>Show the release candidate (for testers only)</summary>
-
-<BuildDownloads channel="prerelease" />
-
-</details>
-
-### Test Builds
-
-Test builds (also called nightly builds) are made automatically from the
-newest code. They are less tested, so do not use them for anything you cannot
-afford to lose. For more, see "What are Nightly versions?" in the
-[FAQ](/overview/faq/#using-gpgfrontend).
-
-<details>
-<summary>Show test builds (for testers only)</summary>
-
-<BuildDownloads channel="nightly" />
-
-</details>
-
-[github-v2-1-x]: https://github.com/saturneric/GpgFrontend/releases/tag/v2.1.13
 [ftp-gpgfrontend]: https://ftp.bktus.com/GpgFrontend/
 [github-releases]: https://github.com/saturneric/GpgFrontend/releases
