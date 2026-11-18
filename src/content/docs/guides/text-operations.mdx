@@ -85,7 +85,8 @@ You need **their public key** in your key list.
 If you tick **no key at all**, **Encrypt** is greyed out. To encrypt with a
 password instead of a key, use **Operations** > **Sym. Encrypt**. This is
 called [symmetric encryption](/guides/symmetric-encrypt-decrypt/). You can
-only use **Sym. Encrypt** while no key is ticked.
+only use **Sym. Encrypt** while no key is ticked. It is always greyed out in
+an email tab.
 
 </Aside>
 
@@ -257,8 +258,10 @@ key.
 This window needs the KeyServerSync module. If that module is turned off, the
 window does not appear.
 
-- Click **Yes** to search the key server for the key.
-- Click **No** to stop. You can
+- Click **Yes** to search the key server for the key. If more than one key
+  is missing, only one of them is searched for. Import the others yourself.
+- Click **No** to stop. A message called **Verification Incomplete** reminds
+  you that you can import the keys later. Then
   [import the key](/guides/import-export-key-pair/) yourself and verify again.
 
 <Aside type="tip" title="Check who signed">

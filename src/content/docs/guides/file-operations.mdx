@@ -45,7 +45,8 @@ There are two ways to open the File Panel.
 
 The new panel opens at the folder set in **Settings**, **General**, **File
 Panel Opens At:**. You can pick **Profile Workspace**, **Home Folder** or
-**Working Directory** there.
+**Working Directory** there. The default is **Home Folder**. **Profile
+Workspace** is only offered when your profile has a workspace folder.
 
 The Flatpak and Mac App Store builds hide that setting. In those builds, a
 window called **Select Default Path** asks you to pick a folder each time you
@@ -60,7 +61,8 @@ time. Click any step to jump straight to it. There is a **Home** step at the
 start.
 
 To type a path instead, click the edit button at the end of the path bar, or
-press <kbd>Ctrl</kbd>+<kbd>L</kbd>. You can use `~` for your home folder.
+press <kbd>Ctrl</kbd>+<kbd>L</kbd>. When the path bar has the keyboard focus,
+<kbd>F6</kbd> does the same. You can use `~` for your home folder.
 
 The small buttons next to the path bar have icons only. Point at one to see
 its tooltip:
@@ -183,6 +185,22 @@ next to it, in the same folder. The new file's name tells you what it is:
 If you turned on ASCII output, encrypting and signing make `.asc` files
 instead. See [Choose ASCII or Binary Output](#choose-ascii-or-binary-output).
 
+### Which Buttons Work on What You Selected
+
+Each button only works on certain items. If a button is greyed out, check
+what you selected:
+
+- **Encrypt**, **Encrypt & Sign** and **Sym. Encrypt**: files and folders.
+  Not files that end in `.gpg`, `.pgp`, `.asc` or `.sig`.
+- **Decrypt** and **Decrypt & Verify**: files that end in `.gpg`, `.pgp` or
+  `.asc`. Not folders.
+- **Sign**: files. Not folders, and not files that end in `.gpg`, `.pgp`,
+  `.asc` or `.sig`.
+- **Verify**: files that end in `.gpg`, `.pgp`, `.asc` or `.sig`.
+
+In [Batch Mode](#work-on-many-files-at-once-batch-mode), a button only works
+when every selected item fits its rule.
+
 If a file with the new name is already there, GpgFrontend asks before it
 replaces that file. See
 [If an Operation Is Interrupted](#if-an-operation-is-interrupted).
@@ -229,8 +247,7 @@ You need **your private key**.
    right one.
 3. **Enter your passphrase** when asked.
 4. **Find the new file.** It appears in the same folder, with `.gpg`, `.pgp`
-   or `.asc` taken off the end: `report.pdf`. If the name has no such ending,
-   GpgFrontend adds `.out` instead.
+   or `.asc` taken off the end: `report.pdf`.
 
 </Steps>
 
@@ -341,8 +358,11 @@ target folder. A few checks stop common mistakes:
   **The source and target folder are the same.**
 - A folder can't be moved or copied into itself or one of its own subfolders.
   The status bar says so.
-- If an item with the same name already exists in the target folder, a **Copy
-  Failed** or **Move Failed** message tells you, and nothing is replaced.
+- If an item with the same name already exists in the target folder, it is
+  never replaced. When you move items, a **Move Failed** message names the
+  item. When you copy items, the other items are still copied. Then one
+  message called **Copy Partially Completed** lists every item that was not
+  copied, and why.
 
 After the drop, the panel reads the folder again and selects the new or moved
 items. The status bar says how many items were copied or moved.
@@ -364,6 +384,16 @@ to work on several files at once.
 
 </Steps>
 
+Two selected files may lead to the same new file name. For example,
+`notes.gpg` and `notes.asc` would both decrypt to `notes`. Then an **Error**
+message lists them, and nothing is done. Process those files one at a time.
+
+<Aside type="note" title="New in v2.2.5">
+
+GpgFrontend checks for this since v2.2.5.
+
+</Aside>
+
 ![][img-5]
 
 ![][img-6]
@@ -383,7 +413,8 @@ same way as a file. GpgFrontend does two things:
    files and subfolders. GpgFrontend does this itself. You don't need a
    separate tar program.
 2. It encrypts that archive. You get a `.tar.gpg` file (binary) or a
-   `.tar.asc` file (ASCII), depending on your output format.
+   `.tar.asc` file (ASCII), depending on your output format. For example, a
+   folder called `photos` becomes `photos.tar.gpg`.
 
 The result is one file that holds the whole folder, ready to store or send.
 If you know the `gpg-zip` tool, this works the same way.
@@ -395,9 +426,25 @@ other file. GpgFrontend does two things:
 
 1. It decrypts the file back into the `.tar` archive.
 2. It unpacks that archive into a folder next to the encrypted file, with the
-   same files and subfolders as the original.
+   same files and subfolders as the original. The folder gets the name without
+   the endings: `photos.tar.gpg` becomes the folder `photos`.
 
 You don't need to unpack anything by hand.
+
+A file that ends in `.tar.pgp` is not unpacked. Decrypting it gives you a
+plain `.tar` archive, which you can unpack with another program.
+
+If a folder with that name is already there, GpgFrontend asks first. If you
+go on, your existing folder is not deleted. It is renamed to `photos.bak`
+and kept next to the new one. If `photos.bak` is taken too, the name is
+`photos.bak-2`, then `photos.bak-3`, and so on.
+
+<Aside type="note" title="Changed in v2.2.5">
+
+Before v2.2.5, an existing folder with the same name was deleted and
+replaced. Now it is kept as `<name>.bak`.
+
+</Aside>
 
 ## File Types and Output Format
 

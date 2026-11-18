@@ -83,6 +83,17 @@ The reason is one of these:
 
 Dates are shown as year, month, day, for example `2026-03-08`.
 
+## If the Key Database Changes Before a Task Starts
+
+Before GpgFrontend encrypts or signs, it may ask you questions first, for
+example which subkey to use. While such a question is open, you could switch
+to another key database. Then the keys you picked may no longer be the keys
+in front of you.
+
+In that case GpgFrontend does not start the task. A message called **Key
+Databases Changed** says so. Check which keys are ticked, then start the task
+again.
+
 ## Mixing Post-Quantum and Classical Recipients
 
 Some new keys use **post-quantum** encryption. This is built to stay safe even

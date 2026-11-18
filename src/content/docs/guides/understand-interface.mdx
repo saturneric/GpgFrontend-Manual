@@ -51,6 +51,11 @@ There are three kinds:
 
 You can open many tabs of each kind and switch between them at any time.
 
+When GpgFrontend starts, it opens one tab for you. Which kind it opens is set
+in **Settings** > **General** > **Default Workspace As:**. Pick **File Panel**
+(the default) or **Text Editor**. The Flatpak and Mac App Store builds hide
+this setting and always start with a Text Editor tab.
+
 Right-click a tab's title for three choices:
 
 - **Close**: close the tab.
@@ -99,8 +104,32 @@ In the Text Editor you type new text or open a text file. For the steps, see
 - **File size limit**: files larger than **4 MB** do not open in the Text
   Editor. To encrypt or sign a bigger file, select it in the File Panel
   instead.
+- **Text files only**: a file that looks like a binary file (for example a
+  picture or a program) does not open in the Text Editor. A **File Open
+  Error** message says so. Use the File Panel for such files.
 - **Large files**: while a large file loads, you cannot edit it. Editing
   works again when loading is done.
+- **Zoom**: to make the text bigger or smaller, click **Edit** >
+  **Zoom In** or **Edit** > **Zoom Out**. You can also press
+  <kbd>Ctrl</kbd>+<kbd>+</kbd> or <kbd>Ctrl</kbd>+<kbd>-</kbd>
+  (<kbd>Cmd</kbd> on macOS). This changes only the tab you are in.
+
+#### The Status Strip
+
+Below the text, a thin strip shows facts about the text in the tab:
+
+- **Ln** and **Col**: the line and column where the cursor is.
+- **chars**: how many characters the text has. A `*` after it means the tab
+  has changes that are not saved yet.
+- **LF** or **CRLF**: how lines end in this text. LF is the usual style on
+  macOS and Linux. CRLF is the usual style on Windows.
+- **UTF-8**: the text encoding. An encoding is the way letters are stored as
+  bytes.
+- **SHA256**: the start of a checksum of the text. A checksum is a short code
+  worked out from the text. If the text changes, the code changes too. Point
+  at it to see the full code.
+
+The strip is not shown in an email tab.
 
 #### Text Direction
 
@@ -135,6 +164,11 @@ standard file format for one email message, and most email apps can read it.
 - **Two views**: at the top of an email tab, click **Message** to see the
   message as you would read it. Click **Raw Source** to see the raw text of
   the file.
+- **Edit the raw text**: the **Raw Source** view always opens read-only. To
+  change the raw text, click **Edit Raw Source** at the right of the view
+  bar. Click **Stop Editing** when you are done. For some messages, such as
+  a signed or encrypted one, editing is blocked. Then the button is greyed
+  out, and its tooltip says why.
 
 In an email tab, the Status Panel starts as a thin bar, so the message has more
 room. See [Making the Panel Smaller](#making-the-panel-smaller).
@@ -183,7 +217,10 @@ When a new result arrives, the panel opens again by itself, even if you
 collapsed or closed it.
 
 Email tabs shrink the panel to a bar on their own. If you dragged the panel
-out into its own window (a floating panel), it is never shrunk this way.
+out into its own window (a floating panel), it is not shrunk while it floats.
+If you put it back into the main window while an email tab is open, it
+shrinks then. A panel that an email tab shrank opens fully again when you
+drag it out.
 
 <Aside type="note" title="New in v2.2.3">
 
@@ -363,8 +400,10 @@ Here is how to use such a button:
 
 ![The list of actions on the Encrypt button][img-5]
 
-**Sym. Encrypt** is never the action shown on the button. You always pick it
-from the list.
+**Sym. Encrypt** is never the action shown on a shared button. When it shares
+the **Encrypt** button, you always pick it from the list. If **Sym. Encrypt**
+is the only action you ticked in the Encrypt row, it gets a plain button of
+its own.
 
 <Aside type="note" title="Changed in v2.2.3">
 
@@ -382,7 +421,8 @@ You can hide buttons you don't use, or add ones you use often:
 1. Open **Settings** and go to **Appearance**.
 2. Under **Toolbar**, tick what you want in the **Actions** list. The list is
    arranged by button: the Encrypt row, then the Decrypt row, then Sign and
-   Verify.
+   Verify. In this list, **Encrypt & Sign** is called **Encrypt Sign**, and
+   **Decrypt & Verify** is called **Decrypt Verify**.
 3. If you ticked more than one action in the Encrypt or Decrypt row, an
    **On click** choice appears for that row. Pick the action you want a plain
    click to run. The other ticked actions stay in the right-click list.
@@ -406,6 +446,31 @@ The **On click** choice is new in v2.2.3.
 
 Instant messaging has no toolbar buttons. Its actions are in the
 **Operations** menu. See [Instant Messaging](/guides/instant-messaging/).
+
+## Open Settings
+
+Click **Edit** > **Settings**. On macOS, **Settings** is in the
+**GpgFrontend** application menu instead, as usual for Mac apps.
+
+## See the Application Log
+
+GpgFrontend keeps a log: a list of messages about what the program did. It
+can help you, or a helper, find out why something went wrong.
+
+<Steps>
+
+1. Click **Help** > **Show Application Log**.
+2. A window called **Application Logs** opens. It lists the recent messages.
+3. To find a message, type a word in the **Filter logs…** box.
+4. Use the buttons at the bottom:
+   - **Refresh**: load new messages.
+   - **Auto Refresh**: tick it to load new messages every second.
+   - **Copy**: copy the messages to the clipboard.
+   - **Save**: save the messages to a text file.
+   - **Clear View**: empty the list in this window.
+5. Click **Close** when you are done.
+
+</Steps>
 
 ## Status Bar
 

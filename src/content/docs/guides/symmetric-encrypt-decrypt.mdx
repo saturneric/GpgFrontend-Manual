@@ -54,6 +54,9 @@ press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd>
 (<kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>E</kbd> on macOS). You can only use it
 while no key is ticked in the Key ToolBox.
 
+**Sym. Encrypt** works in a Text Editor tab and in a File Panel tab. It is
+greyed out in an email tab (Mail Editor).
+
 You can also put it on the toolbar:
 
 <Steps>
@@ -65,18 +68,21 @@ You can also put it on the toolbar:
 
 ![][img-1]
 
-**Sym. Encrypt** does not get a button of its own. It joins the **Encrypt**
-button. To use it, right-click the **Encrypt** button (or press and hold it),
-then choose **Sym. Encrypt** from the list. If no key is ticked, a plain click
-on **Encrypt** also opens this list. For more about such buttons, see
+If you also ticked **Encrypt** or **Encrypt Sign** in that row, **Sym.
+Encrypt** joins the **Encrypt** button. To use it, right-click the **Encrypt**
+button (or press and hold it), then choose **Sym. Encrypt** from the list. If
+no key is ticked, a plain click on **Encrypt** also opens this list.
+
+If **Sym. Encrypt** is the only action ticked in the Encrypt row, it gets a
+plain button of its own. For more about such buttons, see
 [Buttons With More Than One Action](/guides/understand-interface/#buttons-with-more-than-one-action).
 
 ![][img-2]
 
 <Aside type="note" title="Changed in v2.2.3">
 
-Before v2.2.3, **Sym. Encrypt** had its own toolbar button. Now it is in the
-**Encrypt** button's list.
+Before v2.2.3, **Sym. Encrypt** always had its own toolbar button. Now it
+shares the **Encrypt** button when another action in its row is ticked.
 
 </Aside>
 
