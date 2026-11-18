@@ -35,8 +35,12 @@ You can import a public or private key in a few ways.
 
 ### From a File
 
-Choose **File**, then pick a public or private key file. The file can be text
-with any extension.
+Choose **File**, then pick a public or private key file. The file window
+shows **Keyring files** only: files that end in `.asc` or `.gpg`. A key file
+can be at most 16 MB.
+
+In the **KeyPair Management** window, **File** > **Open** does the same. The
+shortcut is <kbd>Ctrl</kbd>+<kbd>O</kbd>.
 
 ### By Pasting Into the Editor
 
@@ -53,6 +57,9 @@ This choice is in the main window only.
 ### From the Clipboard
 
 Copy the key's text to your clipboard, then choose **Clipboard**.
+
+In the **KeyPair Management** window you can also press
+<kbd>Ctrl</kbd>+<kbd>V</kbd>.
 
 ### From a Key Package
 
@@ -73,8 +80,45 @@ See [Module Controller](/advanced/module-controller/).
 
 ### By Drag and Drop
 
-Drag a key file onto the Key ToolBox. If GpgFrontend asks whether to import
-the key, click **OK**.
+<Steps>
+
+1. Drag one or more key files onto the Key ToolBox, or onto the **KeyPair
+   Management** window. You can also drag key text, for example from a web
+   page.
+2. GpgFrontend asks: "You've dropped something on the key list. GpgFrontend
+   will now try to import key(s)." Click **OK**.
+
+   If you do not want this question again, untick **Ask before importing
+   keys next time.** before you click **OK**.
+
+</Steps>
+
+A dropped file that is bigger than 16 MB, or that GpgFrontend cannot read, is
+skipped. A message lists the files that were not imported.
+
+<Aside type="note" title="Changed in v2.2.5">
+
+Dropping keys on the **KeyPair Management** window now asks first, the same
+as the Key ToolBox. Key files up to 16 MB can be imported. Before, the limit
+for a picked file was 1 MB.
+
+</Aside>
+
+## Check the Result
+
+After an import, the **Key Import Details** window opens. At the top it
+says how it went:
+
+- **Import Successful**: new keys or new parts of keys were added.
+- **Nothing to Import**: you already had all of these keys, unchanged.
+- **Import Completed with Issues**: some keys could not be imported.
+
+Under **Summary** you see counts, such as **Imported**, **Unchanged** and
+**Not Imported**. Below that is a list of the keys, with their **Name**,
+**Email**, **Status** and **Fingerprint**. Click **OK** to close the window.
+
+If GpgFrontend found no key at all, you only see the message "No keys found
+to import".
 
 ## Export a Key
 
@@ -140,6 +184,12 @@ To export the public keys of several key pairs together:
 The public keys are now on your clipboard. Paste them into any app or file.
 
 If you tick no key, **Export To Clipboard** uses the rows you selected instead.
+
+To save the ticked keys to a file instead, choose **Export As Key Package**
+in the same menu. This makes a protected file, a
+[KeyPackage](/advanced/key-package/). At first it holds only the public
+keys. To add the private keys too, tick **Include private keys** in the
+window that opens.
 
 ![][img-4]
 

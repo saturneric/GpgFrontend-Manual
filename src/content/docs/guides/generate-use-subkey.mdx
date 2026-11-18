@@ -32,6 +32,14 @@ private primary key is in the key database.
 
 </Steps>
 
+You can also start from the **KeyPair Management** window. Select the key
+pair, then do one of these:
+
+- Right-click it, open **Key Operations** and choose **New Subkey**.
+- Open the **Operations** menu and choose **New Subkey**.
+- Open **Key** > **Generate Key** > **New Subkey**.
+- Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>.
+
 ### Step 1: Choose What the Subkey Is For
 
 Under **What is the subkey for?**, click one choice:
@@ -170,6 +178,9 @@ subkey's right-click menu. Use a GnuPG-backed key database for this.
 4. **Export it**: click **Export Subkey** on the right. (If the selected row
    is the primary key, the button says **Export Primary Key** and is greyed
    out.) GpgFrontend asks you to confirm. Click **Yes**.
+
+   The button is also greyed out when you have only the public part of the
+   key, or when the private part of this subkey is not in the key database.
 5. **Save the file**: choose a safe folder and save the subkey as its own
    file.
 

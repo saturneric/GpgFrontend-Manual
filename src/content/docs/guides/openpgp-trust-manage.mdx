@@ -76,8 +76,14 @@ constant updates from key servers.
 
 </Steps>
 
-You can also open the key's details, go to the **Operations** tab, and click
-**Set Owner Trust Level** there.
+There are two more ways to reach the same window:
+
+- In the **KeyPair Management** window, right-click the key, open **Key
+  Operations** and choose **Set Owner Trust Level**. It is also in the
+  **Operations** menu at the top of that window.
+- Open the key's details, go to the **Operations** tab, and click **Set Owner
+  Trust Level**. This button is only there for keys you have no private key
+  for. For your own keys, use one of the other ways.
 
 <Aside type="tip" title="Several keys at once">
 
@@ -141,7 +147,8 @@ the owner first, in person or over a channel you trust. Then:
 
    - To certify **every** user ID of a key, right-click the key in the
      **KeyPair Management** window, open **Key Operations** and choose
-     **Certify Key...**.
+     **Certify Key...**. You can also select the key and open the
+     **Operations** menu at the top of that window, then **Certify Key...**.
    - To certify **one** user ID, open the key's details, go to the **UIDs**
      tab, right-click the user ID and choose **Certify User ID...**.
 
@@ -151,6 +158,11 @@ the owner first, in person or over a channel you trust. Then:
    **Certifying**, check the name and the **Fingerprint** once more.
 3. Under **Certify with**, tick the private key you want to certify with. If
    only one of your keys can do it, it is ticked already.
+
+   The list, **Certifying Keys**, only shows your keys that can certify. It
+   leaves out the key you are certifying, and keys that are expired, revoked
+   or disabled. It also leaves out keys whose primary private key is not in
+   the key database.
 
    ![The Certify Key window][img-5]
 

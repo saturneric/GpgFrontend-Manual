@@ -115,7 +115,10 @@ The buttons are:
   Reset Code**.
 - **Generate Card Keys**: make brand new keys on the card itself.
 - **Move Key to Card**: put a key you already have onto the card.
-- **Fetch**: read the card again and bring your key list up to date with it.
+- **Fetch**: download your public key from the **public key URL** stored on
+  the card, and import it into your key list. This needs an internet
+  connection, and a URL must be set on the card (**Cardholder** > **Change
+  Public Key URL**).
 - **Refresh**: reload what is shown in this window.
 
 There is also a **More** button with two items:
@@ -138,7 +141,7 @@ has never existed anywhere else. This is the safest way to use a card.
 2. Type your **Name**. **Email** and **Comment** are optional.
 
 3. Pick an **Expire Date**, or tick **Non Expire** for keys that never
-   expire.
+   expire. The earliest date you can pick is two years from today.
 
 4. Click **Generate**. This replaces any keys that are already on the card.
 
@@ -179,6 +182,9 @@ to undo it.
    First** and save the file somewhere safe. This backup is your only way back
    if the card fails.
 
+   **Continue Without Backup** moves the key without saving a copy.
+   **Cancel** stops, and nothing is moved.
+
 5. If the key could go in more than one slot, the **Select Card Slot** window
    asks where to store it: **Signature (OPENPGP.1)**, **Encryption
    (OPENPGP.2)** or **Authentication (OPENPGP.3)**.
@@ -189,7 +195,9 @@ to undo it.
 </Steps>
 
 You can also start this from a single subkey: open the key's details, go to
-the **Keychain** tab, right-click the subkey, and choose **Move to Card**.
+the **Keychain** tab, right-click the subkey, and choose **Move to Card**. If
+more than one card is plugged in, the **Select Smart Card** window asks which
+card to use.
 
 ## Common Questions
 
@@ -211,6 +219,13 @@ Try, in this order:
 4. Check that your key database is using the GnuPG engine.
 
 </Steps>
+
+### I changed my default key database, and the card still uses the old one
+
+Smart cards stay with the previous default key database until GpgFrontend
+restarts. To switch them sooner, open the **Smart Card Controller** window,
+click **More**, then **Restart All Gpg-Agents**. See
+[Multi-Key Database](/advanced/key-database/).
 
 ### Can one device do more than OpenPGP?
 

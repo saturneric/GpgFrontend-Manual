@@ -37,7 +37,8 @@ address, the key ID, and the fingerprint. Any of those will find the key.
 
 You can paste a fingerprint with spaces in it. It still matches.
 
-- <kbd>Ctrl</kbd>+<kbd>F</kbd> jumps to the search box.
+- <kbd>Ctrl</kbd>+<kbd>F</kbd> jumps to the search box. So does **Edit** >
+  **Find Key**.
 - <kbd>Escape</kbd> clears it.
 - <kbd>F5</kbd> reads the key list again (**View** > **Refresh Key List**).
 - Click a column heading to sort by it. Click again to reverse it.
@@ -69,7 +70,8 @@ The menu only lists what you can do with the key you clicked. For example,
 
 ### Copy something
 
-These are in the **Copy** submenu.
+These are in the **Copy** submenu, and in the **Edit** menu at the top of the
+window.
 
 - **Copy Fingerprint**: the long code people use to check they have the right
   key. This is the one to read out over the phone.
@@ -168,6 +170,40 @@ See [Module Controller](/advanced/module-controller/).
 
 </Aside>
 
+## Right-Click an Empty Area
+
+Right-click below the last key, or anywhere in an empty list. You get a short
+menu for adding keys:
+
+- **New Keypair** and **Quick Generate**: make a new key. See
+  [Generate Key Pair](/guides/generate-key/).
+- **Clipboard**: import a key you copied.
+- **Open**: import a key from a file.
+- **Key Package**: import keys from a [KeyPackage](/advanced/key-package/).
+- **Refresh Key List**: read the key list again.
+
+For more ways to bring keys in, see
+[Import & Export Key Pair](/guides/import-export-key-pair/).
+
+## Keyboard Shortcuts
+
+These work anywhere in the **KeyPair Management** window:
+
+| Keys | What it does |
+| --- | --- |
+| <kbd>Ctrl</kbd>+<kbd>N</kbd> | **New Keypair**: open the window to make a key. |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd> | **Quick Generate**: make a key in one click. |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> | **New Subkey** for the selected key. |
+| <kbd>Ctrl</kbd>+<kbd>O</kbd> | **File** > **Open**: import a key from a file. |
+| <kbd>Ctrl</kbd>+<kbd>V</kbd> | Import a key from the clipboard. |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd> | **Find Key**: jump to the search box. |
+| <kbd>F5</kbd> | **Refresh Key List**. |
+| <kbd>Delete</kbd> | **Delete Selected Keys**. |
+| <kbd>Ctrl</kbd>+<kbd>Q</kbd> | **Close** the window. |
+
+On macOS, use <kbd>Cmd</kbd> instead of <kbd>Ctrl</kbd>, and
+<kbd>Option</kbd> instead of <kbd>Alt</kbd>.
+
 ## Work on Several Keys at Once
 
 <Steps>
@@ -222,6 +258,13 @@ The usual reasons are simple:
 - **"This key carries no email address."** There is nothing to copy.
 - **"You need a private key to certify with."** Certifying uses one of your
   private keys, and you have none.
+- **"Check or select at least one key first."** Tick or select a key.
+- **"Tick the box beside at least one key first."** **Delete Checked Keys**
+  only works on ticked keys.
+- **"Expiry can only be changed on keys you own."** None of the keys you
+  picked for **Extend Expiry of Checked Keys...** has a private key.
+- **"This keyring holds no private keys."** **Back Up All Private Keys...**
+  has nothing to save.
 
 Some actions are missing from every menu. These are actions your OpenPGP
 engine cannot do at all. So a short menu usually means you are on the rPGP

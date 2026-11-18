@@ -45,7 +45,11 @@ You can change the owner. See [UID Info](#uid-info).
 <Steps>
 
 1. On the **UIDs** tab, click **New UID** to add a new UID.
-2. Right-click the new UID and choose **Set As Primary**.
+2. With the GnuPG engine, you are done. The window says "The new User ID will
+   be set as the primary User ID.", and GpgFrontend does that for you.
+
+   With the rPGP engine, right-click the new UID and choose **Set As
+   Primary**.
 
 </Steps>
 
@@ -89,7 +93,8 @@ NISTP256.
 
 #### Key Format Version
 
-Which key format the primary key uses, shown as `v4`, `v5`, or `v6`.
+Which key format the primary key uses, shown as `v4`, `v5`, or `v6`. If
+GpgFrontend cannot tell the format, this field is not shown.
 
 - `v4` is the widely compatible default, from the older OpenPGP standard.
 - `v6` is the format from the current OpenPGP standard, RFC 9580. Post-quantum
@@ -140,23 +145,36 @@ When the primary key was made, shown in your local time.
 
 #### Expires on (Local Time)
 
-When the primary key expires. After that date the key can't be used, and its
-subkeys stop working too. You can change the date whenever you like, or set
-the key to never expire, as long as you have the primary key's private part.
+When the primary key expires, or **Never Expire**. After that date the key
+can't be used, and its subkeys stop working too. You can change the date
+whenever you like, or set the key to never expire, as long as you have the
+primary key's private part.
 
 #### Last Update (Local Time)
 
 When the key pair's content last changed. Adding a UID or subkey counts as a
-change.
+change. If this date is not known, it says **No Data**.
 
 #### Primary Key Existence
 
 Whether the primary key's private part is in this key database, shown as
-**Exists** or **Not Exists**. If it is missing but the key pair still has
-usable subkeys, you can keep using the key for normal tasks. You just can't
-change the key pair (for example, add UIDs or subkeys) or certify other keys
-with it. See
+**Exists** (in green) or **Not Exists** (in red). For a key you only have the
+public part of, it always says **Not Exists**.
+
+If it is missing but the key pair still has usable private subkeys, you can
+keep using the key for normal tasks. You just can't change the key pair (for
+example, add UIDs or subkeys) or certify other keys with it. See
 [Keep Your Primary Key Offline](/guides/generate-use-subkey/#keep-your-primary-key-offline-optional).
+
+### Warnings at the Bottom
+
+If something is wrong with the primary key, a warning appears at the bottom
+of the **KeyPair** tab:
+
+- **Warning: The primary key has expired.**
+- **Warning: The primary key has been revoked.**
+- **Warning: The primary key is not exists.** You have some private
+  subkeys, but not the private part of the primary key.
 
 ### Fingerprint
 
@@ -186,6 +204,23 @@ click **New UID**. These rules apply:
 - The email is optional. If you fill it in, it must be a valid email address.
 - The comment is optional.
 - The name and comment cannot contain `(`, `)`, `<` or `>`.
+
+### Change or Remove a UID
+
+Right-click a UID in the list to see what you can do with it:
+
+- **Set As Primary**: make this UID the primary UID.
+- **Revoke UID**: mark the UID as no longer valid. GpgFrontend asks you to
+  confirm, then asks for a reason. This cannot be undone. Others see the
+  revoked UID once you share the updated key.
+- **Delete UID**: remove the UID from your copy of the key. Others who
+  already have your key still see it. GpgFrontend asks you to confirm.
+- **Certify User ID...**: see
+  [Certifications on a UID](#certifications-on-a-uid).
+
+**Set As Primary**, **Revoke UID** and **Delete UID** only appear when you
+have the private part of the primary key. They are greyed out for the primary
+UID.
 
 You cannot delete the primary UID. On a v4 key you also cannot delete the last
 UID, because the key needs it to keep working. Add a new UID first if you want

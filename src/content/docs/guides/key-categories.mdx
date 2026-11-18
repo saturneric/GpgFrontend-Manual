@@ -54,15 +54,21 @@ The **KeyPair Management** window has these:
 - **Has Private Key**: keys you own.
 - **Expiring Soon**: keys that expire soon. At first that means within the
   next 30 days. You can change the number of days (see the tip below).
-- **No Primary Key**, **Revoked**, **Expired**, **Disabled**: keys with a
-  problem.
+- **No Primary Key**: keys where you do not have the private part of the
+  primary key. Keys you only have the public part of are listed here too.
+- **Revoked**, **Expired**, **Disabled**: keys with a problem.
+
+**Only Public Key**, **Has Private Key** and **No Primary Key** leave out
+expired, revoked and disabled keys. You find those in **Revoked**,
+**Expired** and **Disabled**, or under **All**.
 
 The **Key ToolBox** has a shorter list, made for picking keys:
 
 - **Default**: every key you can use. Expired, revoked and disabled keys are
   left out.
-- **Key Group**, **Only Public Key** and **Has Private Key**: as above, but
-  again without expired, revoked and disabled keys.
+- **Key Group**: your key groups, without disabled ones.
+- **Only Public Key** and **Has Private Key**: the same as in the KeyPair
+  Management window.
 
 You cannot rename or delete the built-in categories.
 

@@ -39,6 +39,8 @@ group, you pick the group once and you are done.
   out of smaller ones.
 - You can add or remove keys from a group at any time.
 - Each group has a name so you can find it easily.
+- Each group belongs to one [key database](/advanced/key-database/). If you
+  switch to another key database, you see only the groups made there.
 
 ## Create a Key Group
 
@@ -67,6 +69,11 @@ group, you pick the group once and you are done.
 
 You can change a group whenever you want. Double-click the group in the key
 list to open the **Key Group Management** window.
+
+If some keys in the group are no longer in your key database, a window called
+**Invalid Keys in Group** opens first. It lists those keys and asks if you want
+to remove them from the group. Click **Yes** to remove them, or **No** to keep
+the group as it is.
 
 ![][img-3]
 
@@ -152,6 +159,9 @@ Right-click a group in the Key ToolBox and choose **Set Owner Trust Level**.
 That trust level is then applied to every key in the group, including keys in
 any groups nested inside it. This is a fast way to set trust for many people at
 once.
+
+This choice is only there when the current key database uses GnuPG. With the
+**rPGP** engine, the menu does not show **Set Owner Trust Level**.
 
 ### Only encryption keys can join
 
