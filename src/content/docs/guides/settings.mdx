@@ -80,20 +80,20 @@ The technical settings, plus logging.
 
 ## What Is on Each Page
 
-| Page                  | Group          | What you change there                                                                  |
-| --------------------- | -------------- | -------------------------------------------------------------------------------------- |
-| **General**           | Application    | Language, how operations behave, where the File Panel opens, which modules to look for |
-| **Appearance**        | Application    | Theme, icon size, which actions appear on the toolbar and what a click runs, fonts    |
-| **Network**           | Application    | Proxy settings                                                                         |
-| **Updates**           | Application    | Whether GpgFrontend checks for a new version when it starts                            |
-| **Key Databases**     | Keys & Engines | Your key databases, which one is the default, and the built-in database's engine       |
-| **Key Generation**    | Keys & Engines | The default key type, the made-up identity for Quick Generate, and your key profiles   |
-| **GnuPG**             | Keys & Engines | Use your own copy of GnuPG, and fix GnuPG when it stops responding                      |
-| **rPGP**              | Keys & Engines | How long the rPGP engine remembers a passphrase, and passphrase encryption strength    |
-| **Key Servers**       | Keys & Engines | The list of key servers, and which one is the default                                  |
-| **Instant Messaging** | Features       | Your phrase for [instant messaging](/guides/instant-messaging/)                        |
-| **Mail Accounts**     | Features       | Your email accounts for [sending and reading email](/email/accounts-sending/)          |
-| **Advanced**          | System         | How the program protects its own key, and how much it writes to the log                |
+| Page                  | Group          | What you change there                                                                                                     |
+| --------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **General**           | Application    | Language, how operations behave, where the File Panel opens, which modules to look for                                    |
+| **Appearance**        | Application    | Theme, toolbar buttons, and the fonts of the text editor and the Status Panel                                             |
+| **Network**           | Application    | Proxy settings                                                                                                            |
+| **Updates**           | Application    | Whether GpgFrontend checks for a new version when it starts                                                               |
+| **Key Databases**     | Keys & Engines | Your key databases, which one is the default, and the built-in database's engine                                          |
+| **Key Generation**    | Keys & Engines | The default key type, the made-up identity for Quick Generate, and your key profiles                                      |
+| **GnuPG**             | Keys & Engines | What happens to GnuPG on exit, keeping it offline, using your own copy, and fixing it when it stops responding            |
+| **rPGP**              | Keys & Engines | How long the rPGP engine remembers a passphrase, how long its passphrase window waits, and passphrase encryption strength |
+| **Key Servers**       | Keys & Engines | The list of key servers, and which one is the default                                                                     |
+| **Instant Messaging** | Features       | Your phrase for [instant messaging](/guides/instant-messaging/)                                                           |
+| **Mail Accounts**     | Features       | Your email accounts for [sending and reading email](/email/accounts-sending/)                                             |
+| **Advanced**          | System         | How the program protects its own key, and how much it writes to the log                                                   |
 
 Some pages only show up when they apply to you:
 
@@ -136,12 +136,16 @@ Sandboxed builds hide the whole **Base** box.
   **File Panel** or the **Text Editor**. The default is **File Panel**.
 - **File Panel Opens At:** the folder a new File Panel shows first. The
   choices are **Profile Workspace**, **Home Folder** and **Working
-  Directory**. **Profile Workspace** is only listed when your profile has a
-  workspace folder.
+  Directory**. The default is **Home Folder**. **Profile Workspace** is only
+  listed when your profile has a workspace folder.
 - **Cache text editor contents.** keeps your open text tabs, including ones you
   have not saved, so they come back the next time you start GpgFrontend. They
   are stored encrypted. This is **on** by default.
-- **Import files dropped on the Key List without confirmation.**
+- **Import files dropped on the Key List without confirmation.** When this
+  box is ticked, GpgFrontend asks you before it imports something you drop
+  on the Key List. When it is not ticked, the import starts right away. It is
+  ticked at first. The question window has its own box, **Ask before
+  importing keys next time.** Untick it there to stop the question.
 - **Remember which keys are checked in the key list between restarts.** This
   is **off** by default.
 - **Allow only one checked key in the key list.** When you tick a key, the
@@ -155,7 +159,8 @@ Sandboxed builds hide the whole **Base** box.
 - **Use Binary Mode for File Operations**: this is **on** by default. See
   [Choose ASCII or Binary Output](/guides/file-operations/#choose-ascii-or-binary-output).
 - **Warn about keys expiring within:** how many days before its end date a
-  key is marked **Expiring Soon**. The default is 30 days.
+  key is marked **Expiring Soon**. You can pick from 1 to 365 days. The
+  default is 30 days.
 
 Sandboxed builds hide **Default Workspace As:** and **File Panel Opens At:**.
 They always start with the **Text Editor**, and ask for a folder each time you
@@ -187,84 +192,77 @@ system. Changing it reloads the window.
 
 Sandboxed builds hide the **Data** box.
 
-## The Key Databases Page
+## The Appearance Page
 
-A key database is a folder where your keys are kept.
+The **Appearance** page changes how GpgFrontend looks. It has four boxes.
 
-The **Key Databases** page lists your key databases and lets you add, edit and
-remove them. You can also pick which one is the default with **Use as
-Default**.
+### Theme
 
-The **Built-in Key Database** box has a **Key engine:** choice. It applies only
-to the built-in database. Other databases always open with their own engine.
+**Theme** sets the look of buttons, lists and windows. The list shows the
+styles your system offers. Changing it reloads the window.
 
-For the details, see [Key Database](/advanced/key-database/).
+### Toolbar
 
-## The Key Generation Page
+The toolbar is the row of buttons at the top of the main window.
 
-This page decides what [making a new key](/guides/generate-key/) starts with.
-It has two tabs.
+| Setting        | Choices                                           | Default                                        |
+| -------------- | ------------------------------------------------- | ---------------------------------------------- |
+| **Icon Size**  | **small**, **medium**, **large**                  | **medium**                                     |
+| **Icon Style** | **just text**, **just icons**, **text and icons** | **text and icons**                             |
+| **Actions**    | Tick the actions that get a button                | **Encrypt**, **Decrypt**, **Sign**, **Verify** |
 
-<Aside type="note" title="New in v2.2.4">
+**On click** only appears when you tick more than one action in the Encrypt
+or Decrypt row. It picks which action a plain click runs. See
+[Customization](/guides/understand-interface/#customization) for how the
+buttons share actions.
 
-This page is new.
+### Text Editor
 
-</Aside>
+This box sets the font of the text editor, where you type and paste
+messages.
 
-### The Quick Generate Tab
+- **Font Family**: the font. At first it is the fixed-width font that comes
+  with GpgFrontend. In a fixed-width font every letter takes the same space.
+- **Show all fonts**: also list fonts that are not fixed-width. Use it if your
+  language does not show well. The font that comes with GpgFrontend covers
+  Latin, Greek and Cyrillic letters only. This box also changes the list in
+  the **Status Panel** box.
+- **Font Size**: from 9 to 18. The default is 12.
+- **Tab Size**: how many spaces wide a tab is. The default is 4.
 
-- **Default key profile**: the key type that is picked first in the
-  **Generate Key** window, and that **Quick Generate** uses. A **profile** is
-  a saved set of key choices. The default is **Ed25519 / X25519 (Modern &
-  Fast)**.
-- **Quick Generate identity**: how the made-up name, email and comment look.
-  **Quick Generate** and the **Fill In Anonymously** button use these. Change
-  them in **Name pattern:**, **Email pattern:** and **Comment pattern:**.
-  **Preview:** shows an example. Click the refresh button next to it for
-  another one.
+### Status Panel
 
-A pattern is normal text with placeholders in curly braces. GpgFrontend
-replaces each placeholder with a value. For example, the default name pattern
-`anon-{token}` gives `anon-` followed by 8 random letters and digits. Click
-**Placeholders** to see them all. Some useful ones:
+The **Status Panel** is the area below the workspace that shows the result
+of each task. This box has its own **Font Family** and **Font Size** (9 to
+18, default 12). They work like the ones for the text editor.
 
-- `{token}`: 8 random letters and digits, the same in every field.
-- `{domain}` and `{tld}`: a made-up domain. `{tld}` gives `test`, `example` or
-  `invalid`, so no mail can ever reach the address.
-- `{date}`: today's date.
+## The Network Page
 
-**Restore Default Patterns** puts the three patterns back as they were.
+The **Network** page holds the proxy settings. A proxy is a server that
+passes on GpgFrontend's network traffic for it. You only need one if your
+network requires it. Sandboxed builds do not have this page.
 
-### The Profiles Tab
+The **Proxy** box:
 
-The list shows every profile and its **Status**: **Default**, **Hidden**,
-**Unavailable** (your engine cannot make it) or **Offered**. Click a profile to
-see what it makes and where it appears in the **Generate Key** window.
+- **Enable Proxy**: use a proxy. It is off by default. While it is off, the
+  other fields are greyed out.
+- **Proxy Type**: **System Default** uses the proxy your system is set to.
+  **HTTP** and **Socks5** use the server you type in below.
+- **Host Address** and **Port**: the proxy server's address and port.
+- **Username** and **Password**: only if your proxy asks you to sign in.
 
-- **New…** makes a profile. Choose its **Name**, the **Primary key**, and
-  whether to add a **Subkey**.
-- **Edit…** changes the selected profile.
-- **More** has **Duplicate**, **Set as Default**, **Hide** and **Delete**.
-- Drag a profile, or use the arrow buttons, to change the order.
+With **System Default**, the address, port, user name and password fields are
+greyed out.
 
-You cannot delete or hide the default profile. Choose another default first.
-Deleting a profile never changes keys you already made with it.
+To test your proxy:
 
-**Restore Built-in Profiles…** adds back the profiles GpgFrontend comes with,
-if you deleted any. Your own profiles and your changes are kept.
-
-## The rPGP Page
-
-The **rPGP** page has three boxes:
-
-- **Password Cache**: how long the rPGP engine remembers a passphrase you
-  typed.
-- **Passphrase Prompt**: how long the passphrase window waits for you before
-  it closes.
-- **Passphrase Encryption**: the **Argon2 Parameters:** choice, **High memory,
-  2 GiB** (the default) or **Low memory, 64 MiB**. It is used when you
-  encrypt with a password only. See
-  [Choose How Much Memory Argon2 Uses](/guides/symmetric-encrypt-decrypt/#choose-how-much-memory-argon2-uses).
+1. Fill in the **Proxy** box.
+2. In the **Operations** box, click **Apply Proxy Settings and Check Proxy
+   Connection**. This also saves the proxy settings.
+3. A window called **Test Server Url Accessibility** opens. Type the address
+   of a web site under **Server Url**, then click OK.
+4. GpgFrontend tries to reach that address through the proxy. It tells you
+   **Success** or **Failed**.
 
 ## The Updates Page
 
@@ -319,18 +317,206 @@ Updates** window was redesigned.
 
 </Aside>
 
+## The Key Databases Page
+
+A key database is a folder where your keys are kept.
+
+The **Key Databases** page lists your key databases and lets you add, edit and
+remove them. You can also pick which one is the default with **Use as
+Default**.
+
+At the top is the **Built-in Key Database** box:
+
+- **Key engine:** the engine the built-in database uses. It applies only to
+  the built-in database. Other databases always open with their own engine.
+- **Location:** the folder of the built-in database. Click **Copy** to copy
+  the full path.
+
+Below it, your other key databases are sorted into three tabs:
+
+| Tab             | What it holds                                                                        |
+| --------------- | ------------------------------------------------------------------------------------ |
+| **In Profile**  | Key databases kept inside your profile                                               |
+| **Local Only**  | Key databases outside your profile, on this computer only                            |
+| **Recycle Bin** | Key databases you removed from **In Profile**. Their keys are still on this computer |
+
+Right-click a key database for more actions, such as **Open** (show its
+folder) and **Copy Folder Path**.
+
+Sandboxed builds hide the **Local Only** tab and the **Edit** action. There,
+the built-in database cannot be turned off.
+
+For the details, see [Key Database](/advanced/key-database/).
+
+## The Key Generation Page
+
+This page decides what [making a new key](/guides/generate-key/) starts with.
+It has two tabs.
+
+<Aside type="note" title="New in v2.2.4">
+
+This page is new.
+
+</Aside>
+
+### The Quick Generate Tab
+
+- **Default key profile**: the key type that is picked first in the
+  **Generate Key** window, and that **Quick Generate** uses. A **profile** is
+  a saved set of key choices. The default is **Ed25519 / X25519 (Modern &
+  Fast)**.
+- **Quick Generate identity**: how the made-up name, email and comment look.
+  **Quick Generate** and the **Fill In Anonymously** button use these. Change
+  them in **Name pattern:**, **Email pattern:** and **Comment pattern:**.
+  **Preview:** shows an example. Click the refresh button next to it for
+  another one.
+
+A pattern is normal text with placeholders in curly braces. GpgFrontend
+replaces each placeholder with a value. For example, the default name pattern
+`anon-{token}` gives `anon-` followed by 8 random letters and digits. Click
+**Placeholders** to see them all. Some useful ones:
+
+- `{token}`: 8 random letters and digits, the same in every field.
+- `{domain}` and `{tld}`: a made-up domain. `{tld}` gives `test`, `example` or
+  `invalid`, so no mail can ever reach the address.
+- `{date}`: today's date.
+
+**Restore Default Patterns** puts the three patterns back as they were.
+
+### The Profiles Tab
+
+The list shows every profile and its **Status**: **Default**, **Hidden**,
+**Unavailable** (your engine cannot make it) or **Offered**. Click a profile to
+see what it makes and where it appears in the **Generate Key** window.
+
+- **New…** makes a profile. Choose its **Name**, the **Primary key**, and
+  whether to add a **Subkey**.
+- **Edit…** changes the selected profile.
+- **More** has **Duplicate**, **Set as Default**, **Hide** and **Delete**.
+  For a profile that is already hidden, **Hide** becomes **Show**.
+- Drag a profile, or use the arrow buttons, to change the order. The keys
+  Alt+Up and Alt+Down do the same.
+
+You cannot delete or hide the default profile. Choose another default first.
+Deleting a profile never changes keys you already made with it.
+
+**Restore Built-in Profiles…** adds back the profiles GpgFrontend comes with,
+if you deleted any. Your own profiles and your changes are kept.
+
+## The GnuPG Page
+
+The **GnuPG** page only appears if your copy of GpgFrontend has the GnuPG
+engine.
+
+### General
+
+| Option                                           | What it does                                                                                         | Default |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ------- |
+| **Enable GpgME Debug Log**                       | Writes much more detail about GnuPG to the log, to help find a problem. Needs a restart.             | Off     |
+| **Terminate GnuPG background processes on exit** | Stops GnuPG's helper programs when you close GpgFrontend. This can affect other apps that use GnuPG. | On      |
+| **Clear password cache on exit**                 | Makes GnuPG forget every passphrase it remembers when you close GpgFrontend.                         | On      |
+| **Forbid all GnuPG network connection.**         | Keeps GnuPG offline. Takes effect without a restart.                                                 | Off     |
+
+Sandboxed builds hide **Clear password cache on exit**.
+
+### Advanced
+
+Use this box only if you want GpgFrontend to use a GnuPG you installed
+yourself.
+
+1. Tick **Use Custom GnuPG**.
+2. Click **Select GnuPG Path**.
+3. Pick the folder that holds the `gpgconf` program, which is part of
+   GnuPG.
+4. Click OK in the settings window (on macOS, close the window). A **Restart
+   Required** message appears. Click **Save and Restart**.
+
+If the folder does not hold `gpgconf`, an **Illegal GnuPG Path** message
+tells you so, and nothing changes.
+
+### Maintenance
+
+Three buttons that fix a stuck GnuPG. See
+[If GnuPG Stops Responding](#if-gnupg-stops-responding).
+
+### If You See "GnuPG Unavailable"
+
+This box only shows up when GnuPG cannot start because the folder path of the
+key database is too long. GnuPG needs a short path for its helper program.
+Move to a key database in a shorter folder, on the **Key Databases** page.
+
+## The rPGP Page
+
+The **rPGP** page only appears if your copy of GpgFrontend has the rPGP
+engine. It has three boxes.
+
+### Password Cache
+
+The rPGP engine can remember a passphrase for a while, so you do not have to
+type it again each time. These settings only affect the rPGP engine.
+
+| Setting                               | What it means                                                                                   | Range                | Default     |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------- | -------------------- | ----------- |
+| **Password Cache TTL (minutes):**     | Forget the passphrase after it has not been used for this long. Each use starts the time again. | 1 to 1440 (24 hours) | 10 minutes  |
+| **Password Cache Max TTL (minutes):** | Forget the passphrase this long after you first typed it, even if it is still in use.           | 1 to 10080 (7 days)  | 120 minutes |
+
+The second value is never shorter than the first. If you set it shorter,
+GpgFrontend saves it as the same as the first.
+
+### Passphrase Prompt
+
+**Passphrase Prompt Timeout (seconds):** how long the passphrase window waits
+for you. When the time is up, the window closes and the task is cancelled.
+You can pick from 0 to 3600 seconds. 0 shows as **Never**: the window then
+waits as long as needed. The default is 60 seconds.
+
+This only applies to rPGP keys. GnuPG asks for passphrases in its own
+window, which has its own time limit.
+
+### Passphrase Encryption
+
+**Argon2 Parameters:** is used when you encrypt with a password only. The
+choices are **High memory, 2 GiB** (the default) and **Low memory, 64 MiB**.
+See
+[Choose How Much Memory Argon2 Uses](/guides/symmetric-encrypt-decrypt/#choose-how-much-memory-argon2-uses).
+
 ## The Advanced Page
 
-The **Advanced** page has two parts:
+The **Advanced** page has two boxes. Every change here takes effect only after
+a restart.
 
-- **Security**: **Secure Level:** and **Application Key Protection:**. See
-  [App Secure Key](/advanced/app-secure-key/).
-- **Diagnostics**: **Log Level:** and **Log Ring Buffer:**.
+### Security
+
+- **Secure Level:** how hard GpgFrontend works to protect secrets in memory.
+  The choices are **Standard**, **Enhanced**, **Strong** and **Maximum**.
+  Each one lists what it adds, for example "wipe freed memory". The default
+  is **Standard**. See [Memory Security](/advanced/memory-security/).
+- **Application Key Protection:** how the program's own key file is protected
+  on disk. The choices are **No extra protection (default)**, **System
+  keychain** and **PIN at startup**. **Change PIN…** next to it only works
+  with **PIN at startup**. See [App Secure Key](/advanced/app-secure-key/).
+
+### Diagnostics
+
+| Setting              | Choices                                                           | Default   |
+| -------------------- | ----------------------------------------------------------------- | --------- |
+| **Log Level:**       | **Trace**, **Debug**, **Info**, **Warning**, **Error**, **Fatal** | **Error** |
+| **Log Ring Buffer:** | 128 to 65536 entries                                              | 1024      |
 
 **Log Level:** decides how much GpgFrontend writes to its log. The log is a
-record of what the program did, and it helps to find problems. The choices are
-**Trace**, **Debug**, **Info**, **Warning**, **Error** and **Fatal**. **Trace**
+record of what the program did, and it helps to find problems. **Trace**
 writes the most. It adds detail from modules that **Debug** leaves out.
+
+**Log Ring Buffer:** is how many recent log messages GpgFrontend keeps in
+memory, for crash reports and the log viewer. A bigger number uses more
+memory.
+
+### Settings You Cannot Change
+
+A profile can come with fixed values for **Secure Level:**, **Application
+Key Protection:**, **Log Level:** or **Log Ring Buffer:**. A fixed setting is
+greyed out, and a note on the page says that some settings are fixed. You
+cannot change a fixed setting in this window.
 
 You can also set the level for one run when you start GpgFrontend from a
 terminal:
