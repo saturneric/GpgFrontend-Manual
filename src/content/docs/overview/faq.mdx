@@ -56,9 +56,11 @@ Replace the old AppImage file with the new one.
 Your settings and keys are kept, unless the release notes say otherwise. If
 you installed from an app store or a package manager, update there instead.
 
-The built-in update check only offers newer releases from your own series
-(for example, 2.2.x). Moving to a new series is a step you take yourself. See
-the [Version Numbering Policy](/appendix/version-policy/).
+The built-in update check offers newer fix releases of your own series (for
+example, 2.2.x). If your series is old, it also offers the current release
+and marks it **(recommended)**. If your series gets no more fixes, it only
+offers the current release. You choose what to download. See
+[Which Updates the App Offers](/appendix/version-policy/#which-updates-the-app-offers).
 
 </details>
 
@@ -74,8 +76,18 @@ most once a day. It never pops up a window. If a newer version exists, a small
 badge appears on **Help** > **Check for Updates**. Click it to see what is new
 and to download it.
 
-The check only asks GitHub Releases. See
-[Finding Your Settings](/guides/settings/#the-updates-page).
+The check does not ask GitHub. It downloads a signed list of releases from
+GpgFrontend's own update server (`update.bktus.com`), and checks the
+signature before it trusts the list. See
+[Finding Your Settings](/guides/settings/#the-updates-page) and
+[How Releases and Updates Work](/appendix/release-updates/).
+
+<Aside type="note" title="Changed in v2.2.5">
+
+Before v2.2.5, the update check asked GitHub Releases, and it only offered
+releases of your own series.
+
+</Aside>
 
 The Flatpak and Mac App Store builds have no update check. Flathub and the App
 Store deliver their updates.

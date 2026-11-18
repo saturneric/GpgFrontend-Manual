@@ -13,7 +13,7 @@ details, or to get the source code, visit the homepage of each project. To see
 what your computer needs to run the app, see
 [System Requirement](/appendix/system-requirement/).
 
-Two changes over time are worth knowing:
+Some changes over time are worth knowing:
 
 - Since v2.1.9, GpgFrontend no longer uses the QtAES library. The app's own
   internal cryptography (not your OpenPGP messages) moved to OpenSSL, with
@@ -23,10 +23,16 @@ Two changes over time are worth knowing:
   key derivation. OpenSSL is still used by the email module, for its secure
   (TLS) connections to mail servers. Qt may also use it for other secure
   connections.
+- Since v2.2.5, the update check also uses **libsodium**. It checks the
+  signature on the list of releases that the app downloads, so a fake list
+  is refused. See [How Releases and Updates Work](/appendix/release-updates/).
 
 ### Common
 
 - **Qt (Open Source)**: [https://www.qt.io][qt]
+- **Qt Translations** (`qttranslations`):
+  [https://github.com/qt/qttranslations][qttranslations]. Translates Qt's own
+  standard texts, such as the buttons of system dialogs, into your language.
 - **GnuPG**: [https://gnupg.org][gnupg]
 - **GpgME**: [https://gnupg.org/software/gpgme/index.html][gnupg-gpgme]
 - **libgpg-error** and **libassuan**: [https://gnupg.org][gnupg]. Helper
@@ -82,6 +88,7 @@ vector icon library is free to use. It is not a registered trademark, has no
 copyright issues, and may be used commercially.
 
 [qt]: https://www.qt.io
+[qttranslations]: https://github.com/qt/qttranslations
 [gnupg]: https://gnupg.org
 [gnupg-gpgme]: https://gnupg.org/software/gpgme/index.html
 [openssl-library]: https://openssl-library.org

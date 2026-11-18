@@ -13,8 +13,8 @@ import ReleaseFlowFigure from "../../../components/figures/ReleaseFlowFigure.ast
 
 The release pipeline and the in-app update check were rebuilt. This page is a
 technical reference. Everything in it comes from the public repository,
-mainly `release/`, `scripts/release/`, `.github/workflows/build.yml` and the
-`m_ver_check` module.
+mainly `release/`, `scripts/release/`, `.github/workflows/build.yml`,
+`.github/workflows/github-release.yml` and the `m_ver_check` module.
 
 </Aside>
 
@@ -48,7 +48,7 @@ The rest of this page is for experts.
 | Component             | Role                                                                                                                     | Trust boundary                                                                    |
 | :-------------------- | :----------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
 | Public repository     | Source of truth for code, build recipe, release policy and the trust root.                                               | Tags for stable releases are signed by the maintainer.                            |
-| GitHub Actions        | Builds every platform and records provenance with Sigstore.                                                              | No job has `contents: write`. It cannot write to the release store.               |
+| GitHub Actions        | Builds every platform and records provenance with Sigstore. A separate hourly job mirrors stable releases to GitHub Releases. | No build job has `contents: write`. Only the mirror job does, and it can only write this repository's GitHub releases. No job can write to the release store. |
 | Staging bucket        | Holds builds exactly as CI signed them.                                                                                  | Private. Never served to users.                                                   |
 | Signing host          | Verifies and publishes nightlies, betas and release candidates. Re-checks stable releases before it lists them. Signs the update index. | Holds the index key only. Never holds the OpenPGP, Authenticode or root keys. |
 | Maintainer's machine  | Runs the offline stable stage: OpenPGP and Authenticode signing, then the upload of the stable release.                  | Keys are not on any server. Authenticode key is on a hardware token.              |
@@ -135,11 +135,30 @@ Rules:
   workflow, the ref and the commit, and the signature is logged in Rekor.
 - A `stage` job uploads the build to the private staging bucket. A release
   candidate is staged beside its series' betas.
-- No job publishes downloads. CI cannot create a GitHub release or write to
-  the release store. There is one exception, for Android: a separate job
-  uploads every build it stages to the internal testing track of Google Play.
-  Stable releases, betas and release candidates go to the app
-  `com.bktus.gpgfrontend`; nightlies go to `com.bktus.gpgfrontend.nightly`.
+- No job in `build.yml` publishes downloads. It has no `contents: write`, so
+  it cannot create a GitHub release, and it cannot write to the release store.
+  There is one exception, for Android: a separate job uploads every build it
+  stages to the internal testing track of Google Play. Stable releases, betas
+  and release candidates go to the app `com.bktus.gpgfrontend`; nightlies go
+  to `com.bktus.gpgfrontend.nightly`.
+
+### GitHub Releases Mirror
+
+GitHub Releases is a mirror, filled after a release is published, never
+before. The workflow `.github/workflows/github-release.yml` runs every hour
+(and by hand):
+
+- It reads the signed update index from the public servers, the same way the
+  app does, and checks it against the trust root.
+- For each stable release in the index, it makes the GitHub release match:
+  the files with their maintainer `.sig` signatures, and the signed release
+  notes.
+- It checks every file against the index and its signature before it uploads
+  it. So a mirrored file is the same as the one the update check offers.
+- Its job is the only one with `contents: write`. That token can only write
+  this repository's releases. It holds no signing key.
+
+Betas, release candidates and nightlies are not mirrored.
 
 ### Which Builds Are Separate Apps
 

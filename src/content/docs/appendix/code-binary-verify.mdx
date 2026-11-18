@@ -208,9 +208,10 @@ If you are in that situation, this is the path:
 
 1. **Get the source, not a binary.** Clone the repository and check out an
    official release tag. Release tags made by the current release process
-   (v2.3.0 and later) are signed. Verify the signature with `git verify-tag`
-   and the maintainer's key from [bktus.com/openpgp][bktus-openpgp]. The tags
-   of v2.2.4 and older releases are not signed.
+   are signed, starting with v2.2.5 and v2.1.14. Verify the signature with
+   `git verify-tag` and the maintainer's key from
+   [bktus.com/openpgp][bktus-openpgp]. Older tags, such as v2.2.4 and
+   v2.1.13, are not signed.
 2. **Read before you build.** Review the code yourself, or have someone you
    trust review it. Pay attention to the build scripts too, not only the app
    code.

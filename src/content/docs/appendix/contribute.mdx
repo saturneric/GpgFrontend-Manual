@@ -122,9 +122,12 @@ git config --global core.eol lf
 
 ### Install Dependencies
 
-Besides Qt, the build needs libarchive, libsodium, OpenSSL, and GoogleTest,
-plus the autotools packages used to build gpgme from the bundled submodule.
-OpenSSL is used by the email module for TLS connections.
+Besides Qt, the build needs libarchive, libsodium and OpenSSL, plus the
+autotools packages used to build gpgme from the bundled submodule. OpenSSL is
+used by the email module for TLS connections. GoogleTest is only needed if
+you build the unit tests (`-DGPGFRONTEND_BUILD_TESTS=ON`, see
+[Build the Project](#build-the-project)). The package lists below include it,
+so you can leave it out for a plain build.
 
 <Tabs syncKey="os">
 <TabItem label="Windows">
@@ -182,8 +185,9 @@ sudo apt-get install -y build-essential git cmake ninja-build \
   libarchive-dev libssl-dev libsodium-dev libgtest-dev
 ```
 
-If the `libgtest-dev` package on your distribution is too old, build GoogleTest
-from source instead. The CodeQL job in CI builds v1.15.0 this way:
+If you build the tests and the `libgtest-dev` package on your distribution is
+too old, build GoogleTest from source instead. The CodeQL job in CI builds
+v1.15.0 this way:
 
 ```sh
 git clone --branch v1.15.0 --depth 1 https://github.com/google/googletest.git
@@ -246,8 +250,8 @@ Notes:
   libgpg-error from the bundled submodules and links them statically. The
   Linux, Windows and macOS builds in CI use this option, because GpgFrontend is
   meant to run on gpgme 2.0 or newer and most package managers do not ship it
-  yet. The Mac App Store and Android builds do not use GnuPG, so they leave it
-  off. This is why the autotools
+  yet. The Mac App Store build (the `sandbox` flavor, see below) uses only
+  rPGP, so it leaves it off. This is why the autotools
   packages (autoconf, automake, gettext, texinfo) are in the dependency lists
   above.
 - Adjust the build type (`Release`, `RelWithDebInfo`, etc.) as needed; it
@@ -261,6 +265,49 @@ Notes:
   to also build the modules' own unit tests.
 - `GPGFRONTEND_BUILD_APP_IMAGE` is gone. The AppImage is now made from the
   tree that `cmake --install` produces.
+
+### Build Mode and Flavor
+
+`GPGFRONTEND_BUILD_MODE` says whether a build is an official release:
+
+- `nightly` (the default): every build that is not an official release,
+  including your local one. The app calls itself **GpgFrontend Testing** and
+  uses its own profile name, `GpgFrontendTesting`. So its settings and its
+  app data folder (with the app's secure key and stored data) are separate
+  from those of an installed release, and it cannot change them.
+- `release`: an official build. Betas and release candidates are release
+  builds too. It uses the normal name and profile. It cannot be combined
+  with `GPGFRONTEND_BUILD_SCREENSHOT_MODE`.
+
+`GPGFRONTEND_BUILD_FLAVOR` says what kind of distribution the build is. It
+also decides which modules ship:
+
+- `installed` (the default): keeps its data in the system's user data folder.
+- `portable`: keeps its data beside the application.
+- `sandbox`: the Mac App Store build (GpgFrontend Lite). It needs the Xcode
+  generator, and it uses only the rPGP engine.
+- `flatpak`: the Flathub build.
+
+`GPGFRONTEND_INSTALL_KIND` says how the build reaches its users, for example
+`appimage`, `msi`, `msix`, `portable-zip`, `dmg`, `distro` or `source`. The
+update check uses it to pick the file to download, or to show only a notice
+when a store or package manager does the updates. It defaults to `source` (a
+build from a checkout, which is only shown a notice), to `distro` with
+`GPGFRONTEND_BUILD_APP_FOR_PACKAGE=ON`, and to `mas` or `flatpak` for those
+flavors. A kind that does not fit the flavor stops the configure step.
+
+`GPGFRONTEND_BUILD_APP_FOR_PACKAGE=ON` prepares a build for a DEB or RPM
+package. It also turns on `GPGFRONTEND_BUILD_STRIP_RPATH` by default.
+
+Some older options are deprecated. An old command line or build cache still
+configures: CMake prints a warning, carries the value over once and drops the
+old entry.
+
+| Old option                         | Use instead                            |
+| :--------------------------------- | :------------------------------------- |
+| `GPGFRONTEND_BUILD_STABLE`         | `GPGFRONTEND_BUILD_MODE=release`       |
+| `GPGFRONTEND_BUILD_PORTABLE`       | `GPGFRONTEND_BUILD_FLAVOR=portable`    |
+| `GPGFRONTEND_XCODE_ENABLE_SANDBOX` | `GPGFRONTEND_BUILD_FLAVOR=sandbox`     |
 
 ### Module Binding Options
 
