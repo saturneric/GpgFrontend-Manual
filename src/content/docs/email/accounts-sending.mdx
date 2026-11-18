@@ -54,6 +54,12 @@ the list. The **Add Mail Account** window opens. It has four steps:
 
 1. **Your Account**: type **Your name** (as people will see it), your **Email
    address**, and your **Password**. Click **Continue**.
+   - For some well-known providers, a note appears under the password. For
+     example, Gmail, iCloud Mail and Yahoo Mail usually refuse your normal
+     password here, so the note asks you to make an **app password**. For
+     Outlook.com, the note says that signing in works only if your account
+     allows an app password. See
+     [No Sign-In Through a Web Page](#no-sign-in-through-a-web-page).
 2. **Servers**: GpgFrontend fills in the servers for you, from your address.
    - Choose what the account is for: **Send and receive**, **Receive only** or
      **Send only**.
@@ -119,6 +125,11 @@ Each server shows **Connected** or **Failed**, with the reason. You can:
   to set it up later in Settings.
 
 Click **Stop** to stop the check. Nothing is then verified.
+
+If a server uses a certificate that no known authority vouches for, the check
+asks **Trust This Certificate?** This is the same question as in
+[Trust a Server You Run Yourself](#trust-a-server-you-run-yourself). If you
+click **Yes**, the check runs again for that server right away.
 
 ## Change an Account
 
@@ -301,6 +312,10 @@ The **Result** section then shows two lines:
     message was still sent.
 
 Click **Details** to see more, or **Copy details** to copy them.
+
+While the copy is being saved, a **Stop** button shows next to **Copy in
+Sent**. Click it to skip the copy. The line then says **Stopped: no copy was
+kept. The message was still sent.**
 
 When all went well, the window closes by itself after three seconds. The
 **Close** button counts down. Click anywhere in the window to stop the
