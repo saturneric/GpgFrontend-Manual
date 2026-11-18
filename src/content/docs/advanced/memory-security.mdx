@@ -30,6 +30,19 @@ would not want recovered from a memory dump or a swap file.
 The change takes effect after GpgFrontend restarts. It offers to restart for
 you.
 
+Each [profile](/advanced/profiles/) has its own Secure Level.
+
+### If the list is greyed out
+
+Whoever set up your computer can fix the Secure Level for a profile. They do
+this in the `profile.json` file in the profile's folder, with a
+`"deployment"` section such as `"deployment": { "SecureLevel": 2 }`. Then
+**Secure Level:** is greyed out, and you cannot change it in **Settings**.
+
+The note on the page then says the setting is fixed by an `ENV.ini` file.
+The value really comes from `profile.json`. To change it, edit or remove the
+`SecureLevel` line there, then restart GpgFrontend.
+
 <Aside type="note" title="Changed in v2.2.2">
 
 Older versions set this by putting a line like `SecureLevel=1` in an `ENV.ini`
@@ -48,6 +61,10 @@ The default. Normal memory, with no extra work.
 Even here, GpgFrontend does not simply leave things lying around. Whenever it
 reads text out of a box on screen, it copies it into its own buffer and wipes
 the original straight away.
+
+Its most sensitive memory, such as the memory that holds your passphrases, is
+also wiped when the program is done with it. This happens at every level,
+Standard included.
 
 Choose this if you want the best speed and the fewest surprises.
 
@@ -75,6 +92,12 @@ Instead, it makes GpgFrontend use a new key for its saved data every week.
 That is about the data the program saves, not about memory. It has a catch,
 so read [Application Secure Key](/advanced/app-secure-key/#secure-level)
 before you turn it on.
+
+The weekly key change does not happen in a
+[temporary profile](/advanced/temporary-profiles/), or in a profile you
+opened straight from a file. Both run from a working copy that is deleted
+when the window closes. A new key kept only in that copy would be lost with
+it, and so would everything saved with it.
 
 ## Undo After an Operation
 

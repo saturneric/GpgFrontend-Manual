@@ -71,9 +71,15 @@ Profiles you make yourself live in a `profiles` folder inside that one. You do
 not have to go looking for them: in **Manage Profiles**, pick a profile and
 choose **Show in Folder** from the **⋯** button or the right-click menu.
 
+Sandbox builds keep this folder inside the closed-off space the system gives
+the app, not at the paths above. For the Flatpak build that space is under
+`~/.var/app/com.bktus.gpgfrontend/`. For the Mac App Store build it is under
+`~/Library/Containers/`.
+
 <Aside type="tip" title="Nightly builds stay out of your way">
 
-Test builds keep their files in a separate folder of their own. Trying a
+Nightly and other test builds keep their files in a separate folder called
+`GpgFrontendTesting`, next to the `GpgFrontend` folder shown above. Trying a
 nightly version never touches the setup your installed version uses.
 
 </Aside>
@@ -101,7 +107,9 @@ right corner of the window: it shows the profile name, and clicking it opens
 
 ![The Profiles On This Computer window][img-1]
 
-**Manage Profiles...** opens the **Profiles On This Computer** window. Its list
+**Manage Profiles...** opens the **Profiles On This Computer** window. Its
+**New** button opens a menu with **New Profile...**, **New Temporary Profile**
+and **Import Profile File...**. Its list
 has the columns **Name**, **Type**, **Last Opened** and **Status**. A profile
 you have never opened shows **Never** under **Last Opened**. The **Status**
 column can say:
@@ -135,7 +143,8 @@ this page needs the full edition.
    **Name**, **Keys** and **Settings**.
 
 2. **Name**: type a name, such as `Work`. This name shows in the profile list
-   and the status bar. You can change it later. Click **Continue**.
+   and the status bar. Any name works, but it cannot be empty. You can change
+   it later. Click **Continue**.
 
 3. **Keys**: choose where the profile's built-in key database lives. Click
    one of the two choices:
@@ -175,7 +184,7 @@ The **Settings** step lets the new profile start with the settings of the
 window you are in, so you do not have to set everything up again.
 
 - **Start with this window's settings** turns all the groups below it on or
-  off at once.
+  off at once. At first, every group is ticked.
 - Each group has its own box, so you can copy some and leave out others:
   - **OpenPGP engine and GnuPG**
   - **rPGP passphrase handling**
@@ -440,10 +449,14 @@ place to keep the unpacked copy. It picks the safest place this computer
 offers:
 
 - **Memory**: nothing is written to the disk in the normal course of things.
+  Only on Linux and FreeBSD.
 - **An encrypted folder**: written to the disk, but only this session can
-  read it.
+  read it. On Linux this is a folder the system can encrypt. On Windows it is
+  the system's temporary folder, encrypted by Windows.
 - **An ordinary folder on this disk**: used only when neither of the above is
-  possible.
+  possible. This is the system's temporary folder or, as a last resort, the
+  `profiles` folder. macOS has neither of the choices above, so it always
+  uses an ordinary folder.
 
 To see which one is in use, point at the profile name in the status bar at
 the bottom right of the window. Or open **Help**, then **About**, then the
@@ -484,7 +497,9 @@ first if you might want it back.
 </Aside>
 
 You cannot delete the profile you are currently using, or one that is open in
-another window.
+another window. The **Default** and **Portable** profiles can never be
+deleted, because GpgFrontend opens one of them by itself every time it
+starts.
 
 ## For Advanced Users
 
@@ -514,8 +529,15 @@ itself to pass settings to a temporary profile it starts. You do not need to
 type it.
 
 You can also name a profile in the `GF_PROFILE` environment variable, using
-its folder name. This is handy for scripts. `--profile` and a profile file on
-the command line win over it.
+its folder name. This is handy for scripts.
+
+When you give more than one, GpgFrontend uses the first of these it finds:
+
+1. `--profile`
+2. `--temp-profile`
+3. a profile file named on the command line
+4. `GF_PROFILE`
+5. the **Default** profile (or **Portable** in a portable copy)
 
 ```sh
 GF_PROFILE=a3f19c gpgfrontend
@@ -527,6 +549,9 @@ A few other options can help when something goes wrong:
 - `-e` or `--environment`: show details about where GpgFrontend runs.
 - `-l` or `--log-level`: set how much goes into the log. Choose `trace`,
   `debug`, `info`, `warn` or `error`.
+- `--module-status FILE`: load the modules, write a report about them to
+  `FILE`, and exit. See
+  [Module Controller](/advanced/module-controller/).
 - `-h` or `--help`: list all options.
 
 [img-1]: https://img.bktus.com/d95zV1Ai.webp

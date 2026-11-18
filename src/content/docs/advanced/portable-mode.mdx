@@ -79,15 +79,26 @@ was unpacked into. On Linux, an AppImage uses the folder that holds the
 So whoever holds the drive holds your keys. Keep the drive somewhere safe, and
 use a strong passphrase on your private keys.
 
+There is one exception. When you open a profile file or a
+[temporary profile](/advanced/temporary-profiles/), GpgFrontend needs a place
+to unpack it while you work. It may use the computer's memory or its
+temporary folder for that, not the drive. The copy is deleted when the window
+closes. See
+[Where the Open File Is Kept](/advanced/profiles/#where-the-open-file-is-kept).
+
 ## What a Portable Copy Cannot Do
 
-A portable copy cannot use your computer's password store to protect its own
-key. That store belongs to one computer, and a portable copy has to work on
-any computer you plug it into.
+The **Portable** profile cannot use your computer's password store to protect
+its own key. That store belongs to one computer, and a portable copy has to
+work on any computer you plug it into.
 
-The **System keychain** choice is greyed out in a portable copy, so there is
-nothing you need to do. See
+So the **System keychain** choice is greyed out in the **Portable** profile,
+and there is nothing you need to do. See
 [Application Secure Key](/advanced/app-secure-key/) if you want the details.
+
+This only applies to the **Portable** profile itself. A **Local** profile you
+make inside a portable copy can choose **System keychain**. If you do, its
+saved data can only be read on the computer where you chose it.
 
 ## Tip: Moving Between Computers
 

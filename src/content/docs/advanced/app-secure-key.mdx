@@ -60,14 +60,21 @@ But the key file on its own is now useless to someone who copies it.
 
 This choice is greyed out when it cannot work:
 
-- On a **portable** copy, because the password store belongs to one computer
-  and a portable copy has to run on any computer.
-- On a profile you **opened from a file**, for the same reason. That file is
-  already protected by its own passphrase.
-- On Linux, when **no password service is set up**. Install one and switch it
-  on, then try again.
+- In the **Portable** profile of a [portable copy](/advanced/portable-mode/),
+  because the password store belongs to one computer and a portable copy has
+  to run on any computer.
+- When GpgFrontend cannot find any password store on this computer. On Linux
+  this means the `libsecret` library is missing. Install it (`libsecret-1-0`
+  on Debian and Ubuntu, `libsecret` on Fedora), then start GpgFrontend again.
 
 Point at the greyed-out choice to see why it is not available.
+
+On Linux the choice can also be shown, but still not work. For example, no
+password service such as GNOME Keyring or KWallet is running, or it is locked.
+Then, when you pick **System keychain**, GpgFrontend shows **System Keychain
+Unavailable** and sets the list back to **No extra protection (default)**.
+Click **Show Details...** in that window to see the reason your system gave.
+Start or unlock your password service, then try again.
 
 #### If the keychain is locked on Linux
 
@@ -85,6 +92,11 @@ unlock it.
 </Steps>
 
 If the keychain stays locked, GpgFrontend shows **Secure Key Unavailable**.
+This window can also appear on Windows and macOS. It means the secret in the
+password store could not be read. Besides a locked keychain, the store may
+have been reset, or the profile was copied from another computer or user
+account.
+
 Click **Show Details...** to see the reason your system gave. Then:
 
 - Click **Quit**, unlock your keychain, and start GpgFrontend again. This
@@ -102,10 +114,19 @@ shows the system's reason when it cannot read it.
 
 </Aside>
 
+#### If the keychain stops working
+
+If you chose **System keychain** but GpgFrontend cannot use it when it starts,
+it shows **System Keychain Unavailable**. The program's key then stays without
+extra protection, and the setting goes back to **No extra protection
+(default)**. You can choose **System keychain** again once your password
+service works.
+
 ### PIN at startup
 
 You choose a PIN, and GpgFrontend asks for it every time it opens. Nothing it
-saved can be read until you type it.
+saved can be read until you type it. The PIN must be at least 8 characters
+long.
 
 This is the strongest of the three. It is also the only one where you can
 lose data.
@@ -126,26 +147,46 @@ Your OpenPGP keys are not affected. Only the program's own saved data is.
 Use **Change PIN…** on the same settings page to pick a new one later. You
 need the current PIN to do it.
 
+To stop using a PIN, pick another choice in the list and click **OK**. The
+**Unlock Application Key** window then asks for your current PIN. Type it and
+click **Unlock**. If you close that window instead, nothing changes and the
+PIN stays. Its other button is labelled **Quit**, but here it does not close
+GpgFrontend.
+
+<Aside type="note" title="New in v2.2.5">
+
+Turning the PIN off now asks for the current PIN first.
+
+</Aside>
+
+If GpgFrontend finds at start that a PIN is set but the key on disk is not
+locked with it, it shows **Application Key Not Protected**. This can happen
+when an earlier change was cut off halfway. GpgFrontend turns the PIN setting
+off and leaves the key as it is. Choose **PIN at startup** again if you want
+it.
+
 ### Profiles that have no choice
 
 - A profile **opened from a file** uses the file's passphrase to protect its
-  key. To change it, export the profile again with a new passphrase. See
-  [Profiles](/advanced/profiles/).
+  key. The whole **Application Key Protection:** list and **Change PIN…** are
+  greyed out. To change the protection, export the profile again with a new
+  passphrase. See [Profiles](/advanced/profiles/).
 - A [temporary profile](/advanced/temporary-profiles/) has no key protection
   at all. Its key is held in memory only and is destroyed when the window
-  closes, so there is nothing to protect. All three choices are greyed out.
+  closes, so there is nothing to protect. The list and **Change PIN…** are
+  greyed out.
 
 ## Secure Level
 
 On the same settings page, just above the key protection choices, you will
 find **Secure Level:**. It has four levels:
 
-| Level        | What it does                                         |
-| ------------ | ---------------------------------------------------- |
-| **Standard** | No extra hardening. <Badge text="Default" />         |
-| **Enhanced** | Wipes memory as soon as it is finished with it.      |
-| **Strong**   | Also keeps sensitive memory out of the swap file.    |
-| **Maximum**  | Also changes the program's internal key every week.  |
+| In the list                           | What it does                                        |
+| ------------------------------------- | --------------------------------------------------- |
+| **Standard (no extra hardening)**     | No extra hardening. <Badge text="Default" />        |
+| **Enhanced (wipe freed memory)**      | Wipes memory as soon as it is finished with it.     |
+| **Strong (also lock memory pages)**   | Also keeps sensitive memory out of the swap file.   |
+| **Maximum (also rotate keys weekly)** | Also changes the program's internal key every week. |
 
 The first three are about memory, and are explained on
 [Memory Security](/advanced/memory-security/).

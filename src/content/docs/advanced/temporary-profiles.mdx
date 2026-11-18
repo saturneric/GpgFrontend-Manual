@@ -157,8 +157,14 @@ A temporary profile's own key is made fresh, held in memory only, and
 destroyed with the window. There is nothing on disk to protect, so the
 [Application Key Protection](/advanced/app-secure-key/) choices are greyed out.
 
+For the same reason, the weekly key change of the **Maximum**
+[Secure Level](/advanced/memory-security/) does not happen in a temporary
+profile.
+
 ### Where it is kept
 
 While it is open, the temporary profile is kept in the safest place this
-computer offers: memory, an encrypted folder, or an ordinary folder. See
+computer offers: memory, an encrypted folder, or an ordinary folder. This may
+be the system's temporary folder, even in a
+[portable copy](/advanced/portable-mode/). See
 [Where the Open File Is Kept](/advanced/profiles/#where-the-open-file-is-kept).

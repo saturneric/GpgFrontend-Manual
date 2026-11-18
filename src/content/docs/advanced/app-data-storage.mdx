@@ -9,7 +9,9 @@ sidebar:
 import { Aside, FileTree, Steps } from "@astrojs/starlight/components";
 
 Besides your keys, GpgFrontend saves a few things of its own: key server
-entries, key generation profiles, window positions, and so on. The sensitive
+entries, key generation profiles, window positions, your list of key
+databases, key groups, key categories, and so on. Modules keep their secrets
+here too, such as the phrase of the Instant Messaging module. The sensitive
 parts are encrypted with the program's own key.
 
 The saved data also includes a copy of your unsaved text editor tabs, when
@@ -22,6 +24,18 @@ maintain. This page is here for people who want to know what is going on.
 For the key that does the protecting, and the choices you have about it, see
 [Application Secure Key](/advanced/app-secure-key/).
 
+## Look at the Saved Data
+
+<Steps>
+
+1. Open **Settings** and go to **General**.
+
+2. In the **Data** box, click **Reveal in File Explorer**. Your file manager
+   opens your profile folder. The saved data is in the `data_objs` folder
+   there.
+
+</Steps>
+
 ## Clear the Saved Data
 
 <Steps>
@@ -31,14 +45,26 @@ For the key that does the protecting, and the choices you have about it, see
 2. In the **Data** box, click the button that starts with **Clear All Data
    Objects**. The button also shows the total size of the saved data.
 
-3. A **Confirm** window asks if you are sure. Click **Yes**.
+3. A **Confirm** window asks: "Are you sure you want to clear all data
+   objects?" Click **Yes** to go ahead, or **No** to stop.
 
 </Steps>
 
 <Aside type="danger" title="This cannot be undone">
 
-This removes window positions, the key server list and similar saved data.
-Your keys are not touched.
+This deletes every file in the `data_objs` folder, not only window positions
+and the key server list. You also lose:
+
+- the list of key databases you added (the built-in one stays);
+- your key groups and key categories;
+- the saved copy of your unsaved text editor tabs;
+- secrets that modules saved, such as the Instant Messaging phrase.
+
+Your keys are not touched. They stay in their key database folders. A key
+database folder inside your profile that is no longer on the list shows up in
+the **Recycle Bin** tab of the
+[Key Databases](/advanced/key-database/#restore-or-delete-a-removed-database)
+settings, where you can restore it.
 
 </Aside>
 
@@ -87,9 +113,21 @@ no longer be opened. GpgFrontend warns you first. See
 
 ## Files Whose Key Is Gone
 
-GpgFrontend clears out saved files whose key is gone. It waits a few days
-first (3 days at **Strong** or **Maximum**, 7 days below that). Then it moves
-the files aside, and deletes them later.
+Once each time it runs, GpgFrontend checks the saved files in the background.
+It cleans up files it can no longer use. First it moves them to a folder
+called `data_objs.quarantine`, next to `data_objs`. Later it deletes them from
+there.
+
+How long it waits depends on the [Secure Level](/advanced/memory-security/):
+
+| What is wrong with the file        | **Standard** or **Enhanced** | **Strong** or **Maximum** |
+| ---------------------------------- | ---------------------------- | ------------------------- |
+| Its key is gone                    | Moved aside after 7 days     | Moved aside after 3 days  |
+| It cannot be opened with its key   | Left where it is             | Moved aside at once       |
+| It is broken (bad name, too small) | Moved aside at once          | Moved aside at once       |
+| Already moved aside                | Deleted after 30 days        | Deleted after 7 days      |
+
+Until a file is deleted, you can still find it in `data_objs.quarantine`.
 
 <Aside type="note" title="Changed in v2.2.0">
 

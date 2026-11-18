@@ -49,10 +49,21 @@ The page has two parts:
 - Below it, three tabs: **In Profile**, **Recycle Bin** and **Local Only**.
   - **In Profile** and **Local Only** list the key databases you added
     yourself.
-  - **Recycle Bin** lists key databases you removed from **In Profile**. Their
-    keys are still on this computer.
+  - **Recycle Bin** lists key database folders in your profile that are no
+    longer in use, such as ones you removed from **In Profile**. Their keys
+    are still on this computer.
 
 ![The Key Databases page in Settings][img-1]
+
+The **In Profile** and **Local Only** tabs show these columns:
+
+- **ID**: the number GpgFrontend uses for the database.
+- **Name**: the name you gave it.
+- **Engine**: **GnuPG** or **rPGP**.
+- **Status**: **Active** when the database is open and working, **Inactive**
+  when it could not be opened.
+- **Role**: shows **Default** for the default database.
+- **Folder**: where its keys are kept.
 
 Nothing you change on this page is saved until you click **OK**. If you click
 **Cancel**, every change you made in the settings window is thrown away.
@@ -212,8 +223,9 @@ The add window no longer has a **Mode** choice with **Automatic** and
 3. Type a **Name**, such as `Work` or `Personal`. GpgFrontend suggests a name
    like `Key DB 1` that you can keep or change.
 
-4. If an **Engine** choice is shown, pick **GnuPG** or **rPGP**. If you are not
-   sure, keep **GnuPG**. You cannot change the engine later.
+4. If an **Engine** choice is shown, pick **GnuPG** or **rPGP**. It starts on
+   the engine the built-in database uses. If you are not sure, keep that one.
+   You cannot change the engine later.
 
 5. Click **OK** in the window, then click **OK** in the settings window.
 
@@ -247,8 +259,8 @@ directory, or a folder on another drive.
 5. If you use GpgFrontend from a USB drive, tick **Convert to Relative Path**.
    See [Portable Mode](/advanced/portable-mode/).
 
-6. If an **Engine** choice is shown, pick **GnuPG** or **rPGP**. You cannot
-   change it later.
+6. If an **Engine** choice is shown, pick **GnuPG** or **rPGP**. It starts on
+   the engine the built-in database uses. You cannot change it later.
 
 7. Click **OK** in the window, then click **OK** in the settings window.
 
@@ -259,10 +271,12 @@ opened after the databases inside your profile.
 
 ### Rules for Names
 
-- A name can use letters, numbers, spaces, `-` and `_`.
+- A name can use the letters A to Z (upper or lower case), numbers, spaces,
+  `-` and `_`. Letters with accents and other alphabets are not allowed.
 - Two key databases cannot have the same name. Upper and lower case count as
   the same, so `Work` and `work` clash.
-- The name `DEFAULT` is kept for the built-in database. You cannot use it.
+- The name `DEFAULT` is kept for the built-in database. You cannot use it in
+  any mix of upper and lower case, so `default` and `Default` are refused too.
 
 ## Edit, Rename, Reorder, or Remove a Key Database
 
@@ -295,7 +309,8 @@ to Recycle Bin** or **Remove Reference**, depending on the tab.
 1. On the **In Profile** tab, right-click the database and choose **Edit**. The
    **Rename Key Database** window opens.
 
-2. Type the new **Name** and click **OK**.
+2. Type the new **Name** and click **OK**. The **Engine** is shown but greyed
+   out. A database keeps the engine it was made with.
 
 3. Click **OK** in the settings window.
 
@@ -353,9 +368,17 @@ tab, instead of just being dropped from the list.
 
 </Aside>
 
-Open the **Recycle Bin** tab. It shows each removed database with its
-**Name**, **Engine**, **Size** and **Folder**. The size may show `…` for a
-moment while GpgFrontend measures it.
+Open the **Recycle Bin** tab. The text above the list says: "These folders are
+no longer referenced by the current configuration. Their keys are still stored
+on this computer."
+
+The list shows every key database folder inside your profile that no key
+database uses. Most are databases you removed from **In Profile**. A folder
+that got there some other way, for example one you copied in yourself, is
+listed too.
+
+For each folder you see its **Name**, **Engine**, **Size** and **Folder**.
+The size may show `…` for a moment while GpgFrontend measures it.
 
 ![The Recycle Bin tab][img-3]
 
