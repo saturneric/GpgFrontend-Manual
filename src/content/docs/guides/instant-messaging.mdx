@@ -88,9 +88,19 @@ GpgFrontend recognises an instant message by itself. There is no separate
 button for reading one. If the sender signed the message, use **Decrypt &
 Verify** to check the signature too.
 
-If GpgFrontend sees an instant message but cannot unpack it, it shows **The
-message could not be decoded.** The most common cause is that you and the
-sender do not use the same secret phrase. See
+After decrypting, the Status Panel shows the **Instant Messaging** card again,
+this time without the sizes. It tells you which phrase was used to read the
+line.
+
+### If Decrypting Fails
+
+GpgFrontend can only recognise an instant message if you and the sender use
+the same secret phrase. If the phrases differ, GpgFrontend does not see an
+instant message at all. It tries to decrypt the line as ordinary text, and you
+get a normal decryption error.
+
+So if a line from a friend will not decrypt, first check that you both use the
+same phrase. Compare your **Book Fingerprint** codes, as described in
 [Share a Secret Phrase](#share-a-secret-phrase).
 
 ## Share a Secret Phrase
@@ -112,11 +122,17 @@ everyone else.
 3. Click **Copy** and send the phrase to your friend privately. Do not send it
    over the chat app you are trying to protect.
 
-4. Your friend opens the same page, copies your phrase, and clicks **Paste**.
+4. Click **OK** to save the phrase. The phrase is only saved when you click
+   **OK**. **Cancel** throws it away. On macOS there is no **OK** button: the
+   phrase is saved when you close the **Preferences** window.
 
-5. You both look at the **Book Fingerprint** box. It shows a short code made
+5. Your friend opens the same page, copies your phrase, clicks **Paste**, and
+   then clicks **OK**.
+
+6. You both look at the **Book Fingerprint** box. It shows a short code made
    from your phrase. Read the codes out to each other. If they match, you are
-   set.
+   set. The box has its own **Copy** button, if you would rather send the code
+   as text.
 
 </Steps>
 
@@ -149,13 +165,18 @@ The only thing you lose is the disguise. Without a shared phrase, GpgFrontend
 uses a built-in one that every copy of the program has. So anyone who knows the
 program can tell your message is an encrypted GpgFrontend message.
 
-When you use **IM Encrypt** without a phrase, GpgFrontend tells you so in a
-window called **No Message Book Phrase Set**. You can choose:
+When you use **IM Encrypt** or **IM Encrypt & Sign** without a phrase,
+GpgFrontend tells you so in a window called **No Message Book Phrase Set**.
+You can choose:
 
-- **Open Settings...**: go to the settings page and set a phrase. Then run
-  **IM Encrypt** again.
+- **Open Settings...**: open the **Settings** window. It does not open on the
+  right page by itself. Choose **Instant Messaging** under **Features**, and
+  set and save a phrase as shown in
+  [Share a Secret Phrase](#share-a-secret-phrase). Then run the action again.
+  Your text is not encrypted in the meantime.
 - **Continue with Default**: encrypt anyway, this time.
 - **Continue, Don't Ask Again**: encrypt anyway, and stop asking.
+- **Cancel**: stop, and leave your text unchanged.
 
 ## If the Message Is Too Long
 
@@ -180,6 +201,8 @@ messages. To turn it back on, see
   with or without a phrase.
 - The phrase is stored in GpgFrontend's encrypted storage, never in the plain
   settings file.
-- GpgFrontend keeps one phrase at a time, and uses it for everyone you write
-  to. If you want a different phrase for each person, you have to change the
-  phrase in **Settings** each time you write to someone else.
+- GpgFrontend keeps one phrase per profile, and uses it for everyone you
+  write to from that profile. If you want a different phrase for each person,
+  you can change the phrase in **Settings** each time you write to someone
+  else. Or keep a separate [profile](/advanced/profiles/) for each person:
+  each profile remembers its own phrase.
