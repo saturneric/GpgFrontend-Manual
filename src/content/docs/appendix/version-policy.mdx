@@ -16,7 +16,8 @@ fixes it has had since.
 
 Before v2.2.5, the last number counted feature releases. Since v2.2.5, it
 counts only fix releases. New features now raise the middle number. See
-[How It Used to Work](#how-it-used-to-work).
+[How It Used to Work](#how-it-used-to-work). The maintainer explains why in
+["GpgFrontend's New Version Model and Release Mechanism"][blog-version-model].
 
 </Aside>
 
@@ -188,6 +189,9 @@ touched, and nothing is removed. Moving to the newer series is up to you.
 
 The `2.1.x` series is legacy until the end of 2027.
 
+The project looks after at most three series at the same time. That is the
+maintainer's own rule, not something the app enforces.
+
 ## The Story So Far
 
 | Series  | What it was about                                                                             |
@@ -221,10 +225,18 @@ temporary profiles, and key databases that change without a restart.
 From v2.2.5 on, that is no longer the case. `v2.2.5` and later `2.2.x`
 versions are fix releases, and new features arrive in `v2.3.0`.
 
+Why the change? A release came out about every two months. A bug found just
+after one had to wait for the next, and that next one also brought new
+features. Most people want a stable app, and many cannot build it
+themselves. Now a fix can go out to each series on its own, as a fix
+release, without new features attached.
+
 <Aside type="note" title="How to tell what changed">
 
-Read the release notes on the [releases page][github-releases]. They say what
-actually changed in each version.
+Read the release notes. When the app offers you an update, **Help** >
+**Check for Updates** shows the notes of that version. All notes are also on
+the [releases page][github-releases]. They say what actually changed in each
+version.
 
 </Aside>
 
@@ -242,3 +254,4 @@ That is a deliberate choice, described in the maintainer's article
 
 [github-releases]: https://github.com/saturneric/GpgFrontend/releases
 [blog-history]: https://blog.bktus.com/en/archives/u8hywl/
+[blog-version-model]: https://blog.bktus.com/en/archives/651hln/

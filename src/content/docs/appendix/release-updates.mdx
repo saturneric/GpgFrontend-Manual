@@ -39,6 +39,32 @@ mainly `release/`, `scripts/release/`, `.github/workflows/build.yml`,
   server. To check a download yourself, see
   [Code & Binary Verify](/appendix/code-binary-verify/).
 
+## Why It Changed
+
+For years, every release came out through GitHub Releases. That stopped
+working well:
+
+- **There are now several release lines.** The 2.1 series stays with GnuPG,
+  and 2.2 added a second engine. The app had to work out by itself which
+  release was newest for each series, whether a version was withdrawn, and
+  when a series ends. GitHub has no way to say any of that.
+- **GitHub limits how often it can be asked.** Many people behind one office
+  network can reach that limit together. The project also depended on GitHub
+  to deliver every file.
+- **The old check verified almost no signatures.** It mostly took GitHub's
+  answer as it came.
+
+So the project now runs its own update server. It publishes one signed list
+of releases, which says what state each series is in. The app no longer has
+to guess. GitHub Releases stays as a copy (a "mirror").
+
+The app does not simply trust that server. It checks the list against keys
+that are built into the app. If someone broke into the server, the check
+would fail, and you could still download a release by hand.
+
+The maintainer explains the reasons in more detail in
+["GpgFrontend's New Version Model and Release Mechanism"][blog-version-model].
+
 The rest of this page is for experts.
 
 ## Architecture
@@ -471,6 +497,30 @@ There is no separate signature on the AppImage itself. Its trust comes from
 the signed index, which pins the descriptor's hash, which pins the file's
 hash.
 
+### The 2.1 Series
+
+Since v2.1.14, the 2.1 series also asks the update server
+(`https://update.bktus.com/gpgfrontend/v1/index.json`), not GitHub. Its
+check is much simpler:
+
+- It reads only the `stable` channel, which names the newest stable release.
+  Today that is a 2.2 release. It never offers a 2.1 fix release.
+- It does **not** verify the index signature, the trust root or any
+  descriptor.
+- A build counts as official when its version is listed in the index and not
+  withdrawn. The build commit is not checked.
+- It tells you about each new stable release once.
+
+For the fully verified check, move to 2.2.
+
+<Aside type="note" title="Changed in v2.1.14">
+
+Up to v2.1.13, the 2.1 series asked GitHub or bktus.com, chosen in Settings.
+Its check at startup also never ran, because it read the wrong setting. The
+choice of server is gone.
+
+</Aside>
+
 ### Builds Without an Update Check
 
 - **Flatpak and Mac App Store:** the module is not built. Updates come from
@@ -508,6 +558,9 @@ hash.
 - The update check reveals the build commit to the server it asks. The
   commit also tells the server which version is running.
 - Apps older than v2.2.5 follow only one step of a successor chain.
+- v2.1.14 and later 2.1 releases read the index without checking its
+  signature. See [The 2.1 Series](#the-21-series).
 
 [github-releases]: https://github.com/saturneric/GpgFrontend/releases
 [security-md]: https://github.com/saturneric/GpgFrontend/blob/main/SECURITY.md
+[blog-version-model]: https://blog.bktus.com/en/archives/651hln/

@@ -85,7 +85,10 @@ signature before it trusts the list. See
 <Aside type="note" title="Changed in v2.2.5">
 
 Before v2.2.5, the update check asked GitHub Releases, and it only offered
-releases of your own series.
+releases of your own series. The 2.1 series asks the update server too since
+v2.1.14, in a simpler way that does not check the signature. To learn why
+the project made this change, read the maintainer's article
+["GpgFrontend's New Version Model and Release Mechanism"][blog-version-model].
 
 </Aside>
 
@@ -704,3 +707,4 @@ your work.
 [gnupg-sandbox-mail]: https://lists.gnupg.org/pipermail/gnupg-devel/2022-May/035065.html
 [gnupg-faq]: https://gnupg.org/faq/gnupg-faq.html#successful_attacks
 [gnupg-download]: https://www.gnupg.org/download/
+[blog-version-model]: https://blog.bktus.com/en/archives/651hln/
