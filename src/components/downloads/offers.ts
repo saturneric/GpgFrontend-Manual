@@ -57,14 +57,18 @@ function folder(kind: OfferKind): string {
   return isRelease(kind) ? "releases/" : "nightly/";
 }
 
-// Only files inside the offer's folder of the build storage.
-export function buildUrl(path: unknown, kind: OfferKind): string | null {
-  if (typeof path !== "string" || !path.startsWith(folder(kind))) {
-    return null;
-  }
+// The address of @p path in the build storage, only if it lies inside
+// @p dir there ("releases/", "nightly/", "notes/").
+export function storeUrl(path: unknown, dir: string): string | null {
+  if (typeof path !== "string" || !path.startsWith(dir)) return null;
   if (path.includes("..") || path.includes("//")) return null;
   const url = new URL(path, BUILDS_BASE);
-  return url.href.startsWith(BUILDS_BASE) ? url.href : null;
+  return url.href.startsWith(BUILDS_BASE + dir) ? url.href : null;
+}
+
+// Only files inside the offer's folder of the build storage.
+export function buildUrl(path: unknown, kind: OfferKind): string | null {
+  return storeUrl(path, folder(kind));
 }
 
 export async function sha256Hex(data: ArrayBuffer): Promise<string> {
@@ -78,7 +82,7 @@ export async function sha256Hex(data: ArrayBuffer): Promise<string> {
 
 const RC = /^\d+\.\d+\.0-rc\.\d+$/;
 
-function isObj(x: unknown): x is Record<string, any> {
+export function isObj(x: unknown): x is Record<string, any> {
   return typeof x === "object" && x !== null && !Array.isArray(x);
 }
 

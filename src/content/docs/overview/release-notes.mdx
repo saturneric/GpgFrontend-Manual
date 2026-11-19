@@ -1,0 +1,49 @@
+---
+title: Release Notes
+description: "What changed in each version of GpgFrontend: new features, fixes and security fixes, newest version first."
+sidebar:
+  order: 4
+---
+
+import { Steps } from "@astrojs/starlight/components";
+import ReleaseNotes from "../../../components/ReleaseNotes.astro";
+
+Each new version of GpgFrontend brings changes: new features, fixes, and
+security fixes. This page lists them for every version. The newest version is
+at the top. Scroll down to go back in time and see how the app grew.
+
+To get the newest version, go to [Downloads](/overview/downloads/).
+
+## Which Version Do I Have?
+
+<Steps>
+
+1. Open GpgFrontend.
+2. Click **Help** > **About**. On macOS, **About** is in the **GpgFrontend**
+   menu instead.
+3. The version number is under the app name, for example `v2.2.5`.
+
+</Steps>
+
+Find that number in the version list below to read what your version
+brought.
+
+## How to Read a Version Number
+
+Take `2.2.5` as an example:
+
+- The first two numbers, **2.2**, are the **series**. A new series, like
+  2.3, brings new features.
+- The last number, **5**, counts the fix releases in that series. A higher
+  number means more fixes.
+- Some older series still get fixes after a newer one is out. Their notes
+  are marked **Older series** below.
+
+Before v2.2.5, the last number could also bring new features. For the full
+rules, see [Version Policy](/appendix/version-policy/).
+
+## What Changed in Each Version
+
+Click a version number in the list to jump to its notes.
+
+<ReleaseNotes />

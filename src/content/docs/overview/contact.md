@@ -3,7 +3,7 @@ title: Contact Information
 description: "How to reach the GpgFrontend maintainer for technical questions, feedback, and collaboration."
 sidebar:
   label: Contact
-  order: 5
+  order: 6
 ---
 
 Have a technical question, a bug report, or an idea to make GpgFrontend better?

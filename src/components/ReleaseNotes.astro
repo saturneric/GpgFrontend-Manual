@@ -1,0 +1,548 @@
+---
+// The release notes of every version, read live from the signed update
+// index and the build storage (notes/notes.ts). Newest version first: the
+// first few in full, the others one click away, and a list of all versions
+// to jump to one. Nothing here offers a download: that is the Downloads
+// page's job. Without JavaScript, or if the index can't be read, only the
+// fallback text shows. While the data loads, a placeholder shows.
+const INDEX_URL = "https://update.bktus.com/gpgfrontend/v1/index.json";
+const GITHUB_RELEASES = "https://github.com/saturneric/GpgFrontend/releases";
+---
+
+<div class="rn-notes" data-index={INDEX_URL}>
+  <div class="rn-loading not-content" hidden>
+    <span class="rn-skel rn-skel-title"></span>
+    <span class="rn-skel rn-skel-line"></span>
+    <span class="rn-skel rn-skel-line"></span>
+    <span class="rn-skel rn-skel-line rn-skel-short"></span>
+    <p class="rn-loading-text" role="status">Loading the release notes…</p>
+  </div>
+  <p class="rn-status not-content" data-fallback>
+    <span data-slow hidden>Taking long? </span>
+    The release notes can't be shown here. You can read them on
+    <a href={GITHUB_RELEASES}>GitHub</a>.
+  </p>
+  <div class="rn-result" hidden></div>
+</div>
+
+<script>
+  import { micromark } from "micromark";
+  import { sha256Hex } from "./downloads/offers";
+  import {
+    anchor,
+    entries,
+    groups,
+    notesUrl,
+    splitHeading,
+    type Entry,
+    type Group,
+  } from "./notes/notes";
+
+  // How many versions show at first, and how many more each click adds.
+  const PAGE = 5;
+  // The most the app itself reads of a notes file.
+  const MAX_NOTES_BYTES = 256 * 1024;
+  // After this long, also show the fallback link, but keep waiting.
+  const SLOW_MS = 8000;
+
+  function el<K extends keyof HTMLElementTagNameMap>(
+    tag: K,
+    cls?: string,
+    ...kids: (Node | string)[]
+  ): HTMLElementTagNameMap[K] {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    e.append(...kids);
+    return e;
+  }
+
+  function formatDate(iso: string): string | null {
+    const date = new Date(`${iso}T00:00:00Z`);
+    if (Number.isNaN(date.getTime())) return null;
+    return date.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      timeZone: "UTC",
+    });
+  }
+
+  // What a series still gets, in plain words.
+  function seriesStatus(g: Group): string {
+    if (g.current) return "Current series";
+    switch (g.status) {
+      case "stable":
+        return "Still gets fixes";
+      case "legacy": {
+        const end = g.eol ? formatDate(g.eol) : null;
+        return end ? `Security fixes only, until ${end}` : "Security fixes only";
+      }
+      case "eol":
+        return "No longer gets fixes";
+      default:
+        return "";
+    }
+  }
+
+  // ------------------------------------------------------------- the notes
+
+  // Each notes file is fetched once, and used only if it is exactly the file
+  // the index names.
+  const cache = new Map<string, Promise<string>>();
+  function fetchNotes(e: Entry): Promise<string> {
+    let p = cache.get(e.notes);
+    if (!p) {
+      p = (async () => {
+        const url = notesUrl(e.notes);
+        if (!url) throw new Error("bad notes path");
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`notes: ${res.status}`);
+        const raw = await res.arrayBuffer();
+        if (raw.byteLength > MAX_NOTES_BYTES) throw new Error("notes too big");
+        if ((await sha256Hex(raw)) !== e.sha256) {
+          throw new Error("notes hash does not match the index");
+        }
+        return new TextDecoder().decode(raw);
+      })();
+      p.catch(() => cache.delete(e.notes));
+      cache.set(e.notes, p);
+    }
+    return p;
+  }
+
+  // The notes as HTML. micromark escapes raw HTML and drops unsafe links,
+  // so the result is safe to insert. The notes' own headings move one level
+  // down, below the version's heading.
+  function renderBody(md: string): HTMLElement {
+    const body = el("div", "rn-body");
+    body.innerHTML = micromark(md);
+    for (const h of body.querySelectorAll("h1, h2, h3, h4, h5, h6")) {
+      const level = Math.min(6, Number(h.tagName[1]) + 1);
+      const next = document.createElement(`h${level}`);
+      next.append(...h.childNodes);
+      h.replaceWith(next);
+    }
+    return body;
+  }
+
+  // One version: its heading, what it is, and its notes once they arrive.
+  function renderEntry(e: Entry, latestSeries: string | null): HTMLElement {
+    const article = el("article", "rn-entry");
+    article.id = anchor(e.version);
+
+    const head = el("header", "rn-entry-head not-content");
+    const title = el("h3", "rn-entry-title", `Version ${e.version}`);
+    const meta = el("div", "rn-entry-meta");
+    if (e.latest) {
+      meta.append(el("span", "rn-badge rn-badge-latest", "Latest version"));
+    } else if (latestSeries && e.series !== latestSeries) {
+      meta.append(el("span", "rn-badge", `Older series ${e.series}`));
+    }
+    const date = el("span", "rn-date");
+    meta.append(date);
+    head.append(title, meta);
+
+    const slot = el("div", "rn-slot");
+    slot.append(el("p", "rn-loading-text not-content", "Loading…"));
+    slot.setAttribute("aria-busy", "true");
+    article.append(head, slot);
+
+    // The notes load only when the version comes near the screen, so
+    // opening the page, or jumping to an old version, fetches only what is
+    // read.
+    whenNear(article, () => fill(e, slot, date));
+    return article;
+  }
+
+  // Fetch the notes of @p e and put them into @p slot, their date into
+  // @p date.
+  function fill(e: Entry, slot: HTMLElement, date: HTMLElement) {
+    fetchNotes(e)
+      .then((md) => {
+        const { date: day, body } = splitHeading(md, e.version);
+        const shown = day ? formatDate(day) : null;
+        if (shown) {
+          const time = el("time", undefined, `Released ${shown}`);
+          time.dateTime = day!;
+          date.append(time);
+        }
+        slot.replaceChildren(renderBody(body));
+        keepPinned();
+      })
+      .catch((err) => {
+        console.warn(`${e.version} notes unavailable:`, err);
+        slot.replaceChildren(
+          el(
+            "p",
+            "rn-hint not-content",
+            "The notes for this version can't be shown right now. Please " +
+              "try again later.",
+          ),
+        );
+      })
+      .finally(() => slot.setAttribute("aria-busy", "false"));
+  }
+
+  // After a jump to a version, the notes above it still load and grow,
+  // which would push it down. Until the reader scrolls, it is put back at
+  // the top after each one.
+  let pinned: HTMLElement | null = null;
+  function pin(target: HTMLElement) {
+    pinned = target;
+    target.scrollIntoView();
+  }
+  function keepPinned() {
+    pinned?.scrollIntoView();
+  }
+  for (const type of ["wheel", "touchstart", "keydown", "mousedown"]) {
+    window.addEventListener(type, () => (pinned = null), { passive: true });
+  }
+
+  // Run @p load once, when @p target is within about a screen of the
+  // visible part of the page. Without IntersectionObserver, at once.
+  const pending = new WeakMap<Element, () => void>();
+  const observer =
+    "IntersectionObserver" in window
+      ? new IntersectionObserver(
+          (seen) => {
+            for (const s of seen) {
+              if (!s.isIntersecting) continue;
+              observer!.unobserve(s.target);
+              pending.get(s.target)?.();
+              pending.delete(s.target);
+            }
+          },
+          { rootMargin: "100% 0px" },
+        )
+      : null;
+  function whenNear(target: Element, load: () => void) {
+    if (!observer) return load();
+    pending.set(target, load);
+    observer.observe(target);
+  }
+
+  // The list of every version, by series, to jump to one.
+  function renderIndex(list: Group[]): HTMLElement {
+    const nav = el("nav", "rn-index not-content");
+    nav.id = "version-list";
+    nav.setAttribute("aria-label", "All versions");
+    nav.append(el("p", "rn-index-title", "Jump to a version"));
+    for (const g of list) {
+      const row = el("div", "rn-index-row");
+      const label = el(
+        "div",
+        "rn-index-series",
+        el("span", "rn-index-name", `Series ${g.series}`),
+      );
+      const status = seriesStatus(g);
+      if (status) label.append(el("span", "rn-index-status", status));
+      const chips = el("ul", "rn-chips");
+      for (const e of g.entries) {
+        const a = el("a", e.latest ? "rn-chip rn-chip-latest" : "rn-chip");
+        a.href = `#${anchor(e.version)}`;
+        a.append(e.version);
+        if (e.latest) a.title = "Latest version";
+        chips.append(el("li", undefined, a));
+      }
+      row.append(label, chips);
+      nav.append(row);
+    }
+    return nav;
+  }
+
+  // ------------------------------------------------------------- the page
+
+  async function load(root: HTMLElement) {
+    const res = await fetch(root.dataset.index!, { cache: "no-cache" });
+    if (!res.ok) throw new Error(`index: ${res.status}`);
+    const index = await res.json();
+    const list = entries(index);
+    if (!list.length) throw new Error("no release notes in the index");
+    const latestSeries = list.find((e) => e.latest)?.series ?? null;
+
+    const feed = el("div", "rn-feed");
+    const more = el("button", "rn-more not-content");
+    more.type = "button";
+    let shown = 0;
+
+    // Show every version down to number @p upTo (at least one more page).
+    const showUpTo = (upTo: number) => {
+      const end = Math.min(list.length, Math.max(upTo, shown));
+      for (; shown < end; shown++) {
+        feed.append(renderEntry(list[shown], latestSeries));
+      }
+      const rest = list.length - shown;
+      more.hidden = rest === 0;
+      more.textContent =
+        rest === 1 ? "Show 1 older version" : `Show ${Math.min(rest, PAGE)} older versions`;
+    };
+    more.addEventListener("click", () => {
+      const first = shown;
+      showUpTo(shown + PAGE);
+      // Move focus to the first new version, so keyboard users go on there.
+      const next = feed.children[first] as HTMLElement | undefined;
+      next?.querySelector<HTMLElement>(".rn-entry-title")?.setAttribute("tabindex", "-1");
+      next?.querySelector<HTMLElement>(".rn-entry-title")?.focus();
+    });
+
+    // A link to one version ("#v2-1-9"): show it, and everything above it.
+    const reveal = () => {
+      const i = list.findIndex((e) => `#${anchor(e.version)}` === location.hash);
+      if (i < 0) return;
+      showUpTo(i + 1);
+      const target = document.getElementById(anchor(list[i].version));
+      if (target) pin(target);
+    };
+
+    const out = root.querySelector<HTMLElement>(".rn-result")!;
+    out.replaceChildren(renderIndex(groups(index, list)), feed, more);
+    showUpTo(PAGE);
+    reveal();
+    window.addEventListener("hashchange", reveal);
+  }
+
+  type State = "loading" | "slow" | "done" | "failed";
+
+  // Which part of the box shows: the placeholder, the fallback text, or the
+  // notes.
+  function setState(root: HTMLElement, state: State) {
+    const loading = root.querySelector<HTMLElement>(".rn-loading")!;
+    const fallback = root.querySelector<HTMLElement>("[data-fallback]")!;
+    const slow = fallback.querySelector<HTMLElement>("[data-slow]")!;
+    const result = root.querySelector<HTMLElement>(".rn-result")!;
+    loading.hidden = state !== "loading" && state !== "slow";
+    fallback.hidden = state === "loading" || state === "done";
+    slow.hidden = state !== "slow";
+    result.hidden = state !== "done";
+    root.setAttribute("aria-busy", String(state === "loading" || state === "slow"));
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>(".rn-notes")) {
+    setState(root, "loading");
+    let settled = false;
+    const timer = setTimeout(() => {
+      if (!settled) setState(root, "slow");
+    }, SLOW_MS);
+    load(root)
+      .then(() => setState(root, "done"))
+      .catch((e) => {
+        setState(root, "failed");
+        console.warn("release notes unavailable:", e);
+      })
+      .finally(() => {
+        settled = true;
+        clearTimeout(timer);
+      });
+  }
+</script>
+
+<style is:global>
+  .rn-notes {
+    margin-top: 1.5rem;
+  }
+  .rn-notes .rn-status {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    color: var(--sl-color-gray-2);
+  }
+  .rn-notes .rn-status a {
+    color: var(--sl-color-text-accent);
+  }
+  .rn-loading:not([hidden]) + .rn-status {
+    margin-top: 1rem;
+  }
+
+  /* Placeholder while the data loads. */
+  .rn-loading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .rn-loading[hidden] {
+    display: none;
+  }
+  .rn-skel {
+    display: block;
+    border-radius: 999rem;
+    background: var(--sl-color-gray-6);
+  }
+  .rn-skel-title {
+    width: min(12rem, 60%);
+    height: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+  .rn-skel-line {
+    width: min(32rem, 100%);
+    height: 0.8rem;
+  }
+  .rn-skel-short {
+    width: min(18rem, 60%);
+  }
+  .rn-loading-text {
+    margin: 0.4rem 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .rn-skel {
+      background: linear-gradient(
+        90deg,
+        var(--sl-color-gray-6) 25%,
+        var(--sl-color-gray-5) 50%,
+        var(--sl-color-gray-6) 75%
+      );
+      background-size: 200% 100%;
+      animation: rn-shimmer 1.4s ease-in-out infinite;
+    }
+  }
+  @keyframes rn-shimmer {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: -100% 0;
+    }
+  }
+
+  /* The list of all versions. */
+  .rn-index {
+    padding: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    box-shadow: var(--sl-shadow-sm);
+  }
+  .rn-index-title {
+    margin: 0 0 0.75rem;
+    font-size: var(--sl-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sl-color-text-accent);
+  }
+  .rn-index-row + .rn-index-row {
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+  }
+  .rn-index-series {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.15rem 0.75rem;
+  }
+  .rn-index-name {
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .rn-index-status {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .rn-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rn-notes a.rn-chip {
+    display: inline-block;
+    padding: 0.2rem 0.75rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 999rem;
+    font-family: var(--__sl-font-mono, monospace);
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-white);
+    text-decoration: none;
+  }
+  .rn-notes a.rn-chip:hover {
+    border-color: var(--sl-color-text-accent);
+    color: var(--sl-color-text-accent);
+  }
+  .rn-notes a.rn-chip-latest {
+    border-color: var(--sl-color-text-accent);
+    background: var(--sl-color-text-accent);
+    color: var(--sl-color-black);
+  }
+  .rn-notes a.rn-chip-latest:hover {
+    color: var(--sl-color-black);
+  }
+
+  /* One version. */
+  .rn-entry {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+  }
+  .rn-entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 1rem;
+  }
+  .rn-notes .rn-entry-title {
+    margin: 0;
+    font-size: var(--sl-text-h3);
+    font-weight: 600;
+    line-height: var(--sl-line-height-headings);
+    color: var(--sl-color-white);
+  }
+  .rn-entry-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.75rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .rn-badge {
+    padding: 0.1rem 0.6rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 999rem;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-2);
+  }
+  .rn-badge-latest {
+    border-color: var(--sl-color-text-accent);
+    background: var(--sl-color-text-accent);
+    color: var(--sl-color-black);
+    font-weight: 600;
+  }
+  .rn-slot {
+    margin-top: 1rem;
+  }
+  .rn-body {
+    overflow-wrap: anywhere;
+  }
+  .rn-hint {
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    border-inline-start: 0.25rem solid var(--sl-color-asides-border, var(--sl-color-blue));
+    background: var(--sl-color-asides-bg-accent, var(--sl-color-blue-low));
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-white);
+  }
+
+  /* Same look as Starlight's secondary LinkButton. */
+  .rn-notes .rn-more {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: 999rem;
+    background: transparent;
+    color: var(--sl-color-white);
+    font: inherit;
+    font-size: var(--sl-text-sm);
+    cursor: pointer;
+  }
+  .rn-notes .rn-more:hover {
+    border-color: var(--sl-color-white);
+  }
+  .rn-notes .rn-more[hidden] {
+    display: none;
+  }
+</style>

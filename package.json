@@ -21,6 +21,7 @@
     "@astrojs/sitemap": "^3.7.4",
     "@astrojs/starlight": "^0.42.10",
     "astro": "^7.4.7",
+    "micromark": "4.0.2",
     "sharp": "^0.35.5",
     "starlight-links-validator": "^0.27.0",
     "starlight-theme-nova": "^0.12.3",
