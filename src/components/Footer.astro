@@ -1,0 +1,31 @@
+---
+// The page footer: Starlight's own footer, then a link to the legal notice.
+// German law wants that link on every page, so it lives here and not in the
+// page content.
+import Default from "@astrojs/starlight/components/Footer.astro";
+---
+
+<Default><slot /></Default>
+
+<p class="site-legal">
+  <a href="/impressum/">Impressum</a>
+</p>
+
+<style>
+  .site-legal {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: var(--sl-text-sm);
+  }
+
+  .site-legal a {
+    color: var(--sl-color-gray-3);
+    text-decoration: none;
+  }
+
+  .site-legal a:hover,
+  .site-legal a:focus-visible {
+    color: var(--sl-color-white);
+    text-decoration: underline;
+  }
+</style>

@@ -107,6 +107,9 @@ export default defineConfig({
           items: [{ autogenerate: { directory: "extra" } }],
         },
       ],
+      components: {
+        Footer: "./src/components/Footer.astro",
+      },
       customCss: ["./src/styles/custom.css"],
       expressiveCode: {
         themes: ["github-dark", "github-light"],
@@ -117,7 +120,10 @@ export default defineConfig({
         },
       },
     }),
-    sitemap(),
+    sitemap({
+      // The legal notice is noindex, so it stays out of the sitemap too.
+      filter: (page) => new URL(page).pathname !== "/impressum/",
+    }),
   ],
   output: "static",
 });
