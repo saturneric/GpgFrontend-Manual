@@ -8,7 +8,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sync:privacy": "node scripts/sync-privacy-policy.mjs"
   },
   "engines": {
     "node": ">=22.12.0"
