@@ -150,6 +150,27 @@ The build checks every internal link. If a link points to a page that does not
 exist, the build fails and tells you which link is wrong, so broken links never
 reach the live site.
 
+## The privacy policy page
+
+The page at `/privacy/` shows the GpgFrontend privacy policy. The policy is
+written in the main repository
+([`PrivacyPolicy.md`](https://github.com/saturneric/GpgFrontend/blob/main/PrivacyPolicy.md)),
+and this site only keeps a copy of it in `src/privacy/`.
+
+- **Never edit the copy by hand.** The build checks it and fails if it was
+  changed here.
+- To change the policy, change it in the main repository first. Then update
+  the copy with one command, and commit the two files it writes:
+
+  ```bash
+  yarn sync:privacy            # fetch the policy from GitHub
+  yarn sync:privacy --check    # only say whether the copy is current
+  ```
+
+- `src/privacy/source.json` records which revision the copy is. The page
+  shows the same revision below the policy text.
+- App store listings link to `/privacy/`. Do not move or rename the page.
+
 ## Check your work before sharing
 
 ```bash

@@ -1,0 +1,51 @@
+---
+// The privacy policy. App store listings link to /privacy/, so this page
+// must never move or be renamed.
+//
+// The text is the copy in src/privacy (see policy.ts there), shown as it
+// is. To change the policy, change it in the main repository and run
+// "yarn sync:privacy". The only words added here are the line below the
+// policy, which says which revision this is.
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { loadPolicy } from "../privacy/policy";
+
+const { title, html, headings, source } = loadPolicy();
+
+const repo = `https://github.com/${source.repo}`;
+const commitUrl = `${repo}/commit/${source.commit}`;
+const historyUrl = `${repo}/commits/${source.ref}/${source.path}`;
+---
+
+<StarlightPage
+  frontmatter={{
+    title,
+    description:
+      "The GpgFrontend privacy policy: what personal data is processed when you use the app, its update servers and this website.",
+    prev: false,
+    next: false,
+  }}
+  headings={headings}
+>
+  <div class="privacy-policy" set:html={html} />
+  <hr />
+  <p class="privacy-source">
+    This page shows revision{" "}
+    <a href={commitUrl}><code>{source.commit.slice(0, 7)}</code></a>{" "}
+    of the policy, last changed on {source.committed.slice(0, 10)}. Every
+    version is in its <a href={historyUrl}>history on GitHub</a>.
+  </p>
+</StarlightPage>
+
+<style>
+  /* The theme boxes every <code>, also the one inside a plain <pre>. */
+  .privacy-policy :global(pre code) {
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .privacy-source {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+</style>
